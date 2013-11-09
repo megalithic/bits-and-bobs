@@ -26,6 +26,11 @@ fail () {
   exit
 }
 
+install_xcode_commandline_tools () {
+  echo "Force an install of the XCode Command-line Tools"
+  gcc
+}
+
 setup_gitconfig () {
   if ! [ -f git/gitconfig.symlink ]
   then
@@ -120,6 +125,7 @@ install_dotfiles () {
   done
 }
 
+install_xcode_commandline_tools
 setup_gitconfig
 install_dotfiles
 

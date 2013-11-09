@@ -1,5 +1,20 @@
 #!/bin/sh
 
+echo "Installing RVM (Ruby Version Manager) and Ruby 2.0.0, which becomes the default ..."
+  curl -L https://get.rvm.io | bash -s stable --ruby
+  echo " # RVM [[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'" >> ~/.zshenv
+  source ~/.rvm/scripts/rvm
+  rvm install ruby-2.0.0
+  rvm gemset create global
+  rvm gemset use global
+  rvm use 2.0.0@global --default
+
+echo "Update to latest RubyGems version ..."
+  successfully gem update --system
+
+echo "Installing critical Ruby gems for Rails development ..."
+  successfully gem install bundler rails pg foreman thin pry launchy --no-rdoc --no-ri
+
 if test ! $(which rbenv)
 then
   echo "  Installing rbenv for you."

@@ -1,0 +1,2 @@
+#compdef i
+_files -W $WORK -/
