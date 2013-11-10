@@ -68,6 +68,19 @@ There's a few special files in the hierarchy.
 
 Use `~/.localrc` as your location for sensitive information.
 
+## additional reading
+
+There are many great dotfiles repos to check out and in general get inspiration
+and code snippets from... Here's a few that I like to keep a record of.
+
+- [zach holman](https://github.com/holman/dotfiles/)
+- [addy osmani](https://github.com/addyosmani/dotfiles/)
+- [ben alman](https://github.com/cowboy/dotfiles/)
+- [paul irish](https://github.com/paulirish/dotfiles)
+- [mathias bynens](https://github.com/mathiasbynens/dotfiles)
+
+.. I'll continually add more as I come across them.
+
 ## todo
 
 Unfortunately, this is a neverending project it seems.. so as to help myself
