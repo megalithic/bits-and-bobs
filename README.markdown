@@ -1,22 +1,17 @@
 # @megalithic dotfiles
-## a fork of [@holman](https://github.com/holman/dotfiles)'s dotfiles
-### which is an offshoot of [@rbates](https://github.com/ryanb/dotfiles)'s dotfiles
 
 ## dotfiles
 
-This for now is just a reminder of things i need to setup on a new osx
-install. the install script is there, but not complete.. more to come on that
-soon enough.
+Before you go any further... this is all specific to an OSX install; for my linux fam,
+I recommend checking out [@cowboy's dotfiles repo](https://github.com/cowboy/dotfiles), as it has mostly safe
+osx/linux alternatives and is also geared towards bash instead of zsh, which is
+my preferred shell.
 
-Oh, before i forget, this is all specific to an osx install; for my linux fam
-just replace `brew` with `apt-get` (or your package manager of choice on your
-distro)
-
-In case you want to see what these dotfiles can get you, check out:
+In case you want to see what these dotfiles can get you, or close to it...
 [![Boom!  Awesomeness.](http://cl.ly/image/1d2J0G053I0C/image_large.png)](http://cl.ly/image/1v461h0r3w1l "Bigger++")
 
-
 ## install
+
 Run this:
 
 ```sh
@@ -68,7 +63,7 @@ There's a few special files in the hierarchy.
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
 
-## localrc
+## .localrc
 ![Keep it secret, keep it safe](http://i.qkme.me/3ppbat.jpg)
 
 Use `~/.localrc` as your location for sensitive information.
@@ -86,7 +81,7 @@ and i'll periodically merge upstream.
 
 ## thanks
 
-Just wanted to thank [@holman](https://github.com/holman/dotfiles) for providing
+Big ups to [@holman](https://github.com/holman/dotfiles) for providing
 a solid starting point "framework" for having a mostly automated way of quickly
 getting a new system install up and running with your preferred environment
 tools and workflows.
