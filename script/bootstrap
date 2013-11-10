@@ -56,6 +56,10 @@ setup_gitconfig () {
 link_files () {
   ln -s $1 $2
   success "linked $1 to $2"
+
+  echo "Symlinking misc other files and directories ..."
+  # so we have common apache functionality with other nix distros
+  success ln -sf /Library/WebServer/Documents /var/www
 }
 
 install_dotfiles () {
@@ -125,8 +129,8 @@ install_dotfiles () {
   done
 }
 
-install_xcode_commandline_tools
 setup_gitconfig
+install_xcode_commandline_tools
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.

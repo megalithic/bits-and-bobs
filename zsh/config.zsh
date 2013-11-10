@@ -46,3 +46,6 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
+
+# ref: https://rvm.io/integration/zsh
+__rvm_project_rvmrc

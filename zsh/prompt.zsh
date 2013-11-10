@@ -23,6 +23,9 @@
 # %n => username
 # %m => shortname host
 # %(?..) => prompt conditional - %(condition.true.false)
+
+autoload colors && colors
+
 prompt_format_pwd() {
   local pwd="${PWD/#$HOME/~}"
 

@@ -1,0 +1,33 @@
+session:
+  name: "trucoin"
+  windows:
+    - name: "dev procs"
+      clear: true
+      root: "~/Isotope11/"
+      layout: tiled
+      panes:
+        - cmd: ["tru", "bundle", "rails s"]
+        - cmd: ["cd ./trucoin_websockets", "bundle", "bundle exec ruby lib/server.rb"]
+        - cmd: ["cd ./trucoin_websockets", "bundle", "bundle exec ruby lib/trucoin/separate_ephemeral_store.rb"]
+        - cmd: ["cd ./trucoin_services/exchange_aggregator", "bundle", "bundle exec ruby lib/exchange_aggregator.rb"]
+        - cmd: ["cd ./trucoin_services/exchange_history_manager", "bundle install", "bundle exec ruby lib/exchange_history_manager.rb"]
+        - cmd: ["cd ./trucoin_order_handler", "bundle", "bundle exec ruby lib/subscriber.rb"]
+    - name: "extras"
+      clear: true
+      root: "~/Isotope11/"
+      layout: tiled
+      panes:
+        - cmd: ["cd ./trucoin_order_handler", "rake jobs:work"]
+        - cmd: ["tru"]
+    - name: "code"
+      clear: true
+      root: "~/Isotope11/trucoin_rails"
+      layout: tiled
+      panes:
+        - cmd: [""]
+    - name: "irc"
+      clear: true
+      root: "~"
+      layout: tiled
+      panes:
+        - cmd: ["irc"]

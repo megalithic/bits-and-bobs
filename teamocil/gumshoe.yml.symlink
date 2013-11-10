@@ -1,0 +1,22 @@
+session:
+  name: "gumshoe"
+  windows:
+    - name: "dev procs"
+      clear: true
+      root: "~/Isotope11/"
+      layout: tiled
+      panes:
+        - cmd: ["cd ./gumshoe/frontend", "bower install && grunt server"]
+        - cmd: ["cd ./gumshoe/frontend", "karma start"]
+    - name: "code"
+      clear: true
+      root: "~/Isotope11/gumshoe/frontend"
+      layout: tiled
+      panes:
+        - cmd: [""]
+    - name: "irc"
+      clear: true
+      root: "~"
+      layout: tiled
+      panes:
+        - cmd: ["irc"]

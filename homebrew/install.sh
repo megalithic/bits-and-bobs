@@ -9,7 +9,7 @@
 if test ! $(which brew)
 then
   echo "  Installing Homebrew for you."
-  ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" > /tmp/homebrew-install.log
+  ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 fi
 
 # Install homebrew packages
@@ -18,6 +18,9 @@ brew install ack apple-gcc42 autoconf automake avrdude bison chruby cmake coreut
 
 brew install weechat --with-ruby --with-python --with-perl
 brew install macvim --with-cscope --with-lua --HEAD
+
+# Some homebrew packages need additional commands to complete their setup:
+initdb /usr/local/var/postgres -E utf8
 
 # Install homebrew-cask so we can easily install GUI apps
 brew tap phinze/homebrew-cask
