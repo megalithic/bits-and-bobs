@@ -91,7 +91,7 @@ remember all the things, here's a basic list of what I haven't finished:
 
 - Finish filling out the brew-cask install list
 - Get nodejs and certain npm installed as globals (grunt, yeoman, etc)
-- Automate the cloning of an arbitrary private repo and link the relevant files
+- ~~Automate the cloning of an arbitrary private repo and link the relevant files~~
 
 ## bugs
 
