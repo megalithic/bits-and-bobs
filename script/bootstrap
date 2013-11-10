@@ -58,10 +58,6 @@ setup_gitconfig () {
 link_files () {
   ln -s $1 $2
   success "linked $1 to $2"
-
-  echo "Symlinking misc other files and directories ..."
-  # so we have common apache functionality with other nix distros
-  success ln -sf /Library/WebServer/Documents /var/www
 }
 
 install_dotfiles () {
@@ -131,9 +127,31 @@ install_dotfiles () {
   done
 }
 
+additional_symlinking () {
+  echo "Symlinking misc other files and directories ..."
+  # so we have common apache functionality with other nix distros
+  success ln -sf /Library/WebServer/Documents /var/www
+}
+
+setup_private_repo () {
+  echo "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private"
+
+  user ' - What is your private github repo (ssh) address?'
+  read -e git_privaterepo
+
+  git clone $git_privaterepo $HOME/.dotfiles/private
+  success "cloned $git_privaterepo to $HOME/.dotfiles/private"
+
+  source $home/.dotfiles/private/install.sh
+  success 'executed private dotfiles repo install script'
+}
+
+
 setup_gitconfig
 install_xcode_commandline_tools
 install_dotfiles
+additional_symlinking
+setup_private_repo
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
