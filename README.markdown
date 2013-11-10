@@ -17,8 +17,6 @@ In case you want to see what these dotfiles can get you, check out:
 
 
 ## install
-![set us up the dotfiles](http://cdn.memegenerator.net/instances/400x/34650587.jpg)
-
 Run this:
 
 ```sh
