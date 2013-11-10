@@ -63,10 +63,13 @@ There's a few special files in the hierarchy.
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
 
-## .localrc
+## .localrc and sensitive data
 ![Keep it secret, keep it safe](http://i.qkme.me/3ppbat.jpg)
 
-Use `~/.localrc` as your location for sensitive information.
+Use `~/.localrc` as your location for sensitive information. Optionally, you
+can let `script/bootstrap` handle the cloning of your private repo to
+~/.dotfiles/private and subsequently executing an expected install script at
+`~/.dotfiles/private/install.sh`.
 
 ## additional reading
 

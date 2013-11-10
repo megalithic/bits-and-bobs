@@ -134,16 +134,21 @@ additional_symlinking () {
 }
 
 setup_private_repo () {
-  echo "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private"
+  echo "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private ..."
 
-  user ' - What is your private github repo (ssh) address?'
+  user ' - What is your private github repo (ssh) address? Leave blank to skip.'
   read -e git_privaterepo
 
-  git clone $git_privaterepo $HOME/.dotfiles/private
-  success "cloned $git_privaterepo to $HOME/.dotfiles/private"
+  if [ "$git_privaterepo" == "" ]
+  then
+    echo "Skipping ..."
+  else
+    git clone $git_privaterepo $HOME/.dotfiles/private
+    success "cloned $git_privaterepo to $HOME/.dotfiles/private"
 
-  source $home/.dotfiles/private/install.sh
-  success 'executed private dotfiles repo install script'
+    source $home/.dotfiles/private/install.sh
+    success 'executed private dotfiles repo install script'
+  fi
 }
 
 
