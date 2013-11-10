@@ -1,23 +1,23 @@
 # @megalithic dotfiles
-## a derivitave of @holman's dotfiles
-### which is an offshoot of @rbates's dotfiles
-#### most of the info contained here-in comes from [@holman's](https://github.com/holman/dotfiles) own repo
+## a fork of [@holman](https://github.com/holman/dotfiles)'s dotfiles
+### which is an offshoot of [@rbates](https://github.com/ryanb/dotfiles)'s dotfiles
 
 ## dotfiles
 
-Your dotfiles are how you personalize your system. These are mine.
+This for now is just a reminder of things i need to setup on a new osx
+install. the install script is there, but not complete.. more to come on that
+soon enough.
 
-I was a little tired of having long alias files and everything strewn about
-(which is extremely common on other dotfiles projects, too). That led to this
-project being much more topic-centric. I realized I could split a lot of things
-up into the main areas I used (Ruby, git, system libraries, and so on), so I
-structured the project accordingly.
+Oh, before i forget, this is all specific to an osx install; for my linux fam
+just replace `brew` with `apt-get` (or your package manager of choice on your
+distro)
 
-If you're interested in the philosophy behind why projects like these are
-awesome, you might want to [read my post on the
-subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
+In case you want to see what these dotfiles can get you, check out:
+[![Boom!  Awesomeness.](http://cl.ly/image/1d2J0G053I0C/image_large.png)](http://cl.ly/image/1v461h0r3w1l "Bigger++")
+
 
 ## install
+![set us up the dotfiles](http://cdn.memegenerator.net/instances/400x/34650587.jpg)
 
 Run this:
 
@@ -70,10 +70,15 @@ There's a few special files in the hierarchy.
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
 
+## localrc
+![Keep it secret, keep it safe](http://i.qkme.me/3ppbat.jpg)
+
+Use `~/.localrc` as your location for sensitive information.
+
 ## bugs
 
 I want this to work for everyone; that means when you clone it down it should
-work for you even though you may not have `rbenv` installed, for example. That
+work for you even though you may not have `rvm` installed, for example. That
 said, I do use this as *my* dotfiles, so there's a good chance I may break
 something if I forget to make a check for a dependency.
 
@@ -83,9 +88,7 @@ and i'll periodically merge upstream.
 
 ## thanks
 
-I forked [Ryan Bates](http://github.com/ryanb)' excellent
-[dotfiles](http://github.com/ryanb/dotfiles) for a couple years before the
-weight of my changes and tweaks inspired me to finally roll my own. But Ryan's
-dotfiles were an easy way to get into bash customization, and then to jump ship
-to zsh a bit later. A decent amount of the code in these dotfiles stem or are
-inspired from Ryan's original project.
+Just wanted to thank [@holman](https://github.com/holman/dotfiles) for providing
+a solid starting point "framework" for having a mostly automated way of quickly
+getting a new system install up and running with your preferred environment
+tools and workflows.
