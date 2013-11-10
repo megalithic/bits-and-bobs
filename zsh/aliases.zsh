@@ -11,9 +11,9 @@ alias f="ffind"
 alias files="find . -type f | wc -l"
 alias a="ack"
 alias new="print -rl -- **/*(Dom[1,5])"
-alias ls='ls -GFh' # Colorize output, add file type indicator, and put sizes in human readable format
-alias ll='ls -GFhl' # Same as above, but in long listing format
-alias lsd='ls -aFhlG'
+# alias ls='ls -GFh' # Colorize output, add file type indicator, and put sizes in human readable format
+# alias ll='ls -GFhl' # Same as above, but in long listing format
+# alias lsd='ls -aFhlG'
 
 ## - TMUX -----------------------------------------------
 # alias mux="tmux"
@@ -31,7 +31,7 @@ alias b="brew"
 
 ## - VIM -----------------------------------------------
 # alias e="vim"
-alias e="mvim -v"
+# alias e="mvim -v"
 alias vi="vim"
 alias v="vim"
 alias vm="vim"
