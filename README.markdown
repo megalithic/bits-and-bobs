@@ -7,9 +7,6 @@ I recommend checking out [@cowboy's dotfiles repo](https://github.com/cowboy/dot
 osx/linux alternatives and is also geared towards bash instead of zsh, which is
 my preferred shell.
 
-In case you want to see what these dotfiles can get you, or close to it...
-[![Boom!  Awesomeness.](http://cl.ly/image/1d2J0G053I0C/image_large.png)](http://cl.ly/image/1v461h0r3w1l "Bigger++")
-
 ## install
 
 Pre-install stuffs: You'll obviously need git installed; if you're using
