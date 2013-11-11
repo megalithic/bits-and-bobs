@@ -76,11 +76,13 @@ can let `script/bootstrap` handle the cloning of your private repo to
 There are many great dotfiles repos to check out and in general get inspiration
 and code snippets from... Here's a few that I like to keep a record of.
 
-- [zach holman](https://github.com/holman/dotfiles/)
+- [zach holman](https://github.com/holman/dotfiles/) (the one this very repo is
+based on)
 - [addy osmani](https://github.com/addyosmani/dotfiles/)
 - [ben alman](https://github.com/cowboy/dotfiles/)
 - [paul irish](https://github.com/paulirish/dotfiles)
 - [mathias bynens](https://github.com/mathiasbynens/dotfiles)
+- [yan pritzker (yadr)](https://github.com/skwp/dotfiles)
 
 .. I'll continually add more as I come across them.
 
@@ -89,9 +91,13 @@ and code snippets from... Here's a few that I like to keep a record of.
 Unfortunately, this is a neverending project it seems.. so as to help myself
 remember all the things, here's a basic list of what I haven't finished:
 
-- Finish filling out the brew-cask install list
+- ~~Finish filling out the brew-cask install list~~
+- ~~Backup/restore KeyRemap4MacBook config~~
 - ~~Get nodejs and certain npm installed as globals (grunt, yeoman, etc)~~
 - ~~Automate the cloning of an arbitrary private repo and link the relevant files~~
+- verify all the things on a fresh install
+- figure out import/export of common/handy apps i always use
+- scour the yadr dotfiles repo for more ideas (careful of bloat though!)
 
 ## bugs
 

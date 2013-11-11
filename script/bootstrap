@@ -31,6 +31,23 @@ install_xcode_commandline_tools () {
   gcc
 }
 
+prepare_ssh_key () {
+  echo 'Enter new hostname of the machine (e.g. replibook)'
+    read hostname
+    echo "Setting new hostname to $hostname..."
+    scutil --set HostName "$hostname"
+    compname=$(sudo scutil --get HostName | tr '-' '.')
+    echo "Setting computer name to $compname"
+    scutil --set ComputerName "$compname"
+
+  echo 'Checking for SSH key, generating one if it does not exist...'
+    [[ -f '~/.ssh/id_rsa.pub' ]] || ssh-keygen -t rsa
+
+  echo 'Copying public key to clipboard. Paste it into your Github account...'
+    [[ -f '~/.ssh/id_rsa.pub' ]] && cat '~/.ssh/id_rsa.pub' | pbcopy
+    open 'https://github.com/account/ssh'
+}
+
 setup_gitconfig () {
   if ! [ -f git/gitconfig.symlink ]
   then
@@ -123,7 +140,6 @@ install_dotfiles () {
     else
       link_files $source $dest
     fi
-
   done
 }
 
@@ -136,23 +152,24 @@ additional_symlinking () {
 setup_private_repo () {
   echo "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private ..."
 
-  user ' - What is your private github repo (ssh) address? Leave blank to skip.'
+  user ' - What is your private github repo (git://) address? Leave blank to skip.'
   read -e git_privaterepo
 
   if [ "$git_privaterepo" == "" ]
   then
-    echo "Skipping ..."
+    echo "Skipping private repo setup ..."
   else
-    git clone $git_privaterepo $HOME/.dotfiles/private
-    success "cloned $git_privaterepo to $HOME/.dotfiles/private"
+    git clone $git_privaterepo $ZSH/private
+    success "cloned $git_privaterepo to $ZSH/private"
 
-    source $home/.dotfiles/private/install.sh
+    source $ZSH/private/install.sh
     success 'executed private dotfiles repo install script'
   fi
 }
 
-
+# execute our functions
 setup_gitconfig
+prepare_ssh_key
 install_xcode_commandline_tools
 install_dotfiles
 additional_symlinking

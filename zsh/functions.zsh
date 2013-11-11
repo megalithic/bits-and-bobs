@@ -258,3 +258,8 @@ pretty_git_log() {
         # Page only if we need to
         less -FXRS
 }
+
+# ============================================================================
+# https://github.com/addyosmani/dotfiles/blob/master/.functions
+# Need to convert his functions to zsh from bash
+# ============================================================================
