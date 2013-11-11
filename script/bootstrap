@@ -191,6 +191,7 @@ setup_private_repo () {
     echo "Skipping private repo setup ..."
   else
     git submodule add $git_privaterepo $ZSH/private
+    git submodule update --init
     git commit -am "Adding submodule for private repo"
     git push origin
     success "submoduled $git_privaterepo to $ZSH/private"

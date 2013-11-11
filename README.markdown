@@ -78,6 +78,8 @@ can let `script/bootstrap` handle the submoduling of your private repo to
 ~/.dotfiles/private and subsequently executing an expected install script at
 `~/.dotfiles/private/install.sh`.
 
+For some submodule info, rather, [a cheatsheet](http://blog.jacius.info/git-submodule-cheat-sheet/).
+
 ## additional reading
 
 There are many great dotfiles repos to check out and in general get inspiration
