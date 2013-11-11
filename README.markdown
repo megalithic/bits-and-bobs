@@ -12,7 +12,14 @@ In case you want to see what these dotfiles can get you, or close to it...
 
 ## install
 
-Run this:
+Pre-install stuffs: You'll obviously need git installed; if you're using
+Mavericks, just hit up: `xcode-select --install`, click 'Install' when the
+dialog pops up, disco.
+
+Note: if the above doesn't work to get XCode CLI Tools installed, you can try
+the script I have in [scripts/bootstrap]().
+
+Now that the pre-reqs are out of the way, run this:
 
 ```sh
 git clone https://github.com/megalithic/dotfiles.git ~/.dotfiles
