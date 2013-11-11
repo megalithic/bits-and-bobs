@@ -75,8 +75,8 @@ There's a few special files in the hierarchy.
 
 Use `~/.localrc` as your location for sensitive information. Optionally, you
 can let `script/bootstrap` handle the submoduling of your private repo to
-~/.dotfiles/private and subsequently executing an expected install script at
-`~/.dotfiles/private/install.sh`.
+~/.dotfiles/private, which will execute an install script, assuming it's
+located at `~/.dotfiles/private/install.sh`.
 
 For some submodule info, rather, [a cheatsheet](http://blog.jacius.info/git-submodule-cheat-sheet/).
 
