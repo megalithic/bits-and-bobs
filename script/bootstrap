@@ -183,15 +183,17 @@ additional_symlinking () {
 setup_private_repo () {
   echo "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private ..."
 
-  user ' - What is your private github repo (git://) address? Leave blank to skip.'
+  user ' - What is your private github repo address? Leave blank to skip.'
   read -e git_privaterepo
 
   if [ "$git_privaterepo" == "" ]
   then
     echo "Skipping private repo setup ..."
   else
-    git clone $git_privaterepo $ZSH/private
-    success "cloned $git_privaterepo to $ZSH/private"
+    git submodule add $git_privaterepo $ZSH/private
+    git commit -am "Adding submodule for private repo"
+    git push origin
+    success "submoduled $git_privaterepo to $ZSH/private"
 
     sh $ZSH/private/install.sh
     success 'executed private dotfiles repo install script'

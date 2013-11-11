@@ -74,7 +74,7 @@ There's a few special files in the hierarchy.
 ![Keep it secret, keep it safe](http://i.qkme.me/3ppbat.jpg)
 
 Use `~/.localrc` as your location for sensitive information. Optionally, you
-can let `script/bootstrap` handle the cloning of your private repo to
+can let `script/bootstrap` handle the submoduling of your private repo to
 ~/.dotfiles/private and subsequently executing an expected install script at
 `~/.dotfiles/private/install.sh`.
 
