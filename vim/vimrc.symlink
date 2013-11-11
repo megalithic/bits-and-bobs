@@ -226,7 +226,7 @@ nnoremap / /\v
 vnoremap / /\v
 
 if has('mouse')
-  set mouse=a                   " Enable mouse everywhere.
+  set mouse-=a                   " Enable mouse everywhere.
   set mousemodel=popup_setpos   " Show a pop-up for right-click.
   set mousehide                 " Hide mouse while typing.
 endif
