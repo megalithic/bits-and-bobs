@@ -17,7 +17,7 @@ Mavericks, just hit up: `xcode-select --install`, click 'Install' when the
 dialog pops up, disco.
 
 Note: if the above doesn't work to get XCode CLI Tools installed, you can try
-the script I have in [scripts/bootstrap]().
+the code I have in [scripts/bootstrap:L35-59](https://github.com/megalithic/dotfiles/blob/master/script/bootstrap#L35-L59).
 
 Now that the pre-reqs are out of the way, run this:
 
