@@ -27,8 +27,15 @@ fail () {
 }
 
 install_xcode_commandline_tools () {
-  echo "Force an install of the XCode Command-line Tools"
-  gcc
+  user ' - Check and install XCode Command-line Tools if necessary? [yes|no]'
+  read -e bool_installxcode
+
+  if [ "$bool_installxcode" == "yes" ]
+  then
+    gcc
+  else
+    echo "Skipping XCode Command-line Tools install ..."
+  fi
 }
 
 prepare_ssh_key () {
