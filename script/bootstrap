@@ -193,7 +193,7 @@ setup_private_repo () {
     git clone $git_privaterepo $ZSH/private
     success "cloned $git_privaterepo to $ZSH/private"
 
-    source $ZSH/private/install.sh
+    sh $ZSH/private/install.sh
     success 'executed private dotfiles repo install script'
   fi
 }
