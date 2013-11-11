@@ -83,6 +83,7 @@ based on)
 - [paul irish](https://github.com/paulirish/dotfiles)
 - [mathias bynens](https://github.com/mathiasbynens/dotfiles)
 - [yan pritzker (yadr)](https://github.com/skwp/dotfiles)
+- [paul miller](https://github.com/paulmillr/dotfiles)
 
 .. I'll continually add more as I come across them.
 
