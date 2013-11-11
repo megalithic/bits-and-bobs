@@ -1,4 +1,4 @@
-# @megalithic dotfiles
+# megadotfiles
 
 ## dotfiles
 
