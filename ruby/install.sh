@@ -12,11 +12,11 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 2.0.0, which becomes the de
   rvm use 2.0.0@global --default
 
 echo "Update to latest RubyGems version ..."
-  successfully gem update --system
+  gem update --system
 
 echo "Installing critical Ruby gems for Rails development ..."
-  successfully rvm @global do gem install bundler rails pg foreman thin pry launchy teamocil --no-rdoc --no-ri
-  # successfully gem install bundler rails pg foreman thin pry launchy teamocil --no-rdoc --no-ri
+  rvm @global do gem install bundler rails pg foreman thin pry launchy teamocil --no-rdoc --no-ri
+  bundle config --global jobs 2
 
 # hey jack! if you ever wanna go to rbenv, then here you go:
 # if test ! $(which rbenv)
