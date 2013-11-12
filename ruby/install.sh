@@ -4,6 +4,9 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 2.0.0, which becomes the de
   curl -L https://get.rvm.io | bash -s stable --ruby
   echo " # RVM [[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'" >> ~/.zshenv
   source ~/.rvm/scripts/rvm
+  # avoid weird ssl issues with rvm on osx
+  # ref: http://www.randomactsofsentience.com/2013/10/emremotefetcherfetcherror-sslconnect.html
+  rvm osx-ssl-certs update all
 
   rvm install ruby-2.0.0
   rvm install ruby-1.9.3

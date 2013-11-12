@@ -16,8 +16,8 @@ export VISUAL='vim'
 
 # Setup terminal, and turn on colors
 export TERM=xterm-256color
-# export CLICOLOR=1
-# export LSCOLORS=Gxfxcxdxbxegedabagacad
+export CLICOLOR=1
+export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 # Enable color in grep
 export GREP_OPTIONS='--color=auto'
@@ -46,3 +46,4 @@ export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vf
 
 export ECLIPSE_HOME=/Applications/Eclipse
 export SSL_CERT_FILE=/usr/local/etc/openssl/certs/cert.pem
+export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
