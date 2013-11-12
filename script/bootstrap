@@ -190,11 +190,8 @@ setup_private_repo () {
   then
     echo "Skipping private repo setup ..."
   else
-    git submodule add -f $git_privaterepo $ZSH/private
-    git submodule update --init
-    git commit -am "Adding submodule for private repo"
-    git push origin
-    success "submoduled $git_privaterepo to $ZSH/private"
+    git clone $git_privaterepo $ZSH/private
+    success "cloned $git_privaterepo to $ZSH/private"
 
     sh $ZSH/private/install.sh
     success 'executed private dotfiles repo install script'
@@ -205,7 +202,7 @@ setup_private_repo () {
 setup_gitconfig
 #prepare_ssh_key
 # install_xcode_commandline_tools
-install_dotfiles
+# install_dotfiles
 additional_symlinking
 #setup_private_repo
 
@@ -220,6 +217,8 @@ then
     fail "error installing dependencies"
   fi
 fi
+
+install_dotfiles
 
 echo ''
 echo ' setting login shell to zsh '
