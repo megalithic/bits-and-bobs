@@ -30,7 +30,7 @@ alias teamiso="cd ~ && teamocil --here isotope"
 alias b="brew"
 
 ## - VIM -----------------------------------------------
-# alias e="vim"
+alias e="vim"
 # alias e="mvim -v"
 alias vi="vim"
 alias v="vim"

@@ -48,4 +48,4 @@ bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
 
 # ref: https://rvm.io/integration/zsh
-__rvm_project_rvmrc
+# __rvm_project_rvmrc

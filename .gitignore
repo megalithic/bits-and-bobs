@@ -1,3 +1,5 @@
 git/gitconfig.symlink
 private
 .DS_Store
+teamocil/teamocil
+npm-debug.log

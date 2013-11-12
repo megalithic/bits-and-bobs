@@ -1,7 +1,7 @@
 # Only set this if we haven't set $EDITOR up somewhere else previously.
 if [[ "$EDITOR" == "" ]] ; then
   # Use sublime for my editor.
-  export EDITOR='mvim -v'
+  export EDITOR='vim'
 fi
 
 # Random other exports
@@ -9,7 +9,6 @@ export WORDCHARS='*?[]~&;!$%^<>'
 export ACK_COLOR_MATCH='red'
 export CC=/usr/bin/gcc
 export DISPLAY=:0.0
-export EDITOR='vim'
 export VISUAL='vim'
 
 # Set default console Java to 1.6
