@@ -33,6 +33,7 @@ brew install autoconf
 brew install automake
 brew install avrdude
 brew install bison
+brew install curl-ca-bundle
 brew install chruby
 brew install cmake
 brew install cscope
