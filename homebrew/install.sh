@@ -128,10 +128,11 @@ brew install solr
 
 brew install weechat --with-ruby --with-python --with-perl
 #brew install macvim --with-cscope --with-lua --HEAD
+brew install postgresql --no-python
 
 # Some homebrew packages need additional commands to complete their setup:
-brew install postgresql --no-python
 initdb /usr/local/var/postgres -E utf8
+brew link openssl --force
 
 # Install homebrew-cask so we can easily install GUI apps
 brew tap phinze/homebrew-cask
