@@ -332,7 +332,7 @@ defaults write com.apple.dashboard devmode -bool true
 defaults write com.apple.dashboard mcx-disabled -bool true
 
 # Reset Launchpad
-[ -e ~/Library/Application\ Support/Dock/*.db ] && rm ~/Library/Application\ Support/Dock/*.db
+# [ -e ~/Library/Application\ Support/Dock/*.db ] && rm ~/Library/Application\ Support/Dock/*.db
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true

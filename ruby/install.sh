@@ -3,12 +3,12 @@
 echo "Installing RVM (Ruby Version Manager) and Ruby 2.0.0, which becomes the default ..."
   curl -L https://get.rvm.io | bash -s stable --ruby
   echo " # RVM [[ -s '/Users/`whoami`/.rvm/scripts/rvm' ]] && source '/Users/`whoami`/.rvm/scripts/rvm'" >> ~/.zshenv
-  source ~/.rvm/scripts/rvm
   rvm install ruby-2.0.0
   rvm install ruby-1.9.3
   # ref: http://rvm.io/gemsets/global
   # rvm gemset create global
   # rvm gemset use global
+  source ~/.rvm/scripts/rvm
   rvm use 2.0.0@global --default
 
 echo "Update to latest RubyGems version ..."
