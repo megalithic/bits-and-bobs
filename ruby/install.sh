@@ -7,13 +7,13 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 2.0.0, which becomes the de
 
   rvm install ruby-2.0.0
   rvm install ruby-1.9.3
+  rvm install ruby-1.9.2
 
   # ref: http://rvm.io/gemsets/global
   rvm gemset create global
   rvm gemset use global
 
-  rvm use 2.0.0@global --default
-
+  # rvm use 2.0.0@global --default
 
 echo "Installing critical Ruby gems for Rails development ..."
   rvm @global do gem install bundler rails pg foreman thin pry launchy teamocil --no-rdoc --no-ri
