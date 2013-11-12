@@ -3,6 +3,4 @@
 # Teamocil
 #
 # Get stuff done for teamocil
-
-# Check for Homebrew
-mkdir ~/.teamocil
+ln -sf ~/.dotfiles/teamocil ~/.teamocil

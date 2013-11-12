@@ -19,7 +19,7 @@ function! LoadBundles()
   Bundle 'chriskempson/base16-vim'
   Bundle 'bling/vim-airline'
   Bundle 'ervandew/supertab'
-  Bundle 'Shougo/neocomplete.vim'
+  " Bundle 'Shougo/neocomplete.vim'
   Bundle 'git@github.com:kien/ctrlp.vim.git'
   " Bundle 'Valloric/YouCompleteMe'
   Bundle 'marijnh/tern_for_vim'

@@ -177,7 +177,7 @@ install_dotfiles () {
 additional_symlinking () {
   echo "Symlinking misc other files and directories ..."
   # so we have common apache functionality with other nix distros
-  success ln -sf /Library/WebServer/Documents /var/www
+  ln -sf /Library/WebServer/Documents /var/www
 }
 
 setup_private_repo () {
@@ -203,11 +203,11 @@ setup_private_repo () {
 
 # execute our functions
 setup_gitconfig
-prepare_ssh_key
+#prepare_ssh_key
 # install_xcode_commandline_tools
 install_dotfiles
-additional_symlinking
-setup_private_repo
+#additional_symlinking
+#setup_private_repo
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
