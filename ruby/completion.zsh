@@ -20,6 +20,3 @@ _rbenv() {
 
   reply=("${(ps:\n:)completions}")
 }
-
-# ref: https://rvm.io/workflow/completion
-echo 'fpath=($rvm/scripts/zsh/Completion/_rvm $fpath)' >> $HOME/.zshrc

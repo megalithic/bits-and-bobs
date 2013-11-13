@@ -11,9 +11,15 @@ alias f="ffind"
 alias files="find . -type f | wc -l"
 alias a="ack"
 alias new="print -rl -- **/*(Dom[1,5])"
-# alias ls='ls -GFh' # Colorize output, add file type indicator, and put sizes in human readable format
-# alias ll='ls -GFhl' # Same as above, but in long listing format
-# alias lsd='ls -aFhlG'
+
+alias ls="gls -Fha --color"
+alias l="gls -lAh --color"
+alias ll="gls -lFh --color"
+alias la='gls -A --color'
+
+# alias ls='ls -GFh --color=auto' # Colorize output, add file type indicator, and put sizes in human readable format
+# alias ll='ls -GFhl --color=auto' # Same as above, but in long listing format
+# alias lsd='ls -aFhlG --color=auto'
 
 ## - TMUX -----------------------------------------------
 # alias mux="tmux"
@@ -132,8 +138,6 @@ alias rmrf="rm -rf .DS_Store .gitignore .rspec .rvmrc Gemfile GuardFile README.m
 alias sourcez="source ~/.zshrc"
 alias srcz=sourcez
 alias sz=sourcez
-alias ls="ls -Gah"
-alias l="ls -ahg"
 alias cls="clr && ls"
 alias ip="ifconfig"
 alias web="open -a '/Applications/Google Chrome.app' --args --disable-web-security"
