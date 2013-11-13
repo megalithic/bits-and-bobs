@@ -223,8 +223,7 @@ install_dotfiles
 setup_private_repo
 
 echo ''
-echo ' setting login shell to zsh '
-sudo su && echo "/usr/local/bin/zsh" >> /etc/shells
-exit
 chsh -s /usr/local/bin/zsh
+success ' setting login shell to zsh '
 echo '  All installed!'
+info 'Remember to `echo "/usr/local/bin/zsh" >> /etc/shells` to finish zsh setup'
