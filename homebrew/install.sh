@@ -141,13 +141,13 @@ brew install brew-cask
 # Install homebrew-cask GUI apps
 brew cask install alfred
 brew cask alfred link
-brew cask install google-chrome
+# brew cask install google-chrome
 # brew cask install airmail-beta
 brew cask install dropbox
 brew cask install bartender
 brew cask install evernote
 brew cask install f-lux
-brew cask install iterm2
+# brew cask install iterm2
 brew cask install libreoffice
 brew cask install vlc
 brew cask install firefox
