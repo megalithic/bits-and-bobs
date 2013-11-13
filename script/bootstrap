@@ -204,7 +204,6 @@ setup_gitconfig
 # install_xcode_commandline_tools
 # install_dotfiles
 additional_symlinking
-#setup_private_repo
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
@@ -219,6 +218,7 @@ then
 fi
 
 install_dotfiles
+setup_private_repo
 
 echo ''
 echo ' setting login shell to zsh '
