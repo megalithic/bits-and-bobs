@@ -142,7 +142,7 @@ brew install brew-cask
 brew cask install alfred
 brew cask alfred link
 brew cask install google-chrome
-brew cask install airmail-beta
+# brew cask install airmail-beta
 brew cask install dropbox
 brew cask install bartender
 brew cask install evernote
@@ -151,7 +151,7 @@ brew cask install iterm2
 brew cask install libreoffice
 brew cask install vlc
 brew cask install firefox
-brew cask install one-password
+# brew cask install one-password
 brew cask install reggy
 brew cask install the-unarchiver
 brew cask install trim-enabler
@@ -170,9 +170,9 @@ brew cask install flash
 brew cask install google-drive
 brew cask install google-music-manager
 brew cask install istat-menus
-brew cask install keepassx
+# brew cask install keepassx
+# brew cask install lastpass-universal
 brew cask install key-codes
-brew cask install lastpass-universal
 brew cask install parallels-9
 brew cask install sparrow
 brew cask install spectacle
