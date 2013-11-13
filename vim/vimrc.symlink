@@ -23,6 +23,7 @@ function! LoadBundles()
   Bundle 'kien/ctrlp.vim.git'
   " Bundle 'Valloric/YouCompleteMe'
   Bundle 'marijnh/tern_for_vim'
+  " TODO: cd ~/.vim/bundle/tern_for_vim && npm install
   Bundle 'rking/ag.vim'
   Bundle 'tpope/vim-endwise'
   Bundle 'tpope/vim-unimpaired'

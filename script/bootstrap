@@ -177,7 +177,7 @@ install_dotfiles () {
 additional_symlinking () {
   echo "Symlinking misc other files and directories ..."
   # so we have common apache functionality with other nix distros
-  ln -sf /Library/WebServer/Documents /var/www
+  sudo ln -sf /Library/WebServer/Documents /var/www
 }
 
 setup_private_repo () {
@@ -190,10 +190,11 @@ setup_private_repo () {
   then
     echo "Skipping private repo setup ..."
   else
-    git clone $git_privaterepo $ZSH/private
-    success "cloned $git_privaterepo to $ZSH/private"
+    rm -rf ~/.dotfiles/private
+    git clone $git_privaterepo ~/.dotfiles/private
+    success "cloned $git_privaterepo to ~/.dotfiles/private"
 
-    sh $ZSH/private/install.sh
+    sh ~/.dotfiles/private/install.sh
     success 'executed private dotfiles repo install script'
   fi
 }
@@ -202,19 +203,20 @@ setup_private_repo () {
 setup_gitconfig
 #prepare_ssh_key
 # install_xcode_commandline_tools
-# install_dotfiles
 additional_symlinking
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
-  if . bin/dot > /tmp/dotfiles-dot 2>&1
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
+  echo ''
+  bin/dot
+  #if . bin/dot > /tmp/dotfiles-dot 2>&1
+  #then
+  #  success "dependencies installed"
+  #else
+  #  fail "error installing dependencies"
+  #fi
 fi
 
 install_dotfiles
@@ -222,6 +224,7 @@ setup_private_repo
 
 echo ''
 echo ' setting login shell to zsh '
-sudo sh -c "echo '/usr/local/bin/zsh'" >> /etc/shells
+sudo su && echo "/usr/local/bin/zsh" >> /etc/shells
+exit
 chsh -s /usr/local/bin/zsh
 echo '  All installed!'

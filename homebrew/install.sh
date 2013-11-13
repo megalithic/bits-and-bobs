@@ -13,6 +13,7 @@ then
 fi
 
 brew doctor
+brew prune
 brew update
 brew upgrade
 
@@ -28,7 +29,7 @@ brew install wget --enable-iri
 
 # TODO: need to get this cleaned up, lots of deps here
 brew install ack
-# apple-gcc42
+brew install apple-gcc42
 brew install autoconf
 brew install automake
 brew install avrdude
@@ -97,7 +98,6 @@ brew install pkg-config
 brew install popt
 brew install python
 brew install python3
-brew install qt
 brew install readline
 brew install reattach-to-user-namespace
 brew install redis
@@ -105,7 +105,6 @@ brew install s-lang
 brew install sbt
 brew install sqlite
 brew install ssh-copy-id
-brew install sshfs
 brew install ta-lib
 brew install texi2html
 brew install the_silver_searcher
@@ -155,8 +154,6 @@ brew cask install firefox
 brew cask install one-password
 brew cask install reggy
 brew cask install the-unarchiver
-brew cask install adobe-air
-open /opt/homebrew-cask/Caskroom/adobe-air/3.9/AdobeAIRInstaller.app
 brew cask install trim-enabler
 brew cask install skype
 brew cask install keyremap4macbook
@@ -176,7 +173,6 @@ brew cask install istat-menus
 brew cask install keepassx
 brew cask install key-codes
 brew cask install lastpass-universal
-brew cask install osxfuse
 brew cask install parallels-9
 brew cask install sparrow
 brew cask install spectacle
@@ -184,5 +180,6 @@ brew cask install totalfinder
 brew cask install steermouse
 brew cask install right-zoom
 
+brew linkapps
 brew cleanup
 exit 0

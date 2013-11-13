@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 # installs yeoman, as well as grunt-cli and bower
 npm install -g yo #or lineman
-npm install -g protractor #used for e2e testing
+# npm install -g protractor #used for e2e testing
 npm install
 
 # potential grunt addons (per project):
