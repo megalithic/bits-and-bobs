@@ -170,8 +170,6 @@ brew cask install flash
 brew cask install google-drive
 brew cask install google-music-manager
 brew cask install istat-menus
-# brew cask install keepassx
-# brew cask install lastpass-universal
 brew cask install key-codes
 brew cask install parallels-9
 brew cask install sparrow
@@ -182,4 +180,22 @@ brew cask install right-zoom
 
 brew linkapps
 brew cleanup
+
+# ==========================================================================
+# Handle other apps to pull down
+cd /tmp
+# iTerm2-nightly
+curl -OL http://www.iterm2.com/nightly/latest
+mv latest iTerm2-nightly.zip
+unzip iTerm2-nightly.zip
+rm -rf /tmp/iTerm2-nightly.zip
+mv -f /tmp/iTerm2.app /Applications/
+
+# 1Password 3.x
+curl -O https://d13itkw33a7sus.cloudfront.net/dist/1P/mac/1Password-3.8.21.zip
+unzip 1Password-3.8.21.zip
+rm -rf /tmp/1Password-3.8.21.zip
+mv -f /tmp/1Password.app /Applications/
+# ==========================================================================
+
 exit 0
