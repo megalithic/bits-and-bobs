@@ -124,7 +124,6 @@ alias check=process
 alias chk=process
 alias running=process
 alias proc=process
-alias die="sudo pkill -9 -f"
 
 alias mg="mongod run --config /usr/local/Cellar/mongodb/2.0.2-x86_64/mongod.conf"
 alias startred="redis-server /usr/local/etc/redis.conf"

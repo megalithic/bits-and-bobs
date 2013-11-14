@@ -1,3 +1,9 @@
+#ref: http://stackoverflow.com/questions/3964068/zsh-automatically-run-ls-after-every-cd
+# function chpwd() {
+#   emulate -L zsh
+#   ls -a
+# }
+
 function zsh_recompile {
   autoload -U zrecompile
   rm -f ~/.zsh/*.zwc
@@ -138,8 +144,6 @@ cdf() { cd *$1*/ } # stolen from @topfunky
 port\?() { lsof -iTCP:$1 }
 
 \?() { check $1 }
-
-die() { sudo kill `ps -ef | grep $1 | grep -v grep | awk '{print $2}'` }
 
 freplace() {find  . -type f | grep "$0" | xargs sed -i "" 's,$1\$,$2,'}
 

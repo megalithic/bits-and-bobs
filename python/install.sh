@@ -1,2 +1,2 @@
-easy_install SpoofMAC
-pip install gntp
+# easy_install SpoofMAC
+pip install gntp pync

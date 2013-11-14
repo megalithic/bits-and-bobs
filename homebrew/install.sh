@@ -131,6 +131,7 @@ brew install postgresql --no-python
 
 # Some homebrew packages need additional commands to complete their setup:
 initdb /usr/local/var/postgres -E utf8
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 brew link openssl --force
 brew link python --force
 sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2 /usr/bin/gcc
