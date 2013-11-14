@@ -141,37 +141,29 @@ brew install brew-cask
 # Install homebrew-cask GUI apps
 brew cask install alfred
 brew cask alfred link
-# brew cask install google-chrome
-# brew cask install airmail-beta
 brew cask install dropbox
 brew cask install bartender
 brew cask install evernote
 brew cask install f-lux
-# brew cask install iterm2
 brew cask install libreoffice
 brew cask install vlc
 brew cask install firefox
-# brew cask install one-password
 brew cask install reggy
 brew cask install the-unarchiver
 brew cask install trim-enabler
 brew cask install skype
 brew cask install keyremap4macbook
 brew cask install android-file-transfer
-brew cask install appdelete
-brew cask install appzapper
 brew cask install hazel
 brew cask install witch
 brew cask install arduino
 brew cask install bettertouchtool
 brew cask install cord
-brew cask install delibar
 brew cask install flash
 brew cask install google-drive
 brew cask install google-music-manager
 brew cask install istat-menus
 brew cask install key-codes
-brew cask install parallels-9
 brew cask install sparrow
 brew cask install spectacle
 brew cask install totalfinder

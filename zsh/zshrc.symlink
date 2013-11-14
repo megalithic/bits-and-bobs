@@ -43,3 +43,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # ref: https://rvm.io/workflow/completion
 fpath=($rvm/scripts/zsh/Completion/_rvm $fpath)
+
+# init `z`
+source $ZSH/functions/z.sh
