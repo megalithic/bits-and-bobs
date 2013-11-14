@@ -1,7 +1,7 @@
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
-export PROJECTS=~/Development #`c <tab>`
+export PROJECTS=~/code #`c <tab>`
 export WORK=~/Isotope11 #`i <tab>`
 
 # use .localrc for SUPER SECRET STUFF that you don't

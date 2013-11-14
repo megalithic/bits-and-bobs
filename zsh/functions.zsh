@@ -230,9 +230,13 @@ sha() {
 
 
 ## - Complete in specific folders -----------------------------------------------
-# d() { cd ~/Development/$1; }
-# _d() { _files -W ~/Development -/; }
-# compdef _d d
+# c() { cd ~/code/$1; }
+# _c() { _files -W ~/code -/; }
+# compdef _c c
+
+# # d() { cd ~/Development/$1; }
+# # _d() { _files -W ~/Development -/; }
+# # compdef _d d
 
 # i() { cd ~/Isotope11/$1; }
 # _i() { _files -W ~/Isotope11 -/; }
@@ -241,6 +245,7 @@ sha() {
 # h() { cd ~/$1; }
 # _h() { _files -W ~/ -/; }
 # compdef _h h
+
 
 # Log output:
 #
