@@ -1,0 +1,39 @@
+session:
+  name: "uspto"
+  windows:
+    - name: "irc"
+      clear: true
+      options:
+        synchronize-panes: false
+      root: "~"
+      filters:
+        after:
+          - "ls"
+      splits:
+        - cmd: "irc"
+          focus: true
+    - name: "vim"
+      clear: true
+      options:
+        synchronize-panes: false
+      root: "~/Isotope11/uspto/uspto_dir_frontend/8293"
+      filters:
+        after:
+          - "gfod"
+      splits:
+        - cmd: "usfe"
+          focus: true
+    - name: "uspto services"
+      clear: true
+      options:
+        synchronize-panes: false
+      root: "~/Isotope11/uspto/uspto_dir_frontend/8293"
+      filters:
+      splits:
+        - cmd: "jb"
+        - cmd: "slr"
+          width: 50
+        - cmd: "usfe"
+          height: 50
+          focus: true
+          target: "bottom-right"

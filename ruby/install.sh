@@ -19,6 +19,9 @@ echo "Installing RVM (Ruby Version Manager) and Ruby 2.0.0, which becomes the de
 
   /bin/bash rvm use 2.0.0@global --default
 
+  # disable .rvmrc warnings
+  rvm rvmrc warning ignore all.rvmrcs
+
 echo "Installing critical Ruby gems for Rails development ..."
   rvm @global do gem install bundler rails pg foreman thin pry launchy teamocil --no-rdoc --no-ri
   bundle config --global jobs 2
