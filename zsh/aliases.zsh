@@ -28,9 +28,11 @@ alias la='gls -A --color'
 alias tgum="tmux attach-session -t gumshoe"
 alias ttru="tmux attach-session -t trucoin"
 alias tiso="tmux attach-session -t isotope"
+alias tpto="tmux attach-session -t uspto"
 alias teamgum="cd ~ && teamocil --here gumshoe"
 alias teamtru="cd ~ && teamocil --here trucoin"
 alias teamiso="cd ~ && teamocil --here isotope"
+alias teampto="cd ~ && teamocil --here uspto"
 
 ## - BREW-----------------------------------------------
 alias b="brew"
@@ -50,7 +52,7 @@ alias eza="vim ~/.dotfiles/zsh/aliases.zsh"
 alias ezf="vim ~/.dotfiles/zsh/functions.zsh"
 alias vars="vim ~/.localrc"
 alias ezo="vim ~/.dotfiles/zsh/config.zsh"
-alias eze="vim ~/.dotfiles/setup/env.zsh"
+alias eze="vim ~/.dotfiles/system/env.zsh"
 alias ezkb="vim ~/.dotfiles/zsh/keybindings.zsh"
 alias ev="vim ~/.vimrc"
 alias et="vim ~/.tmux.conf"
@@ -210,3 +212,11 @@ alias rs="bundle exec rails server"
 alias rsp="bundle exec rails server -p"
 alias rc="bundle exec rails console"
 alias bec=rc
+
+## - GRUNT / KARMA -----------------------------------------------
+alias gs="grunt server"
+alias gsf="grunt server --force"
+alias gb="grunt build"
+alias gbf="grunt build --force"
+alias ks="karma start"
+alias kr="karma run"

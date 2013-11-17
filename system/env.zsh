@@ -7,12 +7,14 @@ fi
 # Random other exports
 export WORDCHARS='*?[]~&;!$%^<>'
 export ACK_COLOR_MATCH='red'
-export CC=/usr/bin/gcc
+# export CC=/usr/bin/gcc
 export DISPLAY=:0.0
 export VISUAL='vim'
 
-# Set default console Java to 1.6
-# export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home
+# so I can run USPTO/jboss stuff sensibly
+export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vfs.forceCopy=false"
+export JBOSS_HOME="$HOME/code/Isotope11/uspto/jboss"
+# export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home"
 
 # Setup terminal, and turn on colors
 export TERM=xterm-256color
@@ -40,9 +42,6 @@ export LC_COLLATE=C
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_FREE_MIN=500000
 export RUBY_HEAP_MIN_SLOTS=40000
-
-# so I can run USPTO/jboss stuff sensibly
-export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vfs.forceCopy=false"
 
 export ECLIPSE_HOME=/Applications/Eclipse
 export SSL_CERT_FILE=/usr/local/etc/openssl/certs/cert.pem

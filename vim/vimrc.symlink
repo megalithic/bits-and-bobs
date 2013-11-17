@@ -164,7 +164,8 @@ set diffopt+=iwhite         " Ignore whitespace changes.
 " set fillchars=diff:⣿,vert:│
 set fillchars=diff:⣿,vert:\|
 
-set ttimeoutlen=0
+set timeout
+set ttimeoutlen=10
 set timeoutlen=100
 
 set autowrite

@@ -83,6 +83,7 @@ brew install libxml2
 brew install libxslt
 brew install libyaml
 brew install lua
+brew install maven
 brew install mercurial
 brew install mutt
 brew install mysql
@@ -193,6 +194,10 @@ curl -O https://d13itkw33a7sus.cloudfront.net/dist/1P/mac/1Password-3.8.21.zip
 unzip 1Password-3.8.21.zip
 rm -rf /tmp/1Password-3.8.21.zip
 mv -f /tmp/1Password.app /Applications/
+
+# JDK
+curl -O http://download.oracle.com/otn-pub/java/jdk/7u45-b18/jdk-7u45-macosx-x64.dmg
+open jdk-7u45-macosx-x64.dmg
 # ==========================================================================
 
 exit 0
