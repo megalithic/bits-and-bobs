@@ -1,4 +1,5 @@
 #ref: http://stackoverflow.com/questions/3964068/zsh-automatically-run-ls-after-every-cd
+#
 # function chpwd() {
 #   emulate -L zsh
 #   ls -a
@@ -154,10 +155,6 @@ pg() { psql -d $1_development -U $1 }
 run() { open -a "/Applications/$1.app" }
 
 browserstack() { java -jar "/Users/replicant/Dropbox/scripts/BrowserStackTunnel.jar" M85ys4P3n6xEFGfcc1tQ localhost,$1,0 } #isotopeadmin: ozsSMrLsEacKuGM1yxLs #info@isotope11.com: M85ys4P3n6xEFGfcc1tQ
-
-nginit() {
-  cdm $1 && npm install generator-angular generator-testacular && yo angular && npm install && bower install --dev && npm install grunt-contrib-compass --save-dev
-}
 
 revert() {
   git reset $1 #resets index to former commit; replace '56e05fced' with your commit code

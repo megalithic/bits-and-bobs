@@ -99,6 +99,7 @@ brew install pkg-config
 brew install popt
 brew install python
 brew install python3
+brew install qt --HEAD
 brew install readline
 brew install reattach-to-user-namespace
 brew install redis

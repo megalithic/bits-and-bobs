@@ -22,7 +22,7 @@ session:
       root: "~/Isotope11/uspto/uspto_dir_frontend/8293"
       filters:
         after:
-          - "gfod"
+          - "git fetch origin && git merge origin/development"
       splits:
         - cmd: "usfe"
           focus: true
