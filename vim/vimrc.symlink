@@ -51,6 +51,7 @@ function! LoadBundles()
   Bundle 'suan/vim-instant-markdown'
   Bundle 'aaronjensen/vim-sass-status'
   Bundle 'cakebaker/scss-syntax.vim'
+  Bundle 'groenewege/vim-less'
   Bundle 'hail2u/vim-css3-syntax'
   Bundle 'claco/jasmine.vim'
   Bundle 'mklabs/grunt.vim'
@@ -737,9 +738,9 @@ augroup buffer_cmds
   autocmd!
 
   " when vimrc is edited, reload it
-  autocmd bufwritepost .gvimrc source %
-  autocmd bufwritepost .vimrc source %
-  autocmd bufwritepost .vim source %
+  " autocmd bufwritepost .gvimrc source %
+  " autocmd bufwritepost .vimrc source %
+  " autocmd bufwritepost .vim source %
 
   " Only show cursorline in the current window and in normal mode
   au WinLeave,InsertEnter * set nocul
@@ -806,8 +807,6 @@ augroup END
 
 " Misc keymapping notes:
 " -----------------------------------------------------------------------------
-"  <F1> maps to NERDTreeFind
-"  <F2> maps to NERDTree
 "  <F3> maps to Error list
 "  <F4> maps to Quicklist
 "  <F5> maps to ctags refresh/rebuild
@@ -815,13 +814,6 @@ augroup END
 "  <F6> maps to setpaste toggle
 "  <F7> maps to SynStack
 "  <F8> maps to GundoToggle
-
-" -----------------------------------------------------------------------------
-" NerdTree ------
-noremap  <F1> :NERDTreeFind<cr>
-inoremap <F1> <esc>:NERDTreeFind<cr>
-noremap  <F2> :NERDTreeTabsToggle<cr>
-inoremap <F2> <esc>:NERDTreeTabsToggle<cr>
 
 " error and quickfix window toggles
 " nmap <silent> <f3> :ErrorsToggle<cr>
@@ -833,21 +825,17 @@ silent! nnoremap <silent> <S-F5> :call FlushEnvironment()<CR>
 
 " give us BundleInstall!
 nnoremap <F5> :BundleInstall!<cr>
+noremap <F5> :BundleInstall!<cr>
+map <F5> :BundleInstall!<cr>
 
 " Toggle paste
 " For some reason pastetoggle doesn't redraw the screen (thus the status bar
 " doesn't change) while :set paste! does, so I use that instead.
 " set pastetoggle=<F6>
-" nnoremap <F6> :set paste!<cr>
+nnoremap <S-F6> :set paste!<cr>
 
 " switch between relative and absolute line numbers
 nnoremap <F6> :call NumberToggle()<cr>
-
-" show the syntax highlighting stack for the cursored word
-nnoremap <F7> :call SynStack()<CR>
-
-" ... use Gundo (visual undo awesome)
-nnoremap <F8> :GundoToggle<cr>
 
 "remap ESC key
 " disabling this cuz we rockin <capslock> as <esc>, y'all!
@@ -889,6 +877,16 @@ noremap K <nop>
 
 " stop changing casing when in visual mode
 vnoremap u <nop>
+
+nmap <Up> <Nop>
+nmap <Down> <Nop>
+vmap <Up> <Nop>
+vmap <Down> <Nop>
+
+nmap <Left> <Nop>
+nmap <Right> <Nop>
+vmap <Left> <Nop>
+vmap <Right> <Nop>
 
 " map up/down arrow keys to unimpaired commands
 " nmap <Up> [e
@@ -932,24 +930,6 @@ nnoremap <c-n> :vsp .<CR>
 " nmap <silent> <C-l>     <Plug>GoldenViewNext
 " nmap <silent> <C-h>     <Plug>GoldenViewPrevious
 
-" -----------------------------------------------------------------------------
-" Thwins ------
-"create new vertical window split and focus it
-" nnoremap <c-n> :vert belowright sb N<cr>
-" nnoremap <c-o> :vert belowright sb N<cr>
-" nnoremap <c-o> :vnew<cr>:e<space><c-d>
-
-" -----------------------------------------------------------------------------
-" DWM ------
-" open a new DWM window, with an edit prompt
-" NOTE: This overrides a vim default for C-O (which is the go back to last
-" change action), but is way nicer imo
-" nnoremap <c-o> :silent! call DWM_New()<cr>:edit <c-d>
-" override DWM close
-" nmap <C-c> :silent! exec DWM_Close()<cr>
-" override DWM focus; make the current window focused (into the big window split)
-" nmap <leader>f :silent! call DWM_Focus()<cr>
-
 "allow deleting selection without updating the clipboard (yank buffer)
 vnoremap x "_x
 vnoremap X "_X
@@ -958,6 +938,10 @@ vnoremap X "_X
 noremap <leader>y "*y
 noremap <leader>yy "*Y
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>"
+
+nnoremap Y y$
+vmap <silent><leader>y "xy
+map <silent><leader>p "xp
 
 "don't move the cursor after pasting
 "(by jumping to back start of previously changed text)
@@ -998,19 +982,19 @@ nnoremap =- V`]=
 
 " Front and center
 " Use :sus for the rare times I want to actually background Vim.
-vnoremap <c-z> <esc>zv`<ztgv
+" vnoremap <c-z> <esc>zv`<ztgv
 
-" MY SURROUND stuff; couldn't get surround.vim to work 100%
-" surround the current word with quotes
-nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
-" surround the current word with ticks
-nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
-" surround the current word with ()
-nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
-" surround the current word with {}
-nnoremap <leader>{ viw<esc>a}<esc>hbi{<esc>lel
-" surround the current word with []
-nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
+" " MY SURROUND stuff; couldn't get surround.vim to work 100%
+" " surround the current word with quotes
+" nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+" " surround the current word with ticks
+" nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+" " surround the current word with ()
+" nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
+" " surround the current word with {}
+" nnoremap <leader>{ viw<esc>a}<esc>hbi{<esc>lel
+" " surround the current word with []
+" nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
 
 "make the tab key match bracket pairs
 map <tab> %
@@ -1021,7 +1005,7 @@ vnoremap <tab> %
 noremap <silent><leader>W :w !sudo tee %<CR>
 
 " Better mark jumping (line + col)
-nnoremap ' `
+" nnoremap ' `
 
 " Toggle show tabs and trailing spaces (,c)
 set lcs=tab:›\ ,trail:·,eol:¬,nbsp:_
@@ -1030,12 +1014,6 @@ nnoremap <silent> <leader>i :set nolist!<CR>
 
 " duplicate whatever’s selected directly below
 vmap D y'>p
-
-" Yank from cursor to end of line
-nnoremap Y y$
-
-vmap <silent><leader>y "xy
-map <silent><leader>p "xp
 
 " Reindent the whole document and keep the cursor in the same location
 nnoremap <C-=> mqHmwgg=G`wzt`q
@@ -1090,7 +1068,7 @@ nnoremap N Nzzzv
 " Keep search matches jumping around
 nnoremap g; g;zz
 nnoremap g, g,zz
- 
+
 " Easier to type, and I never use the default behavior.
 noremap H ^
 noremap L $
@@ -1129,9 +1107,6 @@ vnoremap <leader>gi :w !gist -p -t %:e \\| pbcopy<cr>
 " Insert the directory of the current buffer in command line mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-" display the syntax name under the cursor
-map <F12> :echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name")<cr>
-
 " Mapping Space to fold/unfold
 map <Space> za
 
@@ -1163,11 +1138,10 @@ nmap <leader>r :%s/\<<C-r>=expand("<cword>")<CR>\>/
 map <leader>t :VroomRunTestFile<cr>
 map <leader>T :VroomRunNearestTest<cr>
 
+
 " -----------------------------------------------------------------------------
-" Coffee Script ------
-" NOTE: not working?
-" vmap <leader>s <esc>:'<,'>:CoffeeCompile<CR>
-" map <leader>s :CoffeeCompile<CR>
+" Vim-LESS ------
+" nnoremap <leader>l :w <BAR> !lessc % > %:t:r.css<CR><space>
 
 " -----------------------------------------------------------------------------
 " Tabularize ------
@@ -1195,6 +1169,3 @@ vmap ) S)
 vmap } S}
 vmap ' S'
 vmap " S"
-
-" Wrap gitcommit file types at the appropriate length
-filetype indent plugin on
