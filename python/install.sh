@@ -1,2 +1,2 @@
 # easy_install SpoofMAC
-pip install gntp pync
+pip install gntp pync selenium

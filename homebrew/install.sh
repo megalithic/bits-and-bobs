@@ -171,7 +171,6 @@ brew cask install google-drive
 brew cask install google-music-manager
 brew cask install istat-menus
 brew cask install key-codes
-brew cask install sparrow
 brew cask install spectacle
 brew cask install totalfinder
 brew cask install steermouse

@@ -756,9 +756,10 @@ augroup buffer_cmds
   " filetype
   autocmd BufNewFile,BufRead *.json setf json
   autocmd BufNewFile,BufRead *.slim set filetype=slim
+  autocmd BufNewFile,BufRead *.less setf less
 
   " Enable omnicomplete for supported filetypes
-  autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
   " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   " jscomplete is a separate plugin
@@ -824,7 +825,7 @@ nmap <silent> <f4> :QFixToggle<cr>
 silent! nnoremap <silent> <S-F5> :call FlushEnvironment()<CR>
 
 " give us BundleInstall!
-nnoremap <F5> :BundleInstall!<cr>
+" nnoremap <F5> :BundleInstall!<cr>
 noremap <F5> :BundleInstall!<cr>
 map <F5> :BundleInstall!<cr>
 
@@ -984,18 +985,6 @@ nnoremap =- V`]=
 " Use :sus for the rare times I want to actually background Vim.
 " vnoremap <c-z> <esc>zv`<ztgv
 
-" " MY SURROUND stuff; couldn't get surround.vim to work 100%
-" " surround the current word with quotes
-" nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
-" " surround the current word with ticks
-" nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
-" " surround the current word with ()
-" nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
-" " surround the current word with {}
-" nnoremap <leader>{ viw<esc>a}<esc>hbi{<esc>lel
-" " surround the current word with []
-" nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
-
 "make the tab key match bracket pairs
 map <tab> %
 noremap <tab> %
@@ -1138,25 +1127,9 @@ nmap <leader>r :%s/\<<C-r>=expand("<cword>")<CR>\>/
 map <leader>t :VroomRunTestFile<cr>
 map <leader>T :VroomRunNearestTest<cr>
 
-
 " -----------------------------------------------------------------------------
 " Vim-LESS ------
 " nnoremap <leader>l :w <BAR> !lessc % > %:t:r.css<CR><space>
-
-" -----------------------------------------------------------------------------
-" Tabularize ------
-" nmap <Leader>t= :Tabularize /=<CR>
-vmap <Leader>t= :Tabularize /=<CR>
-" nmap <Leader>t: :Tabularize /:\zs<CR>
-vmap <Leader>t: :Tabularize /:\zs<CR>
-" nmap <Leader>t, :Tabularize /,\zs<CR>
-vmap <Leader>t, :Tabularize /,\zs<CR>
-" nmap <Leader>t> :Tabularize /=>\zs<CR>
-vmap <Leader>t> :Tabularize /=>\zs<CR>
-" nmap <Leader>t- :Tabularize /-<CR>
-vmap <Leader>t- :Tabularize /-<CR>
-" nmap <Leader>t" :Tabularize /"<CR>
-vmap <Leader>t" :Tabularize /"<CR>
 
 " -----------------------------------------------------------------------------
 " Surround ------
