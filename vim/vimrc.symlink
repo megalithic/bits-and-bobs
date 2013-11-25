@@ -1014,20 +1014,12 @@ nnoremap <cr><cr> o<ESC>
 " nnoremap <leader>fr :%s/\<<C-r><C-w>\>//<Left>
 nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
 
-" Toggle folds (<Space>)
-" nnoremap <silent> <space> :exe 'silent! normal! '.((foldclosed('.')>0)? 'zMzx' : 'zc')<
-
-" -----------------------------------------------------------------------------
-" Rainbow Parameters ------
-" nnoremap <leader>P :RainbowParenthesesToggle<CR>
-
 " -----------------------------------------------------------------------------
 " Tern ------
 " Rename a JavaScript variable with Tern. (r)
 " nmap <leader>r :TernRename<CR>
 " Jump to JavaScript definition with tern. (j)
 " nmap <leader>j :TernDef<CR>
-
 
 " -----------------------------------------------------------------------------
 " Ag/Ack ------
@@ -1064,7 +1056,6 @@ noremap L $
 vnoremap L g_
 
 " clear highlights with ESC and <leader><space>
-nmap <silent> <ESC> :nohl<CR>
 nnoremap <silent><Leader><space> :nohls<CR>
 
 "Quick edit of certain files and such
@@ -1126,10 +1117,6 @@ nmap <leader>r :%s/\<<C-r>=expand("<cword>")<CR>\>/
 " Vroom ------
 map <leader>t :VroomRunTestFile<cr>
 map <leader>T :VroomRunNearestTest<cr>
-
-" -----------------------------------------------------------------------------
-" Vim-LESS ------
-" nnoremap <leader>l :w <BAR> !lessc % > %:t:r.css<CR><space>
 
 " -----------------------------------------------------------------------------
 " Surround ------

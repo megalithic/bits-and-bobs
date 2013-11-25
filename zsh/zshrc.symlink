@@ -46,3 +46,5 @@ fpath=($rvm/scripts/zsh/Completion/_rvm $fpath)
 
 # init `z`
 source $ZSH/functions/z.sh
+
+[[ $TERM = "screen" ]] && rvm use default
