@@ -269,6 +269,12 @@ augroup force_save_on_events
     au FocusLost * :silent! wall
 augroup END
 
+augroup Tmux
+  au!
+  autocmd VimEnter,BufNewFile,BufReadPost * call system('tmux rename-window "vim - ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1] . '"')
+  autocmd VimLeave * call system('tmux rename-window ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1])
+augroup END
+
 augroup trailing
   au!
   au InsertEnter * :set listchars-=trail:⌴
@@ -354,6 +360,11 @@ augroup END
 let g:ackprg="ag --column --nogroup"
 set grepprg=ag\ --nogroup\ --nocolor
 let g:agprg="ag --column --nogroup"
+"
+" bind \ (backward slash) to grep shortcut
+" http://robots.thoughtbot.com/faster-grepping-in-vim/
+" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+"
 
 " -----------------------------------------------------------------------------
 " Fugitive ------
@@ -1024,10 +1035,10 @@ nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " -----------------------------------------------------------------------------
 " Ag/Ack ------
 nnoremap <leader>a :Ag!<space>
+nnoremap <leader>/ :Ag! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " nmap <leader>a :Ag! "<cword>\s*\("<space>
-nnoremap <silent> <leader>? :execute "Ag! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
-nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-"NOTE: this functionality is now handled by Unite, defined in .vimrc
+" nnoremap <silent> <leader>? :execute "Ag! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+" nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 " Toggle 'keep current line in the center of the screen' mode
 nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>

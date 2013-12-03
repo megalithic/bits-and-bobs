@@ -156,6 +156,9 @@ alias clr=clear
 alias gn="python ~/.dotfiles/utils/geeknote/geeknote.py"
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
+## - ANDROID -----------------------------------------------
+alias fb="moto-fastboot-osx64"
+
 ## - GIT -----------------------------------------------
 alias push="git push -u"
 alias pull="git pull"
