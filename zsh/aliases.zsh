@@ -36,8 +36,11 @@ alias teamiso="cd ~ && teamocil --here isotope"
 alias teampto="cd ~ && teamocil --here uspto"
 alias teamomni="cd ~ && teamocil --here omniscient"
 
-## - BREW-----------------------------------------------
+## - BREW -----------------------------------------------
 alias b="brew"
+
+## - PYTHON -----------------------------------------------
+alias py="python"
 
 ## - VIM -----------------------------------------------
 alias e="vim"
@@ -56,18 +59,18 @@ alias vars="vim ~/.localrc"
 alias el="vim ~/.localrc"
 alias ezo="vim ~/.dotfiles/zsh/config.zsh"
 alias eze="vim ~/.dotfiles/system/env.zsh"
+alias ezp="vim ~/.dotfiles/system/path.zsh"
 alias ezkb="vim ~/.dotfiles/zsh/keybindings.zsh"
 alias ev="vim ~/.vimrc"
 alias et="vim ~/.tmux.conf"
-alias etgum="vim ~/.dotfiles/teamocil/gumshoe.yml"
-alias ettru="vim ~/.dotfiles/teamocil/trucoin.yml"
 
 ## - FOLDERS -----------------------------------------------
-alias dev="cd ~/Development/"
+alias code="cd ~/code"
+alias dev="cd ~/Dropbox/Development/"
 alias music="cd ~/music/Audio"
-alias sand="cd ~/Development/sandbox"
-alias repos="cd ~/Development/repos"
-alias logs="cd ~/Development/logs/"
+alias sand="cd ~/Dropbox/Development/sandbox"
+alias repos="cd ~/Dropbox/Development/repos"
+alias logs="cd ~/Dropbox/Development/logs/"
 alias docs="cd ~/Documents"
 alias box="cd ~/Dropbox/"
 alias dot="cd ~/.dotfiles"
@@ -78,8 +81,8 @@ alias scripts="cd ~/Dropbox/scripts/"
 alias adb="/Users/replicant/Dropbox/Android/adb/platform-tools/adb"
 alias fastboot="/Users/replicant/Dropbox/Android/adb/platform-tools/fastboot"
 alias dl="cd $HOME/Downloads/"
-alias sbox="cd ~/Development/sandbox/"
-alias trav="cd ~/Development/traverse.io/"
+alias sbox="cd ~/Dropbox/Development/sandbox/"
+alias trav="cd ~/Dropbox/Development/traverse.io/"
 alias railsfiles="cd ~/Dropbox/scripts/rails_defaults/"
 
 alias cabin="cd ~/Isotope11/cabin_builder"
@@ -98,8 +101,8 @@ alias sec="cd ~/Isotope11/sec_quiz"
 alias zig="cd ~/Isotope11/att-zig-web"
 
 ## - POSTGRES -----------------------------------------------
-alias startpg="pg_ctl -D /usr/local/var/postgres -l ~/Development/logs/server.log start" #postgres -D /usr/local/var/postgres
-alias stoppg="pg_ctl -D /usr/local/var/postgres -l ~/Development/logs/server.log stop" #postgres -D /usr/local/var/postgres
+alias startpg="pg_ctl -D /usr/local/var/postgres -l ~/Dropbox/Development/logs/server.log start" #postgres -D /usr/local/var/postgres
+alias stoppg="pg_ctl -D /usr/local/var/postgres -l ~/Dropbox/Development/logs/server.log stop" #postgres -D /usr/local/var/postgres
 alias pgstart="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pgstop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
   # To have launchd start postgresql at login:
@@ -216,6 +219,7 @@ alias rbox="rails c test -s"
 alias nodeapp="nodemon app.js 3000"
 alias rs="bundle exec rails server"
 alias rsp="bundle exec rails server -p"
+alias rsprod="bundle exec rails server -e production"
 alias rc="bundle exec rails console"
 alias bec=rc
 

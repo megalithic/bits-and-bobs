@@ -111,6 +111,8 @@ brew install ta-lib
 brew install texi2html
 brew install the_silver_searcher
 brew install tmux
+brew tap nviennot/tmate
+brew install tmate
 brew install todo-txt
 brew install tokyo-cabinet
 brew install tor
