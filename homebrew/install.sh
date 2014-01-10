@@ -146,6 +146,8 @@ sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/cpp-4.2 /usr/bin/cpp
 brew tap phinze/homebrew-cask
 brew install brew-cask
 
+# Install quicklook plugins
+brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
 # Install homebrew-cask GUI apps
 brew cask install alfred

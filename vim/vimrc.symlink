@@ -69,6 +69,11 @@ function! LoadBundles()
   " Bundle 'sudar/vim-arduino-syntax'
   " Bundle 'sheerun/vim-polyglot'
 
+  " Clojure stuffs
+  Bundle 'guns/vim-clojure-static'
+  Bundle 'tpope/vim-fireplace'
+  Bundle 'jpalardy/vim-slime'
+
   if exists('*getmatches')
     Bundle 'scrooloose/syntastic'
   endif
@@ -526,6 +531,10 @@ let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
 let g:syntastic_javascript_checkers=["jshint"]
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='!'
+
+" -----------------------------------------------------------------------------
+" Slime ------
+let g:slime_target = "tmux"
 
 " -----------------------------------------------------------------------------
 " Supertab ------
