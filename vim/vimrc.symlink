@@ -68,11 +68,14 @@ function! LoadBundles()
   Bundle 'jameslyden/vim-arduino'
   " Bundle 'sudar/vim-arduino-syntax'
   " Bundle 'sheerun/vim-polyglot'
+  Bundle 'elzr/vim-json'
 
   " Clojure stuffs
   Bundle 'guns/vim-clojure-static'
   Bundle 'tpope/vim-fireplace'
-  Bundle 'jpalardy/vim-slime'
+  Bundle 'tpope/vim-classpath'
+  " Bundle 'jpalardy/vim-slime'
+  Bundle 'vim-scripts/paredit.vim'
 
   if exists('*getmatches')
     Bundle 'scrooloose/syntastic'
@@ -167,7 +170,7 @@ set splitbelow
 
 set diffopt=filler          " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite         " Ignore whitespace changes.
-" set fillchars=diff:⣿,vert:│
+set fillchars=diff:⣿,vert:│
 set fillchars=diff:⣿,vert:\|
 
 set timeout
