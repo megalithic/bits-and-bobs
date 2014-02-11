@@ -133,7 +133,7 @@ set cindent
 " set relativenumber
 set number
 set ofu=syntaxcomplete#Complete " Set omni-completion method.
-set infercase
+" set infercase
 set completeopt=longest,menuone,preview
 set omnifunc=syntaxcomplete#Complete
 set completefunc=syntaxcomplete#Complete

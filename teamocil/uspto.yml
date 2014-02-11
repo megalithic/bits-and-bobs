@@ -11,7 +11,7 @@ session:
         - cmd: "jb"
         - cmd: "slr"
           width: 50
-        - cmd: "usfe"
+        - cmd: "usfe && grunt watch"
           height: 50
           focus: true
           target: "bottom-right"
