@@ -47,8 +47,8 @@ function! LoadBundles()
   Bundle 'jelera/vim-javascript-syntax'
   Bundle 'othree/javascript-libraries-syntax.vim'
   Bundle 'lfilho/cosco.vim'
-  Bundle 'jtratner/vim-flavored-markdown'
-  Bundle 'suan/vim-instant-markdown'
+  " Bundle 'jtratner/vim-flavored-markdown'
+  " Bundle 'suan/vim-instant-markdown'
   Bundle 'aaronjensen/vim-sass-status'
   Bundle 'cakebaker/scss-syntax.vim'
   Bundle 'groenewege/vim-less'
@@ -81,6 +81,7 @@ function! LoadBundles()
     Bundle 'scrooloose/syntastic'
   endif
 
+  Bundle 'justinmk/vim-sneak'
   Bundle 'vim-scripts/matchit.zip'
 endfunction
 
@@ -203,7 +204,7 @@ set incsearch
 set showmatch
 set hlsearch
 
-set matchpairs+=<:> 
+set matchpairs+=<:>
 set gdefault
 
 set ruler
@@ -230,7 +231,7 @@ set mat=2
 set noerrorbells
 set novisualbell
 set t_vb=
-" set t_ti= 
+" set t_ti=
 " set t_te=
 set tm=500
 nnoremap / /\v
@@ -251,14 +252,22 @@ set secure " disable unsafe commands in local .vimrc files
 " =============================================================================
 " Highlighting
 " -----------------------------------------------------------------------------
-highlight ColorColumn ctermbg=237 guibg=#262626
+hi ColorColumn ctermbg=237 guibg=#262626
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
-highlight NonText guifg=#4a4a59
-highlight SpecialKey guifg=#4a4a59 guibg=NONE
+
+" Highlight extra white space
+hi ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+\%#\@<!$/
+" highlight ExtraWhitespace ctermbg=red guibg=red
+" autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
+
+hi NonText guifg=#4a4a59
+hi SpecialKey guifg=#4a4a59 guibg=NONE
+
 " Highlight search results
-hi Search guibg=Khaki guifg=Black gui=NONE
+" hi Search ctermbg=gray guibg=khaki guifg=black gui=NONE
+hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
 au BufEnter *.rb syn match error contained "\<binding.pry\>"
 
@@ -329,6 +338,10 @@ let loaded_matchit = 1
 " let ruby_fold = 1
 
 " -----------------------------------------------------------------------------
+" Markdown ------
+let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
+
+" -----------------------------------------------------------------------------
 " Airline ------
 let g:airline_enable_branch=1
 let g:airline_enable_syntastic=1
@@ -345,6 +358,15 @@ let g:airline_paste_symbol = 'ρ'
 let g:airline_paste_symbol = 'Þ'
 let g:airline_paste_symbol = '∥'
 let g:airline#extensions#tabline#enabled = 0
+let g:airline_mode_map = {
+\ 'n' : 'N',
+\ 'i' : 'I',
+\ 'R' : 'REPLACE',
+\ 'v' : 'VISUAL',
+\ 'V' : 'V-LINE',
+\ 'c' : 'CMD   ',
+\ '': 'V-BLCK',
+\ }
 
 " -----------------------------------------------------------------------------
 " Rainbow Parenthesis ------
@@ -366,7 +388,7 @@ augroup END
 " -----------------------------------------------------------------------------
 " Ag (the_silver_searcher)/Ack ------
 let g:ackprg="ag --column --nogroup"
-set grepprg=ag\ --nogroup\ --nocolor
+set grepprg=ag\ --nogroup\ --line-numbers\ --noheading
 let g:agprg="ag --column --nogroup"
 "
 " bind \ (backward slash) to grep shortcut
@@ -1085,7 +1107,7 @@ nnoremap <silent><Leader><space> :nohls<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ez :vsplit ~/.zshrc<cr>
 
-" Insert Mode Completion 
+" Insert Mode Completion
 inoremap <c-f> <c-x><c-f>
 inoremap <c-]> <c-x><c-]>
 

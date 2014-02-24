@@ -5,7 +5,7 @@ session:
       clear: true
       options:
         synchronize-panes: false
-      root: "~/Isotope11/uspto/uspto_dir_frontend/"
+      root: "~/Isotope11/uspto/frontend/"
       filters:
       splits:
         - cmd: "jb"
@@ -19,7 +19,7 @@ session:
       clear: true
       options:
         synchronize-panes: false
-      root: "~/Isotope11/uspto/uspto_dir_frontend/"
+      root: "~/Isotope11/uspto/frontend/"
       filters:
         after:
           - "git fetch origin && git merge origin/development"
