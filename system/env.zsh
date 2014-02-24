@@ -46,3 +46,5 @@ export RUBY_HEAP_MIN_SLOTS=40000
 export ECLIPSE_HOME=/Applications/Eclipse
 export SSL_CERT_FILE=/usr/local/etc/openssl/certs/cert.pem
 export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+
+export PATH=/Users/replicant/pebble-dev/PebbleSDK-current/bin:$PATH

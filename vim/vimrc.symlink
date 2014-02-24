@@ -270,8 +270,8 @@ hi NonText guifg=#4a4a59
 hi SpecialKey guifg=#4a4a59 guibg=NONE
 
 " Highlight search results
-" hi Search ctermbg=gray guibg=khaki guifg=black gui=NONE
-hi Search cterm=NONE ctermfg=grey ctermbg=blue
+hi Search ctermbg=gray guibg=khaki guifg=black gui=NONE
+" hi Search cterm=NONE ctermfg=khaki ctermbg=blue
 
 au BufEnter *.rb syn match error contained "\<binding.pry\>"
 
@@ -1186,3 +1186,9 @@ vmap <leader>( S)lvi(
 vmap <leader>{ S}lvi{
 vmap <leader>[ S]lvi[
 vmap <leader>< S>lvi<
+
+
+" -----------------------------------------------------------------------------
+" Prettify XML/JSON ------
+map <leader>pj :%!python -m json.tool<CR>
+map <leader>px :%!xmllint % --format<CR>

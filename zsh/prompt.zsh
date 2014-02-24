@@ -94,6 +94,9 @@ prompt_pure_precmd() {
     (( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) &&
     # some crazy ansi magic to inject the symbol into the previous line
     print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{red}⇣%f\e8"
+
+    command git push --dry-run 2>&1 | grep -q -v "Everything up-to-date" &&
+    print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}⇡%f\e8"
   } &!
 
 	# reset value since `preexec` isn't always triggered
