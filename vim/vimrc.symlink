@@ -24,6 +24,7 @@ function! LoadBundles()
   " Bundle 'Valloric/YouCompleteMe'
   Bundle 'marijnh/tern_for_vim'
   " TODO: cd ~/.vim/bundle/tern_for_vim && npm install
+  Bundle 'tomtom/tcomment_vim'
   Bundle 'rking/ag.vim'
   Bundle 'tpope/vim-endwise'
   Bundle 'tpope/vim-unimpaired'
@@ -32,7 +33,7 @@ function! LoadBundles()
   Bundle 'tpope/vim-git'
   Bundle 'tpope/vim-fugitive'
   Bundle 'tpope/vim-repeat'
-  Bundle 'tpope/vim-commentary'
+  " Bundle 'tpope/vim-commentary'
   Bundle 'tpope/vim-rvm'
   Bundle 'tpope/vim-haml'
   Bundle 'tpope/vim-markdown'
@@ -53,6 +54,7 @@ function! LoadBundles()
   Bundle 'cakebaker/scss-syntax.vim'
   Bundle 'groenewege/vim-less'
   Bundle 'hail2u/vim-css3-syntax'
+  Bundle 'gorodinskiy/vim-coloresque.git'
   Bundle 'claco/jasmine.vim'
   Bundle 'mklabs/grunt.vim'
   " Bundle 'mattn/emmet-vim'
@@ -81,7 +83,7 @@ function! LoadBundles()
     Bundle 'scrooloose/syntastic'
   endif
 
-  Bundle 'justinmk/vim-sneak'
+  " Bundle 'justinmk/vim-sneak'
   Bundle 'vim-scripts/matchit.zip'
 endfunction
 
@@ -227,6 +229,8 @@ set nofoldenable        "dont fold by default
 
 set magic
 set mat=2
+
+set re=1
 
 set noerrorbells
 set novisualbell
@@ -388,13 +392,23 @@ augroup END
 " -----------------------------------------------------------------------------
 " Ag (the_silver_searcher)/Ack ------
 let g:ackprg="ag --column --nogroup"
-set grepprg=ag\ --nogroup\ --line-numbers\ --noheading
+set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
 let g:agprg="ag --column --nogroup"
 "
 " bind \ (backward slash) to grep shortcut
 " http://robots.thoughtbot.com/faster-grepping-in-vim/
 " command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 "
+
+" -----------------------------------------------------------------------------
+" Sneak ------
+let g:sneak#streak = 1
+" nmap f <Plug>Sneak_s
+" nmap F <Plug>Sneak_S
+" xmap f <Plug>Sneak_s
+" xmap F <Plug>Sneak_S
+" omap f <Plug>Sneak_s
+" omap F <Plug>Sneak_S
 
 " -----------------------------------------------------------------------------
 " Fugitive ------
@@ -419,6 +433,12 @@ function! BufEnterCommit()
   if getline('.') == ''
     start
   end
+
+  " force spell when doing a git commit
+  if  bufname("%")=="COMMIT_EDITMSG"
+      set spell
+      set spelllang=en
+  endif
 endfunction
 autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
 
@@ -556,6 +576,7 @@ let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
 let g:syntastic_javascript_checkers=["jshint"]
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='!'
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 " -----------------------------------------------------------------------------
 " Slime ------
@@ -605,23 +626,6 @@ let g:ctrlp_prompt_mappings = {
 \ 'PrtHistory(1)':        ['<c-p>'],
 \ 'ToggleFocus()':        ['<c-tab>'],
 \}
-
-" stevelosh ctrlp suggestions
-" let ctrlp_filter_greps = "".
-"     \ "egrep -iv '\\.(" .
-"     \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
-"     \ ")$' | " .
-"     \ "egrep -v '^(\\./)?(" .
-"     \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
-"     \ ")'"
-" let my_ctrlp_user_command = "" .
-"     \ "find %s '(' -type f -or -type l ')' -maxdepth 15 -not -path '*/\\.*/*' | " .
-"     \ ctrlp_filter_greps
-" let my_ctrlp_git_command = "" .
-"     \ "cd %s && git ls-files --exclude-standard -co | " .
-"     \ ctrlp_filter_greps
-" let my_ctrlp_ffind_command = "ffind --semi-restricted --dir %s --type e -B -f"
-" let g:ctrlp_user_command = ['.git/', my_ctrlp_ffind_command, my_ctrlp_ffind_command]
 
 " -----------------------------------------------------------------------------
 " Vroom ------
@@ -995,9 +999,9 @@ noremap p p`[
 noremap P P`[
 
 " -----------------------------------------------------------------------------
-" Commentary ------
-nmap <leader>c <Plug>CommentaryLine
-xmap <leader>c <Plug>Commentary
+" TComment ------
+nmap <leader>c :TComment<cr>
+vmap <leader>c :TComment<cr>
 
 " -----------------------------------------------------------------------------
 " Fugitive ------
@@ -1096,8 +1100,8 @@ nnoremap g; g;zz
 nnoremap g, g,zz
 
 " Easier to type, and I never use the default behavior.
-noremap H ^
-noremap L $
+" noremap H ^
+" noremap L $
 vnoremap L g_
 
 " clear highlights with ESC and <leader><space>
@@ -1166,11 +1170,19 @@ map <leader>T :VroomRunNearestTest<cr>
 " -----------------------------------------------------------------------------
 " Surround ------
 " Autoclose in visual mode
-vmap [ S[
-vmap ( S(
-vmap { S{
-vmap ] S]
-vmap ) S)
-vmap } S}
-vmap ' S'
-vmap " S"
+" vmap [ S[
+" vmap ( S(
+" vmap { S{
+" vmap ] S]
+" vmap ) S)
+" vmap } S}
+" vmap ' S'
+" vmap " S"
+
+vmap <leader>" S"lvi"
+vmap <leader>' S'lvi'
+vmap <leader>` S`lvi`
+vmap <leader>( S)lvi(
+vmap <leader>{ S}lvi{
+vmap <leader>[ S]lvi[
+vmap <leader>< S>lvi<
