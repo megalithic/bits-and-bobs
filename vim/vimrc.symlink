@@ -80,6 +80,7 @@ function! LoadBundles()
     Bundle 'scrooloose/syntastic'
   endif
 
+  Bundle 'gregsexton/gitv'
   Bundle 'justinmk/vim-sneak'
   Bundle 'vim-scripts/matchit.zip'
 endfunction
@@ -162,6 +163,7 @@ set backspace=indent,eol,start
 set laststatus=2
 set history=100
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
+set fcs=fold:-
 set shell=/usr/local/bin/zsh\ --login
 set lazyredraw "may be the cause of lots of issues
 set matchtime=3
@@ -170,8 +172,8 @@ set splitbelow
 
 set diffopt=filler          " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite         " Ignore whitespace changes.
-set fillchars=diff:⣿,vert:│
-set fillchars=diff:⣿,vert:\|
+" set fillchars=diff:⣿,vert:│
+" set fillchars=diff:⣿,vert:\|
 
 set timeout
 set ttimeoutlen=10
@@ -246,6 +248,8 @@ endif
 
 " add system clipboard support
 set clipboard+=unnamed
+
+set iskeyword+=-
 
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
@@ -377,16 +381,6 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 " -----------------------------------------------------------------------------
-" Commentary ------
-augroup plugin_commentary
-  au!
-  au FileType htmldjango setlocal commentstring={#\ %s\ #}
-  au FileType clojurescript setlocal commentstring=;\ %s
-  au FileType puppet setlocal commentstring=#\ %s
-  au FileType fish setlocal commentstring=#\ %s
-augroup END
-
-" -----------------------------------------------------------------------------
 " Ag (the_silver_searcher)/Ack ------
 let g:ackprg="ag --column --nogroup"
 set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
@@ -440,6 +434,11 @@ endfunction
 autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
 
 " -----------------------------------------------------------------------------
+" Gitv ------
+nnoremap <Leader>gv :Gitv --all<CR>
+nnoremap <Leader>gV :Gitv! --all<CR>
+
+" -----------------------------------------------------------------------------
 " Gist ------
 let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1
@@ -465,103 +464,7 @@ let AccordionAll = 3
 
 " -----------------------------------------------------------------------------
 " Unite ------
-"
-" https://github.com/mmozuras/vimfiles/blob/master/plugin/settings/unite.vim
-" let g:unite_source_history_yank_enable = 1
-" let g:unite_enable_start_insert = 1
-" let g:unite_update_time = 200
-
-" call unite#filters#matcher_default#use(['matcher_fuzzy'])
-
-" if executable('ag')
-"   let g:unite_source_grep_command = 'ag'
-"   let g:unite_source_grep_default_opts = '--nocolor --nogroup'
-"   let g:unite_source_grep_recursive_opt = ''
-"   let g:unite_source_grep_max_candidates = 200
-" endif
-
-" call unite#custom_source('file,file_rec/async,file_mru',
-"            \ 'ignore_pattern',
-"            \ escape(
-"            \     substitute(join(split(&wildignore, ","), '\|'), '**/\?', '', 'g'),
-"            \     '.'))
-
-" " Mappings
-" nnoremap <Leader>f :<C-u>Unite -no-split -buffer-name=files   file_rec/async:!<CR>
-" nnoremap <Leader>t :<C-u>Unite -no-split -buffer-name=files   file<CR>
-" nnoremap <Leader>r :<C-u>Unite -no-split -buffer-name=mru     file_mru<CR>
-" nnoremap <Leader>o :<C-u>Unite -no-split -buffer-name=outline outline<CR>
-" nnoremap <Leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<CR>
-" nnoremap <Leader>b :<C-u>Unite -no-split -buffer-name=buffer  buffer<CR>
-" nnoremap <Leader>d :<C-u>Unite -no-split -buffer-name=change-cwd -default-action=lcd directory_mru<CR>
-" nnoremap <Leader>a :<C-u>Unite -no-split grep:.<CR>
-" nnoremap <Leader>* :<C-u>UniteWithCursorWord -no-split grep:.<CR>
-
-" autocmd FileType unite call s:unite_settings()
-" function! s:unite_settings()
-"   imap <buffer> <C-j> <Plug>(unite_select_next_line)
-"   imap <buffer> <C-k> <Plug>(unite_select_previous_line)
-
-"   nmap <buffer> <ESC> <Plug>(unite_exit)
-"   imap <buffer> <ESC> <Plug>(unite_exit)
-" endfunction
-"
-" call unite#filters#matcher_default#use(['matcher_fuzzy'])
-" call unite#filters#sorter_default#use(['sorter_rank'])
-" call unite#set_profile('files', 'smartcase', 1)
-" call unite#custom#source('line,outline','matchers','matcher_fuzzy')
-" call unite#custom#source('sorters', 'sorter_rank', 'sorter_length')
-" call unite#custom#source('file_rec', 'ignore_pattern', '\node_modules|\*.png|\*.jpg\|\.git$')
-" " let s:file_rec_ignore_pattern = (unite#sources#rec#define()[0]['ignore_pattern']) . '\|\$global\|\.class$\|\<target\>'
-" " call unite#custom#source('file_rec', 'ignore_pattern', s:file_rec_ignore_pattern)
-" " call unite#custom#source('grep', 'ignore_pattern', s:file_rec_ignore_pattern)
-
-" nnoremap <silent> <leader>m :<C-u>Unite -buffer-name=files -auto-resize -start-insert file_rec/async:!<cr>
-" " nnoremap <silent> <leader>f :<C-u>Unite -buffer-name=grep -auto-resize -start-insert grep:.<cr>
-" " nnoremap <silent> <leader>m :<C-u>Unite -buffer-name=files -start-insert file_rec/async:!<cr>
-" " nnoremap <silent> <leader>m :<C-r> Unite -buffer-name=files -start-insert file<cr>
-" "nnoremap <leader>f :<C-r> Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
-" " nnoremap <leader>r :<C-r> Unite -buffer-name=mru -start-insert file_mru<cr>
-" " nnoremap <leader>o :<C-r> Unite -buffer-name=outline -start-insert outline<cr>
-" " nnoremap <leader>y :<C-r> Unite -buffer-name=yank history/yank<cr>
-" " nnoremap <leader>e :<C-r> Unite -buffer-name=buffer buffer<cr>
-
-" let g:unite_data_directory='~/.vim/cache/unite'
-" let g:unite_enable_start_insert=1
-" let g:unite_source_history_yank_enable=1
-" let g:unite_source_rec_max_cache_files=5000
-" let g:unite_prompt='» '
-" let g:unite_split_rule = "botright"
-
-" if executable('ack-grep')
-"   let g:unite_source_grep_command = 'ack-grep'
-"   let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
-"   let g:unite_source_grep_recursive_opt = ''
-" elseif executable('ag')
-"   let g:unite_source_grep_command='ag'
-"   let g:unite_source_grep_default_opts='--nocolor --nogroup --hidden'
-"   let g:unite_source_grep_recursive_opt=''
-" elseif executable('ack')
-"   let g:unite_source_grep_command='ack'
-"   let g:unite_source_grep_default_opts='-a'
-"   let g:unite_source_grep_recursive_opt=''
-" endif
-
-" function! s:unite_settings()
-"   let b:SuperTabDisabled=1
-"   nmap <buffer> ,q <plug>(unite_exit)
-"   imap <buffer> ,q <plug>(unite_exit)
-"   nmap <buffer> <esc> <plug>(unite_exit)
-"   imap <buffer> <esc> <plug>(unite_exit)
-"   imap <buffer> <C-j> <Plug>(unite_select_next_line)
-"   imap <buffer> <C-k> <Plug>(unite_select_previous_line)
-"   inoremap <silent><buffer><expr> <cr> unite#do_action('right')
-"   nnoremap <silent><buffer><expr> <cr> unite#do_action('right')
-"   nmap <buffer> <C-r> <Plug>(unite_redraw)
-"   imap <buffer> <C-r> <Plug>(unite_redraw)
-"   imap <buffer> <c-a> <Plug>(unite_choose_action)
-" endfunction
-" autocmd FileType unite call s:unite_settings()
+" can haz?
 
 " -----------------------------------------------------------------------------
 " Syntastic ------
@@ -572,7 +475,7 @@ let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
 let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
 let g:syntastic_javascript_checkers=["jshint"]
 let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='!'
+let g:syntastic_warning_symbol='⚠'
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 " -----------------------------------------------------------------------------
@@ -634,15 +537,6 @@ let g:vroom_use_colors=1
 " AutoClose
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'}
 let g:AutoCloseProtectedRegions = ["Character"]
-
-" Toggle relative line numbers
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
 
 " Errors Toggle
 command! ErrorsToggle call ErrorsToggle()
@@ -806,7 +700,7 @@ augroup buffer_cmds
 
   " Enable omnicomplete for supported filetypes
   autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
-  " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   " jscomplete is a separate plugin
   autocmd FileType javascript setlocal omnifunc=jscomplete#CompleteJS
@@ -848,20 +742,6 @@ augroup END
 " Keybindings
 " -----------------------------------------------------------------------------
 
-" if filereadable(expand("~/.vim/vimrc.keybindings.vim"))
-"   source ~/.vim/vimrc.keybindings.vim
-" endif
-
-" Misc keymapping notes:
-" -----------------------------------------------------------------------------
-"  <F3> maps to Error list
-"  <F4> maps to Quicklist
-"  <F5> maps to ctags refresh/rebuild
-"  <S-F5> maps to BundleInstall!
-"  <F6> maps to setpaste toggle
-"  <F7> maps to SynStack
-"  <F8> maps to GundoToggle
-
 " error and quickfix window toggles
 " nmap <silent> <f3> :ErrorsToggle<cr>
 nmap <silent> <f3> :Errors<CR>
@@ -880,13 +760,6 @@ map <F5> :BundleInstall!<cr>
 " doesn't change) while :set paste! does, so I use that instead.
 " set pastetoggle=<F6>
 nnoremap <S-F6> :set paste!<cr>
-
-" switch between relative and absolute line numbers
-nnoremap <F6> :call NumberToggle()<cr>
-
-"remap ESC key
-" disabling this cuz we rockin <capslock> as <esc>, y'all!
-" inoremap jk <esc>
 
 " navigation a lil better
 noremap j gj
@@ -929,23 +802,10 @@ nmap <Up> <Nop>
 nmap <Down> <Nop>
 vmap <Up> <Nop>
 vmap <Down> <Nop>
-
 nmap <Left> <Nop>
 nmap <Right> <Nop>
 vmap <Left> <Nop>
 vmap <Right> <Nop>
-
-" map up/down arrow keys to unimpaired commands
-" nmap <Up> [e
-" nmap <Down> ]e
-" vmap <Up> [egv
-" vmap <Down> ]egv
-
-" map left/right arrow keys to indendation
-" nmap <Left> <<
-" nmap <Right> >>
-" vmap <Left> <gv
-" vmap <Right> >gv
 
 " -----------------------------------------------------------------------------
 " CtrlP ------
@@ -966,16 +826,7 @@ nnoremap <leader>s :Switch<CR>
 "create new vertical window split and focus it
 " nnoremap <c-n> :vnew<cr>
 nnoremap <c-o> :vnew<cr>:e<space><c-d>
-nnoremap <c-n> :vsp .<CR>
-
-" -----------------------------------------------------------------------------
-" GoldenView ------
-" let g:goldenview__enable_default_mapping = 0
-" nmap <silent> <C-n>     <Plug>GoldenViewSplit
-" nmap <silent> <C-space> <Plug>GoldenViewSwitchMain
-" nmap <silent> <C-CR>    <Plug>GoldenViewSwitchToggle
-" nmap <silent> <C-l>     <Plug>GoldenViewNext
-" nmap <silent> <C-h>     <Plug>GoldenViewPrevious
+nnoremap <c-n> :vsp .<cr>
 
 "allow deleting selection without updating the clipboard (yank buffer)
 vnoremap x "_x
@@ -984,7 +835,6 @@ vnoremap X "_X
 "copy/paste mappings
 noremap <leader>y "*y
 noremap <leader>yy "*Y
-noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>"
 
 nnoremap Y y$
 vmap <silent><leader>y "xy
@@ -1015,7 +865,6 @@ nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
 nnoremap <leader>H :Gbrowse<cr>
 vnoremap <leader>H :Gbrowse<cr>
 
-
 " select all text on the page
 noremap <leader>v ggVG
 
@@ -1043,8 +892,6 @@ noremap <silent><leader>W :w !sudo tee %<CR>
 " nnoremap ' `
 
 " Toggle show tabs and trailing spaces (,c)
-set lcs=tab:›\ ,trail:·,eol:¬,nbsp:_
-set fcs=fold:-
 nnoremap <silent> <leader>i :set nolist!<CR>
 
 " duplicate whatever’s selected directly below
@@ -1071,13 +918,10 @@ nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " Ag/Ack ------
 nnoremap <leader>a :Ag!<space>
 nnoremap <leader>/ :Ag! "\b<C-R><C-W>\b"<CR>:cw<CR>
-" nmap <leader>a :Ag! "<cword>\s*\("<space>
-" nnoremap <silent> <leader>? :execute "Ag! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
-" nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 " Toggle 'keep current line in the center of the screen' mode
 nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
-
+"
 " gi already moves to 'last place you exited insert mode', so we'll map gI to
 " something similar: move to last change
 nnoremap gI `.
@@ -1122,13 +966,13 @@ nnoremap vv ^vg_
 " Keep the cursor in place while joining lines
 nnoremap J mzJ`z
 
-" Split line (sister to [J]oin lines)
+" Split line (sister to [J]oin lines above)
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
-vnoremap <leader>gi :w !gist -p -t %:e \\| pbcopy<cr>
+vnoremap <leader>G :w !gist -p -t %:e \\| pbcopy<cr>
 
 " Insert the directory of the current buffer in command line mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -1136,19 +980,9 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " -----------------------------------------------------------------------------
 " vimgrep searching and cope displaying
 " -----------------------------------------------------------------------------
-" When you press gv you vimgrep after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-
 " Smart Tab Completion
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 inoremap <s-tab> <c-n>
-
-" Visual Mode set search (based on * and #)
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 
 " Remap VIM 0 to first non-blank character
 map 0 ^
@@ -1164,14 +998,14 @@ map <leader>T :VroomRunNearestTest<cr>
 " -----------------------------------------------------------------------------
 " Surround ------
 " Autoclose in visual mode
-" vmap [ S[
-" vmap ( S(
-" vmap { S{
-" vmap ] S]
-" vmap ) S)
-" vmap } S}
-" vmap ' S'
-" vmap " S"
+vmap [ S[
+vmap ( S(
+vmap { S{
+vmap ] S]
+vmap ) S)
+vmap } S}
+vmap ' S'
+vmap " S"
 
 vmap <leader>" S"lvi"
 vmap <leader>' S'lvi'
@@ -1181,6 +1015,11 @@ vmap <leader>{ S}lvi{
 vmap <leader>[ S]lvi[
 vmap <leader>< S>lvi<
 
+" Insert mode movements
+" Ctrl-e: Go to end of line
+inoremap <c-e> <esc>A
+" Ctrl-a: Go to begin of line
+inoremap <c-a> <esc>I
 
 " -----------------------------------------------------------------------------
 " Prettify XML/JSON ------

@@ -129,6 +129,10 @@ brew install zsh-lovers
 brew install zsh-syntax-highlighting
 brew install solr
 
+brew tap laurent22/massren
+brew install massren
+massren --config editor vim
+
 brew install weechat --with-ruby --with-python --with-perl
 #brew install macvim --with-cscope --with-lua --HEAD
 brew install postgresql --no-python
