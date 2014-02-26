@@ -43,7 +43,7 @@ alias b="brew"
 alias py="python"
 
 ## - VIM -----------------------------------------------
-alias e="vim"
+alias e="mvim"
 # alias e="mvim -v"
 alias vi="vim"
 alias v="vim"

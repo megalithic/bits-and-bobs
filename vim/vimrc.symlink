@@ -19,7 +19,6 @@ function! LoadBundles()
   Bundle 'chriskempson/base16-vim'
   Bundle 'bling/vim-airline'
   Bundle 'ervandew/supertab'
-  " Bundle 'Shougo/neocomplete.vim'
   Bundle 'kien/ctrlp.vim.git'
   " Bundle 'Valloric/YouCompleteMe'
   Bundle 'marijnh/tern_for_vim'
@@ -63,8 +62,6 @@ function! LoadBundles()
   Bundle 'Valloric/MatchTagAlways'
   Bundle 'Townk/vim-autoclose'
   Bundle 'roman/golden-ratio'
-  " Bundle 'mattboehm/vim-accordion'
-  " Bundle 'zhaocai/GoldenView.Vim'
   Bundle 'sickill/vim-pasta'
   Bundle 'tclem/vim-arduino'
   Bundle 'jameslyden/vim-arduino'
@@ -83,7 +80,7 @@ function! LoadBundles()
     Bundle 'scrooloose/syntastic'
   endif
 
-  " Bundle 'justinmk/vim-sneak'
+  Bundle 'justinmk/vim-sneak'
   Bundle 'vim-scripts/matchit.zip'
 endfunction
 
@@ -337,13 +334,13 @@ endif
 " endif
 
 let g:JSHintHighlightErrorLine = 1
-" let javascript_fold = 1
+let javascript_fold = 1
 let loaded_matchit = 1
-" let ruby_fold = 1
+let ruby_fold = 1
 
 " -----------------------------------------------------------------------------
 " Markdown ------
-let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
+" let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
 
 " -----------------------------------------------------------------------------
 " Airline ------
@@ -403,12 +400,12 @@ let g:agprg="ag --column --nogroup"
 " -----------------------------------------------------------------------------
 " Sneak ------
 let g:sneak#streak = 1
-" nmap f <Plug>Sneak_s
-" nmap F <Plug>Sneak_S
-" xmap f <Plug>Sneak_s
-" xmap F <Plug>Sneak_S
-" omap f <Plug>Sneak_s
-" omap F <Plug>Sneak_S
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
+xmap f <Plug>Sneak_s
+xmap F <Plug>Sneak_S
+omap f <Plug>Sneak_s
+omap F <Plug>Sneak_S
 
 " -----------------------------------------------------------------------------
 " Fugitive ------
@@ -1100,8 +1097,8 @@ nnoremap g; g;zz
 nnoremap g, g,zz
 
 " Easier to type, and I never use the default behavior.
-" noremap H ^
-" noremap L $
+noremap H ^
+noremap L $
 vnoremap L g_
 
 " clear highlights with ESC and <leader><space>
@@ -1135,9 +1132,6 @@ vnoremap <leader>gi :w !gist -p -t %:e \\| pbcopy<cr>
 
 " Insert the directory of the current buffer in command line mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-" Mapping Space to fold/unfold
-map <Space> za
 
 " -----------------------------------------------------------------------------
 " vimgrep searching and cope displaying

@@ -90,6 +90,7 @@ based on)
 - [mathias bynens](https://github.com/mathiasbynens/dotfiles)
 - [yan pritzker (yadr)](https://github.com/skwp/dotfiles)
 - [paul miller](https://github.com/paulmillr/dotfiles)
+- [l0stsoul - good for front-end dev](https://github.com/L0stSoul/vim-config)
 
 .. I'll continually add more as I come across them.
 
