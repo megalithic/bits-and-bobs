@@ -116,7 +116,7 @@ brew install tmate
 brew install todo-txt
 brew install tokyo-cabinet
 brew install tor
-brew install vim
+brew install vim --with-lua
 brew install watch
 brew install wkhtmltopdf
 brew install x264
