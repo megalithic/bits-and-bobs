@@ -40,6 +40,7 @@ function! LoadBundles()
     endif
   endif
 
+  Bundle 'rking/ag.vim'
   Bundle 'tomtom/tcomment_vim'
   Bundle 'rking/ag.vim'
   Bundle 'tpope/vim-endwise'
@@ -68,10 +69,10 @@ function! LoadBundles()
   Bundle 'cakebaker/scss-syntax.vim'
   Bundle 'groenewege/vim-less'
   Bundle 'hail2u/vim-css3-syntax'
-  Bundle 'gorodinskiy/vim-coloresque.git'
+  " Bundle 'gorodinskiy/vim-coloresque.git'
+  " Bundle 'AndrewRadev/switch.vim'
   Bundle 'claco/jasmine.vim'
   Bundle 'mklabs/grunt.vim'
-  Bundle 'AndrewRadev/switch.vim'
   Bundle 'kien/rainbow_parentheses.vim'
   Bundle 'Valloric/MatchTagAlways'
   Bundle 'Townk/vim-autoclose'
@@ -89,6 +90,7 @@ function! LoadBundles()
   Bundle 'tpope/vim-classpath'
   " Bundle 'jpalardy/vim-slime'
   Bundle 'vim-scripts/paredit.vim'
+  " Bundle 'jayflo/vim-skip'
 
   if exists('*getmatches')
     Bundle 'scrooloose/syntastic'
@@ -420,7 +422,7 @@ au Syntax * RainbowParenthesesLoadBraces
 " Ag (the_silver_searcher)/Ack ------
 let g:ackprg="ag --column --nogroup"
 set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
-let g:agprg="ag --column --nogroup"
+let g:agprg="ag --column --nogroup --line-numbers"
 "
 " bind \ (backward slash) to grep shortcut
 " http://robots.thoughtbot.com/faster-grepping-in-vim/
@@ -445,6 +447,7 @@ augroup ft_fugitive
   " Automatically remove fugitive buffers
   autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
+
 function! BufReadIndex()
   " Use j/k in status
   setlocal cursorline
@@ -452,15 +455,16 @@ function! BufReadIndex()
   nnoremap <buffer> <silent> j :call search('^#\t.*','W')<Bar>.<CR>
   nnoremap <buffer> <silent> k :call search('^#\t.*','Wbe')<Bar>.<CR>
 endfunction
+
 autocmd BufReadCmd *.git/index exe BufReadIndex()
 autocmd BufEnter *.git/index silent normal gg0j
+
 function! BufEnterCommit()
   " Start in insert mode for commit
   normal gg0
   if getline('.') == ''
     start
   end
-
   " force spell when doing a git commit
   if  bufname("%")=="COMMIT_EDITMSG"
       set spell
@@ -942,7 +946,7 @@ nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " Ag/Ack ------
 nnoremap <leader>a :Ag!<space>
 " immediately grep for word under cursor
-map <leader>/ :execute "Ag " . expand("<cword>") <CR>
+map <leader>/ :execute "Ag! " . expand("<cword>") <CR>
 
 " Toggle 'keep current line in the center of the screen' mode
 nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
