@@ -14,15 +14,32 @@ set nocompatible
 " =============================================================================
 " Manage plugins with Vundle
 " -----------------------------------------------------------------------------
+
 function! LoadBundles()
+  " Determine if npm is installed
+  let isNpmInstalled = executable("npm")
+
+  " Determine make or gmake will be used for making additional deps for Bundles
+  let g:make = 'gmake'
+  if system('uname -o') =~ '^GNU/'
+    let g:make = 'make'
+  endif
+
   Bundle 'gmarik/vundle'
   Bundle 'chriskempson/base16-vim'
   Bundle 'bling/vim-airline'
   Bundle 'ervandew/supertab'
   Bundle 'kien/ctrlp.vim.git'
-  " Bundle 'Valloric/YouCompleteMe'
-  Bundle 'marijnh/tern_for_vim'
-  " TODO: cd ~/.vim/bundle/tern_for_vim && npm install
+
+  if has("python")
+    " Provide smart autocomplete results for javascript, and some useful commands
+    Bundle 'marijnh/tern_for_vim'
+    " install node dependencies for tern
+    if isNpmInstalled && isdirectory(expand('~/.vim/bundle/tern_for_vim')) && !isdirectory(expand('~/.vim/bundle/tern_for_vim/node_modules'))
+      silent ! echo 'Installing tern' && npm --prefix ~/.vim/bundle/tern_for_vim install
+    endif
+  endif
+
   Bundle 'tomtom/tcomment_vim'
   Bundle 'rking/ag.vim'
   Bundle 'tpope/vim-endwise'
@@ -32,7 +49,6 @@ function! LoadBundles()
   Bundle 'tpope/vim-git'
   Bundle 'tpope/vim-fugitive'
   Bundle 'tpope/vim-repeat'
-  " Bundle 'tpope/vim-commentary'
   Bundle 'tpope/vim-rvm'
   Bundle 'tpope/vim-haml'
   Bundle 'tpope/vim-markdown'
@@ -46,9 +62,8 @@ function! LoadBundles()
   Bundle 'pangloss/vim-javascript'
   Bundle 'jelera/vim-javascript-syntax'
   Bundle 'othree/javascript-libraries-syntax.vim'
+  Bundle 'lukaszb/vim-web-indent'
   Bundle 'lfilho/cosco.vim'
-  " Bundle 'jtratner/vim-flavored-markdown'
-  " Bundle 'suan/vim-instant-markdown'
   Bundle 'aaronjensen/vim-sass-status'
   Bundle 'cakebaker/scss-syntax.vim'
   Bundle 'groenewege/vim-less'
@@ -56,7 +71,6 @@ function! LoadBundles()
   Bundle 'gorodinskiy/vim-coloresque.git'
   Bundle 'claco/jasmine.vim'
   Bundle 'mklabs/grunt.vim'
-  " Bundle 'mattn/emmet-vim'
   Bundle 'AndrewRadev/switch.vim'
   Bundle 'kien/rainbow_parentheses.vim'
   Bundle 'Valloric/MatchTagAlways'
@@ -80,6 +94,25 @@ function! LoadBundles()
     Bundle 'scrooloose/syntastic'
   endif
 
+  " Install jshint and csslint for syntastic
+  " Path to jshint if it not installed globally, then use local installation
+  if !executable("jshint")
+    let g:syntastic_jshint_exec = '~/.vim/node_modules/.bin/jshint'
+    "let g:syntastic_javascript_jshint_exec = '~/.vim/node_modules/.bin/jshint'
+    if isNpmInstalled && !executable(expand(g:syntastic_jshint_exec))
+      silent ! echo 'Installing jshint' && npm --prefix ~/.vim/ install jshint
+    endif
+  endif
+
+  " Path to csslint if it not installed globally, then use local installation
+  if !executable("csslint")
+    let g:syntastic_css_csslint_exec='~/.vim/node_modules/.bin/csslint'
+    if isNpmInstalled && !executable(expand(g:syntastic_css_csslint_exec))
+      silent ! echo 'Installing csslint' && npm --prefix ~/.vim/ install csslint
+    endif
+  endif
+
+  Bundle 'maxbrunsfeld/vim-yankstack'
   Bundle 'gregsexton/gitv'
   Bundle 'justinmk/vim-sneak'
   Bundle 'vim-scripts/matchit.zip'
@@ -173,7 +206,7 @@ set splitbelow
 set diffopt=filler          " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite         " Ignore whitespace changes.
 " set fillchars=diff:⣿,vert:│
-" set fillchars=diff:⣿,vert:\|
+set fillchars=diff:\|,vert:\|
 
 set timeout
 set ttimeoutlen=10
@@ -190,8 +223,8 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
-set wrap
 set nowrap
+set wrap
 set wrapscan
 set textwidth=79
 set formatoptions=qrn1          " automatic formating.
@@ -240,15 +273,17 @@ set tm=500
 nnoremap / /\v
 vnoremap / /\v
 
-if has('mouse')
-  set mouse-=a                   " Enable mouse everywhere.
-  set mousemodel=popup_setpos   " Show a pop-up for right-click.
-  set mousehide                 " Hide mouse while typing.
-endif
+" DON'T BE SILLY! NO MEESES HERE!
+" if has('mouse')
+"   set mouse-=a                   " Enable mouse everywhere.
+"   set mousemodel=popup_setpos   " Show a pop-up for right-click.
+"   set mousehide                 " Hide mouse while typing.
+" endif
 
 " add system clipboard support
 set clipboard+=unnamed
 
+" treat certain characters as full keyword boundaries, e.g. `-`
 set iskeyword+=-
 
 set exrc   " enable per-directory .vimrc files
@@ -733,17 +768,12 @@ augroup END
 "   au WinLeave * setlocal nocursorcolumn
 " augroup END
 
-" if filereadable(expand("~/.vim/vimrc.filetypes.vim"))
-"   source ~/.vim/vimrc.filetypes.vim
-" endif
-
 
 " -----------------------------------------------------------------------------
 " Keybindings
 " -----------------------------------------------------------------------------
 
 " error and quickfix window toggles
-" nmap <silent> <f3> :ErrorsToggle<cr>
 nmap <silent> <f3> :Errors<CR>
 nmap <silent> <f4> :QFixToggle<cr>
 
@@ -751,15 +781,8 @@ nmap <silent> <f4> :QFixToggle<cr>
 silent! nnoremap <silent> <S-F5> :call FlushEnvironment()<CR>
 
 " give us BundleInstall!
-" nnoremap <F5> :BundleInstall!<cr>
 noremap <F5> :BundleInstall!<cr>
 map <F5> :BundleInstall!<cr>
-
-" Toggle paste
-" For some reason pastetoggle doesn't redraw the screen (thus the status bar
-" doesn't change) while :set paste! does, so I use that instead.
-" set pastetoggle=<F6>
-nnoremap <S-F6> :set paste!<cr>
 
 " navigation a lil better
 noremap j gj
@@ -1025,3 +1048,8 @@ inoremap <c-a> <esc>I
 " Prettify XML/JSON ------
 map <leader>pj :%!python -m json.tool<CR>
 map <leader>px :%!xmllint % --format<CR>
+
+" -----------------------------------------------------------------------------
+" Yankstack ------
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
