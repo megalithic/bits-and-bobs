@@ -941,7 +941,8 @@ nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " -----------------------------------------------------------------------------
 " Ag/Ack ------
 nnoremap <leader>a :Ag!<space>
-nnoremap <leader>/ :Ag! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" immediately grep for word under cursor
+map <leader>/ :execute "Ag " . expand("<cword>") <CR>
 
 " Toggle 'keep current line in the center of the screen' mode
 nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
