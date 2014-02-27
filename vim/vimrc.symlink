@@ -675,6 +675,14 @@ function! FlushEnvironment()
   silent! exe ":!ctags -R"
 endfunction
 
+function! HLNext (blinktime)
+  set invcursorline
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  set invcursorline
+  redraw
+endfunction
+
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -962,8 +970,8 @@ nnoremap D d$
 nnoremap X Vx
 
 " Keep search matches in the middle of the window.
-nnoremap n nzzzv
-nnoremap N Nzzzv
+nnoremap <silent> n nzzzv n:call HLNext(0.4)<cr>
+nnoremap <silent> N Nzzzv N:call HLNext(0.4)<cr>
 
 " Keep search matches jumping around
 nnoremap g; g;zz
