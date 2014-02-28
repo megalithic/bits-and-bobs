@@ -303,6 +303,8 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 
 highlight SyntasticError guibg=#2f0000 ctermbg=red
 
+hi CursorLineNr term=bold ctermfg=11 ctermbg=yellow gui=bold guifg=Yellow
+
 hi NonText guifg=#4a4a59
 hi SpecialKey guifg=#4a4a59 guibg=NONE
 
