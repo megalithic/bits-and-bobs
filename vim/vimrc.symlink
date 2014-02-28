@@ -69,8 +69,6 @@ function! LoadBundles()
   Bundle 'cakebaker/scss-syntax.vim'
   Bundle 'groenewege/vim-less'
   Bundle 'hail2u/vim-css3-syntax'
-  " Bundle 'gorodinskiy/vim-coloresque.git'
-  " Bundle 'AndrewRadev/switch.vim'
   Bundle 'claco/jasmine.vim'
   Bundle 'mklabs/grunt.vim'
   Bundle 'kien/rainbow_parentheses.vim'
@@ -80,8 +78,6 @@ function! LoadBundles()
   Bundle 'sickill/vim-pasta'
   Bundle 'tclem/vim-arduino'
   Bundle 'jameslyden/vim-arduino'
-  " Bundle 'sudar/vim-arduino-syntax'
-  " Bundle 'sheerun/vim-polyglot'
   Bundle 'elzr/vim-json'
 
   " Clojure stuffs
@@ -90,7 +86,7 @@ function! LoadBundles()
   Bundle 'tpope/vim-classpath'
   " Bundle 'jpalardy/vim-slime'
   Bundle 'vim-scripts/paredit.vim'
-  " Bundle 'jayflo/vim-skip'
+  Bundle 'jayflo/vim-skip'
 
   if exists('*getmatches')
     Bundle 'scrooloose/syntastic'
@@ -114,10 +110,10 @@ function! LoadBundles()
     endif
   endif
 
-  Bundle '29decibel/vim-stringify'
+  " Bundle '29decibel/vim-stringify'
   " Bundle 'maxbrunsfeld/vim-yankstack'
-  Bundle 'gregsexton/gitv'
-  Bundle 'justinmk/vim-sneak'
+  " Bundle 'gregsexton/gitv'
+  " Bundle 'justinmk/vim-sneak'
   Bundle 'vim-scripts/matchit.zip'
 endfunction
 
@@ -305,6 +301,8 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 " highlight ExtraWhitespace ctermbg=red guibg=red
 " autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
 
+highlight SyntasticError guibg=#2f0000 ctermbg=red
+
 hi NonText guifg=#4a4a59
 hi SpecialKey guifg=#4a4a59 guibg=NONE
 
@@ -431,13 +429,13 @@ let g:agprg="ag --column --nogroup --line-numbers"
 
 " -----------------------------------------------------------------------------
 " Sneak ------
-let g:sneak#streak = 1
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S
-xmap f <Plug>Sneak_s
-xmap F <Plug>Sneak_S
-omap f <Plug>Sneak_s
-omap F <Plug>Sneak_S
+" let g:sneak#streak = 1
+" nmap f <Plug>Sneak_s
+" nmap F <Plug>Sneak_S
+" xmap f <Plug>Sneak_s
+" xmap F <Plug>Sneak_S
+" omap f <Plug>Sneak_s
+" omap F <Plug>Sneak_S
 
 " -----------------------------------------------------------------------------
 " Fugitive ------
@@ -472,11 +470,6 @@ function! BufEnterCommit()
   endif
 endfunction
 autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
-
-" -----------------------------------------------------------------------------
-" Gitv ------
-nnoremap <Leader>gv :Gitv --all<CR>
-nnoremap <Leader>gV :Gitv! --all<CR>
 
 " -----------------------------------------------------------------------------
 " Gist ------
@@ -517,6 +510,7 @@ let g:syntastic_javascript_checkers=["jshint"]
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_always_populate_loc_list=1
 
 " -----------------------------------------------------------------------------
 " Slime ------
@@ -673,14 +667,6 @@ endif
 " mapping to generate tags file
 function! FlushEnvironment()
   silent! exe ":!ctags -R"
-endfunction
-
-function! HLNext (blinktime)
-  set invcursorline
-  redraw
-  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-  set invcursorline
-  redraw
 endfunction
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
@@ -842,6 +828,9 @@ nmap <Left> <Nop>
 nmap <Right> <Nop>
 vmap <Left> <Nop>
 vmap <Right> <Nop>
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
 
 " -----------------------------------------------------------------------------
 " CtrlP ------
@@ -955,6 +944,7 @@ nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
 nnoremap <leader>a :Ag!<space>
 " immediately grep for word under cursor
 map <leader>/ :execute "Ag! " . expand("<cword>") <CR>
+vmap <leader>/ :execute "Ag! " . S <CR>
 
 " Toggle 'keep current line in the center of the screen' mode
 nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
@@ -970,8 +960,8 @@ nnoremap D d$
 nnoremap X Vx
 
 " Keep search matches in the middle of the window.
-nnoremap <silent> n nzzzv n:call HLNext(0.4)<cr>
-nnoremap <silent> N Nzzzv N:call HLNext(0.4)<cr>
+nnoremap <silent> n nzzzv
+nnoremap <silent> N Nzzzv
 
 " Keep search matches jumping around
 nnoremap g; g;zz
@@ -1031,6 +1021,11 @@ nmap <leader>r :%s/\<<C-r>=expand("<cword>")<CR>\>/
 " Vroom ------
 map <leader>t :VroomRunTestFile<cr>
 map <leader>T :VroomRunNearestTest<cr>
+
+" -----------------------------------------------------------------------------
+" Gitv ------
+nnoremap <Leader>gv :Gitv --all<CR>
+nnoremap <Leader>gV :Gitv! --all<CR>
 
 " -----------------------------------------------------------------------------
 " Surround ------
