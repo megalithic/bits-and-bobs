@@ -63,6 +63,7 @@ function! LoadBundles()
   Bundle 'pangloss/vim-javascript'
   Bundle 'jelera/vim-javascript-syntax'
   Bundle 'othree/javascript-libraries-syntax.vim'
+  Bundle 'mxw/vim-jsx'
   Bundle 'lukaszb/vim-web-indent'
   Bundle 'lfilho/cosco.vim'
   Bundle 'aaronjensen/vim-sass-status'
@@ -87,9 +88,10 @@ function! LoadBundles()
   " Bundle 'jpalardy/vim-slime'
   Bundle 'vim-scripts/paredit.vim'
   Bundle 'jayflo/vim-skip'
+  Bundle 'guns/vim-sexp'
 
   if exists('*getmatches')
-    Bundle 'scrooloose/syntastic'
+    " Bundle 'scrooloose/syntastic'
 
     " Install jshint and csslint for syntastic
     " Path to jshint if it not installed globally, then use local installation
@@ -205,7 +207,7 @@ set splitbelow
 set diffopt=filler          " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite         " Ignore whitespace changes.
 " set fillchars=diff:⣿,vert:│
-set fillchars=diff:\|,vert:\|
+" set fillchars=diff:\|,vert:\|
 
 set timeout
 set ttimeoutlen=10
@@ -303,7 +305,7 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 
 highlight SyntasticError guibg=#2f0000 ctermbg=red
 
-hi CursorLineNr term=bold ctermfg=11 ctermbg=yellow gui=bold guifg=Yellow
+hi CursorLineNr term=bold ctermfg=11 ctermbg=blue gui=bold guifg=Yellow
 
 hi NonText guifg=#4a4a59
 hi SpecialKey guifg=#4a4a59 guibg=NONE
