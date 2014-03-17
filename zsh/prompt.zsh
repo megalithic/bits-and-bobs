@@ -23,6 +23,11 @@
 # %n => username
 # %m => shortname host
 # %(?..) => prompt conditional - %(condition.true.false)
+#
+# References:
+# https://github.com/olivierverdier/zsh-git-prompt #robust dirty status
+# https://github.com/marioizquierdo/git-branch-zsh-command #neat branch bin
+# https://github.com/chrisfrazier0/pure/blob/master/pure.zsh #awesome pure mods
 
 autoload colors && colors
 
@@ -42,12 +47,18 @@ prompt_current_rvm() {
 
 # fastest possible way to check if repo is dirty
 prompt_pure_git_dirty() {
+  local dirt=''
 	# check if we're in a git repo
 	command git rev-parse --is-inside-work-tree &>/dev/null || return
-	# check if it's dirty
-	command git diff --quiet --ignore-submodules HEAD &>/dev/null
+	# # check if it's dirty
+	# command git diff --quiet --ignore-submodules HEAD &>/dev/null
+  # (($? == 1)) && echo '*' #✹⟐
 
-	(($? == 1)) && echo '*' #✹⟐
+  # check if it's dirty
+  command git diff --quiet --ignore-submodules HEAD &>/dev/null || dirty='*'
+  # check for untracked files
+  command test -z "$(git ls-files --others --exclude-standard)" || dirty='…'
+  echo $dirty
 }
 
 # displays the exec time of the last command if set threshold was exceeded
@@ -80,24 +91,47 @@ prompt_pure_precmd() {
 	# git info
 	vcs_info
 
-  local prompt_pure_preprompt="\n%F{blue}$(prompt_format_pwd) %f%{$fg[green]%}$(prompt_current_rvm)%f%F{242}$vcs_info_msg_0_%f%{$fg[red]%}$(prompt_pure_git_dirty)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
+  # local prompt_pure_preprompt="\n%F{blue}$(prompt_format_pwd) %f%{$fg[green]%}$(prompt_current_rvm)%f%F{242}$vcs_info_msg_0_%f%{$fg[red]%} $(prompt_pure_git_dirty)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
+  local prompt_pure_preprompt="\n%F{blue}$(prompt_format_pwd)%F{242}$vcs_info_msg_0_%f%{$fg[red]%} $(prompt_pure_git_dirty)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
   print -P $prompt_pure_preprompt
 
+#   # check async if there is anything to pull
+#   (( ${PURE_GIT_PULL:-1} )) && {
+#     # check if we're in a git repo
+#     command git rev-parse --is-inside-work-tree &>/dev/null &&
+#     # check check if there is anything to pull
+#     command git fetch &>/dev/null &&
+#     # check if there is an upstream configured for this branch
+#     command git rev-parse --abbrev-ref @'{u}' &>/dev/null &&
+#     (( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) &&
+#     # some crazy ansi magic to inject the symbol into the previous line
+#     print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{red}⇣%f\e8"
+#
+#     # for some reason, it is ALWAYS saying something is ready to push .... fix!
+#     # command git push --dry-run 2>&1 | grep -q -v "Everything up-to-date" &&
+#     # print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}⇡%f\e8"
+#   } &!
+
   # check async if there is anything to pull
-  (( ${PURE_GIT_PULL:-1} )) && {
+  {
+    local dirty=''
     # check if we're in a git repo
     command git rev-parse --is-inside-work-tree &>/dev/null &&
     # check check if there is anything to pull
     command git fetch &>/dev/null &&
     # check if there is an upstream configured for this branch
+    [[ "$PURE_ASYNC" == "off" ]] && exit
     command git rev-parse --abbrev-ref @'{u}' &>/dev/null &&
-    (( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) &&
-    # some crazy ansi magic to inject the symbol into the previous line
-    print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{red}⇣%f\e8"
-
-    # for some reason, it is ALWAYS saying something is ready to push .... fix!
-    command git push --dry-run 2>&1 | grep -q -v "Everything up-to-date" &&
-    print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}⇡%f\e8"
+    {
+      # count exclusive local and remote commits
+      local org_count=$(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null)
+      local loc_count=$(command git rev-list --right-only --count @'{u}'...HEAD 2>/dev/null)
+      (( org_count > 0 )) && dirty='⇣'
+      (( loc_count > 0 )) && dirty='⇡'
+      (( org_count > 0 && org_count == loc_count )) && dirty='⚑'
+      # some crazy ansi magic to inject the symbol into the previous line
+      print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}$dirty%f\e8"
+    }
   } &!
 
 	# reset value since `preexec` isn't always triggered
@@ -121,7 +155,10 @@ prompt_pure_setup() {
 	[[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username='%n@%m '
 
 	# prompt turns red if the previous command didn't exit with 0
-	PROMPT='%(?.%F{magenta}.%F{red})❯%f '
+	# PROMPT='%(?.%F{green}.%F{red})❯%f '
+  PROMPT='%(?.%F{green}.%F{red})%(!.❯.)❯%f '
+  # PROMPT='%(?.%F{green}.%F{red}❯%F{green})❯%f '
+  RPROMPT='%f%{$fg[green]%}$(prompt_current_rvm)%f%'
 }
 
 prompt_pure_setup "$@"

@@ -53,7 +53,6 @@ function! LoadBundles()
   Bundle 'tpope/vim-rvm'
   Bundle 'tpope/vim-haml'
   Bundle 'tpope/vim-markdown'
-  Bundle 'tpope/vim-rake'
   Bundle 'tpope/vim-rails'
   Bundle 'vim-ruby/vim-ruby'
   Bundle 'skalnik/vim-vroom'
@@ -87,8 +86,8 @@ function! LoadBundles()
   Bundle 'tpope/vim-classpath'
   " Bundle 'jpalardy/vim-slime'
   Bundle 'vim-scripts/paredit.vim'
-  Bundle 'jayflo/vim-skip'
-  Bundle 'guns/vim-sexp'
+  " Bundle 'jayflo/vim-skip'
+  " Bundle 'guns/vim-sexp'
 
   if exists('*getmatches')
     " Bundle 'scrooloose/syntastic'
@@ -1043,13 +1042,13 @@ vmap } S}
 vmap ' S'
 vmap " S"
 
-vmap <leader>" S"lvi"
-vmap <leader>' S'lvi'
-vmap <leader>` S`lvi`
-vmap <leader>( S)lvi(
-vmap <leader>{ S}lvi{
-vmap <leader>[ S]lvi[
-vmap <leader>< S>lvi<
+" vmap <leader>" S"lvi"
+" vmap <leader>' S'lvi'
+" vmap <leader>` S`lvi`
+" vmap <leader>( S)lvi(
+" vmap <leader>{ S}lvi{
+" vmap <leader>[ S]lvi[
+" vmap <leader>< S>lvi<
 
 " Insert mode movements
 " Ctrl-e: Go to end of line

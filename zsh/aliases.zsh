@@ -159,6 +159,8 @@ alias clr=clear
 alias gn="python ~/.dotfiles/utils/geeknote/geeknote.py"
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
+alias syncoctoprint="scp pi@octopi.local:/home/pi/.octoprint/config.yaml /Users/replicant/Dropbox/3d/configs/octoprint"
+
 ## - ANDROID -----------------------------------------------
 alias fb="moto-fastboot-osx64"
 
@@ -201,6 +203,7 @@ alias glog="git l"
 alias conflict="git diff --name-only --diff-filter=U"
 alias gap="git add --patch"
 alias gaa="git aa"
+alias uncommit="git reset --soft 'HEAD^'" # re-commit with `git commit -c ORIG_HEAD`
 
 ## - RUBY / RAILS -----------------------------------------------
 alias be="bundle exec"

@@ -9,7 +9,7 @@ if version > 580
 endif
 
 set t_Co=256
-let g:colors_name = "jellybeans_replicantg"
+let g:colors_name = "jellybeans_replicant"
 
 "hi IncSearch -- no settings --
 "hi WildMenu -- no settings --
