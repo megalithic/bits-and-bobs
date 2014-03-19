@@ -1,6 +1,5 @@
+# don't forget to source our function files (ext files not currently in this one)
 source ~/.dotfiles/zsh/site-functions/*.zsh
-
-
 
 #ref: http://stackoverflow.com/questions/3964068/zsh-automatically-run-ls-after-every-cd
 #
