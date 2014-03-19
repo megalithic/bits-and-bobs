@@ -90,6 +90,7 @@ prompt_pure_precmd() {
 
 	# git info
 	vcs_info
+  # instead, we're using: https://github.com/yonchu/zsh-vcs-prompt # -> vcs_super_info
 
   # local prompt_pure_preprompt="\n%F{blue}$(prompt_format_pwd) %f%{$fg[green]%}$(prompt_current_rvm)%f%F{242}$vcs_info_msg_0_%f%{$fg[red]%} $(prompt_pure_git_dirty)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
   # local prompt_pure_preprompt="\n%F{222}$(prompt_format_pwd) %f$(git_super_status)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
