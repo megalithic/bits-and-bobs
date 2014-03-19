@@ -1,3 +1,7 @@
+source ~/.dotfiles/zsh/site-functions/*.zsh
+
+
+
 #ref: http://stackoverflow.com/questions/3964068/zsh-automatically-run-ls-after-every-cd
 #
 # function chpwd() {

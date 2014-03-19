@@ -1,7 +1,7 @@
 session:
   name: "uspto"
   windows:
-    - name: "uspto services"
+    - name: "services"
       clear: true
       options:
         synchronize-panes: false
@@ -15,7 +15,7 @@ session:
           height: 50
           focus: true
           target: "bottom-right"
-    - name: "vim"
+    - name: "code"
       clear: true
       options:
         synchronize-panes: false
@@ -26,7 +26,7 @@ session:
       splits:
         - cmd: "usfe"
           focus: true
-    - name: "irc"
+    - name: "chats"
       clear: true
       options:
         synchronize-panes: false

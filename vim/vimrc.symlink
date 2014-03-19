@@ -111,6 +111,7 @@ function! LoadBundles()
     endif
   endif
 
+  Bundle 'AndrewRadev/switch.vim'
   " Bundle '29decibel/vim-stringify'
   " Bundle 'maxbrunsfeld/vim-yankstack'
   " Bundle 'gregsexton/gitv'

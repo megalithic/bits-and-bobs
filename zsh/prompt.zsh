@@ -92,7 +92,7 @@ prompt_pure_precmd() {
 	vcs_info
 
   # local prompt_pure_preprompt="\n%F{blue}$(prompt_format_pwd) %f%{$fg[green]%}$(prompt_current_rvm)%f%F{242}$vcs_info_msg_0_%f%{$fg[red]%} $(prompt_pure_git_dirty)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
-  local prompt_pure_preprompt="\n%F{blue}$(prompt_format_pwd)%F{242}$vcs_info_msg_0_%f%{$fg[red]%} $(prompt_pure_git_dirty)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
+  local prompt_pure_preprompt="\n%F{222}$(prompt_format_pwd) %f$(git_super_status)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
   print -P $prompt_pure_preprompt
 
 #   # check async if there is anything to pull
@@ -158,7 +158,7 @@ prompt_pure_setup() {
 	# PROMPT='%(?.%F{green}.%F{red})❯%f '
   PROMPT='%(?.%F{green}.%F{red})%(!.❯.)❯%f '
   # PROMPT='%(?.%F{green}.%F{red}❯%F{green})❯%f '
-  RPROMPT='%f%{$fg[green]%}$(prompt_current_rvm)%f%'
+  RPROMPT='%f%F{240}$(prompt_current_rvm)%f%'
 }
 
 prompt_pure_setup "$@"
