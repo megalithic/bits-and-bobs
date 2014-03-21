@@ -33,7 +33,7 @@ install_xcode_commandline_tools () {
   if [ "$bool_installxcode" == "yes" ]
   then
     OSX_VERS=$(sw_vers -productVersion | awk -F "." '{print $2}')
-     
+
     # Get Xcode CLI tools
     # https://devimages.apple.com.edgekey.net/downloads/xcode/simulators/index-3905972D-B609-49CE-8D06-51ADC78E07BC.dvtdownloadableindex
     # Find Xcode CLI Tools versions with:

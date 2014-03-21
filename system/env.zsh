@@ -40,8 +40,8 @@ export LC_COLLATE=C
 
 # Custom GC options for custom compiled 1.9.3 rubies
 export RUBY_GC_MALLOC_LIMIT=1000000000
-export RUBY_FREE_MIN=500000
-export RUBY_HEAP_MIN_SLOTS=40000
+export RUBY_GC_HEAP_FREE_SLOTS=500000
+export RUBY_GC_HEAP_INIT_SLOTS=40000
 
 export ECLIPSE_HOME=/Applications/Eclipse
 export SSL_CERT_FILE=/usr/local/etc/openssl/certs/cert.pem

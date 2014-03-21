@@ -36,6 +36,7 @@ brew install avrdude
 brew install bison
 brew install curl-ca-bundle
 brew install chruby
+brew install ruby-install
 brew install cmake
 brew install cscope
 brew install ctags
@@ -146,6 +147,9 @@ sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2 /usr/bin/gcc
 sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/g++-4.2 /usr/bin/g++
 sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/cpp-4.2 /usr/bin/cpp
 
+brew tap homebrew/versions
+brew install gcc48
+
 # Install homebrew-cask so we can easily install GUI apps
 brew tap phinze/homebrew-cask
 brew install brew-cask
@@ -154,35 +158,35 @@ brew install brew-cask
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
 # Install homebrew-cask GUI apps
-brew cask install alfred
-brew cask alfred link
-brew cask install dropbox
-brew cask install bartender
-brew cask install evernote
-brew cask install f-lux
-brew cask install libreoffice
-brew cask install vlc
-brew cask install firefox
-brew cask install reggy
-brew cask install the-unarchiver
-brew cask install trim-enabler
-brew cask install skype
-brew cask install keyremap4macbook
-brew cask install android-file-transfer
-brew cask install hazel
-brew cask install witch
-brew cask install arduino
-brew cask install bettertouchtool
-brew cask install cord
-brew cask install flash
-brew cask install google-drive
-brew cask install google-music-manager
-brew cask install istat-menus
-brew cask install key-codes
-brew cask install spectacle
-brew cask install totalfinder
-brew cask install steermouse
-brew cask install right-zoom
+# brew cask install alfred
+# brew cask alfred link
+# brew cask install dropbox
+# brew cask install bartender
+# brew cask install evernote
+# brew cask install f-lux
+# brew cask install libreoffice
+# brew cask install vlc
+# brew cask install firefox
+# brew cask install reggy
+# brew cask install the-unarchiver
+# brew cask install trim-enabler
+# brew cask install skype
+# brew cask install keyremap4macbook
+# brew cask install android-file-transfer
+# brew cask install hazel
+# brew cask install witch
+# brew cask install arduino
+# brew cask install bettertouchtool
+# brew cask install cord
+# brew cask install flash
+# brew cask install google-drive
+# brew cask install google-music-manager
+# brew cask install istat-menus
+# brew cask install key-codes
+# brew cask install spectacle
+# brew cask install totalfinder
+# brew cask install steermouse
+# brew cask install right-zoom
 
 brew linkapps
 brew cleanup
