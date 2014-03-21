@@ -113,23 +113,23 @@ else
     # No action.
     if [ -z "$ZSH_VCS_PROMPT_GIT_FORMATS" ]; then
         # VCS name
-        ZSH_VCS_PROMPT_GIT_FORMATS='(%{%B%F{yellow}%}#s%{%f%b%})'
+        ZSH_VCS_PROMPT_GIT_FORMATS='(%{%F{239}%}#s%{%f%})'
         # Branch name
-        ZSH_VCS_PROMPT_GIT_FORMATS+='[%{%B%F{red}%}#b%{%f%b%}'
+        ZSH_VCS_PROMPT_GIT_FORMATS+='[%{%F{242}%}#b%{%f%}'
         # Ahead and Behind
         ZSH_VCS_PROMPT_GIT_FORMATS+='#c#d|'
         # Staged
-        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{blue}%}#e%{%f%b%}'
+        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{blue}%}#e%{%f%}'
         # Conflicts
-        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{red}%}#f%{%f%b%}'
+        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{red}%}#f%{%f%}'
         # Unstaged
-        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{yellow}%}#g%{%f%b%}'
+        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{yellow}%}#g%{%f%}'
         # Untracked
         ZSH_VCS_PROMPT_GIT_FORMATS+='#h'
         # Stashed
-        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{cyan}%}#i%{%f%b%}'
+        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{cyan}%}#i%{%f%}'
         # Clean
-        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{green}%}#j%{%f%b%}]'
+        ZSH_VCS_PROMPT_GIT_FORMATS+='%{%F{green}%}#j%{%f%}]'
     fi
     # No action using python.
     if [ -z "$ZSH_VCS_PROMPT_GIT_FORMATS_USING_PYTHON" ]; then
@@ -139,11 +139,11 @@ else
     # Action.
     if [ -z "$ZSH_VCS_PROMPT_GIT_ACTION_FORMATS" ]; then
         # VCS name
-        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS='(%{%B%F{yellow}%}#s%{%f%b%})'
+        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS='(%{%F{239}%}#s%{%f%})'
         # Branch name
-        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS+='[%{%B%F{red}%}#b%{%f%b%}'
+        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS+='[%{%F{242}%}#b%{%f%}'
         # Action
-        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS+=':%{%B%F{red}%}#a%{%f%b%}'
+        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS+=':%{%F{red}%}#a%{%f%}'
         # Ahead and Behind
         ZSH_VCS_PROMPT_GIT_ACTION_FORMATS+='#c#d|'
         # Staged
@@ -164,18 +164,18 @@ else
     # No action.
     if [ -z "$ZSH_VCS_PROMPT_VCS_FORMATS" ]; then
         # VCS name
-        ZSH_VCS_PROMPT_VCS_FORMATS='(%{%B%F{yellow}%}#s%{%f%b%})'
+        ZSH_VCS_PROMPT_VCS_FORMATS='(%{%F{yellow}%}#s%{%f%})'
         # Branch name
-        ZSH_VCS_PROMPT_VCS_FORMATS+='[%{%B%F{red}%}#b%{%f%b%}]'
+        ZSH_VCS_PROMPT_VCS_FORMATS+='[%{%F{red}%}#b%{%f%}]'
     fi
     # Action.
     if [ -z "$ZSH_VCS_PROMPT_VCS_ACTION_FORMATS" ]; then
         # VCS name
-        ZSH_VCS_PROMPT_VCS_ACTION_FORMATS='(%{%B%F{yellow}%}#s%{%f%b%})'
+        ZSH_VCS_PROMPT_VCS_ACTION_FORMATS='(%{%F{yellow}%}#s%{%f%})'
         # Branch name
-        ZSH_VCS_PROMPT_VCS_ACTION_FORMATS+='[%{%B%F{red}%}#b%{%f%b%}'
+        ZSH_VCS_PROMPT_VCS_ACTION_FORMATS+='[%{%F{red}%}#b%{%f%}'
         # Action
-        ZSH_VCS_PROMPT_VCS_ACTION_FORMATS+=':%{%B%F{red}%}#a%{%f%b%}]'
+        ZSH_VCS_PROMPT_VCS_ACTION_FORMATS+=':%{%F{red}%}#a%{%f%}]'
     fi
 
     ## Initialize.

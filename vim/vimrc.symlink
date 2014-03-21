@@ -30,6 +30,7 @@ function! LoadBundles()
   Bundle 'bling/vim-airline'
   Bundle 'ervandew/supertab'
   Bundle 'kien/ctrlp.vim.git'
+  Bundle 'duff/vim-scratch'
 
   if has("python")
     " Provide smart autocomplete results for javascript, and some useful commands
@@ -54,6 +55,7 @@ function! LoadBundles()
   Bundle 'tpope/vim-haml'
   Bundle 'tpope/vim-markdown'
   Bundle 'tpope/vim-rails'
+  Bundle 'tpope/vim-dispatch'
   Bundle 'vim-ruby/vim-ruby'
   Bundle 'skalnik/vim-vroom'
   Bundle 'othree/html5.vim'
@@ -576,6 +578,18 @@ let g:vroom_use_colors=1
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'}
 let g:AutoCloseProtectedRegions = ["Character"]
 
+" Scratch
+command! ScratchToggle call ScratchToggle()
+function! ScratchToggle()
+    if exists("w:is_scratch_window")
+        unlet w:is_scratch_window
+        exec "q"
+    else
+        exec "normal! :Sscratch\<cr>\<C-W>L"
+        let w:is_scratch_window = 1
+    endif
+endfunction
+
 " Errors Toggle
 command! ErrorsToggle call ErrorsToggle()
 function! ErrorsToggle()
@@ -1030,6 +1044,10 @@ map <leader>T :VroomRunNearestTest<cr>
 " Gitv ------
 nnoremap <Leader>gv :Gitv --all<CR>
 nnoremap <Leader>gV :Gitv! --all<CR>
+
+" -----------------------------------------------------------------------------
+" Scratch ------
+nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 
 " -----------------------------------------------------------------------------
 " Surround ------

@@ -336,10 +336,11 @@ pretty_git_log() {
 # Need to convert his functions to zsh from bash
 # ============================================================================
 
-chrometest() {
+chrome() {
   app="/Applications/Google Chrome 22.app/Contents/MacOS/Google Chrome"
+  userdatadir="/Users/replicant/Library/Application\ Support/Google/Chrome/$1"
   (
-    ${app} --user-data-dir=$1 > /dev/null 2>&1;
-    rm -r $1
+    ${app} --user-data-dir=${userdatadir} > /dev/null 2>&1;
+    #rm -r $1
   ) &
 }
