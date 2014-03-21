@@ -44,9 +44,6 @@ zle -N newtab
 # bindkey '^[^N' newtab
 # bindkey '^?' backward-delete-char
 
-# ref: https://rvm.io/integration/zsh
-# __rvm_project_rvmrc
-
 # ===== Basics
 setopt no_beep # don't beep on error
 setopt interactive_comments # Allow comments even in interactive shells (especially for Muness)

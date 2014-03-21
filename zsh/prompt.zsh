@@ -45,9 +45,9 @@ prompt_format_pwd() {
     echo "${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
   fi
 }
-# prompt_current_rvm() {
-#   rvm current 2>/dev/null
-# }
+prompt_current_ruby() {
+  echo "$RUBY_ENGINE""-""$RUBY_VERSION"
+}
 
 # fastest possible way to check if repo is dirty
 prompt_pure_git_dirty() {
@@ -163,7 +163,7 @@ prompt_pure_setup() {
 	# PROMPT='%(?.%F{green}.%F{red})❯%f '
   PROMPT='%(?.%F{green}.%F{red})%(!.❯.)❯%f '
   # PROMPT='%(?.%F{green}.%F{red}❯%F{green})❯%f '
-  # RPROMPT='%f%F{240}$(prompt_current_rvm)%f%'
+  RPROMPT='%f%F{240}$(prompt_current_ruby)%f%'
 }
 
 prompt_pure_setup "$@"
