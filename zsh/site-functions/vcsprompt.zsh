@@ -113,9 +113,9 @@ else
     # No action.
     if [ -z "$ZSH_VCS_PROMPT_GIT_FORMATS" ]; then
         # VCS name
-        ZSH_VCS_PROMPT_GIT_FORMATS='(%{%F{239}%}#s%{%f%})'
+        ZSH_VCS_PROMPT_GIT_FORMATS='(%{%F{59}%}#s%{%f%})'
         # Branch name
-        ZSH_VCS_PROMPT_GIT_FORMATS+='[%{%F{242}%}#b%{%f%}'
+        ZSH_VCS_PROMPT_GIT_FORMATS+='[%{%F{130}%}#b%{%f%}'
         # Ahead and Behind
         ZSH_VCS_PROMPT_GIT_FORMATS+='#c#d|'
         # Staged
@@ -139,9 +139,9 @@ else
     # Action.
     if [ -z "$ZSH_VCS_PROMPT_GIT_ACTION_FORMATS" ]; then
         # VCS name
-        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS='(%{%F{239}%}#s%{%f%})'
+        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS='(%{%F{59}%}#s%{%f%})'
         # Branch name
-        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS+='[%{%F{242}%}#b%{%f%}'
+        ZSH_VCS_PROMPT_GIT_ACTION_FORMATS+='[%{%F{130}%}#b%{%f%}'
         # Action
         ZSH_VCS_PROMPT_GIT_ACTION_FORMATS+=':%{%F{red}%}#a%{%f%}'
         # Ahead and Behind

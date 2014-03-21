@@ -29,6 +29,8 @@
 # https://github.com/marioizquierdo/git-branch-zsh-command #neat branch bin
 # https://github.com/chrisfrazier0/pure/blob/master/pure.zsh #awesome pure mods
 
+# ANSI COLORS!!11! http://misc.flogisoft.com/bash/tip_colors_and_formatting
+#
 autoload colors && colors
 
 prompt_format_pwd() {
