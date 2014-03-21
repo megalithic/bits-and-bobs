@@ -30,7 +30,9 @@
 # https://github.com/chrisfrazier0/pure/blob/master/pure.zsh #awesome pure mods
 
 # ANSI COLORS!!11! http://misc.flogisoft.com/bash/tip_colors_and_formatting
-#
+# Shell prompt syntax: http://www.nparikh.org/unix/prompt.php
+# ZSH prompt splicing, neat! http://radiumblue.net/blog/2013/04/29/zsh-prompt-spicing-up-the-present-working-directory/
+
 autoload colors && colors
 
 prompt_format_pwd() {
