@@ -30,11 +30,13 @@ alias ttru="tmux attach-session -t trucoin"
 alias tiso="tmux attach-session -t isotope"
 alias tpto="tmux attach-session -t uspto"
 alias tomni="tmux attach-session -t omniscient"
+alias t="tmux attach-session -t std"
 alias teamgum="cd ~ && teamocil --here gumshoe"
 alias teamtru="cd ~ && teamocil --here trucoin"
 alias teamiso="cd ~ && teamocil --here isotope"
 alias teampto="cd ~ && teamocil --here uspto"
 alias teamomni="cd ~ && teamocil --here omniscient"
+alias team="cd ~ && teamocil --here std"
 
 ## - BREW -----------------------------------------------
 alias b="brew"
