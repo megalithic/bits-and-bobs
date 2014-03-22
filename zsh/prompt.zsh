@@ -161,7 +161,7 @@ prompt_pure_setup() {
 	# PROMPT='%(?.%F{green}.%F{red})❯%f '
   PROMPT='%(?.%F{green}.%F{red})%(!.❯.)❯%f '
   # PROMPT='%(?.%F{green}.%F{red}❯%F{green})❯%f '
-  RPROMPT='%f%F{240}$RUBY_ENGINE-$RUBY_VERSION%f%'
+  RPROMPT='%f%F{240}$RUBY_ENGINE-$RUBY_AUTO_VERSION%f%'
 }
 
 prompt_pure_setup "$@"
