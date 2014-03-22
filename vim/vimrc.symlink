@@ -58,6 +58,7 @@ function! LoadBundles()
   Bundle 'vim-ruby/vim-ruby'
   Bundle 'skalnik/vim-vroom'
   Bundle 'othree/html5.vim'
+  Bundle 'slim-template/vim-slim'
   " Bundle 'git@github.com:slim-template/vim-slim.git'
   " Bundle 'kchmck/vim-coffee-script'
   Bundle 'pangloss/vim-javascript'
