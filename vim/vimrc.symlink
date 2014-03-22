@@ -51,7 +51,6 @@ function! LoadBundles()
   Bundle 'tpope/vim-git'
   Bundle 'tpope/vim-fugitive'
   Bundle 'tpope/vim-repeat'
-  Bundle 'tpope/vim-rvm'
   Bundle 'tpope/vim-haml'
   Bundle 'tpope/vim-markdown'
   Bundle 'tpope/vim-rails'
@@ -377,6 +376,12 @@ let g:JSHintHighlightErrorLine = 1
 let javascript_fold = 1
 let loaded_matchit = 1
 let ruby_fold = 1
+
+" -----------------------------------------------------------------------------
+" smalls ------
+let g:smalls_auto_jump = 1
+let g:smalls_auto_jump_min_input_length = 3
+let g:smalls_auto_jump_timeout = 0.25
 
 " -----------------------------------------------------------------------------
 " Markdown ------
@@ -1078,3 +1083,11 @@ map <leader>px :%!xmllint % --format<CR>
 " Yankstack ------
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
+
+" -----------------------------------------------------------------------------
+" smalls ------
+" map normal-mode 's' for simple search
+nmap <leader><leader> <Plug>(smalls)
+" if you want to use smalls in visual/operator or both mode.
+omap <leader><leader> <Plug>(smalls)
+xmap <leader><leader> <Plug>(smalls)
