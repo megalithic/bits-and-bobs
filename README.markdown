@@ -110,17 +110,17 @@ remember all the things, here's a basic list of what I haven't finished:
 ## bugs
 
 I want this to work for everyone; that means when you clone it down it should
-work for you even though you may not have `rvm` installed, for example. That
+work for you even though you may not have `chruby` installed, for example. That
 said, I do use this as *my* dotfiles, so there's a good chance I may break
 something if I forget to make a check for a dependency.
 
 If you're brand-new to the project and run into any blockers, please
-[open an issue](https://github.com/holman/dotfiles/issues) on @holman's repo
-and i'll periodically merge upstream.
+[open an issue](https://github.com/megalithic/dotfiles/issues) and let me know
+what's broke so I can sure this thing up!
 
 ## thanks
 
-Big ups to [@holman](https://github.com/holman/dotfiles) for providing
-a solid starting point "framework" for having a mostly automated way of quickly
-getting a new system install up and running with your preferred environment
+Big up to [@holman](https://github.com/holman/dotfiles) for providing
+a solid starting point for having a mostly automated way of quickly
+getting a new system (OSX for now) install up and running with preferred environment
 tools and workflows.
