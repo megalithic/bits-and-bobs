@@ -34,6 +34,7 @@
 # ZSH prompt splicing, neat! http://radiumblue.net/blog/2013/04/29/zsh-prompt-spicing-up-the-present-working-directory/
 
 autoload colors && colors
+setopt PROMPT_SUBST
 
 prompt_format_pwd() {
   local pwd="${PWD/#$HOME/~}"
@@ -44,9 +45,6 @@ prompt_format_pwd() {
   else
     echo "${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
   fi
-}
-prompt_current_ruby() {
-  echo "$RUBY_ENGINE""-""$RUBY_VERSION"
 }
 
 # fastest possible way to check if repo is dirty
@@ -163,7 +161,7 @@ prompt_pure_setup() {
 	# PROMPT='%(?.%F{green}.%F{red})❯%f '
   PROMPT='%(?.%F{green}.%F{red})%(!.❯.)❯%f '
   # PROMPT='%(?.%F{green}.%F{red}❯%F{green})❯%f '
-  RPROMPT='%f%F{240}$(prompt_current_ruby)%f%'
+  RPROMPT='%f%F{240}$RUBY_ENGINE-$RUBY_VERSION%f%'
 }
 
 prompt_pure_setup "$@"

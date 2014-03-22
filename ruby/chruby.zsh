@@ -1,17 +1,7 @@
-# # rehash shims
-# rvm rehash 2>/dev/null
+#!/bin/bash
 
-# # shell thing
-# rvm() {
-#   command="$1"
-#   if [ "$#" -gt 0 ]; then
-#     shift
-#   fi
-
-#   case "$command" in
-#   shell)
-#     eval `rvm "sh-$command" "$@"`;;
-#   *)
-#     command rvm "$command" "$@";;
-#   esac
-# }
+#
+# Change preexec_functions to precmd_functions.
+# This is so the $RUBY_* env vars are updated before the directory is changed
+#
+sed -i.bak s/preexec_functions/precmd_functions/g /usr/local/share/chruby/auto.sh
