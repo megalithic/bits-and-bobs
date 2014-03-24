@@ -94,6 +94,10 @@ based on)
 
 .. I'll continually add more as I come across them.
 
+References for various things:
+
+- [xterm color chart](https://raw.github.com/foize/go.sgr/master/xterm_color_chart.png)
+
 ## todo
 
 Unfortunately, this is a neverending project it seems.. so as to help myself

@@ -43,7 +43,6 @@ function! LoadBundles()
 
   Bundle 'rking/ag.vim'
   Bundle 'tomtom/tcomment_vim'
-  Bundle 'rking/ag.vim'
   Bundle 'tpope/vim-endwise'
   Bundle 'tpope/vim-unimpaired'
   Bundle 'tpope/vim-eunuch'
@@ -64,6 +63,7 @@ function! LoadBundles()
   Bundle 'pangloss/vim-javascript'
   Bundle 'jelera/vim-javascript-syntax'
   Bundle 'othree/javascript-libraries-syntax.vim'
+  " Bundle 'jsx/jsx.vim.git'
   Bundle 'mxw/vim-jsx'
   Bundle 'lukaszb/vim-web-indent'
   Bundle 'lfilho/cosco.vim'
@@ -299,16 +299,15 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 " highlight ExtraWhitespace ctermbg=red guibg=red
 " autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
 
-highlight SyntasticError guibg=#2f0000 ctermbg=red
+highlight SyntasticError ctermbg=red term=bold
 
-hi CursorLineNr term=bold ctermfg=11 ctermbg=blue gui=bold guifg=Yellow
+hi CursorLineNr term=bold ctermbg=144
 
-hi NonText guifg=#4a4a59
-hi SpecialKey guifg=#4a4a59 guibg=NONE
+hi NonText ctermfg=24
+hi SpecialKey ctermfg=24 guibg=NONE
 
 " Highlight search results
-hi Search ctermbg=gray guibg=khaki guifg=black gui=NONE
-" hi Search cterm=NONE ctermfg=khaki ctermbg=blue
+hi Search term=underline ctermbg=144
 
 au BufEnter *.rb syn match error contained "\<binding.pry\>"
 
@@ -507,16 +506,20 @@ let AccordionAll = 3
 
 " -----------------------------------------------------------------------------
 " Syntastic ------
+let g:syntastic_javascript_jshint_conf = $HOME . '/.jshintrc'
 let g:syntastic_enable_signs = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_disabled_filetypes = ['html', 'rst']
 let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
 let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
 let g:syntastic_javascript_checkers=["jshint"]
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
+let g:syntastic_error_symbol='✖' "⛌✖
+let g:syntastic_warning_symbol='⚑'
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_always_populate_loc_list=1
+let g:syntastic_jshint_exec = '/usr/local/bin/jshint'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_quiet_messages = { "type": "style" }
 
 " -----------------------------------------------------------------------------
 " Slime ------
@@ -791,7 +794,7 @@ augroup END
 " -----------------------------------------------------------------------------
 
 " error and quickfix window toggles
-nmap <silent> <f3> :Errors<CR>
+nmap <silent> <f3> :ErrorsToggle<CR>
 nmap <silent> <f4> :QFixToggle<cr>
 
 " rebuild ctags
