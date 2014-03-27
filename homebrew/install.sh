@@ -37,6 +37,7 @@ brew install bison
 brew install curl-ca-bundle
 brew install chruby
 brew install ruby-install
+brew install https://raw.github.com/postmodern/chgems/master/homebrew/chgems.rb
 brew install cmake
 brew install cscope
 brew install ctags
