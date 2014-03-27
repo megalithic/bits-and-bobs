@@ -48,7 +48,8 @@ source $ZSH/functions/z.sh
 # setup chruby
 # NOTE: this exists in ~/.zlogin
 # source /usr/local/opt/chruby/share/chruby/chruby.sh # <-- is this correct?
-# source /usr/local/share/chruby/chruby.sh
-# source /usr/local/share/chruby/auto.sh
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+chruby ruby-2.1.1
 
 # [[ $TERM = "tmux" ]] && rvm use default # this was [[$TERM = "screen"]]

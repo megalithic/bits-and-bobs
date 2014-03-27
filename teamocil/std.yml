@@ -10,9 +10,8 @@ session:
       splits:
         - cmd: "ls"
         - cmd: "ls"
-          width: 50
         - cmd: "ls"
-          height: 50
+        - cmd: "ls"
           focus: true
           target: "bottom-right"
     - name: "code"
