@@ -53,6 +53,7 @@ function! LoadBundles()
   Bundle 'tpope/vim-haml'
   Bundle 'tpope/vim-markdown'
   Bundle 'tpope/vim-rails'
+  Bundle 'tpope/vim-rake'
   Bundle 'tpope/vim-dispatch'
   Bundle 'vim-ruby/vim-ruby'
   Bundle 'skalnik/vim-vroom'
@@ -81,6 +82,7 @@ function! LoadBundles()
   Bundle 'tclem/vim-arduino'
   Bundle 'jameslyden/vim-arduino'
   Bundle 'elzr/vim-json'
+  Bundle 'zaiste/tmux.vim'
 
   " Clojure stuffs
   " Bundle 'guns/vim-clojure-static'

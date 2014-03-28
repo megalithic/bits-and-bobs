@@ -7,7 +7,8 @@ session:
         synchronize-panes: false
       root: "~/code"
       filters:
-      splits:
+      layout: tiled
+      panes:
         - cmd: "ls"
         - cmd: "ls"
         - cmd: "ls"
@@ -19,7 +20,7 @@ session:
       options:
         synchronize-panes: false
       root: "~/code"
-      splits:
+      panes:
         - cmd: "ls"
           focus: true
     - name: "chats"
@@ -30,6 +31,6 @@ session:
       filters:
         after:
           - "ls"
-      splits:
+      panes:
         - cmd: "irc"
           focus: true

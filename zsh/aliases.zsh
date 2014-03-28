@@ -84,8 +84,8 @@ alias adb="/Users/replicant/Dropbox/Android/adb/platform-tools/adb"
 alias fastboot="/Users/replicant/Dropbox/Android/adb/platform-tools/fastboot"
 alias dl="cd $HOME/Downloads/"
 alias sbox="cd ~/code/sandbox/"
-alias trav="cd ~/code/traverse.io/"
 alias railsfiles="cd ~/Dropbox/scripts/rails_defaults/"
+alias tip="cd ~/code/tipping"
 
 alias cabin="cd ~/Isotope11/cabin_builder"
 alias tru="cd ~/Isotope11/trucoin_rails"
@@ -98,9 +98,6 @@ alias usdir="cd ~/Isotope11/uspto/dir_search"
 alias tope="cd ~/Isotope11"
 alias iso=tope
 alias isoblog='cd ~/Isotope11/blog_posts'
-alias arlo="cd ~/Isotope11/mrarlo.com/"
-alias sec="cd ~/Isotope11/sec_quiz"
-alias zig="cd ~/Isotope11/att-zig-web"
 
 ## - POSTGRES -----------------------------------------------
 alias startpg="pg_ctl -D /usr/local/var/postgres -l ~/Dropbox/Development/logs/server.log start" #postgres -D /usr/local/var/postgres

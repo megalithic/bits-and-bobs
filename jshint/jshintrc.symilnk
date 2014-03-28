@@ -3,6 +3,7 @@
 "dojo": true,
 "jquery": true,
 "document": true,
+"doh": true,
 
 "strict": false,
 "boss": true,

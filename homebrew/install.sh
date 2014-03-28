@@ -37,7 +37,7 @@ brew install bison
 brew install curl-ca-bundle
 brew install chruby
 brew install ruby-install
-brew install https://raw.github.com/postmodern/chgems/master/homebrew/chgems.rb
+# brew install https://raw.github.com/postmodern/chgems/master/homebrew/chgems.rb
 brew install cmake
 brew install cscope
 brew install ctags
@@ -203,10 +203,10 @@ rm -rf /tmp/iTerm2-nightly.zip
 mv -f /tmp/iTerm2.app /Applications/
 
 # 1Password 3.x
-curl -O https://d13itkw33a7sus.cloudfront.net/dist/1P/mac/1Password-3.8.21.zip
-unzip 1Password-3.8.21.zip
-rm -rf /tmp/1Password-3.8.21.zip
-mv -f /tmp/1Password.app /Applications/
+# curl -O https://d13itkw33a7sus.cloudfront.net/dist/1P/mac/1Password-3.8.21.zip
+# unzip 1Password-3.8.21.zip
+# rm -rf /tmp/1Password-3.8.21.zip
+# mv -f /tmp/1Password.app /Applications/
 
 # JDK
 curl -O http://download.oracle.com/otn-pub/java/jdk/7u45-b18/jdk-7u45-macosx-x64.dmg

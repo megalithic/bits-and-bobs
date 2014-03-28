@@ -7,12 +7,12 @@ session:
         synchronize-panes: false
       root: "~/Isotope11/uspto/frontend/"
       filters:
-      splits:
+      layout: tiled
+      panes:
         - cmd: "jb"
         - cmd: "slr"
-          width: 50
         - cmd: "usfe && grunt watch"
-          height: 50
+        - cmd: "cd ~/code"
           focus: true
           target: "bottom-right"
     - name: "code"
@@ -23,7 +23,7 @@ session:
       filters:
         after:
           - "git fetch origin && git merge origin/development"
-      splits:
+      panes:
         - cmd: "usfe"
           focus: true
     - name: "chats"
@@ -34,6 +34,6 @@ session:
       filters:
         after:
           - "ls"
-      splits:
+      panes:
         - cmd: "irc"
           focus: true
