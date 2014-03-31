@@ -27,6 +27,10 @@ echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH.
 brew install grc findutils spark zsh git
 brew install wget --enable-iri
 
+brew tap homebrew/versions
+brew install gcc48
+
+
 # TODO: need to get this cleaned up, lots of deps here
 brew install ack
 brew install apple-gcc42
@@ -118,7 +122,7 @@ brew install tmate
 brew install todo-txt
 brew install tokyo-cabinet
 brew install tor
-brew install vim --with-lua
+brew install vim --with-lua --with-perl --override-system-vi #--with-python3
 brew install watch
 brew install wkhtmltopdf
 brew install x264
@@ -126,6 +130,7 @@ brew install xvid
 brew install xz
 brew install yasm
 brew install zeromq
+brew install zsh
 brew install zsh-completions
 brew install zsh-lovers
 brew install zsh-syntax-highlighting
@@ -139,6 +144,13 @@ brew install weechat --with-ruby --with-python --with-perl
 #brew install macvim --with-cscope --with-lua --HEAD
 brew install postgresql --no-python
 
+# Setup ZSH as default shell and some other stuffs
+echo ' -- Setting login shell to zsh '
+sudo mv /etc/zshenv /etc/zprofile
+chsh -s /usr/local/bin/zsh
+echo "/usr/local/bin/zsh" >> /etc/shells
+echo ' -- All installed!'
+
 # Some homebrew packages need additional commands to complete their setup:
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
@@ -147,9 +159,6 @@ brew link python --force
 sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2 /usr/bin/gcc
 sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/g++-4.2 /usr/bin/g++
 sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/cpp-4.2 /usr/bin/cpp
-
-brew tap homebrew/versions
-brew install gcc48
 
 # Install homebrew-cask so we can easily install GUI apps
 brew tap phinze/homebrew-cask

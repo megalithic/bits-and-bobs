@@ -45,9 +45,12 @@ alias b="brew"
 alias py="python"
 
 ## - VIM -----------------------------------------------
-alias e="mvim -v"
 # alias e="mvim -v"
+alias e="mvim -v"
+alias vim="/usr/local/bin/vim"
+# alias vim="mvim -v"
 alias vi="vim"
+alias vmi="vim"
 alias v="vim"
 alias vm="vim"
 alias vundle="vim -c ':BundleInstall!' -c ':BundleClean' -c ':qa!'"
