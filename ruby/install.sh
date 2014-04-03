@@ -13,4 +13,4 @@ echo "Installing chruby ..."
   chruby ruby-2.1
 
 echo "Installing critical Ruby gems for Rails development ..."
-  gem install bundler rails pg foreman thin pry launchy teamocil --no-rdoc --no-ri
+  gem install bundler rails pg foreman thin pry launchy teamocil weechat terminal-notifier --no-rdoc --no-ri

@@ -119,6 +119,7 @@ brew install the_silver_searcher
 brew install tmux
 brew tap nviennot/tmate
 brew install tmate
+brew install terminal-notifier
 brew install todo-txt
 brew install tokyo-cabinet
 brew install tor
@@ -141,8 +142,12 @@ brew install massren
 massren --config editor vim
 
 brew install weechat --with-ruby --with-python --with-perl
-#brew install macvim --with-cscope --with-lua --HEAD
+brew install macvim --with-cscope --with-lua --with-perl --HEAD
 brew install postgresql --no-python
+
+# Setup homebrew vim to override system vim
+sudo mv /usr/bin/vim /usr/bin/vim_system
+sudo ln -s /usr/local/bin/vim /usr/bin/vim
 
 # Setup ZSH as default shell and some other stuffs
 echo ' -- Setting login shell to zsh '
