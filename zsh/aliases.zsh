@@ -103,8 +103,8 @@ alias iso=tope
 alias isoblog='cd ~/Isotope11/blog_posts'
 
 ## - POSTGRES -----------------------------------------------
-alias startpg="pg_ctl -D /usr/local/var/postgres -l ~/Dropbox/Development/logs/server.log start" #postgres -D /usr/local/var/postgres
-alias stoppg="pg_ctl -D /usr/local/var/postgres -l ~/Dropbox/Development/logs/server.log stop" #postgres -D /usr/local/var/postgres
+alias startpg="pg_ctl -D /usr/local/var/postgres -l ~/code/logs/server.log start" #postgres -D /usr/local/var/postgres
+alias stoppg="pg_ctl -D /usr/local/var/postgres -l ~/code/logs/server.log stop" #postgres -D /usr/local/var/postgres
 alias pgstart="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pgstop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
   # To have launchd start postgresql at login:
@@ -119,6 +119,8 @@ alias pgsetup="sh ~/Dropbox/scripts/postgresql_db_setup.sh"
 # alias server="python -m SimpleHTTPServer"
 # alias srv=server
 alias chromedebug="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --js-flags=--stack_trace_limit=-1 --user-data-dir=/tmp/jsleakcheck"
+alias chrome22="chrome Chrome22"
+alias c22=chrome22
 
 alias dirsize="du -sh"
 alias gumsolr="~/Isotope11/gumshoe/solr/solr.sh run"
@@ -141,6 +143,7 @@ alias redisstart="startred"
 alias redstart="startred"
 alias redcli="redis-cli"
 
+alias ex=extract
 alias rmrf="rm -rf .DS_Store .gitignore .rspec .rvmrc Gemfile GuardFile README.md"
 alias sourcez="source ~/.zshrc"
 alias srcz=sourcez

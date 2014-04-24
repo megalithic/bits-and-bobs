@@ -136,6 +136,7 @@ brew install zsh-completions
 brew install zsh-lovers
 brew install zsh-syntax-highlighting
 brew install solr
+brew install --HEAD mobile-shell
 
 brew tap laurent22/massren
 brew install massren

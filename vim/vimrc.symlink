@@ -83,6 +83,7 @@ function! LoadBundles()
   Bundle 'jameslyden/vim-arduino'
   Bundle 'elzr/vim-json'
   Bundle 'zaiste/tmux.vim'
+  Bundle 'mattn/emmet-vim'
 
   " Clojure stuffs
   " Bundle 'guns/vim-clojure-static'
@@ -380,10 +381,17 @@ let loaded_matchit = 1
 let ruby_fold = 1
 
 " -----------------------------------------------------------------------------
-" smalls ------
+" Smalls ------
 let g:smalls_auto_jump = 1
 let g:smalls_auto_jump_min_input_length = 3
 let g:smalls_auto_jump_timeout = 0.25
+
+" -----------------------------------------------------------------------------
+" Emmett ------
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_mode='iv' "enable all function in all mode.
+let g:user_emmet_leader_key='<C-e>'
 
 " -----------------------------------------------------------------------------
 " Markdown ------
@@ -406,6 +414,7 @@ let g:airline_paste_symbol = 'ρ'
 let g:airline_paste_symbol = 'Þ'
 let g:airline_paste_symbol = '∥'
 let g:airline#extensions#tabline#enabled = 0
+" let g:airline#extensions#tabline#fnamemod=':t'
 let g:airline_mode_map = {
 \ 'n' : 'N',
 \ 'i' : 'I',

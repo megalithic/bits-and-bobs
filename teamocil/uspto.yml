@@ -9,8 +9,8 @@ session:
       filters:
       layout: tiled
       panes:
-        - cmd: "jb"
         - cmd: "slr"
+        - cmd: "jb"
         - cmd: "usfe && grunt watch"
         - cmd: "cd ~/code"
           focus: true
@@ -20,9 +20,9 @@ session:
       options:
         synchronize-panes: false
       root: "~/Isotope11/uspto/frontend/"
-      filters:
-        after:
-          - "git fetch origin && git merge origin/development"
+      # filters:
+      #   after:
+      #     - "git fetch origin && git merge origin/development"
       panes:
         - cmd: "usfe"
           focus: true
