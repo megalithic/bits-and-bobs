@@ -33,10 +33,14 @@
 #
 #
 # TODO n STUFF:
+# * Get those command line options/switches workin', dog!
 # * Handle archiving
 # * Handle a more appropriate setup of files and folder locations.
 # * Prepare the web counter-part for Dropbox/GitHub-hosted note viewing.
 # * Migrate the script to GitHub.
+# * Sigh, code smells in process_script method
+# * Time-stamp new "chunks" of entries?
+# * Tests!
 #
 
 
