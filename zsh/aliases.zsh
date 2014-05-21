@@ -68,7 +68,7 @@ alias ezp="vim ~/.dotfiles/system/path.zsh"
 alias ezkb="vim ~/.dotfiles/zsh/keybindings.zsh"
 alias ev="vim ~/.vimrc"
 alias et="vim ~/.tmux.conf"
-alias notes="vim ~/Dropbox/notes/notes.md"
+# alias notes="vim ~/Dropbox/notes/notes.md"
 alias n="ruby ~/.dotfiles/bin/noter.rb"
 
 ## - FOLDERS -----------------------------------------------
