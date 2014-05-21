@@ -81,15 +81,15 @@ def open_file_in_editor(f)
   end
 end
 
-def add_note(f, note_text)
+def add_note(f, note)
   # if we don't have any note text, just open the file instead
-  if note_text.nil?
+  if note.chomp("- ").empty?
     # open our file for editing in default editor
     open_file_in_editor(f)
     exit
   else
-    # otherwise go ahead and append our given note_text
-    f.puts note_text
+    # otherwise go ahead and append our given note text
+    f.puts note
   end
 end
 
@@ -106,9 +106,9 @@ def process_script
     begin
       File.open(current_file, "a+") do |f|
         # append our note text to the file
-        add_note(f, note_text)
+        add_note(f, "- #{note_text}")
       end
-      STDOUT.puts ".. finished appending '#{note_text.chomp}' to #{current_file}"
+      STDOUT.puts ".. finished appending to #{current_file}"
     rescue => e
       # something went horribly wrong with writing to our file..
       STDOUT.puts "Unable to open current dated file for appending -- #{e}"
@@ -120,9 +120,9 @@ def process_script
     begin
       File.open(new_file, "w+") do |f|
         add_date(f, current_date)
-        add_note(f, note_text)
+        add_note(f, "- #{note_text}")
       end
-      STDOUT.puts ".. finished writing '#{note_text.chomp}' to #{new_file}"
+      STDOUT.puts ".. finished writing to #{new_file}"
     rescue => e
       # something went horribly wrong with writing to our file..
       STDOUT.puts "Unable to open newly created file for writing -- #{e}"
