@@ -4,7 +4,7 @@
 # NOTER!
 # ===========================================================================
 # This is a super basic markdown-based note taking app for command-line users.
-# It makes some # assumptions already, but is flexible in other areas as well.
+# It makes some assumptions already, but is flexible in other areas as well.
 #
 # Firstly, it assumes you're using Dropbox and that your Dropbox folder - with
 # a subfolder called `notes` - exists at `~/Dropbox/notes`.
@@ -71,7 +71,6 @@ def open_file_in_editor(f)
   # people that use vim, otherwise just open the file
   case `which $EDITOR`
   when /vim/
-    # system "$EDITOR -c 'ggo' -c 'startinsert' #{f.path}"
     system "$EDITOR +norm\!Go +startinsert #{f.path}"
   else
     system "$EDITOR #{f.path}"
@@ -95,6 +94,7 @@ def add_date(f, date)
   add_note(f, "##########")
 end
 
+# TODO: clean up redundancy
 def process_script
   if all_available_notes.grep(/#{current_date_stamp}/)[0]
     # we found a current-dated file, so write to it
