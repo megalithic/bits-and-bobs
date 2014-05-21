@@ -77,6 +77,17 @@ located at `~/.dotfiles/private/install.sh`.
 
 For some submodule info, rather, [a cheatsheet](http://blog.jacius.info/git-submodule-cheat-sheet/).
 
+## extrees
+
+I also created a handy little command-line note taking app. It's provided at
+bin/noter.rb.
+
+It is pretty basic right now, but hope to break it out into its own repo soon
+with a more robust (but still simplistic in UX) feature set. Stay tuned for
+that. For now though, to use it, give the file's source a read. Has basic usage
+and details about it.
+
+
 ## additional reading
 
 There are many great dotfiles repos to check out and in general get inspiration
