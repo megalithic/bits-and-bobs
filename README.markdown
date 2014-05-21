@@ -79,14 +79,10 @@ For some submodule info, rather, [a cheatsheet](http://blog.jacius.info/git-subm
 
 ## extrees
 
-I also created a handy little command-line note taking app. It's provided at
-[bin/noter.rb](https://github.com/megalithic/dotfiles/blob/master/bin/noter.rb).
+I also created a handy little [command-line note taking app](https://github.com/megalithic/noter).
 
-It is pretty basic right now, but hope to break it out into its own repo soon
-with a more robust (but still simplistic in UX) feature set. Stay tuned for
-that. For now though, to use it, give the [file's source](https://github.com/megalithic/dotfiles/blob/master/bin/noter.rb) a read. Has basic usage
-and details about it.
-
+It is pretty basic app/script right now, but have ideas for a more robust, yet still simplistic in UX,
+feature set. Stay tuned for that.
 
 ## additional reading
 
