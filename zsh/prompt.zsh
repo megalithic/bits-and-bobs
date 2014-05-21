@@ -115,25 +115,43 @@ prompt_pure_precmd() {
 #     # print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}⇡%f\e8"
 #   } &!
 
+  # WORKING ---------
   # check async if there is anything to pull
-  {
-    local dirty=''
+  # {
+  #   local dirty=''
+  #   # check if we're in a git repo
+  #   command git rev-parse --is-inside-work-tree &>/dev/null &&
+  #   # check check if there is anything to pull
+  #   command git fetch &>/dev/null &&
+  #   # check if there is an upstream configured for this branch
+  #   [[ "$PURE_ASYNC" == "off" ]] && exit
+  #   command git rev-parse --abbrev-ref @'{u}' &>/dev/null &&
+  #   {
+  #     # count exclusive local and remote commits
+  #     local org_count=$(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null)
+  #     local loc_count=$(command git rev-list --right-only --count @'{u}'...HEAD 2>/dev/null)
+  #     (( org_count > 0 )) && dirty='⇣'
+  #     (( loc_count > 0 )) && dirty='⇡'
+  #     (( org_count > 0 && org_count == loc_count )) && dirty='⚑'
+  #     # some crazy ansi magic to inject the symbol into the previous line
+  #     print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}$dirty%f\e8"
+  #   }
+  # } &!
+  # /WORKING ---------
+
+  # https://github.com/sindresorhus/pure/pull/67
+  # check async if there is anything to pull
+  (( ${PURE_GIT_PULL:-1} )) && {
     # check if we're in a git repo
     command git rev-parse --is-inside-work-tree &>/dev/null &&
     # check check if there is anything to pull
     command git fetch &>/dev/null &&
     # check if there is an upstream configured for this branch
-    [[ "$PURE_ASYNC" == "off" ]] && exit
-    command git rev-parse --abbrev-ref @'{u}' &>/dev/null &&
-    {
-      # count exclusive local and remote commits
-      local org_count=$(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null)
-      local loc_count=$(command git rev-list --right-only --count @'{u}'...HEAD 2>/dev/null)
-      (( org_count > 0 )) && dirty='⇣'
-      (( loc_count > 0 )) && dirty='⇡'
-      (( org_count > 0 && org_count == loc_count )) && dirty='⚑'
-      # some crazy ansi magic to inject the symbol into the previous line
-      print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}$dirty%f\e8"
+    command git rev-parse --abbrev-ref @'{u}' &>/dev/null && {
+      local arrows=""
+      (( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows="⇣"
+      (( $(command git rev-list --left-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows+="⇡"
+      print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}${arrows}%f\e8"
     }
   } &!
 

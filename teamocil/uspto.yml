@@ -10,7 +10,7 @@ session:
       layout: tiled
       panes:
         - cmd: "slr"
-        - cmd: "jb"
+        - cmd: "jb6"
         - cmd: "usfe && grunt watch"
         - cmd: "cd ~/code"
           focus: true
