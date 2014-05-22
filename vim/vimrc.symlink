@@ -79,8 +79,6 @@ function! LoadBundles()
   Bundle 'Townk/vim-autoclose'
   Bundle 'roman/golden-ratio'
   Bundle 'sickill/vim-pasta'
-  Bundle 'tclem/vim-arduino'
-  Bundle 'jameslyden/vim-arduino'
   Bundle 'elzr/vim-json'
   Bundle 'zaiste/tmux.vim'
   Bundle 'mattn/emmet-vim'
@@ -498,7 +496,7 @@ endif
 
 " -----------------------------------------------------------------------------
 " Arduino ------
-let g:vim_arduino_map_keys = 0
+" let g:vim_arduino_map_keys = 0
 " nnoremap <leader>rc :call ArduinoCompile()<CR>
 " nnoremap <leader>rd :call ArduinoDeploy()<CR>
 " nnoremap <leader>rs :call ArduinoSerialMonitor()<CR>
