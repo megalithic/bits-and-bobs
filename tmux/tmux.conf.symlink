@@ -10,11 +10,11 @@ set -g prefix C-a
 bind C-a send-prefix
 
 # Mouse support
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
-set -g mouse-select-window on
+# set -g mouse-select-pane on
+# set -g mouse-resize-pane on
+# set -g mouse-select-window on
 setw -g mode-mouse copy-mode
-setw -g mode-mouse on
+# setw -g mode-mouse on
 
 set -g history-limit 30000
 
