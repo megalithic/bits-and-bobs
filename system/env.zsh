@@ -49,4 +49,7 @@ export ECLIPSE_HOME=/Applications/Eclipse
 export SSL_CERT_FILE=/usr/local/etc/openssl/certs/cert.pem
 export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
 
-export PATH=/Users/replicant/pebble-dev/PebbleSDK-current/bin:$PATH
+# This setting is for the new UTF-8 terminal support
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+

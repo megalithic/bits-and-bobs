@@ -47,32 +47,55 @@ prompt_format_pwd() {
   fi
 }
 
-# fastest possible way to check if repo is dirty
-prompt_pure_git_dirty() {
-  local dirt=''
-	# check if we're in a git repo
-	command git rev-parse --is-inside-work-tree &>/dev/null || return
-	# # check if it's dirty
-	# command git diff --quiet --ignore-submodules HEAD &>/dev/null
-  # (($? == 1)) && echo '*' #✹⟐
+# turns seconds into human readable time
+# 165392 => 1d 21h 56m 32s
+prompt_pure_human_time() {
+  local tmp=$1
+  local days=$(( tmp / 60 / 60 / 24 ))
+  local hours=$(( tmp / 60 / 60 % 24 ))
+  local minutes=$(( tmp / 60 % 60 ))
+  local seconds=$(( tmp % 60 ))
+  (( $days > 0 )) && echo -n "${days}d "
+  (( $hours > 0 )) && echo -n "${hours}h "
+  (( $minutes > 0 )) && echo -n "${minutes}m "
+  echo "${seconds}s"
+}
 
+# fastest possible way to check if repo is dirty
+# prompt_pure_git_dirty() {
+#   local dirt=''
+# 	# check if we're in a git repo
+# 	command git rev-parse --is-inside-work-tree &>/dev/null || return
+# 	# # check if it's dirty
+# 	# command git diff --quiet --ignore-submodules HEAD &>/dev/null
+#   # (($? == 1)) && echo '*' #✹⟐
+#
+#   # check if it's dirty
+#   command git diff --quiet --ignore-submodules HEAD &>/dev/null || dirty='*'
+#   # check for untracked files
+#   command test -z "$(git ls-files --others --exclude-standard)" || dirty='…'
+#   echo $dirty
+# }
+
+prompt_pure_git_dirty() {
+  # check if we're in a git repo
+  command git rev-parse --is-inside-work-tree &>/dev/null || return
   # check if it's dirty
-  command git diff --quiet --ignore-submodules HEAD &>/dev/null || dirty='*'
-  # check for untracked files
-  command test -z "$(git ls-files --others --exclude-standard)" || dirty='…'
-  echo $dirty
+  command git diff --quiet --ignore-submodules HEAD &>/dev/null
+
+  (($? == 1)) && echo '*'
 }
 
 # displays the exec time of the last command if set threshold was exceeded
 prompt_pure_cmd_exec_time() {
-	local stop=$(date +%s)
-	local start=${cmd_timestamp:-$stop}
-	integer elapsed=$stop-$start
-	(($elapsed > ${PURE_CMD_MAX_EXEC_TIME:=5})) && echo ${elapsed}s
+  local stop=$EPOCHSECONDS
+  local start=${cmd_timestamp:-$stop}
+  integer elapsed=$stop-$start
+  (($elapsed > ${PURE_CMD_MAX_EXEC_TIME:=5})) && prompt_pure_human_time $elapsed
 }
 
 prompt_pure_preexec() {
-  cmd_timestamp=$(date +%s)
+  cmd_timestamp=$EPOCHSECONDS
 
   # shows the current dir and executed command in the title when a process is active
   print -Pn "\e]0;"
@@ -98,48 +121,6 @@ prompt_pure_precmd() {
   local prompt_pure_preprompt="\n%F{blue}$(prompt_format_pwd) %f$(vcs_super_info)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
   print -P $prompt_pure_preprompt
 
-#   # check async if there is anything to pull
-#   (( ${PURE_GIT_PULL:-1} )) && {
-#     # check if we're in a git repo
-#     command git rev-parse --is-inside-work-tree &>/dev/null &&
-#     # check check if there is anything to pull
-#     command git fetch &>/dev/null &&
-#     # check if there is an upstream configured for this branch
-#     command git rev-parse --abbrev-ref @'{u}' &>/dev/null &&
-#     (( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) &&
-#     # some crazy ansi magic to inject the symbol into the previous line
-#     print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{red}⇣%f\e8"
-#
-#     # for some reason, it is ALWAYS saying something is ready to push .... fix!
-#     # command git push --dry-run 2>&1 | grep -q -v "Everything up-to-date" &&
-#     # print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}⇡%f\e8"
-#   } &!
-
-  # WORKING ---------
-  # check async if there is anything to pull
-  # {
-  #   local dirty=''
-  #   # check if we're in a git repo
-  #   command git rev-parse --is-inside-work-tree &>/dev/null &&
-  #   # check check if there is anything to pull
-  #   command git fetch &>/dev/null &&
-  #   # check if there is an upstream configured for this branch
-  #   [[ "$PURE_ASYNC" == "off" ]] && exit
-  #   command git rev-parse --abbrev-ref @'{u}' &>/dev/null &&
-  #   {
-  #     # count exclusive local and remote commits
-  #     local org_count=$(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null)
-  #     local loc_count=$(command git rev-list --right-only --count @'{u}'...HEAD 2>/dev/null)
-  #     (( org_count > 0 )) && dirty='⇣'
-  #     (( loc_count > 0 )) && dirty='⇡'
-  #     (( org_count > 0 && org_count == loc_count )) && dirty='⚑'
-  #     # some crazy ansi magic to inject the symbol into the previous line
-  #     print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}$dirty%f\e8"
-  #   }
-  # } &!
-  # /WORKING ---------
-
-  # https://github.com/sindresorhus/pure/pull/67
   # check async if there is anything to pull
   (( ${PURE_GIT_PULL:-1} )) && {
     # check if we're in a git repo
@@ -148,9 +129,9 @@ prompt_pure_precmd() {
     command git fetch &>/dev/null &&
     # check if there is an upstream configured for this branch
     command git rev-parse --abbrev-ref @'{u}' &>/dev/null && {
-      local arrows=""
-      (( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows="⇣"
-      (( $(command git rev-list --left-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows+="⇡"
+      local arrows=''
+      (( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows='⇣'
+      (( $(command git rev-list --left-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows+='⇡'
       print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}${arrows}%f\e8"
     }
   } &!
@@ -160,8 +141,13 @@ prompt_pure_precmd() {
 }
 
 prompt_pure_setup() {
+  # prevent percentage showing up
+  # if output doesn't end with a newline
+  export PROMPT_EOL_MARK=''
+
 	prompt_opts=(cr subst percent)
 
+  zmodload zsh/datetime
 	autoload -Uz add-zsh-hook
 	autoload -Uz vcs_info
 

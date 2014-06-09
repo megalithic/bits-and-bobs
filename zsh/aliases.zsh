@@ -68,8 +68,9 @@ alias ezp="vim ~/.dotfiles/system/path.zsh"
 alias ezkb="vim ~/.dotfiles/zsh/keybindings.zsh"
 alias ev="vim ~/.vimrc"
 alias et="vim ~/.tmux.conf"
-# alias notes="vim ~/Dropbox/notes/notes.md"
+alias notes="~/Dropbox/notes/"
 alias n="ruby ~/.dotfiles/bin/noter.rb"
+alias last='ls *(.om[1])'
 
 ## - FOLDERS -----------------------------------------------
 alias code="cd ~/code"
@@ -238,9 +239,12 @@ alias rc="bundle exec rails console"
 alias bec=rc
 
 ## - GRUNT / KARMA -----------------------------------------------
-alias gs="grunt server"
-alias gsf="grunt server --force"
-alias gb="grunt build"
-alias gbf="grunt build --force"
+alias grs="grunt server"
+alias grsf="grunt server --force"
+alias grb="grunt build"
+alias grbf="grunt build --force"
 alias ks="karma start"
 alias kr="karma run"
+
+## - YEOMAN -----------------------------------------------
+alias yrc="yo react-webpack:component"

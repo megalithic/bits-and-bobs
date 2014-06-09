@@ -335,7 +335,6 @@ pretty_git_log() {
 # https://github.com/addyosmani/dotfiles/blob/master/.functions
 # Need to convert his functions to zsh from bash
 # ============================================================================
-
 chrome() {
   app="/Applications/Google Chrome 22.app/Contents/MacOS/Google Chrome"
   userdatadir="/Users/replicant/Library/Application\ Support/Google/Chrome/$1"

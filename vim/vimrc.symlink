@@ -114,6 +114,7 @@ function! LoadBundles()
   Bundle 'AndrewRadev/switch.vim'
   Bundle 't9md/vim-smalls'
   Bundle 'vim-scripts/matchit.zip'
+  " Bundle 'toyamarinyon/vim-swift'
 endfunction
 
 try
@@ -145,6 +146,7 @@ let maplocalleader = "\\"
 
 set enc=utf-8
 set term=screen-256color
+let $TERM='screen-256color'
 set ttyfast
 set showcmd
 set fileformats=unix,mac,dos
