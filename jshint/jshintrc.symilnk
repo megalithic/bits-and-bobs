@@ -6,6 +6,7 @@
 "doh": true,
 
 "strict": false,
+"esnext": true,
 "boss": true,
 "curly": true,
 "devel": true,

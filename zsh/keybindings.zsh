@@ -4,7 +4,7 @@
 
 bindkey "^K"      kill-whole-line                      # ctrl-k
 bindkey "^R"      history-incremental-search-backward  # ctrl-r
-bindkey "^A"      beginning-of-line                    # ctrl-a  
+bindkey "^A"      beginning-of-line                    # ctrl-a
 bindkey "^E"      end-of-line                          # ctrl-e
 bindkey '^[[A'    up-line-or-search
 bindkey '^[[B'    down-line-or-search
@@ -21,16 +21,16 @@ bindkey "[A"      history-search-backward              # up arrow
 # bindkey -e   # Default to standard emacs bindings, regardless of editor string
 
 # Enable Ctrl-x-e to edit command line
-autoload -U edit-command-line
+# autoload -U edit-command-line
 # Emacs style
 # zle -N edit-command-line
 # bindkey '^xe' edit-command-line
 # bindkey '^x^e' edit-command-line
 # Vi style:
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
-# Use C-x C-e to edit the current command line
-bindkey '\C-x\C-e' edit-command-line
+# zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+# # Use C-x C-e to edit the current command line
+# bindkey '\C-x\C-e' edit-command-line
 
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^S' history-incremental-pattern-search-forward

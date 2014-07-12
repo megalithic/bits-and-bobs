@@ -15,3 +15,5 @@ if [[ -e /usr/local/share/chruby ]]; then
     chruby $(cat ~/.ruby-version)
   fi
 fi
+
+~/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh

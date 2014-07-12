@@ -27,26 +27,32 @@ function! LoadBundles()
 
   Bundle 'gmarik/vundle'
   Bundle 'chriskempson/base16-vim'
+  " Bundle 'w0ng/vim-hybrid'
+  " Bundle 'morhetz/gruvbox'
+  " Bundle 'junegunn/seoul256.vim'
+  " https://github.com/morhetz/gruvbox/wiki/Terminal-specific
   Bundle 'bling/vim-airline'
   Bundle 'ervandew/supertab'
   Bundle 'kien/ctrlp.vim.git'
   " Bundle 'duff/vim-scratch'
+  Bundle 'inside/vim-search-pulse'
 
-  if has("python")
-    " Provide smart autocomplete results for javascript, and some useful commands
-    Bundle 'marijnh/tern_for_vim'
-    " install node dependencies for tern
-    if isNpmInstalled && isdirectory(expand('~/.vim/bundle/tern_for_vim')) && !isdirectory(expand('~/.vim/bundle/tern_for_vim/node_modules'))
-      silent ! echo 'Installing tern' && npm --prefix ~/.vim/bundle/tern_for_vim install
-    endif
-  endif
+  " if has("python")
+  "   " Provide smart autocomplete results for javascript, and some useful commands
+  "   Bundle 'marijnh/tern_for_vim'
+  "   " install node dependencies for tern
+  "   if isNpmInstalled && isdirectory(expand('~/.vim/bundle/tern_for_vim')) && !isdirectory(expand('~/.vim/bundle/tern_for_vim/node_modules'))
+  "     silent ! echo 'Installing tern' && npm --prefix ~/.vim/bundle/tern_for_vim install
+  "   endif
+  " endif
 
+  Bundle 'Raimondi/delimitMate'
   Bundle 'rking/ag.vim'
   Bundle 'tomtom/tcomment_vim'
   Bundle 'tpope/vim-endwise'
   Bundle 'tpope/vim-unimpaired'
   Bundle 'tpope/vim-eunuch'
-  Bundle 'tpope/vim-surround'
+  " Bundle 'tpope/vim-surround'
   Bundle 'tpope/vim-git'
   Bundle 'tpope/vim-fugitive'
   Bundle 'tpope/vim-repeat'
@@ -60,11 +66,9 @@ function! LoadBundles()
   Bundle 'othree/html5.vim'
   Bundle 'slim-template/vim-slim'
   " Bundle 'git@github.com:slim-template/vim-slim.git'
-  " Bundle 'kchmck/vim-coffee-script'
   Bundle 'pangloss/vim-javascript'
   Bundle 'jelera/vim-javascript-syntax'
   Bundle 'othree/javascript-libraries-syntax.vim'
-  " Bundle 'jsx/jsx.vim.git'
   Bundle 'mxw/vim-jsx'
   Bundle 'lukaszb/vim-web-indent'
   Bundle 'lfilho/cosco.vim'
@@ -81,7 +85,11 @@ function! LoadBundles()
   Bundle 'sickill/vim-pasta'
   Bundle 'elzr/vim-json'
   Bundle 'zaiste/tmux.vim'
-  Bundle 'mattn/emmet-vim'
+  " Bundle 'mattn/emmet-vim'
+  Bundle 'mozfr/mozilla.vim'
+  Bundle 'mattn/webapi-vim'
+  Bundle 'mattn/gist-vim'
+  " Bundle 'Yggdroot/indentLine'
 
   " Clojure stuffs
   " Bundle 'guns/vim-clojure-static'
@@ -111,10 +119,9 @@ function! LoadBundles()
 "      endif
    endif
 
-  Bundle 'AndrewRadev/switch.vim'
-  Bundle 't9md/vim-smalls'
+  " Bundle 'Keithbsmiley/swift.vim'
+  " Bundle 't9md/vim-smalls'
   Bundle 'vim-scripts/matchit.zip'
-  " Bundle 'toyamarinyon/vim-swift'
 endfunction
 
 try
@@ -138,11 +145,18 @@ filetype plugin indent on
 set t_Co=256
 set background=dark
 syntax enable
+
+" let g:hybrid_use_iTerm_colors=1
+" colorscheme hybrid
+" colorscheme gruvbox
+" let g:seoul256_background = 236
+" colorscheme seoul256
 colorscheme base16-eighties
+
 syntax on
 
 let mapleader=","
-let maplocalleader = "\\"
+let maplocalleader="\\"
 
 set enc=utf-8
 set term=screen-256color
@@ -292,7 +306,7 @@ set secure " disable unsafe commands in local .vimrc files
 " =============================================================================
 " Highlighting
 " -----------------------------------------------------------------------------
-hi ColorColumn ctermbg=237 guibg=#262626
+hi ColorColumn ctermfg=232 ctermbg=237 guibg=#262626
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Highlight extra white space
@@ -321,6 +335,7 @@ au BufEnter *.rb syn match error contained "\<binding.pry\>"
 " =============================================================================
 " Autocommands
 " -----------------------------------------------------------------------------
+
 augroup force_save_on_events
     au!
     au InsertLeave * :silent! wall
@@ -352,15 +367,13 @@ augroup END
 au VimResized * :wincmd =
 
 " change vim cursor depending on the mode
-if exists('$ITERM_PROFILE')
-  if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-  endif
-end
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 " if more than 1 files are passed to vim as arg, open them in vertical splits
 if argc() > 1
@@ -381,17 +394,30 @@ let loaded_matchit = 1
 let ruby_fold = 1
 
 " -----------------------------------------------------------------------------
+" gruvbox ------
+let g:gruvbox_italic=0
+let g:gruvbox_termcolors=16
+
+" -----------------------------------------------------------------------------
+" vim-search-pulse ------
+let g:vim_search_pulse_mode = 'cursor_line'
+
+" -----------------------------------------------------------------------------
+" IndentLine ------
+" let g:indentLine_char = '¦'
+
+" -----------------------------------------------------------------------------
 " Smalls ------
-let g:smalls_auto_jump = 1
-let g:smalls_auto_jump_min_input_length = 3
-let g:smalls_auto_jump_timeout = 0.25
+" let g:smalls_auto_jump = 1
+" let g:smalls_auto_jump_min_input_length = 3
+" let g:smalls_auto_jump_timeout = 0.25
 
 " -----------------------------------------------------------------------------
 " Emmett ------
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-let g:user_emmet_mode='iv' "enable all function in all mode.
-let g:user_emmet_leader_key='<C-e>'
+" let g:user_emmet_install_global = 0
+" autocmd FileType html,css EmmetInstall
+" let g:user_emmet_mode='iv' "enable all function in all mode.
+" let g:user_emmet_leader_key='<C-e>'
 
 " -----------------------------------------------------------------------------
 " Markdown ------
@@ -490,7 +516,7 @@ autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
 " -----------------------------------------------------------------------------
 " Gist ------
 let g:gist_open_browser_after_post = 1
-let g:gist_detect_filetype = 1
+let g:gist_detect_filetype = 2
 let g:gist_post_private = 1
 if has('macunix')
   let g:gist_clip_command = 'pbcopy'
@@ -516,8 +542,12 @@ let AccordionAll = 3
 " can haz?
 
 " -----------------------------------------------------------------------------
+" Javascript ------
+let javascript_enable_domhtmlcss=1
+
+" -----------------------------------------------------------------------------
 " Syntastic ------
-let g:syntastic_javascript_jshint_conf = $HOME . '/.jshintrc'
+let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.jshintrc'
 let g:syntastic_enable_signs = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_disabled_filetypes = ['html', 'rst']
@@ -528,7 +558,7 @@ let g:syntastic_error_symbol='✖' "⛌✖
 let g:syntastic_warning_symbol='⚑'
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_jshint_exec = '/usr/local/bin/jshint'
+let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_quiet_messages = { "type": "style" }
 
@@ -686,13 +716,17 @@ if exists('+colorcolumn')
     " au WinEnter * call s:DimInactiveWindows()
     au WinEnter * set cursorline
     au WinEnter * set number
+    au WinEnter * set syntax=ON
+    au BufEnter * set syntax=ON
     au BufEnter * set cursorline
     au InsertEnter * set nocursorline
 
     au BufLeave * set nocursorline
+    au BufLeave * set syntax=OFF
     au InsertLeave * set cursorline
     au WinLeave * set nocursorline
     au WinLeave * set nonumber
+    au WinLeave * set syntax=OFF
   augroup END
 endif
 
@@ -707,6 +741,7 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
+au BufEnter * call DeleteTrailingWS()
 
 " Diff current buffer with last GIT version
 function! s:DiffWithGITCheckedOut()
@@ -719,8 +754,8 @@ endfunction
 com! DiffGIT call s:DiffWithGITCheckedOut()
 
 " Cosco
-autocmd FileType javascript,css nmap <silent> ,; :call cosco#commaOrSemiColon()<CR>
-autocmd FileType javascript,css inoremap <silent> ,; <ESC>:call cosco#commaOrSemiColon()"<CR>a
+autocmd FileType javascript,css nmap <silent> <leader>; :call cosco#commaOrSemiColon()<CR>
+autocmd FileType javascript,css inoremap <silent> <leader>; <ESC>:call cosco#commaOrSemiColon()"<CR>a
 
 " If there isn't one, append a semi colon to the end of the current line.
 function! s:appendSemiColon()
@@ -732,8 +767,8 @@ function! s:appendSemiColon()
 endfunction
 
 " For programming languages using a semi colon at the end of statement.
-autocmd FileType c,cpp,css,java,javascript,perl,php,jade nmap <silent> ;; :call <SID>appendSemiColon()<CR>
-autocmd FileType c,cpp,css,java,javascript,perl,php,jade inoremap <silent> ;; <ESC>:call <SID>appendSemiColon()<CR>a
+" autocmd FileType c,cpp,css,java,javascript,perl,php,jade nmap <silent> ;; :call <SID>appendSemiColon()<CR>
+" autocmd FileType c,cpp,css,java,javascript,perl,php,jade inoremap <silent> ;; <ESC>:call <SID>appendSemiColon()<CR>a
 
 "------------------------------------------------------------------------------
 " Filetypes #ftypes
@@ -742,11 +777,6 @@ autocmd FileType c,cpp,css,java,javascript,perl,php,jade inoremap <silent> ;; <E
 augroup buffer_cmds
   " clear commands before resetting
   autocmd!
-
-  " when vimrc is edited, reload it
-  " autocmd bufwritepost .gvimrc source %
-  " autocmd bufwritepost .vimrc source %
-  " autocmd bufwritepost .vim source %
 
   " Only show cursorline in the current window and in normal mode
   au WinLeave,InsertEnter * set nocul
@@ -761,9 +791,9 @@ augroup buffer_cmds
   au BufNewFile,BufReadPost *.ino,*.pde set filetype=arduino
 
   " filetype
-  autocmd BufNewFile,BufRead *.json setf json
+  autocmd BufNewFile,BufRead *.json set filetype=json
   autocmd BufNewFile,BufRead *.slim set filetype=slim
-  autocmd BufNewFile,BufRead *.less setf less
+  autocmd BufNewFile,BufRead *.less set filetype=less
 
   " Enable omnicomplete for supported filetypes
   autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
@@ -790,16 +820,6 @@ augroup buffer_cmds
     autocmd InsertLeave * set colorcolumn=""
   endif
 augroup END
-
-" Highlight cursor line.
-" augroup CursorLine
-"   au!
-"   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-"   au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-"   au WinLeave * setlocal nocursorline
-"   au WinLeave * setlocal nocursorcolumn
-" augroup END
-
 
 " -----------------------------------------------------------------------------
 " Keybindings
@@ -870,10 +890,6 @@ vnoremap <F1> <ESC>
 let g:ctrlp_map = '<leader>m'
 " let g:ctrlp_map = '<leader>,'
 " nnoremap <leader>m :CtrlPMRU<cr>
-
-" -----------------------------------------------------------------------------
-" Switch ------
-nnoremap <leader>s :Switch<CR>
 
 " -----------------------------------------------------------------------------
 " Unite ------
@@ -1032,7 +1048,8 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
-vnoremap <leader>G :w !gist -p -t %:e \\| pbcopy<cr>
+vnoremap <leader>G :'<,'>Gist -p -t<cr>
+" vnoremap <leader>G !gist -p -t %:e \\| pbcopy<cr>
 
 " Insert the directory of the current buffer in command line mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -1067,12 +1084,12 @@ nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 " -----------------------------------------------------------------------------
 " Surround ------
 " Autoclose in visual mode
-vmap [ S[
-vmap ( S(
-vmap { S{
-vmap ] S]
-vmap ) S)
-vmap } S}
+vmap [ S]
+vmap ( S)
+vmap { S}
+" vmap ] S[
+" vmap ) S(
+" vmap } S{
 vmap ' S'
 vmap " S"
 
@@ -1094,16 +1111,3 @@ inoremap <c-a> <esc>I
 " Prettify XML/JSON ------
 map <leader>pj :%!python -m json.tool<CR>
 map <leader>px :%!xmllint % --format<CR>
-
-" -----------------------------------------------------------------------------
-" Yankstack ------
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
-
-" -----------------------------------------------------------------------------
-" smalls ------
-" map normal-mode 's' for simple search
-nmap <leader><leader> <Plug>(smalls)
-" if you want to use smalls in visual/operator or both mode.
-omap <leader><leader> <Plug>(smalls)
-xmap <leader><leader> <Plug>(smalls)

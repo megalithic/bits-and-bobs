@@ -10,8 +10,8 @@ set -g prefix C-a
 bind C-a send-prefix
 
 # Mouse support
-# set -g mouse-select-pane on
 # set -g mouse-resize-pane on
+# set -g mouse-select-pane on
 # set -g mouse-select-window on
 setw -g mode-mouse copy-mode
 # setw -g mode-mouse on
@@ -57,14 +57,6 @@ bind -r C-h select-pane -L
 bind -r C-l select-pane -R
 bind -r C-j select-pane -D
 bind -r C-k select-pane -U
-
-# NOTE: can't use this because weechat uses ctrl+j/k for channel movement :(
-# josh's pane movement bindings (works with vim splits too):
-# bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
-# bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-j) || tmux select-pane -D"
-# bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-k) || tmux select-pane -U"
-# bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-l) || tmux select-pane -R"
-# bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys 'C-\\') || tmux select-pane -l"
 
 unbind C-f
 unbind f

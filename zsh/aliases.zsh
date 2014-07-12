@@ -20,6 +20,7 @@ alias la='gls -A --color'
 # alias ls='ls -GFh --color=auto' # Colorize output, add file type indicator, and put sizes in human readable format
 # alias ll='ls -GFhl --color=auto' # Same as above, but in long listing format
 # alias lsd='ls -aFhlG --color=auto'
+alias webcam="sudo killall VDCAssistant"
 
 ## - TMUX -----------------------------------------------
 # alias mux="tmux"
@@ -45,10 +46,8 @@ alias b="brew"
 alias py="python"
 
 ## - VIM -----------------------------------------------
-# alias e="mvim -v"
-alias e="mvim -v"
 alias vim="/usr/local/bin/vim"
-alias vim="mvim -v"
+# alias vim="mvim -v"
 alias vi="vim"
 alias vmi="vim"
 alias v="vim"
@@ -127,6 +126,13 @@ alias chrome22="chrome Chrome22"
 alias chrome32="open /Applications/Chromium.app"
 alias c22=chrome22
 
+# Kill all the tabs in Chrome to free up memory
+# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+# Thanks @sindersorhus: https://github.com/mathiasbynens/dotfiles/commit/bd9429af1cfdc7f4caa73e6f98773ed69a161c9c
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+# fix facetime camera
+alias restartcamera="sudo killall VDCAssistant"
+
 alias dirsize="du -sh"
 alias gumsolr="~/Isotope11/gumshoe/solr/solr.sh run"
 
@@ -137,8 +143,9 @@ alias slr="sh ~/Isotope11/uspto/solr/localsolr.sh run"
 alias mci="usapi && mvn package && cp ear/target/solrService.ear ../jboss/server/default/deploy && usfe"
 # alias mci="cd ~/Isotope11/uspto/api && mvn clean install && usfe"
 
-alias checkpg="ps auxwww | grep postgres"
-alias process="ps auxwww | grep"
+alias psgrep='ps auxwww | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
+alias checkpg="psgrep postgres"
+alias process="psgrep"
 alias check=process
 alias chk=process
 alias running=process
