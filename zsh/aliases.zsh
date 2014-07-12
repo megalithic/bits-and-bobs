@@ -17,15 +17,9 @@ alias l="gls -lAh --color"
 alias ll="gls -lFh --color"
 alias la='gls -A --color'
 
-# alias ls='ls -GFh --color=auto' # Colorize output, add file type indicator, and put sizes in human readable format
-# alias ll='ls -GFhl --color=auto' # Same as above, but in long listing format
-# alias lsd='ls -aFhlG --color=auto'
 alias webcam="sudo killall VDCAssistant"
 
 ## - TMUX -----------------------------------------------
-# alias mux="tmux"
-# alias tmx="tmux"
-# alias tm="tmux"
 alias tgum="tmux attach-session -t gumshoe"
 alias ttru="tmux attach-session -t trucoin"
 alias tiso="tmux attach-session -t isotope"
@@ -47,7 +41,6 @@ alias py="python"
 
 ## - VIM -----------------------------------------------
 alias vim="/usr/local/bin/vim"
-# alias vim="mvim -v"
 alias vi="vim"
 alias vmi="vim"
 alias v="vim"
@@ -122,16 +115,13 @@ alias pgsetup="sh ~/Dropbox/scripts/postgresql_db_setup.sh"
 # alias server="python -m SimpleHTTPServer"
 # alias srv=server
 alias chromedebug="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --js-flags=--stack_trace_limit=-1 --user-data-dir=/tmp/jsleakcheck"
-alias chrome22="chrome Chrome22"
 alias chrome32="open /Applications/Chromium.app"
-alias c22=chrome22
+alias c32=chrome32
 
 # Kill all the tabs in Chrome to free up memory
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
 # Thanks @sindersorhus: https://github.com/mathiasbynens/dotfiles/commit/bd9429af1cfdc7f4caa73e6f98773ed69a161c9c
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-# fix facetime camera
-alias restartcamera="sudo killall VDCAssistant"
 
 alias dirsize="du -sh"
 alias gumsolr="~/Isotope11/gumshoe/solr/solr.sh run"
@@ -166,7 +156,6 @@ alias cls="clr && ls"
 alias ip="ifconfig"
 alias web="open -a '/Applications/Google Chrome.app' --args --disable-web-security"
 alias get="curl -OL"
-alias ex="exit"
 alias q="exit"
 alias x="exit"
 alias g="grep -r -i --color='auto'"
@@ -252,6 +241,3 @@ alias grb="grunt build"
 alias grbf="grunt build --force"
 alias ks="karma start"
 alias kr="karma run"
-
-## - YEOMAN -----------------------------------------------
-alias yrc="yo react-webpack:component"
