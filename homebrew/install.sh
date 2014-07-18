@@ -91,7 +91,12 @@ brew install libyaml
 brew install lua
 brew install maven
 brew install mercurial
-brew install mutt
+
+brew install notmuch
+brew install mutt --with-sidebar-patch
+brew install offlineimap
+brew install msmtp
+
 brew install mysql
 brew install nettle
 brew install newt
@@ -166,6 +171,9 @@ sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2 /usr/bin/gcc
 sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/g++-4.2 /usr/bin/g++
 sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/cpp-4.2 /usr/bin/cpp
 
+notmuch setup
+notmuch new
+
 # Install homebrew-cask so we can easily install GUI apps
 brew tap phinze/homebrew-cask
 brew install brew-cask
@@ -206,22 +214,6 @@ brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch 
 
 brew linkapps
 brew cleanup
-
-# ==========================================================================
-# Handle other apps to pull down
-cd /tmp
-# iTerm2-nightly
-curl -OL http://www.iterm2.com/nightly/latest
-mv latest iTerm2-nightly.zip
-unzip iTerm2-nightly.zip
-rm -rf /tmp/iTerm2-nightly.zip
-mv -f /tmp/iTerm2.app /Applications/
-
-# 1Password 3.x
-# curl -O https://d13itkw33a7sus.cloudfront.net/dist/1P/mac/1Password-3.8.21.zip
-# unzip 1Password-3.8.21.zip
-# rm -rf /tmp/1Password-3.8.21.zip
-# mv -f /tmp/1Password.app /Applications/
 
 # JDK
 curl -O http://download.oracle.com/otn-pub/java/jdk/7u45-b18/jdk-7u45-macosx-x64.dmg
