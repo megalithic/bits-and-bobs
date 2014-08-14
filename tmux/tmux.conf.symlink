@@ -80,8 +80,6 @@ set-option -g status-justify "centre" #don't change this spelling
 set-option -g status-left-length 120
 set-option -g status-right-length 120
 set-option -g status-position top
-# set-option -g status-left "#(~/.tmux-powerline/powerline.sh left)"
-# set-option -g status-right "#(~/.tmux-powerline/powerline.sh right)"
 
 # Taken from: http://zanshin.net/2013/09/05/my-tmux-configuration/
 # ==================================================================
@@ -108,7 +106,7 @@ set -g status-left "#[fg=green]#h #[fg=brightblue]ⓦ #(curl icanhazip.com) #[fg
 # show session name, window & pane number, date and time on right side of
 # status bar
 set -g status-right-length 60
-set -g status-right "#(/usr/local/bin/battery -t) #[fg=yellow] %b %d, %Y #[fg=blue]🞟%l:%M %p"
+set -g status-right "#(/usr/local/bin/battery -t) #[fg=yellow] %b %d, %Y #[fg=blue] %I:%M %p"
 
 # Window options
 set-window-option -g utf8 on
