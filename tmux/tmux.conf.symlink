@@ -16,13 +16,14 @@ bind C-a send-prefix
 setw -g mode-mouse copy-mode
 # setw -g mode-mouse on
 
-set -g history-limit 30000
+set -g history-limit 50000
 
 # tmate stuffs
 # set -g tmate-status on
 
 # 256 color support
 set -g default-terminal "screen-256color"
+set -g terminal-overrides 'xterm:colors=256'
 set-option -g default-shell /usr/local/bin/zsh
 
 # Start window numbers from 1
@@ -77,20 +78,47 @@ set-option -g status-utf8 on
 set-option -g status-justify "centre" #don't change this spelling
 set-option -g status-left-length 120
 set-option -g status-right-length 120
-set-option -g status-left "#(~/.tmux-powerline/powerline.sh left)"
-set-option -g status-right "#(~/.tmux-powerline/powerline.sh right)"
+# set-option -g status-left "#(~/.tmux-powerline/powerline.sh left)"
+# set-option -g status-right "#(~/.tmux-powerline/powerline.sh right)"
 set-option -g status-position top
+
+# Taken from: http://zanshin.net/2013/09/05/my-tmux-configuration/
+# ==================================================================
+# set color for status bar
+set-option -g status-bg colour235 #base02
+set-option -g status-fg yellow #yellow
+set-option -g status-attr dim
+
+# set window list colors - red for active and cyan for inactive
+set-window-option -g window-status-fg brightblue #base0
+set-window-option -g window-status-bg colour236
+set-window-option -g window-status-attr dim
+
+set-window-option -g window-status-current-fg brightred #orange
+set-window-option -g window-status-current-bg colour236
+set-window-option -g window-status-current-attr bright
+
+# show host name and IP address on left side of status bar
+set -g status-left-length 70
+set -g status-left "#[fg=green]#h #[fg=brightblue]ⓦ #(curl icanhazip.com) #[fg=yellow]ⓛ #(ifconfig en0 | grep 'inet ' | awk '{print \"en0 \" $2}') #(ifconfig en1 | grep 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | grep 'inet ' | awk '{print \"vpn \" $2}') "
+# ==================================================================
+
+
+# show session name, window & pane number, date and time on right side of
+# status bar
+set -g status-right-length 60
+set -g status-right "⌁ #(/usr/local/bin/battery -t) #[fg=yellow] %b %d, %Y #[fg=blue]🞟%l:%M %p"
 
 # Window options
 set-window-option -g utf8 on
 set-window-option -g monitor-activity off
 set-window-option -g xterm-keys on
 # set-window-option -g mode-keys vi
-set-window-option -g automatic-rename off
-set-window-option -g aggressive-resize off
-set-window-option -g window-status-format ' #I ❯ #W '
-set-window-option -g window-status-current-format ' #I ❯ #W '
-set-window-option -g window-status-current-format "#[fg=colour235, bg=colour27]#[fg=colour255, bg=colour27] #I ⮁ #W #[fg=colour27, bg=colour235]"
+set-window-option -g automatic-rename on
+set-window-option -g aggressive-resize on
+set-window-option -g window-status-format ' #I ◦ #W '
+set-window-option -g window-status-current-format ' #I ◦ #W '
+set-window-option -g window-status-current-format "#[fg=colour235, bg=colour27]#[fg=colour255, bg=colour27] #I ● #W #[fg=colour28, bg=colour235]"
 # set-window-option -g window-status-current-format "#[fg=colour235, bg=colour27]⮀#[fg=colour255, bg=colour27] #I ⮁ #W #[fg=colour27, bg=colour235]⮀"
 
 # clipboard

@@ -54,3 +54,4 @@ RUBIES=(/Users/replicant/.rubies/*)
 chruby ruby-2.1.1
 
 # [[ $TERM = "tmux" ]] && rvm use default # this was [[$TERM = "screen"]]
+source ~/.fzf.zsh

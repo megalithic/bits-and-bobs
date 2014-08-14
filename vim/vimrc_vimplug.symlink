@@ -12,105 +12,130 @@ filetype plugin indent on
 set nocompatible
 
 " =============================================================================
-" Manage plugins with Vundle
+" Install plugins
 " -----------------------------------------------------------------------------
+function! LoadPlugs()
+  " Plug 'gmarik/vundle'
 
-function! LoadBundles()
   " Determine if npm is installed
   let isNpmInstalled = executable("npm")
 
-  " Determine make or gmake will be used for making additional deps for Bundles
+  " Determine make or gmake will be used for making additional deps for Plugs
   " let g:make = 'gmake'
   " if system('uname -o') =~ '^GNU/'
   "   let g:make = 'make'
   " endif
 
-  Bundle 'gmarik/vundle'
-  Bundle 'chriskempson/base16-vim'
-  Bundle 'bling/vim-airline'
-  Bundle 'ervandew/supertab'
-  Bundle 'kien/ctrlp.vim.git'
-  Bundle 'FelikZ/ctrlp-py-matcher'
-  " Bundle 'duff/vim-scratch'
-  Bundle 'inside/vim-search-pulse'
+  Plug 'chriskempson/base16-vim'
+  Plug 'bling/vim-airline'
+  Plug 'ervandew/supertab'
+  Plug 'kien/ctrlp.vim.git'
+  " Plug 'duff/vim-scratch'
+  Plug 'inside/vim-search-pulse'
 
   " if has("python")
   "   " Provide smart autocomplete results for javascript, and some useful commands
-  "   Bundle 'marijnh/tern_for_vim'
+  "   Plug 'marijnh/tern_for_vim'
   "   " install node dependencies for tern
   "   if isNpmInstalled && isdirectory(expand('~/.vim/bundle/tern_for_vim')) && !isdirectory(expand('~/.vim/bundle/tern_for_vim/node_modules'))
   "     silent ! echo 'Installing tern' && npm --prefix ~/.vim/bundle/tern_for_vim install
   "   endif
   " endif
 
+  Plug 'Raimondi/delimitMate'
+  Plug 'rking/ag.vim', { 'on': 'Ag' }
+  Plug 'tomtom/tcomment_vim', { 'on': 'TComment' }
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-git'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-haml', { 'for': 'haml' }
+  Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-rake'
+  Plug 'tpope/vim-dispatch'
+  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  Plug 'skalnik/vim-vroom'
+  Plug 'othree/html5.vim'
+  Plug 'slim-template/vim-slim'
+  " Plug 'git@github.com:slim-template/vim-slim.git'
+  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+  Plug 'jelera/vim-javascript-syntax'
+  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'mxw/vim-jsx', { 'for': 'jsx' }
+  Plug 'lukaszb/vim-web-indent'
+  Plug 'lfilho/cosco.vim'
+  Plug 'aaronjensen/vim-sass-status'
+  Plug 'cakebaker/scss-syntax.vim'
+  Plug 'groenewege/vim-less'
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'claco/jasmine.vim'
+  Plug 'mklabs/grunt.vim'
+  Plug 'kien/rainbow_parentheses.vim'
+  Plug 'Valloric/MatchTagAlways'
+  Plug 'Townk/vim-autoclose'
+  Plug 'roman/golden-ratio'
+  Plug 'sickill/vim-pasta'
+  Plug 'elzr/vim-json'
+  Plug 'zaiste/tmux.vim'
+  " Plug 'mattn/emmet-vim'
+  Plug 'mozfr/mozilla.vim'
+  Plug 'mattn/webapi-vim'
+  Plug 'mattn/gist-vim'
+  " Plug 'Yggdroot/indentLine'
 
-  Bundle 'Raimondi/delimitMate'
-  Bundle 'rking/ag.vim'
-  Bundle 'tomtom/tcomment_vim'
-  Bundle 'tpope/vim-endwise'
-  Bundle 'tpope/vim-unimpaired'
-  Bundle 'tpope/vim-eunuch'
-  Bundle 'tpope/vim-surround'
-  Bundle 'tpope/vim-git'
-  Bundle 'tpope/vim-fugitive'
-  Bundle 'tpope/vim-repeat'
-  Bundle 'tpope/vim-markdown'
-  Bundle 'tpope/vim-rails'
-  Bundle 'tpope/vim-rake'
-  Bundle 'tpope/vim-dispatch'
-  Bundle 'skalnik/vim-vroom'
-  Bundle 'lukaszb/vim-web-indent'
-  Bundle 'lfilho/cosco.vim'
-  Bundle 'kien/rainbow_parentheses.vim'
-  Bundle 'Valloric/MatchTagAlways'
-  Bundle 'Townk/vim-autoclose'
-  Bundle 'roman/golden-ratio'
-  Bundle 'sickill/vim-pasta'
-  Bundle 'elzr/vim-json'
-  Bundle 'zaiste/tmux.vim'
-  Bundle 'mozfr/mozilla.vim'
-  Bundle 'mattn/webapi-vim'
-  Bundle 'mattn/gist-vim'
-  " Bundle 'mattn/emmet-vim'
-
-  Plugin 'SirVer/ultisnips'
-  Plugin 'honza/vim-snippets'
-
-  " SYNTAX STUFFS
-  " =================================================================
-  Bundle 'sheerun/vim-polyglot'
-  Bundle 'mxw/vim-jsx'
-  Bundle 'aaronjensen/vim-sass-status'
-  Bundle 'cakebaker/scss-syntax.vim'
-  Bundle 'groenewege/vim-less'
-  Bundle 'hail2u/vim-css3-syntax'
-  " Bundle 'tpope/vim-haml'
-  " Bundle 'vim-ruby/vim-ruby'
-  " Bundle 'othree/html5.vim'
-  " Bundle 'slim-template/vim-slim'
-  " Bundle 'git@github.com:slim-template/vim-slim.git'
-  " Bundle 'pangloss/vim-javascript'
-  " Bundle 'jelera/vim-javascript-syntax'
-  " Bundle 'othree/javascript-libraries-syntax.vim'
-  " Bundle 'claco/jasmine.vim'
-  " Bundle 'mklabs/grunt.vim'
+  " Clojure stuffs
+  " Plug 'guns/vim-clojure-static'
+  " Plug 'tpope/vim-fireplace'
+  " Plug 'tpope/vim-classpath'
+  " Plug 'vim-scripts/paredit.vim'
 
   if exists('*getmatches')
-    Bundle 'scrooloose/syntastic'
-  endif
+    Plug 'scrooloose/syntastic'
 
-  Bundle 'vim-scripts/matchit.zip'
+    " Install jshint and csslint for syntastic
+    " Path to jshint if it not installed globally, then use local installation
+"      if !executable("jshint")
+"        let g:syntastic_jshint_exec = '~/.vim/node_modules/.bin/jshint'
+"        "let g:syntastic_javascript_jshint_exec = '~/.vim/node_modules/.bin/jshint'
+"        if isNpmInstalled && !executable(expand(g:syntastic_jshint_exec))
+"          silent ! echo 'Installing jshint' && npm --prefix ~/.vim/ install jshint
+"        endif
+"      endif
+"
+"      " Path to csslint if it not installed globally, then use local installation
+"      if !executable("csslint")
+"        let g:syntastic_css_csslint_exec='~/.vim/node_modules/.bin/csslint'
+"        if isNpmInstalled && !executable(expand(g:syntastic_css_csslint_exec))
+"          silent ! echo 'Installing csslint' && npm --prefix ~/.vim/ install csslint
+"        endif
+"      endif
+   endif
+
+  " Plug 'Keithbsmiley/swift.vim'
+  " Plug 't9md/vim-smalls'
+  Plug 'vim-scripts/matchit.zip'
 endfunction
 
 try
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#rc()
-  call LoadBundles()
-  :catch /^Vim\%((\a\+)\)\=:E117/
-  echomsg "Failed to load vundle and/or bundles. Perhaps vundle isn't installed."
-  echomsg "You need to install vundle into ~/.vim/bundle/vundle: "
-  echomsg "   git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
-  echomsg "   vim -c ':BundleInstall' -c ':qa!'"
+  call plug#begin('~/.vim/plugged')
+  call LoadPlugs()
+  echomsg "Failed to load plugins. Perhaps vim-plug isn't installed."
+  echomsg "https://github.com/junegunn/vim-plug for all the infos."
+  echomsg "You need to install vim-plug into ~/.vim/autoload: "
+  echomsg "   mkdir -p ~/.vim/autoload && curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim"
+  call plug#end()
+  " set rtp+=~/.vim/bundle/vundle/
+  " call vundle#rc()
+  " call LoadPlugs()
+  " :catch /^Vim\%((\a\+)\)\=:E117/
+  " echomsg "Failed to load vundle and/or bundles. Perhaps vundle isn't installed."
+  " echomsg "You need to install vundle into ~/.vim/bundle/vundle: "
+  " echomsg "   git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
+  " echomsg "   vim -c ':PlugInstall' -c ':qa!'"
 endtry
 
 runtime macros/matchit.vim
@@ -135,7 +160,6 @@ syntax on
 
 let mapleader=","
 let maplocalleader="\\"
-" nmap , <space>
 
 " fzf support
 set rtp+=/usr/local/Cellar/fzf/0.8.6
@@ -375,18 +399,24 @@ let javascript_fold = 1
 let loaded_matchit = 1
 let ruby_fold = 1
 
-
 " -----------------------------------------------------------------------------
-" ultisnips ------
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
+" gruvbox ------
+let g:gruvbox_italic=0
+let g:gruvbox_termcolors=16
 
 " -----------------------------------------------------------------------------
 " vim-search-pulse ------
 let g:vim_search_pulse_mode = 'cursor_line'
 
+" -----------------------------------------------------------------------------
+" IndentLine ------
+" let g:indentLine_char = '¦'
+
+" -----------------------------------------------------------------------------
+" Smalls ------
+" let g:smalls_auto_jump = 1
+" let g:smalls_auto_jump_min_input_length = 3
+" let g:smalls_auto_jump_timeout = 0.25
 
 " -----------------------------------------------------------------------------
 " Emmett ------
@@ -445,6 +475,15 @@ let g:agprg="ag --column --nogroup --line-numbers"
 " command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 "
 
+" -----------------------------------------------------------------------------
+" Sneak ------
+" let g:sneak#streak = 1
+" nmap f <Plug>Sneak_s
+" nmap F <Plug>Sneak_S
+" xmap f <Plug>Sneak_s
+" xmap F <Plug>Sneak_S
+" omap f <Plug>Sneak_s
+" omap F <Plug>Sneak_S
 
 " -----------------------------------------------------------------------------
 " Fugitive ------
@@ -480,7 +519,6 @@ function! BufEnterCommit()
 endfunction
 autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
 
-
 " -----------------------------------------------------------------------------
 " Gist ------
 let g:gist_open_browser_after_post = 1
@@ -490,6 +528,20 @@ if has('macunix')
   let g:gist_clip_command = 'pbcopy'
 endif
 
+" -----------------------------------------------------------------------------
+" Arduino ------
+" let g:vim_arduino_map_keys = 0
+" nnoremap <leader>rc :call ArduinoCompile()<CR>
+" nnoremap <leader>rd :call ArduinoDeploy()<CR>
+" nnoremap <leader>rs :call ArduinoSerialMonitor()<CR>
+
+" -----------------------------------------------------------------------------
+" Focus ------
+let g:focusmode_width = 180
+
+" -----------------------------------------------------------------------------
+" Accordion ------
+let AccordionAll = 3
 
 " -----------------------------------------------------------------------------
 " Unite ------
@@ -516,17 +568,14 @@ let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_quiet_messages = { "type": "style" }
 
-
 " -----------------------------------------------------------------------------
 " Slime ------
 let g:slime_target = "tmux"
-
 
 " -----------------------------------------------------------------------------
 " Supertab ------
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabCrMapping = 1
-
 
 " -----------------------------------------------------------------------------
 " YouCompleteMe ------
@@ -535,7 +584,6 @@ let g:SuperTabCrMapping = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 " let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
 " set completeopt-=preview
-
 
 " -----------------------------------------------------------------------------
 " CtrlP ------
@@ -556,9 +604,7 @@ let g:ctrlp_custom_ignore = {
 \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
 \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
 \ }
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" let g:ctrlp_user_command = 'ag %s -l -i --nocolor -g --nogroup ""'
 let g:ctrlp_prompt_mappings = {
 \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
 \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
@@ -571,11 +617,9 @@ let g:ctrlp_prompt_mappings = {
 \ 'ToggleFocus()':        ['<c-tab>'],
 \}
 
-
 " -----------------------------------------------------------------------------
 " Vroom ------
 let g:vroom_use_colors=1
-
 
 " =============================================================================
 " Custom Functions #cfunctions
@@ -787,48 +831,6 @@ augroup END
 " Keybindings
 " -----------------------------------------------------------------------------
 
-" ///////START KEYBINDINGS FROM http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
-" copy and paste from system clipboard with <leader>p and <leader>y:
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
-
-" easier search and replace:
-vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
-    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap s :normal vs<CR>
-
-" jump to end of pasted content:
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
-
-" prevent replacing paste buffer on paste:
-" vp doesn't replace paste buffer
-function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
-endfunction
-function! s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()\<cr>"
-endfunction
-vmap <silent> <expr> p <sid>Repl()
-
-" Type 12<Enter> to go to line 12 instead of 12G
-nnoremap <CR> G
-nnoremap <BS> gg
-
-" reselect pasted content:
-noremap gV `[v`]
-
-
-" ///////END KEYBINDINGS FROM http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
-
-
 " error and quickfix window toggles
 nmap <silent> <f3> :ErrorsToggle<CR>
 nmap <silent> <f4> :QFixToggle<cr>
@@ -836,9 +838,9 @@ nmap <silent> <f4> :QFixToggle<cr>
 " rebuild ctags
 silent! nnoremap <silent> <S-F5> :call FlushEnvironment()<CR>
 
-" give us BundleInstall!
-noremap <F5> :BundleInstall!<cr>
-map <F5> :BundleInstall!<cr>
+" give us PlugInstall!
+noremap <F5> :PlugUpdate<cr>
+map <F5> :PlugUpdate<cr>
 
 " navigation a lil better
 noremap j gj
@@ -891,7 +893,6 @@ vnoremap <F1> <ESC>
 
 " -----------------------------------------------------------------------------
 " CtrlP ------
-" let g:ctrlp_map = '<leader>o'
 let g:ctrlp_map = '<leader>m'
 " let g:ctrlp_map = '<leader>,'
 " nnoremap <leader>m :CtrlPMRU<cr>

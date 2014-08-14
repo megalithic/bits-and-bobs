@@ -45,6 +45,7 @@ alias vi="vim"
 alias vmi="vim"
 alias v="vim"
 alias vm="vim"
+alias m="vim"
 alias vundle="vim -c ':BundleInstall!' -c ':BundleClean' -c ':qa!'"
 alias eclimd="/Applications/Eclipse/eclimd"
 

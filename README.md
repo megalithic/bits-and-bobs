@@ -99,6 +99,7 @@ based on)
 - [paul miller](https://github.com/paulmillr/dotfiles)
 - [l0stsoul - good for front-end dev](https://github.com/L0stSoul/vim-config)
 - [great medium post about dotfiles and an install scheme](https://medium.com/p/43c3602fd789)
+- [zanshin](https://github.com/zanshin/dotfiles)
 
 .. I'll continually add more as I come across them.
 

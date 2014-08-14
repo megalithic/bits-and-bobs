@@ -29,6 +29,7 @@ brew install wget --enable-iri
 
 brew tap homebrew/versions
 brew install gcc48
+brew tap Goles/battery
 
 
 # TODO: need to get this cleaned up, lots of deps here

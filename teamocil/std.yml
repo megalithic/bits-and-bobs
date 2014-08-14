@@ -1,20 +1,6 @@
 session:
   name: "std"
   windows:
-    - name: "services"
-      clear: true
-      options:
-        synchronize-panes: false
-      root: "~/code"
-      filters:
-      layout: tiled
-      panes:
-        - cmd: "ls"
-        - cmd: "ls"
-        - cmd: "ls"
-        - cmd: "ls"
-          focus: true
-          target: "bottom-right"
     - name: "code"
       clear: true
       options:
@@ -23,14 +9,5 @@ session:
       panes:
         - cmd: "ls"
           focus: true
-    - name: "chats"
-      clear: true
-      options:
-        synchronize-panes: false
-      root: "~"
-      filters:
-        after:
-          - "ls"
-      panes:
-        - cmd: "irc"
-          focus: true
+        - cmd: "ls"
+          height: 10

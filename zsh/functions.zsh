@@ -132,7 +132,7 @@ cd() { builtin cd "$@"; ls -ahG }
 #         cd
 #       fi
 #     else
-#       cd 
+#       cd
 #     fi
 #   fi
 # }
@@ -269,7 +269,7 @@ if [[ $IS_MAC -eq 1 ]]; then
     pman() { ps=`mktemp -t manpageXXXX`.ps ; man -t $@ > "$ps" ; open "$ps" ; }
 
     # function to show interface IP assignments
-    ips() { foo=`/Users/mark/bin/getip.py; /Users/mark/bin/getip.py en0; /Users/mark/bin/getip.py en1`; echo $foo; } 
+    ips() { foo=`/Users/mark/bin/getip.py; /Users/mark/bin/getip.py en0; /Users/mark/bin/getip.py en1`; echo $foo; }
 
     # notify function - http://hints.macworld.com/article.php?story=20120831112030251
     notify() { automator -D title=$1 -D subtitle=$2 -D message=$3 ~/Library/Workflows/DisplayNotification.wflow }
@@ -342,4 +342,26 @@ chrome() {
     ${app} --user-data-dir=${userdatadir} > /dev/null 2>&1;
     #rm -r $1
   ) &
+}
+
+
+
+# ============================================================================
+# FZF fun stuffs
+# https://github.com/junegunn/fzf/wiki/examples
+# ============================================================================
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+fe() {
+  local file
+  file=$(fzf --query="$1" --select-1 --exit-0)
+  [ -n "$file" ] && ${EDITOR:-vim} "$file"
+}
+
+# Equivalent to above, but opens it with `open` command
+fo() {
+  local file
+  file=$(fzf --query="$1" --select-1 --exit-0)
+  [ -n "$file" ] && open "$file"
 }
