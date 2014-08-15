@@ -129,7 +129,7 @@ alias gumsolr="~/Isotope11/gumshoe/solr/solr.sh run"
 
 alias jb="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss""  && ~/Isotope11/uspto/jboss/bin/run.sh"
 alias jb5="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss5""  && ~/Isotope11/uspto/jboss5/bin/run.sh"
-alias jb6="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss6""  && ~/Isotope11/uspto/jboss6/bin/standalone.sh"
+alias jb6="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss6""  && ~/Isotope11/uspto/jboss6/bin/standalone.sh -b 0.0.0.0"
 alias slr="sh ~/Isotope11/uspto/solr/localsolr.sh run"
 alias mci="usapi && mvn package && cp ear/target/solrService.ear ../jboss/server/default/deploy && usfe"
 # alias mci="cd ~/Isotope11/uspto/api && mvn clean install && usfe"
