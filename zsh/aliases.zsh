@@ -18,6 +18,8 @@ alias ll="gls -lFh --color"
 alias la='gls -A --color'
 
 alias webcam="sudo killall VDCAssistant"
+alias dsnuke="find . -name '*.DS_Store' -type f -ls -delete"
+alias pkey="pbcopy < ~/.ssh/id_rsa.pub"
 
 ## - TMUX -----------------------------------------------
 alias tgum="tmux attach-session -t gumshoe"
