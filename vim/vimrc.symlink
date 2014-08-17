@@ -27,13 +27,13 @@ function! LoadBundles()
 
   Bundle 'gmarik/vundle'
   Bundle 'chriskempson/base16-vim'
+  " Bundle 'junegunn/seoul256.vim'
   Bundle 'bling/vim-airline'
   Bundle 'ervandew/supertab'
   Bundle 'kien/ctrlp.vim.git'
   Bundle 'FelikZ/ctrlp-py-matcher'
   Bundle 'rking/ag.vim'
   Bundle 'inside/vim-search-pulse'
-  " Bundle 'junegunn/seoul256.vim'
 
   " if has("python")
   "   " Provide smart autocomplete results for javascript, and some useful commands
@@ -59,8 +59,7 @@ function! LoadBundles()
   Bundle 'tpope/vim-dispatch'
   Bundle 'skalnik/vim-vroom'
   Bundle 'lukaszb/vim-web-indent'
-  " Bundle 'kien/rainbow_parentheses.vim'
-  Bundle 'megalithic/rainbow_parentheses.vim'
+  Bundle 'kien/rainbow_parentheses.vim'
   Bundle 'Valloric/MatchTagAlways'
   Bundle 'Townk/vim-autoclose'
   Bundle 'roman/golden-ratio'
@@ -71,8 +70,9 @@ function! LoadBundles()
   Bundle 'mattn/gist-vim'
   " Bundle 'mattn/emmet-vim'
 
-  " Plugin 'SirVer/ultisnips'
-  " Plugin 'honza/vim-snippets'
+  Bundle 'jordwalke/VimAutoMakeDirectory'
+  Bundle 'honza/vim-snippets'
+  Bundle 'SirVer/ultisnips'
 
   " SYNTAX STUFFS
   " =================================================================
@@ -369,11 +369,12 @@ let ruby_fold = 1
 
 
 " -----------------------------------------------------------------------------
-" ultisnips ------
+" UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" let g:UltiSnipsSnippetsDir="~/.vim"
+" let g:UltiSnipsSnippetDirectories=["ulti-snippets"]
 
 " -----------------------------------------------------------------------------
 " vim-search-pulse ------
@@ -521,15 +522,6 @@ let g:SuperTabCrMapping = 1
 
 
 " -----------------------------------------------------------------------------
-" YouCompleteMe ------
-" let g:ycm_add_preview_to_completeopt=0
-" let g:ycm_confirm_extra_conf=0
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
-" set completeopt-=preview
-
-
-" -----------------------------------------------------------------------------
 " CtrlP ------
 let g:ctrlp_match_window_bottom = 1 " Show at top of window
 let g:ctrlp_working_path_mode = 2 " Smart path mode
@@ -614,26 +606,26 @@ function! QFixToggle(forced)
 endfunction
 
 " Smart TabComplete
-function! Smart_TabComplete()
-  let line = getline('.')                         " current line
-
-  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-  " line to one character right
-  " of the cursor
-  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-  if (strlen(substr)==0)                          " nothing to match on empty string
-    return "\<tab>"
-  endif
-  let has_period = match(substr, '\.') != -1      " position of period, if any
-  let has_slash = match(substr, '\/') != -1       " position of slash, if any
-  if (!has_period && !has_slash)
-    return "\<C-X>\<C-P>"                         " existing text matching
-  elseif ( has_slash )
-    return "\<C-X>\<C-F>"                         " file matching
-  else
-    return "\<C-X>\<C-O>"                         " plugin matching
-  endif
-endfunction
+" function! Smart_TabComplete()
+"   let line = getline('.')                         " current line
+"
+"   let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+"   " line to one character right
+"   " of the cursor
+"   let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+"   if (strlen(substr)==0)                          " nothing to match on empty string
+"     return "\<tab>"
+"   endif
+"   let has_period = match(substr, '\.') != -1      " position of period, if any
+"   let has_slash = match(substr, '\/') != -1       " position of slash, if any
+"   if (!has_period && !has_slash)
+"     return "\<C-X>\<C-P>"                         " existing text matching
+"   elseif ( has_slash )
+"     return "\<C-X>\<C-F>"                         " file matching
+"   else
+"     return "\<C-X>\<C-O>"                         " plugin matching
+"   endif
+" endfunction
 
 augroup FastEscape
   autocmd!
@@ -780,6 +772,9 @@ augroup END
 " Keybindings
 " -----------------------------------------------------------------------------
 
+" why must i press shift to execute commands?
+nnoremap ; :
+
 " ///////START KEYBINDINGS FROM http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
 " copy and paste from system clipboard with <leader>p and <leader>y:
 vmap <Leader>y "+y
@@ -823,8 +818,8 @@ noremap gV `[v`]
 
 
 " error and quickfix window toggles
-nmap <silent> <f3> :ErrorsToggle<CR>
-nmap <silent> <f4> :QFixToggle<cr>
+nmap <silent> <F3> :ErrorsToggle<CR>
+nmap <silent> <F4> :QFixToggle<CR>
 
 " rebuild ctags
 silent! nnoremap <silent> <S-F5> :call FlushEnvironment()<CR>
@@ -1056,8 +1051,8 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " vimgrep searching and cope displaying
 " -----------------------------------------------------------------------------
 " Smart Tab Completion
-inoremap <tab> <c-r>=Smart_TabComplete()<CR>
-inoremap <s-tab> <c-n>
+" inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+" inoremap <s-tab> <c-n>
 
 " Remap VIM 0 to first non-blank character
 map 0 ^

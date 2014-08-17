@@ -1,11 +1,6 @@
 #!/bin/bash
 
 echo "Installing chruby ..."
-  # to fix the issue described in the readme here:
-  # https://github.com/skalnik/vim-vroom
-  sudo rm /etc/zshenv
-  sudo cp ~/.dotfiles/zsh/zprofile.zsh /etc/zprofile
-
   source /usr/local/share/chruby/chruby.sh
   source /usr/local/share/chruby/auto.sh
 

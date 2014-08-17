@@ -16,3 +16,5 @@ curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/mast
 cp -rf ~/.dotfiles/vim/colors ~/.vim/bundle/
 ln -s ~/.dotfiles/vim/vimrc.symlink ~/.nvimrc
 ln -s ~/.vim ~/.nvim
+ln -s ~/.dotfiles/vim/snippets ~/.vim/snippets
+ln -s ~/.dotfiles/vim/UltiSnips ~/.vim/UltiSnips

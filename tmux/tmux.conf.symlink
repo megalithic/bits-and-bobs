@@ -10,16 +10,15 @@ set -g prefix C-a
 bind C-a send-prefix
 
 # Mouse support
-# set -g mouse-resize-pane on
-# set -g mouse-select-pane on
-# set -g mouse-select-window on
-setw -g mode-mouse copy-mode
-# setw -g mode-mouse on
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
+set-option -g mouse-resize-pane on
+set-option -g mouse-utf8 on
+set-window-option -g mode-mouse copy-mode
 
 set -g history-limit 50000
 
 # tmate stuffs
-set -g tmate-status on
 set -g set-titles off
 
 # 256 color support

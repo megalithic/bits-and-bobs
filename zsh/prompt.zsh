@@ -77,13 +77,24 @@ prompt_pure_human_time() {
 #   echo $dirty
 # }
 
-prompt_pure_git_dirty() {
-  # check if we're in a git repo
-  command git rev-parse --is-inside-work-tree &>/dev/null || return
-  # check if it's dirty
-  command git diff --quiet --ignore-submodules HEAD &>/dev/null
+# prompt_pure_git_dirty() {
+#   # check if we're in a git repo
+#   command git rev-parse --is-inside-work-tree &>/dev/null || return
+#   # check if it's dirty
+#   command git diff --quiet --ignore-submodules HEAD &>/dev/null
+#
+#   (($? == 1)) && echo '*'
+# }
 
-  (($? == 1)) && echo '*'
+# fastest possible way to check if repo is dirty
+prompt_pure_git_dirty() {
+	# check if we're in a git repo
+	command git rev-parse --is-inside-work-tree &>/dev/null || return
+	# check if it's dirty
+	[[ "$PURE_GIT_UNTRACKED_DIRTY" == 0 ]] && local umode="-uno" || local umode="-unormal"
+	command test -n "$(git status --porcelain --ignore-submodules ${umode})"
+
+	(($? == 0)) && echo '*'
 }
 
 # displays the exec time of the last command if set threshold was exceeded
@@ -114,7 +125,7 @@ prompt_pure_precmd() {
   # print -Pn '\e]0;%~\a'
 
 	# git info
-	vcs_info
+	# vcs_info
   # instead, we're using: https://github.com/yonchu/zsh-vcs-prompt # -> vcs_super_info
 
   # local prompt_pure_preprompt="\n%F{blue}$(prompt_format_pwd) %f%{$fg[green]%}$(prompt_current_rvm)%f%F{242}$vcs_info_msg_0_%f%{$fg[red]%} $(prompt_pure_git_dirty)%f $prompt_pure_username%f %F{yellow}$(prompt_pure_cmd_exec_time)%f"
@@ -150,6 +161,7 @@ prompt_pure_setup() {
   zmodload zsh/datetime
 	autoload -Uz add-zsh-hook
 	autoload -Uz vcs_info
+  autoload -Uz vcs_super_info
 
 	add-zsh-hook precmd prompt_pure_precmd
 	add-zsh-hook preexec prompt_pure_preexec
@@ -162,9 +174,7 @@ prompt_pure_setup() {
 	[[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username='%n@%m '
 
 	# prompt turns red if the previous command didn't exit with 0
-	# PROMPT='%(?.%F{green}.%F{red})❯%f '
   PROMPT='%(?.%F{green}.%F{red})%(!.❯.)❯%f '
-  # PROMPT='%(?.%F{green}.%F{red}❯%F{green})❯%f '
   RPROMPT='%f%F{240}$RUBY_ENGINE-$RUBY_AUTO_VERSION%f%'
 }
 
