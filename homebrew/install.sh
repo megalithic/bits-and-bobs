@@ -113,7 +113,7 @@ brew install python
 brew install python3
 brew install qt --HEAD
 brew install readline
-brew install reattach-to-user-namespace
+brew install reattach-to-user-namespace --wrap-pbcopy-and-pbpaste
 brew install redis
 brew install s-lang
 brew install sbt

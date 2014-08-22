@@ -20,7 +20,7 @@ export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vf
 # export JBOSS_HOME="$HOME/code/Isotope11/uspto/jboss-eap-6.1" #6.1eap
 
 # Setup terminal, and turn on colors
-export TERM=xterm-256color
+export TERM=screen-256color-bce
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 

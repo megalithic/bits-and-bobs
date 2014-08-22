@@ -22,6 +22,9 @@ alias dsnuke="find . -name '*.DS_Store' -type f -ls -delete"
 alias pkey="pbcopy < ~/.ssh/id_rsa.pub"
 
 ## - TMUX -----------------------------------------------
+alias tmux="TERM=screen-256color-bce tmux -2"
+alias takeover="tmux detach -a"
+
 alias tgum="tmux attach-session -t gumshoe"
 alias ttru="tmux attach-session -t trucoin"
 alias tiso="tmux attach-session -t isotope"
@@ -237,10 +240,30 @@ alias rsprod="bundle exec rails server -e production"
 alias rc="bundle exec rails console"
 alias bec=rc
 
-## - GRUNT / KARMA -----------------------------------------------
-alias grs="grunt server"
-alias grsf="grunt server --force"
-alias grb="grunt build"
-alias grbf="grunt build --force"
-alias ks="karma start"
-alias kr="karma run"
+# Unicode emotions; WHY DO I HAVE THESE FEELS!?
+alias srs="echo '\n ಠ_ಠ\n' | pbcopy"
+alias srsheh="echo '\n ಠ‿ಠ\n' | pbcopy"
+alias srsmad="echo '\n ಠ▃ಠ\n' | pbcopy"
+alias srswha="echo '\n ಠ.ಠ\n' | pbcopy"
+alias flip="echo '\n（╯°□°）╯︵ ┻━┻\n' | pbcopy"
+alias flipsrs="echo '\n（╯ಠ▃ಠ）╯︵ ┻━┻\n' | pbcopy"
+alias flipfix="echo '\n（┬──┬ ノ( ゜-゜ノ)\n' | pbcopy"
+alias crysrs="echo '\n ಥ_ಥ\n' | pbcopy"
+alias crywobble="echo '\n ಥ﹏ಥ\n' | pbcopy"
+alias yeaaaaaah="echo '\n •_•)\n( •_•)>⌐■-■\n(⌐■_■)\n' | pbcopy"
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip_wifi="ipconfig getifaddr en0"
+alias localip_display="ipconfig getifaddr en2"
+alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
+
+# Enhanced WHOIS lookups
+alias whois="whois -h whois-servers.net"
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache"
+
+# View HTTP traffic
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""

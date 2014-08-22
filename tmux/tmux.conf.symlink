@@ -32,7 +32,7 @@ set -sg escape-time 0
 
 # Key bindings
 bind C-d detach			# the same as d so you don't have to depress Ctrl
-bind -r C-r source-file ~/.tmux.conf \; display-message "Configuration reloaded."
+bind -r C-R source-file ~/.tmux.conf \; display-message "Configuration reloaded."
 
 bind-key r refresh-client
 

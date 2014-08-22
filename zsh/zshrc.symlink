@@ -54,7 +54,7 @@ RUBIES=(/Users/replicant/.rubies/*)
 chruby ruby-2.1.1
 
 # [[ $TERM = "tmux" ]] && rvm use default # this was [[$TERM = "screen"]]
-source ~/.fzf.zsh
+# source ~/.fzf.zsh
 
 # ===========================================================================
 # NOTE: DO NOT PUT `source`s for *.zsh files local to ~/.dotfiles/zsh folder.
