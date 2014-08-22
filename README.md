@@ -1,5 +1,7 @@
 # megadotfiles
 
+![Keep it secret, keep it safe](https://dl.dropboxusercontent.com/u/81794/megadotfiles.png)
+
 ## dotfiles
 
 Before you go any further... this is all specific to an OSX install; for my linux fam,
@@ -68,7 +70,7 @@ There's a few special files in the hierarchy.
   symlinked in when you run `script/bootstrap`.
 
 ## .localrc and sensitive data
-![Keep it secret, keep it safe](http://i.qkme.me/3ppbat.jpg)
+![Keep it secret, keep it safe](https://dl.dropboxusercontent.com/u/81794/secret_safe.jpg)
 
 Use `~/.localrc` as your location for sensitive information. Optionally, you
 can let `script/bootstrap` handle the cloning of your private repo to
