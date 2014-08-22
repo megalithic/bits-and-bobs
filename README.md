@@ -1,8 +1,7 @@
-# megadotfiles
 
 ![Keep it secret, keep it safe](https://dl.dropboxusercontent.com/u/81794/megadotfiles.png)
 
-## dotfiles
+## megadotfiles
 
 Before you go any further... this is all specific to an OSX install; for my linux fam,
 I recommend checking out [@cowboy's dotfiles repo](https://github.com/cowboy/dotfiles), as it has mostly safe
