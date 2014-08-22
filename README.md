@@ -101,6 +101,7 @@ based on)
 - [great medium post about dotfiles and an install scheme](https://medium.com/p/43c3602fd789)
 - [zanshin](https://github.com/zanshin/dotfiles)
 - [thoughtbot](https://github.com/thoughtbot/dotfiles)
+- [wolfy87](https://github.com/Wolfy87/dotfiles)
 
 .. I'll continually add more as I come across them.
 
