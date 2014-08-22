@@ -19,7 +19,7 @@ set-window-option -g mode-mouse copy-mode
 set -g history-limit 50000
 
 # tmate stuffs
-set -g set-titles off
+set -g set-titles on
 
 # 256 color support
 set -g default-terminal "screen-256color"
