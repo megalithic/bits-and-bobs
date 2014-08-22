@@ -825,6 +825,11 @@ nnoremap <leader>r :%s/\<<C-r>=expand("<cword>")<CR>\>/
 " nmap <leader>j :TernDef<CR>
 
 " -----------------------------------------------------------------------------
+" Fugitive ------
+nnoremap <leader>H :Gbrowse<cr>
+vnoremap <leader>H :Gbrowse<cr>
+
+" -----------------------------------------------------------------------------
 " Ag/Ack ------
 nnoremap <leader>a :Ag!<space>
 " immediately ag/ack/grep for word under cursor
