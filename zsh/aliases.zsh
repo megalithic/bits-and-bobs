@@ -241,7 +241,7 @@ alias rc="bundle exec rails console"
 alias bec=rc
 
 # Unicode emotions; WHY DO I HAVE THESE FEELS!?
-alias srs="echo '\n ಠ_ಠ\n' | pbcopy"
+alias srs="echod  '\n ಠ_ಠ\n' | pbcopy"
 alias srsheh="echo '\n ಠ‿ಠ\n' | pbcopy"
 alias srsmad="echo '\n ಠ▃ಠ\n' | pbcopy"
 alias srswha="echo '\n ಠ.ಠ\n' | pbcopy"

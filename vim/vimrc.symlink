@@ -174,17 +174,11 @@ function! LoadPlugins()
       let g:gist_clip_command = 'pbcopy'
     endif
 
-  Plugin 'kien/rainbow_parentheses.vim'
-    au VimEnter * RainbowParenthesesActivate
-    au Syntax * RainbowParenthesesLoadRound
-    au Syntax * RainbowParenthesesLoadSquare
-    au Syntax * RainbowParenthesesLoadBraces
-
-  Plugin 'mattn/emmet-vim'
-    let g:user_emmet_install_global = 0
-    autocmd FileType html,css,sass,scss,haml,less EmmetInstall
-    let g:user_emmet_mode='iv' "enable all function in all mode.
-    let g:user_emmet_leader_key='<leader>e'
+  " Plugin 'mattn/emmet-vim'
+  "   let g:user_emmet_install_global = 0
+  "   autocmd FileType html,css,sass,scss,haml,less EmmetInstall
+  "   let g:user_emmet_mode='iv' "enable all function in all mode.
+  "   let g:user_emmet_leader_key='<leader>e'
 
   Plugin 'jordwalke/VimAutoMakeDirectory'
   Plugin 'honza/vim-snippets'
@@ -235,6 +229,12 @@ function! LoadPlugins()
       let g:syntastic_always_populate_loc_list = 1
       let g:syntastic_quiet_messages = { "type": "style" }
   endif
+
+  Plugin 'kien/rainbow_parentheses.vim'
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
 
   Plugin 'vim-scripts/matchit.zip'
 endfunction
@@ -558,7 +558,7 @@ if exists('+colorcolumn')
 
   augroup DimInactiveWindows
     au!
-    au WinEnter * call s:DimInactiveWindows()
+    " au WinEnter * call s:DimInactiveWindows()
     au WinEnter * set cursorline
     au WinEnter * set number
     au WinEnter * set syntax=ON
