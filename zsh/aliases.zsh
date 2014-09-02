@@ -53,6 +53,8 @@ alias vm="vim"
 alias m="vim"
 alias vundle="vim -c ':BundleInstall!' -c ':BundleClean' -c ':qa!'"
 alias eclimd="/Applications/Eclipse/eclimd"
+alias renv="brew reinstall --HEAD https://raw.github.com/neovim/neovim/master/neovim.rb"
+alias nv="nvim"
 
 ## - EDITS -----------------------------------------------
 alias ez="vim ~/.zshrc"
@@ -123,6 +125,7 @@ alias pgsetup="sh ~/Dropbox/scripts/postgresql_db_setup.sh"
 alias chromedebug="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --js-flags=--stack_trace_limit=-1 --user-data-dir=/tmp/jsleakcheck"
 alias chrome32="open /Applications/Chromium.app"
 alias c32=chrome32
+alias chrome="open -a '/Applications/Google Chrome.app' --args --disable-web-security"
 
 # Kill all the tabs in Chrome to free up memory
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
@@ -132,9 +135,10 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 alias dirsize="du -sh"
 alias gumsolr="~/Isotope11/gumshoe/solr/solr.sh run"
 
-alias jb="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss""  && ~/Isotope11/uspto/jboss/bin/run.sh"
 alias jb5="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss5""  && ~/Isotope11/uspto/jboss5/bin/run.sh"
 alias jb6="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss6""  && ~/Isotope11/uspto/jboss6/bin/standalone.sh -b 0.0.0.0"
+alias jb="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss""  && ~/Isotope11/uspto/jboss/bin/run.sh"
+alias jb=jb6
 alias slr="sh ~/Isotope11/uspto/solr/localsolr.sh run"
 alias mci="usapi && mvn package && cp ear/target/solrService.ear ../jboss/server/default/deploy && usfe"
 # alias mci="cd ~/Isotope11/uspto/api && mvn clean install && usfe"
@@ -160,7 +164,6 @@ alias srcz=sourcez
 alias sz=sourcez
 alias cls="clr && ls"
 alias ip="ifconfig"
-alias web="open -a '/Applications/Google Chrome.app' --args --disable-web-security"
 alias get="curl -OL"
 alias q="exit"
 alias x="exit"
@@ -218,6 +221,7 @@ alias conflict="git diff --name-only --diff-filter=U"
 alias gap="git add --patch"
 alias gaa="git aa"
 alias uncommit="git reset --soft 'HEAD^'" # re-commit with `git commit -c ORIG_HEAD`
+alias gex="git archive master | tar -x -C" # update this to support more than the master branch
 
 ## - RUBY / RAILS -----------------------------------------------
 alias be="bundle exec"

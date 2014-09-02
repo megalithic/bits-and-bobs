@@ -38,6 +38,7 @@ function! LoadPlugins()
   Plugin 'mozfr/mozilla.vim'
   Plugin 'mattn/webapi-vim'
 
+  Plugin 'amirh/HTML-AutoCloseTag'
   Plugin 'Townk/vim-autoclose'
     let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'}
     let g:AutoCloseProtectedRegions = ["Character"]
@@ -157,14 +158,14 @@ function! LoadPlugins()
   Plugin 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
 
-  if has("python")
-    " Provide smart autocomplete results for javascript, and some useful commands
-    Plugin 'marijnh/tern_for_vim'
-    " install node dependencies for tern
-    if executable("npm") && isdirectory(expand('~/.vim/bundle/tern_for_vim')) && !isdirectory(expand('~/.vim/bundle/tern_for_vim/node_modules'))
-      silent ! echo 'Installing tern' && npm --prefix ~/.vim/bundle/tern_for_vim install
-    endif
-  endif
+  " if has("python")
+  "   " Provide smart autocomplete results for javascript, and some useful commands
+  "   Plugin 'marijnh/tern_for_vim'
+  "   " install node dependencies for tern
+  "   if executable("npm") && isdirectory(expand('~/.vim/bundle/tern_for_vim')) && !isdirectory(expand('~/.vim/bundle/tern_for_vim/node_modules'))
+  "     silent ! echo 'Installing tern' && npm --prefix ~/.vim/bundle/tern_for_vim install
+  "   endif
+  " endif
 
   Plugin 'mattn/gist-vim'
     let g:gist_open_browser_after_post = 1
@@ -181,12 +182,12 @@ function! LoadPlugins()
   "   let g:user_emmet_leader_key='<leader>e'
 
   Plugin 'jordwalke/VimAutoMakeDirectory'
-  Plugin 'honza/vim-snippets'
-  Plugin 'SirVer/ultisnips'
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-    let g:UltiSnipsSnippetsDir="~/.vim/snippets"
+  " Plugin 'honza/vim-snippets'
+  " Plugin 'SirVer/ultisnips'
+  "   let g:UltiSnipsExpandTrigger="<tab>"
+  "   let g:UltiSnipsJumpForwardTrigger="<tab>"
+  "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  "   let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 
   " SYNTAX STUFFS
   " =================================================================
@@ -220,7 +221,7 @@ function! LoadPlugins()
       let g:syntastic_disabled_filetypes = ['html', 'rst']
       let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
       let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
-      let g:syntastic_javascript_checkers=["jshint"]
+      let g:syntastic_javascript_checkers=["jshint", "jsxhint"]
       let g:syntastic_error_symbol='✖' "⛌✖
       let g:syntastic_warning_symbol='⚑'
       let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
@@ -230,11 +231,18 @@ function! LoadPlugins()
       let g:syntastic_quiet_messages = { "type": "style" }
   endif
 
-  Plugin 'kien/rainbow_parentheses.vim'
-    au VimEnter * RainbowParenthesesToggle
-    au Syntax * RainbowParenthesesLoadRound
-    au Syntax * RainbowParenthesesLoadSquare
-    au Syntax * RainbowParenthesesLoadBraces
+  Plugin 'farseer90718/Rainbow-Parentheses-Improved-and2'
+    let g:rainbow_active = 1
+
+  " Plugin 'kien/rainbow_parentheses.vim'
+  "   au VimEnter * RainbowParenthesesToggle
+  "   au Syntax * RainbowParenthesesLoadRound
+  "   au Syntax * RainbowParenthesesLoadSquare
+  "   au Syntax * RainbowParenthesesLoadBraces
+
+  Plugin 'Valloric/ListToggle'
+    let g:lt_location_list_toggle_map = '<F3>'
+    let g:lt_quickfix_list_toggle_map = '<F4>'
 
   Plugin 'vim-scripts/matchit.zip'
 endfunction
@@ -613,6 +621,7 @@ augroup buffer_cmds
   autocmd BufNewFile,BufRead *.json set filetype=json
   autocmd BufNewFile,BufRead *.slim set filetype=slim
   autocmd BufNewFile,BufRead *.less set filetype=less
+  " autocmd BufNewFile,BufRead *.scss set filetype=sass
 
   " Enable omnicomplete for supported filetypes
   autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
@@ -889,8 +898,8 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
-vnoremap <leader>G :'<,'>Gist -p -t<cr>
-" vnoremap <leader>G !gist -p -t %:e \\| pbcopy<cr>
+" vnoremap <leader>G :'<,'>Gist -p -t<cr>
+vnoremap <leader>G !gist -p -t %:e \\| pbcopy<cr>
 
 " Insert the directory of the current buffer in command line mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'

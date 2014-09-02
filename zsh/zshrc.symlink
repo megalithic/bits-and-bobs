@@ -1,4 +1,4 @@
-# shortcut to this dotfiles path is $ZSH
+#j shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
 export PROJECTS=~/code #`c <tab>`

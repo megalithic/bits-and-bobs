@@ -8,7 +8,7 @@ echo "Installing chruby ..."
   chruby ruby-2.1
 
 echo "Installing critical Ruby gems for Rails development ..."
-  gem install bundler rails pg foreman thin pry launchy teamocil sass --no-rdoc --no-ri
+  gem install bundler rails pg foreman thin pry launchy teamocil sass compass curses --no-rdoc --no-ri
 
 echo "Installing gems that need system ruby ..."
   sudo chruby-exec system -- gem install weechat terminal-notifier
