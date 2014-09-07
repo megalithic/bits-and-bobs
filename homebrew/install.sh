@@ -92,12 +92,6 @@ brew install libyaml
 brew install lua
 brew install maven
 brew install mercurial
-
-brew install notmuch
-brew install mutt --with-sidebar-patch
-brew install offlineimap
-brew install msmtp
-
 brew install mysql
 brew install nettle
 brew install newt
