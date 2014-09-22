@@ -38,6 +38,10 @@ function! LoadPlugins()
   Plugin 'mozfr/mozilla.vim'
   Plugin 'mattn/webapi-vim'
 
+  Plugin 'jplaut/vim-arduino-ino'
+    let g:vim_arduino_map_keys = 0
+    let g:vim_arduino_auto_open_serial = 1
+
   Plugin 'amirh/HTML-AutoCloseTag'
   Plugin 'Townk/vim-autoclose'
     let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'}

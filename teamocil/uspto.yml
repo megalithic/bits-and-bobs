@@ -1,39 +1,22 @@
-session:
-  name: "uspto"
-  windows:
-    - name: "services"
-      clear: true
-      options:
-        synchronize-panes: false
-      root: "~/Isotope11/uspto/frontend/"
-      filters:
-      layout: tiled
-      panes:
-        - cmd: "slr"
-        - cmd: "jb6"
-        - cmd: "usfe && grunt watch"
-        - cmd: "cd ~/code"
-          focus: true
-          target: "bottom-right"
-    - name: "code"
-      clear: true
-      options:
-        synchronize-panes: false
-      root: "~/Isotope11/uspto/frontend/"
-      # filters:
-      #   after:
-      #     - "git fetch origin && git merge origin/development"
-      panes:
-        - cmd: "usfe"
-          focus: true
-    - name: "chats"
-      clear: true
-      options:
-        synchronize-panes: false
-      root: "~"
-      filters:
-        after:
-          - "ls"
-      panes:
-        - cmd: "irc"
-          focus: true
+name: "uspto"
+windows:
+  - name: "services"
+    root: "~/Isotope11/uspto/frontend/"
+    layout: tiled
+    panes:
+      - commands:
+        - cd ~/Isotope11/uspto/solr
+        - ./scripts/start-local-solrcloud.sh 3 2
+      - jb6
+      - commands:
+        - usfe
+        - grunt watch
+      - cd ~/code
+  - name: "code"
+    root: "~/Isotope11/uspto/frontend/"
+    panes:
+      - usfe
+  - name: "chats"
+    root: "~"
+    panes:
+      - irc

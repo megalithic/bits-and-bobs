@@ -341,14 +341,14 @@ pretty_git_log() {
 # https://github.com/addyosmani/dotfiles/blob/master/.functions
 # Need to convert his functions to zsh from bash
 # ============================================================================
-chrome() {
-  app="/Applications/Google Chrome 22.app/Contents/MacOS/Google Chrome"
-  userdatadir="/Users/replicant/Library/Application\ Support/Google/Chrome/$1"
-  (
-    ${app} --user-data-dir=${userdatadir} > /dev/null 2>&1;
-    #rm -r $1
-  ) &
-}
+# chrome() {
+#   app="/Applications/Google Chrome 22.app/Contents/MacOS/Google Chrome"
+#   userdatadir="/Users/replicant/Library/Application\ Support/Google/Chrome/$1"
+#   (
+#     ${app} --user-data-dir=${userdatadir} > /dev/null 2>&1;
+#     #rm -r $1
+#   ) &
+# }
 
 
 
@@ -370,4 +370,20 @@ fo() {
   local file
   file=$(fzf --query="$1" --select-1 --exit-0)
   [ -n "$file" ] && open "$file"
+}
+
+start_cassandra() {
+  echo "proceeding with cassandra start with -p option to write pidfile"
+  /usr/local/bin/cassandra -p ~/bin/cassandra_pidfile.pid
+}
+stop_cassandra() {
+  echo "proceeding with cassandra stop, will kill"
+  cat ~/bin/cassandra_pidfile.pid | awk '{print $1}' | xargs kill -9
+
+  echo "checking for remaining cassandra processes... "
+  ps aux | grep cassandra
+}
+tail_cassandra() {
+  echo "tailing cassandra log at /usr/local/var/log/cassandra/system.log... "
+  tail -f /usr/local/var/log/cassandra/system.log
 }
