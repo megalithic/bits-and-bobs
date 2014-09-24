@@ -374,11 +374,11 @@ fo() {
 
 start_cassandra() {
   echo "proceeding with cassandra start with -p option to write pidfile"
-  /usr/local/bin/cassandra -p ~/bin/cassandra_pidfile.pid
+  /usr/local/bin/cassandra -p /usr/local/bin/cassandra_pidfile.pid
 }
 stop_cassandra() {
   echo "proceeding with cassandra stop, will kill"
-  cat ~/bin/cassandra_pidfile.pid | awk '{print $1}' | xargs kill -9
+  cat /usr/local/bin/cassandra_pidfile.pid | awk '{print $1}' | xargs kill -9
 
   echo "checking for remaining cassandra processes... "
   ps aux | grep cassandra

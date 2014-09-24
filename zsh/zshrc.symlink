@@ -39,9 +39,6 @@ done
 
 unset config_files
 
-# PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-# fpath=($rvm/scripts/zsh/Completion/_rvm $fpath) # ref: https://rvm.io/workflow/completion
-
 # init `z`
 source $ZSH/functions/z.sh
 
@@ -62,3 +59,5 @@ chruby ruby-2.1.1
 # ===========================================================================
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PATH="/usr/local/bin:$PATH"

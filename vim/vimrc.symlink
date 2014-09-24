@@ -31,7 +31,7 @@ function! LoadPlugins()
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-rake'
   Plugin 'tpope/vim-dispatch'
-  Plugin 'Valloric/MatchTagAlways'
+  " Plugin 'Valloric/MatchTagAlways'
   Plugin 'roman/golden-ratio'
   Plugin 'sickill/vim-pasta'
   Plugin 'zaiste/tmux.vim'
