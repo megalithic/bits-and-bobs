@@ -372,6 +372,9 @@ fo() {
   [ -n "$file" ] && open "$file"
 }
 
+# ============================================================================
+# Cassandra stuffs (C*)
+# ============================================================================
 start_cassandra() {
   echo "proceeding with cassandra start with -p option to write pidfile"
   /usr/local/bin/cassandra -p /usr/local/bin/cassandra_pidfile.pid
@@ -386,4 +389,20 @@ stop_cassandra() {
 tail_cassandra() {
   echo "tailing cassandra log at /usr/local/var/log/cassandra/system.log... "
   tail -f /usr/local/var/log/cassandra/system.log
+}
+
+
+# ============================================================================
+# Chromecast stuffs
+# ============================================================================
+ccyt() {
+  curl -H "Content-Type: application/json" \
+    http://192.168.1.103:8008/apps/YouTube \
+    -X POST \
+    -d "v=$1";
+}
+ytsearch() {
+  curl -s https://www.youtube.com/results\?search_query\=$@ | \
+    grep -o 'watch?v=[^"]*"[^>]*title="[^"]*' | \
+    sed -e 's/^watch\?v=\([^"]*\)".*title="\(.*\)/\1 \2/g'
 }

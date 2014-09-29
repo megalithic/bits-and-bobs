@@ -7,6 +7,7 @@ windows:
       - commands:
         - cd ~/Isotope11/uspto/solr
         - ./scripts/start-local-solrcloud.sh 3 2
+        - ./scripts/start-us-patent-grant-with-shards-per-year.sh
         - cd ../ingestor
         - ./c2s_sample.sh localhost
         - jb6
