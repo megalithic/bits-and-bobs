@@ -93,6 +93,8 @@ brew install lua
 brew install maven
 brew install mercurial
 brew install mysql
+  ln -sf /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
+
 brew install nettle
 brew install newt
 brew install node

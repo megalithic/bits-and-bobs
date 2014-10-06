@@ -60,5 +60,6 @@ chruby ruby-2.1.1
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+export PATH="/Users/replicant/.dotfiles/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-export PATH="~/.dotfiles/bin:$PATH"

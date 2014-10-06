@@ -20,22 +20,21 @@ alias la='gls -A --color'
 alias webcam="sudo killall VDCAssistant"
 alias dsnuke="find . -name '*.DS_Store' -type f -ls -delete"
 alias pkey="pbcopy < ~/.ssh/id_rsa.pub"
+alias die="kill -9 $(ps -eo pid,command | grep '$1' | grep -v grep | awk '{print $1}')"
 
 ## - TMUX -----------------------------------------------
 alias tmux="TERM=screen-256color-bce tmux -2"
+alias tm=tmux
 alias takeover="tmux detach -a"
 
 alias tgum="tmux attach-session -t gumshoe"
-alias ttru="tmux attach-session -t trucoin"
 alias tiso="tmux attach-session -t isotope"
 alias tpto="tmux attach-session -t uspto"
 alias tomni="tmux attach-session -t omniscient"
 alias t="tmux attach-session -t std"
 alias teamgum="cd ~ && teamocil --here gumshoe"
-alias teamtru="cd ~ && teamocil --here trucoin"
 alias teamiso="cd ~ && teamocil --here isotope"
-alias teampto="cd ~ && teamocil --here uspto"
-alias teamomni="cd ~ && teamocil --here omniscient"
+alias teampto="cd ~/.dotfiles; teamocil --here uspto"
 alias team="cd ~ && teamocil --here std"
 
 ## - BREW -----------------------------------------------
@@ -141,13 +140,7 @@ alias slr="sh ~/Isotope11/uspto/solr/localsolr.sh run"
 alias mci="usapi && mvn package && cp ear/target/solrService.ear ../jboss/server/default/deploy && usfe"
 # alias mci="cd ~/Isotope11/uspto/api && mvn clean install && usfe"
 
-alias psgrep='ps auxwww | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
-alias checkpg="psgrep postgres"
-alias process="psgrep"
-alias check=process
-alias chk=process
-alias running=process
-alias proc=process
+alias chk='ps auxwww | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
 
 alias mg="mongod run --config /usr/local/Cellar/mongodb/2.0.2-x86_64/mongod.conf"
 alias startred="redis-server /usr/local/etc/redis.conf"

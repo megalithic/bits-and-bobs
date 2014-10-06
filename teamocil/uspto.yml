@@ -6,10 +6,10 @@ windows:
     panes:
       - commands:
         - cd ~/Isotope11/uspto/solr
-        - ./scripts/start-local-solrcloud.sh 3 2
-        - ./scripts/start-us-patent-grant-with-shards-per-year.sh
+        - nocorrect ./scripts/start-local-solrcloud.sh 2
         - cd ../ingestor
-        - ./c2s_sample.sh localhost
+        - nocorrect ./c2s_sample.sh localhost
+        - ln -sf ~/Isotope11/uspto/banana ~/Isotope11/uspto/solr/solrcloud-working-dir/example/solr-webapp/webapp
         - jb6
       - commands:
         - usfe
