@@ -159,9 +159,7 @@ alias get="curl -OL"
 alias q="exit"
 alias x="exit"
 alias g="grep -r -i --color='auto'"
-alias sirc="screen irssi"
-alias wee="weechat-curses"
-alias irc=weechat
+alias irc="weechat-curses"
 alias ip="ipconfig getifaddr"
 alias clr=clear
 alias gn="python ~/.dotfiles/utils/geeknote/geeknote.py"
