@@ -1,13 +1,19 @@
-session:
-  name: "std"
-  windows:
-    - name: "code"
-      clear: true
-      options:
-        synchronize-panes: false
-      root: "~/code"
-      panes:
-        - cmd: "ls"
-          focus: true
-        - cmd: "ls"
-          height: 10
+name: "std"
+windows:
+  - name: "services"
+    root: "~/code"
+    layout: tiled
+    panes:
+      - commands:
+        - ls
+      - commands:
+        - ls
+  - name: "code"
+    root: "~/code"
+    panes:
+      - commands:
+        - ls
+  - name: "chats"
+    root: "~"
+    panes:
+      - irc

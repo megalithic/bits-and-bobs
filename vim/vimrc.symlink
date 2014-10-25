@@ -37,6 +37,7 @@ function! LoadPlugins()
   Plugin 'zaiste/tmux.vim'
   Plugin 'mozfr/mozilla.vim'
   Plugin 'mattn/webapi-vim'
+  Plugin 'haya14busa/incsearch.vim'
 
   Plugin 'jplaut/vim-arduino-ino'
     let g:vim_arduino_map_keys = 0

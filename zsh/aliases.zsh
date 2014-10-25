@@ -35,7 +35,7 @@ alias t="tmux attach-session -t std"
 alias teamgum="cd ~ && teamocil --here gumshoe"
 alias teamiso="cd ~ && teamocil --here isotope"
 alias teampto="cd ~/.dotfiles; teamocil --here uspto"
-alias team="cd ~ && teamocil --here std"
+alias team="cd ~/.dotfiles; teamocil --here std"
 
 ## - BREW -----------------------------------------------
 alias b="brew"
