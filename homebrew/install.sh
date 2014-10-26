@@ -71,7 +71,7 @@ brew install jbig2dec
 brew install jpeg
 brew install jq
 brew install jsl
-brew install jslint
+brew install jshint
 brew install lame
 brew install libelf
 brew install libevent
@@ -111,7 +111,6 @@ brew install python3
 brew install qt --HEAD
 brew install readline
 brew install reattach-to-user-namespace --wrap-pbcopy-and-pbpaste
-brew install redis
 brew install s-lang
 brew install sbt
 brew install sqlite
@@ -126,6 +125,7 @@ brew install terminal-notifier
 brew install todo-txt
 brew install tokyo-cabinet
 brew install tor
+brew install tig
 brew install vim --with-lua --with-perl --override-system-vi #--with-python3
 brew install watch
 brew install wkhtmltopdf
@@ -133,12 +133,10 @@ brew install x264
 brew install xvid
 brew install xz
 brew install yasm
-brew install zeromq
 brew install zsh
 brew install zsh-completions
 brew install zsh-lovers
 brew install zsh-syntax-highlighting
-brew install solr
 brew install --HEAD mobile-shell
 
 brew tap laurent22/massren
@@ -156,8 +154,8 @@ sudo ln -s /usr/local/bin/vim /usr/bin/vim
 # Setup ZSH as default shell and some other stuffs
 echo ' -- Setting login shell to zsh '
 sudo mv /etc/zshenv /etc/zprofile
+sudo echo "/usr/local/bin/zsh" >> /etc/shells
 chsh -s /usr/local/bin/zsh
-echo "/usr/local/bin/zsh" >> /etc/shells
 echo ' -- All installed!'
 
 # Some homebrew packages need additional commands to complete their setup:
