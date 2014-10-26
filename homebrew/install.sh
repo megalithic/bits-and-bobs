@@ -27,7 +27,7 @@ echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH.
 brew install grc findutils spark zsh git gh
 brew install wget --enable-iri
 
-# To be able to install ruby versions older than 1.9.3-p492:
+# To be able to install ruby versions older than 1.9.3-p492 (https://github.com/postmodern/ruby-install#ruby):
 brew tap homebrew/versions
 brew install gcc48
 
