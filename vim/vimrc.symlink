@@ -276,7 +276,7 @@ set t_Co=256
 set t_ut= " improve screen clearing by using the background color
 set background=dark
 syntax enable
-colorscheme base16-ocean
+colorscheme base16-eighties
 syntax on
 
 let mapleader=","
