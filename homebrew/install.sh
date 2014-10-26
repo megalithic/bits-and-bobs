@@ -211,7 +211,7 @@ brew cleanup
 
 # JDK
 cd ~/.dotfiles
-curl -O http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-macosx-x64.dmg
+wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-macosx-x64.dmg
 open jdk-7u71-macosx-x64.dmg
 # ==========================================================================
 
