@@ -14,7 +14,7 @@ Pre-install stuffs: You'll obviously need git installed; if you're using
 dialog pops up, disco.
 
 Note: if the above doesn't work to get XCode CLI Tools installed, you can try
-the code I have in [scripts/bootstrap:L35-59](https://github.com/megalithic/dotfiles/blob/master/script/bootstrap#L35-L59).
+the code I have in [script/bootstrap:L35-59](https://github.com/megalithic/dotfiles/blob/master/script/bootstrap#L35-L59).
 
 Now that the pre-reqs are out of the way, run this:
 
