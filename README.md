@@ -5,13 +5,12 @@
 
 Before you go any further... this is all specific to an OSX install; for my linux fam,
 I recommend checking out [@cowboy's dotfiles repo](https://github.com/cowboy/dotfiles), as it has mostly safe
-osx/linux alternatives and is also geared towards bash instead of zsh, which is
-my preferred shell.
+osx/linux alternatives and is also geared towards bash instead of zsh (my preferred shell).
 
 ## install
 
 Pre-install stuffs: You'll obviously need git installed; if you're using
-Mavericks, just hit up `xcode-select --install`, click 'Install' when the
+10.9+, just hit up `xcode-select --install`, click 'Install' when the
 dialog pops up, disco.
 
 Note: if the above doesn't work to get XCode CLI Tools installed, you can try
