@@ -33,8 +33,8 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Disable Notification Center and remove the menu bar icon
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
-sudo defaults write /System/Library/LaunchAgents/com.apple.notificationcenterui KeepAlive -bool false
+#launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+#sudo defaults write /System/Library/LaunchAgents/com.apple.notificationcenterui KeepAlive -bool false
 
 ###############################################################################
 # Safari & WebKit                                                             #
