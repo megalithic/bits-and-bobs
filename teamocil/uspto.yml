@@ -1,22 +1,27 @@
 name: "uspto"
 windows:
   - name: "services"
-    root: "~/Isotope11/uspto/frontend/"
+    root: "~/code/Isotope11/uspto"
     layout: tiled
     panes:
       - commands:
-        - cd ~/Isotope11/uspto/solr
+        - cd ~/code/Isotope11/uspto/solr
+        - cowsay "Starting SolrCloud"
+        - nocorrect ./scripts/stop-local-solrcloud.sh
         - nocorrect ./scripts/start-local-solrcloud.sh 2
-        - cd ../ingestor
+        - cowsay "Populating Cassandra"
+        - cd ~/code/Isotope11/uspto/ingester
         - nocorrect ./c2s_sample.sh localhost
-        - ln -sf ~/Isotope11/uspto/banana ~/Isotope11/uspto/solr/solrcloud-working-dir/example/solr-webapp/webapp
-        - jb6
+        - ln -sfv ~/code/Isotope11/uspto/banana ~/code/Isotope11/uspto/solr/solrcloud-working-dir/example/solr-webapp/webapp
+        - cowsay "Starting JBoss"
+        - cd ~/code/Isotope11/uspto
+        - jb
       - commands:
         - usfe
-        - grunt watch
-      - cd ~/code
+        - ./node_modules/.bin/grunt watch
+      - cd ~/code/Isotope11/uspto
   - name: "code"
-    root: "~/Isotope11/uspto/frontend/"
+    root: "~/code/Isotope11/uspto"
     panes:
       - usfe
   - name: "chats"

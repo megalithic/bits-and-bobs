@@ -92,18 +92,12 @@ alias sbox="cd ~/code/sandbox/"
 alias railsfiles="cd ~/Dropbox/scripts/rails_defaults/"
 alias tip="cd ~/code/tipping"
 
-alias cabin="cd ~/Isotope11/cabin_builder"
-alias tru="cd ~/Isotope11/trucoin_rails"
-alias gum="cd ~/Isotope11/gumshoe/frontend"
-alias le="cd ~/Isotope11/Mayhem"
-alias pto="cd ~/Isotope11/uspto"
-alias uspto="cd ~/Isotope11/uspto"
-alias usfe="cd ~/Isotope11/uspto/frontend/"
-alias usapi="cd ~/Isotope11/uspto/api"
-alias usdir="cd ~/Isotope11/uspto/dir_search"
-alias tope="cd ~/Isotope11"
+alias pto="cd ~/code/Isotope11/uspto"
+alias uspto="cd ~/code/Isotope11/uspto"
+alias usfe="cd ~/code/Isotope11/uspto/frontend/"
+alias usapi="cd ~/code/Isotope11/uspto/api"
+alias tope="cd ~/code/Isotope11"
 alias iso=tope
-alias isoblog='cd ~/Isotope11/blog_posts'
 
 ## - POSTGRES -----------------------------------------------
 alias startpg="pg_ctl -D /usr/local/var/postgres -l ~/code/logs/server.log start" #postgres -D /usr/local/var/postgres
@@ -130,15 +124,15 @@ alias chrome="open -a '/Applications/Google Chrome.app' --args --disable-web-sec
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
 alias dirsize="du -sh"
-alias gumsolr="~/Isotope11/gumshoe/solr/solr.sh run"
 
-alias jb5="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss5""  && ~/Isotope11/uspto/jboss5/bin/run.sh"
-alias jb6="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss6""  && ~/Isotope11/uspto/jboss6/bin/standalone.sh -b 0.0.0.0"
-alias jb="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss""  && ~/Isotope11/uspto/jboss/bin/run.sh"
-alias jb=jb6
-alias slr="sh ~/Isotope11/uspto/solr/localsolr.sh run"
-alias mci="usapi && mvn package && cp ear/target/solrService.ear ../jboss/server/default/deploy && usfe"
-# alias mci="cd ~/Isotope11/uspto/api && mvn clean install && usfe"
+alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0 > ~/code/Isotope11/uspto/logs/jboss.log 2>&1 &"
+# alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0"
+
+# alias jb5="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss5""  && ~/code/Isotope11/uspto/jboss5/bin/run.sh"
+# alias jb6="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss6""  && ~/code/Isotope11/uspto/jboss6/bin/standalone.sh -b 0.0.0.0"
+# alias jb="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss""  && ~/code/Isotope11/uspto/jboss/bin/run.sh"
+# alias slr="sh ~/code/Isotope11/uspto/solr/localsolr.sh run"
+# alias mci="usapi && mvn clean package && cp ear/target/solrService.ear ../jboss/server/default/deploy && usfe"
 
 alias chk='ps auxwww | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
 

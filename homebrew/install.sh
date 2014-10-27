@@ -36,7 +36,6 @@ brew tap Goles/battery
 
 # TODO: need to get this cleaned up, lots of deps here
 brew install ack
-# brew install apple-gcc42
 brew install autoconf
 brew install automake
 brew install avrdude
@@ -44,8 +43,9 @@ brew install bison
 brew install curl --with-openssl --with-ssh --with-rtmp
 brew install chruby
 brew install ruby-install
-# brew install https://raw.github.com/postmodern/chgems/master/homebrew/chgems.rb
 brew install cmake
+brew install cowsay
+brew install chromedriver
 brew install cscope
 brew install ctags
 brew install faac
@@ -94,8 +94,6 @@ brew install lua
 brew install maven
 brew install mercurial
 brew install mysql
-  ln -sf /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
-
 brew install nettle
 brew install newt
 brew install node
@@ -115,6 +113,7 @@ brew install s-lang
 brew install sbt
 brew install sqlite
 brew install ssh-copy-id
+brew install selenium-server-standalone
 brew install ta-lib
 brew install texi2html
 brew install the_silver_searcher
@@ -147,64 +146,27 @@ brew install weechat --with-ruby --with-python --with-perl
 brew install macvim --with-cscope --with-lua --with-perl --HEAD # requires full install of xcode
 brew install postgresql --no-python
 
+# Setup mysql
+ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+ln -sfv /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
+
 # Setup homebrew vim to override system vim
 sudo mv /usr/bin/vim /usr/bin/vim_system
 sudo ln -s /usr/local/bin/vim /usr/bin/vim
 
 # Setup ZSH as default shell and some other stuffs
 echo ' -- Setting login shell to zsh '
-sudo mv /etc/zshenv /etc/zprofile
-sudo echo "/usr/local/bin/zsh" >> /etc/shells
+sudo su
+mv /etc/zshenv /etc/zprofile
+echo "/usr/local/bin/zsh" >> /etc/shells
 chsh -s /usr/local/bin/zsh
-echo ' -- All installed!'
+exit
 
 # Some homebrew packages need additional commands to complete their setup:
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 brew link openssl --force
 brew link python --force
-
-# sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2 /usr/bin/gcc
-# sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/g++-4.2 /usr/bin/g++
-# sudo ln -s /usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/cpp-4.2 /usr/bin/cpp
-
-# Install homebrew-cask so we can easily install GUI apps
-# brew tap phinze/homebrew-cask
-# brew install brew-cask
-
-# Install quicklook plugins
-# brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
-
-# Install homebrew-cask GUI apps
-# brew cask install alfred
-# brew cask alfred link
-# brew cask install dropbox
-# brew cask install bartender
-# brew cask install evernote
-# brew cask install f-lux
-# brew cask install libreoffice
-# brew cask install vlc
-# brew cask install firefox
-# brew cask install reggy
-# brew cask install the-unarchiver
-# brew cask install trim-enabler
-# brew cask install skype
-# brew cask install keyremap4macbook
-# brew cask install android-file-transfer
-# brew cask install hazel
-# brew cask install witch
-# brew cask install arduino
-# brew cask install bettertouchtool
-# brew cask install cord
-# brew cask install flash
-# brew cask install google-drive
-# brew cask install google-music-manager
-# brew cask install istat-menus
-# brew cask install key-codes
-# brew cask install spectacle
-# brew cask install totalfinder
-# brew cask install steermouse
-# brew cask install right-zoom
 
 brew linkapps
 brew cleanup

@@ -14,10 +14,8 @@ export VISUAL='vim'
 
 # so I can run USPTO/jboss stuff sensibly
 export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vfs.forceCopy=false"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home"
-
-# export JBOSS_HOME="$HOME/code/Isotope11/uspto/jboss" #5.1ga
-# export JBOSS_HOME="$HOME/code/Isotope11/uspto/jboss-eap-6.1" #6.1eap
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home"
+export JBOSS_HOME="$HOME/code/Isotope11/uspto/jboss-eap-6.1"
 
 # Setup terminal, and turn on colors
 export TERM=screen-256color-bce

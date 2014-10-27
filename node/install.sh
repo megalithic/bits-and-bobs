@@ -8,4 +8,3 @@ npm install -g karma
 npm install -g bower
 npm install -g jshint
 npm install -g jsxhint
-npm install
