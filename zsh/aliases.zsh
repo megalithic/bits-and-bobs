@@ -20,7 +20,7 @@ alias la='gls -A --color'
 alias webcam="sudo killall VDCAssistant"
 alias dsnuke="find . -name '*.DS_Store' -type f -ls -delete"
 alias pkey="pbcopy < ~/.ssh/id_rsa.pub"
-alias die="kill -9 $(ps -eo pid,command | grep '$1' | grep -v grep | awk '{print $1}')"
+
 
 ## - TMUX -----------------------------------------------
 alias tmux="TERM=screen-256color-bce tmux -2"
@@ -125,8 +125,8 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 
 alias dirsize="du -sh"
 
-alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0 > ~/code/Isotope11/uspto/logs/jboss.log 2>&1 &"
-# alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0"
+# alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0 > ~/code/Isotope11/uspto/logs/jboss.log 2>&1 &"
+alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0"
 
 # alias jb5="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss5""  && ~/code/Isotope11/uspto/jboss5/bin/run.sh"
 # alias jb6="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss6""  && ~/code/Isotope11/uspto/jboss6/bin/standalone.sh -b 0.0.0.0"
@@ -135,6 +135,7 @@ alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0 > ~/
 # alias mci="usapi && mvn clean package && cp ear/target/solrService.ear ../jboss/server/default/deploy && usfe"
 
 alias chk='ps auxwww | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
+alias die='pkill -9 -f'
 
 alias mg="mongod run --config /usr/local/Cellar/mongodb/2.0.2-x86_64/mongod.conf"
 alias startred="redis-server /usr/local/etc/redis.conf"
