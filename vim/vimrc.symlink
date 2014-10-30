@@ -18,6 +18,7 @@ set nocompatible
 function! LoadPlugins()
   Plugin 'gmarik/vundle'
   Plugin 'chriskempson/base16-vim'
+  Plugin 'freeo/vim-kalisi'
 
   Plugin 'Raimondi/delimitMate'
   Plugin 'tomtom/tcomment_vim'
@@ -88,7 +89,8 @@ function! LoadPlugins()
     let g:airline_enable_branch=1
     let g:airline_enable_syntastic=1
     " let g:airline_powerline_fonts=0
-    let g:airline_theme='badwolf'
+    let g:airline_theme='base16'
+    " let g:airline_theme='kalisi'
     let g:airline_powerline_fonts = 1
     let g:airline_left_sep = ''
     let g:airline_right_sep = ''
@@ -274,9 +276,14 @@ filetype plugin indent on
 " Main Settings #msettings
 " -----------------------------------------------------------------------------
 set t_Co=256
+" in case t_Co alone doesn't work, add this as well:
+let &t_AB="\e[48;5;%dm"
+let &t_AF="\e[38;5;%dm"
+
 set t_ut= " improve screen clearing by using the background color
 set background=dark
 syntax enable
+" colorscheme kalisi
 colorscheme base16-ocean
 syntax on
 
