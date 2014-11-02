@@ -108,6 +108,10 @@ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 # Disable Mission Control Animations
 defaults write com.apple.dock expose-animation-duration -int 0
 
+# Completely disable mission control and spaces
+defaults write com.apple.dock mcx-expose-disabled -bool TRUE
+# defaults delete com.apple.dock mcx-expose-disabled # to reenable
+
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 

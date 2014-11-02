@@ -62,31 +62,6 @@ prompt_pure_human_time() {
 }
 
 # fastest possible way to check if repo is dirty
-# prompt_pure_git_dirty() {
-#   local dirt=''
-# 	# check if we're in a git repo
-# 	command git rev-parse --is-inside-work-tree &>/dev/null || return
-# 	# # check if it's dirty
-# 	# command git diff --quiet --ignore-submodules HEAD &>/dev/null
-#   # (($? == 1)) && echo '*' #✹⟐
-#
-#   # check if it's dirty
-#   command git diff --quiet --ignore-submodules HEAD &>/dev/null || dirty='*'
-#   # check for untracked files
-#   command test -z "$(git ls-files --others --exclude-standard)" || dirty='…'
-#   echo $dirty
-# }
-
-# prompt_pure_git_dirty() {
-#   # check if we're in a git repo
-#   command git rev-parse --is-inside-work-tree &>/dev/null || return
-#   # check if it's dirty
-#   command git diff --quiet --ignore-submodules HEAD &>/dev/null
-#
-#   (($? == 1)) && echo '*'
-# }
-
-# fastest possible way to check if repo is dirty
 prompt_pure_git_dirty() {
 	# check if we're in a git repo
 	command git rev-parse --is-inside-work-tree &>/dev/null || return
