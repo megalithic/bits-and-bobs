@@ -173,9 +173,14 @@ brew linkapps
 brew cleanup
 
 # JDK
+# Hat tip:
+# http://stackoverflow.com/questions/10268583/how-to-automate-download-and-installation-of-java-jdk-on-linux
 cd ~/.dotfiles
+wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u67-b01/jdk-7u67-macosx-x64.dmg
 wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-macosx-x64.dmg
-open jdk-7u71-macosx-x64.dmg
+# open jdk-7u71-macosx-x64.dmg
+open jdk-7u67-macosx-x64.dmg
+
 # ==========================================================================
 
 exit 0

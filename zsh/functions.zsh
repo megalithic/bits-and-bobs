@@ -8,6 +8,8 @@ source ~/.dotfiles/zsh/site-functions/*.zsh
 #   ls -a
 # }
 
+# chk() { ag $0 =(ps aux) }
+
 tmurl () {
   array_of_lines=("${(@f)$(tmate show-message)}")
   echo "$array_of_lines" | sed -n '/ssh/p' | sed -n '$p' #| pbcopy

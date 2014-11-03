@@ -134,7 +134,7 @@ alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0"
 # alias slr="sh ~/code/Isotope11/uspto/solr/localsolr.sh run"
 # alias mci="usapi && mvn clean package && cp ear/target/solrService.ear ../jboss/server/default/deploy && usfe"
 
-alias chk='ps auxwww | grep $(echo $1 | sed "s/^\(.\)/[\1]/g")'
+alias chk='ps auxwww | ag'
 alias die='pkill -9 -f'
 
 alias mg="mongod run --config /usr/local/Cellar/mongodb/2.0.2-x86_64/mongod.conf"
