@@ -8,7 +8,7 @@ source ~/.dotfiles/zsh/site-functions/*.zsh
 #   ls -a
 # }
 
-# chk() { ag $0 =(ps aux) }
+chk() { grep $1 =(ps aux) }
 
 tmurl () {
   array_of_lines=("${(@f)$(tmate show-message)}")
