@@ -8,13 +8,15 @@
 "   1.2) Utilities
 "   1.3) Filetypes
 "   1.4) Code Navigation
+"     1.4.1) Text objects
 " 2) UI Tweaks
-" 3) Keyboard shortcut Setup
+" 3) Keyboard shortcut Setup / keybindings
 " 4) vim environment handling tweaks (needs work / renaming)
 " 5) File navigation
 " 6) Auto Commands
 "   6.1) Filetypes
-"   6.1) Normalization
+"   6.2) Normalization
+" 7) Custom functions
 " =============================================================================
 
 filetype off
@@ -162,8 +164,6 @@ function! LoadPlugins()
   """"" /Filetypes ==========================================================
 
   """"" Code Navigation======================================================
-  Plugin 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
-
   """"""" Text objects
   Plugin 'wellle/targets.vim'
   Plugin 'kana/vim-textobj-function'
@@ -172,6 +172,7 @@ function! LoadPlugins()
   Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'whatyouhide/vim-textobj-xmlattr'
 
+  Plugin 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
   Plugin 'ervandew/supertab'
     let g:SuperTabLongestHighlight = 1
     let g:SuperTabCrMapping = 0
@@ -388,7 +389,6 @@ set gdefault
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
-" set cul "toggle cursorline
 " set cuc "toggle cursorcolumn
 set virtualedit+=block
 
@@ -452,7 +452,6 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 
 function! BufReadIndex()
   " Use j/k in status
-  " setlocal cursorline
   setlocal nohlsearch
   nnoremap <buffer> <silent> j :call search('^#\t.*','W')<Bar>.<CR>
   nnoremap <buffer> <silent> k :call search('^#\t.*','Wbe')<Bar>.<CR>
@@ -594,17 +593,11 @@ if exists('+colorcolumn')
   augroup DimInactiveWindows
     au!
     " au WinEnter * call s:DimInactiveWindows()
-    au WinEnter * set cursorline
     au WinEnter * set number
     au WinEnter * set syntax=ON
     au BufEnter * set syntax=ON
-    " au BufEnter * set cursorline
-    " au InsertEnter * set nocursorline
 
-    " au BufLeave * set nocursorline
     au BufLeave * set syntax=OFF
-    " au InsertLeave * set cursorline
-    " au WinLeave * set nocursorline
     au WinLeave * set nonumber
     au WinLeave * set syntax=OFF
   augroup END
@@ -632,11 +625,6 @@ au BufWrite * silent call DeleteTrailingWS()
 augroup buffer_cmds
   " clear commands before resetting
   autocmd!
-
-  " Only show cursorline in the current window and in normal mode
-  " au WinLeave,InsertEnter * set nocul
-  " au WinEnter,InsertLeave * set cul
-  " au VimLeave * :!clear
 
   " Markdown turn off lazyredraw
   autocmd BufNewFile,BufRead *.md,*.mdown,*.markdown set nolazyredraw filetype=markdown
