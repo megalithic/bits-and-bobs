@@ -232,6 +232,7 @@ function! LoadPlugins()
   """"" /Code Navigation ====================================================
 
   """"" Snippets ============================================================
+  " info: https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   Plugin 'SirVer/ultisnips'
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsListSnippets="<c-tab>"
@@ -239,13 +240,12 @@ function! LoadPlugins()
     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
     let g:UltiSnipsSnippetsDir=["UltiSnips", "snippets"]
   Plugin 'matthewsimo/angular-vim-snippets'
-  " Plugin 'honza/vim-snippets'
   """"" /Snippets ===========================================================
 
   Plugin 'vim-scripts/matchit.zip'
 endfunction
 
-" Execute our Plugins, if it doesn't work, tell them how to install Vundle
+""""" Install those Plugins (fail nicely) =====================================
 try
   set rtp+=~/.vim/bundle/vundle/
   call vundle#begin()
