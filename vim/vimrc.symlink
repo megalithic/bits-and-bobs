@@ -252,21 +252,11 @@ endtry
 
 " Enable built-in matchit plugin
 runtime macros/matchit.vim
-" End Plugins / Config ========================================================
-
-
-let g:JSHintHighlightErrorLine = 1
-let javascript_fold = 1
-let loaded_matchit = 1
-let ruby_fold = 1
-let g:js_indent_log = 1
-let javascript_enable_domhtmlcss=1
 
 
 " =============================================================================
 " Main Settings #msettings
 " -----------------------------------------------------------------------------
-
 """"" UI ====================================================================
 """"""" Theme / Terminal
 colorscheme base16-ocean
@@ -436,7 +426,14 @@ endif
 """"""" Per project/folder vim settings
 set exrc
 set secure " disable unsafe commands in local .vimrc files
-""""" /Behavior =============================================================
+
+""""""" Why do I even have these settings? Please clean.
+let g:JSHintHighlightErrorLine = 1
+let javascript_fold = 1
+let loaded_matchit = 1
+let ruby_fold = 1
+let g:js_indent_log = 1
+let javascript_enable_domhtmlcss=1
 
 
 " =============================================================================
