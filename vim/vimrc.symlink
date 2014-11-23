@@ -1,9 +1,14 @@
 " =============================================================================
-" A megalithic .vimrc
-" Author: Seth Messer <seth.messer@gmail.com>
+"
+"   ┌┬┐┌─┐┌─┐┌─┐┬  ┬┌┬┐┬ ┬┬┌─┐
+"   │││├┤ │ ┬├─┤│  │ │ ├─┤││   :: DOTFILES > vimrc
+"   ┴ ┴└─┘└─┘┴ ┴┴─┘┴ ┴ ┴ ┴┴└─┘
+"   Author: Seth Messer <seth.messer@gmail.com>
+"
 " -----------------------------------------------------------------------------
 " Table of Contents
-" 1) Plugins / Config
+" -----------------------------------------------------------------------------
+" 1) Plugins / Config #plugins
 "   1.1) UI
 "   1.2) Utilities
 "   1.3) Filetypes
@@ -13,7 +18,7 @@
 "   2.1) UI
 "   2.2) Behavior
 "   2.3) *Needs more work and organizing and documentation
-" 3) Highlighting #hilights
+" 3) Highlighting #highlights
 " 4) Custom functions #cfunctions
 " 5) Auto Commands #autocommands
 "   5.1) Filetypes
@@ -23,11 +28,10 @@
 " =============================================================================
 
 filetype off
-filetype plugin indent on
 set nocompatible
 
 " =============================================================================
-" Plugins / Config
+" Plugins / Config #plugins
 " -----------------------------------------------------------------------------
 function! LoadPlugins()
   Plugin 'gmarik/vundle'
@@ -36,10 +40,10 @@ function! LoadPlugins()
   Plugin 'chriskempson/base16-vim'
   Plugin 'roman/golden-ratio'
   Plugin 'bling/vim-airline'
-    set laststatus=2 " so we always get airline displaying
+    set laststatus=2 " so we always get airline displaying / always show status
     let g:airline_enable_branch=1
     let g:airline_enable_syntastic=1
-    let g:airline_theme='wombat'
+    let g:airline_theme='jellybeans'
     let g:airline_powerline_fonts = 1
     let g:airline_left_sep = ''
     let g:airline_right_sep = ''
@@ -81,7 +85,6 @@ function! LoadPlugins()
     let g:syntastic_quiet_messages = { "type": "style" }
   Plugin 'farseer90718/Rainbow-Parentheses-Improved-and2'
     let g:rainbow_active = 1
-  """"" /UI =================================================================
 
   """"" Utilities ===========================================================
   Plugin 'tomtom/tcomment_vim'
@@ -110,18 +113,6 @@ function! LoadPlugins()
     autocmd BufReadCmd *.git/index exe BufReadIndex()
     autocmd BufEnter *.git/index silent normal gg0j
 
-    function! BufEnterCommit()
-      " Start in insert mode for commit
-      normal gg0
-      if getline('.') == ''
-        start
-      end
-      " force spell when doing a git commit
-      if  bufname("%")=="COMMIT_EDITMSG"
-          set spell
-          set spelllang=en
-      endif
-    endfunction
     autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
   Plugin 'mattn/webapi-vim'
   Plugin 'mattn/gist-vim'
@@ -134,7 +125,6 @@ function! LoadPlugins()
   Plugin 'Valloric/ListToggle'
     let g:lt_location_list_toggle_map = '<F3>'
     let g:lt_quickfix_list_toggle_map = '<F4>'
-  """"" /Utilities ==========================================================
 
   """"" Filetypes ===========================================================
   """"""" Ruby
@@ -168,7 +158,6 @@ function! LoadPlugins()
   Plugin 'hail2u/vim-css3-syntax'
   Plugin 'groenewege/vim-less'
   Plugin 'tpope/vim-haml'
-  """"" /Filetypes ==========================================================
 
   """"" Code Navigation======================================================
   """"""" Text objects
@@ -229,7 +218,6 @@ function! LoadPlugins()
     let g:agprg="ag --column --nogroup --line-numbers"
   Plugin 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
-  """"" /Code Navigation ====================================================
 
   """"" Snippets ============================================================
   " info: https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
@@ -240,12 +228,11 @@ function! LoadPlugins()
     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
     let g:UltiSnipsSnippetsDir=["UltiSnips", "snippets"]
   Plugin 'matthewsimo/angular-vim-snippets'
-  """"" /Snippets ===========================================================
 
   Plugin 'vim-scripts/matchit.zip'
 endfunction
 
-""""" Install those Plugins (fail nicely) =====================================
+""""" Install Vundle Plugins (fail nicely) ====================================
 try
   set rtp+=~/.vim/bundle/vundle/
   call vundle#begin()
@@ -258,8 +245,8 @@ try
   echomsg "   vim -c ':PluginInstall' -c ':qa!'"
 endtry
 
+" Enable built-in matchit plugin
 runtime macros/matchit.vim
-filetype plugin indent on
 " End Plugins / Config ========================================================
 
 
@@ -276,32 +263,63 @@ let javascript_enable_domhtmlcss=1
 " -----------------------------------------------------------------------------
 
 """"" UI ====================================================================
+""""""" Theme / Terminal
+colorscheme base16-ocean
+set background=dark
+
+filetype plugin indent on
+syntax enable
+syntax on
+
 set t_Co=256
 " in case t_Co alone doesn't work, add this as well:
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 set t_ut= " improve screen clearing by using the background color
-set background=dark
-syntax enable
-colorscheme base16-ocean
 
-syntax on
 set enc=utf-8
 set term=screen-256color
 let $TERM='screen-256color'
-""""" /UI ===================================================================
 
-""""" Behavior =============================================================
-set ttyfast
-set showcmd
-set fileformats=unix,mac,dos
+set shell=/usr/local/bin/zsh\ --login
 
+""""""" Layout
+set linebreak
+set wrap " off is 'nowrap'
+set wrapscan
+set synmaxcol=800 " turn off syntax highlight beyond 800 chars
+set textwidth=79
+set showcmd " show incomplete commands
+set ruler " show the cursor position all the time
+set scrolloff=5
+set sidescroll=1
+set sidescrolloff=10
+set cul " turn on cursorline highlighting -- needed for linenumber hl too
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
+set diffopt=filler " Add vertical spaces to keep right and left aligned.
+set diffopt+=iwhite " Ignore whitespace changes.
+set noerrorbells
+set novisualbell
+set number
+set splitbelow
+
+" change vim cursor depending on the mode
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+
+""""" Behavior ==============================================================
+""""""" Swaps / Backups / Sessions / History
 set undodir=/tmp
 set undofile
 set undoreload=500
 set undolevels=500
 
-"" Swaps, backups, and sessions
 if !strlen($SUDO_USER) && has("unix")
   " Don't store swaps in . -- store in ~/.vim/tmp/swap/%path%to%orig.swp
   set directory=~/.vim/tmp/swap//,.,/var/tmp
@@ -317,19 +335,35 @@ else
   set nowritebackup
   set noswapfile
 endif
-set sessionoptions-=options     " Do not save settings and mappings to sessions
 
+set sessionoptions-=options " Do not save settings and mappings to sessions
+set history=100
+
+""""""" Indentions / Tabs
 set autoindent
 set smartindent
 set cindent
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
 
-set number
+""""""" Grepping / Searching
+set ignorecase
+set smartcase
+set incsearch
+set showmatch
+set hlsearch
+set gdefault " assume the /g flag is on in :s substitutions
+
+""""""" Completions
 set ofu=syntaxcomplete#Complete " Set omni-completion method.
 set completeopt=longest,menuone,preview
 set omnifunc=syntaxcomplete#Complete
 set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
 
+""""""" Ignores
 set wildmenu
 set wildmode=list:longest
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
@@ -348,82 +382,40 @@ set wildignore+=*.orig                           " merge resolution files
 set wildignore+=classes
 set wildignore+=lib
 
+""""""" File handling
+set ttyfast
+set autowrite
+set autoread
+set fileformats=unix,mac,dos
+set lazyredraw "may be the cause of lots of issues
+
+""""""" Mode change speedups
+set noesckeys
+set timeout
+set timeoutlen=100
+set ttimeout
+set ttimeoutlen=1
+
+""""""" Misc (Needs documentation / understanding)
+set fcs=fold:-
+set matchtime=3
+set showbreak=↪
 set report=0 " Show all changes.
 set hidden
 set backspace=indent,eol,start
-set history=100
-
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
-
-set fcs=fold:-
-set shell=/usr/local/bin/zsh\ --login
-set lazyredraw "may be the cause of lots of issues
-set matchtime=3
-set showbreak=↪
-set splitbelow
-
-set diffopt=filler          " Add vertical spaces to keep right and left aligned.
-set diffopt+=iwhite         " Ignore whitespace changes.
-
-set timeout
-set ttimeoutlen=10
-set timeoutlen=100
-
-set autowrite
-set autoread
 set shiftround
-set linebreak
-set synmaxcol=800 " turn off syntax highlight beyond 800 chars
-
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-set ruler
-set nowrap
-set wrap
-set wrapscan
-set textwidth=79
-set formatoptions=qrn1 " automatic formating.
-set formatoptions-=or  " don't start new lines w/ comment leader on pressing 'o'
-set shortmess=atI      " don't show the intro message when starting vim.
-" set colorcolumn=+1
-
-set ignorecase
-set smartcase
-set incsearch
-set showmatch
-set hlsearch
-
+" set formatoptions=qrn1 " automatic formating.
+set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
+set formatoptions-=r " don't start new lines w/ comment leader on pressing 'o'
+set shortmess=atI " don't show the intro message when starting vim.
 set matchpairs+=<:>
-set gdefault
-
-set scrolloff=5
-set sidescroll=1
-set sidescrolloff=10
-set cul
-" set cuc "toggle cursorcolumn
 set virtualedit+=block
-
-set nofoldenable        "dont fold by default
-
+set nofoldenable " dont fold by default
 set magic
 set mat=2
-
 set re=1
-
-set noerrorbells
-set novisualbell
 set t_vb=
 set tm=500
-
-" DON'T BE SILLY! NO MEESES HERE!
-" if has('mouse')
-"   set mouse-=a                   " Enable mouse everywhere.
-"   set mousemodel=popup_setpos   " Show a pop-up for right-click.
-"   set mousehide                 " Hide mouse while typing.
-" endif
 
 " add system clipboard support
 set clipboard+=unnamed
@@ -436,13 +428,14 @@ if argc() > 1
   silent vertical all
 endif
 
-set exrc   " enable per-directory .vimrc files
+""""""" Per project/folder vim settings
+set exrc
 set secure " disable unsafe commands in local .vimrc files
 """"" /Behavior =============================================================
 
 
 " =============================================================================
-" Highlighting #hilights
+" Highlighting #highlights
 " -----------------------------------------------------------------------------
 au BufEnter *.rb syn match ExtraWhitespace contained "\<binding.pry\>"
 au BufEnter *.js syn match ExtraWhitespace contained "\<debugger\>"
@@ -453,7 +446,8 @@ hi ColorColumn ctermfg=232 ctermbg=238 guibg=#262626
 hi ExtraWhitespace ctermbg=red guibg=red
 hi SyntasticError ctermbg=red term=bold
 hi CursorLineNr term=bold ctermbg=144
-" you're welcome @knewter vv
+
+" better tmate UX for other pairers ⇊
 hi CursorLine ctermbg=none
 hi NonText ctermfg=24
 hi SpecialKey ctermfg=24 guibg=NONE
@@ -468,11 +462,26 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 " =============================================================================
 " Custom Functions #cfunctions
 " -----------------------------------------------------------------------------
+" Used by Fugitive
 function! BufReadIndex()
   " Use j/k in status
   setlocal nohlsearch
   nnoremap <buffer> <silent> j :call search('^#\t.*','W')<Bar>.<CR>
   nnoremap <buffer> <silent> k :call search('^#\t.*','Wbe')<Bar>.<CR>
+endfunction
+
+" Used by Fugitive
+function! BufEnterCommit()
+  " Start in insert mode for commit
+  normal gg0
+  if getline('.') == ''
+    start
+  end
+  " force spell when doing a git commit
+  if  bufname("%")=="COMMIT_EDITMSG"
+      set spell
+      set spelllang=en
+  endif
 endfunction
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
@@ -481,6 +490,17 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
+
+" prevent replacing paste buffer on paste:
+" vp doesn't replace paste buffer
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
 
 
 " =============================================================================
@@ -497,24 +517,13 @@ if exists('+colorcolumn')
   augroup END
 endif
 
-augroup FastEscape
-  autocmd!
-  au InsertEnter * set timeoutlen=0
-  au InsertLeave * set timeoutlen=1000
-augroup END
-
 augroup Tmux
   au!
   au VimEnter,BufNewFile,BufReadPost * call system('tmux rename-window "vim - ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1] . '"')
   au VimLeave * call system('tmux rename-window ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1])
 augroup END
 
-augroup trailing
-  au!
-  au InsertEnter * :set listchars-=trail:⌴
-augroup END
-
-augroup line_return
+augroup ReturnToLastEditedLine
   au!
   au BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -537,14 +546,6 @@ if exists("&colorcolumn")
   autocmd InsertLeave * set colorcolumn=""
 endif
 
-" change vim cursor depending on the mode
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
 
 " =============================================================================
 " Filetypes / Syntax #ftypes
@@ -573,6 +574,7 @@ augroup filetypes
   " jscomplete is a separate plugin
   autocmd FileType javascript setlocal omnifunc=jscomplete#CompleteJS
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 
   " make `gf` search for .js files
   autocmd FileType javascript setlocal suffixesadd=.js
@@ -621,22 +623,80 @@ augroup END
 
 " =============================================================================
 " Keybindings #bindings
+" TODO: this area needs lots of cleanup and re-evaluation
 " -----------------------------------------------------------------------------
 let mapleader=","
 let maplocalleader="\\"
 
-""""" Navigation ============================================================
+""""""" CtrlP
+let g:ctrlp_map = '<leader>m'
+let g:ctrlp_cmd = 'CtrlPMixed'
+
+""""""" Golden Ratio
+"create new vertical window split and focus it
+" nnoremap <c-n> :vnew<cr>
+nnoremap <c-o> :vnew<cr>:e<space><c-d>
+nnoremap <c-n> :vsp .<cr>
+
+""""""" Tcomment
+nmap <leader>c :TComment<cr>
+vmap <leader>c :TComment<cr>
+
+""""""" Vundle
+noremap <F5> :PluginInstall!<cr>
+map <F5> :PluginInstall!<cr>
+
+""""""" Fugitive
+nnoremap <leader>H :Gbrowse<cr>
+vnoremap <leader>H :Gbrowse<cr>
+
+""""""" Ag / Ack
+nnoremap <leader>a :Ag!<space>
+" immediately ag/ack/grep for word under cursor
+map <leader>/ :execute "Ag! " . expand("<cword>") <CR>
+vmap <leader>/ :execute "Ag! " . S <CR>
+
+""""""" Vroom
+silent! map <unique> <Leader>t :VroomRunTestFile<CR>
+silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
+silent! map <unique> <Leader>l :VroomRunLastTest<CR>
+
+""""""" Gist
+" Send visual selection to gist.github.com as a private, filetyped Gist
+" Requires the gist command line too (brew install gist)
+" vnoremap <leader>G :'<,'>Gist -p -t<cr>
+vnoremap <leader>G !gist -p -t %:e \\| pbcopy<cr>
+
+""""""" Surround
+vmap [ S]
+vmap ( S)
+vmap { S}
+" vmap ] S[
+" vmap ) S(
+" vmap } S{
+vmap ' S'
+vmap " S"
+
+""""""" Code Formatting
+map <leader>pj :%!python -m json.tool<CR>
+map <leader>px :%!xmllint % --format<CR>
+
+""""""" Quick edit of certain files
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ez :vsplit ~/.zshrc<cr>
+
+""""""" Tab manipulation
 " Make opening files in a new tab easier
 nmap <C-t> :tabnew<space>
 nmap <C-e> :edit<space> <C-d>
 
-" navigation a lil better
+""""""" Motions
 noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
 
-" Window and tab movement
+""""""" Split movement
 map <C-j> <Nop>
 map <C-k> <Nop>
 unmap <C-j>
@@ -649,7 +709,8 @@ unmap <C-l>
 nnoremap <C-l> <C-W>w
 nnoremap <C-h> <C-W>W
 
-" Disable arrow keys
+""""""" Just say no to drugs
+" disable arrow keys
 nmap <Up> <Nop>
 nmap <Down> <Nop>
 vmap <Up> <Nop>
@@ -658,138 +719,98 @@ nmap <Left> <Nop>
 nmap <Right> <Nop>
 vmap <Left> <Nop>
 vmap <Right> <Nop>
-
-" saving and quiting more easily
-nmap <leader>w :w<cr>
-nmap <leader>q :q<cr>
-
-nnoremap / /\v
-vnoremap / /\v
-
-" why must i press shift to execute commands?
-nnoremap ; :
-
-" prevent replacing paste buffer on paste:
-" vp doesn't replace paste buffer
-function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
-endfunction
-function! s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()\<cr>"
-endfunction
-vmap <silent> <expr> p <sid>Repl()
-
-" reselect pasted content:
-noremap gV `[v`]
-
-" give us PluginInstall!
-noremap <F5> :PluginInstall!<cr>
-map <F5> :PluginInstall!<cr>
-
-" remap q for recording to Q
-nnoremap Q q
-nnoremap q <Nop>
-
 " this always does annoying things for some reason, so stop it
 noremap K <nop>
-
 " stop changing casing when in visual mode
 vnoremap u <nop>
 
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
+""""""" Writing / quitting
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+" Sudo write (,W)
+noremap <silent><leader>W :w !sudo tee %<CR>
 
-"allow deleting selection without updating the clipboard (yank buffer)
-vnoremap x "_x
-vnoremap X "_X
+""""""" Vim process management
+" background VIM
+vnoremap <c-z> <esc>zv`<ztgv
 
-"copy/paste mappings
+""""""" Search / Substitutions / Replacements
+nnoremap <silent><Leader><space> :nohls<CR>
+nnoremap / /\v
+vnoremap / /\v
+" Keep search matches in the middle of the window.
+nnoremap <silent> n nzzzv
+nnoremap <silent> N Nzzzv
+" Keep search matches jumping around
+nnoremap g; g;zz
+nnoremap g, g,zz
+" Search and replace word under cursor (,*)
+" nnoremap <leader>fr :%s/\<<C-r><C-w>\>//<Left>
+nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
+" Use word under cursor into lhs of a substitute (for quick search and replace)
+nnoremap <leader>r :%s/\<<C-r>=expand("<cword>")<CR>\>/
+
+""""""" Copy/Paste
+vmap <silent> <expr> p <sid>Repl()
 noremap <leader>y "*y
 noremap <leader>yy "*Y
-
-nnoremap Y y$
-vmap <silent><leader>y "xy
-map <silent><leader>p "xp
-
 "don't move the cursor after pasting
 "(by jumping to back start of previously changed text)
 noremap p p`[
 noremap P P`[
+nnoremap Y y$
+vmap <silent><leader>y "xy
+map <silent><leader>p "xp
 
+""""""" ESC rebindings
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
 
-" -----------------------------------------------------------------------------
-" CtrlP ------
-let g:ctrlp_map = '<leader>m'
-let g:ctrlp_cmd = 'CtrlPMixed'
-
-" -----------------------------------------------------------------------------
-" Golden Ratio ------
-"create new vertical window split and focus it
-" nnoremap <c-n> :vnew<cr>
-nnoremap <c-o> :vnew<cr>:e<space><c-d>
-nnoremap <c-n> :vsp .<cr>
-
-" -----------------------------------------------------------------------------
-" TComment ------
-nmap <leader>c :TComment<cr>
-vmap <leader>c :TComment<cr>
-
-" select all text on the page
-noremap <leader>v ggVG
-
-" Easier linewise reselection of what you just pasted.
-nnoremap <leader>V V`]
-
-" Indent/dedent/autoindent what you just pasted.
-nnoremap <lt>> V`]<
-nnoremap ><lt> V`]>
-nnoremap =- V`]=
-
-" Front and center
-" Use :sus for the rare times I want to actually background Vim.
-vnoremap <c-z> <esc>zv`<ztgv
-
+""""""" Convenience rebindings
+" semicolon is easier to hit than colon
+nnoremap ; :
+" remap q for recording to Q
+nnoremap Q q
+nnoremap q <Nop>
+"allow deleting selection without updating the clipboard (yank buffer)
+vnoremap x "_x
+vnoremap X "_X
+" Easier to type, and I never use the default behavior.
+noremap H ^
+noremap L $
+vnoremap L g_
 "make the tab key match bracket pairs
 map <tab> %
 noremap <tab> %
 vnoremap <tab> %
-
-" Sudo write (,W)
-noremap <silent><leader>W :w !sudo tee %<CR>
-
 " Better mark jumping (line + col)
 nnoremap ' <nop>
+" Remap VIM 0 to first non-blank character
+map 0 ^
 
+""""""" Selections
+" reselect pasted content:
+noremap gV `[v`]
+" select all text on the page
+noremap <leader>v ggVG
+" Easier linewise reselection of what you just pasted.
+nnoremap <leader>V V`]
 " duplicate whatever’s selected, to the next line
 vmap D y'>p
 
+""""""" Indentions
+" Indent/dedent/autoindent what you just pasted.
+nnoremap <lt>> V`]<
+nnoremap ><lt> V`]>
+nnoremap =- V`]=
 " Reindent the whole document and keep the cursor in the same location
 nnoremap <C-=> mqHmwgg=G`wzt`q
 
+
+""""""" Misc (organize this please!)
 " Insert newline below
 nnoremap <cr><cr> o<ESC>
-
-" Search and replace word under cursor (,*)
-" nnoremap <leader>fr :%s/\<<C-r><C-w>\>//<Left>
-nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
-
-" Use word under cursor into lhs of a substitute (for quick search and replace)
-nnoremap <leader>r :%s/\<<C-r>=expand("<cword>")<CR>\>/
-
-" -----------------------------------------------------------------------------
-" Fugitive ------
-nnoremap <leader>H :Gbrowse<cr>
-vnoremap <leader>H :Gbrowse<cr>
-
-" -----------------------------------------------------------------------------
-" Ag/Ack ------
-nnoremap <leader>a :Ag!<space>
-" immediately ag/ack/grep for word under cursor
-map <leader>/ :execute "Ag! " . expand("<cword>") <CR>
-vmap <leader>/ :execute "Ag! " . S <CR>
 
 " Toggle 'keep current line in the center of the screen' mode
 nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
@@ -803,26 +824,6 @@ nnoremap D d$
 
 " Delete a line and not keep it in a register
 nnoremap X Vx
-
-" Keep search matches in the middle of the window.
-nnoremap <silent> n nzzzv
-nnoremap <silent> N Nzzzv
-
-" Keep search matches jumping around
-nnoremap g; g;zz
-nnoremap g, g,zz
-
-" Easier to type, and I never use the default behavior.
-noremap H ^
-noremap L $
-vnoremap L g_
-
-" clear highlights with ESC and <leader><space>
-nnoremap <silent><Leader><space> :nohls<CR>
-
-"Quick edit of certain files and such
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>ez :vsplit ~/.zshrc<cr>
 
 " Insert Mode Completion
 inoremap <c-f> <c-x><c-f>
@@ -842,43 +843,11 @@ nnoremap J mzJ`z
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
-" Send visual selection to gist.github.com as a private, filetyped Gist
-" Requires the gist command line too (brew install gist)
-" vnoremap <leader>G :'<,'>Gist -p -t<cr>
-vnoremap <leader>G !gist -p -t %:e \\| pbcopy<cr>
-
 " Insert the directory of the current buffer in command line mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
-
-" -----------------------------------------------------------------------------
-" Vroom ------
-silent! map <unique> <Leader>t :VroomRunTestFile<CR>
-silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
-silent! map <unique> <Leader>l :VroomRunLastTest<CR>
-
-" -----------------------------------------------------------------------------
-" Surround ------
-" Autoclose in visual mode
-vmap [ S]
-vmap ( S)
-vmap { S}
-" vmap ] S[
-" vmap ) S(
-" vmap } S{
-vmap ' S'
-vmap " S"
 
 " Insert mode movements
 " Ctrl-e: Go to end of line
 inoremap <c-e> <esc>A
 " Ctrl-a: Go to begin of line
 inoremap <c-a> <esc>I
-
-" -----------------------------------------------------------------------------
-" Prettify XML/JSON ------
-map <leader>pj :%!python -m json.tool<CR>
-map <leader>px :%!xmllint % --format<CR>
