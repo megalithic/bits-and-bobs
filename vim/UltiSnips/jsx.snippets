@@ -1,0 +1,100 @@
+snippet cc "createClass" b
+var ${1:`!p snip.rv = ''.join(x.title() for x in re.sub('\.js$', '', snip.basename or 'ModuleName').split('_'))`} = React.createClass({
+	/**
+	 * @return {Object}
+	 */
+	render: function() {
+		return (
+			$0
+		);
+	}
+});
+
+module.exports = $1;
+endsnippet
+
+snippet cdm "componentDidMount" b
+componentDidMount: function() {
+	$0
+},
+endsnippet
+
+snippet cdu "componentDidUpdate" b
+/**
+ * @param {Object} prevProps
+ * @param {Object} prevState
+ */
+componentDidUpdate: function(prevProps, prevState) {
+	$0
+},
+endsnippet
+
+snippet cwm "componentWillMount" b
+componentWillMount: function() {
+	$0
+},
+endsnippet
+
+snippet cwrp "componentWillReceiveProps" b
+/**
+ * @param {Object} nextProps
+ */
+componentWillReceiveProps: function(nextProps) {
+	$0
+},
+endsnippet
+
+snippet cwum "componentWillUnmount" b
+componentWillUnmount: function() {
+	$0
+},
+endsnippet
+
+snippet cwu "componentWillUpdate" b
+/**
+ * @param {Object} nextProps
+ * @param {Object} nextState
+ */
+componentWillUpdate: function(nextProps, nextState) {
+	$0
+},
+endsnippet
+
+snippet gdp "getDefaultProps" b
+/**
+ * @return {Object}
+ */
+getDefaultProps: function() {
+	return {
+		$0
+	};
+},
+endsnippet
+
+snippet gis "getInitialState" b
+/**
+ * @return {Object}
+ */
+getInitialState: function() {
+	return {
+		$0
+	};
+},
+endsnippet
+
+snippet pt "propTypes" b
+propTypes: {
+	$0
+},
+endsnippet
+
+snippet scu "shouldComponentUpdate" b
+/**
+ * @param {Object} nextProps
+ * @param {Object} nextState
+ * @return {boolean}
+ */
+shouldComponentUpdate: function(nextProps, nextState) {
+	return ${1:true};
+},
+endsnippet

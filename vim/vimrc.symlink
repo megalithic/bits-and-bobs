@@ -3,20 +3,23 @@
 " Author: Seth Messer <seth.messer@gmail.com>
 " -----------------------------------------------------------------------------
 " Table of Contents
-" 1) Vundle
+" 1) Plugins / Config
 "   1.1) UI
 "   1.2) Utilities
 "   1.3) Filetypes
 "   1.4) Code Navigation
 "     1.4.1) Text objects
-" 2) UI Tweaks
-" 3) Keyboard shortcut Setup / keybindings
-" 4) vim environment handling tweaks (needs work / renaming)
-" 5) File navigation
-" 6) Auto Commands
-"   6.1) Filetypes
-"   6.2) Normalization
-" 7) Custom functions
+" 2) Main Settings #msettings
+"   2.1) UI
+"   2.2) Behavior
+"   2.3) *Needs more work and organizing and documentation
+" 3) Highlighting #hilights
+" 4) Custom functions #cfunctions
+" 5) Auto Commands #autocommands
+"   5.1) Filetypes
+"   5.2) Normalization
+" 6) Filetypes #ftypes
+" 7) Keybindings #bindings
 " =============================================================================
 
 filetype off
@@ -64,7 +67,11 @@ function! LoadPlugins()
     let g:syntastic_disabled_filetypes = ['html', 'rst']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
     let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
-    let g:syntastic_javascript_checkers=["jshint", "jsxhint"]
+    let g:syntastic_javascript_checkers=["jshint", "jsxhint", "jscs"]
+    let g:syntastic_haml_checkers = ['haml_lint']
+    let g:syntastic_javascript_jscs_exec = 'jsxcs'
+    let g:syntastic_ruby_checkers        = ['rubocop']
+    let g:syntastic_scss_checkers        = ['scss_lint']
     let g:syntastic_error_symbol='✖' "
     let g:syntastic_warning_symbol='⚑'
     let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
@@ -148,7 +155,7 @@ function! LoadPlugins()
   Plugin 'jelera/vim-javascript-syntax'
   Plugin 'othree/javascript-libraries-syntax.vim'
   Plugin 'elzr/vim-json'
-  Plugin 'claco/jasmine.vim'
+  Plugin 'glanotte/vim-jasmine'
   Plugin 'lukaszb/vim-web-indent'
   Plugin 'Shutnik/jshint2.vim'
   Plugin 'burnettk/vim-angular'
@@ -176,6 +183,10 @@ function! LoadPlugins()
   Plugin 'ervandew/supertab'
     let g:SuperTabLongestHighlight = 1
     let g:SuperTabCrMapping = 0
+    let g:SuperTabDefaultCompletionType = '<C-n>'
+  Plugin 'Valloric/YouCompleteMe'
+    let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
   Plugin 'FelikZ/ctrlp-py-matcher'
   Plugin 'kien/ctrlp.vim.git'
     let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
@@ -197,8 +208,9 @@ function! LoadPlugins()
           \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
           \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
           \ }
-    " let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+    " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
     " let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
     let g:ctrlp_prompt_mappings = {
           \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
@@ -220,13 +232,14 @@ function! LoadPlugins()
   """"" /Code Navigation ====================================================
 
   """"" Snippets ============================================================
+  Plugin 'SirVer/ultisnips'
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsListSnippets="<c-tab>"
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+    let g:UltiSnipsSnippetsDir=["UltiSnips", "snippets"]
   Plugin 'matthewsimo/angular-vim-snippets'
   " Plugin 'honza/vim-snippets'
-  " Plugin 'SirVer/ultisnips'
-  "   let g:UltiSnipsExpandTrigger="<tab>"
-  "   let g:UltiSnipsJumpForwardTrigger="<tab>"
-  "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  "   let g:UltiSnipsSnippetsDir="~/.vim/snippets"
   """"" /Snippets ===========================================================
 
   Plugin 'vim-scripts/matchit.zip'
@@ -389,6 +402,7 @@ set gdefault
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
+set cul
 " set cuc "toggle cursorcolumn
 set virtualedit+=block
 
@@ -417,13 +431,18 @@ set clipboard+=unnamed
 " treat certain characters as full keyword boundaries, e.g. `-`
 set iskeyword+=-
 
+" if more than 1 files are passed to vim as arg, open them in vertical splits
+if argc() > 1
+  silent vertical all
+endif
+
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
 """"" /Behavior =============================================================
 
 
 " =============================================================================
-" Highlighting
+" Highlighting #hilights
 " -----------------------------------------------------------------------------
 au BufEnter *.rb syn match ExtraWhitespace contained "\<binding.pry\>"
 au BufEnter *.js syn match ExtraWhitespace contained "\<debugger\>"
@@ -447,15 +466,42 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 
 
 " =============================================================================
-" Autocommands
+" Custom Functions #cfunctions
 " -----------------------------------------------------------------------------
-
 function! BufReadIndex()
   " Use j/k in status
   setlocal nohlsearch
   nnoremap <buffer> <silent> j :call search('^#\t.*','W')<Bar>.<CR>
   nnoremap <buffer> <silent> k :call search('^#\t.*','Wbe')<Bar>.<CR>
 endfunction
+
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
+
+" =============================================================================
+" Autocommands #autocommands
+" -----------------------------------------------------------------------------
+if exists('+colorcolumn')
+  augroup UnSyntaxInactive
+    au!
+    au WinEnter * set number
+    au BufWinEnter * set syntax=ON
+
+    au BufWinLeave * set syntax=OFF
+    au WinLeave * set nonumber
+  augroup END
+endif
+
+augroup FastEscape
+  autocmd!
+  au InsertEnter * set timeoutlen=0
+  au InsertLeave * set timeoutlen=1000
+augroup END
 
 augroup Tmux
   au!
@@ -476,8 +522,20 @@ augroup line_return
     \ endif
 augroup END
 
+" Delete trailing whitespace on write
+au BufWrite * silent call DeleteTrailingWS()
+
 " Resize splits when the window is resized
 au VimResized * :wincmd =
+
+" No line numbers in the cmd window
+au CmdwinEnter * set nonumber
+
+" Color Column (only on insert)
+if exists("&colorcolumn")
+  autocmd InsertEnter * set colorcolumn=80
+  autocmd InsertLeave * set colorcolumn=""
+endif
 
 " change vim cursor depending on the mode
 if exists('$TMUX')
@@ -488,141 +546,10 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-" if more than 1 files are passed to vim as arg, open them in vertical splits
-if argc() > 1
-  silent vertical all
-endif
-
-if has("autocmd")
-  augroup vimrc
-    autocmd!
-
-    set cursorline
-
-    " Only highlight cursor line in active buffer window
-    autocmd WinLeave * set nocursorline
-    autocmd WinEnter * if &filetype != 'qf' | set cursorline | endif
-
-    autocmd QuickFixCmdPost *grep* cwindow
-
-    highlight! link TrailingWhitespace Error
-    highlight! link MixedWhitespace TrailingWhitespace
-
-    autocmd BufWinEnter * if &modifiable | match MixedWhitespace / \+\t\+/ | endif
-    autocmd BufWinEnter * if &modifiable | match TrailingWhitespace /\s\+$/ | endif
-    autocmd InsertEnter * if &modifiable | match TrailingWhitespace /\s\+\%#\@<!$/ | endif
-    autocmd InsertLeave * if &modifiable | match TrailingWhitespace /\s\+$/ | endif
-    autocmd BufWinLeave * if &modifiable | call clearmatches() | endif
-
-    " Never show line numbers in command-line window as they are not useful
-    " and take up space (normally it inherits this setting like any other
-    " window)
-    autocmd CmdwinEnter * set nonumber
-  augroup END
-endif
-
-
 " =============================================================================
-" Custom Functions #cfunctions
+" Filetypes / Syntax #ftypes
 " -----------------------------------------------------------------------------
-
-" Scratch
-command! ScratchToggle call ScratchToggle()
-function! ScratchToggle()
-    if exists("w:is_scratch_window")
-        unlet w:is_scratch_window
-        exec "q"
-    else
-        exec "normal! :Sscratch\<cr>\<C-W>L"
-        let w:is_scratch_window = 1
-    endif
-endfunction
-
-" Smart TabComplete
-function! Smart_TabComplete()
-  let line = getline('.')                         " current line
-
-  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-  " line to one character right
-  " of the cursor
-  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-  if (strlen(substr)==0)                          " nothing to match on empty string
-    return "\<tab>"
-  endif
-  let has_period = match(substr, '\.') != -1      " position of period, if any
-  let has_slash = match(substr, '\/') != -1       " position of slash, if any
-  if (!has_period && !has_slash)
-    return "\<C-X>\<C-P>"                         " existing text matching
-  elseif ( has_slash )
-    return "\<C-X>\<C-F>"                         " file matching
-  else
-    return "\<C-X>\<C-O>"                         " plugin matching
-  endif
-endfunction
-
-augroup FastEscape
-  autocmd!
-  au InsertEnter * set timeoutlen=0
-  au InsertLeave * set timeoutlen=1000
-augroup END
-
-" Dim inactive windows using 'colorcolumn' setting.
-" This tends to slow down redrawing, but is very useful.
-" NOTE: this will only work with lines containing text (i.e. not '~')
-" Based on https://groups.google.com/d/msg/vim_use/IJU-Vk-QLJE/xz4hjPjCRBUJ
-if exists('+colorcolumn')
-  function! s:DimInactiveWindows()
-    for i in range(1, tabpagewinnr(tabpagenr(), '$'))
-      let l:range = ""
-      if i != winnr()
-        if &wrap
-          " HACK: when wrapping lines is enabled, we use the maximum number
-          " of columns getting highlighted. This might get calculated by
-          " looking for the longest visible line and using a multiple of
-          " winwidth().
-          let l:width=400 " max
-        else
-          let l:width=winwidth(i)
-        endif
-        let l:range = join(range(1, l:width), ',')
-      endif
-      call setwinvar(i, '&colorcolumn', l:range)
-    endfor
-  endfunction
-
-  augroup DimInactiveWindows
-    au!
-    " au WinEnter * call s:DimInactiveWindows()
-    au WinEnter * set number
-    au WinEnter * set syntax=ON
-    au BufEnter * set syntax=ON
-
-    au BufLeave * set syntax=OFF
-    au WinLeave * set nonumber
-    au WinLeave * set syntax=OFF
-  augroup END
-endif
-
-" mapping to generate tags file
-function! FlushEnvironment()
-  silent! exe ":!ctags -R"
-endfunction
-
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-au BufWrite * silent call DeleteTrailingWS()
-
-
-"------------------------------------------------------------------------------
-" Filetypes #ftypes / Syntax
-" -----------------------------------------------------------------------------
-" filetypes borrowed from @bit-theory vimfiles and edited
-"
-augroup buffer_cmds
+augroup filetypes
   " clear commands before resetting
   autocmd!
 
@@ -630,14 +557,13 @@ augroup buffer_cmds
   autocmd BufNewFile,BufRead *.md,*.mdown,*.markdown set nolazyredraw filetype=markdown
   autocmd BufNewFile,BufRead *.md,*.mdown,*.markdown set filetype=markdown
 
-  " arduino
-  au BufNewFile,BufReadPost *.ino,*.pde set filetype=arduino
-
   " filetype
   autocmd BufNewFile,BufRead *.json set filetype=json
   autocmd BufNewFile,BufRead *.slim set filetype=slim
   autocmd BufNewFile,BufRead *.less set filetype=less
-  " autocmd BufNewFile,BufRead *.scss set filetype=sass
+  autocmd BufNewFile,BufRead *.scss set filetype=sass
+
+  autocmd BufNewFile,BufRead,BufWritePost *[Ss]pec*js,*SpecHelper*js set filetype=jasmine.javascript syntax=jasmine
 
   " Enable omnicomplete for supported filetypes
   autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
@@ -646,7 +572,6 @@ augroup buffer_cmds
 
   " jscomplete is a separate plugin
   autocmd FileType javascript setlocal omnifunc=jscomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
   " make `gf` search for .js files
@@ -659,19 +584,46 @@ augroup buffer_cmds
   autocmd InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
   autocmd InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
 
-  " Color Column (only on insert)
-  if exists("&colorcolumn")
-    autocmd InsertEnter * set colorcolumn=80
-    autocmd InsertLeave * set colorcolumn=""
-  endif
+  " " JSX
+  " " https://github.com/lencioni/dotfiles/blob/master/.vim/ftdetect/jsx.vim
+  " function! s:ScanFile()
+  "   let n = 1
+  "   let nmax = line("$")
+  "   if line("$") > 500
+  "     let nmax = 500
+  "   endif
+  "   while n < nmax
+  "     if getline(n) =~ "\\v<React\\.|<jsx>"
+  "       return 1
+  "       break
+  "     endif
+  "     let n = n + 1
+  "   endwhile
+  "   return 0
+  " endfunction
+  "
+  " function! s:DetectJSX(file)
+  "   if a:file =~ "\\v\\.html""
+  "     if s:ScanFile()
+  "       set ft=html.jsx
+  "     endif
+  "   elseif a:file =~ "\\v\\.js""
+  "     if s:ScanFile()
+  "       set ft=javascript.jsx
+  "     endif
+  "   endif
+  " endfunction
+  " autocmd BufNewFile,BufRead *.js.jsx set ft=javascript.jsx
+  " autocmd BufNewFile,BufRead *{_spec,Spec}.js.jsx set ft=javascript.jsx.jasmine
+  " autocmd BufNewFile,BufRead *.html,*.js call s:DetectJSX(expand("<afile>"))
 augroup END
 
+
 " =============================================================================
-" Keybindings
+" Keybindings #bindings
 " -----------------------------------------------------------------------------
 let mapleader=","
 let maplocalleader="\\"
-
 
 """"" Navigation ============================================================
 " Make opening files in a new tab easier
@@ -717,25 +669,6 @@ vnoremap / /\v
 " why must i press shift to execute commands?
 nnoremap ; :
 
-" = START KEYBINDINGS FROM http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
-" copy and paste from system clipboard with <leader>p and <leader>y:
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
-
-" easier search and replace:
-vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
-    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap s :normal vs<CR>
-
-" jump to end of pasted content:
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
-
 " prevent replacing paste buffer on paste:
 " vp doesn't replace paste buffer
 function! RestoreRegister()
@@ -750,7 +683,6 @@ vmap <silent> <expr> p <sid>Repl()
 
 " reselect pasted content:
 noremap gV `[v`]
-" = END KEYBINDINGS FROM http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
 
 " give us PluginInstall!
 noremap <F5> :PluginInstall!<cr>
@@ -791,7 +723,7 @@ noremap P P`[
 " -----------------------------------------------------------------------------
 " CtrlP ------
 let g:ctrlp_map = '<leader>m'
-" nnoremap <leader>m :CtrlPMRU<cr>
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 " -----------------------------------------------------------------------------
 " Golden Ratio ------
@@ -846,13 +778,6 @@ nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
 
 " Use word under cursor into lhs of a substitute (for quick search and replace)
 nnoremap <leader>r :%s/\<<C-r>=expand("<cword>")<CR>\>/
-
-" -----------------------------------------------------------------------------
-" Tern ------
-" Rename a JavaScript variable with Tern. (r)
-" nmap <leader>r :TernRename<CR>
-" Jump to JavaScript definition with tern. (j)
-" nmap <leader>j :TernDef<CR>
 
 " -----------------------------------------------------------------------------
 " Fugitive ------
@@ -925,10 +850,6 @@ vnoremap <leader>G !gist -p -t %:e \\| pbcopy<cr>
 " Insert the directory of the current buffer in command line mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-" Smart Tab Completion
-inoremap <tab> <c-r>=Smart_TabComplete()<CR>
-inoremap <s-tab> <c-n>
-
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
@@ -938,10 +859,6 @@ map 0 ^
 silent! map <unique> <Leader>t :VroomRunTestFile<CR>
 silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
 silent! map <unique> <Leader>l :VroomRunLastTest<CR>
-
-" -----------------------------------------------------------------------------
-" Dispatch ------
-nnoremap <leader>D :Dispatch<space>
 
 " -----------------------------------------------------------------------------
 " Surround ------
@@ -954,14 +871,6 @@ vmap { S}
 " vmap } S{
 vmap ' S'
 vmap " S"
-
-" vmap <leader>" S"lvi"
-" vmap <leader>' S'lvi'
-" vmap <leader>` S`lvi`
-" vmap <leader>( S)lvi(
-" vmap <leader>{ S}lvi{
-" vmap <leader>[ S]lvi[
-" vmap <leader>< S>lvi<
 
 " Insert mode movements
 " Ctrl-e: Go to end of line
