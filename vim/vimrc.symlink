@@ -174,6 +174,8 @@ function! LoadPlugins()
     let g:SuperTabCrMapping = 0
     let g:SuperTabDefaultCompletionType = '<C-n>'
   Plugin 'Valloric/YouCompleteMe'
+    " NOTE: Remember to do this after bundling:
+    " cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer
     let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
   Plugin 'FelikZ/ctrlp-py-matcher'
@@ -220,7 +222,10 @@ function! LoadPlugins()
     let g:vim_search_pulse_mode = 'cursor_line'
 
   """"" Snippets ============================================================
-  " info: https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
+  " Snippets informationg (handy!):
+  " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
+  " Make keybindings play nice with YCM, Supertab, Ultisnips:
+  " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
   Plugin 'SirVer/ultisnips'
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsListSnippets="<c-tab>"
