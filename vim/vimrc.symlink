@@ -81,6 +81,7 @@ function! LoadPlugins()
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_quiet_messages = { "type": "style" }
+    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
   Plugin 'farseer90718/Rainbow-Parentheses-Improved-and2'
     let g:rainbow_active = 1
 
@@ -209,8 +210,8 @@ function! LoadPlugins()
           \}
   Plugin 'rking/ag.vim'
     let g:ackprg="ag --column --nogroup"
-    set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:agprg="ag --column --nogroup --line-numbers"
+    set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
   Plugin 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
 
@@ -640,7 +641,7 @@ let maplocalleader="\\"
 
 """"""" CtrlP
 let g:ctrlp_map = '<leader>m'
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlP'
 
 """"""" Golden Ratio
 "create new vertical window split and focus it
@@ -676,6 +677,9 @@ silent! map <unique> <Leader>l :VroomRunLastTest<CR>
 " Requires the gist command line too (brew install gist)
 " vnoremap <leader>G :'<,'>Gist -p -t<cr>
 vnoremap <leader>G !gist -p -t %:e \\| pbcopy<cr>
+
+""""""" Gist
+nnoremap <leader>e :SyntasticCheck<cr> :SyntasticToggleMode<cr>
 
 """"""" Surround
 vmap [ S]
@@ -761,7 +765,6 @@ nnoremap <leader>fr :%s#\<<C-r>=expand("<cword>")<CR>\>#
 nnoremap <leader>r :%s/\<<C-r>=expand("<cword>")<CR>\>/
 
 """"""" Copy/Paste
-vmap <silent> <expr> p <sid>Repl()
 noremap <leader>y "*y
 noremap <leader>yy "*Y
 "don't move the cursor after pasting
@@ -771,11 +774,14 @@ noremap P P`[
 nnoremap Y y$
 vmap <silent><leader>y "xy
 map <silent><leader>p "xp
+vmap <silent> <expr> p <sid>Repl()
 
 " Neovim copy/paste support from system clipboard
-" vnoremap <silent> y y:call ClipboardYank()<cr>
-" vnoremap <silent> d d:call ClipboardYank()<cr>
-" nnoremap <silent> p :call ClipboardPaste()<cr>p
+if has("nvim")
+  vnoremap <silent> y y:call ClipboardYank()<cr>
+  vnoremap <silent> d d:call ClipboardYank()<cr>
+  nnoremap <silent> p :call ClipboardPaste()<cr>p
+endif
 
 """"""" ESC rebindings
 inoremap <F1> <ESC>
