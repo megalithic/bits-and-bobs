@@ -66,21 +66,20 @@ function! LoadPlugins()
           \ }
   Plugin 'scrooloose/syntastic'
     let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.jshintrc'
-    let g:syntastic_enable_signs = 1
-    let g:syntastic_check_on_open = 0
+    let g:syntastic_enable_signs = 0 " slow downs
+    let g:syntastic_check_on_open = 0 " slow downs
     let g:syntastic_disabled_filetypes = ['html', 'rst']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
     let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
-    let g:syntastic_javascript_checkers=["jshint", "jsxhint"]
-    " let g:syntastic_haml_checkers = ['haml_lint']
-    " let g:syntastic_ruby_checkers        = ['rubocop']
-    " let g:syntastic_scss_checkers        = ['scss_lint']
+    let g:syntastic_javascript_checkers = ['jshint', 'jsxhint']
+    let g:syntastic_haml_checkers = ['haml_lint']
+    let g:syntastic_ruby_checkers = ['rubocop']
+    let g:syntastic_scss_checkers = ['scss_lint']
     let g:syntastic_error_symbol='✖' "
     let g:syntastic_warning_symbol='⚑'
     let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-    let g:syntastic_always_populate_loc_list=1
-    let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_quiet_messages = { "type": "style" }
   Plugin 'farseer90718/Rainbow-Parentheses-Improved-and2'
     let g:rainbow_active = 1
@@ -408,6 +407,9 @@ set tm=500
 
 " add system clipboard support
 set clipboard+=unnamed
+if has('nvim')
+  set unnamedclip
+endif
 
 " treat certain characters as full keyword boundaries, e.g. `-`
 set iskeyword+=-
@@ -481,11 +483,11 @@ function! BufEnterCommit()
 endfunction
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
+function! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
   exe "normal `z"
-endfunc
+endfunction
 
 " prevent replacing paste buffer on paste:
 " vp doesn't replace paste buffer
@@ -496,6 +498,14 @@ endfunction
 function! s:Repl()
   let s:restore_reg = @"
   return "p@=RestoreRegister()\<cr>"
+endfunction
+
+" Neovim support system clipboard in OSX
+function! ClipboardYank()
+  call system('pbcopy', @@)
+endfunction
+function! ClipboardPaste()
+  let @@ = system('pbpaste')
 endfunction
 
 
@@ -761,6 +771,11 @@ noremap P P`[
 nnoremap Y y$
 vmap <silent><leader>y "xy
 map <silent><leader>p "xp
+
+" Neovim copy/paste support from system clipboard
+" vnoremap <silent> y y:call ClipboardYank()<cr>
+" vnoremap <silent> d d:call ClipboardYank()<cr>
+" nnoremap <silent> p :call ClipboardPaste()<cr>p
 
 """"""" ESC rebindings
 inoremap <F1> <ESC>
