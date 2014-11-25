@@ -43,7 +43,7 @@ function! LoadPlugins()
     set laststatus=2 " so we always get airline displaying / always show status
     let g:airline_enable_branch=1
     let g:airline_enable_syntastic=1
-    let g:airline_theme='jellybeans'
+    let g:airline_theme='wombat'
     let g:airline_powerline_fonts = 1
     let g:airline_left_sep = ''
     let g:airline_right_sep = ''
@@ -67,15 +67,14 @@ function! LoadPlugins()
   Plugin 'scrooloose/syntastic'
     let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.jshintrc'
     let g:syntastic_enable_signs = 1
-    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_open = 0
     let g:syntastic_disabled_filetypes = ['html', 'rst']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
     let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
-    let g:syntastic_javascript_checkers=["jshint", "jsxhint", "jscs"]
-    let g:syntastic_haml_checkers = ['haml_lint']
-    let g:syntastic_javascript_jscs_exec = 'jsxcs'
-    let g:syntastic_ruby_checkers        = ['rubocop']
-    let g:syntastic_scss_checkers        = ['scss_lint']
+    let g:syntastic_javascript_checkers=["jshint", "jsxhint"]
+    " let g:syntastic_haml_checkers = ['haml_lint']
+    " let g:syntastic_ruby_checkers        = ['rubocop']
+    " let g:syntastic_scss_checkers        = ['scss_lint']
     let g:syntastic_error_symbol='✖' "
     let g:syntastic_warning_symbol='⚑'
     let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
@@ -173,11 +172,6 @@ function! LoadPlugins()
     let g:SuperTabLongestHighlight = 1
     let g:SuperTabCrMapping = 0
     let g:SuperTabDefaultCompletionType = '<C-n>'
-  Plugin 'Valloric/YouCompleteMe'
-    " NOTE: Remember to do this after bundling:
-    " cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer
-    let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
-    let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
   Plugin 'FelikZ/ctrlp-py-matcher'
   Plugin 'kien/ctrlp.vim.git'
     let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
@@ -199,7 +193,7 @@ function! LoadPlugins()
           \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
           \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
           \ }
-    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+    " let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
     " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
     " let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
@@ -222,17 +216,17 @@ function! LoadPlugins()
     let g:vim_search_pulse_mode = 'cursor_line'
 
   """"" Snippets ============================================================
-  " Snippets informationg (handy!):
+  " Snippets information (handy!):
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  Plugin 'SirVer/ultisnips'
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsListSnippets="<c-tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-    let g:UltiSnipsSnippetsDir=["UltiSnips", "snippets"]
-  Plugin 'matthewsimo/angular-vim-snippets'
+  " Plugin 'SirVer/ultisnips'
+  "   let g:UltiSnipsExpandTrigger="<tab>"
+  "   let g:UltiSnipsListSnippets="<c-tab>"
+  "   let g:UltiSnipsJumpForwardTrigger="<tab>"
+  "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  "   let g:UltiSnipsSnippetsDir=["UltiSnips"]
+  " Plugin 'matthewsimo/angular-vim-snippets'
 
   Plugin 'vim-scripts/matchit.zip'
 endfunction
@@ -280,7 +274,7 @@ set shell=/usr/local/bin/zsh\ --login
 
 """"""" Layout
 set linebreak
-set wrap " off is 'nowrap'
+set nowrap " off is 'nowrap'
 set wrapscan
 set synmaxcol=800 " turn off syntax highlight beyond 800 chars
 set textwidth=79
@@ -513,8 +507,12 @@ if exists('+colorcolumn')
     au!
     au WinEnter * set number
     au BufWinEnter * set syntax=ON
+    au BufEnter * set syntax=ON
+    au WinEnter * set syntax=ON
 
     au BufWinLeave * set syntax=OFF
+    au BufLeave * set syntax=OFF
+    au WinLeave * set syntax=OFF
     au WinLeave * set nonumber
   augroup END
 endif

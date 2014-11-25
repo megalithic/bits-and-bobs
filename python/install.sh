@@ -1,3 +1,3 @@
 # easy_install SpoofMAC
-pip install gntp pync selenium goobook
-easy_install pycp
+pip install gntp pync selenium goobook pycp
+pip install --upgrade neovim
