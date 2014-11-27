@@ -33,13 +33,11 @@ set nocompatible
 " =============================================================================
 " Plugins / Config #plugins
 " -----------------------------------------------------------------------------
-function! LoadPlugins()
-  Plugin 'gmarik/vundle'
-
+function! LoadPlugs()
   """"" UI ==================================================================
-  Plugin 'chriskempson/base16-vim'
-  Plugin 'roman/golden-ratio'
-  Plugin 'bling/vim-airline'
+  Plug 'chriskempson/base16-vim'
+  Plug 'roman/golden-ratio'
+  Plug 'bling/vim-airline'
     set laststatus=2 " so we always get airline displaying / always show status
     let g:airline_enable_branch=1
     let g:airline_enable_syntastic=1
@@ -64,7 +62,7 @@ function! LoadPlugins()
           \ 'c' : 'CMD   ',
           \ '': 'V-BLCK',
           \ }
-  Plugin 'scrooloose/syntastic'
+  Plug 'scrooloose/syntastic'
     let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.jshintrc'
     let g:syntastic_enable_signs = 1 " slow downs
     let g:syntastic_check_on_open = 0 " slow downs
@@ -82,26 +80,26 @@ function! LoadPlugins()
     let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_quiet_messages = { "type": "style" }
     let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
-  Plugin 'farseer90718/Rainbow-Parentheses-Improved-and2'
+  Plug 'farseer90718/Rainbow-Parentheses-Improved-and2'
     let g:rainbow_active = 1
 
   """"" Utilities ===========================================================
-  Plugin 'tomtom/tcomment_vim'
-  Plugin 'sickill/vim-pasta'
-  Plugin 'zaiste/tmux.vim'
-  Plugin 'haya14busa/incsearch.vim'
-  Plugin 'jordwalke/VimAutoMakeDirectory'
-  Plugin 'Raimondi/delimitMate'
-  Plugin 'tpope/vim-endwise'
-  Plugin 'tpope/vim-unimpaired'
-  Plugin 'tpope/vim-eunuch'
-  Plugin 'tpope/vim-surround'
-  Plugin 'tpope/vim-repeat'
+  Plug 'tomtom/tcomment_vim'
+  Plug 'sickill/vim-pasta'
+  Plug 'zaiste/tmux.vim'
+  Plug 'haya14busa/incsearch.vim'
+  Plug 'jordwalke/VimAutoMakeDirectory'
+  Plug 'Raimondi/delimitMate'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
 
-  Plugin 'skalnik/vim-vroom'
+  Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1
     let g:vroom_map_keys = 0
-  Plugin 'tpope/vim-fugitive'
+  Plug 'tpope/vim-fugitive'
     augroup ft_fugitive
       au!
       au BufNewFile,BufRead .git/index setlocal nolist
@@ -113,67 +111,67 @@ function! LoadPlugins()
     autocmd BufEnter *.git/index silent normal gg0j
 
     autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
-  Plugin 'mattn/webapi-vim'
-  Plugin 'mattn/gist-vim'
+  Plug 'mattn/webapi-vim'
+  Plug 'mattn/gist-vim'
     let g:gist_open_browser_after_post = 1
     let g:gist_detect_filetype = 2
     let g:gist_post_private = 1
     if has('macunix')
       let g:gist_clip_command = 'pbcopy'
     endif
-  Plugin 'Valloric/ListToggle'
+  Plug 'Valloric/ListToggle'
     let g:lt_location_list_toggle_map = '<F3>'
     let g:lt_quickfix_list_toggle_map = '<F4>'
 
   """"" Filetypes ===========================================================
   """"""" Ruby
-  Plugin 'vim-ruby/vim-ruby'
-  Plugin 'tpope/vim-rails'
-  Plugin 'tpope/vim-rake'
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-rake'
 
   """"""" Misc
-  Plugin 'tpope/vim-git'
-  Plugin 'tpope/vim-markdown'
+  Plug 'tpope/vim-git'
+  Plug 'tpope/vim-markdown'
     let g:markdown_fenced_languages = ['ruby', 'html', 'javascript', 'css', 'erb=eruby.html', 'bash=sh', 'sh']
     autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
     autocmd FileType markdown set tw=80
 
   """"""" JavaScript
-  Plugin 'mxw/vim-jsx'
-  Plugin 'pangloss/vim-javascript'
-  Plugin 'jelera/vim-javascript-syntax'
-  Plugin 'othree/javascript-libraries-syntax.vim'
-  Plugin 'elzr/vim-json'
-  Plugin 'glanotte/vim-jasmine'
-  Plugin 'lukaszb/vim-web-indent'
-  Plugin 'Shutnik/jshint2.vim'
-  Plugin 'burnettk/vim-angular'
+  Plug 'mxw/vim-jsx'
+  Plug 'pangloss/vim-javascript'
+  Plug 'jelera/vim-javascript-syntax'
+  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'elzr/vim-json'
+  Plug 'glanotte/vim-jasmine'
+  Plug 'lukaszb/vim-web-indent'
+  Plug 'Shutnik/jshint2.vim'
+  Plug 'burnettk/vim-angular'
     " src / test directions should be set in project .vimrc
 
   """"""" CSS/Preprocessors
-  Plugin 'othree/html5.vim'
-  Plugin 'aaronjensen/vim-sass-status'
-  Plugin 'cakebaker/scss-syntax.vim'
-  Plugin 'hail2u/vim-css3-syntax'
-  Plugin 'groenewege/vim-less'
-  Plugin 'tpope/vim-haml'
+  Plug 'othree/html5.vim'
+  Plug 'aaronjensen/vim-sass-status'
+  Plug 'cakebaker/scss-syntax.vim'
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'groenewege/vim-less'
+  Plug 'tpope/vim-haml'
 
   """"" Code Navigation======================================================
   """"""" Text objects
-  Plugin 'wellle/targets.vim'
-  Plugin 'kana/vim-textobj-function'
-  Plugin 'kana/vim-textobj-user'
-  Plugin 'mattn/vim-textobj-url'
-  Plugin 'nelstrom/vim-textobj-rubyblock'
-  Plugin 'whatyouhide/vim-textobj-xmlattr'
+  Plug 'wellle/targets.vim'
+  Plug 'kana/vim-textobj-function'
+  Plug 'kana/vim-textobj-user'
+  Plug 'mattn/vim-textobj-url'
+  Plug 'nelstrom/vim-textobj-rubyblock'
+  Plug 'whatyouhide/vim-textobj-xmlattr'
 
-  Plugin 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
-  Plugin 'ervandew/supertab'
+  Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
+  Plug 'ervandew/supertab'
     let g:SuperTabLongestHighlight = 1
     let g:SuperTabCrMapping = 0
     let g:SuperTabDefaultCompletionType = '<C-n>'
-  Plugin 'FelikZ/ctrlp-py-matcher'
-  Plugin 'kien/ctrlp.vim.git'
+  Plug 'FelikZ/ctrlp-py-matcher'
+  Plug 'kien/ctrlp.vim'
     let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
     let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
     let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
@@ -208,11 +206,11 @@ function! LoadPlugins()
           \ 'PrtHistory(1)':        ['<c-p>'],
           \ 'ToggleFocus()':        ['<c-tab>'],
           \}
-  Plugin 'rking/ag.vim'
+  Plug 'rking/ag.vim'
     let g:ackprg="ag --column --nogroup"
     let g:agprg="ag --column --nogroup --line-numbers"
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
-  Plugin 'inside/vim-search-pulse'
+  Plug 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
 
   """"" Snippets ============================================================
@@ -220,28 +218,28 @@ function! LoadPlugins()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  " Plugin 'SirVer/ultisnips'
+  " Plug 'SirVer/ultisnips'
   "   let g:UltiSnipsExpandTrigger="<tab>"
   "   let g:UltiSnipsListSnippets="<c-tab>"
   "   let g:UltiSnipsJumpForwardTrigger="<tab>"
   "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
   "   let g:UltiSnipsSnippetsDir=["UltiSnips"]
-  " Plugin 'matthewsimo/angular-vim-snippets'
+  " Plug 'matthewsimo/angular-vim-snippets'
 
-  Plugin 'vim-scripts/matchit.zip'
+  Plug 'vim-scripts/matchit.zip'
 endfunction
 
-""""" Install Vundle Plugins (fail nicely) ====================================
+""""" Install vim-plug Plugins (fail nicely) ====================================
 try
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#begin()
-  call LoadPlugins()
-  call vundle#end()
+  call plug#begin()
+  call LoadPlugs()
+  call plug#end()
   :catch /^Vim\%((\a\+)\)\=:E117/
-  echomsg "Failed to load vundle and/or bundles. Perhaps vundle isn't installed."
-  echomsg "You need to install vundle into ~/.vim/bundle/vundle: "
-  echomsg "   git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
-  echomsg "   vim -c ':PluginInstall' -c ':qa!'"
+  echomsg "Failed to load vim-plug and/or bundles. Perhaps vim-plg isn't installed."
+  echomsg "You need to install vim-plug into ~/.vim/autoload: "
+  echomsg "   mkdir -p ~/.vim/autoload"
+  echomsg "   curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  echomsg "   vim -c ':PlugInstall' -c ':qa!'"
 endtry
 
 " Enable built-in matchit plugin
