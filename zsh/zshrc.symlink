@@ -2,7 +2,7 @@
 export ZSH=$HOME/.dotfiles
 
 export PROJECTS=~/code #`c <tab>`
-export WORK=~/Isotope11 #`i <tab>`
+export WORK=~/code/Isotope11 #`i <tab>`
 
 # use .localrc for SUPER SECRET STUFF that you don't
 # want in your public, versioned repo.
