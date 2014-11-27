@@ -47,6 +47,8 @@ bind -r C-x kill-pane
 
 unbind C-c
 unbind C-t
+unbind C-y
+unbind C-p
 bind -r C-t new-window
 
 bind p previous-window
@@ -120,11 +122,11 @@ set-window-option -g window-status-current-format "#[fg=colour235, bg=colour27] 
 
 # clipboard
 set-option -g default-command "reattach-to-user-namespace -l zsh"
-# bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-# bind -r C-p run "tmux paste-buffer"
+bind-key C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+bind-key C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
 
-bind-key C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-bind-key C-v run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+# Capture pane and open in Vim
+bind-key C-c capture-pane -S -102400\; save-buffer /tmp/tmux-capture.txt\; new-window "view /tmp/tmux-capture.txt"\; delete-buffer
 
 # allow the cursor to be changed by vim
 set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:XT:Ms=\E]52;%p1%s;%p2%s\007:Cc=\E]12;%p1%s\007:Cr=\E]112\007:Cs=\E]50;CursorShape=%?%p1%{3}%<%t%{0}%e%p1%{2}%-%;%d\007'
