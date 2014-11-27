@@ -168,7 +168,7 @@ function! LoadPlugs()
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
   Plug 'ervandew/supertab'
     let g:SuperTabLongestHighlight = 1
-    let g:SuperTabCrMapping = 1
+    let g:SuperTabCrMapping = 0
     let g:SuperTabDefaultCompletionType = '<C-n>'
   Plug 'FelikZ/ctrlp-py-matcher'
   Plug 'kien/ctrlp.vim'
