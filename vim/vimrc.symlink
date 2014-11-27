@@ -449,7 +449,7 @@ hi SyntasticError ctermbg=red term=bold
 hi CursorLineNr term=bold ctermbg=144
 
 " better tmate UX for other pairers ⇊
-hi CursorLine ctermbg=none
+" hi CursorLine ctermbg=none
 hi NonText ctermfg=24
 hi SpecialKey ctermfg=24 guibg=NONE
 hi Search term=underline ctermbg=144
@@ -599,38 +599,38 @@ augroup filetypes
   autocmd InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
   autocmd InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
 
-  " " JSX
-  " " https://github.com/lencioni/dotfiles/blob/master/.vim/ftdetect/jsx.vim
-  " function! s:ScanFile()
-  "   let n = 1
-  "   let nmax = line("$")
-  "   if line("$") > 500
-  "     let nmax = 500
-  "   endif
-  "   while n < nmax
-  "     if getline(n) =~ "\\v<React\\.|<jsx>"
-  "       return 1
-  "       break
-  "     endif
-  "     let n = n + 1
-  "   endwhile
-  "   return 0
-  " endfunction
-  "
-  " function! s:DetectJSX(file)
-  "   if a:file =~ "\\v\\.html""
-  "     if s:ScanFile()
-  "       set ft=html.jsx
-  "     endif
-  "   elseif a:file =~ "\\v\\.js""
-  "     if s:ScanFile()
-  "       set ft=javascript.jsx
-  "     endif
-  "   endif
-  " endfunction
-  " autocmd BufNewFile,BufRead *.js.jsx set ft=javascript.jsx
-  " autocmd BufNewFile,BufRead *{_spec,Spec}.js.jsx set ft=javascript.jsx.jasmine
-  " autocmd BufNewFile,BufRead *.html,*.js call s:DetectJSX(expand("<afile>"))
+  " JSX
+  " https://github.com/lencioni/dotfiles/blob/master/.vim/ftdetect/jsx.vim
+  function! s:ScanFile()
+    let n = 1
+    let nmax = line("$")
+    if line("$") > 500
+      let nmax = 500
+    endif
+    while n < nmax
+      if getline(n) =~ "\\v<React\\.|<jsx>"
+        return 1
+        break
+      endif
+      let n = n + 1
+    endwhile
+    return 0
+  endfunction
+
+  function! s:DetectJSX(file)
+    if a:file =~ "\\v\\.html""
+      if s:ScanFile()
+        set ft=html.jsx
+      endif
+    elseif a:file =~ "\\v\\.js""
+      if s:ScanFile()
+        set ft=javascript.jsx
+      endif
+    endif
+  endfunction
+  autocmd BufNewFile,BufRead *.js.jsx set ft=javascript.jsx
+  autocmd BufNewFile,BufRead *{_spec,Spec}.js.jsx set ft=javascript.jsx.jasmine
+  autocmd BufNewFile,BufRead *.html,*.js call s:DetectJSX(expand("<afile>"))
 augroup END
 
 
