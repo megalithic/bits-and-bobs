@@ -656,8 +656,8 @@ nmap <leader>c :TComment<cr>
 vmap <leader>c :TComment<cr>
 
 """"""" Vundle
-noremap <F5> :PluginInstall!<cr>
-map <F5> :PluginInstall!<cr>
+noremap <F5> :PlugUpdate<cr>
+map <F5> :PlugUpdate<cr>
 
 """"""" Fugitive
 nnoremap <leader>H :Gbrowse<cr>
