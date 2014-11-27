@@ -66,7 +66,7 @@ function! LoadPlugins()
           \ }
   Plugin 'scrooloose/syntastic'
     let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.jshintrc'
-    let g:syntastic_enable_signs = 0 " slow downs
+    let g:syntastic_enable_signs = 1 " slow downs
     let g:syntastic_check_on_open = 0 " slow downs
     let g:syntastic_disabled_filetypes = ['html', 'rst']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
@@ -81,7 +81,7 @@ function! LoadPlugins()
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_quiet_messages = { "type": "style" }
-    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
   Plugin 'farseer90718/Rainbow-Parentheses-Improved-and2'
     let g:rainbow_active = 1
 
@@ -253,7 +253,8 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 """"" UI ====================================================================
 """"""" Theme / Terminal
-colorscheme base16-ocean
+colorscheme base16-eighties
+let base16colorspace=256  " Access colors present in 256 colorspac
 set background=dark
 
 filetype plugin indent on
@@ -301,6 +302,9 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
+" Prevent Vim from clobbering the scrollback buffer. See
+" http://www.shallowsky.com/linux/noaltscreen.html
+set t_ti= t_te=
 
 """"" Behavior ==============================================================
 """"""" Swaps / Backups / Sessions / History
@@ -679,7 +683,7 @@ silent! map <unique> <Leader>l :VroomRunLastTest<CR>
 vnoremap <leader>G !gist -p -t %:e \\| pbcopy<cr>
 
 """"""" Gist
-nnoremap <leader>e :SyntasticCheck<cr> :SyntasticToggleMode<cr>
+nnoremap <leader>e :SyntasticToggleMode<cr> :SyntasticCheck<cr>
 
 """"""" Surround
 vmap [ S]
