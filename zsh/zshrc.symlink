@@ -50,6 +50,8 @@ chruby ruby-2.1.3
 
 # [[ $TERM = "tmux" ]] && rvm use default # this was [[$TERM = "screen"]]
 # source ~/.fzf.zsh
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
 
 # ===========================================================================
 # NOTE: DO NOT PUT `source`s for *.zsh files local to ~/.dotfiles/zsh folder.

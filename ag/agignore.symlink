@@ -15,6 +15,9 @@
 /public/system
 **/coverage/
 .DS_Store
+.git
+.svn
+.hg
 *.sql
 *.tags*
 *.gemtags*

@@ -38,7 +38,6 @@ function! LoadPlugs()
   Plug 'chriskempson/base16-vim'
   Plug 'roman/golden-ratio'
   Plug 'bling/vim-airline'
-    set laststatus=2 " so we always get airline displaying / always show status
     let g:airline_enable_branch=1
     let g:airline_enable_syntastic=1
     let g:airline_theme='wombat'
@@ -80,6 +79,9 @@ function! LoadPlugs()
     let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_quiet_messages = { "type": "style" }
     let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
+    let g:syntastic_always_populate_loc_list=1
+    let g:syntastic_auto_loc_list=1
+    let g:syntastic_loc_list_height = 5
   Plug 'farseer90718/Rainbow-Parentheses-Improved-and2'
     let g:rainbow_active = 1
 
@@ -99,26 +101,6 @@ function! LoadPlugs()
   Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1
     let g:vroom_map_keys = 0
-  Plug 'tpope/vim-fugitive'
-    augroup ft_fugitive
-      au!
-      au BufNewFile,BufRead .git/index setlocal nolist
-      " Automatically remove fugitive buffers
-      autocmd BufReadPost fugitive://* set bufhidden=delete
-    augroup END
-
-    autocmd BufReadCmd *.git/index exe BufReadIndex()
-    autocmd BufEnter *.git/index silent normal gg0j
-
-    autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
-  Plug 'mattn/webapi-vim'
-  Plug 'mattn/gist-vim'
-    let g:gist_open_browser_after_post = 1
-    let g:gist_detect_filetype = 2
-    let g:gist_post_private = 1
-    if has('macunix')
-      let g:gist_clip_command = 'pbcopy'
-    endif
   Plug 'Valloric/ListToggle'
     let g:lt_location_list_toggle_map = '<F3>'
     let g:lt_quickfix_list_toggle_map = '<F4>'
@@ -130,7 +112,6 @@ function! LoadPlugs()
   Plug 'tpope/vim-rake'
 
   """"""" Misc
-  Plug 'tpope/vim-git'
   Plug 'tpope/vim-markdown'
     let g:markdown_fenced_languages = ['ruby', 'html', 'javascript', 'css', 'erb=eruby.html', 'bash=sh', 'sh']
     autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
@@ -172,7 +153,8 @@ function! LoadPlugs()
     let g:SuperTabDefaultCompletionType = '<C-n>'
   Plug 'FelikZ/ctrlp-py-matcher'
   Plug 'kien/ctrlp.vim'
-    let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
+    let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
+    let g:ctrlp_switch_buffer=0            " open files in new buffers
     let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
     let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
     let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
@@ -186,14 +168,12 @@ function! LoadPlugs()
     let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
     let g:ctrlp_max_files = 0              " no restriction on results/file list
     let g:ctrlp_working_path_mode = ''
-    let g:ctrlp_dont_split = 'NERD_tree_2' " don't split these buffers
     let g:ctrlp_custom_ignore = {
           \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
           \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
           \ }
     " let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-    " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" -g ""'
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden -g ""'
     " let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
     let g:ctrlp_prompt_mappings = {
           \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
@@ -206,12 +186,40 @@ function! LoadPlugs()
           \ 'PrtHistory(1)':        ['<c-p>'],
           \ 'ToggleFocus()':        ['<c-tab>'],
           \}
-  Plug 'rking/ag.vim'
+  Plug 'megalithic/ag.vim'
+    set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup"
     let g:agprg="ag --column --nogroup --line-numbers"
-    set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
+    let g:aghighlight=1
+    let g:ag_qhandler="copen 30"
+    let g:ag_results_mapping_replacements = {
+      \   'vertical_split_and_close': '<cr>',
+      \   'open': 'o',
+      \ }
+
   Plug 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
+
+  """"" Git/Gist ============================================================
+  Plug 'tpope/vim-git'
+  Plug 'tpope/vim-fugitive'
+    augroup ft_fugitive
+      au!
+      autocmd BufNewFile,BufRead .git/index setlocal nolist
+      autocmd BufReadPost fugitive://* set bufhidden=delete
+    augroup END
+    autocmd BufReadCmd *.git/index exe BufReadIndex()
+    autocmd BufEnter *.git/index silent normal gg0j
+    autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
+  Plug 'mattn/webapi-vim'
+  Plug 'mattn/gist-vim'
+    let g:gist_open_browser_after_post = 1
+    let g:gist_detect_filetype = 2
+    let g:gist_post_private = 1
+    if has('macunix')
+      let g:gist_clip_command = 'pbcopy'
+    endif
+  Plug 'gregsexton/gitv'
 
   """"" Snippets ============================================================
   " Snippets information (handy!):
@@ -290,6 +298,7 @@ set noerrorbells
 set novisualbell
 set number
 set splitbelow
+set laststatus=2 " so we always get airline displaying / always show status
 
 " change vim cursor depending on the mode
 if exists('$TMUX')
@@ -517,41 +526,37 @@ endfunction
 " -----------------------------------------------------------------------------
 if exists('+colorcolumn')
   augroup UnSyntaxInactive
-    au!
-    au WinEnter * set number
-    au BufWinEnter * set syntax=ON
-    au BufEnter * set syntax=ON
-    au WinEnter * set syntax=ON
+    autocmd!
+    autocmd BufEnter,WinEnter * set syntax=ON
+    autocmd BufEnter,WinEnter * set number
 
-    au BufWinLeave * set syntax=OFF
-    au BufLeave * set syntax=OFF
-    au WinLeave * set syntax=OFF
-    au WinLeave * set nonumber
+    autocmd BufLeave,WinLeave * set syntax=OFF
+    autocmd BufLeave,WinLeave * set nonumber
   augroup END
 endif
 
 augroup Tmux
-  au!
-  au VimEnter,BufNewFile,BufReadPost * call system('tmux rename-window "vim - ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1] . '"')
-  au VimLeave * call system('tmux rename-window ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1])
+  autocmd!
+  autocmd VimEnter,BufNewFile,BufReadPost * call system('tmux rename-window "vim - ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1] . '"')
+  autocmd VimLeave * call system('tmux rename-window ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1])
 augroup END
 
 augroup ReturnToLastEditedLine
-  au!
-  au BufReadPost *
+  autocmd!
+  autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \     execute 'normal! g`"zvzz' |
     \ endif
 augroup END
 
 " Delete trailing whitespace on write
-au BufWrite * silent call DeleteTrailingWS()
+autocmd BufWrite * silent call DeleteTrailingWS()
 
 " Resize splits when the window is resized
-au VimResized * :wincmd =
+autocmd VimResized * :wincmd =
 
 " No line numbers in the cmd window
-au CmdwinEnter * set nonumber
+autocmd CmdwinEnter * set nonumber
 
 " Color Column (only on insert)
 if exists("&colorcolumn")
