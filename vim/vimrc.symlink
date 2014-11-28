@@ -174,7 +174,6 @@ function! LoadPlugs()
         \ }
     let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden -g ""'
-    " let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
     let g:ctrlp_prompt_mappings = {
         \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
         \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
@@ -191,7 +190,7 @@ function! LoadPlugs()
     let g:ackprg="ag --column --nogroup"
     let g:agprg="ag --column --nogroup --line-numbers"
     let g:aghighlight=1
-    let g:ag_qhandler="copen 30"
+    let g:ag_qhandler="copen 10"
     let g:ag_results_mapping_replacements = {
         \   'vertical_split_and_close': '<cr>',
         \   'open': 'o',
@@ -219,7 +218,6 @@ function! LoadPlugs()
     if has('macunix')
       let g:gist_clip_command = 'pbcopy'
     endif
-  Plug 'gregsexton/gitv'
 
   """"" Snippets ============================================================
   " Snippets information (handy!):
