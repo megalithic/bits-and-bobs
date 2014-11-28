@@ -169,23 +169,25 @@ function! LoadPlugs()
     let g:ctrlp_max_files = 0              " no restriction on results/file list
     let g:ctrlp_working_path_mode = ''
     let g:ctrlp_custom_ignore = {
-          \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
-          \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
-          \ }
-    " let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+        \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
+        \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
+        \ }
+    if has('python')
+      let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+    endif
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden -g ""'
     " let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
     let g:ctrlp_prompt_mappings = {
-          \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
-          \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-          \ 'AcceptSelection("t")': ['<c-t>'],
-          \ 'AcceptSelection("v")': ['<cr>', '<RightMouse>'],
-          \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
-          \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
-          \ 'PrtHistory(-1)':       ['<c-n>'],
-          \ 'PrtHistory(1)':        ['<c-p>'],
-          \ 'ToggleFocus()':        ['<c-tab>'],
-          \}
+        \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
+        \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+        \ 'AcceptSelection("t")': ['<c-t>'],
+        \ 'AcceptSelection("v")': ['<cr>', '<RightMouse>'],
+        \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+        \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+        \ 'PrtHistory(-1)':       ['<c-n>'],
+        \ 'PrtHistory(1)':        ['<c-p>'],
+        \ 'ToggleFocus()':        ['<c-tab>'],
+        \}
   Plug 'megalithic/ag.vim'
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup"
@@ -193,9 +195,9 @@ function! LoadPlugs()
     let g:aghighlight=1
     let g:ag_qhandler="copen 30"
     let g:ag_results_mapping_replacements = {
-      \   'vertical_split_and_close': '<cr>',
-      \   'open': 'o',
-      \ }
+        \   'vertical_split_and_close': '<cr>',
+        \   'open': 'o',
+        \ }
 
   Plug 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
@@ -204,7 +206,7 @@ function! LoadPlugs()
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
     augroup ft_fugitive
-      au!
+      autocmd!
       autocmd BufNewFile,BufRead .git/index setlocal nolist
       autocmd BufReadPost fugitive://* set bufhidden=delete
     augroup END
