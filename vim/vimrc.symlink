@@ -37,6 +37,7 @@ function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
   Plug 'roman/golden-ratio'
+    let g:golden_ratio_exclude_nonmodifiable = 0
   Plug 'bling/vim-airline'
     let g:airline_enable_branch=1
     let g:airline_enable_syntastic=1
@@ -551,10 +552,8 @@ augroup END
 autocmd BufWrite * silent call DeleteTrailingWS()
 
 " Resize splits when the window is resized
-autocmd VimResized * :wincmd =
-
-" No line numbers in the cmd window
-autocmd CmdwinEnter * set nonumber
+" autocmd VimResized * :wincmd =
+autocmd VimResized * <Plug>(golden_ratio_resize)
 
 " Color Column (only on insert)
 if exists("&colorcolumn")
