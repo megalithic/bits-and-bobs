@@ -151,7 +151,7 @@ function! LoadPlugs()
     let g:SuperTabLongestHighlight = 1
     let g:SuperTabCrMapping = 0
     let g:SuperTabDefaultCompletionType = '<C-n>'
-  Plug 'FelikZ/ctrlp-py-matcher'
+  Plug 'JazzCore/ctrlp-cmatcher', { 'dir': '~/.vim/plugged/ctrlp-cmatcher/', 'do': './install.sh' }
   Plug 'kien/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
     let g:ctrlp_switch_buffer=0            " open files in new buffers
@@ -172,9 +172,7 @@ function! LoadPlugs()
         \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
         \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
         \ }
-    if has('python')
-      let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-    endif
+    let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden -g ""'
     " let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
     let g:ctrlp_prompt_mappings = {
