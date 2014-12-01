@@ -39,7 +39,7 @@ function! LoadPlugs()
   Plug 'RobertAudi/golden-ratio'
     let g:golden_ratio_exclude_nonmodifiable = 0
     let g:golden_ratio_wrap_ignored = 1
-    let g:golden_ratio_filetypes_blacklist = ["nerdtree", "unite", "ctrlp", "quickfix-list", "quickfix-list-window", "location-list", "location-list-window"]
+    let g:golden_ratio_filetypes_blacklist = ["nerdtree", "unite", "ctrlp", "quickfix", "quickfix-list", "quickfix-list-window", "location-list", "location-list-window", "unlisted", "directory", "help", "scratch"]
   Plug 'bling/vim-airline'
     let g:airline_enable_branch=1
     let g:airline_enable_syntastic=1
