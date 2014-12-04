@@ -282,16 +282,16 @@ set shell=/usr/local/bin/zsh\ --login
 
 """"""" Layout
 set linebreak
+" set textwidth=79
 set nowrap " off is 'nowrap'
 set wrapscan
 set synmaxcol=800 " turn off syntax highlight beyond 800 chars
-set textwidth=79
 set showcmd " show incomplete commands
 set ruler " show the cursor position all the time
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
-set cul " turn on cursorline highlighting -- needed for linenumber hl too
+set cul " turn on cursorline highlighting -- needed for linenumber HL too
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
 set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
@@ -465,9 +465,7 @@ hi SpecialKey ctermfg=24 guibg=NONE
 hi Search term=underline ctermbg=144
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-" match ExtraWhitespace /\s\+$/
 match ExtraWhitespace /\s\+\%#\@<!$/
-" match OverLength /\%80v.\+/
 
 
 " =============================================================================
@@ -513,7 +511,7 @@ function! s:Repl()
   return "p@=RestoreRegister()\<cr>"
 endfunction
 
-" Neovim support system clipboard in OSX
+" Neovim support for system clipboard in OSX
 function! ClipboardYank()
   call system('pbcopy', @@)
 endfunction
@@ -563,6 +561,11 @@ if exists("&colorcolumn")
   autocmd InsertLeave * set colorcolumn=""
 endif
 
+if exists('+colorcolumn')
+  " set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
 
 " =============================================================================
 " Filetypes / Syntax #ftypes

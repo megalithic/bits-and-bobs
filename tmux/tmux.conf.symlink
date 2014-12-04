@@ -21,6 +21,16 @@ set -g history-limit 50000
 # tmate stuffs
 set -g set-titles on
 
+# Fixes for ssh-agent.
+set -g update-environment "SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION"
+
+# Fix LSOpenURLsWithRole() error on OS X. Requires reattach-to-user-namespace to be installed.
+set-option -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
+
+# Faster escape sequences (default is 500ms).
+# This helps when exiting insert mode in Vim: http://superuser.com/a/252717/65504.
+set -sg escape-time 50
+
 # 256 color support
 set -g default-terminal "screen-256color"
 set -g terminal-overrides 'xterm:colors=256'
@@ -28,7 +38,6 @@ set-option -g default-shell /usr/local/bin/zsh
 
 # Start window numbers from 1
 set -g base-index 1
-set -sg escape-time 0
 
 # Key bindings
 bind C-d detach			# the same as d so you don't have to depress Ctrl
@@ -37,8 +46,9 @@ bind -r C-R source-file ~/.tmux.conf \; display-message "Configuration reloaded.
 bind-key r refresh-client
 
 # Splitting panes
-bind '|' split-window -h
-bind '_' split-window -v
+bind '|' split-window -h -c "#{pane_current_path}"
+bind '_' split-window -v -c "#{pane_current_path}"
+bind -r C-t new-window -c "#{pane_current_path}"
 
 bind -r C-x kill-pane
 
@@ -49,7 +59,6 @@ unbind C-c
 unbind C-t
 unbind C-y
 unbind C-p
-bind -r C-t new-window
 
 bind p previous-window
 unbind C-space
