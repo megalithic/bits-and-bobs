@@ -92,6 +92,7 @@ alias dl="cd $HOME/Downloads/"
 alias sbox="cd ~/code/sandbox/"
 alias railsfiles="cd ~/Dropbox/scripts/rails_defaults/"
 alias tip="cd ~/code/tipping"
+alias gao="cd ~/code/Isotope11/gao_app"
 
 alias pto="cd ~/code/Isotope11/uspto"
 alias uspto="cd ~/code/Isotope11/uspto"

@@ -82,11 +82,31 @@ function! LoadPlugs()
     let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_quiet_messages = { "type": "style" }
     let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
-    let g:syntastic_always_populate_loc_list=1
-    let g:syntastic_auto_loc_list=1
+    let g:syntastic_auto_loc_list=0
     let g:syntastic_loc_list_height = 5
-  Plug 'farseer90718/Rainbow-Parentheses-Improved-and2'
+  Plug 'luochen1990/rainbow'
     let g:rainbow_active = 1
+    let g:rainbow_conf = {
+      \    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+      \    'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan'],
+      \    'operators': '_,_',
+      \    'parentheses': [['(',')'], ['\[','\]'], ['{','}']],
+      \    'separately': {
+      \        '*': {},
+      \        'lisp': {
+      \            'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+      \            'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan', 'darkred', 'darkgreen'],
+      \        },
+      \        'vim': {
+      \            'parentheses': [['fu\w* \s*.*)','endfu\w*'], ['for','endfor'], ['while', 'endwhile'], ['if','_elseif\|else_','endif'], ['(',')'], ['\[','\]'], ['{','}']],
+      \        },
+      \        'tex': {
+      \            'parentheses': [['(',')'], ['\[','\]'], ['\\begin{.*}','\\end{.*}']],
+      \        },
+      \        'css': 0,
+      \        'stylus': 0,
+      \    }
+      \}
 
   """"" Utilities ===========================================================
   Plug 'tomtom/tcomment_vim'
@@ -122,7 +142,7 @@ function! LoadPlugs()
 
   """"""" JavaScript
   Plug 'mxw/vim-jsx'
-  Plug 'pangloss/vim-javascript'
+  " Plug 'pangloss/vim-javascript' " breaks rainbow parens :(
   Plug 'jelera/vim-javascript-syntax'
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'elzr/vim-json'
@@ -265,6 +285,7 @@ let base16colorspace=256  " Access colors present in 256 colorspac
 set background=dark
 
 filetype plugin indent on
+" are these 2 syntax' needed?
 syntax enable
 syntax on
 
@@ -282,8 +303,8 @@ set shell=/usr/local/bin/zsh\ --login
 
 """"""" Layout
 set linebreak
-" set textwidth=79
-set nowrap " off is 'nowrap'
+" set textwidth=79 " will auto wrap content when set
+set nowrap " on is 'wrap'
 set wrapscan
 set synmaxcol=800 " turn off syntax highlight beyond 800 chars
 set showcmd " show incomplete commands
@@ -336,6 +357,8 @@ else
   set nowritebackup
   set noswapfile
 endif
+
+set noswapfile "override because i hate swap files
 
 set sessionoptions-=options " Do not save settings and mappings to sessions
 set history=100
@@ -608,36 +631,36 @@ augroup filetypes
 
   " JSX
   " https://github.com/lencioni/dotfiles/blob/master/.vim/ftdetect/jsx.vim
-  function! s:ScanFile()
-    let n = 1
-    let nmax = line("$")
-    if line("$") > 500
-      let nmax = 500
-    endif
-    while n < nmax
-      if getline(n) =~ "\\v<React\\.|<jsx>"
-        return 1
-        break
-      endif
-      let n = n + 1
-    endwhile
-    return 0
-  endfunction
-
-  function! s:DetectJSX(file)
-    if a:file =~ "\\v\\.html""
-      if s:ScanFile()
-        set ft=html.jsx
-      endif
-    elseif a:file =~ "\\v\\.js""
-      if s:ScanFile()
-        set ft=javascript.jsx
-      endif
-    endif
-  endfunction
-  autocmd BufNewFile,BufRead *.js.jsx set ft=javascript.jsx
-  autocmd BufNewFile,BufRead *{_spec,Spec}.js.jsx set ft=javascript.jsx.jasmine
-  autocmd BufNewFile,BufRead *.html,*.js call s:DetectJSX(expand("<afile>"))
+"   function! s:ScanFile()
+"     let n = 1
+"     let nmax = line("$")
+"     if line("$") > 500
+"       let nmax = 500
+"     endif
+"     while n < nmax
+"       if getline(n) =~ "\\v<React\\.|<jsx>"
+"         return 1
+"         break
+"       endif
+"       let n = n + 1
+"     endwhile
+"     return 0
+"   endfunction
+"
+"   function! s:DetectJSX(file)
+"     if a:file =~ "\\v\\.html""
+"       if s:ScanFile()
+"         set ft=html.jsx
+"       endif
+"     elseif a:file =~ "\\v\\.js""
+"       if s:ScanFile()
+"         set ft=javascript.jsx
+"       endif
+"     endif
+"   endfunction
+"   autocmd BufNewFile,BufRead *.js.jsx set ft=javascript.jsx
+"   autocmd BufNewFile,BufRead *{_spec,Spec}.js.jsx set ft=javascript.jsx.jasmine
+"   autocmd BufNewFile,BufRead *.html,*.js call s:DetectJSX(expand("<afile>"))
 augroup END
 
 

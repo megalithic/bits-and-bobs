@@ -29,7 +29,7 @@ set-option -g default-command "which reattach-to-user-namespace > /dev/null && r
 
 # Faster escape sequences (default is 500ms).
 # This helps when exiting insert mode in Vim: http://superuser.com/a/252717/65504.
-set -sg escape-time 50
+set -sg escape-time 0
 
 # 256 color support
 set -g default-terminal "screen-256color"
@@ -122,7 +122,6 @@ set -g status-right "#(/usr/local/bin/battery -t) #[fg=yellow] %b %d, %Y #[fg=bl
 set-window-option -g utf8 on
 set-window-option -g monitor-activity off
 set-window-option -g xterm-keys on
-# set-window-option -g mode-keys vi
 set-window-option -g automatic-rename on
 set-window-option -g aggressive-resize on
 set-window-option -g window-status-format ' #I ◦ #W '
