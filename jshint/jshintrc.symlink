@@ -24,6 +24,7 @@
   "globals": {
     "dojo": true,
     "$": true,
+    "_": true,
     "jquery": true,
     "jQuery": true,
     "document": true,

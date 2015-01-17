@@ -168,7 +168,7 @@ function! LoadPlugs()
   Plug 'mattn/vim-textobj-url'
   Plug 'nelstrom/vim-textobj-rubyblock'
   Plug 'whatyouhide/vim-textobj-xmlattr'
-
+  Plug 'EinfachToll/DidYouMean'
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
   Plug 'ervandew/supertab'
     let g:SuperTabLongestHighlight = 1
@@ -222,6 +222,7 @@ function! LoadPlugs()
 
   Plug 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
+  Plug 'kopischke/vim-fetch'
 
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
@@ -237,7 +238,7 @@ function! LoadPlugs()
   Plug 'mattn/webapi-vim'
   Plug 'mattn/gist-vim'
     let g:gist_open_browser_after_post = 1
-    let g:gist_detect_filetype = 2
+    let g:gist_detect_filetype = 1
     let g:gist_post_private = 1
     if has('macunix')
       let g:gist_clip_command = 'pbcopy'
@@ -709,8 +710,7 @@ silent! map <unique> <Leader>l :VroomRunLastTest<CR>
 """"""" Gist
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
-" vnoremap <leader>G :'<,'>Gist -p -t<cr>
-vnoremap <leader>G !gist -p -t %:e \\| pbcopy<cr>
+vnoremap <leader>G :Gist -p<cr>
 
 """"""" Gist
 nnoremap <leader>e :SyntasticToggleMode<cr> :SyntasticCheck<cr>

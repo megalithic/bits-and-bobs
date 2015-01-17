@@ -27,15 +27,14 @@ alias tmux="TERM=screen-256color-bce tmux -2"
 alias tm=tmux
 alias takeover="tmux detach -a"
 
-alias tgum="tmux attach-session -t gumshoe"
+alias tgao="tmux attach-session -t gao"
 alias tiso="tmux attach-session -t isotope"
 alias tpto="tmux attach-session -t uspto"
-alias tomni="tmux attach-session -t omniscient"
-alias t="tmux attach-session -t std"
-alias teamgum="cd ~ && teamocil --here gumshoe"
+alias t="tmux attach-session -t default"
+alias teamgao="cd ~ && teamocil --here gao"
 alias teamiso="cd ~ && teamocil --here isotope"
-alias teampto="cd ~/.dotfiles; teamocil --here uspto"
-alias team="cd ~/.dotfiles; teamocil --here std"
+alias teampto="cd ~ && teamocil --here uspto"
+alias team="cd ~ && teamocil --here default"
 
 ## - BREW -----------------------------------------------
 alias b="brew"
@@ -45,7 +44,7 @@ alias py="python"
 
 ## - VIM -----------------------------------------------
 alias vim="/usr/local/bin/vim"
-# alias vim="nvim" # just wanna use neovim
+alias vim="nvim" # just wanna use neovim
 alias vi="vim"
 alias vmi="vim"
 alias v="vim"
@@ -102,8 +101,8 @@ alias tope="cd ~/code/Isotope11"
 alias iso=tope
 
 ## - POSTGRES -----------------------------------------------
-alias startpg="pg_ctl -D /usr/local/var/postgres -l ~/code/logs/server.log start" #postgres -D /usr/local/var/postgres
-alias stoppg="pg_ctl -D /usr/local/var/postgres -l ~/code/logs/server.log stop" #postgres -D /usr/local/var/postgres
+alias startpg="pg_ctl -D /usr/local/var/postgres -l logfile start" #`pg_ctl -D /usr/local/var/postgres -l ~/code/logs/server.log start` OR `postgres -D /usr/local/var/postgres` OR `pg_ctl -D /usr/local/var/postgres -l logfile start`
+alias stoppg="pg_ctl -D /usr/local/var/postgres -l logfile stop" #`postgres -D /usr/local/var/postgres`
 alias pgstart="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pgstop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
   # To have launchd start postgresql at login:

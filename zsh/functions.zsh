@@ -282,24 +282,6 @@ if [[ $IS_MAC -eq 1 ]]; then
     notify() { automator -D title=$1 -D subtitle=$2 -D message=$3 ~/Library/Workflows/DisplayNotification.wflow }
 fi
 
-## - Complete in specific folders -----------------------------------------------
-# c() { cd ~/code/$1; }
-# _c() { _files -W ~/code -/; }
-# compdef _c c
-
-# # d() { cd ~/Development/$1; }
-# # _d() { _files -W ~/Development -/; }
-# # compdef _d d
-
-# i() { cd ~/Isotope11/$1; }
-# _i() { _files -W ~/Isotope11 -/; }
-# compdef _i i
-
-# h() { cd ~/$1; }
-# _h() { _files -W ~/ -/; }
-# compdef _h h
-
-
 # Log output:
 #
 # * 51c333e    (12 days)    <Gary Bernhardt>   add vim-eunuch

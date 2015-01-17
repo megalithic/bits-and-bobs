@@ -44,8 +44,6 @@ export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_GC_HEAP_FREE_SLOTS=500000
 export RUBY_GC_HEAP_INIT_SLOTS=40000
 
-export DATABASE_URL=postgres:///$(whoami)
-
 export ECLIPSE_HOME=/Applications/Eclipse
 export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
 
@@ -53,3 +51,4 @@ export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"

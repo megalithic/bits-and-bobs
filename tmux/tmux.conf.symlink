@@ -49,11 +49,7 @@ bind-key r refresh-client
 bind '|' split-window -h -c "#{pane_current_path}"
 bind '_' split-window -v -c "#{pane_current_path}"
 bind -r C-t new-window -c "#{pane_current_path}"
-
 bind -r C-x kill-pane
-
-# bind-key x kill-pane
-# bind-key & kill-window
 
 unbind C-c
 unbind C-t
@@ -64,6 +60,7 @@ bind p previous-window
 unbind C-space
 unbind space
 bind -r C-space select-pane -t :.+
+
 # original pane movement bindings:
 bind -r C-h select-pane -L
 bind -r C-l select-pane -R
@@ -79,8 +76,8 @@ unbind ]
 bind Escape copy-mode
 # unbind p
 # bind p paste-buffer
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
+#bind-key -t vi-copy 'v' begin-selection
+#bind-key -t vi-copy 'y' copy-selection
 
 # Tmux Powerline settings
 set-option -g status on
@@ -134,7 +131,7 @@ bind-key C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 bind-key C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
 
 # Capture pane and open in Vim
-bind-key C-c capture-pane -S -102400\; save-buffer /tmp/tmux-capture.txt\; new-window "view /tmp/tmux-capture.txt"\; delete-buffer
+#bind-key C-c capture-pane -S -102400\; save-buffer /tmp/tmux-capture.txt\; new-window "view /tmp/tmux-capture.txt"\; delete-buffer
 
 # allow the cursor to be changed by vim
 set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:XT:Ms=\E]52;%p1%s;%p2%s\007:Cc=\E]12;%p1%s\007:Cr=\E]112\007:Cs=\E]50;CursorShape=%?%p1%{3}%<%t%{0}%e%p1%{2}%-%;%d\007'

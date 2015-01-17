@@ -165,7 +165,7 @@ exit
 # Some homebrew packages need additional commands to complete their setup:
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-sudo -u $(whoami) createdb $(whoami)
+# sudo -u $(whoami) createdb $(whoami)
 brew link openssl --force
 brew link python --force
 

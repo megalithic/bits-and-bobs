@@ -10,27 +10,6 @@ bindkey '^[[A'    up-line-or-search
 bindkey '^[[B'    down-line-or-search
 bindkey "[B"      history-search-forward               # down arrow
 bindkey "[A"      history-search-backward              # up arrow
-# bindkey "^D"      delete-char                          # ctrl-d
-# bindkey "^F"      forward-char                         # ctrl-f
-# bindkey "^B"      backward-char                        # ctrl-b
-# bindkey "^[[3~"   delete-char                          # delete forward
-# bindkey "^[3;5~"  delete-char                          # delete forward
-# bindkey "\e[3~"  delete-char                          # delete forward
-# bindkey '^[[1;5C' emacs-forward-word
-# bindkey '^[[1;5D' emacs-backward-word
-# bindkey -e   # Default to standard emacs bindings, regardless of editor string
-
-# Enable Ctrl-x-e to edit command line
-# autoload -U edit-command-line
-# Emacs style
-# zle -N edit-command-line
-# bindkey '^xe' edit-command-line
-# bindkey '^x^e' edit-command-line
-# Vi style:
-# zle -N edit-command-line
-# bindkey -M vicmd v edit-command-line
-# # Use C-x C-e to edit the current command line
-# bindkey '\C-x\C-e' edit-command-line
 
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^S' history-incremental-pattern-search-forward
