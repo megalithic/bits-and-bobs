@@ -159,6 +159,7 @@ function! LoadPlugs()
   Plug 'hail2u/vim-css3-syntax'
   Plug 'groenewege/vim-less'
   Plug 'tpope/vim-haml'
+  Plug 'slim-template/vim-slim'
 
   """"" Code Navigation======================================================
   """"""" Text objects
@@ -195,7 +196,7 @@ function! LoadPlugs()
         \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
         \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
         \ }
-    let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+    " let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden -g ""'
     let g:ctrlp_prompt_mappings = {
         \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],

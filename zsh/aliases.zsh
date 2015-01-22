@@ -44,7 +44,7 @@ alias py="python"
 
 ## - VIM -----------------------------------------------
 alias vim="/usr/local/bin/vim"
-alias vim="nvim" # just wanna use neovim
+# alias vim="nvim" # just wanna use neovim
 alias vi="vim"
 alias vmi="vim"
 alias v="vim"
