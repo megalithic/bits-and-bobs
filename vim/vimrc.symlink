@@ -154,12 +154,12 @@ function! LoadPlugs()
 
   """"""" CSS/Preprocessors
   Plug 'othree/html5.vim'
+  Plug 'groenewege/vim-less'
+  Plug 'slim-template/vim-slim'
+  Plug 'tpope/vim-haml'
   Plug 'aaronjensen/vim-sass-status'
   Plug 'cakebaker/scss-syntax.vim'
   Plug 'hail2u/vim-css3-syntax'
-  Plug 'groenewege/vim-less'
-  Plug 'tpope/vim-haml'
-  Plug 'slim-template/vim-slim'
 
   """"" Code Navigation======================================================
   """"""" Text objects
@@ -198,6 +198,7 @@ function! LoadPlugs()
         \ }
     " let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden -g ""'
+    "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
     let g:ctrlp_prompt_mappings = {
         \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
         \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
