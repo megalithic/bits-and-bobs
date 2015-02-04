@@ -258,6 +258,17 @@ function! LoadPlugs()
   "   let g:UltiSnipsSnippetsDir=["UltiSnips"]
   " Plug 'matthewsimo/angular-vim-snippets'
 
+  " vim-react-snippets:
+  Plug 'justinj/vim-react-snippets'
+
+  " SnipMate and its dependencies:
+  Plug 'MarcWeber/vim-addon-mw-utils'
+  Plug 'tomtom/tlib_vim'
+  Plug 'garbas/vim-snipmate'
+
+  " Other sets of snippets (optional):
+  Plug 'honza/vim-snippets'
+
   Plug 'vim-scripts/matchit.zip'
 endfunction
 
