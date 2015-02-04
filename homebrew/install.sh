@@ -35,7 +35,6 @@ brew install gcc48
 # brew install battery
 
 # TODO: need to get this cleaned up, lots of deps here
-brew install ack
 brew install autoconf
 brew install automake
 brew install avrdude
@@ -93,7 +92,6 @@ brew install libyaml
 brew install lua
 brew install maven
 brew install mercurial
-brew install mysql
 brew install nettle
 brew install newt
 brew install node
@@ -121,9 +119,7 @@ brew install tmux
 brew tap nviennot/tmate
 brew install tmate
 brew install terminal-notifier # requires full install of xcode
-brew install todo-txt
 brew install tokyo-cabinet
-brew install tor
 brew install tig
 brew install vim --with-lua --with-perl --override-system-vi #--with-python3
 brew install watch
@@ -138,6 +134,7 @@ brew install zsh-lovers
 brew install zsh-syntax-highlighting
 brew install --HEAD mobile-shell
 
+# massren
 brew tap laurent22/massren
 brew install massren
 massren --config editor vim
@@ -146,9 +143,11 @@ brew install weechat --with-ruby --with-python --with-perl
 brew install macvim --with-cscope --with-lua --with-perl --HEAD # requires full install of xcode
 brew install postgresql --no-python
 
-# Setup mysql
-ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
-ln -sfv /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
+# neovim
+brew tap neovim/homebrew-neovim
+brew install --HEAD neovim
+# brew update
+# brew reinstall --HEAD neovim
 
 # Setup homebrew vim to override system vim
 sudo mv /usr/bin/vim /usr/bin/vim_system
@@ -175,11 +174,9 @@ brew cleanup
 # JDK
 # Hat tip:
 # http://stackoverflow.com/questions/10268583/how-to-automate-download-and-installation-of-java-jdk-on-linux
-cd ~/.dotfiles
-wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u67-b01/jdk-7u67-macosx-x64.dmg
-wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-macosx-x64.dmg
+# cd ~/.dotfiles
+# wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-macosx-x64.dmg
 # open jdk-7u71-macosx-x64.dmg
-open jdk-7u67-macosx-x64.dmg
 
 # ==========================================================================
 

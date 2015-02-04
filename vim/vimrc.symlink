@@ -457,10 +457,10 @@ set t_vb=
 set tm=500
 
 " add system clipboard support
-set clipboard+=unnamed
-if has('nvim')
-  set unnamedclip
-endif
+" set clipboard+=unnamed
+" if has('nvim')
+"   set unnamedclip
+" endif
 
 " treat certain characters as full keyword boundaries, e.g. `-`
 set iskeyword+=-
