@@ -113,7 +113,7 @@ set -g status-left "#[fg=green]#h #[fg=brightblue]ⓦ #(dig +short myip.opendns.
 # show session name, window & pane number, date and time on right side of
 # status bar
 set -g status-right-length 60
-set -g status-right "#(/usr/local/bin/battery -t) #[fg=yellow] %b %d #[fg=blue] %I:%M %p"
+set -g status-right "#(~/.dotfiles/bin/battery -t) #[fg=yellow] %b %d #[fg=blue] %I:%M %p"
 
 # Window options
 set-window-option -g utf8 on

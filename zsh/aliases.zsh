@@ -23,7 +23,7 @@ alias pkey="pbcopy < ~/.ssh/id_rsa.pub"
 
 
 ## - TMUX -----------------------------------------------
-alias tmux="TERM=screen-256color-bce tmux -2"
+alias tmux="TERM=screen-256color-bce tmux -u -2"
 alias tm=tmux
 alias takeover="tmux detach -a"
 
