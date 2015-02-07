@@ -1,19 +1,20 @@
 [user]
-  name = Seth Messer
-  email = seth.messer@gmail.com
+  name = AUTHORNAME
+  email = AUTHOREMAIL
+  color = auto
   editor = vim
 
 [credential]
-  helper = osxkeychain
+  helper = GIT_CREDENTIAL_HELPER
 
 [hub]
   protocol = https
 
 [git]
-  user = megalithic
+  user = AUTHORUSERNAME
 
 [github]
-	user = megalithic
+	user = AUTHORUSERNAME
 
 [diff]
 [difftool]
