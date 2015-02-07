@@ -41,10 +41,10 @@ bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
 
 # from holman's repo: https://github.com/holman/dotfiles/blob/master/zsh/config.zsh#L42-L48
-bindkey '^[^[[D' backward-word
-bindkey '^[^[[C' forward-word
+# bindkey '^[^[[D' backward-word
+# bindkey '^[^[[C' forward-word
 bindkey '^[[5D' beginning-of-line
 bindkey '^[[5C' end-of-line
-bindkey '^[[3~' delete-char
-bindkey '^[^N' newtab
-bindkey '^?' backward-delete-char
+# bindkey '^[[3~' delete-char
+# bindkey '^[^N' newtab
+# bindkey '^?' backward-delete-char

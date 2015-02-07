@@ -1,0 +1,3 @@
+cd "$CODE/$1"
+
+# vim: filetype=zsh

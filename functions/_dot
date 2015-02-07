@@ -1,0 +1,3 @@
+#compdef dot
+
+_files -W $DOTFILES -/

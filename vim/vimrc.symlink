@@ -84,29 +84,8 @@ function! LoadPlugs()
     let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
     let g:syntastic_auto_loc_list=0
     let g:syntastic_loc_list_height = 5
-  " Plug 'luochen1990/rainbow'
-  "   let g:rainbow_active = 1
-  "   let g:rainbow_conf = {
-  "     \    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-  "     \    'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan'],
-  "     \    'operators': '_,_',
-  "     \    'parentheses': [['(',')'], ['\[','\]'], ['{','}']],
-  "     \    'separately': {
-  "     \        '*': {},
-  "     \        'lisp': {
-  "     \            'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-  "     \            'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan', 'darkred', 'darkgreen'],
-  "     \        },
-  "     \        'vim': {
-  "     \            'parentheses': [['fu\w* \s*.*)','endfu\w*'], ['for','endfor'], ['while', 'endwhile'], ['if','_elseif\|else_','endif'], ['(',')'], ['\[','\]'], ['{','}']],
-  "     \        },
-  "     \        'tex': {
-  "     \            'parentheses': [['(',')'], ['\[','\]'], ['\\begin{.*}','\\end{.*}']],
-  "     \        },
-  "     \        'css': 0,
-  "     \        'stylus': 0,
-  "     \    }
-  "     \}
+  Plug 'luochen1990/rainbow'
+    let g:rainbow_active = 1
 
   """"" Utilities ===========================================================
   Plug 'tomtom/tcomment_vim'
@@ -457,10 +436,25 @@ set t_vb=
 set tm=500
 
 " add system clipboard support
-" set clipboard+=unnamed
-" if has('nvim')
-"   set unnamedclip
-" endif
+set clipboard+=unnamed
+
+
+""""""" Neovim
+if has('nvim')
+  runtime! python_setup.vim
+endif
+
+if has('nvim')
+  " set unnamedclip
+endif
+
+" Neovim copy/paste support from system clipboard
+if has("nvim")
+  vnoremap <silent> y y:call ClipboardYank()<cr>
+  vnoremap <silent> d d:call ClipboardYank()<cr>
+  nnoremap <silent> p :call ClipboardPaste()<cr>p
+endif
+
 
 " treat certain characters as full keyword boundaries, e.g. `-`
 set iskeyword+=-
@@ -621,6 +615,9 @@ augroup filetypes
   autocmd BufNewFile,BufRead *.slim set filetype=slim
   autocmd BufNewFile,BufRead *.less set filetype=less
   autocmd BufNewFile,BufRead *.scss set filetype=sass
+
+  " load rainbow parens
+  autocmd FileType js,jsx,css,scss,sass,less,json call rainbow#load()
 
   autocmd BufNewFile,BufRead,BufWritePost *[Ss]pec*js,*SpecHelper*js set filetype=jasmine.javascript syntax=jasmine
 
@@ -821,13 +818,6 @@ nnoremap Y y$
 vmap <silent><leader>y "xy
 map <silent><leader>p "xp
 vmap <silent> <expr> p <sid>Repl()
-
-" Neovim copy/paste support from system clipboard
-if has("nvim")
-  vnoremap <silent> y y:call ClipboardYank()<cr>
-  vnoremap <silent> d d:call ClipboardYank()<cr>
-  nnoremap <silent> p :call ClipboardPaste()<cr>p
-endif
 
 """"""" ESC rebindings
 inoremap <F1> <ESC>

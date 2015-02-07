@@ -44,7 +44,7 @@ alias py="python"
 
 ## - VIM -----------------------------------------------
 alias vim="/usr/local/bin/vim"
-alias vim="nvim" # just wanna use neovim
+# alias vim="nvim" # just wanna use neovim
 alias vi="vim"
 alias vmi="vim"
 alias v="vim"
@@ -72,7 +72,7 @@ alias n="ruby ~/.dotfiles/bin/noter.rb"
 alias last='ls *(.om[1])'
 
 ## - FOLDERS -----------------------------------------------
-alias code="cd ~/code"
+# alias code="cd ~/code"
 alias dev="cd ~/code"
 alias music="cd ~/music/Audio"
 alias sand="cd ~/code/sandbox"
@@ -80,7 +80,7 @@ alias repos="cd ~/code"
 alias logs="cd ~/code/logs/"
 alias docs="cd ~/Documents"
 alias box="cd ~/Dropbox/"
-alias dot="cd ~/.dotfiles"
+# alias dot="cd ~/.dotfiles"
 alias dropbox="box"
 alias utils="cd ~/Dropbox/Utils"
 alias scripts="cd ~/Dropbox/scripts/"
@@ -146,7 +146,7 @@ alias redcli="redis-cli"
 
 alias ex=extract
 alias rmrf="rm -rf .DS_Store .gitignore .rspec .rvmrc Gemfile GuardFile README.md"
-alias sourcez="source ~/.zshrc"
+alias sourcez=". $HOME/.zshrc"
 alias srcz=sourcez
 alias sz=sourcez
 alias cls="clr && ls"
