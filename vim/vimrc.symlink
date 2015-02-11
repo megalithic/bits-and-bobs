@@ -119,15 +119,6 @@ function! LoadPlugs()
     autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
     autocmd FileType markdown set tw=80
 
-  """"""" CSS/Preprocessors
-  Plug 'othree/html5.vim'
-  Plug 'groenewege/vim-less'
-  Plug 'slim-template/vim-slim'
-  Plug 'tpope/vim-haml'
-  Plug 'aaronjensen/vim-sass-status'
-  Plug 'cakebaker/scss-syntax.vim'
-  Plug 'hail2u/vim-css3-syntax'
-
   """"""" JavaScript
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript' " breaks rainbow parens, but does correct JS indentions :(
@@ -138,6 +129,15 @@ function! LoadPlugs()
   Plug 'lukaszb/vim-web-indent'
   Plug 'Shutnik/jshint2.vim'
   Plug 'burnettk/vim-angular'
+
+  """"""" CSS/Preprocessors
+  Plug 'groenewege/vim-less'
+  Plug 'aaronjensen/vim-sass-status'
+  Plug 'cakebaker/scss-syntax.vim'
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'othree/html5.vim'
+  Plug 'slim-template/vim-slim'
+  Plug 'tpope/vim-haml'
 
   """"" Code Navigation======================================================
   """"""" Text objects
