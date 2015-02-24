@@ -8,7 +8,7 @@ echo "Installing chruby ..."
   chruby ruby-2.1.3
   
 echo "Permit user to write to system rubies and gems ..."
-  sudo chown -R replicant /Library/Ruby/Gems/2.0.0
+  sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
 
 echo "Installing critical Ruby gems for Rails development ..."
   gem install bundler rails pg foreman thin pry launchy teamocil sass compass curses --no-rdoc --no-ri

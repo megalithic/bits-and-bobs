@@ -46,12 +46,12 @@ unset config_files
 # source /usr/local/opt/chruby/share/chruby/chruby.sh # <-- is this correct?
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
-RUBIES=(/Users/replicant/.rubies/*)
+RUBIES=(~/.rubies/*)
 chruby ruby-2.1.3
 (gem list | grep bundler) || gem install bundler
 
 # setup nvm
-export NVM_DIR="/Users/replicant/.nvm"
+export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # [[ $TERM = "tmux" ]] && rvm use default # this was [[$TERM = "screen"]]

@@ -25,7 +25,7 @@ brew install coreutils
 echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
 
 brew install grc findutils spark zsh git gh
-brew install wget --enable-iri
+brew install wget --with-iri
 
 # To be able to install ruby versions older than 1.9.3-p492 (https://github.com/postmodern/ruby-install#ruby):
 brew tap homebrew/versions
@@ -134,13 +134,8 @@ brew install zsh-lovers
 brew install zsh-syntax-highlighting
 brew install --HEAD mobile-shell
 
-# massren
-brew tap laurent22/massren
-brew install massren
-massren --config editor vim
-
 brew install weechat --with-ruby --with-python --with-perl
-brew install macvim --with-cscope --with-lua --with-perl --HEAD # requires full install of xcode
+#brew install macvim --with-cscope --with-lua --with-perl --HEAD # requires full install of xcode
 brew install postgresql --no-python
 
 # neovim
@@ -155,11 +150,8 @@ sudo ln -s /usr/local/bin/vim /usr/bin/vim
 
 # Setup ZSH as default shell and some other stuffs
 echo ' -- Setting login shell to zsh '
-sudo su
-mv /etc/zshenv /etc/zprofile
-echo "/usr/local/bin/zsh" >> /etc/shells
+echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
 chsh -s /usr/local/bin/zsh
-exit
 
 # Some homebrew packages need additional commands to complete their setup:
 initdb /usr/local/var/postgres -E utf8
