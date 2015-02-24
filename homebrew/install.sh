@@ -136,7 +136,21 @@ brew install --HEAD mobile-shell
 
 brew install weechat --with-ruby --with-python --with-perl
 #brew install macvim --with-cscope --with-lua --with-perl --HEAD # requires full install of xcode
+
+# Setup mysql
+brew install mysql
+ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+ln -sfv /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
+
+# Setup postgres
 brew install postgresql --no-python
+initdb /usr/local/var/postgres -E utf8
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+# sudo -u $(whoami) createdb $(whoami)
+
+# Setup redis
+brew install redis
+ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
 
 # neovim
 brew tap neovim/homebrew-neovim
@@ -153,10 +167,6 @@ echo ' -- Setting login shell to zsh '
 echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
 chsh -s /usr/local/bin/zsh
 
-# Some homebrew packages need additional commands to complete their setup:
-initdb /usr/local/var/postgres -E utf8
-ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-# sudo -u $(whoami) createdb $(whoami)
 brew link openssl --force
 brew link python --force
 

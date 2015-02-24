@@ -207,6 +207,7 @@ alias gap="git add --patch"
 alias gaa="git aa"
 alias uncommit="git reset --soft 'HEAD^'" # re-commit with `git commit -c ORIG_HEAD`
 alias gex="git archive master | tar -x -C" # update this to support more than the master branch
+alias rebase="git pull --rebase origin master"
 
 ## - RUBY / RAILS -----------------------------------------------
 alias be="bundle exec"
