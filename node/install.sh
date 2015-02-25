@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install nvm (0.23.3 as of this script)
-cd ~
+cd /Users/$(whoami)
 curl https://raw.githubusercontent.com/creationix/nvm/v0.23.3/install.sh | zsh
 nvm install 0.12.0
 # nvm install 0.10.36
