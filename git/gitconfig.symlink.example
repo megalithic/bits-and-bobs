@@ -122,3 +122,10 @@
 [push]
 	default = matching
   #default = simple
+
+[branch]
+  autosetuprebase = always
+
+[rerere]
+ enabled = true
+ autoupdate = true
