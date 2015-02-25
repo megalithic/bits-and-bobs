@@ -133,6 +133,8 @@ brew install zsh-completions
 brew install zsh-lovers
 brew install zsh-syntax-highlighting
 brew install --HEAD mobile-shell
+brew install elasticsearch
+ln -sfv /usr/local/opt/elasticsearch/*.plist ~/Library/LaunchAgents
 
 brew install weechat --with-ruby --with-python --with-perl
 #brew install macvim --with-cscope --with-lua --with-perl --HEAD # requires full install of xcode
