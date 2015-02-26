@@ -1,6 +1,6 @@
 #!/usr/local/bin/zsh
 
-#j shortcut to this dotfiles path is $ZSH
+# shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
 export CODE=$HOME/code #c<tab>
