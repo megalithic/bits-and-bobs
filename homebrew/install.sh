@@ -24,7 +24,9 @@ brew install homebrew/dupes/grep
 brew install coreutils
 echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
 
-brew install grc findutils spark zsh git gh
+brew install git
+sudo xcodebuild -license
+brew install grc findutils spark zsh gh
 brew install wget --with-iri
 
 # To be able to install ruby versions older than 1.9.3-p492 (https://github.com/postmodern/ruby-install#ruby):
