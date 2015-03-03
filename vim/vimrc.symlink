@@ -164,10 +164,50 @@ function! LoadPlugs()
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
-  Plug 'ervandew/supertab'
-    let g:SuperTabLongestHighlight = 1
-    let g:SuperTabCrMapping = 0
-    let g:SuperTabDefaultCompletionType = '<C-n>'
+  Plug 'majutsushi/tagbar'
+    let g:tagbar_type_go = {
+      \ 'ctagstype' : 'go',
+      \ 'kinds'     : [
+          \ 'p:package',
+          \ 'i:imports:1',
+          \ 'c:constants',
+          \ 'v:variables',
+          \ 't:types',
+          \ 'n:interfaces',
+          \ 'w:fields',
+          \ 'e:embedded',
+          \ 'm:methods',
+          \ 'r:constructor',
+          \ 'f:functions'
+      \ ],
+      \ 'sro' : '.',
+      \ 'kind2scope' : {
+          \ 't' : 'ctype',
+          \ 'n' : 'ntype'
+      \ },
+      \ 'scope2kind' : {
+          \ 'ctype' : 't',
+          \ 'ntype' : 'n'
+      \ },
+      \ 'ctagsbin'  : 'gotags',
+      \ 'ctagsargs' : '-sort -silent'
+    \ }
+  Plug 'Shougo/neocomplete.vim'
+    " Disable AutoComplPop.
+    let g:acp_enableAtStartup = 0
+    " Use neocomplete.
+    let g:neocomplete#enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+
+  " Plug 'ervandew/supertab'
+  "   let g:SuperTabLongestHighlight = 1
+  "   let g:SuperTabCrMapping = 0
+  "   let g:SuperTabDefaultCompletionType = '<C-n>'
+
   " Plug 'JazzCore/ctrlp-cmatcher', { 'dir': '~/.vim/plugged/ctrlp-cmatcher/', 'do': './install.sh' }
   Plug 'kien/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
@@ -497,7 +537,11 @@ let javascript_enable_domhtmlcss=1
 " -----------------------------------------------------------------------------
 au BufEnter *.rb syn match ExtraWhitespace contained "\<binding.pry\>"
 au BufEnter *.js syn match ExtraWhitespace contained "\<debugger\>"
+au BufEnter *.rb syn match error contained "\<binding.pry\>"
+au BufEnter *.rb syn match error contained "\<debugger\>"
+au BufEnter *.js syn match error contained "\<debugger\>"
 au ColorScheme * hi ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * hi error ctermbg=red guibg=red
 au Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
 
 hi ColorColumn ctermfg=232 ctermbg=238 guibg=#262626
@@ -715,6 +759,29 @@ vmap <leader>c :TComment<cr>
 """"""" Vundle
 noremap <F5> :PlugUpdate<cr>
 map <F5> :PlugUpdate<cr>
+
+""""""" Netrw
+let g:netrw_liststyle = 3
+nnoremap <F7> :Tlist<CR><C-W>h<C-W>s:e .<CR><C-W>l:let g:netrw_chgwin=winnr()<CR><C-W>h
+
+""""""" Neocomplete
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    return neocomplete#close_popup() . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+""""""" Tagbar
+nmap <F8> :TagbarToggle<CR>
 
 """"""" Fugitive
 nnoremap <leader>H :Gbrowse<cr>
