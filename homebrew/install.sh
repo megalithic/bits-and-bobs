@@ -151,7 +151,7 @@ ln -sfv /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
 brew install postgresql --no-python
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-# sudo -u $(whoami) createdb $(whoami)
+createdb `whoami`
 
 # Setup redis
 brew install redis
