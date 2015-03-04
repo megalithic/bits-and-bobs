@@ -73,6 +73,8 @@ alias last='ls *(.om[1])'
 
 ## - FOLDERS -----------------------------------------------
 # alias code="cd ~/code"
+alias dot=d
+alias code=c
 alias dev="cd ~/code"
 alias music="cd ~/music/Audio"
 alias sand="cd ~/code/sandbox"
