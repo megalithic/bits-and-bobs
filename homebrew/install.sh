@@ -40,6 +40,7 @@ brew install gcc48
 brew install autoconf
 brew install automake
 brew install avrdude
+brew install bazaar
 brew install bison
 brew install curl --with-openssl --with-ssh --with-rtmp
 brew install chruby
