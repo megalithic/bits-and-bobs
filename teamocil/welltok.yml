@@ -1,0 +1,19 @@
+name: "welltok"
+windows:
+  - name: "services"
+    root: "~/code/"
+    layout: tiled
+    panes:
+      - commands:
+        - cowsay "Starting your_app"
+        - cd ~/code/welltok/cafewell
+        - be foreman start
+      - cd ~/code/
+  - name: "code"
+    root: "~/code/"
+    panes:
+      - ls
+  - name: "chats"
+    root: "~"
+    panes:
+      - irc

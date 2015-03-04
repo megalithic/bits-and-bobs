@@ -27,14 +27,10 @@ alias tmux="TERM=screen-256color-bce tmux -u -2"
 alias tm=tmux
 alias takeover="tmux detach -a"
 
-alias tgao="tmux attach-session -t gao"
-alias tiso="tmux attach-session -t isotope"
-alias tpto="tmux attach-session -t uspto"
-alias t="tmux attach-session -t default"
-alias teamgao="cd ~ && teamocil --here gao"
-alias teamiso="cd ~ && teamocil --here isotope"
-alias teampto="cd ~ && teamocil --here uspto"
+alias teama="tmux attach-session -t default"
 alias team="cd ~ && teamocil --here default"
+alias toka="tmux attach-session -t welltok"
+alias tok="cd ~ && teamocil --here welltok"
 
 ## - BREW -----------------------------------------------
 alias b="brew"
