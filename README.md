@@ -102,6 +102,7 @@ based on)
 - [zanshin](https://github.com/zanshin/dotfiles)
 - [thoughtbot](https://github.com/thoughtbot/dotfiles)
 - [wolfy87](https://github.com/Wolfy87/dotfiles)
+- [albert togg's good uses of this original repo (see brew setup)](https://github.com/albertogg/dotfiles)
 
 .. I'll continually add more as I come across them.
 

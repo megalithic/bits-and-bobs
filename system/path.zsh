@@ -5,3 +5,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export PATH=$PATH:$GOPATH/bin
 export PATH="$PATH:~/.dotfiles/bin"
+
+##
+# remove duplicates from PATH.
+typeset -U PATH
