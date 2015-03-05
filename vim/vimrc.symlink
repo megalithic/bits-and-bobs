@@ -110,6 +110,7 @@ function! LoadPlugs()
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
+  Plug 'EasyGrep'
 
   Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1

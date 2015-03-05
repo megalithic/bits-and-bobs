@@ -26,7 +26,7 @@ echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH.
 
 brew install git
 sudo xcodebuild -license
-brew install grc findutils spark zsh gh
+brew install grc findutils spark zsh gh hub
 brew install wget --with-iri
 
 # To be able to install ruby versions older than 1.9.3-p492 (https://github.com/postmodern/ruby-install#ruby):
@@ -136,11 +136,19 @@ brew install zsh-completions
 brew install zsh-lovers
 brew install zsh-syntax-highlighting
 brew install --HEAD mobile-shell
+brew install weechat --with-ruby --with-python --with-perl
+brew tap neovim/homebrew-neovim
+brew install --HEAD neovim
+# brew update
+# brew reinstall --HEAD neovim
+
+# Setup rabbitmq
+brew install rabbitmq
+ln -sfv /usr/local/opt/rabbitmq/*.plist ~/Library/LaunchAgents
+
+# Setup elasticsearch
 brew install elasticsearch
 ln -sfv /usr/local/opt/elasticsearch/*.plist ~/Library/LaunchAgents
-
-brew install weechat --with-ruby --with-python --with-perl
-#brew install macvim --with-cscope --with-lua --with-perl --HEAD # requires full install of xcode
 
 # Setup mysql
 brew install mysql
@@ -156,12 +164,6 @@ createdb `whoami`
 # Setup redis
 brew install redis
 ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
-
-# neovim
-brew tap neovim/homebrew-neovim
-brew install --HEAD neovim
-# brew update
-# brew reinstall --HEAD neovim
 
 # Setup homebrew vim to override system vim
 sudo mv /usr/bin/vim /usr/bin/vim_system

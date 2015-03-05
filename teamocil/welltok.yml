@@ -5,9 +5,11 @@ windows:
     layout: tiled
     panes:
       - commands:
-        - cowsay "Starting your_app"
         - cd ~/code/welltok/cafewell
         - be foreman start
+      - commands:
+        - cd ~/code/welltok/singleton
+        - rails s -p7071
       - cd ~/code/
   - name: "code"
     root: "~/code/"

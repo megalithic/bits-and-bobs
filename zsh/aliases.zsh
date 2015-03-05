@@ -164,6 +164,9 @@ alias syncoctoprint="scp pi@octopi.local:/home/pi/.octoprint/config.yaml /Users/
 alias fb="moto-fastboot-osx64"
 
 ## - GIT -----------------------------------------------
+alias gpreq="~/.dotfiles/bin/git-pr"
+alias preq=gpreq
+alias req=gpreq
 alias push="git push -u"
 alias pull="git pull"
 alias grm="git rm -r"
@@ -249,7 +252,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+
 alias whois="whois -h whois-servers.net"
 
 # Flush Directory Service cache
-alias flush="dscacheutil -flushcache"
+alias flush="sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say flushed"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"

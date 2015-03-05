@@ -3,4 +3,4 @@
 # Teamocil
 #
 # Get stuff done for teamocil
-ln -sf ~/.dotfiles/teamocil ~/.teamocil
+ln -svf ~/.dotfiles/teamocil ~/.teamocil

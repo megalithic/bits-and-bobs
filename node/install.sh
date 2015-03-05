@@ -1,12 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-# install nvm (0.23.3 as of this script)
-cd /Users/$(whoami)
-curl https://raw.githubusercontent.com/creationix/nvm/v0.23.3/install.sh | zsh
-nvm install 0.12.0
-# nvm install 0.10.36
+brew install nvm
+mkdir ~/.nvm
+nvm install node
 nvm install iojs
-# nvm use 0.10.36 #currently most stable for me
+nvm use iojs
 # nvm alias default iojs # make node default to iojs
 
 # installs yeoman, as well as grunt-cli and bower
