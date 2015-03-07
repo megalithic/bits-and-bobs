@@ -8,9 +8,15 @@ windows:
         - cd ~/code/welltok/cafewell
         - be foreman start
       - commands:
-        - cd ~/code/welltok/singleton
+        - cd ~/code/welltok/simpleton
         - rails s -p7071
-      - cd ~/code/
+      - commands:
+        - cd ~/code/welltok/hitman
+        - go run hitman.go
+      - commands:
+        - cd ~/code/welltok/rewards-service
+        - nvm use 0.10.26
+        - gulp develop | bunyan
   - name: "code"
     root: "~/code/"
     panes:

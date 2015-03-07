@@ -37,9 +37,11 @@ function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
   Plug 'RobertAudi/golden-ratio'
-    let g:golden_ratio_exclude_nonmodifiable = 0
-    let g:golden_ratio_wrap_ignored = 1
+    let g:golden_ratio_exclude_nonmodifiable = 1
+    let g:golden_ratio_wrap_ignored = 0
     let g:golden_ratio_filetypes_blacklist = ["nerdtree", "unite", "ctrlp", "quickfix", "quickfix-list", "quickfix-list-window", "location-list", "location-list-window", "unlisted", "directory", "help", "scratch"]
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'christoomey/vim-tmux-runner'
   Plug 'bling/vim-airline'
     let g:airline#extensions#branch#enabled = 1
     let g:airline#extensions#syntastic#enabled = 1
@@ -97,6 +99,21 @@ function! LoadPlugs()
     let g:syntastic_loc_list_height = 5
   Plug 'luochen1990/rainbow'
     let g:rainbow_active = 1
+  Plug 'eiginn/netrw'
+    let g:netrw_altv          = 1 " open files on right
+    let g:netrw_fastbrowse    = 2
+    let g:netrw_keepdir       = 0
+    let g:netrw_liststyle     = 3 " 0 for thin
+    let g:netrw_retmap        = 1
+    let g:netrw_silent        = 1
+    let g:netrw_special_syntax= 1
+    let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
+    let g:netrw_hide=1              " hide hidden files
+    let g:netrw_dirhistmax=100      " keep more history
+    let g:netrw_altfile=1           " last edited file '#'
+    let g:netrw_altv=1              " open files on right
+    let g:netrw_preview=1           " open previews vertically
+    let g:netrw_use_errorwindow=0   " suppress error window
 
   """"" Utilities ===========================================================
   Plug 'tomtom/tcomment_vim'
@@ -145,6 +162,7 @@ function! LoadPlugs()
   Plug 'Shutnik/jshint2.vim'
   Plug 'burnettk/vim-angular'
   Plug 'kchmck/vim-coffee-script'
+  Plug 'digitaltoad/vim-jade'
 
   """"""" CSS/Preprocessors
   Plug 'groenewege/vim-less'
@@ -197,18 +215,15 @@ function! LoadPlugs()
     " Disable AutoComplPop.
     let g:acp_enableAtStartup = 0
     " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_at_startup = 0
     " Use smartcase.
     let g:neocomplete#enable_smart_case = 1
     " Set minimum syntax keyword length.
     let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-
-  " Plug 'ervandew/supertab'
-  "   let g:SuperTabLongestHighlight = 1
-  "   let g:SuperTabCrMapping = 0
-  "   let g:SuperTabDefaultCompletionType = '<C-n>'
-
+  Plug 'ervandew/supertab'
+    let g:SuperTabLongestHighlight = 1
+    let g:SuperTabCrMapping = 0
+    let g:SuperTabDefaultCompletionType = '<C-n>'
   " Plug 'JazzCore/ctrlp-cmatcher', { 'dir': '~/.vim/plugged/ctrlp-cmatcher/', 'do': './install.sh' }
   Plug 'kien/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
@@ -231,7 +246,7 @@ function! LoadPlugs()
         \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
         \ }
     " let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
-    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden -g ""'
+    let g:ctrlp_user_command = 'ag %s -i -l --nocolor --nogroup --hidden -g ""'
     "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
     let g:ctrlp_prompt_mappings = {
         \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
@@ -244,7 +259,6 @@ function! LoadPlugs()
         \ 'PrtHistory(1)':        ['<c-p>'],
         \ 'ToggleFocus()':        ['<c-tab>'],
         \}
-  " Plug 'megalithic/ag.vim'
   Plug 'megalithic/ag.vim'
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup"
@@ -255,7 +269,6 @@ function! LoadPlugs()
         \   'vertical_split_and_close': '<cr>',
         \   'open': 'o',
         \ }
-
   Plug 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
   Plug 'kopischke/vim-fetch'
@@ -263,14 +276,6 @@ function! LoadPlugs()
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
-    augroup ft_fugitive
-      autocmd!
-      autocmd BufNewFile,BufRead .git/index setlocal nolist
-      autocmd BufReadPost fugitive://* set bufhidden=delete
-    augroup END
-    autocmd BufReadCmd *.git/index exe BufReadIndex()
-    autocmd BufEnter *.git/index silent normal gg0j
-    autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
   Plug 'mattn/webapi-vim'
   Plug 'mattn/gist-vim'
     let g:gist_open_browser_after_post = 1
@@ -304,7 +309,7 @@ function! LoadPlugs()
   " Other sets of snippets (optional):
   Plug 'honza/vim-snippets'
 
-  Plug 'vim-scripts/matchit.zip'
+  Plug 'jwhitley/vim-matchit'
 endfunction
 
 """"" Install vim-plug Plugins (fail nicely) ====================================
@@ -611,12 +616,29 @@ function! ClipboardPaste()
   let @@ = system('pbpaste')
 endfunction
 
+function! FileTypeToggle(num)
+  if a:num > 0 || !exists("b:alt_ftype")
+    let b:alt_ftype = &filetype
+    let   &filetype = input("enter FileType: ")
+  else
+    let     new_alt = &filetype
+    let   &filetype = b:alt_ftype
+    let b:alt_ftype = new_alt
+  end
+endf
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endf
 
 " =============================================================================
 " Autocommands #autocommands
 " -----------------------------------------------------------------------------
 if exists('+colorcolumn')
-  augroup UnSyntaxInactive
+  augroup UnSyntaxInactiveGroup
     autocmd!
     autocmd BufEnter,WinEnter * set syntax=ON
     autocmd BufEnter,WinEnter * set number
@@ -626,13 +648,13 @@ if exists('+colorcolumn')
   augroup END
 endif
 
-augroup Tmux
+augroup TmuxGroup
   autocmd!
   autocmd VimEnter,BufNewFile,BufReadPost * call system('tmux rename-window "vim - ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1] . '"')
   autocmd VimLeave * call system('tmux rename-window ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1])
 augroup END
 
-augroup ReturnToLastEditedLine
+augroup ReturnToLastEditedLineGroup
   autocmd!
   autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -645,19 +667,32 @@ autocmd BufWrite * silent call DeleteTrailingWS()
 
 " Resize splits when the window is resized
 autocmd VimResized * :wincmd =
-" autocmd VimResized * <Plug>(golden_ratio_resize)
 
-" Color Column (only on insert)
-if exists("&colorcolumn")
-  autocmd InsertEnter * set colorcolumn=80
-  autocmd InsertLeave * set colorcolumn=""
-endif
+augroup ColorColumnGroup
+  " Color Column (only on insert)
+  if exists("&colorcolumn")
+    autocmd InsertEnter * set colorcolumn=80
+    autocmd InsertLeave * set colorcolumn=""
+  endif
 
-if exists('+colorcolumn')
-  " set colorcolumn=80
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
+  if exists('+colorcolumn')
+    " set colorcolumn=80
+  else
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  endif
+augroup END
+
+augroup GitGroup
+  autocmd!
+  " Handles tpope/fugitive auto-commands
+  autocmd BufNewFile,BufRead .git/index setlocal nolist
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+
+  autocmd BufReadCmd *.git/index exe BufReadIndex()
+  autocmd BufEnter *.git/index silent normal gg0j
+  autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
+augroup END
+
 
 " =============================================================================
 " Filetypes / Syntax #ftypes
@@ -747,12 +782,6 @@ let maplocalleader="\\"
 let g:ctrlp_map = '<leader>m'
 let g:ctrlp_cmd = 'CtrlP'
 
-""""""" Golden Ratio
-"create new vertical window split and focus it
-" nnoremap <c-n> :vnew<cr>
-nnoremap <c-o> :vnew<cr>:e<space><c-d>
-nnoremap <c-n> :vsp .<cr>
-
 """"""" Tcomment
 nmap <leader>c :TComment<cr>
 vmap <leader>c :TComment<cr>
@@ -761,9 +790,8 @@ vmap <leader>c :TComment<cr>
 noremap <F5> :PlugUpdate<cr>
 map <F5> :PlugUpdate<cr>
 
-""""""" Netrw
-let g:netrw_liststyle = 3
-nnoremap <F7> :Tlist<CR><C-W>h<C-W>s:e .<CR><C-W>l:let g:netrw_chgwin=winnr()<CR><C-W>h
+""""""" CTags
+noremap <S-F5> :!ctags -R<cr>
 
 """"""" Neocomplete
 inoremap <expr><C-g>     neocomplete#undo_completion()
@@ -776,8 +804,8 @@ endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
@@ -787,12 +815,14 @@ nmap <F8> :TagbarToggle<CR>
 """"""" Fugitive
 nnoremap <leader>H :Gbrowse<cr>
 vnoremap <leader>H :Gbrowse<cr>
+nnoremap <leader>gb :Gblame<cr>
 
 """"""" Ag / Ack
-nnoremap <leader>a :Ag!<space>
+nnoremap <leader>a :LAg!<space>
+nnoremap <leader>A :Ag!<space>
 " immediately ag/ack/grep for word under cursor
-map <leader>/ :execute "Ag! " . expand("<cword>") <CR>
-vmap <leader>/ :execute "Ag! " . S <CR>
+map <leader>/ :execute "LAg! " . expand("<cword>") <CR>
+vmap <leader>/ :execute "LAg! " . S <CR>
 
 """"""" Vroom
 silent! map <unique> <Leader>t :VroomRunTestFile<CR>
@@ -804,7 +834,7 @@ silent! map <unique> <Leader>l :VroomRunLastTest<CR>
 " Requires the gist command line too (brew install gist)
 vnoremap <leader>G :Gist -p<cr>
 
-""""""" Gist
+""""""" Syntastic
 nnoremap <leader>e :SyntasticToggleMode<cr> :SyntasticCheck<cr>
 
 """"""" Surround
@@ -824,6 +854,7 @@ map <leader>px :%!xmllint % --format<CR>
 """"""" Quick edit of certain files
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ez :vsplit ~/.zshrc<cr>
+nnoremap <leader>et :vsplit ~/.tmux.conf<cr>
 
 """"""" Tab manipulation
 " Make opening files in a new tab easier
@@ -836,18 +867,16 @@ noremap k gk
 noremap gj j
 noremap gk k
 
-""""""" Split movement
-map <C-j> <Nop>
-map <C-k> <Nop>
-unmap <C-j>
-unmap <C-k>
-map <C-h> <Nop>
-map <C-l> <Nop>
-unmap <C-h>
-unmap <C-l>
-"now, remap them
-nnoremap <C-l> <C-W>w
-nnoremap <C-h> <C-W>W
+""""""" Splits with vim-tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_save_on_switch = 1
+nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
+
+nnoremap <c-o> :vnew<cr>:e<space><c-d>
+nnoremap <c-n> :vsp .<cr>
 
 """"""" Just say no to drugs
 " disable arrow keys
@@ -910,6 +939,8 @@ vnoremap <F1> <ESC>
 """"""" Convenience rebindings
 " semicolon is easier to hit than colon
 nnoremap ; :
+noremap  <C-;>       :!
+noremap  <Leader>:       :<Up>
 " remap q for recording to Q
 nnoremap Q q
 nnoremap q <Nop>
@@ -951,6 +982,12 @@ nnoremap <C-=> mqHmwgg=G`wzt`q
 """"""" Misc (organize this please!)
 " Insert newline below
 nnoremap <cr><cr> o<ESC>
+" push newline
+nnoremap <S-CR>   mzO<Esc>j`z
+nnoremap <C-CR>   mzo<Esc>k`z
+" spawn newline
+inoremap <S-CR>     <C-O>O
+inoremap <C-CR>     <C-O>o
 
 " Toggle 'keep current line in the center of the screen' mode
 nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
