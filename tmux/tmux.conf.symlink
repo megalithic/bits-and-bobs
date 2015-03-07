@@ -74,7 +74,8 @@ bind -r C-f resize-pane
 
 # Smart pane switching with awareness of vim (requires vim-tmux-navigator) splits
 # https://github.com/ivanbrennan/dotfiles/blob/master/tmux.conf
-is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(view|n?vim?)(diff)?$"'
+# NOTE: added weechat in the mix to maintain ctrl+h/j/k/l behaviors
+is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(weechat|view|n?vim?)(diff)?$"'
 bind -n C-h if-shell  "$is_vim" "send-keys C-h" "select-pane -L"
 bind -n C-j if-shell  "$is_vim" "send-keys C-j" "select-pane -D"
 bind -n C-k if-shell  "$is_vim" "send-keys C-k" "select-pane -U"

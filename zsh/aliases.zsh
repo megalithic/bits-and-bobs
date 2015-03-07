@@ -48,7 +48,7 @@ alias vm="vim"
 alias m="vim"
 alias vundle="vim -c ':BundleInstall!' -c ':BundleClean' -c ':qa!'"
 alias eclimd="/Applications/Eclipse/eclimd"
-alias renv="brew reinstall --HEAD https://raw.github.com/neovim/neovim/master/neovim.rb"
+alias updatenvim="brew update; brew reinstall --HEAD neovim"
 alias nv="nvim"
 
 ## - EDITS -----------------------------------------------
