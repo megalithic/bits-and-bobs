@@ -15,3 +15,6 @@ go get github.com/smartystreets/goconvey
 
 # get tags for go
 go get -u github.com/jstemmer/gotags
+
+# symlink some useful things
+ln -sfv $HOME/.go/src $HOME/code/go

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 brew install nvm
-mkdir ~/.nvm
+mkdir $HOME/.nvm
 nvm install node
 nvm install iojs
 nvm use iojs

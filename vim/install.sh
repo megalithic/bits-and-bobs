@@ -16,4 +16,5 @@ vim +PlugInstall +qall
 
 ln -sfv ~/.dotfiles/vim/vimrc.symlink ~/.nvimrc
 ln -sfv ~/.vim ~/.nvim
-ln -sfv ~/.dotfiles/vim/UltiSnips ~/.vim/
+ln -sfv ~/.dotfiles/vim/UltiSnips ~/.vim/UltiSnips
+ln -sfv ~/.dotfiles/vim/UltiSnips ~/.vim/snippets

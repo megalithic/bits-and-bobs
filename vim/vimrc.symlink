@@ -39,7 +39,7 @@ function! LoadPlugs()
   Plug 'RobertAudi/golden-ratio'
     let g:golden_ratio_exclude_nonmodifiable = 1
     let g:golden_ratio_wrap_ignored = 0
-    let g:golden_ratio_filetypes_blacklist = ["nerdtree", "unite", "ctrlp", "quickfix", "quickfix-list", "quickfix-list-window", "location-list", "location-list-window", "unlisted", "directory", "help", "scratch"]
+    let g:golden_ratio_filetypes_blacklist = ["nerdtree", "unite", "ctrlp", "quickfix", "quickfix-list", "quickfix-list-window", "location-list", "location-list-window", "unlisted", "directory", "help", "scratch", "netrw", "NetrwTreeListing 1", "NetrwTreeListing", "NetrwTreeListing1"]
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'christoomey/vim-tmux-runner'
   Plug 'bling/vim-airline'
@@ -81,10 +81,10 @@ function! LoadPlugs()
     let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.jshintrc'
     let g:syntastic_enable_signs = 1 " slow downs
     let g:syntastic_check_on_open = 0 " slow downs
-    let g:syntastic_disabled_filetypes = ['html', 'rst']
+    let g:syntastic_disabled_filetypes = ['html', 'rst', 'java', 'md', 'markdown']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
     let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
-    let g:syntastic_javascript_checkers = ['jshint', 'jsxhint']
+    let g:syntastic_javascript_checkers = ['jshint', 'jsxhint', 'eslint']
     let g:syntastic_haml_checkers = ['haml_lint']
     let g:syntastic_ruby_checkers = ['rubocop']
     let g:syntastic_scss_checkers = ['scss_lint']
@@ -95,7 +95,7 @@ function! LoadPlugs()
     let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_quiet_messages = { "type": "style" }
     let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
-    let g:syntastic_auto_loc_list=0
+    let g:syntastic_auto_loc_list = 0
     let g:syntastic_loc_list_height = 5
   Plug 'luochen1990/rainbow'
     let g:rainbow_active = 1
@@ -114,6 +114,7 @@ function! LoadPlugs()
     let g:netrw_altv=1              " open files on right
     let g:netrw_preview=1           " open previews vertically
     let g:netrw_use_errorwindow=0   " suppress error window
+    let g:netrw_winsize=20
 
   """"" Utilities ===========================================================
   Plug 'tomtom/tcomment_vim'
@@ -127,7 +128,7 @@ function! LoadPlugs()
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
-  Plug 'EasyGrep'
+  Plug 'tpope/vim-dispatch'
 
   Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1
@@ -137,8 +138,16 @@ function! LoadPlugs()
     let g:lt_quickfix_list_toggle_map = '<F4>'
 
   """"" Filetypes ===========================================================
+  " Plug 'sheerun/vim-polyglot'
+
   """"""" Go
   Plug 'fatih/vim-go'
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_highlight_structs = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_build_constraints = 1
+    let g:go_fmt_command = "goimports" " format with goimports instead of gofmt
 
   """"""" Ruby
   Plug 'vim-ruby/vim-ruby'
@@ -211,20 +220,13 @@ function! LoadPlugs()
       \ 'ctagsbin'  : 'gotags',
       \ 'ctagsargs' : '-sort -silent'
     \ }
+  Plug 'Shougo/vimproc.vim', { 'dir': '~/.vim/bundles/vimproc', 'do': 'make -f make_mac.mak' }
   Plug 'Shougo/neocomplete.vim'
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 0
-    " Use smartcase.
-    let g:neocomplete#enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-  Plug 'ervandew/supertab'
-    let g:SuperTabLongestHighlight = 1
-    let g:SuperTabCrMapping = 0
-    let g:SuperTabDefaultCompletionType = '<C-n>'
-  " Plug 'JazzCore/ctrlp-cmatcher', { 'dir': '~/.vim/plugged/ctrlp-cmatcher/', 'do': './install.sh' }
+    let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
+    let g:neocomplete#enable_at_startup = 1 " Use neocomplete.
+    let g:neocomplete#enable_smart_case = 1 " Use smartcase.
+    let g:neocomplete#disable_auto_complete = 0 " Disable auto completion
+    let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
   Plug 'kien/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
     let g:ctrlp_switch_buffer=0            " open files in new buffers
@@ -291,20 +293,22 @@ function! LoadPlugs()
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
   " Plug 'SirVer/ultisnips'
-  "   let g:UltiSnipsExpandTrigger="<tab>"
-  "   let g:UltiSnipsListSnippets="<c-tab>"
-  "   let g:UltiSnipsJumpForwardTrigger="<tab>"
-  "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  "   let g:UltiSnipsSnippetsDir=["UltiSnips"]
-  " Plug 'matthewsimo/angular-vim-snippets'
+    " let g:UltiSnipsExpandTrigger="<tab>"
+    " let g:UltiSnipsListSnippets="<c-tab>"
+    " let g:UltiSnipsJumpForwardTrigger="<tab>"
+    " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+    " let g:UltiSnipsSnippetsDir=["UltiSnips"]
 
-  " vim-react-snippets:
+  " neosnippets
+  Plug 'Shougo/neosnippet.vim'
+    let g:neosnippet#enable_snipmate_compatibility = 1
+  Plug 'Shougo/neosnippet-snippets'
   Plug 'justinj/vim-react-snippets'
 
   " SnipMate and its dependencies:
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'tomtom/tlib_vim'
-  Plug 'garbas/vim-snipmate'
+  " Plug 'garbas/vim-snipmate'
 
   " Other sets of snippets (optional):
   Plug 'honza/vim-snippets'
@@ -625,14 +629,44 @@ function! FileTypeToggle(num)
     let   &filetype = b:alt_ftype
     let b:alt_ftype = new_alt
   end
-endf
+endfunction
 
-function! SynStack()
-  if !exists("*synstack")
-    return
+""" Netrw functionality
+function! VexToggle(dir)
+  if exists("t:vex_buf_nr")
+    call VexClose()
+  else
+    call VexOpen(a:dir)
   endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endf
+endfunction
+function! VexOpen(dir)
+  let g:netrw_browse_split = 4
+  let vex_width = 25
+  execute "Vexplore " . a:dir
+  let t:vex_buf_nr = bufnr("%")
+  wincmd H
+  call VexSize(vex_width)
+endfunction
+function! VexClose()
+  let cur_win_nr = winnr()
+  let target_nr = ( cur_win_nr == 1 ? winnr("#") : cur_win_nr )
+  1wincmd w
+  close
+  unlet t:vex_buf_nr
+  execute (target_nr - 1) . "wincmd w"
+  call NormalizeWidths()
+endfunction
+function! VexSize(vex_width)
+  execute "vertical resize" . a:vex_width
+  set winfixwidth
+  call NormalizeWidths()
+endfunction
+function! NormalizeWidths()
+  let eadir_pref = &eadirection
+  set eadirection=hor
+  set equalalways! equalalways!
+  let &eadirection = eadir_pref
+endfunction
 
 " =============================================================================
 " Autocommands #autocommands
@@ -782,6 +816,11 @@ let maplocalleader="\\"
 let g:ctrlp_map = '<leader>m'
 let g:ctrlp_cmd = 'CtrlP'
 
+""""""" Netrw
+nnoremap <F2> :Vexplore . <cr>
+" noremap <F2> :call VexToggle(getcwd())<CR>
+" noremap <S-F2> :call VexToggle("")<CR>
+
 """"""" Tcomment
 nmap <leader>c :TComment<cr>
 vmap <leader>c :TComment<cr>
@@ -791,7 +830,7 @@ noremap <F5> :PlugUpdate<cr>
 map <F5> :PlugUpdate<cr>
 
 """"""" CTags
-noremap <S-F5> :!ctags -R<cr>
+noremap <F6> :!ctags -R<cr>
 
 """"""" Neocomplete
 inoremap <expr><C-g>     neocomplete#undo_completion()
@@ -809,8 +848,36 @@ inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
+""""""" Neosnippets
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
 """"""" Tagbar
 nmap <F8> :TagbarToggle<CR>
+
+"""""" Dispatch
+nnoremap <F9> :Dispatch<CR>
+
+""""""" Go
+au FileType go nmap <leader>gr :Dispatch go run %<cr>
+au FileType go nmap <leader>gb :Dispatch go build<cr>
+au FileType go nmap <leader>t :Dispatch go test<cr>
+au FileType go nmap <leader>gc :Dispatch go coverage<cr>
 
 """"""" Fugitive
 nnoremap <leader>H :Gbrowse<cr>

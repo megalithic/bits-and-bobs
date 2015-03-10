@@ -138,9 +138,9 @@ brew install zsh-syntax-highlighting
 brew install --HEAD mobile-shell
 brew install weechat --with-ruby --with-python --with-perl
 brew tap neovim/homebrew-neovim
-brew install --HEAD neovim
+brew install --HEAD neovim --with-lua --with-perl --with-ruby
 # brew update
-# brew reinstall --HEAD neovim
+# brew reinstall --HEAD neovim --with-lua --with-perl --with-ruby
 
 # Setup rabbitmq
 brew install rabbitmq

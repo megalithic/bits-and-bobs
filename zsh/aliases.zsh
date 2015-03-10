@@ -79,23 +79,12 @@ alias logs="cd ~/code/logs/"
 alias docs="cd ~/Documents"
 alias box="cd ~/Dropbox/"
 alias dropbox="box"
-alias utils="cd ~/Dropbox/Utils"
 alias scripts="cd ~/Dropbox/scripts/"
 # alias android="cd ~/Dropbox/Android/adb/"
 alias adb="/Users/replicant/Dropbox/Android/adb/platform-tools/adb"
 alias fastboot="/Users/replicant/Dropbox/Android/adb/platform-tools/fastboot"
 alias dl="cd $HOME/Downloads/"
-alias sbox="cd ~/code/sandbox/"
-alias railsfiles="cd ~/Dropbox/scripts/rails_defaults/"
-alias tip="cd ~/code/tipping"
-alias gao="cd ~/code/Isotope11/gao_app"
-
-alias pto="cd ~/code/Isotope11/uspto"
-alias uspto="cd ~/code/Isotope11/uspto"
-alias usfe="cd ~/code/Isotope11/uspto/frontend/"
-alias usapi="cd ~/code/Isotope11/uspto/api"
-alias tope="cd ~/code/Isotope11"
-alias iso=tope
+alias gop="cd $GOPATH"
 
 ## - POSTGRES -----------------------------------------------
 alias startpg="pg_ctl -D /usr/local/var/postgres -l logfile start" #`pg_ctl -D /usr/local/var/postgres -l ~/code/logs/server.log start` OR `postgres -D /usr/local/var/postgres` OR `pg_ctl -D /usr/local/var/postgres -l logfile start`
@@ -123,15 +112,6 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 
 alias dirsize="du -sh"
 
-# alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0 > ~/code/Isotope11/uspto/logs/jboss.log 2>&1 &"
-alias jb="~/code/Isotope11/uspto/jboss-eap-6.1/bin/standalone.sh -b 0.0.0.0"
-
-# alias jb5="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss5""  && ~/code/Isotope11/uspto/jboss5/bin/run.sh"
-# alias jb6="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss6""  && ~/code/Isotope11/uspto/jboss6/bin/standalone.sh -b 0.0.0.0"
-# alias jb="export JBOSS_HOME=""\$HOME/code/Isotope11/uspto/jboss""  && ~/code/Isotope11/uspto/jboss/bin/run.sh"
-# alias slr="sh ~/code/Isotope11/uspto/solr/localsolr.sh run"
-# alias mci="usapi && mvn clean package && cp ear/target/solrService.ear ../jboss/server/default/deploy && usfe"
-
 # alias chk='ps auxwww | ag'
 alias die='pkill -9 -f'
 
@@ -142,7 +122,7 @@ alias redstart="startred"
 alias redcli="redis-cli"
 
 alias ex=extract
-alias rmrf="rm -rf .DS_Store .gitignore .rspec .rvmrc Gemfile GuardFile README.md"
+alias cleanrails="rm -rf .DS_Store .gitignore .rspec .rvmrc Gemfile GuardFile README.md"
 alias sourcez=". $HOME/.zshrc"
 alias srcz=sourcez
 alias sz=sourcez
@@ -155,10 +135,8 @@ alias g="grep -r -i --color='auto'"
 alias irc="weechat-curses"
 alias ip="ipconfig getifaddr"
 alias clr=clear
-alias gn="python ~/.dotfiles/utils/geeknote/geeknote.py"
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-
-alias syncoctoprint="scp pi@octopi.local:/home/pi/.octoprint/config.yaml /Users/replicant/Dropbox/3d/configs/octoprint"
+alias syncoctoprint="scp pi@octopi.local:/home/pi/.octoprint/config.yaml $HOME/Dropbox/3d/configs/octoprint"
 
 ## - ANDROID -----------------------------------------------
 alias fb="moto-fastboot-osx64"
@@ -252,7 +230,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+
 alias whois="whois -h whois-servers.net"
 
 # Flush Directory Service cache
-alias flush="sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say flushed"
+alias dnsflush="sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say flushed"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
