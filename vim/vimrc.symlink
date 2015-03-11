@@ -141,7 +141,7 @@ function! LoadPlugs()
   " Plug 'sheerun/vim-polyglot'
 
   """"""" Go
-  Plug 'fatih/vim-go'
+  Plug 'fatih/vim-go' " remember to :GoInstallBinaries
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
     let g:go_highlight_structs = 1
@@ -873,11 +873,11 @@ nmap <F8> :TagbarToggle<CR>
 """""" Dispatch
 nnoremap <F9> :Dispatch<CR>
 
-""""""" Go
+""""""" Golang
 au FileType go nmap <leader>gr :Dispatch go run %<cr>
 au FileType go nmap <leader>gb :Dispatch go build<cr>
-au FileType go nmap <leader>t :Dispatch go test<cr>
-au FileType go nmap <leader>gc :Dispatch go coverage<cr>
+au FileType go nmap <leader>gt <Plug>(go-test)
+au FileType go nmap <leader>gc <Plug>(go-coverage)
 
 """"""" Fugitive
 nnoremap <leader>H :Gbrowse<cr>

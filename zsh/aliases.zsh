@@ -114,6 +114,7 @@ alias dirsize="du -sh"
 
 # alias chk='ps auxwww | ag'
 alias die='pkill -9 -f'
+alias port='lsof -i :'
 
 alias mg="mongod run --config /usr/local/Cellar/mongodb/2.0.2-x86_64/mongod.conf"
 alias startred="redis-server /usr/local/etc/redis.conf"
