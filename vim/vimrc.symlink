@@ -137,6 +137,7 @@ function! LoadPlugs()
   Plug 'sheerun/vim-polyglot'
 
   """"""" Go
+  Plug 'fatih/vim-go'
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
     let g:go_highlight_structs = 1
@@ -826,10 +827,10 @@ nmap <F8> :TagbarToggle<CR>
 nnoremap <F9> :Dispatch<CR>
 
 """"""" Golang
-au FileType go nmap <leader>gr :Dispatch go run %<cr>
-au FileType go nmap <leader>gb :Dispatch go build<cr>
-au FileType go nmap <leader>gt <Plug>(go-test)
-au FileType go nmap <leader>gc <Plug>(go-coverage)
+au FileType go nnoremap <leader>gr :GoRun<cr>
+au FileType go nnoremap <leader>gb :GoBuild<cr>
+au FileType go nnoremap <leader>t :Dispatch :GoTest<cr>
+au FileType go nnoremap <leader>gc :GoCoverage<cr>
 
 """"""" Fugitive
 nnoremap <leader>H :Gbrowse<cr>
@@ -871,7 +872,7 @@ map <leader>pj :%!python -m json.tool<CR>
 map <leader>px :%!xmllint % --format<CR>
 
 """"""" Quick edit of certain files
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :vsplit ~/.dotfiles/vim/vimrc.symlink<cr>
 nnoremap <leader>ez :vsplit ~/.zshrc<cr>
 nnoremap <leader>et :vsplit ~/.tmux.conf<cr>
 
