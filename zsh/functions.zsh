@@ -8,6 +8,10 @@ source ~/.dotfiles/zsh/site-functions/*.zsh
 #   ls -a
 # }
 
+dockerip() {
+  boot2docker ip 2> /dev/null
+}
+
 pdfjoin() {
   join_py="/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py"
   read "output_file?Name of output file > "

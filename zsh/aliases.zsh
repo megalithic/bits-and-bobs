@@ -33,7 +33,8 @@ alias toka="tmux attach-session -t welltok"
 alias tok="cd ~ && teamocil --here welltok"
 
 ## - DOCKER -----------------------------------------------
-alias docker="sudo docker -H $DOCKER_HOST"
+# alias docker="sudo docker -H $DOCKER_HOST"
+alias docker-ip=dockerip
 
 ## - BREW -----------------------------------------------
 alias b="brew"
