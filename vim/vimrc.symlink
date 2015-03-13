@@ -241,8 +241,8 @@ function! LoadPlugs()
         \ 'PrtHistory(1)':        ['<c-p>'],
         \ 'ToggleFocus()':        ['<c-tab>'],
         \}
-  " Plug 'megalithic/ag.vim'
-  Plug 'rking/ag.vim'
+  " Plug 'rking/ag.vim'
+  Plug 'megalithic/ag.vim'
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup"
     let g:agprg="ag --column --nogroup --line-numbers"
@@ -835,8 +835,8 @@ vnoremap <leader>H :Gbrowse<cr>
 nnoremap <leader>gb :Gblame<cr>
 
 """"""" Ag / Ack
-nnoremap <leader>a :LAg!<space>
-nnoremap <leader>A :Ag!<space>
+nnoremap <leader>a :Ag!<space>
+nnoremap <leader>A :LAg!<space>
 " immediately ag/ack/grep for word under cursor
 map <leader>/ :execute "LAg! " . expand("<cword>") <CR>
 vmap <leader>/ :execute "LAg! " . S <CR>
