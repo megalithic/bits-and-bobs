@@ -1880,7 +1880,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>233 232 459 270 0 0 1920 1178 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>324 669 796 475 0 0 1920 1177 </string>
+	<string>324 675 1016 502 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>650 589 620 392 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUUpdateAlertFrame</key>
@@ -2261,6 +2261,13 @@
 					<integer>11</integer>
 					<key>Text</key>
 					<string>0x01 0x63</string>
+				</dict>
+				<key>0x77-0x100000</key>
+				<dict>
+					<key>Action</key>
+					<integer>13</integer>
+					<key>Text</key>
+					<string></string>
 				</dict>
 				<key>0x7b-0x120000</key>
 				<dict>
@@ -2935,7 +2942,7 @@
 				<real>0.82745098039215681</real>
 			</dict>
 			<key>Bonjour Service Address</key>
-			<string>fe80::82e6:50ff:fe23:34f0</string>
+			<string>192.168.1.95</string>
 			<key>Character Encoding</key>
 			<integer>4</integer>
 			<key>Close Sessions On End</key>
@@ -2943,7 +2950,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>ssh fe80::82e6:50ff:fe23:34f0</string>
+			<string>ssh 192.168.1.95</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -3003,7 +3010,7 @@
 				<real>0.82745098039215681</real>
 			</dict>
 			<key>Guid</key>
-			<string>1A88F300-01B8-42C4-B810-8CEB66839876</string>
+			<string>54DF2E07-E83C-416D-A318-95FE1A091A43</string>
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
@@ -3846,7 +3853,7 @@
 				<real>0.82745098039215681</real>
 			</dict>
 			<key>Guid</key>
-			<string>CBCBAD52-2B1A-4A16-8632-D3C5F8AE7369</string>
+			<string>4FA31A21-6334-45DB-99A1-D1B1F529E226</string>
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
@@ -4464,7 +4471,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-03-03T23:15:21Z</date>
+	<date>2015-03-15T19:17:43Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
@@ -4518,6 +4525,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20150302-nightly</string>
+	<string>2.9.20150309-nightly</string>
 </dict>
 </plist>

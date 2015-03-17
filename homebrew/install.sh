@@ -56,6 +56,7 @@ brew install ffmpeg
 brew install freetype
 brew install gawk
 brew install gdbm
+brew install gdb
 brew install gettext
 brew install ghostscript
 brew install gist

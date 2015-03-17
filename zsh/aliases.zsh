@@ -35,6 +35,7 @@ alias tok="cd ~ && teamocil --here welltok"
 ## - DOCKER -----------------------------------------------
 # alias docker="sudo docker -H $DOCKER_HOST"
 alias docker-ip=dockerip
+alias docker-ubuntu="docker run -i -t ubuntu /bin/bash"
 
 ## - BREW -----------------------------------------------
 alias b="brew"
@@ -235,7 +236,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+
 alias whois="whois -h whois-servers.net"
 
 # Flush Directory Service cache
-alias dnsflush="sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say flushed"
+alias dnsflush="sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"

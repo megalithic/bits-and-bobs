@@ -14,6 +14,7 @@ go get golang.org/x/tools/imports
 go get github.com/smartystreets/goconvey
 go get golang.org/x/tools/cmd/cover
 go get github.com/stretchr/testify/assert
+go get -u github.com/derekparker/delve/cmd/dlv #https://github.com/derekparker/delve
 
 
 # get tags for go
