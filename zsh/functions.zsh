@@ -8,6 +8,12 @@ source ~/.dotfiles/zsh/site-functions/*.zsh
 #   ls -a
 # }
 
+
+dbget() {
+  # https://www.dropbox.com/sh/tvocgjfclbfgez0/AAByYOBEd1_shIk6a6sLKE1Oa?dl=1
+  curl -L -o $1.zip https://www.dropbox.com/sh/$2?dl=1
+}
+
 dockerip() {
   boot2docker ip 2> /dev/null
 }

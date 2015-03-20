@@ -201,18 +201,19 @@ function! LoadPlugs()
       \ 'ctagsbin'  : 'gotags',
       \ 'ctagsargs' : '-sort -silent'
     \ }
-  Plug 'Shougo/vimproc.vim', { 'dir': '~/.vim/bundles/vimproc', 'do': 'make -f make_mac.mak' }
-  Plug 'Shougo/neocomplete.vim'
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#disable_auto_complete = 0
-    let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#enable_auto_delimiter = 1
-    let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
-    let g:neocomplete#enable_auto_select = 1
-    let g:neocomplete#enable_refresh_always = 1
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-      let g:neocomplete#sources#omni#input_patterns = {}
-    endif
+
+  Plug 'ervandew/supertab'
+    let g:SuperTabDefaultCompletionType = '<C-n>'
+    let g:SuperTabCrMapping = 0
+  Plug 'valloric/youcompleteme', { 'dir': '~/.vim/bundle/YouCompleteMe', 'do': './install.sh --clang-completer'}
+    " allow for better for YCM/UltiSnips compatibility
+    " http://www.alexeyshmalko.com/2014/youcompleteme-ultimate-autocomplete-plugin-for-vim/
+    let g:ycm_key_list_select_completion=[]
+    let g:ycm_key_list_previous_completion=[]
+    " make YCM compatible with UltiSnips (using supertab)
+    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
   Plug 'kien/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
     let g:ctrlp_switch_buffer=0            " open files in new buffers
@@ -278,17 +279,14 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  " Plug 'SirVer/ultisnips'
-    " let g:UltiSnipsExpandTrigger="<tab>"
-    " let g:UltiSnipsListSnippets="<c-tab>"
-    " let g:UltiSnipsJumpForwardTrigger="<tab>"
-    " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-    " let g:UltiSnipsSnippetsDir=["UltiSnips"]
+  Plug 'SirVer/ultisnips'
+    " better key bindings for UltiSnipsExpandTrigger
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsListSnippets="<c-tab>"
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+    let g:UltiSnipsSnippetsDir=["UltiSnips"]
 
-  " neosnippets
-  Plug 'Shougo/neosnippet.vim'
-    let g:neosnippet#enable_snipmate_compatibility = 1
-  Plug 'Shougo/neosnippet-snippets'
   Plug 'justinj/vim-react-snippets'
 
   " SnipMate and its dependencies:
@@ -475,6 +473,7 @@ set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
 set formatoptions-=r " don't start new lines w/ comment leader on pressing 'o'
 set shortmess=atI " don't show the intro message when starting vim.
 set matchpairs+=<:>
+let loaded_matchparen = 1 " this turns off pair matching highlight (slow)
 set virtualedit+=block
 set nofoldenable " dont fold by default
 set magic
@@ -786,28 +785,6 @@ map <F5> :PlugUpdate<cr>
 
 """"""" CTags
 noremap <F6> :!ctags -R<cr>
-
-""""""" Neocomplete
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return neocomplete#close_popup() . "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-""""""" Neosnippets
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?

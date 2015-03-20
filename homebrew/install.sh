@@ -17,8 +17,11 @@ brew prune
 brew update
 brew upgrade
 
-brew tap homebrew/dupes
+brew tap 'homebrew/dupes'
+brew tap 'homebrew/brewdler'
+brew tap 'kopischke/ctags'
 brew install homebrew/dupes/grep
+brew install caskroom/cask/brew-cask
 
 # Install homebrew packages
 brew install coreutils
@@ -177,6 +180,18 @@ chsh -s /usr/local/bin/zsh
 
 brew link openssl --force
 brew link python --force
+
+brew cask install 'dropbox'
+brew cask install 'firefox'
+brew cask install 'flux'
+brew cask install 'google-chrome'
+brew cask install 'iterm2'
+brew cask install 'karabiner'
+brew cask install 'licecap'
+brew cask install 'skype'
+brew cask install 'hipchat'
+brew cask install 'virtualbox'
+brew cask install 'vlc'
 
 brew linkapps
 brew cleanup

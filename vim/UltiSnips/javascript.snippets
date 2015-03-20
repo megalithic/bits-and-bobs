@@ -1,3 +1,7 @@
+global !p
+from snippet_helpers import *
+endglobal
+
 # Loops
 
 snippet for "for loop" !
@@ -92,35 +96,44 @@ snippet /**
  */
 endsnippet
 
-snippet @par "@param {...}"
-@param {${1:type}} ${2:name} ${0:description}
+snippet par "@param {...}"
+@param {${1:type}} ${0:name description}
 endsnippet
 
-snippet @ret "@return {...}"
-@return {${1:type}} ${0:description}
+snippet ret "@return {...}"
+@return {${1:type}} ${0}
 endsnippet
 
 
 # Misc
+
+snippet fl "flow" b
+/* @flow */
+endsnippet
 
 snippet cl "console.log(...)" b
 console.log($0);
 endsnippet
 
 snippet re "require" b
-var `!p
+const `!p
 def formatVariableName(path):
+	if path == 'react/addons':
+		return 'React'
+
 	lastPart = path.split('/')[-1]
 	if lastPart == 'underscore':
 		return '_'
 	elif lastPart == 'jquery':
 		return '$'
+	elif lastPart == 'i18n':
+		return 'I18n'
 	else:
-		return string.replace(lastPart.title(), '_', '');
+		return re.sub(r'[_\-]', '', lastPart.title())
 snip.rv = formatVariableName(t[1])
 ` = require('${1}');$0
 endsnippet
 
 snippet me "module.exports" b
-module.exports = ${1:`!p snip.rv = ''.join(x.title() for x in re.sub('\.js$', '', snip.basename or 'ModuleName').split('_'))`};$0
+module.exports = ${1:`!p snip.rv = pascal_case_basename(snip.basename)`};$0
 endsnippet

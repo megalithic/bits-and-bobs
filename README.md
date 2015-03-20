@@ -103,6 +103,7 @@ based on)
 - [thoughtbot](https://github.com/thoughtbot/dotfiles)
 - [wolfy87](https://github.com/Wolfy87/dotfiles)
 - [albert togg's good uses of this original repo (see brew setup)](https://github.com/albertogg/dotfiles)
+- [joe lencioni's awesome dotfiles. fantastic vim stuff here](https://github.com/lencioni/dotfiles)
 
 .. I'll continually add more as I come across them.
 

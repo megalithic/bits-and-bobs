@@ -86,6 +86,7 @@
 	unamend = reset --soft HEAD@{1}
 	subs = submodule foreach git pull origin master
 	hist = for-each-ref --count=5 --sort=-committerdate --format='%(refname:short)' refs/heads/
+  refresh = !ssh-add -l && STASH=$(git stash) && git fetch && git rebase origin/master && test \"$STASH\" != \"No local changes to save\" && git stash pop
 
 [merge]
   tool = vimdiff
@@ -125,13 +126,17 @@
   #whitespace = nowarn
 
 [push]
-	default = current
+	default = current # or upstream?
 
 [web]
   browser = open
 
 [branch]
   autosetuprebase = always
+
+[rebase]
+	autosquash = true
+	# for fixup hotness later
 
 [rerere]
  enabled = true

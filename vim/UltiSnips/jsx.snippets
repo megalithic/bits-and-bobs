@@ -1,5 +1,9 @@
+global !p
+from snippet_helpers import *
+endglobal
+
 snippet cc "createClass" b
-var ${1:`!p snip.rv = ''.join(x.title() for x in re.sub('\.js$', '', snip.basename or 'ModuleName').split('_'))`} = React.createClass({
+const ${1:`!p snip.rv = pascal_case_basename(snip.basename)`} = React.createClass({
 	/**
 	 * @return {Object}
 	 */
@@ -82,10 +86,19 @@ getInitialState: function() {
 },
 endsnippet
 
+snippet cpt "const { PropTypes } = React;" b
+const { PropTypes } = React;
+endsnippet
+
 snippet pt "propTypes" b
 propTypes: {
 	$0
 },
+endsnippet
+
+snippet Pt "PropTypes" w
+PropTypes.$1`!p snip.rv=complete(t[1], ['array', 'bool', 'func', 'number',
+'object', 'string', 'node', 'element', 'instanceOf', 'oneOf', 'oneOfType', 'arrayOf', 'objectOf', 'shape', 'any'])`,$0
 endsnippet
 
 snippet scu "shouldComponentUpdate" b
@@ -97,4 +110,8 @@ snippet scu "shouldComponentUpdate" b
 shouldComponentUpdate: function(nextProps, nextState) {
 	return ${1:true};
 },
+endsnippet
+
+snippet gim "this.getIntlMessage('...')" w
+this.getIntlMessage('`!p snip.rv = pascal_case_basename(snip.basename)`.${1}')${0}
 endsnippet
