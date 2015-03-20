@@ -25,6 +25,7 @@
 "   5.2) Normalization
 " 6) Filetypes #ftypes
 " 7) Keybindings #bindings
+" 8) Abbreviations #abbrev
 " =============================================================================
 
 filetype off
@@ -80,19 +81,27 @@ function! LoadPlugs()
     let g:syntastic_disabled_filetypes = ['html', 'rst', 'java', 'md', 'markdown']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
     let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
-    let g:syntastic_javascript_checkers = ['jshint', 'jsxhint', 'eslint']
+    let g:syntastic_javascript_checkers = ['eslint', 'jshint', 'jsxhint', 'jscs']
     let g:syntastic_haml_checkers = ['haml_lint']
     let g:syntastic_ruby_checkers = ['rubocop']
     let g:syntastic_scss_checkers = ['scss_lint']
     let g:syntastic_error_symbol='✖' "
     let g:syntastic_warning_symbol='⚑'
     let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-    let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_quiet_messages = { "type": "style" }
     let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
-    let g:syntastic_auto_loc_list = 0
+    " Always add any detected errors into the location list
+    let g:syntastic_always_populate_loc_list = 1
+    " Don't auto-open it when errors/warnings are detected, but auto-close when no
+    " more errors/warnings are detected.
+    let g:syntastic_auto_loc_list = 2
+    " Highlight syntax errors where possible
+    let g:syntastic_enable_highlighting = 1
+    " Show this many errors/warnings at a time in the location list
     let g:syntastic_loc_list_height = 5
+    " Don't run checkers when saving and quitting--only on saving
+    let g:syntastic_check_on_wq = 0
   Plug 'luochen1990/rainbow'
     let g:rainbow_active = 1
   Plug 'eiginn/netrw'
@@ -206,13 +215,12 @@ function! LoadPlugs()
     let g:SuperTabDefaultCompletionType = '<C-n>'
     let g:SuperTabCrMapping = 0
   Plug 'valloric/youcompleteme', { 'dir': '~/.vim/bundle/YouCompleteMe', 'do': './install.sh --clang-completer'}
-    " allow for better for YCM/UltiSnips compatibility
-    " http://www.alexeyshmalko.com/2014/youcompleteme-ultimate-autocomplete-plugin-for-vim/
-    let g:ycm_key_list_select_completion=[]
-    let g:ycm_key_list_previous_completion=[]
-    " make YCM compatible with UltiSnips (using supertab)
-    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+    " allow for better for YouCompleteMe/UltiSnips compatibility (with supertab)
+    " http://stackoverflow.com/a/22253548/1626737 and https://github.com/lencioni/dotfiles/blob/master/.vim/plugin/autocomplete.vim
+    let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_seed_identifiers_with_syntax = 1
 
   Plug 'kien/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
@@ -285,7 +293,6 @@ function! LoadPlugs()
     let g:UltiSnipsListSnippets="<c-tab>"
     let g:UltiSnipsJumpForwardTrigger="<tab>"
     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-    let g:UltiSnipsSnippetsDir=["UltiSnips"]
 
   Plug 'justinj/vim-react-snippets'
 
@@ -1027,3 +1034,28 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 inoremap <c-e> <esc>A
 " Ctrl-a: Go to begin of line
 inoremap <c-a> <esc>I
+
+
+" =============================================================================
+" Abbreviations #abbrev
+" These are insert-mode abbreviations
+" -----------------------------------------------------------------------------
+" Autocorrect my common typos
+iab Connectiosn Connections
+iab Cound Could
+iab SOme Some
+iab THat That
+iab THe The
+iab THere There
+iab THerefore Therefore
+iab THese These
+iab THis This
+iab THose Those
+iab WHen When
+iab connectiosn connections
+iab cound could
+iab functino function
+iab indentatino indentation
+iab optiosn options
+iab taht that
+iab teh the
