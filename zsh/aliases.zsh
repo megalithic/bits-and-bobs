@@ -139,6 +139,7 @@ alias q="exit"
 alias x="exit"
 alias g="grep -r -i --color='auto'"
 alias irc="weechat-curses"
+alias rc=irc
 alias ip="ipconfig getifaddr"
 alias clr=clear
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"

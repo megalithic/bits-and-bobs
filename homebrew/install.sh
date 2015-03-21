@@ -181,16 +181,22 @@ chsh -s /usr/local/bin/zsh
 brew link openssl --force
 brew link python --force
 
-brew cask install 'dropbox'
-brew cask install 'firefox'
-brew cask install 'flux'
-brew cask install 'google-chrome'
-brew cask install 'karabiner'
-brew cask install 'licecap'
-brew cask install 'skype'
-brew cask install 'hipchat'
-brew cask install 'virtualbox'
-brew cask install 'vlc'
+brew cask install dropbox
+brew cask install firefox
+brew cask install flux
+brew cask install google-chrome
+brew cask install karabiner
+brew cask install licecap
+brew cask install skype
+brew cask install hipchat
+brew cask install virtualbox
+brew cask install vlc
+brew cask install parallels
+brew cask install sonos
+brew cask install bartender
+brew cask install vagrant
+brew cask install vagrant-manager
+vagrant plugin install vagrant-parallels
 
 brew linkapps
 brew cleanup
