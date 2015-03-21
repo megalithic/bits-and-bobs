@@ -8,9 +8,12 @@ source ~/.dotfiles/zsh/site-functions/*.zsh
 #   ls -a
 # }
 
-dbget() {
-  # https://www.dropbox.com/sh/tvocgjfclbfgez0/AAByYOBEd1_shIk6a6sLKE1Oa?dl=1
-  curl -L -o $1.zip https://www.dropbox.com/sh/$2?dl=1
+function myip() {
+  ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+  ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
 
 dockerip() {
