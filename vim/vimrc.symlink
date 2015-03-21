@@ -72,7 +72,7 @@ function! LoadPlugs()
           \ }
 
     function! MyModified()
-      return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '⁙' : &modifiable ? '' : '-'
+      return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '✭' : &modifiable ? '' : '-'
     endfunction
 
     function! MyReadonly()
