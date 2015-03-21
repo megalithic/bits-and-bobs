@@ -12,10 +12,17 @@ alias files="find . -type f | wc -l"
 alias a="ack"
 alias new="print -rl -- **/*(Dom[1,5])"
 
-alias ls="gls -Fha --color"
-alias l="gls -lAh --color"
-alias ll="gls -lFh --color"
-alias la='gls -A --color'
+# grc overides for ls
+#   Made possible through contributions from generous benefactors like
+#   `brew install coreutils`
+if $(gls &>/dev/null)
+then
+  alias ls="gls -FA --color"
+  alias l="gls -lAhG --color"
+  alias ll="gls -l --color"
+  alias la='gls -A --color'
+fi
+alias last='ls *(.om[1])'
 
 alias webcam="sudo killall VDCAssistant"
 alias dsnuke="find . -name '*.DS_Store' -type f -ls -delete"
@@ -52,8 +59,6 @@ alias im=vim
 alias v="vim"
 alias vm="vim"
 alias m="vim"
-alias vundle="vim -c ':BundleInstall!' -c ':BundleClean' -c ':qa!'"
-alias eclimd="/Applications/Eclipse/eclimd"
 alias updatenvim="brew update; brew reinstall --HEAD neovim"
 alias nv="nvim"
 
@@ -64,14 +69,11 @@ alias ezf="vim ~/.dotfiles/zsh/functions.zsh"
 alias vars="vim ~/.localrc"
 alias ezl="vim ~/.localrc"
 alias ezo="vim ~/.dotfiles/zsh/config.zsh"
-alias eze="vim ~/.dotfiles/system/env.zsh"
-alias ezp="vim ~/.dotfiles/system/path.zsh"
+alias eze="vim ~/.dotfiles/zsh/env.zsh"
+alias ezp="vim ~/.dotfiles/zsh/path.zsh"
 alias ezkb="vim ~/.dotfiles/zsh/keybindings.zsh"
 alias ev="vim ~/.dotfiles/vim/vimrc.symlink"
-alias et="vim ~/.tmux.conf"
-alias notes="~/Dropbox/notes/"
-alias n="ruby ~/.dotfiles/bin/noter.rb"
-alias last='ls *(.om[1])'
+alias et="vim ~/.dotfiles/tmux/tmux.conf.symlink"
 
 ## - FOLDERS -----------------------------------------------
 # alias code="cd ~/code"
@@ -117,6 +119,8 @@ alias chrome="open -a '/Applications/Google Chrome.app' --args --disable-web-sec
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
 alias dirsize="du -sh * | sort -n"
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+alias dus='du -sckx * | sort -nr'
 
 # alias chk='ps auxwww | ag'
 alias die='pkill -9 -f'
@@ -143,7 +147,6 @@ alias irc="weechat-curses"
 alias rc=irc
 alias ip="ipconfig getifaddr"
 alias clr=clear
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias syncoctoprint="scp pi@octopi.local:/home/pi/.octoprint/config.yaml $HOME/Dropbox/3d/configs/octoprint"
 
 ## - ANDROID -----------------------------------------------

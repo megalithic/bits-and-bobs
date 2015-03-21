@@ -1,16 +1,11 @@
-# Only set this if we haven't set $EDITOR up somewhere else previously.
-if [[ "$EDITOR" == "" ]] ; then
-  # Use sublime for my editor.
-  export EDITOR='vim'
-fi
+export EDITOR='vim'
+export VISUAL='vim'
 
 # Random other exports
 export WORDCHARS='*?[]~&;!$%^<>'
 export ACK_COLOR_MATCH='red'
 # export CC=/usr/bin/gcc
 export DISPLAY=:0.0
-export VISUAL='vim'
-# export VIMRUNTIME=/usr/local/bin/vim
 
 # so I can run USPTO/jboss stuff sensibly
 export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vfs.forceCopy=false"
@@ -22,12 +17,10 @@ export TERM='xterm-256color'
 [ -n "$TMUX" ] && export TERM=screen-256color
 # export TERM='xterm-256color-italic' # if this doesn't work set it in iterm2 profiles > terminal
 #
-export CLICOLOR=1
-export LSCOLORS=Exfxcxdxbxegedabagacad # ZSH doesn't recognize LSCOLORS
-# between quotation marks is the tool output for LS_COLORS
-#
-export LS_COLORS="di=1;34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# export CLICOLOR=1
+# export LSCOLORS=Exfxcxdxbxegedabagacad # ZSH doesn't recognize LSCOLORS
+# export LS_COLORS="di=1;34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Enable color in grep
 export GREP_OPTIONS='--color=auto'

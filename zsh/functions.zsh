@@ -25,9 +25,10 @@ pdfjoin() {
 
 chk() { grep $1 =(ps aux) }
 
-tmurl () {
-  array_of_lines=("${(@f)$(tmate show-message)}")
-  echo "$array_of_lines" | sed -n '/ssh/p' | sed -n '$p' #| pbcopy
+tmateip () {
+  output=$(tmate show-message | grep -m 1 "Remote session:")
+  echo ${output#*session: } # display it
+  echo ${output#*session: } | pbcopy # and copy it to clipboard
 }
 
 function zsh_recompile {

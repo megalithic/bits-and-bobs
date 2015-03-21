@@ -69,7 +69,7 @@ export FZF_DEFAULT_COMMAND='ag -l -g ""'
 # ===========================================================================
 # STOP!!!
 # NOTE: DO NOT PUT `source`s for *.zsh files local to ~/.dotfiles/zsh folder.
-# We already source these with the glob pattern around L16.
+# We already source these with the glob pattern around L18.
 # ===========================================================================
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
