@@ -163,11 +163,15 @@ ln -sfv /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
 brew install postgresql --no-python
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-createdb `whoami`
+# createdb `whoami` # is this needed?
 
 # Setup redis
 brew install redis
 ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+
+# Setup fzf
+brew install fzf
+$(brew info fzf | grep /install)
 
 # Setup homebrew vim to override system vim
 sudo mv /usr/bin/vim /usr/bin/vim_system

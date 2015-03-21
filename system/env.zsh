@@ -23,7 +23,11 @@ export TERM='xterm-256color'
 # export TERM='xterm-256color-italic' # if this doesn't work set it in iterm2 profiles > terminal
 #
 export CLICOLOR=1
-export LSCOLORS=Gxfxcxdxbxegedabagacad
+export LSCOLORS=Exfxcxdxbxegedabagacad # ZSH doesn't recognize LSCOLORS
+# between quotation marks is the tool output for LS_COLORS
+#
+export LS_COLORS="di=1;34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Enable color in grep
 export GREP_OPTIONS='--color=auto'
