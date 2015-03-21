@@ -6,13 +6,14 @@ windows:
     panes:
       - commands:
         - cd ~/code/welltok/cafewell
+        - bundle
         - be foreman start
       - commands:
         - cd ~/code/welltok/simpleton
         - rails s -p7071
       - commands:
         - cd ~/code/welltok/hitman
-        - go run hitman.go
+        - go run hitman.go --nosave
       - commands:
         - cd ~/code/welltok/cafewell
   - name: "code"

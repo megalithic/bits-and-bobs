@@ -17,8 +17,11 @@ export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vf
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home"
 export JBOSS_HOME="$HOME/code/Isotope11/uspto/jboss-eap-6.1"
 
-# Setup terminal, and turn on colors
-export TERM=screen-256color-bce
+# Setup terminal, and turn on 256 colors
+export TERM='xterm-256color'
+[ -n "$TMUX" ] && export TERM=screen-256color
+# export TERM='xterm-256color-italic' # if this doesn't work set it in iterm2 profiles > terminal
+#
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 

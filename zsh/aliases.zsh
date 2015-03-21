@@ -115,7 +115,7 @@ alias chrome="open -a '/Applications/Google Chrome.app' --args --disable-web-sec
 # Thanks @sindersorhus: https://github.com/mathiasbynens/dotfiles/commit/bd9429af1cfdc7f4caa73e6f98773ed69a161c9c
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
-alias dirsize="du -sh"
+alias dirsize="du -sh * | sort -n"
 
 # alias chk='ps auxwww | ag'
 alias die='pkill -9 -f'

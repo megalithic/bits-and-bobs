@@ -37,43 +37,136 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
+  Plug 'w0ng/vim-hybrid'
+  Plug 'morhetz/gruvbox'
+  Plug 'junegunn/seoul256.vim'
   Plug 'RobertAudi/golden-ratio'
     let g:golden_ratio_exclude_nonmodifiable = 1
     let g:golden_ratio_wrap_ignored = 0
     let g:golden_ratio_filetypes_blacklist = ["nerdtree", "unite", "ctrlp", "quickfix", "quickfix-list", "quickfix-list-window", "location-list", "location-list-window", "unlisted", "directory", "help", "scratch", "netrw", "NetrwTreeListing 1", "NetrwTreeListing", "NetrwTreeListing1"]
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'christoomey/vim-tmux-runner'
-  Plug 'bling/vim-airline'
-    let g:airline#extensions#branch#enabled = 1
-    let g:airline#extensions#syntastic#enabled = 1
-    let g:airline_theme='wombat'
-
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
-    let g:airline_left_sep = ''
-    let g:airline_left_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_symbols.linenr = '␊'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.linenr = '¶'
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.paste = 'Þ'
-    let g:airline_symbols.paste = '∥'
-    let g:airline_symbols.whitespace = 'Ξ'
-    let g:airline_powerline_fonts = 1
-    let g:airline#extensions#tabline#enabled = 0
-    let g:airline_mode_map = {
-          \ 'n' : 'N',
-          \ 'i' : 'I',
-          \ 'R' : 'REPLACE',
-          \ 'v' : 'VISUAL',
-          \ 'V' : 'V-LINE',
-          \ 'c' : 'CMD   ',
-          \ '': 'V-BLCK',
+  Plug 'itchyny/lightline.vim'
+    let g:lightline = {
+          \ 'colorscheme': 'wombat',
+          \ 'active': {
+          \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+          \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+          \ },
+          \ 'component_function': {
+          \   'fugitive': 'MyFugitive',
+          \   'filename': 'MyFilename',
+          \   'fileformat': 'MyFileformat',
+          \   'filetype': 'MyFiletype',
+          \   'fileencoding': 'MyFileencoding',
+          \   'mode': 'MyMode',
+          \ },
+          \ 'component_expand': {
+          \   'syntastic': 'SyntasticStatuslineFlag',
+          \ },
+          \ 'component_type': {
+          \   'syntastic': 'error',
+          \ },
+          \ 'separator': { 'left': '', 'right': '' },
+          \ 'subseparator': { 'left': '', 'right': '' }
           \ }
+
+    function! MyModified()
+      return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    endfunction
+
+    function! MyReadonly()
+      return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '⭤' : ''
+    endfunction
+
+    function! MyFilename()
+      let fname = expand('%:t')
+      return fname == '__Tagbar__' ? g:lightline.fname :
+            \ fname =~ '__Gundo\|NERD_tree' ? '' :
+            \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+            \ ('' != fname ? fname : '[No Name]') .
+            \ ('' != MyModified() ? ' ' . MyModified() : '')
+    endfunction
+
+    function! MyFugitive()
+      try
+        if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+          let mark = ''  " edit here for cool mark
+          let _ = fugitive#head()
+          return strlen(_) ? '⭠ '._ : ''
+        endif
+      catch
+      endtry
+      return ''
+    endfunction
+
+    function! MyFileformat()
+      return winwidth(0) > 70 ? &fileformat : ''
+    endfunction
+
+    function! MyFiletype()
+      return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    endfunction
+
+    function! MyFileencoding()
+      return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    endfunction
+
+    function! MyMode()
+      let fname = expand('%:t')
+      return fname == '__Tagbar__' ? 'Tagbar' :
+            \ fname =~ 'NERD_tree' ? 'NERDTree' :
+            \ &ft == 'vimfiler' ? 'VimFiler' :
+            \ &ft == 'vimshell' ? 'VimShell' :
+            \ winwidth(0) > 60 ? lightline#mode() : ''
+    endfunction
+
+    function! CtrlPMark()
+      if expand('%:t') =~ 'ControlP'
+        call lightline#link('iR'[g:lightline.ctrlp_regex])
+        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+              \ , g:lightline.ctrlp_next], 0)
+      else
+        return ''
+      endif
+    endfunction
+
+    let g:ctrlp_status_func = {
+      \ 'main': 'CtrlPStatusFunc_1',
+      \ 'prog': 'CtrlPStatusFunc_2',
+      \ }
+
+    function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+      let g:lightline.ctrlp_regex = a:regex
+      let g:lightline.ctrlp_prev = a:prev
+      let g:lightline.ctrlp_item = a:item
+      let g:lightline.ctrlp_next = a:next
+      return lightline#statusline(0)
+    endfunction
+
+    function! CtrlPStatusFunc_2(str)
+      return lightline#statusline(0)
+    endfunction
+
+    let g:tagbar_status_func = 'TagbarStatusFunc'
+
+    function! TagbarStatusFunc(current, sort, fname, ...) abort
+        let g:lightline.fname = a:fname
+      return lightline#statusline(0)
+    endfunction
+
+    augroup AutoSyntastic
+      autocmd!
+      autocmd BufWritePost *.c,*.cpp call s:syntastic()
+    augroup END
+    function! s:syntastic()
+      SyntasticCheck
+      call lightline#update()
+    endfunction
+
+    let g:unite_force_overwrite_statusline = 0
+    let g:vimfiler_force_overwrite_statusline = 0
+    let g:vimshell_force_overwrite_statusline = 0
   Plug 'scrooloose/syntastic'
     let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.jshintrc'
     let g:syntastic_enable_signs = 1 " slow downs
@@ -103,6 +196,9 @@ function! LoadPlugs()
     " Don't run checkers when saving and quitting--only on saving
     let g:syntastic_check_on_wq = 0
   Plug 'luochen1990/rainbow'
+    let g:rainbow_conf = {
+      \ 'separately' : { 'agsv' : 0 }
+      \ }
     let g:rainbow_active = 1
   Plug 'eiginn/netrw'
     let g:netrw_altv          = 1 " open files on right
@@ -163,9 +259,9 @@ function! LoadPlugs()
     let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
 
   """"""" JavaScript
-  " Plug 'pangloss/vim-javascript' " breaks rainbow parens, but does correct JS indentions :(
-  " Plug 'jelera/vim-javascript-syntax'
-  " Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'pangloss/vim-javascript' " breaks rainbow parens, but does correct JS indentions :(
+  Plug 'jelera/vim-javascript-syntax'
+  Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'lukaszb/vim-web-indent'
   Plug 'Shutnik/jshint2.vim'
   Plug 'mxw/vim-jsx'
@@ -179,6 +275,7 @@ function! LoadPlugs()
   " Plug 'nelstrom/vim-textobj-rubyblock'
   " Plug 'whatyouhide/vim-textobj-xmlattr'
 
+  Plug 'Lokaltog/vim-easymotion'
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
@@ -256,6 +353,24 @@ function! LoadPlugs()
         \ 'ToggleFocus()':        ['<c-tab>'],
         \}
   " Plug 'rking/ag.vim'
+  Plug 'gabesoft/vim-ags'
+    let g:ags_agexe = '/usr/local/bin/ag'
+    let g:ags_agmaxcount = 50
+    let g:ags_agcontext = 3
+    let g:ags_agargs = {
+        \ '--break'             : [ '', '' ],
+        \ '--color'             : [ '', '' ],
+        \ '--color-line-number' : [ '"1;30"', '' ],
+        \ '--color-match'       : [ '"32;40"', '' ],
+        \ '--color-path'        : [ '"1;31"', '' ],
+        \ '--column'            : [ '', '' ],
+        \ '--context'           : [ 'g:ags_agcontext', '-C', '3' ],
+        \ '--filename'          : [ '', '' ],
+        \ '--group'             : [ '', '' ],
+        \ '--heading'           : [ '', '-H' ],
+        \ '--max-count'         : [ 'g:ags_agmaxcount', '-m', '2000' ],
+        \ '--numbers'           : [ '', '' ],
+    \ }
   Plug 'megalithic/ag.vim'
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup"
@@ -326,8 +441,9 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 """"" UI ====================================================================
 """"""" Theme / Terminal
-colorscheme base16-eighties
-let base16colorspace=256  " Access colors present in 256 colorspac
+let base16colorspace=256  " Access colors present in 256 colorspac (must be before colorscheme def)
+let g:hybrid_use_Xresources = 1
+colorscheme base16-tomorrow
 set background=dark
 
 filetype plugin indent on
@@ -339,7 +455,7 @@ set t_Co=256
 " in case t_Co alone doesn't work, add this as well:
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
-set t_ut= " improve screen clearing by using the background color
+set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
 
 set enc=utf-8
 set term=screen-256color
@@ -367,6 +483,7 @@ set novisualbell
 set number
 set splitbelow
 set laststatus=2 " so we always get airline displaying / always show status
+set noshowmode
 
 " change vim cursor depending on the mode
 if exists('$TMUX')
@@ -553,6 +670,9 @@ hi CursorLineNr term=bold ctermbg=144
 hi NonText ctermfg=24
 hi SpecialKey ctermfg=24 guibg=NONE
 hi Search term=underline ctermbg=144
+
+" italicize comments
+" hi Comment cterm=italic
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 match ExtraWhitespace /\s\+\%#\@<!$/
@@ -793,14 +913,6 @@ map <F5> :PlugUpdate<cr>
 """"""" CTags
 noremap <F6> :!ctags -R<cr>
 
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
@@ -825,6 +937,7 @@ nnoremap <leader>gb :Gblame<cr>
 
 """"""" Ag / Ack
 nnoremap <leader>a :Ag!<space>
+nnoremap <leader>a :Ags<space>
 nnoremap <leader>A :LAg!<space>
 " immediately ag/ack/grep for word under cursor
 map <leader>/ :execute "LAg! " . expand("<cword>") <CR>

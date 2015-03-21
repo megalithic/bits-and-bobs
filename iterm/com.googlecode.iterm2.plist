@@ -1665,6 +1665,171 @@
 				<real>0.16475556790828705</real>
 			</dict>
 		</dict>
+		<key>spacegray</key>
+		<dict>
+			<key>Ansi 0 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.20000000000000001</real>
+				<key>Green Component</key>
+				<real>0.18431372549019601</real>
+				<key>Red Component</key>
+				<real>0.172549019607843</real>
+			</dict>
+			<key>Ansi 1 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.31372549019607798</real>
+				<key>Green Component</key>
+				<real>0.29803921568627501</real>
+				<key>Red Component</key>
+				<real>0.69019607843137298</real>
+			</dict>
+			<key>Ansi 10 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.356862745098039</real>
+				<key>Green Component</key>
+				<real>0.59607843137254901</real>
+				<key>Red Component</key>
+				<real>0.58039215686274503</real>
+			</dict>
+			<key>Ansi 11 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.36078431372549002</real>
+				<key>Green Component</key>
+				<real>0.59999999999999998</real>
+				<key>Red Component</key>
+				<real>0.88627450980392197</real>
+			</dict>
+			<key>Ansi 12 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.61568627450980395</real>
+				<key>Green Component</key>
+				<real>0.53725490196078396</real>
+				<key>Red Component</key>
+				<real>0.40000000000000002</real>
+			</dict>
+			<key>Ansi 13 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.58039215686274503</real>
+				<key>Green Component</key>
+				<real>0.39215686274509798</real>
+				<key>Red Component</key>
+				<real>0.55294117647058805</real>
+			</dict>
+			<key>Ansi 14 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.46666666666666701</real>
+				<key>Green Component</key>
+				<real>0.48627450980392201</real>
+				<key>Red Component</key>
+				<real>0.32156862745098003</real>
+			</dict>
+			<key>Ansi 15 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.86274509803921595</real>
+				<key>Green Component</key>
+				<real>0.89019607843137205</real>
+				<key>Red Component</key>
+				<real>0.86666666666666703</real>
+			</dict>
+			<key>Ansi 2 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.32156862745098003</real>
+				<key>Green Component</key>
+				<real>0.58823529411764697</real>
+				<key>Red Component</key>
+				<real>0.56862745098039202</real>
+			</dict>
+			<key>Ansi 3 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.36078431372549002</real>
+				<key>Green Component</key>
+				<real>0.59999999999999998</real>
+				<key>Red Component</key>
+				<real>0.88627450980392197</real>
+			</dict>
+			<key>Ansi 4 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.61568627450980395</real>
+				<key>Green Component</key>
+				<real>0.53725490196078396</real>
+				<key>Red Component</key>
+				<real>0.40000000000000002</real>
+			</dict>
+			<key>Ansi 5 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.58039215686274503</real>
+				<key>Green Component</key>
+				<real>0.39215686274509798</real>
+				<key>Red Component</key>
+				<real>0.55294117647058805</real>
+			</dict>
+			<key>Ansi 6 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.46666666666666701</real>
+				<key>Green Component</key>
+				<real>0.48627450980392201</real>
+				<key>Red Component</key>
+				<real>0.32156862745098003</real>
+			</dict>
+			<key>Ansi 7 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.376470588235294</real>
+				<key>Green Component</key>
+				<real>0.38823529411764701</real>
+				<key>Red Component</key>
+				<real>0.376470588235294</real>
+			</dict>
+			<key>Ansi 8 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.337254901960784</real>
+				<key>Green Component</key>
+				<real>0.31372549019607798</real>
+				<key>Red Component</key>
+				<real>0.29411764705882398</real>
+			</dict>
+			<key>Ansi 9 Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.31372549019607798</real>
+				<key>Green Component</key>
+				<real>0.29803921568627501</real>
+				<key>Red Component</key>
+				<real>0.69019607843137298</real>
+			</dict>
+			<key>Background Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.078431372549019607</real>
+				<key>Green Component</key>
+				<real>0.074509803921568599</real>
+				<key>Red Component</key>
+				<real>0.066666666666666693</real>
+			</dict>
+			<key>Foreground Color</key>
+			<dict>
+				<key>Blue Component</key>
+				<real>0.71764705882352897</real>
+				<key>Green Component</key>
+				<real>0.73333333333333295</real>
+				<key>Red Component</key>
+				<real>0.71764705882352897</real>
+			</dict>
+		</dict>
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>E5758E53-BD4E-4C4F-B58E-91F5453CDEB3</string>
@@ -1880,7 +2045,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>233 232 459 270 0 0 1920 1178 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>324 675 1016 502 0 0 1920 1177 </string>
+	<string>346 506 918 512 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>650 589 620 392 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUUpdateAlertFrame</key>
@@ -2085,7 +2250,7 @@
 			<key>Blur</key>
 			<false/>
 			<key>Blur Radius</key>
-			<real>0.10000000149011612</real>
+			<real>14.7846153861055</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -2168,7 +2333,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string></string>
+			<string>tmux a || tmux new</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -2545,17 +2710,17 @@
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
-			<real>0.45723959803581238</real>
+			<real>0.0</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
 			<string>replicant</string>
 			<key>Non Ascii Font</key>
-			<string>SourceCodePro-RegularForPowerline 13</string>
+			<string>SourceCodePro+Powerline+AwesomeRegular 13</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodePro-RegularForPowerline 12</string>
+			<string>SourceCodePro+Powerline+AwesomeRegular 12</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prevent Opening in a Tab</key>
@@ -2711,7 +2876,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.031952662721893496</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -2725,7 +2890,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
@@ -2931,7 +3096,7 @@
 			<key>Blur</key>
 			<false/>
 			<key>Blur Radius</key>
-			<real>0.10000000149011612</real>
+			<real>14.7846153861055</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -2942,7 +3107,7 @@
 				<real>0.82745098039215681</real>
 			</dict>
 			<key>Bonjour Service Address</key>
-			<string>192.168.1.95</string>
+			<string>192.168.1.18</string>
 			<key>Character Encoding</key>
 			<integer>4</integer>
 			<key>Close Sessions On End</key>
@@ -2950,7 +3115,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>ssh 192.168.1.95</string>
+			<string>ssh 192.168.1.18</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -2991,7 +3156,7 @@
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
-			<string>MesserS</string>
+			<string>garage</string>
 			<key>Disable Printing</key>
 			<false/>
 			<key>Disable Smcup Rmcup</key>
@@ -3010,7 +3175,7 @@
 				<real>0.82745098039215681</real>
 			</dict>
 			<key>Guid</key>
-			<string>54DF2E07-E83C-416D-A318-95FE1A091A43</string>
+			<string>EF7F9F2B-9DCC-4ABB-A764-654F8D601261</string>
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
@@ -3018,7 +3183,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string></string>
+			<string>tmux a -t 1 || tmux new</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -3111,6 +3276,13 @@
 					<integer>11</integer>
 					<key>Text</key>
 					<string>0x01 0x63</string>
+				</dict>
+				<key>0x77-0x100000</key>
+				<dict>
+					<key>Action</key>
+					<integer>13</integer>
+					<key>Text</key>
+					<string></string>
 				</dict>
 				<key>0x7b-0x120000</key>
 				<dict>
@@ -3388,17 +3560,17 @@
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
-			<real>0.45723959803581238</real>
+			<real>0.0</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
-			<string>MesserS</string>
+			<string>garage</string>
 			<key>Non Ascii Font</key>
-			<string>SourceCodePro-RegularForPowerline 13</string>
+			<string>SourceCodePro+Powerline+AwesomeRegular 13</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodePro-RegularForPowerline 12</string>
+			<string>SourceCodePro+Powerline+AwesomeRegular 12</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prevent Opening in a Tab</key>
@@ -3554,7 +3726,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.031952662721893496</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -3568,7 +3740,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
@@ -3774,7 +3946,7 @@
 			<key>Blur</key>
 			<false/>
 			<key>Blur Radius</key>
-			<real>0.10000000149011612</real>
+			<real>14.7846153861055</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -3785,7 +3957,7 @@
 				<real>0.82745098039215681</real>
 			</dict>
 			<key>Bonjour Service Address</key>
-			<string>192.168.1.18</string>
+			<string>fe80::82e6:50ff:fe23:34f0</string>
 			<key>Character Encoding</key>
 			<integer>4</integer>
 			<key>Close Sessions On End</key>
@@ -3793,7 +3965,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>ssh 192.168.1.18</string>
+			<string>ssh fe80::82e6:50ff:fe23:34f0</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -3834,7 +4006,7 @@
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
-			<string>garage</string>
+			<string>MesserS</string>
 			<key>Disable Printing</key>
 			<false/>
 			<key>Disable Smcup Rmcup</key>
@@ -3853,7 +4025,7 @@
 				<real>0.82745098039215681</real>
 			</dict>
 			<key>Guid</key>
-			<string>4FA31A21-6334-45DB-99A1-D1B1F529E226</string>
+			<string>4CFFC9E1-7679-43C4-9374-9BC80893A4E6</string>
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
@@ -3861,7 +4033,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string></string>
+			<string>tmux a -t 1 || tmux new</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -3954,6 +4126,13 @@
 					<integer>11</integer>
 					<key>Text</key>
 					<string>0x01 0x63</string>
+				</dict>
+				<key>0x77-0x100000</key>
+				<dict>
+					<key>Action</key>
+					<integer>13</integer>
+					<key>Text</key>
+					<string></string>
 				</dict>
 				<key>0x7b-0x120000</key>
 				<dict>
@@ -4231,17 +4410,17 @@
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
-			<real>0.45723959803581238</real>
+			<real>0.0</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
-			<string>garage</string>
+			<string>MesserS</string>
 			<key>Non Ascii Font</key>
-			<string>SourceCodePro-RegularForPowerline 13</string>
+			<string>SourceCodePro+Powerline+AwesomeRegular 13</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodePro-RegularForPowerline 12</string>
+			<string>SourceCodePro+Powerline+AwesomeRegular 12</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prevent Opening in a Tab</key>
@@ -4397,7 +4576,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.031952662721893496</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -4411,7 +4590,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
@@ -4427,6 +4606,10 @@
 	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
 	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
+	<integer>0</integer>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
 	<key>NoSyncSuppressAnnyoingBellOffer</key>
 	<true/>
@@ -4471,7 +4654,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-03-15T19:17:43Z</date>
+	<date>2015-03-20T02:48:55Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
@@ -4525,6 +4708,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20150309-nightly</string>
+	<string>2.9.20150319-nightly</string>
 </dict>
 </plist>
