@@ -46,8 +46,6 @@ brew install avrdude
 brew install bazaar
 brew install bison
 brew install curl --with-openssl --with-ssh --with-rtmp
-brew install chruby
-brew install ruby-install
 brew install cmake
 brew install cowsay
 brew install chromedriver
