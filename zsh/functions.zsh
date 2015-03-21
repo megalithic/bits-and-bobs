@@ -23,7 +23,18 @@ pdfjoin() {
   "$join_py" -o $output_file $@ && open $output_file
 }
 
-chk() { grep $1 =(ps aux) }
+chk() { grep $1 =(ps auxwww) }
+
+path() {
+  echo $PATH | tr ":" "\n" | \
+    awk "{ sub(\"/usr\",   \"$fg_no_bold[green]/usr$reset_color\"); \
+      sub(\"/bin\",   \"$fg_no_bold[blue]/bin$reset_color\"); \
+      sub(\"/opt\",   \"$fg_no_bold[cyan]/opt$reset_color\"); \
+      sub(\"/sbin\",  \"$fg_no_bold[magenta]/sbin$reset_color\"); \
+      sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
+      sub(\"/.rvm\",  \"$fg_no_bold[red]/.rvm$reset_color\"); \
+      print }"
+}
 
 tmateip () {
   output=$(tmate show-message | grep -m 1 "Remote session:")
@@ -268,72 +279,6 @@ any() {
     else
         ps xauwww | grep -i --color=auto "[${1[1]}]${1[2,-1]}"
     fi
-}
-
-# -------------------------------------------------------------------
-# display a neatly formatted path
-# -------------------------------------------------------------------
-path() {
-  echo $PATH | tr ":" "\n" | \
-    awk "{ sub(\"/usr\",   \"$fg_no_bold[green]/usr$reset_color\"); \
-           sub(\"/bin\",   \"$fg_no_bold[blue]/bin$reset_color\"); \
-           sub(\"/opt\",   \"$fg_no_bold[cyan]/opt$reset_color\"); \
-           sub(\"/sbin\",  \"$fg_no_bold[magenta]/sbin$reset_color\"); \
-           sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
-           print }"
-}
-
-# -------------------------------------------------------------------
-# Mac specific functions
-# -------------------------------------------------------------------
-if [[ $IS_MAC -eq 1 ]]; then
-
-    # view man pages in Preview
-    pman() { ps=`mktemp -t manpageXXXX`.ps ; man -t $@ > "$ps" ; open "$ps" ; }
-
-    # function to show interface IP assignments
-    ips() { foo=`/Users/mark/bin/getip.py; /Users/mark/bin/getip.py en0; /Users/mark/bin/getip.py en1`; echo $foo; }
-
-    # notify function - http://hints.macworld.com/article.php?story=20120831112030251
-    notify() { automator -D title=$1 -D subtitle=$2 -D message=$3 ~/Library/Workflows/DisplayNotification.wflow }
-fi
-
-# Log output:
-#
-# * 51c333e    (12 days)    <Gary Bernhardt>   add vim-eunuch
-#
-# The time massaging regexes start with ^[^<]* because that ensures that they
-# only operate before the first "<". That "<" will be the beginning of the
-# author name, ensuring that we don't destroy anything in the commit message
-# that looks like time.
-#
-# The log format uses } characters between each field, and `column` is later
-# used to split on them. A } in the commit subject or any other field will
-# break this.
-
-HASH="%C(yellow)%h%Creset"
-RELATIVE_TIME="%Cgreen(%ar)%Creset"
-AUTHOR="%C(bold blue)<%an>%Creset"
-REFS="%C(red)%d%Creset"
-SUBJECT="%s"
-
-FORMAT="$HASH}$RELATIVE_TIME}$AUTHOR}$REFS $SUBJECT"
-
-show_git_head() {
-    pretty_git_log -1
-    git show -p --pretty="tformat:"
-}
-
-pretty_git_log() {
-    git log --graph --pretty="tformat:${FORMAT}" $* |
-        # Replace (2 years ago) with (2 years)
-        sed -Ee 's/(^[^<]*) ago\)/\1)/' |
-        # Replace (2 years, 5 months) with (2 years)
-        sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
-        # Line columns up based on } delimiter
-        column -s '}' -t |
-        # Page only if we need to
-        less -FXRS
 }
 
 # ============================================================================
