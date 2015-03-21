@@ -186,6 +186,9 @@ brew cask install firefox
 brew cask install flux
 brew cask install google-chrome
 brew cask install karabiner
+brew cask install bettertouchtool
+brew cask install evernote
+brew cask install xtrafinder
 brew cask install licecap
 brew cask install skype
 brew cask install hipchat
@@ -196,6 +199,8 @@ brew cask install sonos
 brew cask install bartender
 brew cask install vagrant
 brew cask install vagrant-manager
+brew cask install droplr
+brew cask install tweetbot
 vagrant plugin install vagrant-parallels
 
 brew linkapps

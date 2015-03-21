@@ -48,6 +48,7 @@ alias vim="/usr/local/bin/vim"
 # alias vim="nvim" # just wanna use neovim
 alias vi="vim"
 alias vmi="vim"
+alias im=vim
 alias v="vim"
 alias vm="vim"
 alias m="vim"
