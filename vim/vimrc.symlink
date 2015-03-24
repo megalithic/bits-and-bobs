@@ -37,9 +37,6 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
-  Plug 'w0ng/vim-hybrid'
-  Plug 'morhetz/gruvbox'
-  Plug 'junegunn/seoul256.vim'
   Plug 'RobertAudi/golden-ratio'
     let g:golden_ratio_exclude_nonmodifiable = 1
     let g:golden_ratio_wrap_ignored = 0
@@ -157,7 +154,7 @@ function! LoadPlugs()
 
     augroup AutoSyntastic
       autocmd!
-      autocmd BufWritePost *.c,*.cpp call s:syntastic()
+      autocmd BufWritePost *.jsx,*.js,*.json,*.rb,*.coffee call s:syntastic()
     augroup END
     function! s:syntastic()
       SyntasticCheck
@@ -174,7 +171,7 @@ function! LoadPlugs()
     let g:syntastic_disabled_filetypes = ['html', 'rst', 'java', 'md', 'markdown']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
     let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
-    let g:syntastic_javascript_checkers = ['eslint', 'jshint', 'jsxhint', 'jscs']
+    let g:syntastic_javascript_checkers = ['eslint', 'jshint', 'jsxhint', 'jscs', 'jsonlint']
     let g:syntastic_haml_checkers = ['haml_lint']
     let g:syntastic_ruby_checkers = ['rubocop']
     let g:syntastic_scss_checkers = ['scss_lint']
@@ -255,7 +252,7 @@ function! LoadPlugs()
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-rake'
 
-  """"""" Misc
+  """"""" Markdown
     let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
 
   """"""" JavaScript
@@ -266,14 +263,13 @@ function! LoadPlugs()
   Plug 'Shutnik/jshint2.vim'
   Plug 'mxw/vim-jsx'
   Plug 'burnettk/vim-angular'
+  Plug 'marijnh/tern_for_vim', { 'dir': '~/.vim/bundle/tern_for_vim', 'do': 'npm install'}
 
   """"" Code Navigation======================================================
   """"""" Text objects
   " Plug 'kana/vim-textobj-function'
-  " Plug 'kana/vim-textobj-user'
   " Plug 'mattn/vim-textobj-url'
   " Plug 'nelstrom/vim-textobj-rubyblock'
-  " Plug 'whatyouhide/vim-textobj-xmlattr'
 
   Plug 'Lokaltog/vim-easymotion'
   Plug 'wellle/targets.vim'
@@ -352,11 +348,8 @@ function! LoadPlugs()
         \ 'PrtHistory(1)':        ['<c-p>'],
         \ 'ToggleFocus()':        ['<c-tab>'],
         \}
-  " Plug 'rking/ag.vim'
   Plug 'gabesoft/vim-ags'
     let g:ags_agexe = '/usr/local/bin/ag'
-    let g:ags_agmaxcount = 50
-    let g:ags_agcontext = 3
     let g:ags_agargs = {
         \ '--break'             : [ '', '' ],
         \ '--color'             : [ '', '' ],
@@ -368,10 +361,10 @@ function! LoadPlugs()
         \ '--filename'          : [ '', '' ],
         \ '--group'             : [ '', '' ],
         \ '--heading'           : [ '', '-H' ],
-        \ '--max-count'         : [ 'g:ags_agmaxcount', '-m', '2000' ],
+        \ '--max-count'         : [ 'g:ags_agmaxcount', '-m', '50' ],
         \ '--numbers'           : [ '', '' ],
     \ }
-  Plug 'megalithic/ag.vim'
+  Plug 'rking/ag.vim'
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup"
     let g:agprg="ag --column --nogroup --line-numbers"
@@ -954,7 +947,7 @@ silent! map <unique> <Leader>l :VroomRunLastTest<CR>
 vnoremap <leader>G :Gist -p<cr>
 
 """"""" Syntastic
-nnoremap <leader>e :SyntasticToggleMode<cr> :SyntasticCheck<cr>
+nnoremap <F7> :SyntasticCheck<cr>
 
 """"""" Surround
 vmap [ S]

@@ -72,7 +72,10 @@ setopt complete_in_word # Allow completion from within a word/phrase
 # ===== Correction
 setopt correct # spelling correction for commands
 setopt correctall # spelling correction for arguments
-# DISABLE_CORRECTION="true"
+unsetopt correct
+unsetopt correct_all
+# setopt nocorrectall
+DISABLE_CORRECTION="true"
 
 # ===== Prompt
 setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
