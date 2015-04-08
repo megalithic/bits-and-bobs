@@ -54,9 +54,9 @@
 # cat > /dev/null
 # And press it
 
-typeset -g -A key
+# typeset -g -A key
 
-bindkey -e
+bindkey -e # use emacs key bindings
 
 bindkey '^H' delete-word # iterm
 bindkey '^[[3~' delete-char # tmux

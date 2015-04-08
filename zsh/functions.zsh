@@ -8,6 +8,11 @@ source ~/.dotfiles/zsh/site-functions/*.zsh
 #   ls -a
 # }
 
+function v() {
+  rm ~/tmp/profile.log;
+  vim $1 --startuptime ~/tmp/profile.log
+}
+
 function myip() {
   ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
   ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'

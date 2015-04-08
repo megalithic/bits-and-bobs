@@ -152,14 +152,15 @@ function! LoadPlugs()
       return lightline#statusline(0)
     endfunction
 
-    augroup AutoSyntastic
-      autocmd!
-      autocmd BufWritePost *.jsx,*.js,*.json,*.rb,*.coffee call s:syntastic()
-    augroup END
-    function! s:syntastic()
-      SyntasticCheck
-      call lightline#update()
-    endfunction
+    " RE-ENABLE these if you want filetype specific checking on load
+    " augroup AutoSyntastic
+    "   autocmd!
+    "   autocmd BufWritePost *.jsx,*.js,*.json,*.rb,*.coffee call s:syntastic()
+    " augroup END
+    " function! s:syntastic()
+    "   SyntasticCheck
+    "   call lightline#update()
+    " endfunction
 
     let g:unite_force_overwrite_statusline = 0
     let g:vimfiler_force_overwrite_statusline = 0
@@ -170,8 +171,9 @@ function! LoadPlugs()
     let g:syntastic_check_on_open = 0 " slow downs
     let g:syntastic_disabled_filetypes = ['html', 'rst', 'java', 'md', 'markdown']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
-    let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
-    let g:syntastic_javascript_checkers = ['eslint', 'jshint', 'jsxhint', 'jscs', 'jsonlint']
+    let g:syntastic_jsl_conf = '$HOME/.jshintrc'
+    let g:syntastic_javascript_checkers = ['eslint', 'jsonlint', 'jsxhint', 'coffeelint']
+    " let g:syntastic_javascript_checkers = ['eslint', 'jshint', 'jsxhint', 'jscs', 'jsonlint']
     let g:syntastic_haml_checkers = ['haml_lint']
     let g:syntastic_ruby_checkers = ['rubocop']
     let g:syntastic_scss_checkers = ['scss_lint']
@@ -236,7 +238,7 @@ function! LoadPlugs()
     let g:lt_quickfix_list_toggle_map = '<F4>'
 
   """"" Filetypes ===========================================================
-  Plug 'sheerun/vim-polyglot'
+  " Plug 'sheerun/vim-polyglot'
 
   """"""" Go
   Plug 'fatih/vim-go'
@@ -253,17 +255,37 @@ function! LoadPlugs()
   Plug 'tpope/vim-rake'
 
   """"""" Markdown
-    let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
+  Plug 'tpope/vim-markdown'
+    let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
+    autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
+    autocmd FileType markdown set tw=80
+
+  """"""" CSS/SCSS/LESS/Preprocessors
+  Plug 'groenewege/vim-less', { 'for': 'less' }
+  Plug 'aaronjensen/vim-sass-status', { 'for': ['scss', 'sass'] }
+  Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss', 'sass'] }
+  Plug 'hail2u/vim-css3-syntax', { 'for': ['scss', 'sass', 'css'] }
+
+  """"""" HTML/HAML/SLIM/Markup
+  Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
+  Plug 'othree/html5.vim'
+  Plug 'slim-template/vim-slim', { 'for': 'slim' }
+  Plug 'tpope/vim-haml', { 'for': ['haml', 'hamlc'] }
+  Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 
   """"""" JavaScript
-  Plug 'pangloss/vim-javascript' " breaks rainbow parens, but does correct JS indentions :(
-  Plug 'jelera/vim-javascript-syntax'
-  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+  Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'lukaszb/vim-web-indent'
-  Plug 'Shutnik/jshint2.vim'
-  Plug 'mxw/vim-jsx'
-  Plug 'burnettk/vim-angular'
-  Plug 'marijnh/tern_for_vim', { 'dir': '~/.vim/bundle/tern_for_vim', 'do': 'npm install'}
+  Plug 'Shutnik/jshint2.vim', { 'on': 'JSHint' }
+  Plug 'mxw/vim-jsx', { 'for': 'jsx' }
+    let g:jsx_ext_required = 0
+    let g:jsx_pragma_required = 0
+  Plug 'burnettk/vim-angular', { 'for': 'javascript' }
+  Plug 'helino/vim-json', { 'for': 'json' }
+  Plug 'marijnh/tern_for_vim', { 'dir': '~/.vim/bundle/tern_for_vim', 'do': 'npm install', 'for': 'javascript'}
+  Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
   """"" Code Navigation======================================================
   """"""" Text objects
@@ -271,7 +293,7 @@ function! LoadPlugs()
   " Plug 'mattn/vim-textobj-url'
   " Plug 'nelstrom/vim-textobj-rubyblock'
 
-  Plug 'Lokaltog/vim-easymotion'
+  Plug 'Lokaltog/vim-easymotion', { 'on': '<Plug>(easymotion-prefix)' }
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
@@ -364,7 +386,7 @@ function! LoadPlugs()
         \ '--max-count'         : [ 'g:ags_agmaxcount', '-m', '50' ],
         \ '--numbers'           : [ '', '' ],
     \ }
-  Plug 'rking/ag.vim'
+  Plug 'rking/ag.vim', { 'on': 'Ag' }
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup"
     let g:agprg="ag --column --nogroup --line-numbers"
@@ -395,20 +417,21 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  Plug 'SirVer/ultisnips'
-    " better key bindings for UltiSnipsExpandTrigger
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsListSnippets="<c-tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-  Plug 'justinj/vim-react-snippets'
+  " Plug 'SirVer/ultisnips'
+  "   " better key bindings for UltiSnipsExpandTrigger
+  "   let g:UltiSnipsExpandTrigger="<tab>"
+  "   let g:UltiSnipsListSnippets="<c-tab>"
+  "   let g:UltiSnipsJumpForwardTrigger="<tab>"
+  "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-  " SnipMate and its dependencies:
-  Plug 'MarcWeber/vim-addon-mw-utils'
-  Plug 'tomtom/tlib_vim'
-  Plug 'honza/vim-snippets'
+  " Plug 'justinj/vim-react-snippets'
 
+  " " SnipMate and its dependencies:
+  " Plug 'MarcWeber/vim-addon-mw-utils'
+  " Plug 'tomtom/tlib_vim'
+  " Plug 'honza/vim-snippets'
+  "
   Plug 'jwhitley/vim-matchit'
 endfunction
 
@@ -451,7 +474,11 @@ let &t_AF="\e[38;5;%dm"
 set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
 
 set enc=utf-8
-set term=screen-256color
+
+if !has('nvim')
+  set term=screen-256color
+endif
+
 let $TERM='screen-256color'
 
 set shell=/usr/local/bin/zsh\ --login
@@ -644,13 +671,13 @@ let javascript_enable_domhtmlcss=1
 " =============================================================================
 " Highlighting #highlights
 " -----------------------------------------------------------------------------
-au BufEnter *.rb syn match ExtraWhitespace contained "\<binding.pry\>"
-au BufEnter *.js syn match ExtraWhitespace contained "\<debugger\>"
+" Make those debugger statements painfully obvious
 au BufEnter *.rb syn match error contained "\<binding.pry\>"
 au BufEnter *.rb syn match error contained "\<debugger\>"
 au BufEnter *.js syn match error contained "\<debugger\>"
+
 au ColorScheme * hi ExtraWhitespace ctermbg=red guibg=red
-au ColorScheme * hi error ctermbg=red guibg=red
+" au ColorScheme * hi error ctermbg=red guibg=red
 au Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
 
 hi ColorColumn ctermfg=232 ctermbg=238 guibg=#262626
@@ -784,11 +811,12 @@ if exists('+colorcolumn')
   augroup END
 endif
 
-augroup TmuxGroup
-  autocmd!
-  autocmd VimEnter,BufNewFile,BufReadPost * call system('tmux rename-window "vim - ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1] . '"')
-  autocmd VimLeave * call system('tmux rename-window ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1])
-augroup END
+" FIXME: potential slowdown
+" augroup TmuxGroup
+"   autocmd!
+"   autocmd VimEnter,BufNewFile,BufReadPost * call system('tmux rename-window "vim - ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1] . '"')
+"   autocmd VimLeave * call system('tmux rename-window ' . split(substitute(getcwd(), $HOME, '~', ''), '/')[-1])
+" augroup END
 
 augroup ReturnToLastEditedLineGroup
   autocmd!
@@ -857,9 +885,7 @@ augroup filetypes
   autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-
-  " jscomplete is a separate plugin
-  autocmd FileType javascript setlocal omnifunc=jscomplete#CompleteJS
+  autocmd FileType json setlocal equalprg=python\ -m\ json.tool
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 
@@ -929,9 +955,9 @@ vnoremap <leader>H :Gbrowse<cr>
 nnoremap <leader>gb :Gblame<cr>
 
 """"""" Ag / Ack
-nnoremap <leader>a :Ag!<space>
+nnoremap <leader>A :Ag!<space>
 nnoremap <leader>a :Ags<space>
-nnoremap <leader>A :LAg!<space>
+" nnoremap <leader>A :LAg!<space>
 " immediately ag/ack/grep for word under cursor
 map <leader>/ :execute "LAg! " . expand("<cword>") <CR>
 vmap <leader>/ :execute "LAg! " . S <CR>
@@ -1089,6 +1115,8 @@ nnoremap ><lt> V`]>
 nnoremap =- V`]=
 " Reindent the whole document and keep the cursor in the same location
 nnoremap <C-=> mqHmwgg=G`wzt`q
+nnoremap <leader>G mqHmwgg=G`wzt`q
+
 
 
 """"""" Misc (organize this please!)

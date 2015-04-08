@@ -1,5 +1,6 @@
 export EDITOR='vim'
 export VISUAL='vim'
+export VIM_APP_DIR='/Applications/MacVim.app/Contents/MacOs/'
 
 # Random other exports
 export WORDCHARS='*?[]~&;!$%^<>'
@@ -10,7 +11,6 @@ export DISPLAY=:0.0
 # so I can run USPTO/jboss stuff sensibly
 export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vfs.forceCopy=false"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home"
-export JBOSS_HOME="$HOME/code/Isotope11/uspto/jboss-eap-6.1"
 
 # Setup terminal, and turn on 256 colors
 export TERM='xterm-256color'

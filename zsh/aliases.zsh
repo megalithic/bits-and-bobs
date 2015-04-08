@@ -52,13 +52,17 @@ alias py="python"
 
 ## - VIM -----------------------------------------------
 alias vim="/usr/local/bin/vim"
-# alias vim="nvim" # just wanna use neovim
 alias vi="vim"
 alias vmi="vim"
 alias im=vim
-alias v="vim"
 alias vm="vim"
 alias m="vim"
+alias vimprofile="less ~/tmp/profile.log | sort -k 2"
+
+# presently not working in neovim:
+# - copy/paste (vim-pasta)
+# - python bindings (neocomplete)
+# alias vim="nvim" # just wanna use neovim
 alias updatenvim="brew update; brew reinstall --HEAD neovim"
 alias nv="nvim"
 
@@ -69,6 +73,7 @@ alias ezf="vim ~/.dotfiles/zsh/functions.zsh"
 alias vars="vim ~/.localrc"
 alias ezl="vim ~/.localrc"
 alias ezo="vim ~/.dotfiles/zsh/config.zsh"
+alias ezc="vim ~/.dotfiles/zsh/config.zsh"
 alias eze="vim ~/.dotfiles/zsh/env.zsh"
 alias ezp="vim ~/.dotfiles/zsh/path.zsh"
 alias ezkb="vim ~/.dotfiles/zsh/keybindings.zsh"
@@ -108,7 +113,7 @@ alias pgstop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.p
 
 alias pgsetup="sh ~/Dropbox/scripts/postgresql_db_setup.sh"
 
-# alias server="python -m SimpleHTTPServer"
+alias server="python -m SimpleHTTPServer"
 # alias srv=server
 alias chromedebug="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --js-flags=--stack_trace_limit=-1 --user-data-dir=/tmp/jsleakcheck"
 alias chrome="open -a '/Applications/Google Chrome.app' --args --disable-web-security"
@@ -197,6 +202,7 @@ alias gaa="git aa"
 alias uncommit="git reset --soft 'HEAD^'" # re-commit with `git commit -c ORIG_HEAD`
 alias gex="git archive master | tar -x -C" # update this to support more than the master branch
 alias rebase="git pull --rebase origin master"
+alias conflicted="git ls-files -u | cut -f 2 | sort -u"
 
 ## - RUBY / RAILS -----------------------------------------------
 alias be="bundle exec"

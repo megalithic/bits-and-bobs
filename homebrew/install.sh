@@ -126,7 +126,9 @@ brew install tmate
 brew install terminal-notifier # requires full install of xcode
 brew install tokyo-cabinet
 brew install tig
-brew install vim --with-lua --with-perl --override-system-vi #--with-python3
+brew install vim --with-lua --with-perl --with-python3 --override-system-vi
+brew install macvim --with-lua --with-perl --with-python3 --custom-icons
+brew linkapps macvim
 brew install watch
 brew install wkhtmltopdf
 brew install x264
