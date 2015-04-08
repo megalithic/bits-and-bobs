@@ -27,6 +27,7 @@ alias last='ls *(.om[1])'
 alias webcam="sudo killall VDCAssistant"
 alias dsnuke="find . -name '*.DS_Store' -type f -ls -delete"
 alias pkey="pbcopy < ~/.ssh/id_rsa.pub"
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 
 ## - TMUX -----------------------------------------------
@@ -158,6 +159,16 @@ alias syncoctoprint="scp pi@octopi.local:/home/pi/.octoprint/config.yaml $HOME/D
 alias fb="moto-fastboot-osx64"
 
 ## - GIT -----------------------------------------------
+alias git='/usr/local/bin/git'
+
+# # Use `hub` as our git wrapper:
+# #   http://defunkt.github.com/hub/
+# hub_path=$(which hub)
+# if (( $+commands[hub] ))
+# then
+#   alias git=$hub_path
+# fi
+#
 alias gpreq="~/.dotfiles/bin/git-pr"
 alias preq=gpreq
 alias req=gpreq
@@ -203,6 +214,8 @@ alias uncommit="git reset --soft 'HEAD^'" # re-commit with `git commit -c ORIG_H
 alias gex="git archive master | tar -x -C" # update this to support more than the master branch
 alias rebase="git pull --rebase origin master"
 alias conflicted="git ls-files -u | cut -f 2 | sort -u"
+alias grm="git status | grep deleted | awk '{\$1=\$2=\"\"; print \$0}' | \
+           perl -pe 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
 
 ## - RUBY / RAILS -----------------------------------------------
 alias be="bundle exec"

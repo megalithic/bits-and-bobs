@@ -1,77 +1,23 @@
-# these may be all bad and not working anymore....
-# bindkey "^K"      kill-whole-line                      # ctrl-k
-# bindkey "^R"      history-incremental-search-backward  # ctrl-r
-# bindkey "^A"      beginning-of-line                    # ctrl-a
-# bindkey "^E"      end-of-line                          # ctrl-e
-# bindkey '^[[A'    up-line-or-search
-# bindkey '^[[B'    down-line-or-search
-# bindkey "[B"      history-search-forward               # down arrow
-# bindkey "[A"      history-search-backward              # up arrow
-#
-# bindkey '^R' history-incremental-pattern-search-backward
-# bindkey '^S' history-incremental-pattern-search-forward
-# bindkey '^N' history-search-backward
-# bindkey '^P' history-search-forward
-#
-# # this makes the "delete" key work rather than
-# # just entering a ~
-# bindkey '\e[3~' delete-char
-#
-# bindkey "^[B" backward-word
-# bindkey "^[F" forward-word
-#
-# # these allow you to use ctrl+left/right arrow keys
-# # to jump the cursor over words, taken from:
-# # http://www.michael-noll.com/blog/2007/01/04/word-movement-shortcuts-for-iterm-on-mac-os-x/
-# # bindkey '\ef' forward-word
-# # bindkey '\eb' backward-word
-#
-# bindkey '^[[1;5C' emacs-forward-word
-# bindkey '^[[1;5D' emacs-backward-word
-# bindkey '^[[1;5C' forward-word
-# bindkey '^[[1;5D' backward-word
-#
-# bindkey '^[[5D' beginning-of-line
-# bindkey '^[[5C' end-of-line
-# bindkey '^[[3~' delete-char
-# bindkey '^[^N' newtab
-# bindkey '^?' backward-delete-char
-#
-# # from holman's repo: https://github.com/holman/dotfiles/blob/master/zsh/config.zsh#L42-L48
-# # bindkey '^[^[[D' backward-word
-# # bindkey '^[^[[C' forward-word
-# bindkey '^[[5D' beginning-of-line
-# bindkey '^[[5C' end-of-line
-# # bindkey '^[[3~' delete-char
-# # bindkey '^[^N' newtab
-# # bindkey '^?' backward-delete-char
+typeset -g -A key # TODO: need to figure out what this is doing
 
-# =============================================================================
-# Graciously taken from:
-# https://github.com/solnic/dotfiles/blob/master/home/zsh/key-bindings.zsh
-#
-# To see the key combo you want to use just do:
-# cat > /dev/null
-# And press it
+bindkey -e # use emacs key bindings # potentially breaking? first char gobbled on focus in zsh? remove to fix it, but lose the below bindings
 
-# typeset -g -A key
-
-bindkey -e # use emacs key bindings
-
+## these don't seem to be working any longer
 bindkey '^H' delete-word # iterm
 bindkey '^[[3~' delete-char # tmux
 
 bindkey '^[[1;9D' backward-word # iterm
 bindkey '^[^[[D' backward-word # tmux os x
-bindkey '^[[1;3D' backward-word # tmux ubuntu
 
 bindkey '^[[1;9C' forward-word # iterm
 bindkey '^[^[[C' forward-word # tmux os x
-bindkey '^[[1;3C' forward-word # tmux ubuntu
-
 
 bindkey '^[[H' beginning-of-line # iterm
 bindkey '^[[1~' beginning-of-line # tmux
 
 bindkey '^[[F' end-of-line # iterm
 bindkey '^[[4~' end-of-line # tmux
+
+# Delete word with opt-backspace/opt-delete
+bindkey '[G' backward-kill-word
+bindkey '[H' kill-word

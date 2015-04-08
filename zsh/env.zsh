@@ -8,6 +8,8 @@ export ACK_COLOR_MATCH='red'
 # export CC=/usr/bin/gcc
 export DISPLAY=:0.0
 
+export KEYTIMEOUT=1
+
 # so I can run USPTO/jboss stuff sensibly
 export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vfs.forceCopy=false"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home"
