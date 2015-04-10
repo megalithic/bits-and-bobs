@@ -1,16 +1,13 @@
 # don't forget to source our function files (ext files not currently in this one)
 source ~/.dotfiles/zsh/site-functions/*.zsh
 
-#ref: http://stackoverflow.com/questions/3964068/zsh-automatically-run-ls-after-every-cd
-#
-# function chpwd() {
-#   emulate -L zsh
-#   ls -a
-# }
-
 function v() {
   rm ~/tmp/profile.log;
   vim $1 --startuptime ~/tmp/profile.log
+}
+
+function brewup() {
+  brew update --verbose && brew outdated && brew upgrade && brew cleanup
 }
 
 function myip() {

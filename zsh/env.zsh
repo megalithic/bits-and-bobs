@@ -1,9 +1,12 @@
+export SUDO_EDITOR='vim'
 export EDITOR='vim'
 export VISUAL='vim'
 export VIM_APP_DIR='/Applications/MacVim.app/Contents/MacOs/'
+export BROWSER=chrome
 
-# Random other exports
-export WORDCHARS='*?[]~&;!$%^<>'
+# by default: export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+# we take out the slash, period, angle brackets, dash here.
+export WORDCHARS='*?_[]~=&;!#$%^(){}'
 export ACK_COLOR_MATCH='red'
 # export CC=/usr/bin/gcc
 export DISPLAY=:0.0
@@ -34,12 +37,8 @@ export ARCHFLAGS='-arch x86_64'
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
 
-#export NODE_PATH=/opt/github/homebrew/lib/node_modules
-#export PYTHONPATH=/usr/local/lib/python2.6/site-packages
 # CTAGS Sorting in VIM/Emacs is better behaved with this in place
 export LC_COLLATE=C
-
-#export GH_ISSUE_CREATE_TOKEN=083f60c674d8eb41f98258df9fc8d94cb733218a
 
 # Custom GC options for custom compiled 1.9.3 rubies
 export RUBY_GC_MALLOC_LIMIT=1000000000
@@ -58,3 +57,13 @@ export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 export MYSQL=/usr/local/mysql/bin
 export PATH=$PATH:$MYSQL
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
+
+# setup docker
+export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+export DOCKER_HOST=tcp://192.168.59.103:2376 # modify to correct IP/port $(boot2docker ip)
+
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_DEFAULT_OPTS='--select-1 --ansi'

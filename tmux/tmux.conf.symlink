@@ -55,6 +55,8 @@ unbind C-c
 unbind C-t
 unbind C-y
 unbind C-p
+unbind [
+unbind ]
 
 bind p previous-window
 unbind C-space
@@ -63,10 +65,10 @@ bind -r C-space select-pane -t :.+
 
 # original pane movement bindings:
 # unused now.. deprecate
-bind -r C-h select-pane -L
-bind -r C-l select-pane -R
-bind -r C-j select-pane -D
-bind -r C-k select-pane -U
+# bind -r C-h select-pane -L
+# bind -r C-l select-pane -R
+# bind -r C-j select-pane -D
+# bind -r C-k select-pane -U
 
 unbind C-f
 unbind f
@@ -82,15 +84,25 @@ bind -n C-k if-shell  "$is_vim" "send-keys C-k" "select-pane -U"
 bind -n C-l if-shell  "$is_vim" "send-keys C-l" "select-pane -R"
 bind    C-l send-keys 'C-l'
 
-unbind [
-unbind ]
+# Vi-mode stuffs
 bind Escape copy-mode
+
+# Breaks my cmd+{ keybinding behavior
 # unbind p
 # bind p paste-buffer
-#bind-key -t vi-copy 'v' begin-selection
-#bind-key -t vi-copy 'y' copy-selection
 
-# Tmux Powerline settings
+# Use vim keybindings in copy mode
+setw -g mode-keys vi
+
+# Setup 'v' to begin selection as in Vim
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+
+# Update default binding of `Enter` to also use copy-pipe
+unbind -t vi-copy Enter
+bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+
+# Tmux status bar settings
 set-option -g status on
 set-option -g status-interval 2
 set-option -g status-utf8 on

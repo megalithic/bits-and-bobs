@@ -3,6 +3,3 @@ echo ' -- Setting login shell to fish '
 echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
 chsh -s /usr/local/bin/fish
 
-# to fix the issue described in the readme here:
-# https://github.com/skalnik/vim-vroom
-sudo cp ~/.dotfiles/zsh/zprofile.symlink /etc/zprofile

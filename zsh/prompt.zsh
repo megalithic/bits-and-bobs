@@ -144,6 +144,11 @@ prompt_pure_precmd() {
 	unset cmd_timestamp
 }
 
+function zle-line-init zle-keymap-select {
+  vi_mode="${${KEYMAP/vicmd/%%}/(main|viins)/$}"
+  zle reset-prompt
+}
+
 prompt_pure_setup() {
   # prevent percentage showing up
   # if output doesn't end with a newline
@@ -158,6 +163,9 @@ prompt_pure_setup() {
 
 	add-zsh-hook precmd prompt_pure_precmd
 	add-zsh-hook preexec prompt_pure_preexec
+
+  zle -N zle-line-init
+  zle -N zle-keymap-select
 
 	zstyle ':vcs_info:*' enable git
 	zstyle ':vcs_info:git*' formats ' %b'

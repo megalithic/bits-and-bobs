@@ -177,11 +177,6 @@ $(brew info fzf | grep /install)
 sudo mv /usr/bin/vim /usr/bin/vim_system
 sudo ln -s /usr/local/bin/vim /usr/bin/vim
 
-# Setup ZSH as default shell and some other stuffs
-echo ' -- Setting login shell to zsh '
-echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-chsh -s /usr/local/bin/zsh
-
 brew link openssl --force
 brew link python --force
 
