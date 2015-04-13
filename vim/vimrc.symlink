@@ -41,163 +41,130 @@ function! LoadPlugs()
     let g:golden_ratio_exclude_nonmodifiable = 1
     let g:golden_ratio_wrap_ignored = 0
     let g:golden_ratio_filetypes_blacklist = ["nerdtree", "unite", "ctrlp", "quickfix", "quickfix-list", "quickfix-list-window", "location-list", "location-list-window", "unlisted", "directory", "help", "scratch", "netrw", "NetrwTreeListing 1", "NetrwTreeListing", "NetrwTreeListing1"]
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'christoomey/vim-tmux-runner'
-  Plug 'bling/vim-airline'
-    let g:airline#extensions#branch#enabled = 1
-    let g:airline#extensions#syntastic#enabled = 1
-    " let g:airline_theme='base16' " not working for some reason
-
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
-    let g:airline_left_sep = ''
-    let g:airline_left_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_symbols.linenr = '␊'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.linenr = '¶'
-    let g:airline_symbols.branch = '⭠'
-    let g:airline_symbols.readonly = '⭤'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.paste = 'Þ'
-    let g:airline_symbols.paste = '∥'
-    let g:airline_symbols.whitespace = 'Ξ'
-    let g:airline_powerline_fonts = 1
-    let g:airline#extensions#tabline#enabled = 0
-    let g:airline_mode_map = {
-          \ 'n' : 'NORMAL',
-          \ 'i' : 'INSERT',
-          \ 'R' : 'REPLACE',
-          \ 'v' : 'VISUAL',
-          \ 'V' : 'V-LINE',
-          \ 'c' : 'CMD   ',
-          \ '': 'V-BLCK',
+  Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
+  Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
+  Plug 'itchyny/lightline.vim'
+    let g:lightline = {
+          \ 'colorscheme': 'wombat',
+          \ 'active': {
+          \   'left': [ [ 'mode', 'paste' ], [ 'fugitive' ], [ 'filename' ], ['ctrlpmark'] ],
+          \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+          \ },
+          \ 'component_function': {
+          \   'fugitive': 'MyFugitive',
+          \   'filename': 'MyFilename',
+          \   'fileformat': 'MyFileformat',
+          \   'filetype': 'MyFiletype',
+          \   'fileencoding': 'MyFileencoding',
+          \   'mode': 'MyMode',
+          \ },
+          \ 'component_expand': {
+          \   'syntastic': 'SyntasticStatuslineFlag',
+          \ },
+          \ 'component_type': {
+          \   'syntastic': 'error',
+          \ },
+          \ 'separator': { 'left': '', 'right': '' },
+          \ 'subseparator': { 'left': '', 'right': '' }
           \ }
 
-  " Plug 'itchyny/lightline.vim'
-  "   let g:lightline = {
-  "         \ 'colorscheme': 'wombat',
-  "         \ 'active': {
-  "         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-  "         \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
-  "         \ },
-  "         \ 'component_function': {
-  "         \   'fugitive': 'MyFugitive',
-  "         \   'filename': 'MyFilename',
-  "         \   'fileformat': 'MyFileformat',
-  "         \   'filetype': 'MyFiletype',
-  "         \   'fileencoding': 'MyFileencoding',
-  "         \   'mode': 'MyMode',
-  "         \ },
-  "         \ 'component_expand': {
-  "         \   'syntastic': 'SyntasticStatuslineFlag',
-  "         \ },
-  "         \ 'component_type': {
-  "         \   'syntastic': 'error',
-  "         \ },
-  "         \ 'separator': { 'left': '', 'right': '' },
-  "         \ 'subseparator': { 'left': '', 'right': '' }
-  "         \ }
-  "
-  "   function! MyModified()
-  "     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '✭' : &modifiable ? '' : '-'
-  "   endfunction
-  "
-  "   function! MyReadonly()
-  "     return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '⭤' : ''
-  "   endfunction
-  "
-  "   function! MyFilename()
-  "     let fname = expand('%:t')
-  "     return fname == '__Tagbar__' ? g:lightline.fname :
-  "           \ fname =~ '__Gundo\|NERD_tree' ? '' :
-  "           \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-  "           \ ('' != fname ? fname : '[No Name]') .
-  "           \ ('' != MyModified() ? ' ' . MyModified() : '')
-  "   endfunction
-  "
-  "   function! MyFugitive()
-  "     try
-  "       if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-  "         let mark = ''  " edit here for cool mark
-  "         let _ = fugitive#head()
-  "         return strlen(_) ? '⭠ '._ : ''
-  "       endif
-  "     catch
-  "     endtry
-  "     return ''
-  "   endfunction
-  "
-  "   function! MyFileformat()
-  "     return winwidth(0) > 70 ? &fileformat : ''
-  "   endfunction
-  "
-  "   function! MyFiletype()
-  "     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-  "   endfunction
-  "
-  "   function! MyFileencoding()
-  "     return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-  "   endfunction
-  "
-  "   function! MyMode()
-  "     let fname = expand('%:t')
-  "     return fname == '__Tagbar__' ? 'Tagbar' :
-  "           \ fname =~ 'NERD_tree' ? 'NERDTree' :
-  "           \ &ft == 'vimfiler' ? 'VimFiler' :
-  "           \ &ft == 'vimshell' ? 'VimShell' :
-  "           \ winwidth(0) > 60 ? lightline#mode() : ''
-  "   endfunction
-  "
-  "   function! CtrlPMark()
-  "     if expand('%:t') =~ 'ControlP'
-  "       call lightline#link('iR'[g:lightline.ctrlp_regex])
-  "       return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-  "             \ , g:lightline.ctrlp_next], 0)
-  "     else
-  "       return ''
-  "     endif
-  "   endfunction
-  "
-  "   let g:ctrlp_status_func = {
-  "     \ 'main': 'CtrlPStatusFunc_1',
-  "     \ 'prog': 'CtrlPStatusFunc_2',
-  "     \ }
-  "
-  "   function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  "     let g:lightline.ctrlp_regex = a:regex
-  "     let g:lightline.ctrlp_prev = a:prev
-  "     let g:lightline.ctrlp_item = a:item
-  "     let g:lightline.ctrlp_next = a:next
-  "     return lightline#statusline(0)
-  "   endfunction
-  "
-  "   function! CtrlPStatusFunc_2(str)
-  "     return lightline#statusline(0)
-  "   endfunction
-  "
-  "   let g:tagbar_status_func = 'TagbarStatusFunc'
-  "
-  "   function! TagbarStatusFunc(current, sort, fname, ...) abort
-  "       let g:lightline.fname = a:fname
-  "     return lightline#statusline(0)
-  "   endfunction
-  "
-  "   " RE-ENABLE these if you want filetype-specific checking on load
-  "   " augroup AutoSyntastic
-  "   "   autocmd!
-  "   "   autocmd BufWritePost *.jsx,*.js,*.json,*.rb,*.coffee call s:syntastic()
-  "   " augroup END
-  "   " function! s:syntastic()
-  "   "   SyntasticCheck
-  "   "   call lightline#update()
-  "   " endfunction
-  "
-  "   let g:unite_force_overwrite_statusline = 0
-  "   let g:vimfiler_force_overwrite_statusline = 0
-  "   let g:vimshell_force_overwrite_statusline = 0
+    function! MyModified()
+      return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '✭' : &modifiable ? '' : '-'
+    endfunction
+
+    function! MyReadonly()
+      return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '⭤' : ''
+    endfunction
+
+    function! MyFilename()
+      let fname = expand('%f%m') " expand('%:t')
+      return fname == '__Tagbar__' ? g:lightline.fname :
+            \ fname =~ '__Gundo\|NERD_tree' ? '' :
+            \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+            \ ('' != fname ? fname : '[No Name]') .
+            \ ('' != MyModified() ? ' ' . MyModified() : '')
+    endfunction
+
+    function! MyFugitive()
+      try
+        if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+          let mark = ''  " edit here for cool mark
+          let _ = fugitive#head()
+          return strlen(_) ? '⭠ '._ : ''
+        endif
+      catch
+      endtry
+      return ''
+    endfunction
+
+    function! MyFileformat()
+      return winwidth(0) > 70 ? &fileformat : ''
+    endfunction
+
+    function! MyFiletype()
+      return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    endfunction
+
+    function! MyFileencoding()
+      return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    endfunction
+
+    function! MyMode()
+      let fname = expand('%:t')
+      return fname == '__Tagbar__' ? 'Tagbar' :
+            \ fname =~ 'NERD_tree' ? 'NERDTree' :
+            \ &ft == 'vimfiler' ? 'VimFiler' :
+            \ &ft == 'vimshell' ? 'VimShell' :
+            \ winwidth(0) > 60 ? lightline#mode() : ''
+    endfunction
+
+    function! CtrlPMark()
+      if expand('%:t') =~ 'ControlP'
+        call lightline#link('iR'[g:lightline.ctrlp_regex])
+        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+              \ , g:lightline.ctrlp_next], 0)
+      else
+        return ''
+      endif
+    endfunction
+
+    let g:ctrlp_status_func = {
+      \ 'main': 'CtrlPStatusFunc_1',
+      \ 'prog': 'CtrlPStatusFunc_2',
+      \ }
+
+    function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+      let g:lightline.ctrlp_regex = a:regex
+      let g:lightline.ctrlp_prev = a:prev
+      let g:lightline.ctrlp_item = a:item
+      let g:lightline.ctrlp_next = a:next
+      return lightline#statusline(0)
+    endfunction
+
+    function! CtrlPStatusFunc_2(str)
+      return lightline#statusline(0)
+    endfunction
+
+    let g:tagbar_status_func = 'TagbarStatusFunc'
+
+    function! TagbarStatusFunc(current, sort, fname, ...) abort
+        let g:lightline.fname = a:fname
+      return lightline#statusline(0)
+    endfunction
+
+    " RE-ENABLE these if you want filetype-specific checking on load
+    " augroup AutoSyntastic
+    "   autocmd!
+    "   autocmd BufWritePost *.jsx,*.js,*.json,*.rb,*.coffee call s:syntastic()
+    " augroup END
+    " function! s:syntastic()
+    "   SyntasticCheck
+    "   call lightline#update()
+    " endfunction
+
+    let g:unite_force_overwrite_statusline = 0
+    let g:vimfiler_force_overwrite_statusline = 0
+    let g:vimshell_force_overwrite_statusline = 0
   Plug 'scrooloose/syntastic'
     let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.jshintrc'
     let g:syntastic_enable_signs = 1 " slow downs
@@ -271,7 +238,7 @@ function! LoadPlugs()
   " Plug 'sheerun/vim-polyglot'
 
   """"""" Go
-  Plug 'fatih/vim-go'
+  Plug 'fatih/vim-go', {'for': 'go'}
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
     let g:go_highlight_structs = 1
@@ -285,7 +252,11 @@ function! LoadPlugs()
   Plug 'tpope/vim-rake'
 
   """"""" Markdown
-  Plug 'tpope/vim-markdown'
+  Plug 'shime/vim-livedown'
+    let g:livedown_autorun = 0
+    let g:livedown_open = 1
+    " autocmd BufWritePost *.md,*.markdown :InstantMarkdownPreview
+  Plug 'tpope/vim-markdown', {'for': ['markdown','md','mdown']}
     let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
     autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
     autocmd FileType markdown set tw=80
@@ -316,7 +287,7 @@ function! LoadPlugs()
   Plug 'burnettk/vim-angular', { 'for': 'javascript' }
   Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'marijnh/tern_for_vim', { 'dir': '~/.vim/bundle/tern_for_vim', 'do': 'npm install', 'for': 'javascript'}
-  Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+  Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
 
   """"" Code Navigation======================================================
   Plug 'Lokaltog/vim-easymotion', { 'on': '<Plug>(easymotion-prefix)' }
@@ -378,12 +349,13 @@ function! LoadPlugs()
         \ '--max-count'         : [ 'g:ags_agmaxcount', '-m', '50' ],
         \ '--numbers'           : [ '', '' ],
     \ }
-  Plug 'rking/ag.vim', { 'on': 'Ag' }
+  " Plug 'rking/ag.vim', { 'on': 'Ag' }
+  Plug 'mileszs/ack.vim'
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup"
     let g:agprg="ag --column --nogroup --line-numbers"
     let g:aghighlight=1
-    let g:ag_qhandler="copen 20"
+    let g:ag_qhandler="copen 10"
     let g:ag_results_mapping_replacements = {
         \   'vertical_split_and_close': '<cr>',
         \   'open': 'o',
@@ -393,13 +365,17 @@ function! LoadPlugs()
   Plug 'kopischke/vim-fetch'
 
   """"" Git/Gist ============================================================
-  " Plug 'tpope/vim-git'
+  Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
   Plug 'mattn/webapi-vim'
   Plug 'mattn/gist-vim'
-    let g:gist_open_browser_after_post = 1
-    let g:gist_detect_filetype = 1
-    let g:gist_post_private = 1
+    let g:gist_put_url_to_clipboard_after_post  = 1
+    let g:gist_show_privates                    = 1
+    let g:gist_post_private                     = 1
+    " detect filetype if vim failed autodetection
+    let g:gist_detect_filetype                  = 1
+    " :w! updates a Gist, not plain :w
+    let g:gist_update_on_write                  = 2
     if has('macunix')
       let g:gist_clip_command = 'pbcopy'
     endif
@@ -409,17 +385,17 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  Plug 'SirVer/ultisnips'
-    " better key bindings for UltiSnipsExpandTrigger
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsListSnippets="<c-tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  Plug 'justinj/vim-react-snippets'
-  " SnipMate and its dependencies:
-  Plug 'MarcWeber/vim-addon-mw-utils'
-  Plug 'tomtom/tlib_vim'
-  Plug 'honza/vim-snippets'
+  " Plug 'SirVer/ultisnips'
+  "   " better key bindings for UltiSnipsExpandTrigger
+  "   let g:UltiSnipsExpandTrigger="<tab>"
+  "   let g:UltiSnipsListSnippets="<c-tab>"
+  "   let g:UltiSnipsJumpForwardTrigger="<tab>"
+  "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  " Plug 'justinj/vim-react-snippets'
+  " " SnipMate and its dependencies:
+  " Plug 'MarcWeber/vim-addon-mw-utils'
+  " Plug 'tomtom/tlib_vim'
+  " Plug 'honza/vim-snippets'
 
   Plug 'jwhitley/vim-matchit'
 endfunction
@@ -563,6 +539,7 @@ set complete=.,w,b,u,U,t,i,d
 """"""" Ignores
 set wildmenu
 set wildmode=list:longest
+set wildmode=longest:full,full
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
 set wildignore+=*/smarty/*,*/vendor/*,*/node_modules/*,*/.git/*,*/.hg/*,*/.svn/*,*/.sass-cache/*,*/log/*,*/tmp/*,*/build/*,*/ckeditor/*,*/expert/*,*/solr/*,*/dist/*,*/bower_components/*,*/cf/*
 set wildignore+=log/**,node_modules/**,target/**,tmp/**,*.rbc
@@ -870,10 +847,15 @@ augroup filetypes
   autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType json setlocal equalprg=python\ -m\ json.tool
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+  autocmd FileType json setlocal equalprg=python\ -m\ json.tool
   autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
   autocmd FileType ruby let b:vcm_tab_complete = "tags"
+  autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
+  autocmd FileType javascript let b:vcm_tab_complete = 'omni'
 
   " make `gf` search for .js files
   autocmd FileType javascript setlocal suffixesadd=.js
@@ -931,7 +913,7 @@ nnoremap <F9> :Dispatch<CR>
 
 """""" SuperTab/VimCompletesMe
 "Make enter key accept selection
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 """"""" Golang
 au FileType go nnoremap <leader>gr :GoRun<cr>
@@ -944,9 +926,13 @@ nnoremap <leader>H :Gbrowse<cr>
 vnoremap <leader>H :Gbrowse<cr>
 nnoremap <leader>gb :Gblame<cr>
 
+""""""" Markdown/livedown
+nmap md :LivedownPreview<CR>
+
 """"""" Ag / Ack
-nnoremap <leader>A :Ag!<space>
-nnoremap <leader>a :Ags<space>
+nnoremap <leader>a :Ack!<space>
+" nnoremap <leader>a :Ag!<space>
+" nnoremap <leader>a :Ags<space>
 " nnoremap <leader>A :LAg!<space>
 " immediately ag/ack/grep for word under cursor
 map <leader>/ :execute "LAg! " . expand("<cword>") <CR>
@@ -983,11 +969,6 @@ map <leader>px :%!xmllint % --format<CR>
 nnoremap <leader>ev :vsplit ~/.dotfiles/vim/vimrc.symlink<cr>
 nnoremap <leader>ez :vsplit ~/.zshrc<cr>
 nnoremap <leader>et :vsplit ~/.tmux.conf<cr>
-
-""""""" Tab manipulation
-" Make opening files in a new tab easier
-nmap <C-t> :tabnew<space>
-nmap <C-e> :edit<space> <C-d>
 
 """"""" Motions
 noremap j gj
