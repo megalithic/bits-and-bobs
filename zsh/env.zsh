@@ -67,3 +67,5 @@ export DOCKER_HOST=tcp://192.168.59.103:2376 # modify to correct IP/port $(boot2
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
 export FZF_DEFAULT_OPTS='--select-1 --ansi'
+
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
