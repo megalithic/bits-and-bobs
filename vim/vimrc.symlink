@@ -214,6 +214,9 @@ function! LoadPlugs()
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-notes'
     let g:notes_directories = ['~/Dropbox/notes']
+    let g:notes_suffix = '.md'
+    let g:notes_title_sync = 'rename_file'
+    let g:notes_unicode_enabled = 0
   Plug 'tomtom/tcomment_vim'
   Plug 'sickill/vim-pasta'
   Plug 'zaiste/tmux.vim'
@@ -295,11 +298,16 @@ function! LoadPlugs()
   Plug 'EinfachToll/DidYouMean'
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
 
-  Plug 'ajh17/VimCompletesMe'
-  " Plug 'ervandew/supertab'
-  "   let g:SuperTabDefaultCompletionType = '<C-n>'
-  "   let g:SuperTabCrMapping = 0
-  "   let g:SuperTabDefaultCompletionType = "context"
+  Plug 'ervandew/supertab'
+    " handy stuff: https://github.com/ervandew/supertab/issues/53
+    let g:SuperTabDefaultCompletionType = '<C-n>'
+    let g:SuperTabCrMapping = 0
+    let g:SuperTabDefaultCompletionType = "context"
+    let g:SuperTabDefaultCompletionTypeDiscovery = [
+      \ "&completefunc:<c-x><c-u>",
+      \ "&omnifunc:<c-x><c-o>",
+      \ ]
+    let g:SuperTabLongestHighlight = 1
   Plug 'kien/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
     let g:ctrlp_switch_buffer=0            " open files in new buffers
@@ -321,7 +329,6 @@ function! LoadPlugs()
         \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
         \ }
     let g:ctrlp_user_command = 'ag %s -i -l --nocolor --nogroup --hidden -g ""'
-    "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
     let g:ctrlp_prompt_mappings = {
         \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
         \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
@@ -424,7 +431,7 @@ runtime macros/matchit.vim
 """"""" Theme / Terminal
 let base16colorspace=256  " Access colors present in 256 colorspac (must be before colorscheme def)
 let g:hybrid_use_Xresources = 1
-colorscheme base16-tomorrow
+colorscheme base16-eighties
 set background=dark
 
 filetype plugin indent on
@@ -844,12 +851,14 @@ augroup filetypes
   autocmd BufNewFile,BufRead,BufWritePost *[Ss]pec*js,*SpecHelper*js set filetype=jasmine.javascript syntax=jasmine
 
   " Enable omnicomplete for supported filetypes
+  autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
   autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType python set omnifunc=pythoncomplete#Complete
 
   autocmd FileType json setlocal equalprg=python\ -m\ json.tool
   autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
@@ -879,6 +888,10 @@ augroup END
 " -----------------------------------------------------------------------------
 let mapleader=","
 let maplocalleader="\\"
+
+""""""" vim-notes
+nnoremap <leader>n :vsplit note
+
 
 """"""" CtrlP
 let g:ctrlp_map = '<leader>m'
@@ -935,8 +948,8 @@ nnoremap <leader>a :Ack!<space>
 " nnoremap <leader>a :Ags<space>
 " nnoremap <leader>A :LAg!<space>
 " immediately ag/ack/grep for word under cursor
-map <leader>/ :execute "LAg! " . expand("<cword>") <CR>
-vmap <leader>/ :execute "LAg! " . S <CR>
+map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
+" vmap <leader>A :execute "Ack! " . S <CR>
 
 """"""" Vroom
 silent! map <unique> <Leader>t :VroomRunTestFile<CR>
