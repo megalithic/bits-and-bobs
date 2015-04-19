@@ -69,3 +69,4 @@ export FZF_DEFAULT_COMMAND='ag -l -g ""'
 export FZF_DEFAULT_OPTS='--select-1 --ansi'
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+

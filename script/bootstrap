@@ -79,6 +79,14 @@ prepare_ssh_key () {
     open 'https://github.com/account/ssh'
 }
 
+setup_hostname () {
+  info 'setup hostname'
+  user ' - What is your preferred hostname?'
+  read -e preferred_hostname
+  sudo scutil --set HostName $preferred_hostname
+  # sudo scutil --set ComputerName "$compname"
+}
+
 setup_gitconfig () {
   if ! [ -f git/gitconfig.symlink ]
   then
@@ -200,7 +208,9 @@ setup_private_repo () {
   fi
 }
 
-# execute our functions
+## RUN THROUGH OUR STEPS
+#  ============================================================================
+setup_hostname
 setup_gitconfig
 #prepare_ssh_key
 # install_xcode_commandline_tools

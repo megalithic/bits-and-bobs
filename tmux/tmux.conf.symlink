@@ -136,7 +136,8 @@ set -g status-left "#[fg=green]#h|#S #[fg=brightblue]ⓦ #(dig +short myip.opend
 # show session name, window & pane number, date and time on right side of
 # status bar
 set -g status-right-length 60
-set -g status-right "#(~/.dotfiles/bin/battery -t) #[fg=yellow] %b %d #[fg=blue] %I:%M %p"
+# datetime formatting: http://manpages.ubuntu.com/manpages/precise/en/man3/strftime.3.html
+set -g status-right "#(~/.dotfiles/bin/battery -t) #[fg=yellow] %a, %b %d #[fg=blue] %I:%M %p"
 
 # Window options
 set-window-option -g utf8 on
@@ -144,9 +145,13 @@ set-window-option -g monitor-activity off
 set-window-option -g xterm-keys on
 set-window-option -g automatic-rename on
 set-window-option -g aggressive-resize on
-set-window-option -g window-status-format ' #I ◦ #W '
-set-window-option -g window-status-current-format ' #I ◦ #W '
-set-window-option -g window-status-current-format "#[fg=colour250, bg=colour27] #I ● #W #[fg=colour28, bg=colour235]"
+# set-window-option -g window-status-format ' #I ◦ #W '
+# set-window-option -g window-status-current-format ' #I ◦ #W '
+# set-window-option -g window-status-current-format "#[fg=colour250, bg=colour27] #I ● #W #[fg=colour28, bg=colour235]"
+
+set-window-option -g window-status-format ' ◦ '
+set-window-option -g window-status-current-format ' ◦ '
+set-window-option -g window-status-current-format "#[fg=colour250] ● #[fg=colour28]"
 
 # clipboard
 set-option -g default-command "reattach-to-user-namespace -l zsh"
