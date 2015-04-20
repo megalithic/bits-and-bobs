@@ -51,87 +51,54 @@ brew install cowsay
 brew install chromedriver
 brew install cscope
 brew install ctags
-brew install faac
 brew install ffind
 brew install ffmpeg
 brew install freetype
 brew install gawk
 brew install gdbm
 brew install gdb
-brew install gettext
 brew install ghostscript
 brew install gist
 brew install git-extras
 brew install git-flow
-brew install glib
-brew install gmp
 brew install gnu-sed
 brew install gnutls
 brew install grep
 brew install heroku-toolbelt
 brew install htop-osx
 brew install imagemagick
-brew install jbig2dec
 brew install jpeg
 brew install jq
-brew install jsl
-brew install jshint
 brew install lame
-brew install libelf
-brew install libevent
-brew install libffi
-brew install libftdi0
-brew install libgcrypt
-brew install libgpg-error
-brew install libksba
-brew install libpng
-brew install libsodium
-brew install libtasn1
-brew install libtiff
-brew install libtool
-brew install libusb
-brew install libusb-compat
-brew install libxml2
-brew install libxslt
-brew install libyaml
 brew install lua
 brew install maven
 brew install mercurial
 brew install nettle
 brew install newt
-brew install node
 brew install openssl
 brew install ossp-uuid
-brew install p11-kit
 brew install p7zip
 brew install pcre
 brew install phantomjs
 brew install pkg-config
-brew install popt
 brew install python
 brew install python3
 brew install qt --HEAD
 brew install readline
 brew install reattach-to-user-namespace --wrap-pbcopy-and-pbpaste
-brew install s-lang
-brew install sbt
 brew install sqlite
 brew install ssh-copy-id
 brew install selenium-server-standalone
-brew install ta-lib
-brew install texi2html
 brew install the_silver_searcher
 brew install tmux
 brew tap nviennot/tmate
 brew install tmate
 brew install terminal-notifier # requires full install of xcode
-brew install tokyo-cabinet
 brew install tig
 brew install vim --with-lua --with-perl --with-python3 --override-system-vi
 brew install macvim --with-lua --with-perl --with-python3 --custom-icons
 brew linkapps macvim
 brew install watch
-brew install wkhtmltopdf
 brew install x264
 brew install xvid
 brew install xz
@@ -140,7 +107,6 @@ brew install zsh
 brew install zsh-completions
 brew install zsh-lovers
 brew install zsh-syntax-highlighting
-brew install --HEAD mobile-shell
 brew install weechat --with-ruby --with-python --with-perl
 brew tap neovim/homebrew-neovim
 brew install --HEAD neovim --with-lua --with-perl --with-ruby
@@ -159,12 +125,17 @@ ln -sfv /usr/local/opt/elasticsearch/*.plist ~/Library/LaunchAgents
 brew install mysql
 ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
 ln -sfv /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
+unset TMPDIR
+mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+mysql.server start
+# mysql_secure_installation
+# mysqladmin -u root password password
 
 # Setup postgres
 brew install postgresql --no-python
 initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-# createdb `whoami` # is this needed?
+createdb `whoami` # is this needed?
 
 # Setup redis
 brew install redis
@@ -181,11 +152,9 @@ sudo ln -s /usr/local/bin/vim /usr/bin/vim
 brew link openssl --force
 brew link python --force
 
-brew cask install iterm2-nightly
 brew cask install dropbox
 brew cask install firefox
 brew cask install flux
-brew cask install google-chrome
 brew cask install karabiner
 brew cask install bettertouchtool
 brew cask install evernote
@@ -195,25 +164,14 @@ brew cask install skype
 brew cask install hipchat
 brew cask install virtualbox
 brew cask install vlc
-brew cask install parallels
+brew cask install parallels-desktop
 brew cask install sonos
 brew cask install bartender
-brew cask install vagrant
-brew cask install vagrant-manager
 brew cask install droplr
-brew cask install tweetbot
-vagrant plugin install vagrant-parallels
+brew cask install spectacle
+brew cask install java
 
 brew linkapps
 brew cleanup
-
-# JDK
-# Hat tip:
-# http://stackoverflow.com/questions/10268583/how-to-automate-download-and-installation-of-java-jdk-on-linux
-# cd ~/.dotfiles
-# wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-macosx-x64.dmg
-# open jdk-7u71-macosx-x64.dmg
-
-# ==========================================================================
 
 exit 0

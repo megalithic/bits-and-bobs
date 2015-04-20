@@ -53,6 +53,7 @@ alias py="python"
 
 ## - VIM -----------------------------------------------
 alias vim="/usr/local/bin/vim"
+# alias vim="mvim -v"
 alias vi="vim"
 alias vmi="vim"
 alias im=vim
@@ -63,7 +64,8 @@ alias vimprofile="less ~/tmp/profile.log | sort -k 2"
 # presently not working in neovim:
 # - copy/paste (vim-pasta)
 # - python bindings (neocomplete)
-# alias vim="nvim" # just wanna use neovim
+# - cursor changes (insert/normal mode)
+# alias vim="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim" # just wanna use neovim
 alias updatenvim="brew update; brew reinstall --HEAD neovim"
 alias nv="nvim"
 
