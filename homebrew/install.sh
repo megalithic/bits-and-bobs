@@ -103,6 +103,7 @@ brew install node
 brew install openssl
 brew install ossp-uuid
 brew install p11-kit
+brew install p7zip
 brew install pcre
 brew install phantomjs
 brew install pkg-config
