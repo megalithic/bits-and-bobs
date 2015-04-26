@@ -215,8 +215,9 @@ function! LoadPlugs()
   Plug 'xolox/vim-notes'
     let g:notes_directories = ['~/Dropbox/notes']
     let g:notes_suffix = '.md'
-    let g:notes_title_sync = 'rename_file'
+    let g:notes_title_sync = 'no'
     let g:notes_unicode_enabled = 0
+    let g:notes_markdown_program = 'LiveDown'
   Plug 'tomtom/tcomment_vim'
   Plug 'sickill/vim-pasta'
   Plug 'zaiste/tmux.vim'

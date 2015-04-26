@@ -52,7 +52,6 @@ alias b="brew"
 alias py="python"
 
 ## - VIM -----------------------------------------------
-alias vim="/usr/local/bin/vim"
 # alias vim="mvim -v"
 alias vi="vim"
 alias vmi="vim"

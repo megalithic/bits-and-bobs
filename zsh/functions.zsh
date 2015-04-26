@@ -22,6 +22,27 @@ dockerip() {
   boot2docker ip 2> /dev/null
 }
 
+note () {
+  if [ "$#" -ne 0 ] || [ "$1" = "-h" ] || [ "$1" = "–help" ]
+  then
+    echo "Usage: $0" >&2
+    return 1
+  fi
+
+  # Fill these out with values you like.
+  local tag_string=“draft”
+  local notebook=“Sentinote”
+
+  echo -n "What is the title of the post? "
+  read title
+
+  python /usr/local/bin/geeknote create \
+  --title "${title}" \
+  --tags “${tag_string}" \
+  --notebook “${notebook}" \
+  --content WRITE
+}
+
 pdfjoin() {
   join_py="/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py"
   read "output_file?Name of output file > "

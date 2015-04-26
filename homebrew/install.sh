@@ -51,6 +51,7 @@ brew install cowsay
 brew install chromedriver
 brew install cscope
 brew install ctags
+brew install editorconfig
 brew install ffind
 brew install ffmpeg
 brew install freetype
@@ -72,6 +73,8 @@ brew install jq
 brew install lame
 brew install lua
 brew install maven
+brew install markdown
+brew install multimarkdown
 brew install mercurial
 brew install nettle
 brew install newt
@@ -95,8 +98,8 @@ brew tap nviennot/tmate
 brew install tmate
 brew install terminal-notifier # requires full install of xcode
 brew install tig
-brew install vim --with-lua --with-perl --with-python3 --override-system-vi
-brew install macvim --with-lua --with-perl --with-python3 --custom-icons
+brew install vim --with-lua --with-perl --with-python3 --with-python --override-system-vi
+brew install macvim --with-lua --with-perl --with-python3 --with-python --custom-icons
 brew linkapps macvim
 brew install watch
 brew install x264
@@ -133,8 +136,9 @@ mysql.server start
 
 # Setup postgres
 brew install postgresql --no-python
-initdb /usr/local/var/postgres -E utf8
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+initdb /usr/local/var/postgres -E utf8
 createdb `whoami` # is this needed?
 
 # Setup redis
