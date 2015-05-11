@@ -114,13 +114,13 @@ set-option -g status-position top
 # Taken from: http://zanshin.net/2013/09/05/my-tmux-configuration/
 # ==================================================================
 # set color for status bar
-set-option -g status-bg colour235 #base02
+set-option -g status-bg colour234 #base02
 set-option -g status-fg yellow #yellow
 set-option -g status-attr dim
 
 # set window list colors - red for active and cyan for inactive
 set-window-option -g window-status-fg brightblue #base0
-set-window-option -g window-status-bg colour236
+set-window-option -g window-status-bg colour234
 set-window-option -g window-status-attr dim
 
 set-window-option -g window-status-current-fg brightred #orange
@@ -169,10 +169,11 @@ set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:X
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
 #### COLOUR
+# FIXME CLEAN THESE DUPLICATES
 
 # default window title colors
 set-window-option -g window-status-fg colour244 #yellow
-set-window-option -g window-status-bg default #colour235
+# set-window-option -g window-status-bg default #colour235
 set-window-option -g window-status-attr dim
 
 # pane border
@@ -181,7 +182,7 @@ set-option -g pane-active-border-fg colour240 #base01
 set-option -g pane-active-border-fg red #base01
 
 # message text
-set-option -g message-bg colour235 #base02
+# set-option -g message-bg colour235 #base02
 set-option -g message-fg colour166 #orange
 
 # pane number display
