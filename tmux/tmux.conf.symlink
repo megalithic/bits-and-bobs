@@ -172,7 +172,7 @@ set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 # FIXME CLEAN THESE DUPLICATES
 
 # default window title colors
-set-window-option -g window-status-fg colour244 #yellow
+set-window-option -g window-status-fg colour238 #yellow
 # set-window-option -g window-status-bg default #colour235
 set-window-option -g window-status-attr dim
 

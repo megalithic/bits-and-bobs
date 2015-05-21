@@ -42,6 +42,7 @@ brew install gcc48
 # TODO: need to get this cleaned up, lots of deps here
 brew install autoconf
 brew install automake
+brew install autojump
 brew install avrdude
 brew install bazaar
 brew install bison

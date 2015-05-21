@@ -37,10 +37,16 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
-  Plug 'RobertAudi/golden-ratio'
-    let g:golden_ratio_exclude_nonmodifiable = 1
-    let g:golden_ratio_wrap_ignored = 0
-    let g:golden_ratio_filetypes_blacklist = ["nerdtree", "unite", "ctrlp", "quickfix", "quickfix-list", "quickfix-list-window", "location-list", "location-list-window", "unlisted", "directory", "help", "scratch", "netrw", "NetrwTreeListing 1", "NetrwTreeListing", "NetrwTreeListing1"]
+  Plug 'justincampbell/vim-eighties'
+    let g:eighties_enabled = 1
+    let g:eighties_minimum_width = 20
+    let g:eighties_extra_width = 0 " Increase this if you want some extra room
+    let g:eighties_compute = 1 " Disable this if you just want the minimum + extra
+    let g:eighties_bufname_additional_patterns = ['fugitiveblame', 'quickfix', 'location-list'] " Defaults to [], 'fugitiveblame' is only an example. Takes a comma delimited list of bufnames as strings.
+  " Plug 'megalithic/golden-ratio'
+  "   let g:golden_ratio_exclude_nonmodifiable = 1
+  "   let g:golden_ratio_wrap_ignored = 0
+  "   let g:golden_ratio_ignore_horizontal_splits = 1
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'itchyny/lightline.vim'
@@ -357,17 +363,39 @@ function! LoadPlugs()
         \ '--max-count'         : [ 'g:ags_agmaxcount', '-m', '50' ],
         \ '--numbers'           : [ '', '' ],
     \ }
-  " Plug 'rking/ag.vim', { 'on': 'Ag' }
   Plug 'mileszs/ack.vim'
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup"
     let g:agprg="ag --column --nogroup --line-numbers"
     let g:aghighlight=1
-    let g:ag_qhandler="copen 10"
-    let g:ag_results_mapping_replacements = {
-        \   'vertical_split_and_close': '<cr>',
-        \   'open': 'o',
-        \ }
+    let g:aghighlight=1
+
+    " ALL BROKE :( why?
+    " =================
+    " set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
+    " let g:ackprg="ag --column --nogroup --line-numbers"
+    " let g:agprg="ag --column --nogroup --line-numbers"
+    " let g:aghighlight=1
+    " let g:ackhighlight=1
+    " let g:ack_qhandler="copen 20"
+    " let g:ag_qhandler="copen 10"
+    " let g:ack_lhandler="lopen 10"
+    " let g:ack_use_dispatch = 1
+    " let g:ag_results_mapping_replacements = {
+    "     \ 'vertical_split_and_close': '<cr>',
+    "     \ 'open': 'o',
+    "     \ }
+    " let g:ack_mappings = {
+    "     \ 't': '<C-W><CR><C-W>T',
+    "     \ 'T': '<C-W><CR><C-W>TgT<C-W>j',
+    "     \ 'o': '<C-W><CR><C-W>H<C-W>b<C-W>J',
+    "     \ 'O': '<CR><C-W>p<C-W>c',
+    "     \ 'go': '<CR><C-W>p',
+    "     \ 'h': '<C-W><CR><C-W>K',
+    "     \ 'H': '<C-W><CR><C-W>K<C-W>b',
+    "     \ 'v': '<C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t',
+    "     \ 'gv': '<C-W><CR><C-W>H<C-W>b<C-W>J'
+    "     \ }
   Plug 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
   Plug 'kopischke/vim-fetch'

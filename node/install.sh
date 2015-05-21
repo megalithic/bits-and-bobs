@@ -12,7 +12,7 @@ nvm use 0.10.26
 nvm alias default 0.10.26 # make node default to iojs
 
 # get us some commonly used packages
-npm install -g grunt-cli gulp yo karma grunt karma-cli bower jshint jsxhint traceur webpack babel bunyan ampersand eslint jsonlint vimdebug coffeelint livedown node-inspector jscpd jsinspect standard
+npm install -g grunt-cli gulp yo karma grunt karma-cli bower jshint jsxhint traceur webpack babel bunyan ampersand eslint jsonlint vimdebug coffeelint livedown node-inspector jscpd jsinspect standard hicat
 
 # NOTES:
 # when an npm runs or builds and you see "dyld: lazy symbol binding failed: Symbol not found: _node_module_register"

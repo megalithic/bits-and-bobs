@@ -2,6 +2,7 @@
 
 echo "Installing chruby ..."
   brew install chruby
+  brew install chruby-fish
   brew install ruby-install
   source /usr/local/share/chruby/chruby.sh
   source /usr/local/share/chruby/auto.sh

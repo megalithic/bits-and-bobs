@@ -18,6 +18,13 @@ function myip() {
   ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
 
+function remac {
+  sudo /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -z
+  sudo ifconfig en0 ether $(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//')
+  sudo networksetup -detectnewhardware
+  echo $(ifconfig en0 | grep ether)
+}
+
 dockerip() {
   boot2docker ip 2> /dev/null
 }
