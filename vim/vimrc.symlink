@@ -37,16 +37,16 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
-  Plug 'justincampbell/vim-eighties'
-    let g:eighties_enabled = 1
-    let g:eighties_minimum_width = 20
-    let g:eighties_extra_width = 0 " Increase this if you want some extra room
-    let g:eighties_compute = 1 " Disable this if you just want the minimum + extra
-    let g:eighties_bufname_additional_patterns = ['fugitiveblame', 'quickfix', 'location-list'] " Defaults to [], 'fugitiveblame' is only an example. Takes a comma delimited list of bufnames as strings.
-  " Plug 'megalithic/golden-ratio'
-  "   let g:golden_ratio_exclude_nonmodifiable = 1
-  "   let g:golden_ratio_wrap_ignored = 0
-  "   let g:golden_ratio_ignore_horizontal_splits = 1
+  " Plug 'justincampbell/vim-eighties'
+  "   let g:eighties_enabled = 1
+  "   let g:eighties_minimum_width = 100
+  "   let g:eighties_extra_width = 0 " Increase this if you want some extra room
+  "   let g:eighties_compute = 1 " Disable this if you just want the minimum + extra
+  "   let g:eighties_bufname_additional_patterns = ['fugitiveblame', 'quickfix', 'location-list'] " Defaults to [], 'fugitiveblame' is only an example. Takes a comma delimited list of bufnames as strings.
+  Plug 'megalithic/golden-ratio'
+    let g:golden_ratio_exclude_nonmodifiable = 1
+    let g:golden_ratio_wrap_ignored = 0
+    let g:golden_ratio_ignore_horizontal_splits = 1
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'itchyny/lightline.vim'
