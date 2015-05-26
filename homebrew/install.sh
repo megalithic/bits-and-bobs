@@ -20,6 +20,7 @@ brew upgrade
 brew tap 'homebrew/dupes'
 brew tap 'homebrew/brewdler'
 brew tap 'kopischke/ctags'
+brew tap caskroom/fonts #https://github.com/caskroom/homebrew-fonts
 brew install homebrew/dupes/grep
 brew install caskroom/cask/brew-cask
 
@@ -99,8 +100,8 @@ brew tap nviennot/tmate
 brew install tmate
 brew install terminal-notifier # requires full install of xcode
 brew install tig
-brew install vim --with-lua --with-perl --with-python3 --with-python --override-system-vi
-brew install macvim --with-lua --with-perl --with-python3 --with-python --custom-icons
+brew install vim --with-lua --with-perl --with-python3 --with-python --override-system-vi --with-luajit --override-system-vim
+brew install macvim --with-lua --with-perl --with-python3 --with-python --custom-icons --with-luajit # --override-system-vim
 brew linkapps macvim
 brew install watch
 brew install x264

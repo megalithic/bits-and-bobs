@@ -118,7 +118,7 @@
 [core]
   pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-  editor = vim
+	editor = env VIM_MINIMAL=1 vim +startinsert
   excludesfile = ~/.gitignore
 
 [apply]
