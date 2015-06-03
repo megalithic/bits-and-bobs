@@ -37,6 +37,7 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
+  Plug 'hhff/SpacegrayEighties.vim'
   Plug 'megalithic/golden-ratio'
     let g:golden_ratio_exclude_nonmodifiable = 1
     let g:golden_ratio_wrap_ignored = 0
@@ -152,7 +153,7 @@ function! LoadPlugs()
       return lightline#statusline(0)
     endfunction
 
-    " RE-ENABLE these if you want filetype-specific checking on load
+    " ENABLE these if you want filetype-specific checking on load
     " augroup AutoSyntastic
     "   autocmd!
     "   autocmd BufWritePost *.jsx,*.js,*.json,*.rb,*.coffee call s:syntastic()
@@ -458,6 +459,7 @@ runtime macros/matchit.vim
 let base16colorspace=256  " Access colors present in 256 colorspac (must be before colorscheme def)
 let g:hybrid_use_Xresources = 1
 colorscheme base16-eighties
+" colorscheme SpacegrayEighties
 set background=dark
 
 filetype plugin indent on
@@ -886,6 +888,8 @@ augroup filetypes
   " Fix slow Ruby editing
   " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
   autocmd Filetype ruby setlocal foldmethod=manual
+
+  autocmd Filetype coffee map <leader>t :!./node_modules/.bin/protractor --config ./spec/karma/config/protractor.conf.js --specs %
 augroup END
 
 
