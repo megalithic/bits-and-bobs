@@ -231,10 +231,11 @@ function! LoadPlugs()
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-dispatch'
-
-  Plug 'skalnik/vim-vroom'
-    let g:vroom_use_colors=1
-    let g:vroom_map_keys = 0
+  Plug 'janko-m/vim-test'
+    let test#strategy = "dispatch"
+  " Plug 'skalnik/vim-vroom'
+  "   let g:vroom_use_colors=1
+  "   let g:vroom_map_keys = 0
   Plug 'Valloric/ListToggle'
     let g:lt_location_list_toggle_map = '<F3>'
     let g:lt_quickfix_list_toggle_map = '<F4>'
@@ -889,7 +890,7 @@ augroup filetypes
   " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
   autocmd Filetype ruby setlocal foldmethod=manual
 
-  autocmd Filetype coffee map <leader>t :!./node_modules/.bin/protractor --config ./spec/karma/config/protractor.conf.js --specs %
+  " autocmd Filetype coffee map <leader>t :!./node_modules/.bin/protractor --config ./spec/karma/config/protractor.conf.js --specs %
 augroup END
 
 
@@ -991,9 +992,14 @@ map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
 " vmap <leader>A :execute "Ack! " . S <CR>
 
 """"""" Vroom
-silent! map <unique> <Leader>t :VroomRunTestFile<CR>
-silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
-silent! map <unique> <Leader>l :VroomRunLastTest<CR>
+" silent! map <unique> <Leader>t :VroomRunTestFile<CR>
+" silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
+" silent! map <unique> <Leader>l :VroomRunLastTest<CR>
+
+""""""" vim-test
+silent! map <unique> <Leader>t :TestFile<CR>
+silent! map <unique> <Leader>T :TestNearest<CR>
+silent! map <unique> <Leader>l :TestLast<CR>
 
 """"""" Gist
 " Send visual selection to gist.github.com as a private, filetyped Gist
