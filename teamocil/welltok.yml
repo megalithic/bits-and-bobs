@@ -15,8 +15,8 @@ windows:
         - cd ~/code/welltok/hitman
         - go run hitman.go --nosave
       - commands:
-        - cd ~/code/welltok/rewards-service
-        - npm run-script develop
+        - cd ~/code/welltok/front-end-prototyping
+        - npm run dev
   - name: "code"
     root: "~/code/"
     panes:

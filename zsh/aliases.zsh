@@ -22,6 +22,7 @@ then
   alias ll="gls -l --color"
   alias la='gls -A --color'
 fi
+alias s="ls"
 alias last='ls *(.om[1])'
 
 alias webcam="sudo killall VDCAssistant"
