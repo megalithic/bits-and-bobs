@@ -14,7 +14,7 @@ echo "Permit user to write to system rubies and gems ..."
   sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
 
 echo "Installing critical Ruby gems for Rails development ..."
-  gem install bundler rails pg foreman thin pry launchy teamocil sass compass bourbon curses --no-rdoc --no-ri
+  gem install bundler rails pg foreman thin pry launchy teamocil sass compass bourbon curses rubocop --no-rdoc --no-ri
 
 echo "Installing gems that need system ruby ..."
   sudo chruby-exec system -- gem install weechat terminal-notifier
