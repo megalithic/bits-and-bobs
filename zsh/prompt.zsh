@@ -77,6 +77,7 @@ prompt_pure_string_length() {
 	echo $(( ${#${(S%%)1//(\%([KF1]|)\{*\}|\%[Bbkf])}} - 1 ))
 }
 
+# truncate path beyond CWD
 prompt_format_pwd() {
   local pwd="${PWD/#$HOME/~}"
 
@@ -100,7 +101,8 @@ prompt_pure_preprompt_render() {
 	# local prompt="%F{blue}%~%f"
   local prompt="%F{blue}$(prompt_format_pwd)%f"
 	# git info
-	prompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
+	prompt+="%F{$git_color}%f$(vcs_super_info)%f${prompt_pure_git_dirty}%f"
+  # prompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 	# git pull/push arrows
 	prompt+="%F{cyan}${prompt_pure_git_arrows}%f"
 	# username and machine if applicable
@@ -261,6 +263,7 @@ prompt_pure_setup() {
 	zmodload zsh/datetime
 	autoload -Uz add-zsh-hook
 	autoload -Uz vcs_info
+  autoload -Uz vcs_super_info
 	autoload -Uz async && async
 
 	add-zsh-hook precmd prompt_pure_precmd
