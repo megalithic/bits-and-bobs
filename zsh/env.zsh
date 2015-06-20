@@ -46,7 +46,7 @@ export RUBY_GC_HEAP_FREE_SLOTS=500000
 export RUBY_GC_HEAP_INIT_SLOTS=40000
 
 export ECLIPSE_HOME=/Applications/Eclipse
-export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
+# export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
 
 # This setting is for the new UTF-8 terminal support
 export LC_CTYPE=en_US.UTF-8

@@ -176,7 +176,7 @@ prompt_pure_setup() {
 
 	# prompt turns red if the previous command didn't exit with 0
   PROMPT='%(?.%F{green}.%F{red})%(!.❯.)❯%f '
-  RPROMPT='%f%F{240}$RUBY_ENGINE-$RUBY_AUTO_VERSION%f%'
+  # RPROMPT='%f%F{240}$RUBY_ENGINE-$RUBY_AUTO_VERSION%f%'
 }
 
 prompt_pure_setup "$@"
