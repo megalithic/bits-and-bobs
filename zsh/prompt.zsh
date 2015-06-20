@@ -77,6 +77,17 @@ prompt_pure_string_length() {
 	echo $(( ${#${(S%%)1//(\%([KF1]|)\{*\}|\%[Bbkf])}} - 1 ))
 }
 
+prompt_format_pwd() {
+  local pwd="${PWD/#$HOME/~}"
+
+  if [[ "$pwd" == (#m)[/~] ]]; then
+    echo "$MATCH"
+    unset MATCH
+  else
+    echo "${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
+  fi
+}
+
 prompt_pure_preprompt_render() {
 	# check that no command is currently running, the prompt will otherwise be rendered in the wrong place
 	[[ -n ${prompt_pure_cmd_timestamp+x} && "$1" != "precmd" ]] && return
@@ -86,7 +97,8 @@ prompt_pure_preprompt_render() {
 	[[ -n ${prompt_pure_git_last_dirty_check_timestamp+x} ]] && git_color=red
 
 	# construct prompt, beginning with path
-	local prompt="%F{blue}%~%f"
+	# local prompt="%F{blue}%~%f"
+  local prompt="%F{blue}$(prompt_format_pwd)%f"
 	# git info
 	prompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 	# git pull/push arrows
