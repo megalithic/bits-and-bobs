@@ -670,10 +670,10 @@ set secure " disable unsafe commands in local .vimrc files
 """"""" Why do I even have these settings? Please clean.
 let g:JSHintHighlightErrorLine = 1
 let javascript_fold = 1
-let g:javascript_conceal = 1
-let g:javascript_conceal_function   = "ƒ"
-let g:javascript_conceal_this       = "@"
-let g:javascript_conceal_return     = "⇚"
+" let g:javascript_conceal = 1
+" let g:javascript_conceal_function   = "ƒ"
+" let g:javascript_conceal_this       = "@"
+" let g:javascript_conceal_return     = "⇚"
 let loaded_matchit = 1
 let ruby_fold = 1
 let g:js_indent_log = 1
