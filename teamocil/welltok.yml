@@ -7,6 +7,7 @@ windows:
       - commands:
         - cd ~/code/welltok/cafewell
         - bundle
+        - nvm use
         - be foreman start
       - commands:
         - cd ~/code/welltok/simpleton
@@ -16,6 +17,7 @@ windows:
         - go run hitman.go --nosave
       - commands:
         - cd ~/code/welltok/voltron-skeleton
+        - nvm use
         - npm run dev
   - name: "code"
     root: "~/code/"

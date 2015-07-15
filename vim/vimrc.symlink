@@ -362,13 +362,14 @@ function! LoadPlugs()
         \ '--max-count'         : [ 'g:ags_agmaxcount', '-m', '50' ],
         \ '--numbers'           : [ '', '' ],
     \ }
-  Plug 'mileszs/ack.vim'
-    set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
-    let g:ackprg="ag --column --nogroup --line-numbers --vimgrep"
-    let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
-    let g:ackhighlight=1
-    let g:aghighlight=1
-    let g:ack_use_dispatch=1
+  Plug 'vim-scripts/Ferret'
+  " Plug 'mileszs/ack.vim'
+  "   set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
+  "   let g:ackprg="ag --column --nogroup --line-numbers --vimgrep"
+  "   let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
+  "   let g:ackhighlight=1
+  "   let g:aghighlight=1
+  "   let g:ack_use_dispatch=1
 
     " ALL BROKE :( why?
     " =================
@@ -856,6 +857,7 @@ augroup filetypes
   " autocmd VimEnter js,jsx,css,scss,sass,less,json RainbowParentheses
 
   autocmd BufNewFile,BufRead,BufWritePost *[Ss]pec*js,*SpecHelper*js set filetype=jasmine.javascript syntax=jasmine
+  autocmd BufNewFile,BufRead,BufWritePost *.test.js set filetype=mocha.javascript syntax=mocha
 
   " Enable omnicomplete for supported filetypes
   autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
@@ -867,7 +869,7 @@ augroup filetypes
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   autocmd FileType python set omnifunc=pythoncomplete#Complete
 
-  autocmd FileType json setlocal equalprg=python\ -m\ json.tool
+  " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
   autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
   autocmd FileType ruby let b:vcm_tab_complete = "tags"
   autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
@@ -890,8 +892,6 @@ augroup filetypes
   " Fix slow Ruby editing
   " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
   autocmd Filetype ruby setlocal foldmethod=manual
-
-  " autocmd Filetype coffee map <leader>t :!./node_modules/.bin/protractor --config ./spec/karma/config/protractor.conf.js --specs %
 augroup END
 
 
@@ -984,7 +984,7 @@ nnoremap <leader>gb :Gblame<cr>
 nmap md :LivedownPreview<CR>
 
 """"""" Ag / Ack
-nnoremap <leader>a :Ack!<space>
+" nnoremap <leader>a :Ack!<space>
 " nnoremap <leader>a :Ag!<space>
 " nnoremap <leader>a :Ags<space>
 " nnoremap <leader>A :LAg!<space>
