@@ -317,7 +317,7 @@ function! LoadPlugs()
       \ ]
     let g:SuperTabLongestHighlight = 1
 
-  Plug 'kien/ctrlp.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
     let g:ctrlp_switch_buffer=0            " open files in new buffers
     let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
@@ -349,57 +349,15 @@ function! LoadPlugs()
         \ 'PrtHistory(1)':        ['<c-p>'],
         \ 'ToggleFocus()':        ['<c-tab>'],
         \}
-  Plug 'gabesoft/vim-ags'
-    let g:ags_agexe = '/usr/local/bin/ag'
-    let g:ags_agargs = {
-        \ '--break'             : [ '', '' ],
-        \ '--color'             : [ '', '' ],
-        \ '--color-line-number' : [ '"1;30"', '' ],
-        \ '--color-match'       : [ '"32;40"', '' ],
-        \ '--color-path'        : [ '"1;31"', '' ],
-        \ '--column'            : [ '', '' ],
-        \ '--context'           : [ 'g:ags_agcontext', '-C', '3' ],
-        \ '--filename'          : [ '', '' ],
-        \ '--group'             : [ '', '' ],
-        \ '--heading'           : [ '', '-H' ],
-        \ '--max-count'         : [ 'g:ags_agmaxcount', '-m', '50' ],
-        \ '--numbers'           : [ '', '' ],
-    \ }
-  " Plug 'vim-scripts/Ferret'
   Plug 'mileszs/ack.vim'
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup --line-numbers --vimgrep"
     let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
+    " https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
+    let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
     let g:ackhighlight=1
     let g:aghighlight=1
     let g:ack_use_dispatch=1
-
-    " ALL BROKE :( why?
-    " =================
-    " set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
-    " let g:ackprg="ag --column --nogroup --line-numbers"
-    " let g:agprg="ag --column --nogroup --line-numbers"
-    " let g:aghighlight=1
-    " let g:ackhighlight=1
-    " let g:ack_qhandler="copen 20"
-    " let g:ag_qhandler="copen 10"
-    " let g:ack_lhandler="lopen 10"
-    " let g:ack_use_dispatch = 1
-    " let g:ag_results_mapping_replacements = {
-    "     \ 'vertical_split_and_close': '<cr>',
-    "     \ 'open': 'o',
-    "     \ }
-    " let g:ack_mappings = {
-    "     \ 't': '<C-W><CR><C-W>T',
-    "     \ 'T': '<C-W><CR><C-W>TgT<C-W>j',
-    "     \ 'o': '<C-W><CR><C-W>H<C-W>b<C-W>J',
-    "     \ 'O': '<CR><C-W>p<C-W>c',
-    "     \ 'go': '<CR><C-W>p',
-    "     \ 'h': '<C-W><CR><C-W>K',
-    "     \ 'H': '<C-W><CR><C-W>K<C-W>b',
-    "     \ 'v': '<C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t',
-    "     \ 'gv': '<C-W><CR><C-W>H<C-W>b<C-W>J'
-    "     \ }
   Plug 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
   Plug 'kopischke/vim-fetch'
