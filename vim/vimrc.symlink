@@ -36,8 +36,15 @@ set nocompatible
 " -----------------------------------------------------------------------------
 function! LoadPlugs()
   """"" UI ==================================================================
-  Plug 'chriskempson/base16-vim'
+  """"""" Colorschemes
   Plug 'hhff/SpacegrayEighties.vim'
+  Plug 'mhumeSF/one-dark.vim'
+  Plug 'orthecreedence/void.vim'
+  Plug 'keith/parsec.vim'
+  Plug 'CruizeMissile/Revolution.vim'
+  Plug 'blerins/flattown'
+  Plug 'chriskempson/base16-vim'
+
   Plug 'megalithic/golden-ratio'
     let g:golden_ratio_exclude_nonmodifiable = 1
     let g:golden_ratio_wrap_ignored = 0
@@ -213,13 +220,6 @@ function! LoadPlugs()
     let g:netrw_winsize=20
 
   """"" Utilities ===========================================================
-  Plug 'xolox/vim-misc'
-  Plug 'xolox/vim-notes'
-    let g:notes_directories = ['~/Dropbox/notes']
-    let g:notes_suffix = '.md'
-    let g:notes_title_sync = 'no'
-    let g:notes_unicode_enabled = 0
-    let g:notes_markdown_program = 'LiveDown'
   Plug 'tomtom/tcomment_vim'
   Plug 'sickill/vim-pasta'
   Plug 'zaiste/tmux.vim'
@@ -232,11 +232,11 @@ function! LoadPlugs()
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-dispatch'
-  Plug 'janko-m/vim-test'
-    let test#strategy = "dispatch"
-  " Plug 'skalnik/vim-vroom'
-  "   let g:vroom_use_colors=1
-  "   let g:vroom_map_keys = 0
+  " Plug 'janko-m/vim-test'
+  "   let test#strategy = "dispatch"
+  Plug 'skalnik/vim-vroom'
+    let g:vroom_use_colors=1
+    let g:vroom_map_keys = 0
   Plug 'Valloric/ListToggle'
     let g:lt_location_list_toggle_map = '<F3>'
     let g:lt_quickfix_list_toggle_map = '<F4>'
@@ -259,15 +259,15 @@ function! LoadPlugs()
   Plug 'tpope/vim-rake'
 
   """"""" Markdown
-  Plug 'shime/vim-livedown'
-    let g:livedown_autorun = 0
-    let g:livedown_open = 1
-    " autocmd BufWritePost *.md,*.markdown :InstantMarkdownPreview
   Plug 'tpope/vim-markdown', {'for': ['markdown','md','mdown']}
     let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
     let g:vim_markdown_frontmatter=1
-    autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
+    autocmd BufNewFile,BufReadPost *.md,*.markdown,*.mdown set filetype=markdown
     autocmd FileType markdown set tw=80
+  Plug 'suan/vim-instant-markdown'
+    let g:instant_markdown_slow = 1
+    let g:instant_markdown_autostart = 1
+    " autocmd BufWritePost *.md,*.markdown,*.mdown exec :InstantMarkdownPreview
 
   """"""" CSS/SCSS/LESS/Preprocessors
   Plug 'groenewege/vim-less', { 'for': 'less' }
@@ -293,6 +293,7 @@ function! LoadPlugs()
     let g:jsx_ext_required = 0
     let g:jsx_pragma_required = 0
   Plug 'burnettk/vim-angular', { 'for': 'javascript' }
+  Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
   Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'marijnh/tern_for_vim', { 'dir': '~/.vim/bundle/tern_for_vim', 'do': 'npm install', 'for': 'javascript'}
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
@@ -301,6 +302,8 @@ function! LoadPlugs()
   Plug 'Lokaltog/vim-easymotion', { 'on': '<Plug>(easymotion-prefix)' }
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
+  " Plug 'bogado/file-line'
+  Plug 'nelstrom/vim-visual-star-search'
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
 
   Plug 'ervandew/supertab'
@@ -459,37 +462,32 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 """"" UI ====================================================================
 """"""" Theme / Terminal
-let base16colorspace=256  " Access colors present in 256 colorspac (must be before colorscheme def)
-let g:hybrid_use_Xresources = 1
+let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
 colorscheme base16-eighties
-" colorscheme SpacegrayEighties
 set background=dark
 
 filetype plugin indent on
-" are these 2 syntax' needed?
 syntax enable
-syntax on
 
-set t_Co=256
 " in case t_Co alone doesn't work, add this as well:
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
+set t_Co=256
 
-set enc=utf-8
-
+let $TERM='screen-256color'
 if !has('nvim')
   set term=screen-256color
 endif
 
-let $TERM='screen-256color'
-
+set enc=utf-8
 set shell=/usr/local/bin/zsh\ --login
+set shell=bash\ -i " for some reason this works better than the above
 
 """"""" Layout
 set linebreak
 " set textwidth=79 " will auto wrap content when set
-set nowrap " on is 'wrap'
+set nowrap " `on` is 'wrap'
 set wrapscan
 
 " :Hardwrap    -  turns on hardwrapping
@@ -635,9 +633,15 @@ set tm=500
 set dictionary+=/usr/share/dict/words
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 
-" add system clipboard support
-set clipboard+=unnamed
+if has("clipboard")                   " If the feature is available
+  set clipboard=unnamed               " copy to the system clipboard
+  " add system clipboard support
+  " set clipboard+=unnamed
 
+  if has("unnamedplus")
+    set clipboard+=unnamedplus
+  endif
+endif
 
 """"""" Neovim
 if has('nvim')
@@ -856,8 +860,8 @@ augroup filetypes
   autocmd FileType js,jsx,css,scss,sass,less,json call rainbow#load()
   " autocmd VimEnter js,jsx,css,scss,sass,less,json RainbowParentheses
 
-  autocmd BufNewFile,BufRead,BufWritePost *[Ss]pec*js,*SpecHelper*js set filetype=jasmine.javascript syntax=jasmine
-  autocmd BufNewFile,BufRead,BufWritePost *.test.js set filetype=mocha.javascript syntax=mocha
+  " autocmd BufNewFile,BufRead,BufWritePost *[Ss]pec*js,*SpecHelper*js set filetype=jasmine.javascript syntax=jasmine
+  " autocmd BufNewFile,BufRead,BufWritePost *.test.js set filetype=mocha.javascript syntax=mocha
 
   " Enable omnicomplete for supported filetypes
   autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
@@ -980,9 +984,6 @@ nnoremap <leader>H :Gbrowse<cr>
 vnoremap <leader>H :Gbrowse<cr>
 nnoremap <leader>gb :Gblame<cr>
 
-""""""" Markdown/livedown
-nmap md :LivedownPreview<CR>
-
 """"""" Ag / Ack
 nnoremap <leader>a :Ack!<space>
 " nnoremap <leader>a :Ag!<space>
@@ -992,17 +993,12 @@ nnoremap <leader>a :Ack!<space>
 map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
 " vmap <leader>A :execute "Ack! " . S <CR>
 
-""""""" Vroom
-" silent! map <unique> <Leader>t :VroomRunTestFile<CR>
-" silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
-" silent! map <unique> <Leader>l :VroomRunLastTest<CR>
+"""""" Vroom
+silent! map <unique> <Leader>t :VroomRunTestFile<CR>
+silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
+silent! map <unique> <Leader>l :VroomRunLastTest<CR>
 
-""""""" vim-test
-silent! map <unique> <Leader>t :TestFile<CR>
-silent! map <unique> <Leader>T :TestNearest<CR>
-silent! map <unique> <Leader>l :TestLast<CR>
-
-""""""" Gist
+""""""" Gist/Github
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
 vnoremap <leader>G :Gist -p<cr>
@@ -1035,6 +1031,10 @@ noremap k gk
 noremap gj j
 noremap gk k
 
+""""""" Buffers
+" Switch between last two buffers
+nnoremap <leader><leader> <C-^>
+
 """"""" Splits with vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_save_on_switch = 1
@@ -1043,7 +1043,7 @@ nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
-nnoremap <c-o> :vnew<cr>:e<space><c-d>
+nnoremap <c-n> :vnew<cr>:e<space><c-d>
 nnoremap <c-n> :vsp .<cr>
 
 """"""" Just say no to drugs
@@ -1131,8 +1131,10 @@ map 0 ^
 """"""" Selections
 " reselect pasted content:
 noremap gV `[v`]
-" select all text on the page
+" select all text in the file
 noremap <leader>v ggVG
+" select entire file https://github.com/akalyaev/dotfiles/blob/master/vimrc#L129
+nnoremap <leader>v ggV`]
 " Easier linewise reselection of what you just pasted.
 nnoremap <leader>V V`]
 " duplicate whatever’s selected, to the next line
@@ -1146,7 +1148,8 @@ nnoremap =- V`]=
 " Reindent the whole document and keep the cursor in the same location
 nnoremap <C-=> mqHmwgg=G`wzt`q
 nnoremap <leader>G mqHmwgg=G`wzt`q
-
+" Format entire file
+nmap <leader>fef ggVG=
 
 
 """"""" Misc (organize this please!)

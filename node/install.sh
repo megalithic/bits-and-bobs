@@ -8,12 +8,13 @@ source $(brew --prefix nvm)/nvm.sh
 nvm install stable
 nvm install 0.10.26
 nvm install 0.10.32
+nvm install 0.12
 nvm install iojs
-nvm use 0.10.32
-nvm alias default 0.10.32
+nvm use 0.12
+nvm alias default 0.12
 
 # get us some commonly used packages
-npm install -g grunt-cli gulp yo karma grunt karma-cli bower jshint jsxhint traceur webpack babel bunyan ampersand eslint jsonlint vimdebug coffeelint livedown node-inspector jscpd jsinspect standard hicat brunch browserify mocha
+npm install -g grunt-cli gulp yo karma grunt karma-cli bower jshint jsxhint traceur webpack babel bunyan ampersand eslint jsonlint vimdebug coffeelint livedown node-inspector jscpd jsinspect standard hicat brunch browserify mocha instant-markdown-d
 
 # NOTES:
 # when an npm runs or builds and you see "dyld: lazy symbol binding failed: Symbol not found: _node_module_register"
