@@ -440,7 +440,7 @@ endif
 
 set enc=utf-8
 set shell=/usr/local/bin/zsh\ --login
-set shell=bash\ -i " for some reason this works better than the above
+" set shell=bash\ -i " for some reason this works better than the above
 
 """"""" Layout
 set linebreak
@@ -951,10 +951,15 @@ nnoremap <leader>a :Ack!<space>
 map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
 " vmap <leader>A :execute "Ack! " . S <CR>
 
-"""""" Vroom
-silent! map <unique> <Leader>t :VroomRunTestFile<CR>
-silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
-silent! map <unique> <Leader>l :VroomRunLastTest<CR>
+"""""" Testing (vroom, mocha, karma, etc)
+au FileType ruby silent! map <unique> <Leader>t :VroomRunTestFile<CR>
+au FileType ruby silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
+au FileType ruby silent! map <unique> <Leader>l :VroomRunLastTest<CR>
+
+au FileType javascript silent! map <unique> <Leader>t :call RunCurrentSpecFile()<CR>
+au FileType javascript silent! map <unique> <Leader>T :call RunNearestSpec()<CR>
+au FileType javascript silent! map <unique> <Leader>l :call RunLastSpec()<CR>
+au FileType javascript silent! map <unique> <Leader>a :call RunAllSpecs()<CR>
 
 """"""" Gist/Github
 " Send visual selection to gist.github.com as a private, filetyped Gist
@@ -1001,8 +1006,7 @@ nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
-nnoremap <c-n> :vnew<cr>:e<space><c-d>
-nnoremap <c-n> :vsp .<cr>
+nnoremap <leader>f :vnew<cr>:e<space><c-d>
 
 """"""" Just say no to drugs
 " disable arrow keys
