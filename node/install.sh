@@ -14,7 +14,16 @@ nvm use 0.12
 nvm alias default 0.12
 
 # get us some commonly used packages
-npm install -g grunt-cli gulp yo karma grunt karma-cli bower jshint jsxhint traceur webpack babel bunyan ampersand eslint jsonlint vimdebug coffeelint livedown node-inspector jscpd jsinspect standard hicat brunch browserify mocha instant-markdown-d
+npm install -g grunt-cli gulp yo \
+  karma grunt karma-cli bower jshint \
+  jsxhint traceur webpack babel bunyan \
+  ampersand eslint babel-eslint \
+  eslint-plugin-react eslint-plugin-mocha eslint-plugin-chai \
+  eslint-plugin-babel eslint-plugin-smells eslint-plugin-html \
+  eslint-plugin-jasmine eslint-plugin-angularrules jsonlint vimdebug \
+  coffeelint livedown node-inspector jscpd \
+  jsinspect standard hicat brunch browserify \
+  mocha instant-markdown-d
 
 # NOTES:
 # when an npm runs or builds and you see "dyld: lazy symbol binding failed: Symbol not found: _node_module_register"
