@@ -6,11 +6,9 @@ brew install nvm
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 nvm install stable
-nvm install 0.10.26
-nvm install 0.10.32
-nvm install 0.12
 nvm install iojs
-nvm use 0.12
+nvm install 0.10
+nvm install 0.12
 nvm alias default 0.12
 
 # get us some commonly used packages

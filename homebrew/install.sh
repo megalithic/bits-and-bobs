@@ -158,7 +158,6 @@ sudo ln -s /usr/local/bin/vim /usr/bin/vim
 brew link openssl --force
 brew link python --force
 
-brew cask install dropbox
 brew cask install firefox
 brew cask install flux
 brew cask install karabiner
