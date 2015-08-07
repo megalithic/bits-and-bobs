@@ -1,6 +1,7 @@
 export SUDO_EDITOR='vim'
 export EDITOR='vim'
 export VISUAL='vim'
+export ZDOTDIR=$HOME
 export VIM_APP_DIR='/Applications/MacVim.app/Contents/MacOs/'
 export BROWSER=chrome
 

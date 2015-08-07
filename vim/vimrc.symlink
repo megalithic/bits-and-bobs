@@ -295,14 +295,12 @@ function! LoadPlugs()
   Plug 'burnettk/vim-angular', { 'for': 'javascript' }
   Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
   Plug 'helino/vim-json', { 'for': 'json' }
-  Plug 'marijnh/tern_for_vim', { 'dir': '~/.vim/bundle/tern_for_vim', 'do': 'npm install', 'for': 'javascript'}
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
 
   """"" Code Navigation======================================================
   Plug 'Lokaltog/vim-easymotion', { 'on': '<Plug>(easymotion-prefix)' }
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
-  " Plug 'bogado/file-line'
   Plug 'nelstrom/vim-visual-star-search'
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
 
@@ -440,6 +438,7 @@ endif
 
 set enc=utf-8
 set shell=/usr/local/bin/zsh\ --login
+" set shellcmdflag+=i
 " set shell=bash\ -i " for some reason this works better than the above
 
 """"""" Layout
@@ -1006,7 +1005,7 @@ nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
-nnoremap <leader>f :vnew<cr>:e<space><c-d>
+nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
 """"""" Just say no to drugs
 " disable arrow keys
