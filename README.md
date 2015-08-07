@@ -77,13 +77,6 @@ located at `~/.dotfiles/private/install.sh`.
 
 For some submodule info, rather, [a cheatsheet](http://blog.jacius.info/git-submodule-cheat-sheet/).
 
-## extrees
-
-I also created a handy little [command-line note taking app](https://github.com/megalithic/noter).
-
-It is pretty basic app/script right now, but have ideas for a more robust, yet still simplistic in UX,
-feature set. Stay tuned for that.
-
 ## additional reading
 
 There are many great dotfiles repos to check out and in general get inspiration
@@ -110,19 +103,6 @@ based on)
 References for various things:
 
 - [xterm color chart](https://raw.github.com/foize/go.sgr/master/xterm_color_chart.png)
-
-## todo
-
-Unfortunately, this is a neverending project it seems.. so as to help myself
-remember all the things, here's a basic list of what I haven't finished:
-
-- ~~Finish filling out the brew-cask install list~~
-- ~~Backup/restore KeyRemap4MacBook config~~
-- ~~Get nodejs and certain npm installed as globals (grunt, yeoman, etc)~~
-- ~~Automate the cloning of an arbitrary private repo and link the relevant files~~
-- verify all the things on a fresh install
-- figure out import/export of common/handy apps i always use
-- scour the yadr dotfiles repo for more ideas (careful of bloat though!)
 
 ## bugs
 
