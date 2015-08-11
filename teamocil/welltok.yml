@@ -16,7 +16,11 @@ windows:
         - cd ~/code/welltok/hitman
         - go run hitman.go --nosave
       - commands:
-        - cd ~/code/welltok/voltron-skeleton
+        - cd ~/code/welltok/achievement-service
+        - nvm use
+        - npm run dev
+      - commands:
+        - cd ~/code/welltok/munero
         - nvm use
         - npm run dev
   - name: "code"

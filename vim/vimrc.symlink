@@ -37,12 +37,6 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   """"""" Colorschemes
-  Plug 'hhff/SpacegrayEighties.vim'
-  Plug 'mhumeSF/one-dark.vim'
-  Plug 'orthecreedence/void.vim'
-  Plug 'keith/parsec.vim'
-  Plug 'CruizeMissile/Revolution.vim'
-  Plug 'blerins/flattown'
   Plug 'chriskempson/base16-vim'
 
   Plug 'megalithic/golden-ratio'
@@ -202,22 +196,13 @@ function! LoadPlugs()
       \ 'separately' : { 'agsv' : 0 }
       \ }
     let g:rainbow_active = 1
-  Plug 'eiginn/netrw'
-    let g:netrw_altv          = 1 " open files on right
-    let g:netrw_fastbrowse    = 2
-    let g:netrw_keepdir       = 0
-    let g:netrw_liststyle     = 3 " 0 for thin
-    let g:netrw_retmap        = 1
-    let g:netrw_silent        = 1
-    let g:netrw_special_syntax= 1
-    let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
-    let g:netrw_hide=1              " hide hidden files
-    let g:netrw_dirhistmax=100      " keep more history
-    let g:netrw_altfile=1           " last edited file '#'
-    let g:netrw_altv=1              " open files on right
-    let g:netrw_preview=1           " open previews vertically
-    let g:netrw_use_errorwindow=0   " suppress error window
-    let g:netrw_winsize=20
+  Plug 'scrooloose/nerdtree'
+    let g:NERDTreeHijackNetrw=1
+    let g:NERDTreeQuitOnOpen=1
+    let g:NERDTreeWinSize=20
+    let NERDTreeHijackNetrw=1
+    let NERDTreeQuitOnOpen=1
+    let NERDTreeWinSize=20
 
   """"" Utilities ===========================================================
   Plug 'tomtom/tcomment_vim'
@@ -298,7 +283,9 @@ function! LoadPlugs()
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
 
   """"" Code Navigation======================================================
-  Plug 'Lokaltog/vim-easymotion', { 'on': '<Plug>(easymotion-prefix)' }
+  " Plug 'Lokaltog/vim-easymotion', { 'on': '<Plug>(easymotion-prefix)' }
+  Plug 'unblevable/quick-scope'
+    let g:qs_enable = 0
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
   Plug 'nelstrom/vim-visual-star-search'
@@ -314,6 +301,9 @@ function! LoadPlugs()
       \ "&omnifunc:<c-x><c-o>",
       \ ]
     let g:SuperTabLongestHighlight = 1
+    let g:SuperTabLongestEnhanced = 1
+    let g:node_usejscomplete = 1
+    let g:jscomplete_use = ['dom', 'moz']
 
   Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
@@ -381,17 +371,18 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  " Plug 'SirVer/ultisnips'
-  "   " better key bindings for UltiSnipsExpandTrigger
+  Plug 'SirVer/ultisnips'
+    " better key bindings for UltiSnipsExpandTrigger
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsListSnippets="<c-tab>"
     let g:UltiSnipsJumpForwardTrigger="<tab>"
     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  " Plug 'justinj/vim-react-snippets'
   " " SnipMate and its dependencies:
-  " Plug 'MarcWeber/vim-addon-mw-utils'
-  " Plug 'tomtom/tlib_vim'
-  " Plug 'honza/vim-snippets'
+  Plug 'MarcWeber/vim-addon-mw-utils'
+  Plug 'tomtom/tlib_vim'
+  Plug 'honza/vim-snippets'
+  Plug 'justinj/vim-react-snippets'
+  Plug 'isRuslan/vim-es6'
 
   Plug 'jwhitley/vim-matchit'
 endfunction
@@ -693,6 +684,24 @@ function! ClipboardPaste()
   let @@ = system('pbpaste')
 endfunction
 
+" QuickScope, used in conjunction with keybinding overrides
+function! Quick_scope_selective(movement)
+    let needs_disabling = 0
+    if !g:qs_enable
+        QuickScopeToggle
+        redraw
+        let needs_disabling = 1
+    endif
+
+    let letter = nr2char(getchar())
+
+    if needs_disabling
+        QuickScopeToggle
+    endif
+
+    return a:movement . letter
+endfunction
+
 function! FileTypeToggle(num)
   if a:num > 0 || !exists("b:alt_ftype")
     let b:alt_ftype = &filetype
@@ -704,42 +713,25 @@ function! FileTypeToggle(num)
   end
 endfunction
 
-""" Netrw functionality
-function! VexToggle(dir)
-  if exists("t:vex_buf_nr")
-    call VexClose()
-  else
-    call VexOpen(a:dir)
-  endif
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
-function! VexOpen(dir)
-  let g:netrw_browse_split = 4
-  let vex_width = 25
-  execute "Vexplore " . a:dir
-  let t:vex_buf_nr = bufnr("%")
-  wincmd H
-  call VexSize(vex_width)
-endfunction
-function! VexClose()
-  let cur_win_nr = winnr()
-  let target_nr = ( cur_win_nr == 1 ? winnr("#") : cur_win_nr )
-  1wincmd w
-  close
-  unlet t:vex_buf_nr
-  execute (target_nr - 1) . "wincmd w"
-  call NormalizeWidths()
-endfunction
-function! VexSize(vex_width)
-  execute "vertical resize" . a:vex_width
-  set winfixwidth
-  call NormalizeWidths()
-endfunction
-function! NormalizeWidths()
-  let eadir_pref = &eadirection
-  set eadirection=hor
-  set equalalways! equalalways!
-  let &eadirection = eadir_pref
-endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
 " =============================================================================
 " Autocommands #autocommands
@@ -768,6 +760,13 @@ autocmd BufWrite * silent call DeleteTrailingWS()
 
 " Resize splits when the window is resized
 autocmd VimResized * :wincmd =
+
+" Open nerdtree when no files are specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Allow closing vim if nerdtree is only buffer open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 augroup ColorColumnGroup
   " Color Column (only on insert)
@@ -901,8 +900,8 @@ nnoremap <leader>n :vsplit note
 let g:ctrlp_map = '<leader>m'
 let g:ctrlp_cmd = 'CtrlP'
 
-""""""" Netrw
-nnoremap <F2> :Vexplore . <cr>
+""""""" Nerdtree
+nnoremap <F2> :NERDTreeToggle . <cr>
 
 """"""" Tcomment
 nmap <leader>c :TComment<cr>
@@ -936,6 +935,16 @@ au FileType go nnoremap <leader>gb :GoBuild<cr>
 au FileType go nnoremap <leader>t :Dispatch :GoTest<cr>
 au FileType go nnoremap <leader>gc :GoCoverage<cr>
 
+""""""" QuickScope
+nnoremap <expr> <silent> f Quick_scope_selective('f')
+nnoremap <expr> <silent> F Quick_scope_selective('F')
+nnoremap <expr> <silent> t Quick_scope_selective('t')
+nnoremap <expr> <silent> T Quick_scope_selective('T')
+vnoremap <expr> <silent> f Quick_scope_selective('f')
+vnoremap <expr> <silent> F Quick_scope_selective('F')
+vnoremap <expr> <silent> t Quick_scope_selective('t')
+vnoremap <expr> <silent> T Quick_scope_selective('T')
+
 """"""" Fugitive
 nnoremap <leader>H :Gbrowse<cr>
 vnoremap <leader>H :Gbrowse<cr>
@@ -943,9 +952,6 @@ nnoremap <leader>gb :Gblame<cr>
 
 """"""" Ag / Ack
 nnoremap <leader>a :Ack!<space>
-" nnoremap <leader>a :Ag!<space>
-" nnoremap <leader>a :Ags<space>
-" nnoremap <leader>A :LAg!<space>
 " immediately ag/ack/grep for word under cursor
 map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
 " vmap <leader>A :execute "Ack! " . S <CR>
