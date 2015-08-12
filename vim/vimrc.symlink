@@ -251,7 +251,7 @@ function! LoadPlugs()
     autocmd FileType markdown set tw=80
   Plug 'suan/vim-instant-markdown'
     let g:instant_markdown_slow = 1
-    let g:instant_markdown_autostart = 1
+    let g:instant_markdown_autostart = 0
     " autocmd BufWritePost *.md,*.markdown,*.mdown exec :InstantMarkdownPreview
 
   """"""" CSS/SCSS/LESS/Preprocessors
