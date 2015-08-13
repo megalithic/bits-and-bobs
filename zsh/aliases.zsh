@@ -259,8 +259,8 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+
 # Enhanced WHOIS lookups
 alias whois="whois -h whois-servers.net"
 
-# Flush Directory Service cache
-alias dnsflush="sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;"
+# Flush Directory Service cache; http://osxdaily.com/2014/11/20/flush-dns-cache-mac-os-x/
+alias dnsflush="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say cache flushed"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"

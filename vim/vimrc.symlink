@@ -432,6 +432,9 @@ set shell=/usr/local/bin/zsh\ --login
 " set shellcmdflag+=i
 " set shell=bash\ -i " for some reason this works better than the above
 
+""""""" Updated vim regex engine
+set re=1
+
 """"""" Layout
 set linebreak
 " set textwidth=79 " will auto wrap content when set
@@ -525,6 +528,7 @@ set completeopt=longest,menuone,preview
 set omnifunc=syntaxcomplete#Complete
 set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
+set complete-=i "don't complete in included files
 
 """"""" Ignores
 set wildmenu
@@ -622,13 +626,13 @@ set secure " disable unsafe commands in local .vimrc files
 
 """"""" Why do I even have these settings? Please clean.
 let g:JSHintHighlightErrorLine = 1
-let javascript_fold = 1
+let javascript_fold = 0
 " let g:javascript_conceal = 1
 " let g:javascript_conceal_function   = "ƒ"
 " let g:javascript_conceal_this       = "@"
 " let g:javascript_conceal_return     = "⇚"
 let loaded_matchit = 1
-let ruby_fold = 1
+let ruby_fold = 0
 let g:js_indent_log = 1
 let javascript_enable_domhtmlcss=1
 
