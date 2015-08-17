@@ -18,7 +18,7 @@ if [[ ! -e ~/.dotfiles_backup ]]; then
     mkdir ~/.dotfiles_backup
 fi
 
-bot "Hi. I'm going to make your OSX system better. But first, I need to configure this project based on your info so you don't check in files to github as Seth Meser from here on out :)"
+bot "Hi. I'm going to make your OSX system better. But first, I need to configure this project based on your info so you don't check in files to github as Seth Messer from here on out :)"
 
 fullname=`osascript -e "long user name of (system info)"`
 
