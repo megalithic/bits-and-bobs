@@ -159,7 +159,7 @@ run_install_scripts () {
 }
 
 init_install () {
-  cd $ZSH
+  cd ~/.dotfiles
   sh ./setup/install.sh
 }
 
