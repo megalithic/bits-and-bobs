@@ -26,11 +26,19 @@ fail () {
 
 prepare_ssh_key () {
   echo 'Checking for SSH key, generating one if it does not exist...'
-    [[ -f '~/.ssh/id_rsa.pub' ]] || ssh-keygen -t rsa
+    [[ -f '~/.ssh/id_rsa.pub' ]] || ssh-keygen -t rsa -b 4096 -C "seth.messer@gmail.com"
+    # [[ -f '~/.ssh/id_rsa.pub' ]] || ssh-keygen -t rsa
+
+  echo 'Add key to ssh-agent...'
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_rsa
 
   echo 'Copying public key to clipboard. Paste it into your Github account...'
-    [[ -f '~/.ssh/id_rsa.pub' ]] && cat '~/.ssh/id_rsa.pub' | pbcopy
+    [[ -f '~/.ssh/id_rsa.pub' ]] && pbcopy < ~/.ssh/id_rsa.pub
+    # [[ -f '~/.ssh/id_rsa.pub' ]] && cat '~/.ssh/id_rsa.pub' | pbcopy
     open 'https://github.com/account/ssh'
+
+  echo 'To verify the key was setup correctly: `ssh -T git@github.com`...'
 }
 
 link_files () {
