@@ -98,7 +98,6 @@ get_user_settings () {
 
 prepare_ssh_key () {
   user "Do you want to setup ssh keys? (y|n)"
-
   read -n 1 action
   case "$action" in
     y )
@@ -129,6 +128,28 @@ prepare_ssh_key () {
       ;;
   esac
 }
+
+setup_osx_essentials () {
+  ############################################
+  bot "setting up so many osx essentials..." #
+  ############################################
+
+  cd ~/.dotfiles
+
+  action "installing xcode"
+  sudo xcodebuild -license;ok
+
+  action "installing homebrew stuff"
+  sh ./homebrew/install.sh;ok
+
+  action "setting zsh stuff"
+  sh ./zsh/install.sh;ok
+
+  action "setting osx defaults"
+  sh ./osx/set_defaults.sh;ok
+}
+
+
 
 link_files () {
   action "linking $1 to $2"
@@ -229,27 +250,6 @@ run_install_scripts () {
     ok
   done
 }
-
-setup_osx_essentials () {
-  ############################################
-  bot "setting up so many osx essentials..." #
-  ############################################
-
-  cd ~/.dotfiles
-
-  action "installing xcode"
-  sudo xcodebuild -license;ok
-
-  action "installing homebrew stuff"
-  sh ./homebrew/install.sh;ok
-
-  action "setting zsh stuff"
-  sh ./zsh/install.sh;ok
-
-  action "setting osx defaults"
-  sh ./osx/set_defaults.sh;ok
-}
-
 
 
 ## RUN THROUGH OUR STEPS
