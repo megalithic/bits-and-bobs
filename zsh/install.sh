@@ -1,7 +1,15 @@
-# Setup ZSH as default shell and some other stuffs
-echo ' -- Setting login shell to zsh '
-echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-chsh -s /usr/local/bin/zsh $USER
+#!/bin/sh
+
+source ./setup/lib.sh
+
+echo $0 | grep zsh > /dev/null 2>&1 | true
+if [[ ${PIPESTATUS[0]} != 0 ]]; then
+  running "changing your login shell to zsh"
+  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+  chsh -s $(which zsh);ok
+else
+  bot "looks like you are already using zsh. woot!"
+fi
 
 # to fix the issue described in the readme here:
 # https://github.com/skalnik/vim-vroom

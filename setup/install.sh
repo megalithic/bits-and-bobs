@@ -66,29 +66,6 @@ if [[ $response =~ ^(no|n|N) ]];then
   fi
 fi
 
-# bot "creating symlinks for project dotfiles..."
-# symlinkifne .crontab
-# symlinkifne .gemrc
-# symlinkifne .gitconfig
-# symlinkifne .gitignore
-# symlinkifne .profile
-# symlinkifne .ruby-version
-# symlinkifne .screenrc
-# symlinkifne .shellaliases
-# symlinkifne .shellfn
-# symlinkifne .shellpaths
-# symlinkifne .shellvars
-# symlinkifne .vim
-# symlinkifne .vimrc
-# symlinkifne .zlogout
-# symlinkifne .zprofile
-# symlinkifne .zshenv
-# symlinkifne .zshrc
-
-# popd > /dev/null 2>&1
-
-./setup/osx.sh
-
 grep 'user = megalithic' .gitconfig
 if [[ $? = 0 ]]; then
     read -r -p "What is your github.com username? [$DEFAULT_GITHUBUSER]" githubuser
@@ -133,5 +110,29 @@ else
 fi
 
 pushd ~ > /dev/null 2>&1
+
+
+# bot "creating symlinks for project dotfiles..."
+# symlinkifne .crontab
+# symlinkifne .gemrc
+# symlinkifne .gitconfig
+# symlinkifne .gitignore
+# symlinkifne .profile
+# symlinkifne .ruby-version
+# symlinkifne .screenrc
+# symlinkifne .shellaliases
+# symlinkifne .shellfn
+# symlinkifne .shellpaths
+# symlinkifne .shellvars
+# symlinkifne .vim
+# symlinkifne .vimrc
+# symlinkifne .zlogout
+# symlinkifne .zprofile
+# symlinkifne .zshenv
+# symlinkifne .zshrc
+
+popd > /dev/null 2>&1
+
+./setup/osx.sh
 
 bot "Woot! All done."
