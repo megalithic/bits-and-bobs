@@ -5,27 +5,27 @@ source ./setup/lib.sh
 
 # Ask for the administrator password upfront
 
-bot "checking sudo state..."
-if sudo grep -q "# %wheel\tALL=(ALL) NOPASSWD: ALL" "/etc/sudoers"; then
+#bot "checking sudo state..."
+#if sudo grep -q "# %wheel\tALL=(ALL) NOPASSWD: ALL" "/etc/sudoers"; then
 
-  promptSudo
+#  promptSudo
 
-  bot "Do you want me to setup this machine to allow you to run sudo without a password?\nPlease read here to see what I am doing:\nhttp://wiki.summercode.com/sudo_without_a_password_in_mac_os_x \n"
+#  bot "Do you want me to setup this machine to allow you to run sudo without a password?\nPlease read here to see what I am doing:\nhttp://wiki.summercode.com/sudo_without_a_password_in_mac_os_x \n"
 
-  read -r -p "Make sudo passwordless? [y|N] " response
+#  read -r -p "Make sudo passwordless? [y|N] " response
 
-  if [[ $response =~ (yes|y|Y) ]];then
-      sed --version
-      if [[ $? == 0 ]];then
-          sudo sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
-      else
-          sudo sed -i '' 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
-      fi
-      sudo dscl . append /Groups/wheel GroupMembership $(whoami)
-      bot "You can now run sudo commands without password!"
-  fi
-fi
-ok
+#  if [[ $response =~ (yes|y|Y) ]];then
+#      sed --version
+#      if [[ $? == 0 ]];then
+#          sudo sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
+#      else
+#          sudo sed -i '' 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
+#      fi
+#      sudo dscl . append /Groups/wheel GroupMembership $(whoami)
+#      bot "You can now run sudo commands without password!"
+#  fi
+#fi
+#ok
 
 #####
 # install homebrew
