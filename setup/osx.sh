@@ -279,8 +279,10 @@ require_brew chruby
 require_brew ruby-install
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
+source ~/.bashrc
+source ~/.zshrc
 ruby-install ruby 2.1.3
-chruby ruby-2.1.3
+chruby 2.1.3
 
 #Permit user to write to system rubies and gems ...
 sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
