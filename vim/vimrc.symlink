@@ -528,7 +528,7 @@ set completeopt=longest,menuone,preview
 set omnifunc=syntaxcomplete#Complete
 set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
-set complete-=i "don't complete in included files
+" set complete-=i "don't complete in included files
 
 """"""" Ignores
 set wildmenu
@@ -1017,18 +1017,15 @@ nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
-""""""" Just say no to drugs
-" disable arrow keys
-nmap <Up> <Nop>
-nmap <Down> <Nop>
-vmap <Up> <Nop>
-vmap <Down> <Nop>
-nmap <Left> <Nop>
-nmap <Right> <Nop>
-vmap <Left> <Nop>
-vmap <Right> <Nop>
+" Make arrowkey do something usefull, resize the viewports accordingly
+nnoremap <Left> :vertical resize +5<CR>
+nnoremap <Right> :vertical resize -5<CR>
+nnoremap <Up> :resize +5<CR>
+nnoremap <Down> :resize -5<CR>
+
 " this always does annoying things for some reason, so stop it
 noremap K <nop>
+
 " stop changing casing when in visual mode
 vnoremap u <nop>
 

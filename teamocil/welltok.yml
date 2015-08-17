@@ -5,11 +5,6 @@ windows:
     layout: tiled
     panes:
       - commands:
-        - cd ~/code/welltok/cafewell
-        - bundle
-        - nvm use
-        - be foreman start
-      - commands:
         - cd ~/code/welltok/simpleton
         - rails s -p7071
       - commands:
@@ -23,6 +18,11 @@ windows:
         - cd ~/code/welltok/munero
         - nvm use
         - npm run dev
+      - commands:
+        - cd ~/code/welltok/cafewell
+        - bundle
+        - nvm use
+        - be foreman start
   - name: "code"
     root: "~/code/"
     panes:

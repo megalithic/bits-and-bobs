@@ -19,6 +19,10 @@ the code I have in [script/bootstrap:L35-59](https://github.com/megalithic/dotfi
 Now that the pre-reqs are out of the way, run this:
 
 ```sh
+curl https://raw.githubusercontent.com/megalithic/dotfiles/master/setup/bootstrap | bash
+
+# OR
+
 git clone https://github.com/megalithic/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 script/bootstrap
