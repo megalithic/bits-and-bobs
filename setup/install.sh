@@ -74,6 +74,29 @@ if [[ ! $githubuser ]];then
   githubuser=$DEFAULT_GITHUBUSER
 fi
 
+# bot "creating symlinks for project dotfiles..."
+# symlinkifne .crontab
+# symlinkifne .gemrc
+# symlinkifne .gitconfig
+# symlinkifne .gitignore
+# symlinkifne .profile
+# symlinkifne .ruby-version
+# symlinkifne .screenrc
+# symlinkifne .shellaliases
+# symlinkifne .shellfn
+# symlinkifne .shellpaths
+# symlinkifne .shellvars
+# symlinkifne .vim
+# symlinkifne .vimrc
+# symlinkifne .zlogout
+# symlinkifne .zprofile
+# symlinkifne .zshenv
+# symlinkifne .zshrc
+
+# popd > /dev/null 2>&1
+
+./setup/osx.sh
+
 running "replacing items in .gitconfig with your info ($COL_YELLOW$fullname, $email, $githubuser$COL_RESET)"
 
 # test if gnu-sed or osx sed
@@ -110,29 +133,5 @@ else
 fi
 
 pushd ~ > /dev/null 2>&1
-
-
-# bot "creating symlinks for project dotfiles..."
-# symlinkifne .crontab
-# symlinkifne .gemrc
-# symlinkifne .gitconfig
-# symlinkifne .gitignore
-# symlinkifne .profile
-# symlinkifne .ruby-version
-# symlinkifne .screenrc
-# symlinkifne .shellaliases
-# symlinkifne .shellfn
-# symlinkifne .shellpaths
-# symlinkifne .shellvars
-# symlinkifne .vim
-# symlinkifne .vimrc
-# symlinkifne .zlogout
-# symlinkifne .zprofile
-# symlinkifne .zshenv
-# symlinkifne .zshrc
-
-popd > /dev/null 2>&1
-
-./setup/osx.sh
 
 bot "Woot! All done."
