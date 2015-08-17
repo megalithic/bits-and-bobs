@@ -2,8 +2,10 @@
 
 set -e
 
-git clone --recursive https://github.com/megalithic/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
+if [[ ! -e ~/.dotfiles ]]; then
+  git clone --recursive https://github.com/megalithic/dotfiles.git ~/.dotfiles
+  cd ~/.dotfiles
+fi
 
 export DOTFILES_ROOT="`pwd`"
 export ZSH=$HOME/.dotfiles
