@@ -25,7 +25,7 @@ fail () {
 }
 
 prepare_ssh_key () {
-  user "Do you want to setup ssh keys? [y]es, [n]o"
+  user "Do you want to setup ssh keys? (y|n)"
 
   read -n 1 action
   case "$action" in

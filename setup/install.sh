@@ -11,7 +11,7 @@ DEFAULT_GITHUBUSER="megalithic"
 
 
 # include my library helpers for colorized echo and require_brew, etc
-source ./lib.sh
+source ./setup/lib.sh
 
 # make a backup directory for overwritten dotfiles
 if [[ ! -e ~/.dotfiles_backup ]]; then
