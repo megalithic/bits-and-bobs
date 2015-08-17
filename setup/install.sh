@@ -66,14 +66,6 @@ if [[ $response =~ ^(no|n|N) ]];then
   fi
 fi
 
-grep 'user = megalithic' .gitconfig
-if [[ $? = 0 ]]; then
-    read -r -p "What is your github.com username? [$DEFAULT_GITHUBUSER]" githubuser
-fi
-if [[ ! $githubuser ]];then
-  githubuser=$DEFAULT_GITHUBUSER
-fi
-
 # bot "creating symlinks for project dotfiles..."
 # symlinkifne .crontab
 # symlinkifne .gemrc
@@ -96,6 +88,14 @@ fi
 # popd > /dev/null 2>&1
 
 ./setup/osx.sh
+
+grep 'user = megalithic' .gitconfig
+if [[ $? = 0 ]]; then
+    read -r -p "What is your github.com username? [$DEFAULT_GITHUBUSER]" githubuser
+fi
+if [[ ! $githubuser ]];then
+  githubuser=$DEFAULT_GITHUBUSER
+fi
 
 running "replacing items in .gitconfig with your info ($COL_YELLOW$fullname, $email, $githubuser$COL_RESET)"
 
