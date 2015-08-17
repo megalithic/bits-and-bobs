@@ -1,28 +1,14 @@
 #!/bin/bash
 
+set -e
+
 git clone --recursive https://github.com/megalithic/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 
 export DOTFILES_ROOT="`pwd`"
 export ZSH=$HOME/.dotfiles
 
-info () {
-  printf "  [ \033[00;34m..\033[0m ] $1"
-}
-
-user () {
-  printf "\r  [ \033[0;33m?\033[0m ] $1 "
-}
-
-success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
-}
-
-fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
-  echo ''
-  exit
-}
+source ./setup/lib.sh
 
 prepare_ssh_key () {
   user "Do you want to setup ssh keys? (y|n)"
@@ -30,24 +16,24 @@ prepare_ssh_key () {
   read -n 1 action
   case "$action" in
     y )
-      echo 'Checking for SSH key, generating one if it does not exist...'
+      action 'Checking for SSH key, generating one if it does not exist...'
         if ![[ -f '~/.ssh/id_rsa.pub' ]]
         then
-          ssh-keygen -t rsa -b 4096 -C "seth.messer@gmail.com"
+          ssh-keygen -t rsa -b 4096 -C "seth.messer@gmail.com";ok
         fi
 
-      echo 'Add key to ssh-agent...'
+      action 'Add key to ssh-agent...'
         eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/id_rsa
+        ssh-add ~/.ssh/id_rsa;ok
 
-      echo 'Copying public key to clipboard. Paste it into your Github account...'
+      action 'Copying public key to clipboard. Paste it into your Github account...'
         if [[ -f '~/.ssh/id_rsa.pub' ]]
         then
-          pbcopy < ~/.ssh/id_rsa.pub
+          pbcopy < ~/.ssh/id_rsa.pub;ok
           open 'https://github.com/account/ssh'
         fi
 
-      echo 'To verify the key was setup correctly: `ssh -T git@github.com`...'
+      bot "To verify the key was setup correctly: `ssh -T git@github.com`..."
       ;;
     n )
       success "Skipping ssh key setup..."
@@ -59,12 +45,12 @@ prepare_ssh_key () {
 }
 
 link_files () {
-  ln -s $1 $2
-  success "linked $1 to $2"
+  action "linking $1 to $2"
+  ln -s $1 $2;ok
 }
 
 symlink_dotfiles () {
-  info 'installing dotfiles'
+  bot 'installing dotfiles'
 
   overwrite_all=false
   backup_all=false
@@ -129,38 +115,53 @@ symlink_dotfiles () {
 }
 
 setup_private_repo () {
-  echo "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private ..."
+  bot "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private ..."
 
-  echo "Note: if you have 2-factor authentication enabled, you'll need to enter a personal access token when using https:// repo urls."
+  warn "Note: if you have 2-factor authentication enabled, you'll need to enter a personal access token when using https:// repo urls."
   user ' - What is your private github repo address? (Leave blank to skip)'
   read -e git_privaterepo
 
   if [ "$git_privaterepo" == "" ]
   then
-    echo "Skipping private repo setup ..."
+    warn "Skipping private repo setup ..."
   else
+    action "cloning $git_privaterepo to ~/.dotfiles/private"
     rm -rf ~/.dotfiles/private
-    git clone $git_privaterepo ~/.dotfiles/private
-    success "cloned $git_privaterepo to ~/.dotfiles/private"
+    git clone $git_privaterepo ~/.dotfiles/private;ok
 
-    sh ~/.dotfiles/private/install.sh
-    success 'executed private dotfiles repo install script'
+    action 'executing private dotfiles repo install script'
+    sh ~/.dotfiles/private/install.sh;ok
   fi
 }
 
 run_install_scripts () {
-  # Install topic-based install.sh scripts
-  info "Installing topic-based install.sh scripts..."
-  # for source in `find $ZSH -maxdepth 2 -and -not -path $ZSH/homebrew -and -not -path $ZSH/private -name \install.sh`
+  bot "Installing topic-based install.sh scripts..."
   for source in `find $ZSH -not \( -path $ZSH/homebrew -prune \) -not \( -path $ZSH/private -prune \) -name \install.sh`
   do
+    action "installing $source"
     sh $source
+    ok
   done
 }
 
-init_install () {
+setup_osx_essentials () {
+  ############################################
+  bot "setting up so many osx essentials..." #
+  ############################################
+
   cd ~/.dotfiles
-  sh ./setup/install.sh
+
+  action "installing xcode"
+  sudo xcodebuild -license;ok
+
+  action "installing homebrew stuff"
+  sh ./homebrew/install.sh;ok
+
+  action "setting zsh stuff"
+  sh ./zsh/install.sh;ok
+
+  action "setting osx defaults"
+  sh ./osx/set_defaults.sh;ok
 }
 
 
@@ -168,8 +169,7 @@ init_install () {
 ## RUN THROUGH OUR STEPS
 #  ============================================================================
 prepare_ssh_key
-init_install
+setup_osx_essentials
 run_install_scripts
 symlink_dotfiles
 setup_private_repo
-

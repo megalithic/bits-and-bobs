@@ -39,6 +39,25 @@ function error() {
     echo -e "$COL_RED[error]$COL_RESET "$1
 }
 
+
+info () {
+  printf "  [ \033[00;34m..\033[0m ] $1"
+}
+
+user () {
+  printf "\r  [ \033[0;33m?\033[0m ] $1 "
+}
+
+success () {
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+}
+
+fail () {
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+  echo ''
+  exit
+}
+
 function require_cask() {
     running "brew cask $1"
     brew cask list $1 > /dev/null 2>&1 | true
