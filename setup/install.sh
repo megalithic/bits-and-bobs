@@ -133,6 +133,6 @@ pushd ~ > /dev/null 2>&1
 
 popd > /dev/null 2>&1
 
-./osx.sh
+./setup/osx.sh
 
 bot "Woot! All done."
