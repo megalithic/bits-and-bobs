@@ -98,6 +98,7 @@ require_brew chromedriver
 require_brew cscope
 require_brew ctags
 require_brew curl --with-openssl --with-ssh --with-rtmp
+require_brew docker
 require_brew editorconfig
 
 # Setup elasticsearch
@@ -124,6 +125,7 @@ require_brew gnupg
 # so we can do "sed -i 's/foo/bar/' file" instead of "sed -i '' 's/foo/bar/' file"
 # require_brew gnu-sed --default-names
 require_brew go
+brew link go
 # better, more recent grep
 require_brew heroku-toolbelt
 require_brew homebrew/dupes/grep
