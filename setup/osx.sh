@@ -357,6 +357,7 @@ require_cask spectacle
 require_cask the-unarchiver
 require_cask totalfinder
 require_cask xquartz
+require_cask usb-overdrive
 require_cask virtualbox
 # chef-dk, berkshelf, etc
 #require_cask chefdk
