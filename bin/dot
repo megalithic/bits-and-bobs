@@ -9,5 +9,6 @@ export ZSH=$HOME/.dotfiles
 # Set OS X defaults
 $ZSH/osx/set-defaults.sh
 
-# Install homebrew packages
-$ZSH/homebrew/install.sh 2>&1
+# Install homebrew packages; don't silence activity
+# $ZSH/homebrew/install.sh 2>&1
+$ZSH/homebrew/install.sh

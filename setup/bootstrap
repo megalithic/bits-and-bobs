@@ -5,6 +5,8 @@
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd)
 
+source $DOTFILES_ROOT/setup/lib.sh
+
 set -e
 
 echo ''
@@ -172,6 +174,27 @@ install_dotfiles () {
   done
 }
 
+setup_private_repo () {
+  info "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private ..."
+
+  warn "Note: if you have 2-factor authentication enabled, you'll need to enter a personal access token when using https:// repo urls."
+  user ' - What is your private github repo address? (Leave blank to skip)'
+  read -e git_privaterepo
+
+  if [ "$git_privaterepo" == "" ]
+  then
+    warn "Skipping private repo setup ..."
+  else
+    if [[ ! -e ~/.dotfiles_backup ]]; then
+      git clone $git_privaterepo ~/.dotfiles/private
+      success "cloned $git_privaterepo to ~/.dotfiles/private"
+    fi
+
+    sh ~/.dotfiles/private/install.sh
+    success 'executed private dotfiles repo install script'
+  fi
+}
+
 setup_gitconfig
 setup_ssh_key
 install_dotfiles
@@ -186,7 +209,12 @@ then
   else
     fail "error installing dependencies"
   fi
+
+  info "running topic installers"
+  source $DOTFILES_ROOT/setup/install
 fi
+
+setup_private_repo
 
 echo ''
 echo '  All installed!'

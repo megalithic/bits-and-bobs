@@ -6,5 +6,13 @@ set -e
 
 cd "$(dirname $0)"/..
 
-# find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+# find the installers and run them iteratively; ignoring homebrew installer and private installer
+# find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+find . -not \( -path $ZSH/homebrew -prune \) -not \( -path $ZSH/private -prune \) -name \install.sh | while read installer ; do sh -c "${installer}" ; done
+
+# for source in `find $ZSH -not \( -path $ZSH/homebrew -prune \) -not \( -path $ZSH/private -prune \) -name \install.sh`
+# do
+#   action "installing $source"
+#   sh $source
+#   ok
+# done

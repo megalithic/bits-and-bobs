@@ -111,13 +111,13 @@ brew install multimarkdown
 brew install mercurial
 
 # Setup mysql
-mysql.server stop
 brew install mysql
 ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
 ln -sfv /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-mysql.server start
+# mysql.server start
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 # mysql_secure_installation
 # mysqladmin -u root password password
 
