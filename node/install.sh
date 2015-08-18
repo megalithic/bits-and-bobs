@@ -1,6 +1,7 @@
 #!/bin/sh
 
 source ./setup/lib.sh
+source $(brew --prefix nvm)/nvm.sh
 
 ###############################################################################
 bot "NVM versions..."

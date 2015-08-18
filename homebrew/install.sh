@@ -20,7 +20,7 @@ running "checking brew-cask install"
 output=$(brew tap | grep cask)
 if [[ $? != 0 ]]; then
 	action "installing brew-cask"
-	require_brew caskroom/cask/brew-cask
+	brew install caskroom/cask/brew-cask
 fi
 ok
 
@@ -67,65 +67,65 @@ bot "installing homebrew command-line tools..."
 
 # Install GNU core utilities (those that come with OS X are outdated)
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
-require_brew coreutils
+brew install coreutils
 # Install some other useful utilities like `sponge`
-require_brew moreutils
+brew install moreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
-require_brew findutils
+brew install findutils
 
 # Install Bash 4
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
 #install bash
 #install bash-completion
 
-require_brew ack
-require_brew battery
+brew install ack
+brew install battery
 
-require_brew boot2docker
-require_brew chromedriver
-require_brew cscope
-require_brew ctags
-require_brew curl --with-openssl --with-ssh --with-rtmp
-require_brew docker
-require_brew editorconfig
+brew install boot2docker
+brew install chromedriver
+brew install cscope
+brew install ctags
+brew install curl --with-openssl --with-ssh --with-rtmp
+brew install docker
+brew install editorconfig
 
 # Setup elasticsearch
 brew install elasticsearch
 ln -sfv /usr/local/opt/elasticsearch/*.plist ~/Library/LaunchAgents
 
-require_brew ffind
+brew install ffind
 
 # Setup fzf
 brew install fzf
 $(brew info fzf | grep /install)
 
-require_brew gawk
-require_brew gcc48
+brew install gawk
+brew install gcc48
 # http://www.lcdf.org/gifsicle/ (because I'm a gif junky)
-require_brew gifsicle
+brew install gifsicle
 # skip those GUI clients, git command-line all the way
-require_brew git
-require_brew gist
-require_brew git-extras
-require_brew git-flow
+brew install git
+brew install gist
+brew install git-extras
+brew install git-flow
 # why is everyone still not using GPG?
-require_brew gnupg
+brew install gnupg
 # Install GNU `sed`, overwriting the built-in `sed`
 # so we can do "sed -i 's/foo/bar/' file" instead of "sed -i '' 's/foo/bar/' file"
-# require_brew gnu-sed --default-names
-require_brew go
+# brew install gnu-sed --default-names
+brew install go
 brew link go
 # better, more recent grep
-require_brew heroku-toolbelt
-require_brew homebrew/dupes/grep
-require_brew htop-osx
-require_brew hub
-require_brew imagemagick
-require_brew imagesnap
+brew install heroku-toolbelt
+brew install homebrew/dupes/grep
+brew install htop-osx
+brew install hub
+brew install imagemagick
+brew install imagesnap
 # jq is a JSON grep
-require_brew jq
-require_brew multimarkdown
-require_brew mercurial
+brew install jq
+brew install multimarkdown
+brew install mercurial
 
 # Setup mysql
 brew install mysql
@@ -137,17 +137,17 @@ mysql.server start
 # mysql_secure_installation
 # mysqladmin -u root password password
 
-require_brew --HEAD neovim --with-lua --with-perl --with-ruby
+brew install --HEAD neovim --with-lua --with-perl --with-ruby
 
-require_brew nmap
-require_brew nvm
+brew install nmap
+brew install nvm
 
-require_brew openssl
+brew install openssl
 brew link openssl --force
-require_brew ossp-uuid
-require_brew p7zip
-require_brew phantomjs
-require_brew pkg-config
+brew install ossp-uuid
+brew install p7zip
+brew install phantomjs
+brew install pkg-config
 
 # Setup postgres
 brew install postgresql --no-python
@@ -157,43 +157,43 @@ initdb /usr/local/var/postgres -E utf8
 createdb `whoami` # is this needed?
 
 # Setup pythons
-require_brew python
-require_brew python3
+brew install python
+brew install python3
 brew link python --force
 
 # Setup rabbitmq
 brew install rabbitmq
 ln -sfv /usr/local/opt/rabbitmq/*.plist ~/Library/LaunchAgents
 
-require_brew reattach-to-user-namespace --wrap-pbcopy-and-pbpaste
+brew install reattach-to-user-namespace --wrap-pbcopy-and-pbpaste
 
 # Setup redis
 brew install redis
 ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
 
-require_brew selenium-server-standalone
-require_brew spark
-require_brew sqlite
-require_brew ssh-copy-id
-require_brew terminal-notifier # requires full install of xcode
-require_brew the_silver_searcher
-require_brew tig
-require_brew tmate
-require_brew tmux
-require_brew tree
-require_brew vim --with-lua --with-perl --with-python3 --with-python --with-ruby --override-system-vi --with-luajit --override-system-vim
+brew install selenium-server-standalone
+brew install spark
+brew install sqlite
+brew install ssh-copy-id
+brew install terminal-notifier # requires full install of xcode
+brew install the_silver_searcher
+brew install tig
+brew install tmate
+brew install tmux
+brew install tree
+brew install vim --with-lua --with-perl --with-python3 --with-python --with-ruby --override-system-vi --with-luajit --override-system-vim
 
-require_brew macvim --with-lua --with-perl --with-python3 --with-python --with-ruby --custom-icons --with-luajit # --override-system-vim
-require_brew linkapps macvim
+brew install macvim --with-lua --with-perl --with-python3 --with-python --with-ruby --custom-icons --with-luajit # --override-system-vim
+brew install linkapps macvim
 
-require_brew watch
-require_brew weechat --with-ruby --with-python --with-perl
-require_brew wget --enable-iri
-require_brew xz
-require_brew zsh
-require_brew zsh-completions
-require_brew zsh-lovers
-require_brew zsh-syntax-highlighting
+brew install watch
+brew install weechat --with-ruby --with-python --with-perl
+brew install wget --enable-iri
+brew install xz
+brew install zsh
+brew install zsh-completions
+brew install zsh-lovers
+brew install zsh-syntax-highlighting
 
 ###############################################################################
 # Native Apps (via brew cask)                                                 #
@@ -201,57 +201,57 @@ require_brew zsh-syntax-highlighting
 bot "installing GUI tools via homebrew casks..."
 brew tap caskroom/versions > /dev/null 2>&1
 
-require_cask 1password
-# require_cask airmail
-require_cask alfred
+brew cask install 1password
+# brew cask install airmail
+brew cask install alfred
 brew cask alfred link
-require_cask bettertouchtool
-require_cask box-sync
-require_cask bartender
-require_cask cloak
-# require_cask colorsnapper
-require_cask default-folder-x
-require_cask diffmerge
-require_cask dropbox
-require_cask droplr
-require_cask evernote
-require_cask fantastical
-require_cask firefox
-require_cask firefox-aurora
-require_cask flux
-require_cask github
-require_cask google-chrome
-require_cask google-chrome-canary
-require_cask gpgtools
-require_cask hazel
-require_cask hipchat
-require_cask istat-menus
-require_cask iterm2
-require_cask java
-require_cask karabiner
-require_cask licecap
-require_cask livereload
-#require_cask macvim
-require_cask numi
-require_cask parallels-desktop
-require_cask radiant-player
-require_cask reggy
-require_cask sequel-pro
-require_cask shiori
-# require_cask shush
-require_cask slack
-require_cask spectacle
-require_cask the-unarchiver
-require_cask totalfinder
-require_cask xquartz
-require_cask usb-overdrive
-require_cask virtualbox
+brew cask install bettertouchtool
+brew cask install box-sync
+brew cask install bartender
+brew cask install cloak
+# brew cask install colorsnapper
+brew cask install default-folder-x
+brew cask install diffmerge
+brew cask install dropbox
+brew cask install droplr
+brew cask install evernote
+brew cask install fantastical
+brew cask install firefox
+brew cask install firefox-aurora
+brew cask install flux
+brew cask install github
+brew cask install google-chrome
+brew cask install google-chrome-canary
+brew cask install gpgtools
+brew cask install hazel
+brew cask install hipchat
+brew cask install istat-menus
+brew cask install iterm2
+brew cask install java
+brew cask install karabiner
+brew cask install licecap
+brew cask install livereload
+#brew cask install macvim
+brew cask install numi
+brew cask install parallels-desktop
+brew cask install radiant-player
+brew cask install reggy
+brew cask install sequel-pro
+brew cask install shiori
+# brew cask install shush
+brew cask install slack
+brew cask install spectacle
+brew cask install the-unarchiver
+brew cask install totalfinder
+brew cask install xquartz
+brew cask install usb-overdrive
+brew cask install virtualbox
 # chef-dk, berkshelf, etc
-#require_cask chefdk
+#brew cask install chefdk
 # vagrant for running dev environments using docker images
-#require_cask vagrant # # | grep Caskroom | sed "s/.*'\(.*\)'.*/open \1\/Vagrant.pkg/g" | sh
-require_cask vlc
-require_cask xtrafinder
+#brew cask install vagrant # # | grep Caskroom | sed "s/.*'\(.*\)'.*/open \1\/Vagrant.pkg/g" | sh
+brew cask install vlc
+brew cask install xtrafinder
 
 bot "Alright, cleaning up homebrew cache..."
 brew linkapps
@@ -259,3 +259,4 @@ brew linkapps
 brew cleanup > /dev/null 2>&1
 bot "All clean"
 
+exit 0
