@@ -168,7 +168,7 @@ require_brew tree
 require_brew vim --with-lua --with-perl --with-python3 --with-python --with-ruby --override-system-vi --with-luajit --override-system-vim
 
 require_brew macvim --with-lua --with-perl --with-python3 --with-python --with-ruby --custom-icons --with-luajit # --override-system-vim
-require_brew linkapps macvim
+require_brew link macvim
 
 require_brew watch
 require_brew weechat --with-ruby --with-python --with-perl
@@ -237,7 +237,6 @@ require_cask vlc
 require_cask xtrafinder
 
 bot "Alright, cleaning up homebrew cache..."
-brew linkapps
 # Remove outdated versions from the cellar
 brew cleanup > /dev/null 2>&1
 bot "All clean"
