@@ -5,33 +5,15 @@ source ./setup/lib.sh
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 running "checking homebrew install"
-brew_bin=$(which brew) 2>&1 > /dev/null
-if [[ $? != 0 ]]; then
-	action "installing homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    if [[ $? != 0 ]]; then
-    	error "unable to install homebrew, script $0 abort!"
-    	exit -1
-	fi
+if test ! $(which brew)
+then
+  action "installing homebrew"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  action "installing brew-cask"
+  brew install caskroom/cask/brew-cask
 fi
 ok
-
-running "checking brew-cask install"
-output=$(brew tap | grep cask)
-if [[ $? != 0 ]]; then
-	action "installing brew-cask"
-	brew install caskroom/cask/brew-cask
-fi
-ok
-
-# # Check for Homebrew
-# running "checking homebrew install"
-# if test ! $(which brew)
-# then
-# 	action "installing homebrew"
-#   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# fi
-# ok
 
 running "updating homebrew"
 brew update
@@ -62,6 +44,7 @@ brew tap neovim/homebrew-neovim
 brew tap homebrew/versions # To be able to install ruby versions older than 1.9.3-p492 (https://github.com/postmodern/ruby-install#ruby):
 brew tap Goles/battery
 brew tap nviennot/tmate
+brew tap caskroom/versions > /dev/null 2>&1
 
 bot "installing homebrew command-line tools..."
 
@@ -133,6 +116,7 @@ ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
 ln -sfv /usr/local/opt/mysql/support-files/my-default.cnf ~/.my.cnf
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+mysql.server stop
 mysql.server start
 # mysql_secure_installation
 # mysqladmin -u root password password
@@ -199,7 +183,6 @@ brew install zsh-syntax-highlighting
 # Native Apps (via brew cask)                                                 #
 ###############################################################################
 bot "installing GUI tools via homebrew casks..."
-brew tap caskroom/versions > /dev/null 2>&1
 
 brew cask install 1password
 # brew cask install airmail
