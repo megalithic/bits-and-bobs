@@ -185,7 +185,6 @@ require_brew zsh-syntax-highlighting
 bot "installing GUI tools via homebrew casks..."
 
 require_cask 1password
-# require_cask airmail
 require_cask alfred
 brew cask alfred link
 require_cask bettertouchtool
@@ -193,13 +192,11 @@ require_cask box-sync
 require_cask bartender
 require_cask cloak
 require_cask contexts
-# require_cask colorsnapper
 require_cask default-folder-x
 require_cask diffmerge
 require_cask dropbox
 require_cask droplr
 require_cask evernote
-require_cask fantastical
 require_cask firefox
 require_cask firefox-aurora
 require_cask flux
@@ -215,14 +212,12 @@ require_cask java
 require_cask karabiner
 require_cask licecap
 require_cask livereload
-#require_cask macvim
 require_cask numi
 require_cask parallels-desktop
 require_cask radiant-player
 require_cask reggy
 require_cask sequel-pro
 require_cask shiori
-# require_cask shush
 require_cask slack
 require_cask spectacle
 require_cask the-unarchiver
@@ -230,12 +225,13 @@ require_cask totalfinder
 require_cask xquartz
 require_cask usb-overdrive
 require_cask virtualbox
-# chef-dk, berkshelf, etc
-#require_cask chefdk
-# vagrant for running dev environments using docker images
-#require_cask vagrant # # | grep Caskroom | sed "s/.*'\(.*\)'.*/open \1\/Vagrant.pkg/g" | sh
 require_cask vlc
-require_cask xtrafinder
+
+# INSTALL VIA APP STORE
+# require_cask tweetbot
+# require_cask airmail
+# require_cask fantastical
+# require_cask shush
 
 bot "Alright, cleaning up homebrew cache..."
 # Remove outdated versions from the cellar
