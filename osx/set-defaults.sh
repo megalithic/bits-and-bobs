@@ -652,6 +652,8 @@ defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://
 bot "OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
   "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
-  "iCal" "Terminal"; do
+  "iCal"; do
   killall "${app}" > /dev/null 2>&1
 done
+
+exit 0

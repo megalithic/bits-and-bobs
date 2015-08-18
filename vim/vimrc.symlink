@@ -217,8 +217,6 @@ function! LoadPlugs()
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-dispatch'
-  " Plug 'janko-m/vim-test'
-  "   let test#strategy = "dispatch"
   Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1
     let g:vroom_map_keys = 0
@@ -227,7 +225,6 @@ function! LoadPlugs()
     let g:lt_quickfix_list_toggle_map = '<F4>'
 
   """"" Filetypes ===========================================================
-  " Plug 'sheerun/vim-polyglot'
 
   """"""" Go
   Plug 'fatih/vim-go', {'for': 'go'}
@@ -252,7 +249,7 @@ function! LoadPlugs()
   Plug 'suan/vim-instant-markdown'
     let g:instant_markdown_slow = 1
     let g:instant_markdown_autostart = 0
-    " autocmd BufWritePost *.md,*.markdown,*.mdown exec :InstantMarkdownPreview
+    " autocmd BufWritePost *.md,*.markdown,*.mdown call InstantMarkdownPreview()
 
   """"""" CSS/SCSS/LESS/Preprocessors
   Plug 'groenewege/vim-less', { 'for': 'less' }
@@ -818,7 +815,6 @@ augroup filetypes
 
   " load rainbow parens
   autocmd FileType js,jsx,css,scss,sass,less,json call rainbow#load()
-  " autocmd VimEnter js,jsx,css,scss,sass,less,json RainbowParentheses
 
   " autocmd BufNewFile,BufRead,BufWritePost *[Ss]pec*js,*SpecHelper*js set filetype=jasmine.javascript syntax=jasmine
   " autocmd BufNewFile,BufRead,BufWritePost *.test.js set filetype=mocha.javascript syntax=mocha
@@ -848,10 +844,6 @@ augroup filetypes
   " delimiters (_,-,$,%,.) are treated as word separators outside insert mode
   autocmd InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
   autocmd InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
-
-"   autocmd BufNewFile,BufRead *.js.jsx set ft=javascript.jsx
-"   autocmd BufNewFile,BufRead *{_spec,Spec}.js.jsx set ft=javascript.jsx.jasmine
-"   autocmd BufNewFile,BufRead *.html,*.js call s:DetectJSX(expand("<afile>"))
 
   " Fix slow Ruby editing
   " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
