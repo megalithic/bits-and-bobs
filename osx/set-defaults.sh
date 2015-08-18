@@ -547,9 +547,6 @@ bot "Terminal & iTerm2"
 #defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true;ok
 
-running "Installing the Solarized Dark theme for iTerm (opening file)"
-open "./configs/Solarized Dark.itermcolors";ok
-
 running "Don’t display the annoying prompt when quitting iTerm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok
 running "hide tab title bars"
