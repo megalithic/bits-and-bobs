@@ -185,7 +185,7 @@ setup_private_repo () {
   then
     warn "Skipping private repo setup ..."
   else
-    if [[ ! -e ~/.dotfiles_backup ]]; then
+    if [[ ! -e ~/.dotfiles/private ]]; then
       git clone $git_privaterepo ~/.dotfiles/private
       success "cloned $git_privaterepo to ~/.dotfiles/private"
     fi

@@ -18,5 +18,8 @@ go get -u github.com/derekparker/delve/cmd/dlv #https://github.com/derekparker/d
 # get tags for go
 go get -u github.com/jstemmer/gotags
 
-# symlink some useful things
-ln -sfv $HOME/.go/src $HOME/code/go
+if [[ ! -e $HOME/code/go ]]; then
+  # symlink some useful things
+  mkdir -p $HOME/code/go
+  ln -sfv $HOME/.go/src $HOME/code/go
+fi
