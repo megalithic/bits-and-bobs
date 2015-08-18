@@ -192,6 +192,7 @@ require_cask bettertouchtool
 require_cask box-sync
 require_cask bartender
 require_cask cloak
+require_cask contexts
 # require_cask colorsnapper
 require_cask default-folder-x
 require_cask diffmerge
