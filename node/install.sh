@@ -1,6 +1,8 @@
 #!/bin/sh
 
 source ./setup/lib.sh
+
+export NVM_DIR=$HOME/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
 ###############################################################################
