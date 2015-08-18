@@ -3,8 +3,6 @@
 # Docker
 # Getting started: http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide
 
-brew install docker
-brew install boot2docker
 # ln -sfv /usr/local/opt/boot2docker/*.plist ~/Library/LaunchAgents
 # launchctl load ~/Library/LaunchAgents/homebrew.mxcl.boot2docker.plist
 
