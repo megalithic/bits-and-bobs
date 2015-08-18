@@ -27,6 +27,39 @@ fail () {
   exit
 }
 
+setup_ssh_key () {
+  if ! [ -f '~/.ssh/id_rsa.pub' ]
+  then
+    user "Do you want to setup ssh keys? (y|n)"
+    read -n 1 response
+
+    if [[ $response =~ ^(no|n|N) ]];then
+      success "skipping ssh key setup..."
+    else
+      if ![[ -f '~/.ssh/id_rsa.pub' ]]
+      then
+        ssh-keygen -t rsa -b 4096 -C "seth.messer@gmail.com"
+        success 'generated ssh key'
+      fi
+
+      eval "$(ssh-agent -s)"
+      ssh-add ~/.ssh/id_rsa
+      success 'added key to ssh-agent...'
+
+      if [[ -f '~/.ssh/id_rsa.pub' ]]
+      then
+        pbcopy < ~/.ssh/id_rsa.pub
+        success 'copied public key to clipboard. paste it into your Github account...'
+        open 'https://github.com/account/ssh'
+      fi
+
+      info "To verify the key was setup correctly: `ssh -T git@github.com`..."
+    fi
+
+    success 'ssh key setup'
+  fi
+}
+
 setup_gitconfig () {
   if ! [ -f git/gitconfig.symlink ]
   then
@@ -40,10 +73,12 @@ setup_gitconfig () {
 
     user ' - What is your github author name?'
     read -e git_authorname
+    user ' - What is your github author username?'
+    read -e git_authorusername
     user ' - What is your github author email?'
     read -e git_authoremail
 
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.symlink.example > git/gitconfig.symlink
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/AUTHERUSERNAME/$git_authorusername/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.symlink.example > git/gitconfig.symlink
 
     success 'gitconfig'
   fi
@@ -138,6 +173,7 @@ install_dotfiles () {
 }
 
 setup_gitconfig
+setup_ssh_key
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
