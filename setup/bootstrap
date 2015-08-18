@@ -197,6 +197,16 @@ setup_private_repo () {
 
 setup_gitconfig
 setup_ssh_key
+
+echo $0 | grep zsh > /dev/null 2>&1 | true
+if [[ ${PIPESTATUS[0]} != 0 ]]; then
+  running "changing your login shell to zsh"
+  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+  chsh -s $(which zsh);ok
+else
+  bot "looks like you are already using zsh. woot!"
+fi
+
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
