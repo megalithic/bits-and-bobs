@@ -68,7 +68,7 @@ require_brew boot2docker
 require_brew chromedriver
 require_brew cscope
 require_brew ctags
-require_brew curl --with-openssl --with-ssh --with-rtmp
+brew install curl --with-openssl --with-ssh --with-rtmp
 require_brew docker
 require_brew editorconfig
 
@@ -121,7 +121,7 @@ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --
 # mysql_secure_installation
 # mysqladmin -u root password password
 
-require_brew --HEAD neovim --with-lua --with-perl --with-ruby
+brew install --HEAD neovim --with-lua --with-perl --with-ruby
 
 require_brew nmap
 require_brew nvm
@@ -165,14 +165,14 @@ require_brew tig
 require_brew tmate
 require_brew tmux
 require_brew tree
-require_brew vim --with-lua --with-perl --with-python3 --with-python --with-ruby --override-system-vi --with-luajit --override-system-vim
+brew install vim --with-lua --with-perl --with-python3 --with-python --with-ruby --override-system-vi --with-luajit --override-system-vim
 
-require_brew macvim --with-lua --with-perl --with-python3 --with-python --with-ruby --custom-icons --with-luajit # --override-system-vim
+brew install macvim --with-lua --with-perl --with-python3 --with-python --with-ruby --custom-icons --with-luajit # --override-system-vim
 require_brew link macvim
 
 require_brew watch
-require_brew weechat --with-ruby --with-python --with-perl
-require_brew wget --enable-iri
+brew install weechat --with-ruby --with-python --with-perl
+brew install wget --enable-iri
 require_brew xz
 require_brew zsh
 require_brew zsh-completions
