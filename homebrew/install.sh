@@ -64,12 +64,13 @@ require_brew findutils
 require_brew ack
 require_brew battery
 
-require_brew boot2docker
 require_brew chromedriver
 require_brew cscope
 require_brew ctags
 brew install curl --with-openssl --with-ssh --with-rtmp
 require_brew docker
+require_brew docker-compose
+require_brew docker-machine
 require_brew editorconfig
 
 # Setup elasticsearch
