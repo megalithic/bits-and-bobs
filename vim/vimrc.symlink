@@ -300,8 +300,8 @@ function! LoadPlugs()
       \ ]
     let g:SuperTabLongestHighlight = 1
     let g:SuperTabLongestEnhanced = 1
-    let g:node_usejscomplete = 1
-    let g:jscomplete_use = ['dom', 'moz']
+    " let g:node_usejscomplete = 1
+    " let g:jscomplete_use = ['dom', 'moz']
 
   Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
