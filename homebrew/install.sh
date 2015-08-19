@@ -145,6 +145,8 @@ require_brew python
 require_brew python3
 brew link python --force
 
+brew install qt
+
 # Setup rabbitmq
 require_brew rabbitmq
 ln -sfv /usr/local/opt/rabbitmq/*.plist ~/Library/LaunchAgents
@@ -199,6 +201,7 @@ require_cask droplr
 require_cask evernote
 require_cask firefox
 require_cask firefox-aurora
+require_cask flash
 require_cask flux
 require_cask github
 require_cask google-chrome
