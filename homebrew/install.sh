@@ -146,6 +146,7 @@ require_brew python3
 brew link python --force
 
 brew install qt
+brew linkapps qt
 
 # Setup rabbitmq
 require_brew rabbitmq
