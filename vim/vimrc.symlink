@@ -278,6 +278,7 @@ function! LoadPlugs()
   Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
   Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
+  Plug 'sidorares/node-vim-debugger'
 
   """"" Code Navigation======================================================
   " Plug 'Lokaltog/vim-easymotion', { 'on': '<Plug>(easymotion-prefix)' }
@@ -350,6 +351,7 @@ function! LoadPlugs()
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
+  Plug 'rhysd/conflict-marker.vim'
   Plug 'mattn/webapi-vim'
   Plug 'mattn/gist-vim'
     let g:gist_put_url_to_clipboard_after_post  = 1
