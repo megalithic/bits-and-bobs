@@ -276,6 +276,7 @@ function! LoadPlugs()
     let g:jsx_pragma_required = 0
   Plug 'burnettk/vim-angular', { 'for': 'javascript' }
   Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
+    let g:mocha_js_command = "!mocha --compilers js:babel/register {spec}"
   Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
   Plug 'sidorares/node-vim-debugger'
