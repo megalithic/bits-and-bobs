@@ -154,6 +154,7 @@ function! LoadPlugs()
       return lightline#statusline(0)
     endfunction
 
+    " FIXME
     " ENABLE these if you want filetype-specific checking on load
     " augroup AutoSyntastic
     "   autocmd!
@@ -190,7 +191,6 @@ function! LoadPlugs()
     let g:syntastic_enable_highlighting = 1 " Highlight syntax errors where possible
     let g:syntastic_loc_list_height = 5 " Show this many errors/warnings at a time in the location list
     let g:syntastic_check_on_wq = 0 " Don't run checkers when saving and quitting--only on saving
-  " Plug 'junegunn/rainbow_parentheses.vim'
   Plug 'luochen1990/rainbow'
     let g:rainbow_conf = {
       \ 'separately' : { 'agsv' : 0 }
@@ -249,6 +249,7 @@ function! LoadPlugs()
   Plug 'suan/vim-instant-markdown'
     let g:instant_markdown_slow = 1
     let g:instant_markdown_autostart = 0
+    " FIXME
     " autocmd BufWritePost *.md,*.markdown,*.mdown call InstantMarkdownPreview()
 
   """"""" CSS/SCSS/LESS/Preprocessors
@@ -279,7 +280,8 @@ function! LoadPlugs()
     let g:mocha_js_command = "!mocha --compilers js:babel/register {spec}"
   Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
-  Plug 'sidorares/node-vim-debugger'
+  Plug 'sidorares/node-vim-debugger', { 'for': 'javascript' }
+  Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 
   """"" Code Navigation======================================================
   " Plug 'Lokaltog/vim-easymotion', { 'on': '<Plug>(easymotion-prefix)' }
@@ -301,8 +303,8 @@ function! LoadPlugs()
       \ ]
     let g:SuperTabLongestHighlight = 1
     let g:SuperTabLongestEnhanced = 1
-    " let g:node_usejscomplete = 1
-    " let g:jscomplete_use = ['dom', 'moz']
+    let g:node_usejscomplete = 1
+    let g:jscomplete_use = ['dom', 'moz']
 
   Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
@@ -371,18 +373,17 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  Plug 'SirVer/ultisnips'
-    " better key bindings for UltiSnipsExpandTrigger
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsListSnippets="<c-tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  " " SnipMate and its dependencies:
-  Plug 'MarcWeber/vim-addon-mw-utils'
-  Plug 'tomtom/tlib_vim'
-  Plug 'honza/vim-snippets'
-  Plug 'justinj/vim-react-snippets'
-  Plug 'isRuslan/vim-es6'
+  " Plug 'SirVer/ultisnips'
+  "   " better key bindings for UltiSnipsExpandTrigger
+  "   let g:UltiSnipsExpandTrigger="<tab>"
+  "   let g:UltiSnipsListSnippets="<c-tab>"
+  "   let g:UltiSnipsJumpForwardTrigger="<tab>"
+  "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  " " " SnipMate and its dependencies:
+  " Plug 'MarcWeber/vim-addon-mw-utils'
+  " Plug 'tomtom/tlib_vim'
+  " Plug 'honza/vim-snippets'
+  " Plug 'justinj/vim-react-snippets'
 
   Plug 'jwhitley/vim-matchit'
 endfunction
