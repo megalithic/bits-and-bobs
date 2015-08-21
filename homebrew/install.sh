@@ -195,6 +195,7 @@ bot "installing GUI tools via homebrew casks..."
 require_cask 1password
 require_cask alfred
 brew cask alfred link
+require_cask beardedspice
 require_cask bettertouchtool
 require_cask box-sync
 require_cask bartender
