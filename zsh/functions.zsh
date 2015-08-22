@@ -1,6 +1,10 @@
 # don't forget to source our function files (ext files not currently in this one)
 source ~/.dotfiles/zsh/site-functions/*.zsh
 
+function killport() {
+  lsof -t -i tcp:$1 | xargs kill
+}
+
 function v() {
   rm ~/tmp/profile.log;
   vim $1 --startuptime ~/tmp/profile.log
