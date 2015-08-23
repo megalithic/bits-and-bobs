@@ -70,4 +70,5 @@ export FZF_DEFAULT_OPTS='
   --bind ctrl-f:page-down,ctrl-b:page-up
 '
 export FZF_COMPLETION_TRIGGER=''
+export FZF_TMUX_HEIGHT='20%'
 
