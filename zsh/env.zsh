@@ -62,5 +62,10 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
 
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
-export FZF_DEFAULT_OPTS='--select-1 --ansi'
+# export FZF_DEFAULT_OPTS='--select-1 --ansi'
+export FZF_DEFAULT_OPTS='
+  --extended
+  --bind ctrl-f:page-down,ctrl-b:page-up
+'
+export FZF_COMPLETION_TRIGGER=''
 
