@@ -284,7 +284,6 @@ function! LoadPlugs()
   Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 
   """"" Code Navigation======================================================
-  " Plug 'Lokaltog/vim-easymotion', { 'on': '<Plug>(easymotion-prefix)' }
   Plug 'unblevable/quick-scope'
     let g:qs_enable = 0
   Plug 'wellle/targets.vim'
@@ -295,16 +294,10 @@ function! LoadPlugs()
   Plug 'ervandew/supertab'
     " handy stuff: https://github.com/ervandew/supertab/issues/53
     let g:SuperTabDefaultCompletionType = '<C-n>'
-    let g:SuperTabCrMapping = 0
-    let g:SuperTabDefaultCompletionType = "context"
     let g:SuperTabDefaultCompletionTypeDiscovery = [
       \ "&completefunc:<c-x><c-u>",
       \ "&omnifunc:<c-x><c-o>",
       \ ]
-    let g:SuperTabLongestHighlight = 1
-    let g:SuperTabLongestEnhanced = 1
-    let g:node_usejscomplete = 1
-    let g:jscomplete_use = ['dom', 'moz']
 
   Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
@@ -924,10 +917,6 @@ nmap <F8> :TagbarToggle<CR>
 
 """""" Dispatch
 nnoremap <F9> :Dispatch<CR>
-
-"""""" SuperTab/VimCompletesMe
-"Make enter key accept selection
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 """"""" Golang
 au FileType go nnoremap <leader>gr :GoRun<cr>
