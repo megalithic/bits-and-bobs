@@ -41,6 +41,9 @@ done
 
 unset config_files
 
+# setup fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # setup chruby
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
@@ -55,9 +58,6 @@ source $(brew --prefix nvm)/nvm.sh
 
 # setup hub (aliased to git)
 eval "$(hub alias -s)"
-
-# setup fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ===========================================================================
 # STOP!!!

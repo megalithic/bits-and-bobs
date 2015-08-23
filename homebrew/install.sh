@@ -191,57 +191,62 @@ require_brew zsh-syntax-highlighting
 # Native Apps (via brew cask)                                                 #
 ###############################################################################
 bot "installing GUI tools via homebrew casks..."
+read -r -p "install brew cask GUI tools? [Y|n] " response
+if [[ $response =~ ^(y|yes|Y) ]];then
+  require_cask 1password
+  require_cask alfred
+  brew cask alfred link
+  require_cask beardedspice
+  require_cask bettertouchtool
+  require_cask box-sync
+  require_cask bartender
+  require_cask cloak
+  require_cask contexts
+  require_cask default-folder-x
+  require_cask diffmerge
+  require_cask dropbox
+  require_cask droplr
+  require_cask evernote
+  require_cask firefox
+  require_cask firefox-aurora
+  require_cask flash
+  require_cask flux
+  require_cask github
+  require_cask google-chrome
+  require_cask google-chrome-canary
+  require_cask gpgtools
+  require_cask hazel
+  require_cask hipchat
+  require_cask istat-menus
+  require_cask iterm2
+  require_cask java
+  require_cask karabiner
+  require_cask licecap
+  require_cask livereload
+  require_cask numi
+  require_cask parallels-desktop
+  require_cask radiant-player
+  require_cask reggy
+  require_cask sequel-pro
+  require_cask shiori
+  require_cask slack
+  require_cask spectacle
+  require_cask the-unarchiver
+  require_cask totalfinder
+  require_cask xquartz
+  require_cask usb-overdrive
+  require_cask virtualbox
+  require_cask vlc
 
-require_cask 1password
-require_cask alfred
-brew cask alfred link
-require_cask beardedspice
-require_cask bettertouchtool
-require_cask box-sync
-require_cask bartender
-require_cask cloak
-require_cask contexts
-require_cask default-folder-x
-require_cask diffmerge
-require_cask dropbox
-require_cask droplr
-require_cask evernote
-require_cask firefox
-require_cask firefox-aurora
-require_cask flash
-require_cask flux
-require_cask github
-require_cask google-chrome
-require_cask google-chrome-canary
-require_cask gpgtools
-require_cask hazel
-require_cask hipchat
-require_cask istat-menus
-require_cask iterm2
-require_cask java
-require_cask karabiner
-require_cask licecap
-require_cask livereload
-require_cask numi
-require_cask parallels-desktop
-require_cask radiant-player
-require_cask reggy
-require_cask sequel-pro
-require_cask shiori
-require_cask slack
-require_cask spectacle
-require_cask the-unarchiver
-require_cask totalfinder
-require_cask xquartz
-require_cask usb-overdrive
-require_cask virtualbox
-require_cask vlc
+  # INSTALL VIA APP STORE
+  # require_cask tweetbot
+  # require_cask airmail
+  # require_cask fantastical
+  # require_cask shush
 
-# INSTALL VIA APP STORE
-# require_cask tweetbot
-# require_cask airmail
-# require_cask fantastical
-# require_cask shush
+else
+    ok "skipped brew cask GUI tools installation.";
+fi
 
 bot "Alright, cleaning up homebrew cache..."
 # Remove outdated versions from the cellar

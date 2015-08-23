@@ -378,17 +378,17 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  Plug 'SirVer/ultisnips'
-    " better key bindings for UltiSnipsExpandTrigger
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsListSnippets="<c-tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  " " SnipMate and its dependencies:
-  Plug 'MarcWeber/vim-addon-mw-utils'
-  Plug 'tomtom/tlib_vim'
-  Plug 'honza/vim-snippets'
-  Plug 'justinj/vim-react-snippets'
+  " Plug 'SirVer/ultisnips'
+  "   " better key bindings for UltiSnipsExpandTrigger
+  "   let g:UltiSnipsExpandTrigger="<tab>"
+  "   let g:UltiSnipsListSnippets="<c-tab>"
+  "   let g:UltiSnipsJumpForwardTrigger="<tab>"
+  "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  " " " SnipMate and its dependencies:
+  " Plug 'MarcWeber/vim-addon-mw-utils'
+  " Plug 'tomtom/tlib_vim'
+  " Plug 'honza/vim-snippets'
+  " Plug 'justinj/vim-react-snippets'
 
   Plug 'jwhitley/vim-matchit'
 endfunction
