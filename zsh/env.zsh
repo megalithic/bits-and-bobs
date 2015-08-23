@@ -64,6 +64,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
 # export FZF_DEFAULT_OPTS='--select-1 --ansi'
 export FZF_DEFAULT_OPTS='
+  --select-1
+  --ansi
   --extended
   --bind ctrl-f:page-down,ctrl-b:page-up
 '
