@@ -176,7 +176,7 @@ function! LoadPlugs()
     let g:syntastic_disabled_filetypes = ['html', 'rst', 'java', 'md', 'markdown']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
     let g:syntastic_jsl_conf = '$HOME/.jshintrc'
-    let g:syntastic_javascript_checkers = ['eslint', 'jsonlint', 'jsxhint', 'coffeelint']
+    let g:syntastic_javascript_checkers = ['standard']
     let g:syntastic_haml_checkers = ['haml_lint']
     let g:syntastic_ruby_checkers = ['rubocop']
     let g:syntastic_scss_checkers = ['scss_lint']
