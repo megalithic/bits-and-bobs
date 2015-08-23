@@ -48,6 +48,19 @@ fstash() {
       fi
     done
 }
+# fshow - git commit browser
+fshow() {
+  local out sha q
+  while out=$(
+      git log --decorate=short --graph --oneline --color=always |
+      fzf --ansi --multi --no-sort --reverse --query="$q" --print-query); do
+    q=$(head -1 <<< "$out")
+    while read sha; do
+      [ -n "$sha" ] && git show --color=always $sha | less -R
+    done < <(sed '1d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
+  done
+}
+
 
 function brewup() {
   brew update --verbose && brew outdated && brew upgrade && brew cleanup

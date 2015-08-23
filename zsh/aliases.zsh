@@ -31,7 +31,7 @@ alias pkey="pbcopy < ~/.ssh/id_rsa.pub"
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 
-## - TMUX -----------------------------------------------
+## - TMUX -------------------------------------------------
 alias tmux="TERM=screen-256color-bce tmux -u -2"
 alias tm=tmux
 alias takeover="tmux detach -a"
@@ -41,18 +41,22 @@ alias team="cd ~ && teamocil --here default"
 alias toka="tmux attach-session -t welltok"
 alias tok="cd ~ && teamocil --here welltok"
 
+## - ag/ack/grep/fzf --------------------------------------
+# https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
+# alias ag="ag --nobreak --nonumbers --noheading . | fzf"
+
 ## - DOCKER -----------------------------------------------
 # alias docker="sudo docker -H $DOCKER_HOST"
 alias docker-ip=dockerip
 alias docker-ubuntu="docker run -i -t ubuntu /bin/bash"
 
-## - BREW -----------------------------------------------
+## - BREW -------------------------------------------------
 alias b="brew"
 
 ## - PYTHON -----------------------------------------------
 alias py="python"
 
-## - VIM -----------------------------------------------
+## - VIM --------------------------------------------------
 # alias vim="mvim -v"
 alias vi="vim"
 alias vmi="vim"
