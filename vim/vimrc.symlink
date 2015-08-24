@@ -299,50 +299,50 @@ function! LoadPlugs()
       \ "&omnifunc:<c-x><c-o>",
       \ ]
 
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-    set rtp+=/usr/local/Cellar/fzf/0.10.2
-  Plug 'junegunn/fzf.vim'
-    if has('nvim')
-      let $FZF_DEFAULT_OPTS .= ' --inline-info'
-    endif
-    let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'enter': 'vsplit' }
-    let g:fzf_layout = { 'down': '20%' }
+  " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+  "   set rtp+=/usr/local/Cellar/fzf/0.10.2
+  " Plug 'junegunn/fzf.vim'
+  "   if has('nvim')
+  "     let $FZF_DEFAULT_OPTS .= ' --inline-info'
+  "   endif
+  "   let g:fzf_action = {
+  "     \ 'ctrl-t': 'tab split',
+  "     \ 'ctrl-x': 'split',
+  "     \ 'enter': 'vsplit' }
+  "   let g:fzf_layout = { 'down': '20%' }
 
-  " Plug 'ctrlpvim/ctrlp.vim'
-  "   let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
-  "   let g:ctrlp_switch_buffer=0            " open files in new buffers
-  "   let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
-  "   let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
-  "   let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
-  "   let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
-  "   let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
-  "   let g:ctrlp_arg_map = 0
-  "   let g:ctrlp_dotfiles = 0               " do not show (.) dotfiles in match list
-  "   let g:ctrlp_showhidden = 0             " do not show hidden files in match list
-  "   let g:ctrlp_split_window = 0
-  "   let g:ctrlp_max_height = 20            " restrict match list to a maxheight of 40
-  "   let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
-  "   let g:ctrlp_max_files = 0              " no restriction on results/file list
-  "   let g:ctrlp_working_path_mode = ''
-  "   let g:ctrlp_custom_ignore = {
-  "       \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
-  "       \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
-  "       \ }
-  "   let g:ctrlp_user_command = 'ag %s -i -l --nocolor --nogroup --hidden -g ""'
-  "   let g:ctrlp_prompt_mappings = {
-  "       \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
-  "       \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-  "       \ 'AcceptSelection("t")': ['<c-t>'],
-  "       \ 'AcceptSelection("v")': ['<cr>', '<RightMouse>'],
-  "       \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
-  "       \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
-  "       \ 'PrtHistory(-1)':       ['<c-n>'],
-  "       \ 'PrtHistory(1)':        ['<c-p>'],
-  "       \ 'ToggleFocus()':        ['<c-tab>'],
-  "       \}
+  Plug 'ctrlpvim/ctrlp.vim'
+    let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
+    let g:ctrlp_switch_buffer=0            " open files in new buffers
+    let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
+    let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
+    let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
+    let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
+    let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
+    let g:ctrlp_arg_map = 0
+    let g:ctrlp_dotfiles = 0               " do not show (.) dotfiles in match list
+    let g:ctrlp_showhidden = 0             " do not show hidden files in match list
+    let g:ctrlp_split_window = 0
+    let g:ctrlp_max_height = 20            " restrict match list to a maxheight of 40
+    let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
+    let g:ctrlp_max_files = 0              " no restriction on results/file list
+    let g:ctrlp_working_path_mode = ''
+    let g:ctrlp_custom_ignore = {
+        \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
+        \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
+        \ }
+    let g:ctrlp_user_command = 'ag %s -i -l --nocolor --nogroup --hidden -g ""'
+    let g:ctrlp_prompt_mappings = {
+        \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
+        \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+        \ 'AcceptSelection("t")': ['<c-t>'],
+        \ 'AcceptSelection("v")': ['<cr>', '<RightMouse>'],
+        \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+        \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+        \ 'PrtHistory(-1)':       ['<c-n>'],
+        \ 'PrtHistory(1)':        ['<c-p>'],
+        \ 'ToggleFocus()':        ['<c-tab>'],
+        \}
   Plug 'mileszs/ack.vim'
     set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
     let g:ackprg="ag --column --nogroup --line-numbers --vimgrep"
@@ -902,19 +902,19 @@ let maplocalleader="\\"
 nnoremap <leader>n :vsplit note
 
 """"""" CtrlP
-" let g:ctrlp_map = '<leader>m'
-" let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_map = '<leader>m'
+let g:ctrlp_cmd = 'CtrlP'
 
 """"""" fzf-vim
-nnoremap <silent> <Leader>m :Files<CR>
-nnoremap <silent> <Leader>a :Ag <CR>
+" nnoremap <silent> <Leader>m :Files<CR>
+" nnoremap <silent> <Leader>a :Ag <CR>
 " nnoremap <silent> <Leader>C        :Colors<CR>
 " nnoremap <silent> <Leader><Enter>  :Buffers<CR>
 
-inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+" inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
+" imap <c-x><c-k> <plug>(fzf-complete-word)
+" imap <c-x><c-f> <plug>(fzf-complete-path)
+" imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 
 """"""" Nerdtree
 nnoremap <F2> :NERDTreeToggle . <cr>

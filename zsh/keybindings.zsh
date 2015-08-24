@@ -20,5 +20,5 @@ bindkey '^[[4~' end-of-line # tmux
 
 # FZF keybindings for completion
 # https://github.com/junegunn/fzf/wiki/Fuzzy-completion
-bindkey '^T' fzf-completion
-bindkey '^I' $fzf_default_completion
+# bindkey '^T' fzf-completion
+# bindkey '^I' $fzf_default_completion

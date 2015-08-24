@@ -77,6 +77,9 @@ bind -r C-f resize-pane
 # fzf-locate
 bind-key -n 'M-`' run "tmux split-window -p 40 'tmux send-keys -t #{pane_id} \"$(locate / | fzf -m | paste -sd\\  -)\"'"
 
+# insta-calendar
+# bind-key C-c run-shell "cal $(date +%Y)"
+
 # Smart pane switching with awareness of vim (requires vim-tmux-navigator) splits
 # https://github.com/ivanbrennan/dotfiles/blob/master/tmux.conf
 # NOTE: added weechat in the mix to maintain ctrl+h/j/k/l behaviors
