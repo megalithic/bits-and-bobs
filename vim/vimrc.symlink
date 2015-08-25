@@ -1023,6 +1023,12 @@ nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
+" Fix an issue with nvim incorrectly parsing <c-h>
+" https://github.com/neovim/neovim/issues/2048#issuecomment-92776095
+if has('nvim')
+  nmap <bs> :<c-u>TmuxNavigateLeft<cr>
+endif
+
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
 " Make arrowkey do something usefull, resize the viewports accordingly
