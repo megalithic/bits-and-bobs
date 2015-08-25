@@ -963,7 +963,7 @@ vnoremap <leader>H :Gbrowse<cr>
 nnoremap <leader>gb :Gblame<cr>
 
 """"""" Ag / Ack
-" nnoremap <leader>a :Ack!<space>
+nnoremap <leader>a :Ack!<space>
 " immediately ag/ack/grep for word under cursor
 map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
 " vmap <leader>A :execute "Ack! " . S <CR>
