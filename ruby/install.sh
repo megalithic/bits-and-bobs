@@ -30,6 +30,7 @@ require_gem rubocop --no-rdoc --no-ri
 require_gem sass
 require_gem teamocil
 require_gem thin
+require_gem pygmentize
 require_gem mdless
 
 #Installing gems that need system ruby ...
