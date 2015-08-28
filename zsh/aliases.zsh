@@ -72,7 +72,7 @@ alias vimprofile="less ~/tmp/profile.log | sort -k 2"
 # alias vim="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim" # just wanna use neovim
 alias updatenvim="brew update; brew reinstall --HEAD neovim"
 alias nv="nvim"
-alias vim="nvim"
+# alias vim="nvim"
 
 ## - EDITS -----------------------------------------------
 alias ez="v ~/.zshrc"
