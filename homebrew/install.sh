@@ -96,6 +96,7 @@ require_brew git
 require_brew gist
 require_brew git-extras
 require_brew git-flow
+require_brew michaeldfallen/formula/git-radar
 # why is everyone still not using GPG?
 require_brew gnupg
 # Install GNU `sed`, overwriting the built-in `sed`

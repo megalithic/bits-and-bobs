@@ -91,7 +91,7 @@ bind -n C-l if-shell  "$is_vim" "send-keys C-l" "select-pane -R"
 bind    C-l send-keys 'C-l'
 
 # Fix for ctrl-h keybinding issues with nvim: https://github.com/neovim/neovim/issues/2048#issuecomment-98431886
-bind-key -n C-h send-keys Escape "[104;5u"
+# bind-key -n C-h send-keys Escape "[104;5u"
 
 # Vi-mode stuffs
 bind Escape copy-mode

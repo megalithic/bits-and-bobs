@@ -61,7 +61,7 @@ eval "$(hub alias -s)"
 
 # Use custom terminfo if exists (for neovim keybinding issues)
 # https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
-[[ -f "~/.dotfiles/zsh/$TERM.ti" ]] && tic ~/.dotfiles/zsh/$TERM.ti
+# [[ -f "~/.dotfiles/zsh/$TERM.ti" ]] && tic ~/.dotfiles/zsh/$TERM.ti
 
 # ===========================================================================
 # STOP!!!

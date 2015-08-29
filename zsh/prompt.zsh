@@ -22,6 +22,10 @@
 # \e8   => restore cursor position
 # \e[K  => clears everything after the cursor on the current line
 
+# Setup vcsprompt
+# https://github.com/yonchu/zsh-vcs-prompt
+ZSH_VCS_PROMPT_USING_PYTHON='true'
+ZSH_VCS_PROMPT_CONFLICTS_SIGIL='✖ '
 
 # turns seconds into human readable time
 # 165392 => 1d 21h 56m 32s
@@ -131,7 +135,8 @@ prompt_pure_preprompt_render() {
   local preprompt="%F{blue}$(prompt_format_pwd)%f"
 
 	# git info
-	preprompt+="%F{$git_color}%f$(vcs_super_info)%f${prompt_pure_git_dirty}%f"
+	# preprompt+="%F{$git_color}%f$(git-radar --zsh --fetch)%f"
+  preprompt+="%F{$git_color}%f$(vcs_super_info)%f"
   # preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 
   # git pull/push arrows
