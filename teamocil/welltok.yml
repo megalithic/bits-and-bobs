@@ -22,6 +22,8 @@ windows:
         - cd ~/code/welltok/cafewell
         - bundle
         - nvm use 0.12
+        - killport 5000 # kill moxy in case it's already running
+        - killport 3000 # kill thin/rails in case it's already running
         - be foreman start
   - name: "code"
     root: "~/code/"
