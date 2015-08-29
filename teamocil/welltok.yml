@@ -6,10 +6,10 @@ windows:
     panes:
       - commands:
         - cd ~/code/welltok/simpleton
-        - rails s -p7071
+        # - rails s -p7071
       - commands:
         - cd ~/code/welltok/hitman
-        - go run hitman.go --nosave
+        # - go run hitman.go --nosave
       - commands:
         - cd ~/code/welltok/achievement-service
         - nvm use
@@ -21,7 +21,7 @@ windows:
       - commands:
         - cd ~/code/welltok/cafewell
         - bundle
-        - nvm use
+        - nvm use 0.12
         - be foreman start
   - name: "code"
     root: "~/code/"

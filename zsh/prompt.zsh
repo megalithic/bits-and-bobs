@@ -22,10 +22,23 @@
 # \e8   => restore cursor position
 # \e[K  => clears everything after the cursor on the current line
 
-# Setup vcsprompt
+# Setup zsh-vcs-prompt
 # https://github.com/yonchu/zsh-vcs-prompt
 ZSH_VCS_PROMPT_USING_PYTHON='true'
 ZSH_VCS_PROMPT_CONFLICTS_SIGIL='✖ '
+ZSH_VCS_PROMPT_LOGGING_LEVEL=0
+
+# Setup zsh-git-prompt
+# https://github.com/olivierverdier/zsh-git-prompt
+# NOTE: the following have been moved into the lib itself:
+# ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
+# ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
+# ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{•%G%}"
+# ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{+%G%}"
+# ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
+# ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✓%G%}"
+# ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{×%G%}"
+# ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[gray]%}%{⚑%G%}"
 
 # turns seconds into human readable time
 # 165392 => 1d 21h 56m 32s
@@ -136,7 +149,8 @@ prompt_pure_preprompt_render() {
 
 	# git info
 	# preprompt+="%F{$git_color}%f$(git-radar --zsh --fetch)%f"
-  preprompt+="%F{$git_color}%f$(vcs_super_info)%f"
+  preprompt+="%F{$git_color}%f$(git_super_status)%f"
+  # preprompt+="%F{$git_color}%f$(vcs_super_info)%f"
   # preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 
   # git pull/push arrows
@@ -303,7 +317,8 @@ prompt_pure_setup() {
   zmodload zsh/zle # newly added
 	autoload -Uz add-zsh-hook
 	autoload -Uz vcs_info
-  autoload -Uz vcs_super_info
+  autoload -Uz git_super_status
+  # autoload -Uz vcs_super_info
 	autoload -Uz async && async
 
 	add-zsh-hook precmd prompt_pure_precmd

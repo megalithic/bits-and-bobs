@@ -281,7 +281,7 @@ function _zsh_vcs_prompt_precmd_hook_func() {
 
 function _zsh_vcs_prompt_update_vcs_status() {
     if [ -n "$ZSH_VCS_PROMPT_LOGGING_THRESHOLD_MICRO_SEC" ]; then
-        local start=$("$ZSH_VCS_PROMPT_DIR/lib/curret_time.pl")
+        local start=$("$ZSH_VCS_PROMPT_DIR/lib/current_time.pl")
     fi
 
     # Parse raw data.
@@ -380,7 +380,7 @@ function _zsh_vcs_prompt_update_vcs_status() {
 
     # Check running time.
     if [ -n "$ZSH_VCS_PROMPT_LOGGING_THRESHOLD_MICRO_SEC" ]; then
-        local end=$("$ZSH_VCS_PROMPT_DIR/lib/curret_time.pl")
+        local end=$("$ZSH_VCS_PROMPT_DIR/lib/current_time.pl")
         local elapse=$(($end - $start))
         if [ "$elapse" -gt "$ZSH_VCS_PROMPT_LOGGING_THRESHOLD_MICRO_SEC" ]; then
             elapse=$(_zsh_vcs_prompt_microsec2datetime "$elapse")
