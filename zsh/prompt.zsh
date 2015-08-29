@@ -22,6 +22,9 @@
 # \e8   => restore cursor position
 # \e[K  => clears everything after the cursor on the current line
 
+# Setup pure prompt
+# PURE_PROMPT_SYMBOL="⮚"
+
 # Setup zsh-vcs-prompt
 # https://github.com/yonchu/zsh-vcs-prompt
 ZSH_VCS_PROMPT_USING_PYTHON='true'
