@@ -417,7 +417,7 @@ runtime macros/matchit.vim
 """"" UI ====================================================================
 """"""" Theme / Terminal
 let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
-colorscheme base16-eighties
+colorscheme base16-3024
 set background=dark
 
 filetype plugin indent on
@@ -932,7 +932,7 @@ noremap <F5> :PlugUpdate<cr>
 map <F5> :PlugUpdate<cr>
 
 """"""" CTags
-noremap <F6> :!ctags -R<cr>
+" noremap <F6> :!ctags -R<cr>
 
 " For snippet_complete marker.
 if has('conceal')
