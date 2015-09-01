@@ -25,11 +25,11 @@ windows:
         - killport 5000 # kill moxy in case it's already running
         - killport 3000 # kill thin/rails in case it's already running
         - be foreman start
-  - name: "code"
-    root: "~/code/"
-    panes:
-      - ls
   - name: "chats"
     root: "~"
     panes:
       - irc
+  - name: "code"
+    root: "~/code/"
+    panes:
+      - ls
