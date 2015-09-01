@@ -465,7 +465,7 @@ set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
 set noerrorbells
 set novisualbell
-set number
+set number "relativenumber / number
 set splitbelow
 set laststatus=2 " so we always get airline displaying / always show status
 set noshowmode
