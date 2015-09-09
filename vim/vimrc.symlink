@@ -154,28 +154,17 @@ function! LoadPlugs()
       return lightline#statusline(0)
     endfunction
 
-    " FIXME
-    " ENABLE these if you want filetype-specific checking on load
-    " augroup AutoSyntastic
-    "   autocmd!
-    "   autocmd BufWritePost *.jsx,*.js,*.json,*.rb,*.coffee call s:syntastic()
-    " augroup END
-    " function! s:syntastic()
-    "   SyntasticCheck
-    "   call lightline#update()
-    " endfunction
-
     let g:unite_force_overwrite_statusline = 0
     let g:vimfiler_force_overwrite_statusline = 0
     let g:vimshell_force_overwrite_statusline = 0
   Plug 'ngmy/vim-rubocop'
   Plug 'scrooloose/syntastic'
-    let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.jshintrc'
+    let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.eslintrc'
     let g:syntastic_enable_signs = 1 " slow downs
     let g:syntastic_check_on_open = 0 " slow downs
     let g:syntastic_disabled_filetypes = ['html', 'rst', 'java', 'md', 'markdown']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
-    let g:syntastic_jsl_conf = '$HOME/.jshintrc'
+    let g:syntastic_jsl_conf = '$HOME/.eslintrc'
     let g:syntastic_javascript_checkers = ['standard']
     let g:syntastic_haml_checkers = ['haml_lint']
     let g:syntastic_ruby_checkers = ['rubocop']
@@ -970,7 +959,6 @@ nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>a :Ack!<space>
 " immediately ag/ack/grep for word under cursor
 map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
-" vmap <leader>A :execute "Ack! " . S <CR>
 
 """""" Testing (vroom, mocha, karma, etc)
 au FileType ruby silent! map <unique> <Leader>t :VroomRunTestFile<CR>
@@ -1084,6 +1072,11 @@ nnoremap Y y$
 vmap <silent><leader>y "xy
 map <silent><leader>p "xp
 vmap <silent> <expr> p <sid>Repl()
+
+" Go to end of text you've just pasted
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
 
 """"""" ESC rebindings
 inoremap <F1> <ESC>
