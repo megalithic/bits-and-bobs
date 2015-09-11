@@ -816,6 +816,9 @@ augroup filetypes
   autocmd BufNewFile,BufRead *.less set filetype=less
   autocmd BufNewFile,BufRead *.scss set filetype=sass
 
+  autocmd BufNewFile,BufRead */ssh/config  setf sshconfig
+  autocmd BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
+
   " load rainbow parens
   autocmd FileType js,jsx,css,scss,sass,less,json call rainbow#load()
 
