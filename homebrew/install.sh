@@ -197,6 +197,7 @@ if [[ $response =~ ^(y|yes|Y) ]];then
   require_cask 1password
   require_cask alfred
   brew cask alfred link
+  require_cask alternote
   require_cask beardedspice
   require_cask bettertouchtool
   require_cask box-sync
