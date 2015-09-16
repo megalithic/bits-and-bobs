@@ -174,7 +174,7 @@ require_brew tig
 require_brew tmate
 require_brew tmux
 require_brew tree
-brew install vim --with-lua --with-perl --with-python3 --with-python --with-ruby --override-system-vi --with-luajit --override-system-vim
+brew install vim --with-lua --with-perl --with-python3 --with-python --with-ruby --override-system-vi --with-luajit --override-system-vim --with-clientserver
 
 brew install macvim --with-lua --with-perl --with-python3 --with-python --with-ruby --custom-icons --with-luajit # --override-system-vim
 require_brew link macvim
