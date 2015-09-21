@@ -10,7 +10,7 @@ windows:
         - npm run dev
       - commands:
         - cd ~/code/welltok
-        # - go run hitman.go --nosave
+        - docker ps
       - commands:
         - cd ~/code/welltok/achievement-service
         - nvm use
