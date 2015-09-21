@@ -5,10 +5,11 @@ windows:
     layout: tiled
     panes:
       - commands:
-        - cd ~/code/welltok/simpleton
-        # - rails s -p7071
+        - cd ~/code/welltok/currency-service
+        - nvm use
+        - npm run dev
       - commands:
-        - cd ~/code/welltok/hitman
+        - cd ~/code/welltok
         # - go run hitman.go --nosave
       - commands:
         - cd ~/code/welltok/achievement-service
@@ -21,7 +22,7 @@ windows:
       - commands:
         - cd ~/code/welltok/cafewell
         - bundle
-        - nvm use 0.12
+        - nvm use
         - killport 5000 # kill moxy in case it's already running
         - killport 3000 # kill thin/rails in case it's already running
         - be foreman start
