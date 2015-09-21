@@ -206,6 +206,7 @@ function! LoadPlugs()
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-dispatch'
+  Plug 'romainl/vim-qf'
   Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1
     let g:vroom_map_keys = 0
@@ -233,13 +234,9 @@ function! LoadPlugs()
   Plug 'tpope/vim-markdown', {'for': ['markdown','md','mdown']}
     let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
     let g:vim_markdown_frontmatter=1
-    autocmd BufNewFile,BufReadPost *.md,*.markdown,*.mdown set filetype=markdown
-    autocmd FileType markdown set tw=80
   Plug 'suan/vim-instant-markdown'
     let g:instant_markdown_slow = 1
     let g:instant_markdown_autostart = 0
-    " FIXME
-    " autocmd BufWritePost *.md,*.markdown,*.mdown call InstantMarkdownPreview()
 
   """"""" CSS/SCSS/LESS/Preprocessors
   Plug 'groenewege/vim-less', { 'for': 'less' }
@@ -266,7 +263,7 @@ function! LoadPlugs()
     let g:jsx_pragma_required = 0
   Plug 'burnettk/vim-angular', { 'for': 'javascript' }
   Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
-    let g:mocha_js_command = "!mocha --compilers js:babel/register {spec}"
+    let g:mocha_js_command = "!./node_modules/.bin/mocha --compilers js:babel/register {spec}"
   Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
   Plug 'sidorares/node-vim-debugger', { 'for': 'javascript' }
@@ -806,9 +803,9 @@ augroup filetypes
   autocmd!
 
   " Markdown turn off lazyredraw
-  autocmd BufNewFile,BufReadPost *.md,*.mdown,*.markdown set nolazyredraw filetype=markdown
-  autocmd BufNewFile,BufReadPost *.md,*.mdown,*.markdown set filetype=markdown
+  autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
   autocmd FileType markdown set tw=80
+  autocmd BufWritePost *.{md,mdwn,mkd,mkdn,mark*} InstantMarkdownPreview
 
   " filetype
   autocmd BufNewFile,BufRead *.json set filetype=json

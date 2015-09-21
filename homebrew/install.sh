@@ -66,6 +66,7 @@ require_brew findutils
 #install bash-completion
 
 require_brew ack
+require_brew autoenv
 require_brew battery
 
 require_brew chromedriver
