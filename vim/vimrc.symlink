@@ -159,20 +159,18 @@ function! LoadPlugs()
     let g:vimshell_force_overwrite_statusline = 0
   Plug 'ngmy/vim-rubocop'
   Plug 'scrooloose/syntastic'
-    let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.eslintrc'
+    " let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.eslintrc'
     let g:syntastic_enable_signs = 1 " slow downs
     let g:syntastic_check_on_open = 0 " slow downs
     let g:syntastic_disabled_filetypes = ['html', 'rst', 'java', 'md', 'markdown']
     let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
-    let g:syntastic_jsl_conf = '$HOME/.eslintrc'
     let g:syntastic_javascript_checkers = ['standard']
     let g:syntastic_haml_checkers = ['haml_lint']
     let g:syntastic_ruby_checkers = ['rubocop']
     let g:syntastic_scss_checkers = ['scss_lint']
-    let g:syntastic_error_symbol='✖' "
+    let g:syntastic_error_symbol='✖'
     let g:syntastic_warning_symbol='⚑'
     let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-    let g:syntastic_javascript_jshint_exec = '/usr/local/bin/jshint'
     let g:syntastic_quiet_messages = { "type": "style" }
     let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
     let g:syntastic_always_populate_loc_list = 1 " Always add any detected errors into the location list
@@ -194,7 +192,8 @@ function! LoadPlugs()
     let NERDTreeWinSize=20
 
   """"" Utilities ===========================================================
-  Plug 'tomtom/tcomment_vim'
+  " Plug 'tomtom/tcomment_vim'
+  Plug 'tpope/vim-commentary'
   Plug 'sickill/vim-pasta'
   Plug 'zaiste/tmux.vim'
   Plug 'haya14busa/incsearch.vim'
@@ -258,7 +257,7 @@ function! LoadPlugs()
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'lukaszb/vim-web-indent'
   Plug 'Shutnik/jshint2.vim', { 'on': 'JSHint' }
-  Plug 'mxw/vim-jsx', { 'for': 'jsx' }
+  Plug 'mxw/vim-jsx', { 'for': 'javascript' }
     let g:jsx_ext_required = 0
     let g:jsx_pragma_required = 0
   Plug 'burnettk/vim-angular', { 'for': 'javascript' }
@@ -912,9 +911,11 @@ let g:ctrlp_cmd = 'CtrlP'
 """"""" Nerdtree
 nnoremap <F2> :NERDTreeToggle . <cr>
 
-""""""" Tcomment
-nmap <leader>c :TComment<cr>
-vmap <leader>c :TComment<cr>
+""""""" Commenting
+" nmap <leader>c :TComment<cr>
+" vmap <leader>c :TComment<cr>
+nmap <leader>c :Commentary<cr>
+vmap <leader>c :Commentary<cr>
 
 """"""" Vundle
 noremap <F5> :PlugUpdate<cr>
