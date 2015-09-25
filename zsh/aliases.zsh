@@ -156,6 +156,8 @@ alias ip="ifconfig"
 alias get="curl -OL"
 alias g="grep -r -i --color='auto'"
 alias irc="weechat-curses"
+alias weechat="weechat-curses"
+alias eechat="weechat-curses"
 alias rc=irc
 alias ip="ipconfig getifaddr"
 alias clr=clear
