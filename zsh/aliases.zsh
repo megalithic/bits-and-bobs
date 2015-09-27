@@ -40,7 +40,7 @@ alias takeover="tmux detach -a"
 alias teama="tmux attach-session -t default"
 alias team="cd ~ && teamocil --here default"
 alias toka="tmux attach-session -t welltok"
-alias tok="cd ~ && teamocil --here welltok"
+alias tok="cd ~; teamocil --here welltok"
 
 ## - ag/ack/grep/fzf --------------------------------------
 # https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents

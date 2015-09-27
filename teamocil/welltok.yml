@@ -28,8 +28,9 @@ windows:
         - be foreman start
   - name: "chats"
     root: "~"
+    focus: true
     panes:
-      - irc
+      - weechat-curses
   - name: "code"
     root: "~/code/"
     panes:
