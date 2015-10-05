@@ -1,26 +1,26 @@
 name: "welltok"
 windows:
   - name: "services"
-    root: "~/code/"
+    root: "~/code/welltok"
     layout: tiled
     panes:
       - commands:
-        - cd ~/code/welltok/currency-service
+        - cd currency-service
         - nvm use
         - npm run dev
       - commands:
-        - cd ~/code/welltok
+        - cd welltok
         - docker ps
       - commands:
-        - cd ~/code/welltok/achievement-service
+        - cd achievement-service
         - nvm use
         - npm run dev
       - commands:
-        - cd ~/code/welltok/munero
+        - cd munero
         - nvm use
         - npm run dev
       - commands:
-        - cd ~/code/welltok/cafewell
+        - cd cafewell
         - bundle
         - nvm use
         - killport 5000 # kill moxy in case it's already running
@@ -32,6 +32,6 @@ windows:
     panes:
       - weechat-curses
   - name: "code"
-    root: "~/code/"
+    root: "~/code/welltok"
     panes:
       - ls
