@@ -62,6 +62,11 @@ eval "$(hub alias -s)"
 # always launch docker dev env
 eval $(docker-machine env dev)
 
+# load base16 eighties shell colors
+# https://raw.githubusercontent.com/chriskempson/base16-shell/master/base16-eighties.dark.sh
+BASE16_SHELL="$HOME/.dotfiles/zsh/base16-eighties.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
 # Use custom terminfo if exists (for neovim keybinding issues)
 # https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 # [[ -f "~/.dotfiles/zsh/$TERM.ti" ]] && tic ~/.dotfiles/zsh/$TERM.ti

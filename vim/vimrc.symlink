@@ -1188,6 +1188,10 @@ nnoremap j gj
 nnoremap k gk
 
 
+" VOLTRON.JS
+" Run `npm run build` from a JS or SCSS file
+au FileType *.{scss,js,jsx} nnoremap <leader>b :Dispatch npm run build<cr>
+
 " =============================================================================
 " Abbreviations #abbrev
 " These are insert-mode abbreviations
