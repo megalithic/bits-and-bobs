@@ -45,139 +45,42 @@ function! LoadPlugs()
     let g:golden_ratio_ignore_horizontal_splits = 1
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
-  Plug 'itchyny/lightline.vim'
-    let g:lightline = {
-          \ 'colorscheme': 'wombat',
-          \ 'active': {
-          \   'left': [ [ 'mode', 'paste' ], [ 'fugitive' ], [ 'filename' ], ['ctrlpmark'] ],
-          \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
-          \ },
-          \ 'component_function': {
-          \   'fugitive': 'MyFugitive',
-          \   'filename': 'MyFilename',
-          \   'fileformat': 'MyFileformat',
-          \   'filetype': 'MyFiletype',
-          \   'fileencoding': 'MyFileencoding',
-          \   'mode': 'MyMode',
-          \ },
-          \ 'component_expand': {
-          \   'syntastic': 'SyntasticStatuslineFlag',
-          \ },
-          \ 'component_type': {
-          \   'syntastic': 'error',
-          \ },
-          \ 'separator': { 'left': '', 'right': '' },
-          \ 'subseparator': { 'left': '', 'right': '' }
-          \ }
 
-    function! MyModified()
-      return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '✭' : &modifiable ? '' : '-'
-    endfunction
+  Plug 'bling/vim-airline'
+    let g:airline#extensions#branch#enabled = 1
+    let g:airline#extensions#syntastic#enabled = 1
+    let g:airline_theme='bubblegum'
 
-    function! MyReadonly()
-      return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '⭤' : ''
-    endfunction
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
+    let g:airline_left_sep = ''
+    let g:airline_left_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_symbols.linenr = '␊'
+    let g:airline_symbols.linenr = '␤'
+    let g:airline_symbols.linenr = '¶'
+    let g:airline_symbols.branch = '⭠'
+    let g:airline_symbols.readonly = '⭤'
+    let g:airline_symbols.paste = 'ρ'
+    let g:airline_symbols.paste = 'Þ'
+    let g:airline_symbols.paste = '∥'
+    let g:airline_symbols.whitespace = 'Ξ'
+    let g:airline_symbols.modified = '✭'
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#enabled = 0
+    let g:airline_mode_map = {
+        \ 'n' : 'NORMAL',
+        \ 'i' : 'INSERT',
+        \ 'R' : 'REPLACE',
+        \ 'v' : 'VISUAL',
+        \ 'V' : 'V-LINE',
+        \ 'c' : 'CMD   ',
+        \ '': 'V-BLCK',
+        \ }
 
-    function! MyFilename()
-      let fname = expand('%f%m') " expand('%:t')
-      return fname == '__Tagbar__' ? g:lightline.fname :
-            \ fname =~ '__Gundo\|NERD_tree' ? '' :
-            \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-            \ ('' != fname ? fname : '[No Name]') .
-            \ ('' != MyModified() ? ' ' . MyModified() : '')
-    endfunction
-
-    function! MyFugitive()
-      try
-        if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-          let mark = ''  " edit here for cool mark
-          let _ = fugitive#head()
-          return strlen(_) ? '⭠ '._ : ''
-        endif
-      catch
-      endtry
-      return ''
-    endfunction
-
-    function! MyFileformat()
-      return winwidth(0) > 70 ? &fileformat : ''
-    endfunction
-
-    function! MyFiletype()
-      return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-    endfunction
-
-    function! MyFileencoding()
-      return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-    endfunction
-
-    function! MyMode()
-      let fname = expand('%:t')
-      return fname == '__Tagbar__' ? 'Tagbar' :
-            \ fname =~ 'NERD_tree' ? 'NERDTree' :
-            \ &ft == 'vimfiler' ? 'VimFiler' :
-            \ &ft == 'vimshell' ? 'VimShell' :
-            \ winwidth(0) > 60 ? lightline#mode() : ''
-    endfunction
-
-    function! CtrlPMark()
-      if expand('%:t') =~ 'ControlP'
-        call lightline#link('iR'[g:lightline.ctrlp_regex])
-        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-              \ , g:lightline.ctrlp_next], 0)
-      else
-        return ''
-      endif
-    endfunction
-
-    let g:ctrlp_status_func = {
-      \ 'main': 'CtrlPStatusFunc_1',
-      \ 'prog': 'CtrlPStatusFunc_2',
-      \ }
-
-    function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-      let g:lightline.ctrlp_regex = a:regex
-      let g:lightline.ctrlp_prev = a:prev
-      let g:lightline.ctrlp_item = a:item
-      let g:lightline.ctrlp_next = a:next
-      return lightline#statusline(0)
-    endfunction
-
-    function! CtrlPStatusFunc_2(str)
-      return lightline#statusline(0)
-    endfunction
-
-    let g:tagbar_status_func = 'TagbarStatusFunc'
-
-    function! TagbarStatusFunc(current, sort, fname, ...) abort
-        let g:lightline.fname = a:fname
-      return lightline#statusline(0)
-    endfunction
-
-    let g:unite_force_overwrite_statusline = 0
-    let g:vimfiler_force_overwrite_statusline = 0
-    let g:vimshell_force_overwrite_statusline = 0
   Plug 'ngmy/vim-rubocop'
-  Plug 'scrooloose/syntastic'
-    " let g:syntastic_javascript_jshint_args = '--config ' . $HOME . '/.eslintrc'
-    let g:syntastic_enable_signs = 1 " slow downs
-    let g:syntastic_check_on_open = 0 " slow downs
-    let g:syntastic_disabled_filetypes = ['html', 'rst', 'java', 'md', 'markdown']
-    let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
-    let g:syntastic_javascript_checkers = ['standard']
-    let g:syntastic_haml_checkers = ['haml_lint']
-    let g:syntastic_ruby_checkers = ['rubocop']
-    let g:syntastic_scss_checkers = ['scss_lint']
-    let g:syntastic_error_symbol='✖'
-    let g:syntastic_warning_symbol='⚑'
-    let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-    let g:syntastic_quiet_messages = { "type": "style" }
-    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
-    let g:syntastic_always_populate_loc_list = 1 " Always add any detected errors into the location list
-    let g:syntastic_auto_loc_list = 2 " Don't auto-open it when errors/warnings are detected, but auto-close when no more errors/warnings are detected.
-    let g:syntastic_enable_highlighting = 1 " Highlight syntax errors where possible
-    let g:syntastic_loc_list_height = 5 " Show this many errors/warnings at a time in the location list
-    let g:syntastic_check_on_wq = 0 " Don't run checkers when saving and quitting--only on saving
   Plug 'luochen1990/rainbow'
     let g:rainbow_conf = {
       \ 'separately' : { 'agsv' : 0 }
@@ -804,7 +707,7 @@ augroup filetypes
   " Markdown turn off lazyredraw
   autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
   autocmd FileType markdown set tw=80
-  autocmd BufWritePost *.{md,mdwn,mkd,mkdn,mark*} InstantMarkdownPreview
+  " autocmd BufWritePost *.{md,mdwn,mkd,mkdn,mark*} InstantMarkdownPreview " automagically do a thing with your markdown file
 
   " filetype
   autocmd BufNewFile,BufRead *.json set filetype=json
