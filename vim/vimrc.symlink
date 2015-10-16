@@ -81,6 +81,12 @@ function! LoadPlugs()
         \ }
 
   Plug 'ngmy/vim-rubocop'
+  Plug 'benekastah/neomake'
+    let g:neomake_javascript_standard_maker = {
+        \ 'args': ['--verbose'],
+        \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+        \ }
+    let g:neomake_javascript_enabled_makers = ['standard']
   Plug 'luochen1990/rainbow'
     let g:rainbow_conf = {
       \ 'separately' : { 'agsv' : 0 }
@@ -661,6 +667,9 @@ augroup END
 " Delete trailing whitespace on write
 autocmd BufWrite * silent call DeleteTrailingWS()
 
+" Auto lint on buffer write
+autocmd! BufWritePost * Neomake
+
 " Resize splits when the window is resized
 autocmd VimResized * :wincmd =
 
@@ -920,10 +929,10 @@ nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 " Fix an issue with nvim incorrectly parsing <c-h>
-" https://github.com/neovim/neovim/issues/2048#issuecomment-92776095
-" if has('nvim')
-"   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
-" endif
+" https://github.com/christoomey/vim-tmux-navigator/issues/71#issuecomment-148557514
+" Run the following in ~:
+" infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+" tic $TERM.ti
 
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
