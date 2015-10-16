@@ -824,8 +824,6 @@ let g:ctrlp_cmd = 'CtrlP'
 nnoremap <F2> :NERDTreeToggle . <cr>
 
 """"""" Commenting
-" nmap <leader>c :TComment<cr>
-" vmap <leader>c :TComment<cr>
 nmap <leader>c :Commentary<cr>
 vmap <leader>c :Commentary<cr>
 
@@ -882,6 +880,10 @@ au FileType javascript silent! map <unique> <Leader>t :call RunCurrentSpecFile()
 au FileType javascript silent! map <unique> <Leader>T :call RunNearestSpec()<CR>
 au FileType javascript silent! map <unique> <Leader>l :call RunLastSpec()<CR>
 au FileType javascript silent! map <unique> <Leader>a :call RunAllSpecs()<CR>
+
+""""""" VOLTRON.JS
+" Run `npm run build` from a JS or SCSS file
+au FileType *.{scss,js,jsx} nnoremap <leader>b :Dispatch npm run build<cr>
 
 """"""" Gist/Github
 " Send visual selection to gist.github.com as a private, filetyped Gist

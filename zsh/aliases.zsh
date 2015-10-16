@@ -9,7 +9,6 @@ alias dirs="ls *(/)"
 alias ff="ffind -S"
 alias f="ffind"
 alias files="find . -type f | wc -l"
-alias a="ack"
 alias new="print -rl -- **/*(Dom[1,5])"
 
 # grc overides for ls
