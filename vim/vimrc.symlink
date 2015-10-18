@@ -200,7 +200,7 @@ function! LoadPlugs()
       \ ]
 
   " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-  "   set rtp+=/usr/local/Cellar/fzf/0.10.2
+  "   set rtp+=/usr/local/opt/fzf
   " Plug 'junegunn/fzf.vim'
   "   if has('nvim')
   "     let $FZF_DEFAULT_OPTS .= ' --inline-info'

@@ -11,8 +11,8 @@ bot "NVM versions..."
 require_nvm stable
 require_nvm 0.10
 require_nvm 0.12
-nvm alias default 0.12
 require_nvm iojs
+nvm alias default stable
 
 ###############################################################################
 bot "NPM Globals..."
@@ -35,6 +35,7 @@ require_npm eslint-plugin-smells
 require_npm eslint-plugin-html
 require_npm eslint-plugin-jasmine
 require_npm eslint-plugin-angularrules
+require_npm fkill-cli
 require_npm gulp
 require_npm hicat
 require_npm instant-markdown-d
