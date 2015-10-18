@@ -1,4 +1,12 @@
 #!/usr/bin/bash
+#
+# There are different zsh shell modes, and files that manage those:
+#
+# .zshenv: (always) <-- vim responds to stuff in here
+# .zprofile: [[ -o login ]]
+# .zshrc: [[ -o interactive ]]
+# .zlogin: [[ -o login ]]
+#
 
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles

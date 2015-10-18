@@ -118,7 +118,7 @@ function! LoadPlugs()
   Plug 'editorconfig/editorconfig-vim'
   Plug 'janko-m/vim-test'
     let g:mocha_js_command = "!./node_modules/.bin/mocha --compilers js:babel/register {spec}"
-    let test#strategy = "iterm"
+    let test#strategy = "neovim"
   Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1
     let g:vroom_map_keys = 0
@@ -226,7 +226,7 @@ function! LoadPlugs()
     let g:ctrlp_max_height = 20            " restrict match list to a maxheight of 40
     let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
     let g:ctrlp_max_files = 0              " no restriction on results/file list
-    let g:ctrlp_working_path_mode = ''
+    let g:ctrlp_working_path_mode = 0
     let g:ctrlp_custom_ignore = {
         \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
         \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
@@ -509,10 +509,6 @@ endif
 """"""" Neovim
 if has('nvim')
   runtime! python_setup.vim
-endif
-
-if has('nvim')
-  " set unnamedclip
 endif
 
 " Neovim copy/paste support from system clipboard
