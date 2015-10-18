@@ -60,7 +60,7 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(hub alias -s)"
 
 # always launch docker dev env
-eval $(docker-machine env dev)
+# eval $(docker-machine env dev)
 
 # Use custom terminfo if exists (for neovim keybinding issues)
 # https://github.com/neovim/neovim/issues/2048#issuecomment-78045837

@@ -667,8 +667,9 @@ augroup END
 " Delete trailing whitespace on write
 autocmd BufWrite * silent call DeleteTrailingWS()
 
-" Auto lint on buffer write
+" Auto lint on buffer write and enter
 autocmd! BufWritePost * Neomake
+autocmd! BufEnter * Neomake
 
 " Resize splits when the window is resized
 autocmd VimResized * :wincmd =
