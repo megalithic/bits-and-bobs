@@ -10,6 +10,8 @@ windows:
         - npm run dev
       - commands:
         - cd welltok
+        - docker-machine start dev
+        - eval $(docker-machine env dev)
         - docker ps
       - commands:
         - cd achievement-service
