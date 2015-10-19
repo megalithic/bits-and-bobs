@@ -5,16 +5,15 @@ NOW_PLAYING=$(osascript <<EOF
   tell application "Radiant Player"
     set artist to current song artist
     set track to current song name
-    set trackUrl to current song url
-    set playerState to player state
+    set state to player state
 
-    if playerState is 1 then
+    if state is 1 then
       -- paused
       return "#[fg=colour240] ♫ - paused #[fg=default]"
-    else if playerState is 2 then
+    else if state is 2 then
       -- playing
       return "#[fg=red] ♫ " & track & " - " & artist & "#[fg=default]"
-    else if playerState is 0 then
+    else if state is 0 then
       -- stopped
       return ""
     end if
