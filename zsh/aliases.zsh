@@ -30,6 +30,7 @@ alias pkey="pbcopy < ~/.ssh/id_rsa.pub"
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 alias unixts="date +%s"
 alias xit="exit"
+alias please='sudo $(fc -ln -1)'
 
 
 ## - TMUX -------------------------------------------------
