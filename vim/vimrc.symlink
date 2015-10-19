@@ -54,6 +54,7 @@ function! LoadPlugs()
     if !exists('g:airline_symbols')
       let g:airline_symbols = {}
     endif
+    let g:airline_symbols.space = "\ua0"
     let g:airline_left_sep = ''
     let g:airline_left_sep = ''
     let g:airline_right_sep = ''
@@ -68,7 +69,7 @@ function! LoadPlugs()
     let g:airline_symbols.paste = '∥'
     let g:airline_symbols.whitespace = 'Ξ'
     let g:airline_symbols.modified = '✭'
-    let g:airline_powerline_fonts = 1
+    let g:airline_powerline_fonts = 0
     let g:airline#extensions#tabline#enabled = 0
     let g:airline_mode_map = {
         \ 'n' : 'NORMAL',
@@ -118,6 +119,7 @@ function! LoadPlugs()
   Plug 'editorconfig/editorconfig-vim'
   Plug 'janko-m/vim-test'
     let test#strategy = "neovim"
+    let test#javascript#mocha#options = '--compilers js:babel/register'
   Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1
     let g:vroom_map_keys = 0
@@ -735,9 +737,6 @@ augroup filetypes
 
   " load rainbow parens
   autocmd FileType js,jsx,css,scss,sass,less,json call rainbow#load()
-
-  " autocmd BufNewFile,BufRead,BufWritePost *[Ss]pec*js,*SpecHelper*js set filetype=jasmine.javascript syntax=jasmine
-  " autocmd BufNewFile,BufRead,BufWritePost *.test.js set filetype=mocha.javascript syntax=mocha
 
   " Enable omnicomplete for supported filetypes
   autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
