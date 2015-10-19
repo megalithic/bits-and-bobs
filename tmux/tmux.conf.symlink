@@ -103,7 +103,7 @@ bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
 # Tmux status bar settings
 set-option -g status on
-set-option -g status-interval 5
+set-option -g status-interval 3
 set-option -g status-utf8 on
 set-option -g status-justify "centre" #don't change this spelling
 set-option -g status-position top
