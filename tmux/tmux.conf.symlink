@@ -90,30 +90,24 @@ bind -n C-k if-shell  "$is_vim" "send-keys C-k" "select-pane -U"
 bind -n C-l if-shell  "$is_vim" "send-keys C-l" "select-pane -R"
 bind    C-l send-keys 'C-l'
 
-# Fix for ctrl-h keybinding issues with nvim: https://github.com/neovim/neovim/issues/2048#issuecomment-98431886
-# bind-key -n C-h send-keys Escape "[104;5u"
 
 # Vi-mode stuffs
 bind Escape copy-mode
 
-# Breaks my cmd+{ keybinding behavior
-# unbind p
-# bind p paste-buffer
-
-# Use vim keybindings in copy mode
+# Use vim keybindings
 setw -g mode-keys vi
 
-# Setup 'v' to begin selection as in Vim
+# Setup 'v' to being selection as in vim
 bind-key -t vi-copy v begin-selection
 bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
 
-# Update default binding of `Enter` to also use copy-pipe
+# Update default binding of 'Enter' to also use copy-pipe
 unbind -t vi-copy Enter
 bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
 # Tmux status bar settings
 set-option -g status on
-set-option -g status-interval 2
+set-option -g status-interval 5
 set-option -g status-utf8 on
 set-option -g status-justify "centre" #don't change this spelling
 set-option -g status-position top
