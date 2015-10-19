@@ -117,7 +117,6 @@ function! LoadPlugs()
   Plug 'romainl/vim-qf'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'janko-m/vim-test'
-    let g:mocha_js_command = "!./node_modules/.bin/mocha --compilers js:babel/register {spec}"
     let test#strategy = "neovim"
   Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1
@@ -176,8 +175,8 @@ function! LoadPlugs()
     let g:jsx_ext_required = 0
     let g:jsx_pragma_required = 0
   Plug 'burnettk/vim-angular', { 'for': 'javascript' }
-  " Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
-    " let g:mocha_js_command = "!./node_modules/.bin/mocha --compilers js:babel/register {spec}"
+  Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
+    let g:mocha_js_command = '!./node_modules/.bin/mocha --compilers js:babel/register {spec}'
   Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
   Plug 'sidorares/node-vim-debugger', { 'for': 'javascript' }
@@ -658,11 +657,12 @@ if exists('+colorcolumn')
   augroup END
 endif
 
-augroup ReturnToLastEditedLineGroup
+augroup RestoreCursorPosition
   autocmd!
   autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \     execute 'normal! g`"zvzz' |
+    \   execute 'normal! g`"zvzz' |
+    " \   execute 'normal g`\"' |
     \ endif
 augroup END
 
@@ -877,22 +877,21 @@ nnoremap <leader>a :Ack!<space>
 " immediately ag/ack/grep for word under cursor
 map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
 
-"""""" Testing (vroom, mocha, karma, etc)
-" au FileType ruby silent! map <unique> <Leader>t :VroomRunTestFile<CR>
-" au FileType ruby silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
-" au FileType ruby silent! map <unique> <Leader>l :VroomRunLastTest<CR>
+"""""" Testing vim-test
+" nmap <silent> <leader>t :TestNearest<CR>
+" nmap <silent> <leader>T :TestFile<CR>
+" nmap <silent> <leader>a :TestSuite<CR>
+" nmap <silent> <leader>l :TestLast<CR>
+" nmap <silent> <leader>g :TestVisit<CR>
 
-" au FileType javascript silent! map <unique> <Leader>t :call RunCurrentSpecFile()<CR>
-" au FileType javascript silent! map <unique> <Leader>T :call RunNearestSpec()<CR>
-" au FileType javascript silent! map <unique> <Leader>l :call RunLastSpec()<CR>
-" au FileType javascript silent! map <unique> <Leader>a :call RunAllSpecs()<CR>
-
-"""""" Testing vim-test(vroom, mocha, karma, etc)
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+"""""" Testing (vroom/ruby, mocha, karma, etc)
+au FileType ruby silent! map <unique> <Leader>t :VroomRunTestFile<CR>
+au FileType ruby silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
+au FileType ruby silent! map <unique> <Leader>l :VroomRunLastTest<CR>
+au FileType javascript silent! map <unique> <Leader>t :call RunCurrentSpecFile()<CR>
+au FileType javascript silent! map <unique> <Leader>T :call RunNearestSpec()<CR>
+au FileType javascript silent! map <unique> <Leader>l :call RunLastSpec()<CR>
+au FileType javascript silent! map <unique> <Leader>a :call RunAllSpecs()<CR>
 
 """"""" VOLTRON.JS
 " Run `npm run build` from a JS or SCSS file
