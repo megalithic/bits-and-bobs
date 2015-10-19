@@ -21,6 +21,7 @@ bot "NPM Globals..."
 require_npm ampersand
 require_npm babel
 require_npm babel-eslint
+require_npm bible
 require_npm bower
 require_npm brunch
 require_npm browserify
