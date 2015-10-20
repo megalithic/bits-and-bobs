@@ -9,9 +9,6 @@ unbind C-b
 set -g prefix C-a
 bind C-a send-prefix
 
-# Mouse support
-set-option -g mouse on
-
 set -g history-limit 100000
 
 # tmate stuffs
