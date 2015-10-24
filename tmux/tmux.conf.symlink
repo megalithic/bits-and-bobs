@@ -82,7 +82,8 @@ bind -n C-j if-shell  "$is_vim" "send-keys C-j" "select-pane -D"
 bind -n C-k if-shell  "$is_vim" "send-keys C-k" "select-pane -U"
 bind -n C-l if-shell  "$is_vim" "send-keys C-l" "select-pane -R"
 bind    C-l send-keys 'C-l'
-
+# TODO: thieve these keybindings from @kaldrenon, may fix your ctrl-h issue with nvim:
+# https://gist.github.com/kaldrenon/d8cfe7da05c6960a67fc
 
 # Vi-mode stuffs
 bind Escape copy-mode
