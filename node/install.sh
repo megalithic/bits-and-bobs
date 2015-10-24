@@ -53,6 +53,7 @@ require_npm node-inspector
 require_npm prettyjson
 require_npm speed-test
 require_npm standard
+require_npm snazzy
 require_npm traceur
 require_npm trash # https://github.com/sindresorhus/trash
 require_npm webpack

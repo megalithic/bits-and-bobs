@@ -84,11 +84,7 @@ function! LoadPlugs()
         \ }
 
   Plug 'ngmy/vim-rubocop'
-  Plug 'benekastah/neomake'
-    let g:neomake_javascript_standard_maker = {
-        \ 'args': ['--verbose'],
-        \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-        \ }
+  Plug 'benekastah/neomake', { 'on': ['Neomake'] }
     let g:neomake_javascript_enabled_makers = ['standard']
   Plug 'luochen1990/rainbow'
     let g:rainbow_conf = {
@@ -115,13 +111,18 @@ function! LoadPlugs()
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch' " unix shell commands for vim
   Plug 'tpope/vim-surround'
+    " - {Visual}S<arg> surrounds selection
+    " - cs/ds<arg1><arg2> change / delete
+    " - ys<obj><arg> surrounds text object
+    " - yss<arg> for entire line
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-dispatch'
   Plug 'romainl/vim-qf'
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'janko-m/vim-test'
+  Plug 'janko-m/vim-test', { 'for': 'javascript' }
     let test#strategy = "neovim"
     let test#javascript#mocha#options = '--compilers js:babel/register'
+    let test#javascript#mocha#file_pattern = '.test.js'
   Plug 'skalnik/vim-vroom'
     let g:vroom_use_colors=1
     let g:vroom_map_keys = 0
@@ -153,11 +154,12 @@ function! LoadPlugs()
     let g:instant_markdown_slow = 1
     let g:instant_markdown_autostart = 0
 
-  """"""" CSS/SCSS/LESS/Preprocessors
+  """"""" CSS/SCSS/LESS
   Plug 'groenewege/vim-less', { 'for': 'less' }
   Plug 'aaronjensen/vim-sass-status', { 'for': ['scss', 'sass'] }
   Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss', 'sass'] }
   Plug 'hail2u/vim-css3-syntax', { 'for': ['scss', 'sass', 'css'] }
+  Plug 'JulesWang/css.vim', { 'for': ['css', 'less'] }
 
   """"""" HTML/HAML/SLIM/Markup
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
@@ -171,9 +173,12 @@ function! LoadPlugs()
 
   """"""" JavaScript/CoffeeScript
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+  Plug 'othree/yajs.vim', { 'for': ['javascript'] }
   Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+    let g:used_javascript_libs='react'
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'lukaszb/vim-web-indent'
+  Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
   Plug 'Shutnik/jshint2.vim', { 'on': 'JSHint' }
   Plug 'mxw/vim-jsx', { 'for': 'javascript' }
     let g:jsx_ext_required = 0
@@ -185,6 +190,7 @@ function! LoadPlugs()
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
   Plug 'sidorares/node-vim-debugger', { 'for': 'javascript' }
   Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
+  Plug 'moll/vim-node', { 'for': ['javascript'] }
 
   """"" Code Navigation======================================================
   Plug 'unblevable/quick-scope'
@@ -282,17 +288,20 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  " Plug 'SirVer/ultisnips'
-  "   " better key bindings for UltiSnipsExpandTrigger
-  "   let g:UltiSnipsExpandTrigger="<tab>"
-  "   let g:UltiSnipsListSnippets="<c-tab>"
-  "   let g:UltiSnipsJumpForwardTrigger="<tab>"
-  "   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  " " " SnipMate and its dependencies:
-  " Plug 'MarcWeber/vim-addon-mw-utils'
-  " Plug 'tomtom/tlib_vim'
-  " Plug 'honza/vim-snippets'
-  " Plug 'justinj/vim-react-snippets'
+  Plug 'SirVer/ultisnips'
+    " better key bindings for UltiSnipsExpandTrigger
+    " Use tab to expand snippet and move to next target. Shift tab goes back.
+    " <C-tab> lists available snippets for the file
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsListSnippets="<c-tab>"
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  " " SnipMate and its dependencies:
+  Plug 'fortes/vim-personal-snippets'
+  Plug 'MarcWeber/vim-addon-mw-utils'
+  Plug 'tomtom/tlib_vim'
+  Plug 'honza/vim-snippets'
+  Plug 'justinj/vim-react-snippets'
 
   Plug 'jwhitley/vim-matchit'
 endfunction
@@ -674,8 +683,10 @@ augroup END
 autocmd BufWrite * silent call DeleteTrailingWS()
 
 " Auto lint on buffer write and enter
-autocmd! BufWritePost * Neomake
-autocmd! BufEnter * Neomake
+if exists(':Neomake')
+  " Check for lint errors on open & write
+  autocmd BufRead,BufWritePost,BufEnter *.js,*.jsx silent! Neomake standard|redraw
+endif
 
 " Resize splits when the window is resized
 autocmd VimResized * :wincmd =
@@ -1058,6 +1069,19 @@ nnoremap <leader>G mqHmwgg=G`wzt`q
 " Format entire file
 nmap <leader>fef ggVG=
 
+""""""" Terminal
+" Quickly open a shell below current window
+nnoremap <leader>sh :below 10sp term://$SHELL<cr>
+
+" Automatically go into insert mode when entering terminal window
+augroup terminal_insert
+  autocmd!
+  autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+augroup END
+
+""""""" VOLTRON.JS
+" Run `npm run build` from a JS or SCSS file
+au FileType *.{scss,js,jsx} nnoremap <leader>b :Dispatch npm run build<cr>
 
 """"""" Misc (organize this please!)
 " Insert newline below
@@ -1113,11 +1137,6 @@ inoremap <c-a> <esc>I
 " http://vimbits.com/bits/25
 nnoremap j gj
 nnoremap k gk
-
-
-" VOLTRON.JS
-" Run `npm run build` from a JS or SCSS file
-au FileType *.{scss,js,jsx} nnoremap <leader>b :Dispatch npm run build<cr>
 
 " =============================================================================
 " Abbreviations #abbrev
