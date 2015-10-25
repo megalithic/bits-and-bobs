@@ -4,6 +4,7 @@ export VISUAL='vim'
 export ZDOTDIR=$HOME
 export VIM_APP_DIR='/Applications/MacVim.app/Contents/MacOs/'
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export BREW_PATH="$(brew --prefix)"
 export BROWSER=chrome
 
 # by default: export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
