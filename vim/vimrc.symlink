@@ -38,6 +38,7 @@ function! LoadPlugs()
   """"" UI ==================================================================
   """"""" Colorschemes
   Plug 'chriskempson/base16-vim'
+  Plug 'morhetz/gruvbox'
 
   Plug 'megalithic/golden-ratio'
     let g:golden_ratio_exclude_nonmodifiable = 1
@@ -49,7 +50,7 @@ function! LoadPlugs()
   Plug 'bling/vim-airline'
     let g:airline#extensions#branch#enabled = 1
     let g:airline#extensions#syntastic#enabled = 1
-    let g:airline_theme='bubblegum'
+    let g:airline_theme='gruvbox'
 
     if !exists('g:airline_symbols')
       let g:airline_symbols = {}
@@ -212,18 +213,6 @@ function! LoadPlugs()
       \ "&omnifunc:<c-x><c-o>",
       \ ]
 
-  " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-  "   set rtp+=/usr/local/opt/fzf
-  " Plug 'junegunn/fzf.vim'
-  "   if has('nvim')
-  "     let $FZF_DEFAULT_OPTS .= ' --inline-info'
-  "   endif
-  "   let g:fzf_action = {
-  "     \ 'ctrl-t': 'tab split',
-  "     \ 'ctrl-x': 'split',
-  "     \ 'enter': 'vsplit' }
-  "   let g:fzf_layout = { 'down': '20%' }
-
   Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
     let g:ctrlp_switch_buffer=0            " open files in new buffers
@@ -331,8 +320,9 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 """"" UI ====================================================================
 """"""" Theme / Terminal
-let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
-colorscheme base16-3024
+" let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
+" colorscheme base16-3024
+colorscheme gruvbox
 set background=dark
 
 filetype plugin indent on
@@ -345,9 +335,13 @@ set t_ut= " improve screen clearing by using the background color (for tmux/256 
 set t_Co=256
 
 let $TERM='screen-256color'
+
 if !has('nvim')
   set term=screen-256color
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
+
 
 set enc=utf-8
 set shell=/usr/local/bin/zsh\ --login
@@ -392,10 +386,6 @@ if exists('$TMUX')
 else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-if has('nvim')
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
 " Prevent Vim from clobbering the scrollback buffer. See
