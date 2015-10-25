@@ -86,12 +86,14 @@ function! LoadPlugs()
   Plug 'ngmy/vim-rubocop'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
     let g:neomake_javascript_enabled_makers = ['standard']
+  Plug 'airblade/vim-gitgutter'
+    let g:gitgutter_signs = 0
   Plug 'luochen1990/rainbow'
     let g:rainbow_conf = {
       \ 'separately' : { 'agsv' : 0 }
       \ }
     let g:rainbow_active = 1
-  Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' " | Plug 'ryanoasis/vim-devicons'
+  Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin'
     let g:NERDTreeHijackNetrw=1
     let g:NERDTreeQuitOnOpen=1
     let g:NERDTreeWinSize=20
@@ -165,11 +167,12 @@ function! LoadPlugs()
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
   Plug 'othree/html5.vim', { 'for': ['html', 'haml', 'hamlc'] }
   Plug 'mattn/emmet-vim', { 'for': 'html' }
+    let g:user_emmet_mode='a'
+    let g:use_emmet_complete_tag = 1
+    let g:user_emmet_install_global = 0
   Plug 'gregsexton/MatchTag', { 'for': 'html' }
   Plug 'slim-template/vim-slim', { 'for': 'slim' }
   Plug 'tpope/vim-haml', { 'for': ['haml', 'hamlc', 'sass', 'scss'] }
-  Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-  Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'hbs'] }
 
   """"""" JavaScript/CoffeeScript
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -177,6 +180,7 @@ function! LoadPlugs()
   Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
     let g:used_javascript_libs='react'
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+  Plug '1995eaton/vim-better-javascript-completion'
   Plug 'lukaszb/vim-web-indent'
   Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
   Plug 'Shutnik/jshint2.vim', { 'on': 'JSHint' }
@@ -270,8 +274,7 @@ function! LoadPlugs()
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
   Plug 'rhysd/conflict-marker.vim'
-  Plug 'mattn/webapi-vim'
-  Plug 'mattn/gist-vim'
+  Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
     let g:gist_put_url_to_clipboard_after_post  = 1
     let g:gist_show_privates                    = 1
     let g:gist_post_private                     = 1
@@ -638,12 +641,10 @@ endfunction
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
 call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
@@ -655,6 +656,21 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#6699CC', 'none')
+call NERDTreeHighlightFile('config', 'yellow', 'none', '#d8a235', 'none')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', '#d8a235', 'none')
+call NERDTreeHighlightFile('json', 'green', 'none', '#d8a235', 'none')
+call NERDTreeHighlightFile('html', 'yellow', 'none', '#d8a235', 'none')
+call NERDTreeHighlightFile('css', 'cyan', 'none', '#5486C0', 'none')
+call NERDTreeHighlightFile('scss', 'cyan', 'none', '#5486C0', 'none')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
+call NERDTreeHighlightFile('ts', 'Blue', 'none', '#6699cc', 'none')
+call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', 'none')
+call NERDTreeHighlightFile('gitconfig', 'black', 'none', '#686868', 'none')
+call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#7F7F7F', 'none')
+
 
 " =============================================================================
 " Autocommands #autocommands
@@ -734,9 +750,13 @@ augroup filetypes
   " clear commands before resetting
   autocmd!
 
+  " Emmet
+  autocmd FileType html,css EmmetInstall
+
   " Markdown turn off lazyredraw
   autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
   autocmd FileType markdown set tw=80
+  autocmd BufRead,BufNewFile *.md setlocal spell complete+=kspell
   " autocmd BufWritePost *.{md,mdwn,mkd,mkdn,mark*} InstantMarkdownPreview " automagically do a thing with your markdown file
 
   " filetype
@@ -826,6 +846,7 @@ nnoremap <leader>n :vsplit note
 """"""" CtrlP
 let g:ctrlp_map = '<leader>m'
 let g:ctrlp_cmd = 'CtrlP'
+nnoremap <leader>bs :CtrlPBuffer<CR>
 
 """"""" fzf-vim
 " nnoremap <silent> <Leader>m :Files<CR>
