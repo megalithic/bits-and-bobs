@@ -8,7 +8,11 @@ NOW_PLAYING=$(osascript <<EOF
       set state to player state
 
       -- FIXME: temporarily displaying track info anyway
-      return "#[fg=red] ♫ " & track & " - " & artist & "#[fg=default]"
+      if artist is missing value then
+        return ""
+      else
+        return "#[fg=red] ♫ " & track & " - " & artist & "#[fg=default]"
+      end
 
       if state is 1 then
         -- paused
