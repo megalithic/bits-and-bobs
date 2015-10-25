@@ -9,8 +9,11 @@ windows:
         - nvm use
         - npm run dev
       - commands:
+        - cd ep-dev-edition
         - docker-machine start dev
         - eval $(docker-machine env dev)
+        - make reset
+        - cd ~/code/welltok
         - docker ps
       - commands:
         - cd achievement-service
