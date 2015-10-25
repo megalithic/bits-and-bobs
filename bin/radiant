@@ -7,13 +7,6 @@ NOW_PLAYING=$(osascript <<EOF
       set track to current song name
       set state to player state
 
-      -- FIXME: temporarily displaying track info anyway
-      if artist is missing value then
-        return ""
-      else
-        return "#[fg=red] ♫ " & track & " - " & artist & "#[fg=default]"
-      end
-
       if state is 1 then
         -- paused
         return "#[fg=colour240] ♫ - paused #[fg=default]"
@@ -21,8 +14,14 @@ NOW_PLAYING=$(osascript <<EOF
         -- playing
         return "#[fg=red] ♫ " & track & " - " & artist & "#[fg=default]"
       else if state is 0 then
-        -- stopped
-        return ""
+        if artist is missing value then
+          -- stopped
+          return ""
+        else
+          -- status isn\'t coming across correctly
+          return "#[fg=red] ♫ " & track & " - " & artist & "#[fg=default]"
+        end
+
       end if
     end tell
   end if
