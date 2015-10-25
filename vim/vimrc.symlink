@@ -50,7 +50,7 @@ function! LoadPlugs()
   Plug 'bling/vim-airline'
     let g:airline#extensions#branch#enabled = 1
     let g:airline#extensions#syntastic#enabled = 1
-    let g:airline_theme='gruvbox'
+    let g:airline_theme='bubblegum' "gruvbox
 
     if !exists('g:airline_symbols')
       let g:airline_symbols = {}
@@ -320,10 +320,10 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 """"" UI ====================================================================
 """"""" Theme / Terminal
-" let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
-" colorscheme base16-3024
-colorscheme gruvbox
 set background=dark
+let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
+colorscheme base16-3024
+" colorscheme gruvbox
 
 filetype plugin indent on
 syntax enable
@@ -338,10 +338,7 @@ let $TERM='screen-256color'
 
 if !has('nvim')
   set term=screen-256color
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
-
 
 set enc=utf-8
 set shell=/usr/local/bin/zsh\ --login
@@ -387,6 +384,9 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1 " not working for some reason
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html

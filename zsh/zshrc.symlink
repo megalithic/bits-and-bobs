@@ -67,6 +67,9 @@ export NVM_DIR="$HOME/.nvm"
 # setup hub (aliased to git)
 eval "$(hub alias -s)"
 
+# # gruvbox themez
+# source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
+
 # always launch docker dev env
 # eval $(docker-machine env dev) # breaks tmux and auto-run from iterm2
 
