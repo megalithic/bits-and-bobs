@@ -7,6 +7,9 @@ NOW_PLAYING=$(osascript <<EOF
       set track to current song name
       set state to player state
 
+      -- FIXME: temporarily displaying track info anyway
+      return "#[fg=red] ♫ " & track & " - " & artist & "#[fg=default]"
+
       if state is 1 then
         -- paused
         return "#[fg=colour240] ♫ - paused #[fg=default]"
