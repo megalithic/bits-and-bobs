@@ -321,8 +321,9 @@ runtime macros/matchit.vim
 """"" UI ====================================================================
 """"""" Theme / Terminal
 set background=dark
-let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
-colorscheme base16-3024
+colorscheme base16-eighties
+" let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " colorscheme gruvbox
 
 filetype plugin indent on
@@ -385,7 +386,6 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1 " not working for some reason
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Prevent Vim from clobbering the scrollback buffer. See
@@ -746,7 +746,7 @@ augroup filetypes
   " Markdown turn off lazyredraw
   autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
   autocmd FileType markdown set tw=80
-  autocmd BufRead,BufNewFile *.md setlocal spell complete+=kspell
+  " autocmd BufRead,BufNewFile *.md setlocal spell complete+=kspell " SLOW
   " autocmd BufWritePost *.{md,mdwn,mkd,mkdn,mark*} InstantMarkdownPreview " automagically do a thing with your markdown file
 
   " filetype
