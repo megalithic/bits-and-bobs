@@ -974,10 +974,10 @@ nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
 " Make arrowkey do something usefull, resize the viewports accordingly
-nnoremap <Left> :vertical resize +5<CR>
-nnoremap <Right> :vertical resize -5<CR>
-nnoremap <Up> :resize +5<CR>
-nnoremap <Down> :resize -5<CR>
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
+nnoremap <Up> <nop>
+nnoremap <Down> <nop>
 
 " this always does annoying things for some reason, so stop it
 noremap K <nop>
