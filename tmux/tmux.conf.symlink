@@ -1,9 +1,12 @@
 # PREFIX BINDING
 # ===========================================================================
 unbind C-b
+unbind-key C-a
+set-option -g prefix C-a
 set -g prefix C-a
 bind C-a send-prefix
-
+bind-key C-a send-prefix
+bind-key a last-pane
 
 # GENERAL SETTINGS
 # ===========================================================================
