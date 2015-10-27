@@ -67,16 +67,16 @@ export NVM_DIR="$HOME/.nvm"
 # setup hub (aliased to git)
 eval "$(hub alias -s)"
 
-# # gruvbox themez
-# source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
-
 # always launch docker dev env
 # eval $(docker-machine env dev) # breaks tmux and auto-run from iterm2
 
 # Use custom terminfo if exists (for neovim keybinding issues)
 # https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 ## [[ -f "~/.dotfiles/zsh/$TERM.ti" ]] && tic ~/.dotfiles/zsh/$TERM.ti
-# infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti; tic $TERM.ti
+infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.dotfiles/zsh/$TERM.ti; tic ~/.dotfiles/zsh/$TERM.ti
+
+# iTerm2 shell integration
+test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 # ===========================================================================
 # STOP!!!
@@ -86,5 +86,3 @@ eval "$(hub alias -s)"
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 bindkey -e
-
-test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
