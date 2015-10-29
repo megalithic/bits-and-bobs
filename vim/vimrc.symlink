@@ -251,10 +251,6 @@ function! LoadPlugs()
     let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
     " https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
     let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
-    let g:ackhighlight=1
-    let g:aghighlight=1
-    let g:ack_use_dispatch=1
-    command! -nargs=1 -bar Grep execute 'silent! grep! <q-args>' | redraw! | copen
   Plug 'inside/vim-search-pulse'
     let g:vim_search_pulse_mode = 'cursor_line'
   Plug 'kopischke/vim-fetch'

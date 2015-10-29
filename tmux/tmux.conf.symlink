@@ -10,7 +10,7 @@ bind-key a last-pane
 
 # GENERAL SETTINGS
 # ===========================================================================
-set -g history-limit 100000
+set -g history-limit 25000
 set -g set-titles on
 # This helps when exiting insert mode in Vim: http://superuser.com/a/252717/65504.
 set -sg escape-time 0
@@ -23,8 +23,8 @@ set -g update-environment "SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTIO
 # Start window numbers from 1
 set -g base-index 1
 # Fix LSOpenURLsWithRole() error on OS X. Requires reattach-to-user-namespace to be installed.
-set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 set-option -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
+set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 # allow the cursor to be changed by vim
 set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:XT:Ms=\E]52;%p1%s;%p2%s\007:Cc=\E]12;%p1%s\007:Cr=\E]112\007:Cs=\E]50;CursorShape=%?%p1%{3}%<%t%{0}%e%p1%{2}%-%;%d\007'
 # all for internal terminals to be scrolled
@@ -139,33 +139,33 @@ set-window-option -g window-status-current-format "#[fg=blue] ● #W #[fg=colour
 # Bar Layout
 # ---------------------------------------------------------
 set -g status-left-length 60
-set -g status-left "#[fg=green]#S | #{cpu_percentage} #[fg=brightblue] ⓦ #(dig +short myip.opendns.com @resolver1.opendns.com) #[fg=yellow]ⓛ #(ifconfig en0 | ag 'inet ' | awk '{print $2}') #(ifconfig en1 | ag 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | ag 'inet ' | awk '{print \"vpn \" $2}') "
+set -g status-left "#[fg=green]#h|#S #[fg=brightblue] ⓦ #(dig +short myip.opendns.com @resolver1.opendns.com) #[fg=yellow]ⓛ #(ifconfig en0 | ag 'inet ' | awk '{print $2}') #(ifconfig en1 | ag 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | ag 'inet ' | awk '{print \"vpn \" $2}') "
 set -g status-right-length 120
 set -g status-right "#(~/.dotfiles/bin/radiant) #(~/.dotfiles/bin/battery -t -p) #[fg=blue] %a, %b %d #[fg=green] %I:%M %p"
 
 # TMUX PLUGIN MANAGER
 # ===========================================================================
 # tmux plugin manager: github.com/tmux-plugins/tpm
-set-environment -g TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/tmux-plugins/'
+# set-environment -g TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/tmux-plugins/'
 
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'tmux-plugins/tmux-logging'
-set -g @plugin 'tmux-plugins/tmux-cpu'
-set -g @plugin 'tmux-plugins/tmux-copycat'
-set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'tmux-plugins/tmux-open'
-# set -g @plugin 'tmux-plugins/tmux-battery'
-# set -g @plugin 'tmux-plugins/tmux-sessionist'
-# set -g @plugin 'tmux-plugins/tmux-pain-control'
-# set -g @plugin 'tmux-plugins/tmux-example-plugin'
-# set -g @plugin 'tmux-plugins/tmux-online-status'
-# set -g @plugin 'tmux-plugins/tmux-resurrect'
-# set -g @plugin 'tmux-plugins/tmux-continuum'
-# set -g @plugin 'tmux-plugins/tmux-sidebar'
+# set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+# set -g @plugin 'tmux-plugins/tmux-logging'
+# set -g @plugin 'tmux-plugins/tmux-cpu'
+# set -g @plugin 'tmux-plugins/tmux-copycat'
+# set -g @plugin 'tmux-plugins/tmux-yank'
+# set -g @plugin 'tmux-plugins/tmux-open'
+# # set -g @plugin 'tmux-plugins/tmux-battery'
+# # set -g @plugin 'tmux-plugins/tmux-sessionist'
+# # set -g @plugin 'tmux-plugins/tmux-pain-control'
+# # set -g @plugin 'tmux-plugins/tmux-example-plugin'
+# # set -g @plugin 'tmux-plugins/tmux-online-status'
+# # set -g @plugin 'tmux-plugins/tmux-resurrect'
+# # set -g @plugin 'tmux-plugins/tmux-continuum'
+# # set -g @plugin 'tmux-plugins/tmux-sidebar'
 
-# install tpm if not already installed
-if "test ! -d ~/.tmux/plugins/tpm" \
-   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
+# # install tpm if not already installed
+# if "test ! -d ~/.tmux/plugins/tpm" \
+#    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
 
-run-shell '~/.tmux/plugins/tpm/tpm'
+# run-shell '~/.tmux/plugins/tpm/tpm'
