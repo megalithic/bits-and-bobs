@@ -62,6 +62,7 @@
   pom = push origin master
 
   s = status -sb
+  st = status
 
   # git submodules
 	subpull = submodule foreach git pull
