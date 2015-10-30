@@ -216,6 +216,7 @@ if [[ $response =~ ^(y|yes|Y) ]];then
   require_cask github
   require_cask google-chrome
   require_cask hazel
+  require_cask helium
   require_cask hipchat
   require_cask istat-menus
   require_cask iterm2-nightly
