@@ -7,6 +7,17 @@ windows:
       - commands:
         - cd currency-service
         - nvm use
+        - npm install
+        - npm run dev
+      - commands:
+        - cd achievement-service
+        - nvm use
+        - npm install
+        - npm run dev
+      - commands:
+        - cd munero
+        - nvm use
+        - npm install
         - npm run dev
       - commands:
         - cd ep-dev-edition
@@ -16,20 +27,18 @@ windows:
         # - cd ~/code/welltok
         - docker ps
       - commands:
-        - cd achievement-service
-        - nvm use
-        - npm run dev
-      - commands:
-        - cd munero
-        - nvm use
-        - npm run dev
-      - commands:
         - cd cafewell
         - bundle
+        - bundle exec rake db:migrate
         - nvm use
         - killport 5000 # kill moxy in case it's already running
         - killport 3000 # kill thin/rails in case it's already running
         - be foreman start
+      - commands:
+        - cd rewards-dashboard-voltron
+        - nvm use
+        - npm install
+        - npm run dev
   - name: "chats"
     root: "~"
     focus: true

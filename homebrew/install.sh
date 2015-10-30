@@ -211,22 +211,18 @@ if [[ $response =~ ^(y|yes|Y) ]];then
   require_cask droplr
   require_cask evernote
   require_cask firefox
-  require_cask firefox-aurora
   require_cask flash
   require_cask flux
   require_cask github
   require_cask google-chrome
-  require_cask google-chrome-canary
-  require_cask gpgtools
   require_cask hazel
   require_cask hipchat
   require_cask istat-menus
-  require_cask iterm2
+  require_cask iterm2-nightly
   require_cask java
   require_cask karabiner
   require_cask licecap
   require_cask livereload
-  require_cask numi
   require_cask parallels-desktop
   require_cask radiant-player
   require_cask reggy
@@ -243,8 +239,8 @@ if [[ $response =~ ^(y|yes|Y) ]];then
 
   # INSTALL VIA APP STORE
   # require_cask tweetbot
-  # require_cask airmail
-  # require_cask fantastical
+  # require_cask airmail 2
+  # require_cask fantastical 2
   # require_cask shush
 
 else

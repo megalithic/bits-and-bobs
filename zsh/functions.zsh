@@ -457,3 +457,55 @@ ytsearch() {
     grep -o 'watch?v=[^"]*"[^>]*title="[^"]*' | \
     sed -e 's/^watch\?v=\([^"]*\)".*title="\(.*\)/\1 \2/g'
 }
+
+# AMAZING GIT ALIAS COMPLETION
+# https://github.com/bruno-/dotfiles/blob/master/home/.bashrc
+# --- GIT aliases ---
+
+# Does git aliases and git completion completion
+# example invocation: _git_alias gco checkout
+# makes alias: alias gco="git checkout"
+function _git_alias() {
+	local shortname=$1
+	local longname=$2
+	shift
+	local rest=""
+	while [ $# -gt 0 ]; do
+		rest=$rest" $1"
+		shift
+	done
+	rest='git'$rest
+	alias $shortname="$rest"
+
+	if [[ $(_exists __git_complete) -ne 0 ]]; then
+		__git_complete $shortname _git_$longname
+	fi
+}
+
+# Parses all aliases from `git config` in a way that is convenient for making an alias.
+# git config output: alias.co=checkout  => output: gco checkout
+function _git_alias_list() { git config --global --list | sed -n 's/alias.\([^=]*\)=\(.*\)/g\1 \2/p'; }
+
+# Invokes _git_alias function for every alias
+# Syntax is with HERE doc and wierd because aliases wont work after pipe ie $ _git_alias_list | alias ...
+
+function _setup_git_aliases() {
+	[ ! -f ~/.gitconfig ] && return
+	while read i; do
+		_git_alias $i
+	done <<-EOF
+	`_git_alias_list`
+	EOF
+}
+# executed asynchronously at the script bottom
+# _setup_git_aliases
+
+alias g='git'      # this one needs to be aliased manually :)
+alias s='git status -sb'
+
+# tab completion for 'g' as well
+type _git &>/dev/null && complete -o default -o nospace -F _git g
+
+# generaterandomchanges 3 master_file txt
+
+# --- GIT ALIASES END ---

@@ -1,19 +1,19 @@
 [user]
-  name = AUTHORNAME
-  email = AUTHOREMAIL
+  name = Seth Messer
+  email = seth.messer@gmail.com
   color = auto
 
 [credential]
-  helper = GIT_CREDENTIAL_HELPER
+  helper = osxkeychain
 
 [hub]
   protocol = https
 
 [git]
-  user = AUTHORUSERNAME
+  user = megalithic
 
 [github]
-	user = AUTHORUSERNAME
+	user = megalithic
 
 [diff]
 [difftool]
@@ -23,30 +23,55 @@
   autocorrect = 1
 
 [alias]
-  st = status
-  ci = commit
+  aa = add --all :/
+  ap = add --patch
+
+  b = branch
+  ba = branch -A
+	bm = branch -m
+	bd = branch -d
+  #bdd = branch -D
+  bbd = branch -D $1 && push origin --delete $1
+
   cv = commit -v
+  cm = commit -m
+  ca = commit --amend
+
   co = checkout
+  cob = checkout -b
+  com = checkout master
+
   cl = clone
+
   di = diff
   dc = diff --cached
   df = diff
-  amend = commit --amend
-  aa = add --all :/
-  ff = merge --ff-only
-  pullff = pull --ff-only
-  noff = merge --no-ff
+  ds = diff --stat=160,120
+
+  mf = merge --ff-only
+  m = merge --no-ff
+  # open rebase/merge conflicted files
+	fix = !sh -c "'vim `git diff --name-only --diff-filter=U`'"
+	# add unmerged files (when conflicts are resolved)
+	au = !sh -c "'git add `git diff --name-only --diff-filter=U`'"
+
+  plf = pull --ff-only
+  plom = pull origin master
+
   fa = fetch --all
   pom = push origin master
-  b = branch
-  br = branch
-  ds = diff --stat=160,120
-  dh1 = diff HEAD~1
+
+  s = status -sb
+
+  # git submodules
+	subpull = submodule foreach git pull
+
+  sha = name-rev --name-only --refs=refs/heads/*
+  g = grep --break --heading --line-number
+  gi = grep --break --heading --line-number -i
   tree = log --graph --pretty=oneline --decorate
-  pom = push origin master
-  pod = push origin develop
-  amend = commit --amend -C HEAD
   undo = reset --soft HEAD^
+  reset = reset --hard HEAD^
 
   # Divergence (commits we added and commits remote added)
   div = divergence
@@ -72,12 +97,11 @@
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   last = !git log --max-count=1 | awk '{print $2}' | awk 'NR==1{print $1}'
 
-  co = checkout
   promote = !$ZSH/bin/git-promote
   wtf     = !$ZSH/bin/git-wtf
   rank-contributers = !$ZSH/bin/git-rank-contributers
   count   = !git shortlog -sn
-
+  this = !git init && git add . && git commit -m \"Initial commit\"
   who = shortlog -s -n --no-merges
 	standup = shortlog --since=yesterday
 	today = shortlog --since=midnight
@@ -86,7 +110,6 @@
 	subs = submodule foreach git pull origin master
 	hist = for-each-ref --count=5 --sort=-committerdate --format='%(refname:short)' refs/heads/
   refresh = !ssh-add -l && STASH=$(git stash) && git fetch && git rebase origin/master && test \"$STASH\" != \"No local changes to save\" && git stash pop
-  del = branch -D $1 && push origin --delete $1
 
 [merge]
   tool = vimdiff

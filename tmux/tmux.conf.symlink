@@ -149,7 +149,7 @@ set-window-option -g window-status-current-format "#[fg=blue] ● #W #[fg=colour
 set -g status-left-length 60
 set -g status-left "#[fg=green]#h|#S #[fg=brightblue] ⓦ #(dig +short myip.opendns.com @resolver1.opendns.com) #[fg=yellow]ⓛ #(ifconfig en0 | ag 'inet ' | awk '{print $2}') #(ifconfig en1 | ag 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | ag 'inet ' | awk '{print \"vpn \" $2}') "
 set -g status-right-length 120
-set -g status-right "#(~/.dotfiles/bin/radiant) #(~/.dotfiles/bin/battery -t -p) #[fg=blue] %a, %b %d #[fg=green] %I:%M %p"
+set -g status-right "#(~/.dotfiles/bin/radiant) #(~/.dotfiles/bin/battery -t -p) #[fg=blue] %a, %b %d #[fg=green] %I:%M %p #[fg=yellow]#{cpu_percentage}"
 
 # TMUX PLUGIN MANAGER
 # ===========================================================================
@@ -159,9 +159,9 @@ set-environment -g TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/tmux-plugins/'
 set -g @plugin 'tmux-plugins/tpm'
 # set -g @plugin 'tmux-plugins/tmux-sensible'
 # set -g @plugin 'tmux-plugins/tmux-logging'
-# set -g @plugin 'tmux-plugins/tmux-cpu'
-# set -g @plugin 'tmux-plugins/tmux-copycat'
-# set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-open'
 # # set -g @plugin 'tmux-plugins/tmux-battery'
 # # set -g @plugin 'tmux-plugins/tmux-sessionist'
@@ -169,7 +169,6 @@ set -g @plugin 'tmux-plugins/tmux-open'
 # # set -g @plugin 'tmux-plugins/tmux-online-status'
 # # set -g @plugin 'tmux-plugins/tmux-resurrect'
 # # set -g @plugin 'tmux-plugins/tmux-continuum'
-# # set -g @plugin 'tmux-plugins/tmux-sidebar'
 
 # # install tpm if not already installed
 # if "test ! -d ~/.tmux/plugins/tpm" \
