@@ -1,3 +1,9 @@
+# NOTES
+# ...........................................................................
+# To get 24-bit/True Color mode for neovim and other CLI stuffs, need this patched version of tmux:
+# brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/02f04ef70ddad41a81c735d709b2a3b23a3a4b91/tmux.rb
+# * may need to unlink existing installed version of tmux
+
 # PREFIX BINDING
 # ===========================================================================
 unbind C-b
@@ -57,6 +63,7 @@ bind-key C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmu
 bind C-d detach			# the same as d so you don't have to depress Ctrl
 bind -r C-R source-file ~/.tmux.conf \; display-message "Configuration reloaded."
 bind-key r refresh-client
+
 # Splitting panes
 bind '|' split-window -h -c "#{pane_current_path}"
 bind '_' split-window -v -c "#{pane_current_path}"
@@ -65,9 +72,10 @@ bind -r C-x kill-pane
 bind p previous-window
 bind -r C-space select-pane -t :.+
 bind -r C-f resize-pane
+
 # Smart pane switching with awareness of vim (requires vim-tmux-navigator) splits
 # https://github.com/ivanbrennan/dotfiles/blob/master/tmux.conf
-# NOTE: added weechat in the mix to maintain ctrl+h/j/k/l behaviors
+# * these are broken in tmux-2.1
 is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(weechat|view|n?vim?)(diff)?$"'
 bind -n C-h if-shell  "$is_vim" "send-keys C-h" "select-pane -L"
 bind -n C-j if-shell  "$is_vim" "send-keys C-j" "select-pane -D"
@@ -146,19 +154,18 @@ set -g status-right "#(~/.dotfiles/bin/radiant) #(~/.dotfiles/bin/battery -t -p)
 # TMUX PLUGIN MANAGER
 # ===========================================================================
 # tmux plugin manager: github.com/tmux-plugins/tpm
-# set-environment -g TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/tmux-plugins/'
+set-environment -g TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/tmux-plugins/'
 
-# set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tpm'
 # set -g @plugin 'tmux-plugins/tmux-sensible'
 # set -g @plugin 'tmux-plugins/tmux-logging'
 # set -g @plugin 'tmux-plugins/tmux-cpu'
 # set -g @plugin 'tmux-plugins/tmux-copycat'
 # set -g @plugin 'tmux-plugins/tmux-yank'
-# set -g @plugin 'tmux-plugins/tmux-open'
+set -g @plugin 'tmux-plugins/tmux-open'
 # # set -g @plugin 'tmux-plugins/tmux-battery'
 # # set -g @plugin 'tmux-plugins/tmux-sessionist'
 # # set -g @plugin 'tmux-plugins/tmux-pain-control'
-# # set -g @plugin 'tmux-plugins/tmux-example-plugin'
 # # set -g @plugin 'tmux-plugins/tmux-online-status'
 # # set -g @plugin 'tmux-plugins/tmux-resurrect'
 # # set -g @plugin 'tmux-plugins/tmux-continuum'
@@ -168,4 +175,4 @@ set -g status-right "#(~/.dotfiles/bin/radiant) #(~/.dotfiles/bin/battery -t -p)
 # if "test ! -d ~/.tmux/plugins/tpm" \
 #    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
 
-# run-shell '~/.tmux/plugins/tpm/tpm'
+run-shell '~/.tmux/plugins/tpm/tpm'

@@ -32,6 +32,9 @@ alias unixts="date +%s"
 alias xit="exit"
 alias please='sudo $(fc -ln -1)'
 
+## - Z -------------------------------------------------
+alias c=z
+alias d=z
 
 ## - TMUX -------------------------------------------------
 alias tmux="TERM=screen-256color-bce tmux -u -2"
