@@ -6,6 +6,7 @@ export VIM_APP_DIR='/Applications/MacVim.app/Contents/MacOs/'
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export BREW_PATH="$(brew --prefix)"
 export BROWSER=chrome
+export _Z_DATA="$HOME/.z-history"
 
 # by default: export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 # we take out the slash, period, angle brackets, dash here.

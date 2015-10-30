@@ -12,6 +12,8 @@ else
   bot "looks like you are already using zsh. woot!"
 fi
 
+touch ~/.z-history
+
 # to fix the issue described in the readme here:
 # https://github.com/skalnik/vim-vroom
 sudo cp ~/.dotfiles/zsh/zprofile.symlink /etc/zprofile

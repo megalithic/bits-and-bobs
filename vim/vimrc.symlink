@@ -318,8 +318,8 @@ runtime macros/matchit.vim
 """"""" Theme / Terminal
 set background=dark
 colorscheme base16-eighties
-" let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " colorscheme gruvbox
 
 filetype plugin indent on

@@ -11,9 +11,6 @@
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
-export CODE=$HOME/code #c<tab>
-export DOTFILES=$ZSH #d<tab>
-
 # use .localrc for SUPER SECRET STUFF that you don't
 # want in your public, versioned repo.
 if [[ -a ~/.localrc ]]
@@ -67,6 +64,9 @@ export NVM_DIR="$HOME/.nvm"
 # setup hub (aliased to git)
 eval "$(hub alias -s)"
 
+# z.sh init
+source ~/.dotfiles/bin/z.sh
+
 # always launch docker dev env
 # eval $(docker-machine env dev) # breaks tmux and auto-run from iterm2
 
@@ -76,7 +76,7 @@ eval "$(hub alias -s)"
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.dotfiles/zsh/$TERM.ti; tic ~/.dotfiles/zsh/$TERM.ti
 
 # iTerm2 shell integration
-test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+# test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 # ===========================================================================
 # STOP!!!

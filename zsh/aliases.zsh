@@ -91,9 +91,8 @@ alias ev="v ~/.dotfiles/vim/vimrc.symlink"
 alias et="v ~/.dotfiles/tmux/tmux.conf.symlink"
 
 ## - FOLDERS -----------------------------------------------
-# alias code="cd ~/code"
-alias dot=d
-alias code=c
+alias dot="cd ~/.dotfiles"
+alias code="cd ~/code"
 alias dev="cd ~/code"
 alias music="cd ~/music/Audio"
 alias sand="cd ~/code/sandbox"
