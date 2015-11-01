@@ -1,4 +1,4 @@
-#	Reconstructed via infocmp from file: /Users/replicant/.terminfo/78/xterm-256color
+#	Reconstructed via infocmp from file: /Users/seth.messer/.terminfo/78/xterm-256color
 xterm-256color|xterm with 256 colors,
 	am, bce, ccc, km, mc5i, mir, msgr, npc, xenl,
 	colors#256, cols#80, it#8, lines#24, pairs#32767,

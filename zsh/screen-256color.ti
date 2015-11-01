@@ -1,4 +1,4 @@
-#	Reconstructed via infocmp from file: /Users/replicant/.terminfo/73/screen-256color
+#	Reconstructed via infocmp from file: /Users/seth.messer/.terminfo/73/screen-256color
 screen-256color|GNU Screen with 256 colors,
 	am, km, mir, msgr, xenl,
 	colors#256, cols#80, it#8, lines#24, ncv#3, pairs#32767,
