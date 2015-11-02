@@ -38,7 +38,7 @@ windows:
         - cd rewards-dashboard-voltron
         - nvm use
         - npm install
-        - npm run dev
+        - npm start
   - name: "chats"
     root: "~"
     focus: true
