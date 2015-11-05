@@ -755,7 +755,7 @@ augroup filetypes
   autocmd!
 
   " Emmet
-  autocmd FileType html,css EmmetInstall
+  " autocmd FileType html,css EmmetInstall
 
   " Markdown turn off lazyredraw
   autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
