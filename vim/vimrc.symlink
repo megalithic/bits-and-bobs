@@ -220,13 +220,16 @@ function! LoadPlugs()
           \ "&omnifunc:<c-x><c-o>",
           \ ]
     let g:SuperTabDefaultCompletionType = 'context'
-    autocmd FileType *
-          \ if &omnifunc != '' |
-          \     call SuperTabChain(&omnifunc, '<c-p>') |
-          \ endif
     " let g:SuperTabCrMapping = 0
     " let g:SuperTabDefaultCompletionType = '<C-n>'
     " let g:SuperTabContextDefaultCompletionType = '<c-x><c-u>' " breaks case-sensitive completion
+    "
+    " figure out what this does:
+    " autocmd FileType *
+    "       \ if &omnifunc != '' |
+    "       \     call SuperTabChain(&omnifunc, '<c-p>') |
+    "       \ endif
+
 
   Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
