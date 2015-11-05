@@ -72,7 +72,7 @@
   gi = grep --break --heading --line-number -i
   tree = log --graph --pretty=oneline --decorate
   undo = reset --soft HEAD^
-  reset = reset --hard HEAD^
+  # reset = reset --hard HEAD^
 
   # Divergence (commits we added and commits remote added)
   div = divergence
