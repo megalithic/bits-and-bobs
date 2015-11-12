@@ -50,6 +50,7 @@ require_npm karma-cli
 require_npm livedown
 require_npm mocha
 require_npm node-inspector
+require_npm pm2 # http://stackoverflow.com/a/20661027/213904
 require_npm prettyjson
 require_npm speed-test
 require_npm standard

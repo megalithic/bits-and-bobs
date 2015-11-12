@@ -93,7 +93,7 @@ function! LoadPlugs()
         \ 'texthl': 'WarningMsg',
         \ }
     let g:neomake_error_sign = {
-        \ 'text': '>',
+        \ 'text': '>>',
         \ 'texthl': 'ErrorMsg',
         \ }
   Plug 'airblade/vim-gitgutter'
