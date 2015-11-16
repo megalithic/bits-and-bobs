@@ -66,6 +66,9 @@ require_brew findutils
 #install bash-completion
 
 require_brew ack
+# will need to install latest JDK also:
+# http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+require_brew android-sdk
 # require_brew autoenv
 require_brew battery
 

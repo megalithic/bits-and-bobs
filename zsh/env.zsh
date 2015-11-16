@@ -19,7 +19,8 @@ export KEYTIMEOUT=1
 
 # so I can run USPTO/jboss stuff sensibly
 export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vfs.forceCopy=false"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home"
+
+export ANDROID_HOME=/usr/local/opt/android-sdk
 
 # Setup terminal, and turn on 256 colors
 export TERM='xterm-256color'

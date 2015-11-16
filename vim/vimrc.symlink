@@ -782,7 +782,7 @@ augroup filetypes
   autocmd BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
 
   " load rainbow parens
-  autocmd FileType js,jsx,css,scss,sass,less,json call rainbow#load()
+  " autocmd FileType js,jsx,css,scss,sass,less,json call rainbow#load()
 
   " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
   autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
