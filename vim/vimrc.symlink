@@ -202,9 +202,9 @@ function! LoadPlugs()
     let g:mocha_js_command = '!./node_modules/.bin/mocha --compilers js:babel/register {spec}'
   Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
-  Plug 'sidorares/node-vim-debugger', { 'for': 'javascript' }
+  " Plug 'sidorares/node-vim-debugger', { 'for': 'javascript' }
   Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
-  Plug 'moll/vim-node', { 'for': ['javascript'] }
+  " Plug 'moll/vim-node', { 'for': ['javascript'] }
 
   """"" Code Navigation======================================================
   Plug 'unblevable/quick-scope'

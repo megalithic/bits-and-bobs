@@ -1,5 +1,10 @@
 name: "welltok"
 windows:
+  - name: "chats"
+    root: "~"
+    focus: true
+    panes:
+      - weechat-curses
   - name: "services"
     root: "~/code/welltok"
     layout: tiled
@@ -39,11 +44,6 @@ windows:
         - nvm use
         - npm install
         - npm start
-  - name: "chats"
-    root: "~"
-    focus: true
-    panes:
-      - weechat-curses
   - name: "code"
     root: "~/code/welltok"
     panes:
