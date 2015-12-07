@@ -106,10 +106,12 @@ alias box="cd ~/Dropbox/"
 alias dropbox="box"
 alias scripts="cd ~/Dropbox/scripts/"
 # alias android="cd ~/Dropbox/Android/adb/"
-alias adb="/Users/replicant/Dropbox/Android/adb/platform-tools/adb"
-alias fastboot="/Users/replicant/Dropbox/Android/adb/platform-tools/fastboot"
+# alias adb="/Users/replicant/Dropbox/Android/adb/platform-tools/adb"
+# alias fastboot="/Users/replicant/Dropbox/Android/adb/platform-tools/fastboot"
 alias dl="cd $HOME/Downloads/"
 alias gop="cd $GOPATH"
+alias geny="/Applications/Genymotion\ Shell.app/Contents/MacOS/genyshell -c "
+alias genyplay="/Applications/Genymotion.app/Contents/MacOS/player.app/Contents/MacOS/player --vm-name "
 
 ## - POSTGRES -----------------------------------------------
 alias startpg="pg_ctl -D /usr/local/var/postgres -l logfile start" #`pg_ctl -D /usr/local/var/postgres -l ~/code/logs/server.log start` OR `postgres -D /usr/local/var/postgres` OR `pg_ctl -D /usr/local/var/postgres -l logfile start`
@@ -271,7 +273,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+
 alias whois="whois -h whois-servers.net"
 
 # Flush Directory Service cache; http://osxdaily.com/2014/11/20/flush-dns-cache-mac-os-x/
-alias dnsflush="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say cache flushed"
+alias dnsflush="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"

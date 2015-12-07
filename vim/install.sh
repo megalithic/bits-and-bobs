@@ -15,3 +15,5 @@ ln -sfv ~/.dotfiles/vim/colors ~/.vim/colors
 ln -sfv ~/.vim/plugged ~/.vim/bundle
 ln -sfv ~/.vim ~/.config/nvim
 ln -sfv ~/.dotfiles/vim/vimrc.symlink ~/.config/nvim/init.vim
+
+pip3 install neovim
