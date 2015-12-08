@@ -18,14 +18,15 @@
 "   2.1) UI
 "   2.2) Behavior
 "   2.3) *Needs more work and organizing and documentation
-" 3) Highlighting #highlights
-" 4) Custom functions #cfunctions
-" 5) Auto Commands #autocommands
-"   5.1) Filetypes
-"   5.2) Normalization
-" 6) Filetypes #ftypes
-" 7) Keybindings #bindings
-" 8) Abbreviations #abbrev
+" 3) Plugins Settings #psettings
+" 4) Highlighting #highlights
+" 5) Custom functions #cfunctions
+" 6) Auto Commands #autocommands
+"   6.1) Filetypes
+"   6.2) Normalization
+" 7) Filetypes #ftypes
+" 8) Keybindings #bindings
+" 9) Abbreviations #abbrev
 " =============================================================================
 
 filetype off
@@ -36,93 +37,30 @@ set nocompatible
 " -----------------------------------------------------------------------------
 function! LoadPlugs()
   """"" UI ==================================================================
-  """"""" Colorschemes
   Plug 'chriskempson/base16-vim'
-  Plug 'morhetz/gruvbox'
-
   Plug 'megalithic/golden-ratio'
-    let g:golden_ratio_exclude_nonmodifiable = 1
-    let g:golden_ratio_wrap_ignored = 0
-    let g:golden_ratio_ignore_horizontal_splits = 1
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
-
   Plug 'bling/vim-airline'
-    let g:airline#extensions#branch#enabled = 1
-    let g:airline#extensions#syntastic#enabled = 1
-    let g:airline_theme='bubblegum' "gruvbox
-
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
-    let g:airline_left_sep = ''
-    let g:airline_left_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_symbols.linenr = '␊'
-    let g:airline_symbols.linenr = '¶'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.linenr = '⭡'
-    let g:airline_symbols.branch = '⭠'
-    let g:airline_symbols.crypt = '⭤'
-    let g:airline_symbols.readonly = '⭤'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.paste = '∥'
-    let g:airline_symbols.paste = 'Þ'
-    let g:airline_symbols.whitespace = 'Ξ'
-    let g:airline_symbols.modified = '✭'
-    let g:airline_symbols.space = "\ua0"
-    let g:airline_powerline_fonts = 0
-    let g:airline#extensions#tabline#enabled = 0
-    let g:airline_mode_map = {
-        \ 'n' : 'NORMAL',
-        \ 'i' : 'INSERT',
-        \ 'R' : 'REPLACE',
-        \ 'v' : 'VISUAL',
-        \ 'V' : 'V-LINE',
-        \ 'c' : 'CMD   ',
-        \ '': 'V-BLCK',
-        \ }
-
   Plug 'ngmy/vim-rubocop'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
-    let g:neomake_javascript_enabled_makers = ['standard']
-    let g:neomake_verbose=0
-    let g:neomake_warning_sign = {
-        \ 'text': '>',
-        \ 'texthl': 'WarningMsg',
-        \ }
-    let g:neomake_error_sign = {
-        \ 'text': '>>',
-        \ 'texthl': 'ErrorMsg',
-        \ }
-  Plug 'airblade/vim-gitgutter'
-    let g:gitgutter_signs = 0
   Plug 'luochen1990/rainbow'
-    let g:rainbow_conf = {
-      \ 'separately' : { 'agsv' : 0 }
-      \ }
-    let g:rainbow_active = 1
-  Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin'
-    let g:NERDTreeHijackNetrw=1
-    let g:NERDTreeQuitOnOpen=1
-    let g:NERDTreeWinSize=20
-    let NERDTreeHijackNetrw=1
-    let NERDTreeQuitOnOpen=1
-    let NERDTreeWinSize=20
 
   """"" Utilities ===========================================================
   " Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-commentary'
   Plug 'sickill/vim-pasta'
+  Plug 'ciaranm/detectindent'
   Plug 'zaiste/tmux.vim'
   Plug 'haya14busa/incsearch.vim'
+  Plug 'vim-scripts/IndexedSearch'
   Plug 'jordwalke/VimAutoMakeDirectory'
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-endwise' " automagically add end/endfunction/endif/etc
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch' " unix shell commands for vim
   Plug 'tpope/vim-surround'
+  Plug 'docunext/closetag.vim'
     " - {Visual}S<arg> surrounds selection
     " - cs/ds<arg1><arg2> change / delete
     " - ys<obj><arg> surrounds text object
@@ -132,26 +70,13 @@ function! LoadPlugs()
   Plug 'romainl/vim-qf'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'janko-m/vim-test', { 'for': 'javascript' }
-    let test#strategy = "neovim"
-    let test#javascript#mocha#options = '--compilers js:babel/register'
-    let test#javascript#mocha#file_pattern = '.test.js'
   Plug 'skalnik/vim-vroom'
-    let g:vroom_use_colors=1
-    let g:vroom_map_keys = 0
   Plug 'Valloric/ListToggle'
-    let g:lt_location_list_toggle_map = '<F3>'
-    let g:lt_quickfix_list_toggle_map = '<F4>'
 
   """"" Filetypes ===========================================================
 
   """"""" Go
   Plug 'fatih/vim-go', {'for': 'go'}
-    let g:go_highlight_functions = 1
-    let g:go_highlight_methods = 1
-    let g:go_highlight_structs = 1
-    let g:go_highlight_operators = 1
-    let g:go_highlight_build_constraints = 1
-    let g:go_fmt_command = "goimports" " format with goimports instead of gofmt
 
   """"""" Ruby
   Plug 'vim-ruby/vim-ruby'
@@ -160,11 +85,7 @@ function! LoadPlugs()
 
   """"""" Markdown
   Plug 'tpope/vim-markdown', {'for': ['markdown','md','mdown']}
-    let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
-    let g:vim_markdown_frontmatter=1
   Plug 'suan/vim-instant-markdown'
-    let g:instant_markdown_slow = 1
-    let g:instant_markdown_autostart = 0
 
   """"""" CSS/SCSS/LESS
   Plug 'groenewege/vim-less', { 'for': 'less' }
@@ -188,18 +109,14 @@ function! LoadPlugs()
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   Plug 'othree/yajs.vim', { 'for': ['javascript'] }
   Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-    let g:used_javascript_libs='react'
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug '1995eaton/vim-better-javascript-completion'
   Plug 'lukaszb/vim-web-indent'
   Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
   Plug 'Shutnik/jshint2.vim', { 'on': 'JSHint' }
   Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-    let g:jsx_ext_required = 0
-    let g:jsx_pragma_required = 0
   Plug 'burnettk/vim-angular', { 'for': 'javascript' }
   Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
-    let g:mocha_js_command = '!./node_modules/.bin/mocha --compilers js:babel/register {spec}'
   Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
   " Plug 'sidorares/node-vim-debugger', { 'for': 'javascript' }
@@ -208,82 +125,18 @@ function! LoadPlugs()
 
   """"" Code Navigation======================================================
   Plug 'unblevable/quick-scope'
-    let g:qs_enable = 0
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
   Plug 'nelstrom/vim-visual-star-search'
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
-
-  " Plug 'ervandew/supertab'
-  "   " handy stuff: https://github.com/ervandew/supertab/issues/53
-  "   " Enable omnicomplete for supported filetypes
-  "   autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
-  "   autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
-  "   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  "   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  "   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  "   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  "   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  "   let g:SuperTabDefaultCompletionTypeDiscovery = [
-  "         \ "&completefunc:<c-x><c-u>",
-  "         \ "&omnifunc:<c-x><c-o>",
-  "         \ ]
-  "   let g:SuperTabDefaultCompletionType = 'context'
-    " let g:SuperTabCrMapping = 0
-    " let g:SuperTabDefaultCompletionType = '<C-n>'
-    " let g:SuperTabContextDefaultCompletionType = '<c-x><c-u>' " breaks case-sensitive completion
-    "
-    " figure out what this does:
-    " autocmd FileType *
-    "       \ if &omnifunc != '' |
-    "       \     call SuperTabChain(&omnifunc, '<c-p>') |
-    "       \ endif
+  Plug 'ervandew/supertab'
 
 
   Plug 'shougo/deoplete.nvim'
-    let g:deoplete#enable_at_startup = 1
-    let g:deoplete#enable_smart_case = 1
 
   Plug 'ctrlpvim/ctrlp.vim'
-    let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
-    let g:ctrlp_switch_buffer=0            " open files in new buffers
-    let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
-    let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
-    let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
-    let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
-    let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
-    let g:ctrlp_arg_map = 0
-    let g:ctrlp_dotfiles = 0               " do not show (.) dotfiles in match list
-    let g:ctrlp_showhidden = 0             " do not show hidden files in match list
-    let g:ctrlp_split_window = 0
-    let g:ctrlp_max_height = 20            " restrict match list to a maxheight of 40
-    let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
-    let g:ctrlp_max_files = 0              " no restriction on results/file list
-    let g:ctrlp_working_path_mode = 0
-    let g:ctrlp_custom_ignore = {
-        \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
-        \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
-        \ }
-    let g:ctrlp_user_command = 'ag %s -i -l --nocolor --nogroup --hidden -g ""'
-    let g:ctrlp_prompt_mappings = {
-        \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
-        \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-        \ 'AcceptSelection("t")': ['<c-t>'],
-        \ 'AcceptSelection("v")': ['<cr>', '<RightMouse>'],
-        \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
-        \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
-        \ 'PrtHistory(-1)':       ['<c-n>'],
-        \ 'PrtHistory(1)':        ['<c-p>'],
-        \ 'ToggleFocus()':        ['<c-tab>'],
-        \}
   Plug 'mileszs/ack.vim'
-    set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
-    let g:ackprg="ag --column --nogroup --line-numbers --vimgrep"
-    let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
-    " https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
-    let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
   Plug 'inside/vim-search-pulse'
-    let g:vim_search_pulse_mode = 'cursor_line'
   Plug 'kopischke/vim-fetch'
 
   """"" Git/Gist ============================================================
@@ -291,16 +144,6 @@ function! LoadPlugs()
   Plug 'tpope/vim-fugitive'
   Plug 'rhysd/conflict-marker.vim'
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
-    let g:gist_put_url_to_clipboard_after_post  = 1
-    let g:gist_show_privates                    = 1
-    let g:gist_post_private                     = 1
-    " detect filetype if vim failed autodetection
-    let g:gist_detect_filetype                  = 1
-    " :w! updates a Gist, not plain :w
-    let g:gist_update_on_write                  = 2
-    if has('macunix')
-      let g:gist_clip_command = 'pbcopy'
-    endif
 
   """"" Snippets ============================================================
   " Snippets information (handy!):
@@ -308,20 +151,12 @@ function! LoadPlugs()
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
   Plug 'SirVer/ultisnips'
-    " better key bindings for UltiSnipsExpandTrigger
-    " Use tab to expand snippet and move to next target. Shift tab goes back.
-    " <C-tab> lists available snippets for the file
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsListSnippets="<c-tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
   " " SnipMate and its dependencies:
   Plug 'fortes/vim-personal-snippets'
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'tomtom/tlib_vim'
   Plug 'honza/vim-snippets'
   Plug 'justinj/vim-react-snippets'
-
   Plug 'jwhitley/vim-matchit'
 endfunction
 
@@ -563,6 +398,11 @@ endif
 set exrc
 set secure " disable unsafe commands in local .vimrc files
 
+
+" =============================================================================
+" Plugin Settings #psettings
+" -----------------------------------------------------------------------------
+"
 """"""" Why do I even have these settings? Please clean.
 let g:JSHintHighlightErrorLine = 1
 let javascript_fold = 0
@@ -574,6 +414,201 @@ let loaded_matchit = 1
 let ruby_fold = 0
 let g:js_indent_log = 1
 let javascript_enable_domhtmlcss=1
+
+""""""" golden-ratio
+let g:golden_ratio_exclude_nonmodifiable = 1
+let g:golden_ratio_wrap_ignored = 0
+let g:golden_ratio_ignore_horizontal_splits = 1
+
+""""""" vim-airline
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline_theme='bubblegum' "gruvbox
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '⭡'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.crypt = '⭤'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.modified = '✭'
+let g:airline_symbols.space = "\ua0"
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#enabled = 0
+let g:airline_mode_map = {
+    \ 'n' : 'NORMAL',
+    \ 'i' : 'INSERT',
+    \ 'R' : 'REPLACE',
+    \ 'v' : 'VISUAL',
+    \ 'V' : 'V-LINE',
+    \ 'c' : 'CMD   ',
+    \ '': 'V-BLCK',
+    \ }
+
+""""""" neomake
+let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_verbose=0
+let g:neomake_warning_sign = {
+    \ 'text': '>',
+    \ 'texthl': 'WarningMsg',
+    \ }
+let g:neomake_error_sign = {
+    \ 'text': '>>',
+    \ 'texthl': 'ErrorMsg',
+    \ }
+
+""""""" rainbow
+let g:rainbow_conf = {
+  \ 'separately' : { 'agsv' : 0 }
+  \ }
+let g:rainbow_active = 1
+
+""""""" vim-test
+let g:test#preserve_screen = 1
+let test#strategy = "neovim"
+let test#javascript#mocha#options = "--colors --compilers js:babel/register"
+let test#javascript#mocha#file_pattern = ".test.js"
+
+""""""" vim-vroom
+let g:vroom_use_colors=1
+let g:vroom_map_keys = 0
+
+""""""" listtoggle
+let g:lt_location_list_toggle_map = '<F3>'
+let g:lt_quickfix_list_toggle_map = '<F4>'
+
+""""""" vim-go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports" " format with goimports instead of gofmt
+
+""""""" vim-markdown
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
+let g:vim_markdown_frontmatter=1
+
+""""""" vim-instant-markdown
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
+
+""""""" vim-javascript-syntax
+let g:used_javascript_libs='react'
+
+""""""" vim-jsx
+let g:jsx_ext_required = 0
+let g:jsx_pragma_required = 0
+
+""""""" vim-mocha
+" let g:mocha_js_command = '!./node_modules/.bin/mocha --compilers js:babel/register {spec}'
+
+""""""" quick-scope
+let g:qs_enable = 0
+
+""""""" supertab
+" handy stuff: https://github.com/ervandew/supertab/issues/53
+" Enable omnicomplete for supported filetypes
+autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
+autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+let g:SuperTabDefaultCompletionTypeDiscovery = [
+      \ "&completefunc:<c-x><c-u>",
+      \ "&omnifunc:<c-x><c-o>",
+      \ ]
+let g:SuperTabDefaultCompletionType = 'context'
+" let g:SuperTabCrMapping = 0
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+" let g:SuperTabContextDefaultCompletionType = '<c-x><c-u>' " breaks case-sensitive completion
+"
+" figure out what this does:
+" autocmd FileType *
+"       \ if &omnifunc != '' |
+"       \     call SuperTabChain(&omnifunc, '<c-p>') |
+"       \ endif
+
+""""""" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+
+""""""" ctrlp
+let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
+let g:ctrlp_switch_buffer=0            " open files in new buffers
+let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
+let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
+let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
+let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
+let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
+let g:ctrlp_arg_map = 0
+let g:ctrlp_dotfiles = 0               " do not show (.) dotfiles in match list
+let g:ctrlp_showhidden = 0             " do not show hidden files in match list
+let g:ctrlp_split_window = 0
+let g:ctrlp_max_height = 20            " restrict match list to a maxheight of 40
+let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
+let g:ctrlp_max_files = 0              " no restriction on results/file list
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
+    \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
+    \ }
+let g:ctrlp_user_command = 'ag %s -i -l --nocolor --nogroup --hidden -g ""'
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
+    \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+    \ 'AcceptSelection("t")': ['<c-t>'],
+    \ 'AcceptSelection("v")': ['<cr>', '<RightMouse>'],
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+    \ 'PrtHistory(-1)':       ['<c-n>'],
+    \ 'PrtHistory(1)':        ['<c-p>'],
+    \ 'ToggleFocus()':        ['<c-tab>'],
+    \}
+
+""""""" ack.vim
+set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
+let g:ackprg="ag --column --nogroup --line-numbers --vimgrep"
+let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
+" https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
+let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
+
+""""""" vim-search-pulse
+let g:vim_search_pulse_mode = 'cursor_line'
+
+""""""" webapi-vim / gist-vim
+let g:gist_put_url_to_clipboard_after_post  = 1
+let g:gist_show_privates                    = 1
+let g:gist_post_private                     = 1
+" detect filetype if vim failed autodetection
+let g:gist_detect_filetype                  = 1
+" :w! updates a Gist, not plain :w
+let g:gist_update_on_write                  = 2
+if has('macunix')
+  let g:gist_clip_command = 'pbcopy'
+endif
+
+""""""" ultisnips
+" better key bindings for UltiSnipsExpandTrigger
+" Use tab to expand snippet and move to next target. Shift tab goes back.
+" <C-tab> lists available snippets for the file
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 
 " =============================================================================
@@ -656,38 +691,6 @@ function! FileTypeToggle(num)
   end
 endfunction
 
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#6699CC', 'none')
-call NERDTreeHighlightFile('config', 'yellow', 'none', '#d8a235', 'none')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', '#d8a235', 'none')
-call NERDTreeHighlightFile('json', 'green', 'none', '#d8a235', 'none')
-call NERDTreeHighlightFile('html', 'yellow', 'none', '#d8a235', 'none')
-call NERDTreeHighlightFile('css', 'cyan', 'none', '#5486C0', 'none')
-call NERDTreeHighlightFile('scss', 'cyan', 'none', '#5486C0', 'none')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
-call NERDTreeHighlightFile('ts', 'Blue', 'none', '#6699cc', 'none')
-call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', 'none')
-call NERDTreeHighlightFile('gitconfig', 'black', 'none', '#686868', 'none')
-call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#7F7F7F', 'none')
-
 
 " =============================================================================
 " Autocommands #autocommands
@@ -723,13 +726,6 @@ endif
 
 " Resize splits when the window is resized
 autocmd VimResized * :wincmd =
-
-" Open nerdtree when no files are specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Allow closing vim if nerdtree is only buffer open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " make quickfix windows take all the lower section of the screen when there are multiple windows open
 autocmd FileType qf wincmd J
@@ -866,9 +862,6 @@ nnoremap <leader>bs :CtrlPBuffer<CR>
 " imap <c-x><c-f> <plug>(fzf-complete-path)
 " imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 
-""""""" Nerdtree
-nnoremap <F2> :NERDTreeToggle . <cr>
-
 """"""" Commenting
 nmap <leader>c :Commentary<cr>
 vmap <leader>c :Commentary<cr>
@@ -918,20 +911,20 @@ nnoremap <leader>a :Ack!<space>
 map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
 
 """""" Testing vim-test
-" nmap <silent> <leader>t :TestNearest<CR>
-" nmap <silent> <leader>T :TestFile<CR>
-" nmap <silent> <leader>a :TestSuite<CR>
-" nmap <silent> <leader>l :TestLast<CR>
-" nmap <silent> <leader>g :TestVisit<CR>
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 """""" Testing (vroom/ruby, mocha, karma, etc)
 au FileType ruby silent! map <unique> <Leader>t :VroomRunTestFile<CR>
 au FileType ruby silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
 au FileType ruby silent! map <unique> <Leader>l :VroomRunLastTest<CR>
-au FileType javascript silent! map <unique> <Leader>t :call RunCurrentSpecFile()<CR>
-au FileType javascript silent! map <unique> <Leader>T :call RunNearestSpec()<CR>
-au FileType javascript silent! map <unique> <Leader>l :call RunLastSpec()<CR>
-au FileType javascript silent! map <unique> <Leader>a :call RunAllSpecs()<CR>
+" au FileType javascript silent! map <unique> <Leader>t :call RunCurrentSpecFile()<CR>
+" au FileType javascript silent! map <unique> <Leader>T :call RunNearestSpec()<CR>
+" au FileType javascript silent! map <unique> <Leader>l :call RunLastSpec()<CR>
+" au FileType javascript silent! map <unique> <Leader>a :call RunAllSpecs()<CR>
 
 """"""" VOLTRON.JS
 " Run `npm run build` from a JS or SCSS file
@@ -941,9 +934,6 @@ au FileType *.{scss,js,jsx} nnoremap <leader>b :Dispatch npm run build<cr>
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
 vnoremap <leader>G :Gist -p<cr>
-
-""""""" Syntastic
-nnoremap <F7> :SyntasticCheck<cr>
 
 """"""" Surround
 vmap [ S]
@@ -1105,6 +1095,7 @@ nnoremap <leader>sh :below 10sp term://$SHELL<cr>
 augroup terminal_insert
   autocmd!
   autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  autocmd BufWinEnter,WinEnter term://* startinsert
 augroup END
 
 """"""" VOLTRON.JS
