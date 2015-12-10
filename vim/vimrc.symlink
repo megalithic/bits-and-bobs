@@ -609,9 +609,10 @@ function! BufEnterCommit()
     start
   end
   " force spell when doing a git commit
-  if  bufname("%")=="COMMIT_EDITMSG"
-      set spell
-      set spelllang=en
+  if bufname("%")=="COMMIT_EDITMSG"
+    let b:deoplete_disable_auto_complete=1
+    set spell
+    set spelllang=en
   endif
 endfunction
 
@@ -747,6 +748,7 @@ augroup filetypes
 
   " Markdown turn off lazyredraw
   autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
+  autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} let b:deoplete_disable_auto_complete=1
   autocmd FileType markdown set tw=80
   " autocmd BufRead,BufNewFile *.md setlocal spell complete+=kspell " SLOW
   " autocmd BufWritePost *.{md,mdwn,mkd,mkdn,mark*} InstantMarkdownPreview " automagically do a thing with your markdown file
