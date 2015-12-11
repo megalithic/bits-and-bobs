@@ -230,6 +230,9 @@ alias conflicted="git ls-files -u | cut -f 2 | sort -u"
 alias grm="git status | grep deleted | awk '{\$1=\$2=\"\"; print \$0}' | \
            perl -pe 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
 
+## - React/React-Native -----------------------------------------------
+alias rn='react-native'
+
 ## - RUBY / RAILS -----------------------------------------------
 alias be="bundle exec"
 alias br="bundle exec ruby"
