@@ -9,8 +9,8 @@ fpath=($ZSH/functions $fpath)
 autoload -U $ZSH/functions/*(:t)
 
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000
+SAVEHIST=1000
 
 setopt NO_BG_NICE # don't nice background tasks
 setopt NO_HUP
@@ -47,11 +47,14 @@ setopt inc_append_history # Add comamnds as they are typed, don't wait until she
 setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
 setopt hist_expire_dups_first # when trimming history, lose oldest duplicates first
 setopt hist_ignore_dups # Do not write events to history that are duplicates of previous events
+setopt HIST_IGNORE_ALL_DUPS # If a new command line being added to the history list duplicates an older one, the older command is removed from the list (even if it is not the previous event)
+setopt HIST_SAVE_NO_DUPS # When writing out the history file, older commands that duplicate newer ones are omitted.
 setopt hist_ignore_space # remove command line from history list when first character on the line is a space
 setopt hist_find_no_dups # When searching history don't display results already cycled through twice
 setopt hist_reduce_blanks # Remove extra blanks from each command line being added to history
 setopt hist_verify # don't execute, just expand history
 setopt share_history # imports new commands and appends typed commands to history
+setopt histignoredups
 
 # ===== Completion
 setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word
