@@ -123,6 +123,8 @@ function! LoadPlugs()
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'mileszs/ack.vim'
   Plug 'inside/vim-search-pulse'
+  Plug 'kana/vim-operator-user'
+  Plug 'haya14busa/vim-operator-flashy'
   Plug 'kopischke/vim-fetch'
 
   """"" Git/Gist ============================================================
@@ -972,6 +974,12 @@ noremap <silent><leader>W :w !sudo tee %<CR>
 vnoremap <c-z> <esc>zv`<ztgv
 
 """"""" Search / Substitutions / Replacements
+""""""" incsearch.vim
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" clear incsearch term
 nnoremap <silent><Leader><space> :nohls<CR>
 nnoremap / /\v
 vnoremap / /\v
@@ -998,6 +1006,10 @@ nnoremap Y y$
 vmap <silent><leader>y "xy
 map <silent><leader>p "xp
 vmap <silent> <expr> p <sid>Repl()
+
+""""""" vim-operator-flashy
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
 
 " Go to end of text you've just pasted
 vnoremap <silent> y y`]
