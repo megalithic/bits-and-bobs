@@ -52,7 +52,6 @@ function! LoadPlugs()
   Plug 'ciaranm/detectindent'
   Plug 'zaiste/tmux.vim'
   Plug 'haya14busa/incsearch.vim'
-  Plug 'vim-scripts/IndexedSearch'
   Plug 'jordwalke/VimAutoMakeDirectory'
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-endwise' " automagically add end/endfunction/endif/etc
