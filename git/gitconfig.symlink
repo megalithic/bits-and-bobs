@@ -43,6 +43,10 @@
 
   cl = clone
 
+  # stash
+  sshow = "!f() { git stash show stash^{/$*} -p; }; f"
+  sapply = "!f() { git stash apply stash^{/$*}; }; f"
+
   di = diff
   dc = diff --cached
   df = diff
