@@ -125,17 +125,15 @@ function! LoadPlugs()
   Plug 'unblevable/quick-scope'
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
-  Plug 'nelstrom/vim-visual-star-search'
+  Plug 'bronson/vim-visual-star-search'
   Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
   Plug 'ervandew/supertab'
   Plug 'shougo/deoplete.nvim'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'mileszs/ack.vim'
   Plug 'inside/vim-search-pulse'
-  Plug 'kana/vim-operator-user'
-  Plug 'haya14busa/vim-operator-flashy'
   Plug 'kopischke/vim-fetch'
-
+  Plug 'kana/vim-operator-user'
   " provide ai and ii for indent blocks
   " provide al and il for current line
   " provide a_ and i_ for underscores
@@ -774,12 +772,6 @@ if exists(':Neomake')
   autocmd BufRead,BufWritePost,BufEnter *.js,*.jsx silent! Neomake standard|redraw
 endif
 
-" Resize splits when the window is resized
-autocmd VimResized * :wincmd =
-
-" make quickfix windows take all the lower section of the screen when there are multiple windows open
-autocmd FileType qf wincmd J
-
 augroup ColorColumnGroup
   " Color Column (only on insert)
   if exists("&colorcolumn")
@@ -813,9 +805,6 @@ augroup END
 augroup filetypes
   " clear commands before resetting
   autocmd!
-
-  " Emmet
-  " autocmd FileType html,css EmmetInstall
 
   " Markdown turn off lazyredraw
   autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
