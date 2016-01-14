@@ -148,7 +148,7 @@ function! LoadPlugs()
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
-  Plug 'rhysd/committia.vim'
+  " Plug 'rhysd/committia.vim'
   Plug 'rhysd/conflict-marker.vim'
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 
@@ -613,21 +613,21 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 """"""" committia.vim
 " let g:committia_use_singlecolumn='always'
-let g:committia_hooks = {}
-function! g:committia_hooks.edit_open(info)
-  " Additional settings
-  setlocal spell
+" let g:committia_hooks = {}
+" function! g:committia_hooks.edit_open(info)
+"   " Additional settings
+"   setlocal spell
 
-  " If no commit message, start with insert mode
-  if a:info.vcs ==# 'git' && getline(1) ==# ''
-      startinsert
-  end
+"   " If no commit message, start with insert mode
+"   if a:info.vcs ==# 'git' && getline(1) ==# ''
+"     startinsert
+"   end
 
-  " Scroll the diff window from insert mode
-  " Map <C-n> and <C-p>
-  imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
-  imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
-endfunction
+"   " Scroll the diff window from insert mode
+"   " Map <C-n> and <C-p>
+"   imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
+"   imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
+" endfunction
 
 " =============================================================================
 " Custom Functions #cfunctions
@@ -795,7 +795,7 @@ augroup GitGroup
   autocmd BufReadCmd *.git/index exe BufReadIndex()
   autocmd BufEnter *.git/index silent normal gg0j
   " being handled by committia.vim now:
-  " autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
+  autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
 augroup END
 
 
@@ -1066,8 +1066,8 @@ map <silent><leader>p "xp
 vmap <silent> <expr> p <sid>Repl()
 
 """"""" vim-operator-flashy
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
+" map y <Plug>(operator-flashy)
+" nmap Y <Plug>(operator-flashy)$
 
 " Go to end of text you've just pasted
 vnoremap <silent> y y`]
