@@ -77,15 +77,20 @@ function! LoadPlugs()
   Plug 'tpope/vim-rake'
 
   """"""" Markdown
+  Plug 'vim-pandoc/vim-pandoc-syntax'
   Plug 'tpope/vim-markdown', {'for': ['markdown','md','mdown']}
-  Plug 'suan/vim-instant-markdown'
+  Plug 'suan/vim-instant-markdown', {
+    \   'do': 'npm install -g instant-markdown-d'
+    \ }
 
   """"""" CSS/SCSS/LESS
+  " Plug 'aaronjensen/vim-sass-status', { 'for': ['scss', 'sass'] }
   Plug 'groenewege/vim-less', { 'for': 'less' }
-  Plug 'aaronjensen/vim-sass-status', { 'for': ['scss', 'sass'] }
-  Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss', 'sass'] }
-  Plug 'hail2u/vim-css3-syntax', { 'for': ['scss', 'sass', 'css'] }
-  Plug 'JulesWang/css.vim', { 'for': ['css', 'less'] }
+  Plug 'JulesWang/css.vim', { 'for': ['css', 'less', 'sass', 'scss'] }
+    \| Plug 'hail2u/vim-css3-syntax', { 'for': ['scss', 'sass', 'css'] }
+    \| Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss', 'sass'] }
+  Plug 'ap/vim-css-color'
+  Plug 'othree/csscomplete.vim'
 
   """"""" HTML/HAML/SLIM/Markup
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
@@ -96,20 +101,25 @@ function! LoadPlugs()
   Plug 'tpope/vim-haml', { 'for': ['haml', 'hamlc', 'sass', 'scss'] }
 
   """"""" JavaScript/CoffeeScript
-  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   Plug 'othree/yajs.vim', { 'for': ['javascript'] }
-  Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-  Plug '1995eaton/vim-better-javascript-completion'
-  Plug 'lukaszb/vim-web-indent'
   Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
-  Plug 'Shutnik/jshint2.vim', { 'on': 'JSHint' }
+  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+  Plug '1995eaton/vim-better-javascript-completion'
+  Plug 'othree/jspc.vim'
+  " Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+  " Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+  Plug 'lukaszb/vim-web-indent'
   Plug 'burnettk/vim-angular', { 'for': 'javascript' }
   Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
-  Plug 'helino/vim-json', { 'for': 'json' }
+  Plug 'elzr/vim-json', { 'for': 'json' }
+  " Plug 'helino/vim-json', { 'for': 'json' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript'] }
   Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
+
+  " <leader>pd on function to insert jsdoc above
+  " Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+  Plug 'davidosomething/vim-jsdoc', { 'for': 'javascript' }
 
   """"" Code Navigation======================================================
   Plug 'unblevable/quick-scope'
@@ -126,9 +136,21 @@ function! LoadPlugs()
   Plug 'haya14busa/vim-operator-flashy'
   Plug 'kopischke/vim-fetch'
 
+  " provide ai and ii for indent blocks
+  " provide al and il for current line
+  " provide a_ and i_ for underscores
+  " provide a- and i-
+  " provide a= and i= for conflicts
+  Plug 'kana/vim-textobj-user'
+    \| Plug 'kana/vim-textobj-indent'
+    \| Plug 'kana/vim-textobj-line'
+    \| Plug 'mattn/vim-textobj-url'
+    \| Plug 'rhysd/vim-textobj-conflict'
+
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
+  Plug 'rhysd/committia.vim'
   Plug 'rhysd/conflict-marker.vim'
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 
@@ -591,6 +613,23 @@ let g:UltiSnipsListSnippets="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+""""""" committia.vim
+let g:committia_use_singlecolumn='always'
+let g:committia_hooks = {}
+function! g:committia_hooks.edit_open(info)
+  " Additional settings
+  setlocal spell
+
+  " If no commit message, start with insert mode
+  if a:info.vcs ==# 'git' && getline(1) ==# ''
+      startinsert
+  end
+
+  " Scroll the diff window from insert mode
+  " Map <C-n> and <C-p>
+  imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
+  imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
+endfunction
 
 " =============================================================================
 " Custom Functions #cfunctions
