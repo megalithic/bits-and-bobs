@@ -614,7 +614,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 """"""" committia.vim
-let g:committia_use_singlecolumn='always'
+" let g:committia_use_singlecolumn='always'
 let g:committia_hooks = {}
 function! g:committia_hooks.edit_open(info)
   " Additional settings
@@ -802,7 +802,8 @@ augroup GitGroup
 
   autocmd BufReadCmd *.git/index exe BufReadIndex()
   autocmd BufEnter *.git/index silent normal gg0j
-  autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
+  " being handled by committia.vim now:
+  " autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
 augroup END
 
 
