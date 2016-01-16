@@ -12,7 +12,7 @@ set -gx OMF_PATH "/Users/seth.messer/.local/share/omf"
 # Load oh-my-fish configuration.
 source $OMF_PATH/init.fish
 
-set fish_plugins pbcopy balias bang-bang gem nvm ruby brew
+set fish_plugins pbcopy balias bang-bang gem nvm brew
 
 set fish_greeting ""
 set -x LC_CTYPE ja_JP.UTF-8
@@ -43,7 +43,7 @@ set -x ANDROID_HOME /usr/local/opt/android-sdk
 
 # Setup terminal, and turn on 256 colors
 set -x TERM 'xterm-256color'
-[ -n "$TMUX" ] && export TERM screen-256color
+# [ -n "$TMUX" ] && export TERM screen-256color
 
 # Enable color in grep
 set -x GREP_OPTIONS '--color=auto'
@@ -194,117 +194,6 @@ function gl
   git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" $argv | fzf --ansi --no-sort --reverse --tiebreak=index --toggle-sort=\` --bind "ctrl-m:execute: echo '{}' | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show --color=always % | less -R'"
 end
 
-function e
-  set -l arg $argv[1]
-  set -l cmd "emacs -fs "
-
-  if [ (pgrep -x -u $USER emacs) ]
-    set cmd "emacsclient"
-  end
-
-  if test -e $arg
-    eval $cmd $arg "&"
-    return
-  else
-    if echo $arg | grep -q -E '\.\w+$'
-      eval $cmd $arg "&"
-      return
-      end
-      set -l q ""
-      if [ $arg ]
-        set q $arg
-      end
-      fzf -q $q | read file
-      if [ $file ]
-        eval $cmd $file "&"
-      end
-  end
-end
-
-function _gb
-  if test -e "src" -a -e "vendor"
-    set -l gopath (pwd):(pwd)/vendor
-    set -gx GOPATH $gopath
-    set -gx GB_PROJECT (pwd)
-  else
-    if test $GB_PROJECT
-      set -l path (pwd)
-      set -l gb $GB_PROJECT
-      switch $path
-              case "*$gb*"
-              case "*"
-                set -e GB_PROJECT
-                set -gx GOPATH "$HOME/go"
-          end
-      else
-        set -gx GOPATH "$HOME/go"
-      end
-  end
-end
-
-function chpwd --on-variable PWD
-  status --is-command-substitution; and return
-  _gb
-  ll
-end
-
-if [ (pgrep -x -u $USER gpg-agent) ]
-else
-  gpg-connect-agent /bye >/dev/null 2>&1
-end
-set -e SSH_AGENT_PID
-set -e SSH_ASKPASS
-set -x SSH_AUTH_SOCK "$HOME/.gnupg/S.gpg-agent.ssh"
-
-# Set GPG TTY
-set -x GPG_TTY (tty)
-
-# Load oh-my-fish configuration.
-source $OMF_PATH/init.fish
-
-source ~/.config/fish/nvm-wrapper/nvm.fish
-nvm use --silent default
-source ~/.enhancd/fish/enhancd.fish
-alias ecd cd::cd
-
-if status --is-login
-  set -l host (hostname)
-  set PPID (echo (ps --pid %self -o ppid --no-headers) | xargs)
-  if ps --pid $PPID | grep ssh
-    tmux has-session -t $host; and tmux attach-session -t $host; or tmux new-session -s $host; and kill %self
-    echo "tmux failed to start; using plain fish shell"
-  end
-end
-
-if not set -q AUTOENVFISH_FILE
-  set -g AUTOENVFISH_FILE ".env.fish"
-end
-
-function _autoenvfish --on-variable PWD
-  if status --is-command-substitution
-    return
-  end
-
-  set -l envfishdir $PWD
-  while test ! "$envfishdir" = "" -a ! -f "$envfishdir/$AUTOENVFISH_FILE"
-    set envfishdir (echo "$envfishdir" | sed 's|/[^/]*$||')
-  end
-  set -l envfishpath "$envfishdir/$AUTOENVFISH_FILE"
-  if [ $envfishpath != "$AUTOENVFISH" ]
-    if [ -f $envfishpath ]
-      set -gx AUTOENVFISH $envfishpath
-      else
-        set -ex AUTOENVFISH
-      end
-  end
-end
-
-function _source_envfish --on-variable AUTOENVFISH
-  if [ -f "$AUTOENVFISH" ]
-    echo "loading $AUTOENVFISH"
-    . $AUTOENVFISH
-  end
-end
 
 # prompt
 function _hg_branch_name
@@ -330,7 +219,7 @@ function fish_prompt
   set -l cyan (set_color cyan)
   set -l normal (set_color normal)
 
-  set -l arrow "λ"
+  set -l arrow "❯"
   set -l host (hostname)
   set -l cwd $blue(basename (prompt_pwd))
 
