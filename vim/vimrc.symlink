@@ -65,7 +65,7 @@ function! LoadPlugs()
   Plug 'tpope/vim-repeat'
   Plug 'romainl/vim-qf'
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'janko-m/vim-test', { 'for': 'javascript' }
+  Plug 'janko-m/vim-test'
   Plug 'skalnik/vim-vroom'
   Plug 'Valloric/ListToggle'
 
@@ -121,6 +121,7 @@ function! LoadPlugs()
   " Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
   Plug 'davidosomething/vim-jsdoc', { 'for': 'javascript' }
 
+  Plug 'dag/vim-fish'
   """"" Code Navigation======================================================
   Plug 'unblevable/quick-scope'
   Plug 'wellle/targets.vim'
@@ -663,33 +664,33 @@ function! DeleteTrailingWS()
 endfunction
 
 " Neovim Terminal
-tnoremap <F12> <C-\><C-n>
-set switchbuf+=useopen
-function! TermEnter()
-  let bufcount = bufnr("$")
-  let currbufnr = 1
-  let nummatches = 0
-  let firstmatchingbufnr = 0
-  while currbufnr <= bufcount
-    if(bufexists(currbufnr))
-      let currbufname = bufname(currbufnr)
-      if(match(currbufname, "term://") > -1)
-        echo currbufnr . ": ". bufname(currbufnr)
-        let nummatches += 1
-        let firstmatchingbufnr = currbufnr
-        break
-      endif
-    endif
-    let currbufnr = currbufnr + 1
-  endwhile
-  if(nummatches >= 1)
-    execute ":sbuffer ". firstmatchingbufnr
-    startinsert
-  else
-    execute ":terminal"
-  endif
-endfunction
-map <F12> :call TermEnter()<CR>
+" tnoremap <F12> <C-\><C-n>
+" set switchbuf+=useopen
+" function! TermEnter()
+"   let bufcount = bufnr("$")
+"   let currbufnr = 1
+"   let nummatches = 0
+"   let firstmatchingbufnr = 0
+"   while currbufnr <= bufcount
+"     if(bufexists(currbufnr))
+"       let currbufname = bufname(currbufnr)
+"       if(match(currbufname, "term://") > -1)
+"         echo currbufnr . ": ". bufname(currbufnr)
+"         let nummatches += 1
+"         let firstmatchingbufnr = currbufnr
+"         break
+"       endif
+"     endif
+"     let currbufnr = currbufnr + 1
+"   endwhile
+"   if(nummatches >= 1)
+"     execute ":sbuffer ". firstmatchingbufnr
+"     startinsert
+"   else
+"     execute ":terminal"
+"   endif
+" endfunction
+" map <F12> :call TermEnter()<CR>
 
 " prevent replacing paste buffer on paste:
 " vp doesn't replace paste buffer
@@ -844,6 +845,14 @@ augroup filetypes
   " Fix slow Ruby editing
   " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
   autocmd Filetype ruby setlocal foldmethod=manual
+
+  " FISH
+  " Set up :make to use fish for syntax checking.
+  autocmd Filetype fish compiler fish
+  " Set this to have long lines wrap inside comments.
+  autocmd Filetype fish setlocal textwidth=79
+  " Enable folding of block structures in fish.
+  autocmd Filetype fish setlocal foldmethod=expr
 augroup END
 
 
