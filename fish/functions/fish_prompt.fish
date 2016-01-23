@@ -1,112 +1,76 @@
-#!/usr/bin/env fish
-# vim: set ft=sh:
+function _pwd_with_tilde
+  echo $PWD | sed 's|^'$HOME'\(.*\)$|~\1|'
+end
 
-# Pure
-# by Rafael Rinaldi
-# https://github.com/rafaelrinaldi/pure
-# MIT License
+function _in_git_directory
+  git rev-parse --git-dir > /dev/null 2>&1
+end
 
-# Whether or not is a fresh session
-set -g fresh_session 1
+function _git_branch_name_or_revision
+  set -l branch (git symbolic-ref HEAD ^ /dev/null | sed -e 's|^refs/heads/||')
+  set -l revision (git rev-parse HEAD ^ /dev/null | cut -b 1-7)
 
-# Symbols
+  if test (count $branch) -gt 0
+    echo $branch
+  else
+    echo $revision
+  end
+end
 
-set -g symbol_prompt "❯"
-set -g symbol_git_down_arrow "⇣"
-set -g symbol_git_up_arrow "⇡"
-set -g symbol_git_dirty "*"
-set -g symbol_horizontal_bar "—"
+function _git_upstream_configured
+  git rev-parse --abbrev-ref @"{u}" > /dev/null 2>&1
+end
 
-# Colors
+function _git_behind_upstream
+  test (git rev-list --right-only --count HEAD...@"{u}" ^ /dev/null) -gt 0
+end
 
-set -g color_red (set_color red)
-set -g color_green (set_color green)
-set -g color_blue (set_color blue)
-set -g color_yellow (set_color yellow)
-set -g color_cyan (set_color cyan)
-set -g color_gray (set_color 93A1A1)
-set -g color_normal (set_color normal)
+function _git_ahead_of_upstream
+  test (git rev-list --left-only --count HEAD...@"{u}" ^ /dev/null) -gt 0
+end
+
+function _git_upstream_status
+  set -l arrows
+
+  if _git_upstream_configured
+    if _git_behind_upstream
+      set arrows "$arrows⇣"
+    end
+
+    if _git_ahead_of_upstream
+      set arrows "$arrows⇡"
+    end
+  end
+
+  echo $arrows
+end
+
+function _print_in_color
+  set -l string $argv[1]
+  set -l color  $argv[2]
+
+  set_color $color
+  printf $string
+  set_color normal
+end
+
+function _prompt_color_for_status
+  if test $argv[1] -eq 0
+    echo magenta
+  else
+    echo red
+  end
+end
 
 function fish_prompt
-  # Save previous exit code
-  set -l exit_code $status
+  set -l last_status $status
 
-  # Set default color symbol to green meaning it's all good!
-  set -l color_symbol $color_green
+  _print_in_color "\n"(_pwd_with_tilde) blue
 
-  # Template
-
-  set -l current_folder (__parse_current_folder)
-  set -l git_branch_name ""
-  set -l git_dirty ""
-  set -l git_arrows ""
-  set -l command_duration ""
-  set -l prompt ""
-
-  # Do not add a line break to a brand new session
-  if test $fresh_session -eq 0
-    set prompt $prompt "\n"
+  if _in_git_directory
+    _print_in_color " "(_git_branch_name_or_revision) 242
+    _print_in_color " "(_git_upstream_status) cyan
   end
 
-  # Format current folder on prompt output
-  set prompt $prompt "$color_blue$current_folder$color_normal "
-
-  # Handle previous failed command
-  if test $exit_code -ne 0
-    # Symbol color is red when previous command fails
-    set color_symbol $color_red
-
-    # Prompt failed command execution duration
-    set command_duration (__format_time $CMD_DURATION)
-
-    set prompt $prompt "$color_yellow$command_duration$color_normal"
-  end
-
-  # Exit with code 1 if git is not available
-  if not command -s git >/dev/null
-    return 1
-  end
-
-  # Check if is on a Git repository
-  set -l is_git_repository (command git rev-parse --is-inside-work-tree ^/dev/null)
-
-  if test -n "$is_git_repository"
-    set git_branch_name (__parse_git_branch)
-
-    # Check if there are files to commit
-    set -l is_git_dirty (command git status --porcelain --ignore-submodules ^/dev/null)
-
-    if test -n "$is_git_dirty"
-      set git_dirty $symbol_git_dirty
-    end
-
-    # Check if there is an upstream configured
-    set -l has_upstream (command git rev-parse --abbrev-ref @'{u}' ^/dev/null)
-
-    if test -n "$has_upstream"
-      set -l git_status (command git rev-list --left-right --count HEAD...@'{u}' | sed "s/[[:blank:]]/ /" ^/dev/null)
-
-      # Resolve Git arrows by treating `git_status` as an array
-      set -l git_arrow_left (command echo $git_status | cut -c 1 ^/dev/null)
-      set -l git_arrow_right (command echo $git_status | cut -c 3 ^/dev/null)
-
-    # If arrow is not "0", it means it's dirty
-      if test $git_arrow_left -ne "0"
-        set git_arrows $symbol_git_up_arrow
-      end
-
-      if test $git_arrow_right -ne "0"
-        set git_arrows $git_arrows$symbol_git_down_arrow
-      end
-    end
-
-    # Format Git prompt output
-    set prompt $prompt "$color_gray$git_branch_name$git_dirty$color_normal\t$color_cyan$git_arrows$color_normal"
-  end
-
-  set prompt $prompt "\n$color_symbol$symbol_prompt$color_normal "
-
-  echo -e -s $prompt
-
-  set fresh_session 0
+  _print_in_color "\n❯ " (_prompt_color_for_status $last_status)
 end

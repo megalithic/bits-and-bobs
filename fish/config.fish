@@ -1,20 +1,22 @@
 #!/usr/bin/env fish
-#
+
 set fisher_home ~/fisherman
 set fisher_config ~/.config/fisherman
 source $fisher_home/config.fish
+
 # Path to Oh My Fish install.
-set -gx OMF_PATH "/Users/seth.messer/.local/share/omf"
+# set -gx OMF_PATH "/Users/seth.messer/.local/share/omf"
 
 # Customize Oh My Fish configuration path.
 #set -gx OMF_CONFIG "/Users/seth.messer/.config/omf"
 
 # Load oh-my-fish configuration.
-source $OMF_PATH/init.fish
+# source $OMF_PATH/init.fish
 
-set fish_plugins pbcopy balias bang-bang gem nvm brew
+# set fish_plugins pbcopy balias bang-bang gem nvm brew
 
 set fish_greeting ""
+
 set -x LC_CTYPE ja_JP.UTF-8
 set -x LANG ja_JP.UTF-8
 set -x ANSIBLE_NOCOWS 1
@@ -31,7 +33,6 @@ set -x BROWSER chrome
 # we take out the slash, period, angle brackets, dash here.
 set -x WORDCHARS '*?_[]~=&;!#$%^(){}'
 set -x ACK_COLOR_MATCH 'red'
-# export CC=/usr/bin/gcc
 set -x DISPLAY :0.0
 
 set -x KEYTIMEOUT 1
@@ -43,7 +44,8 @@ set -x ANDROID_HOME /usr/local/opt/android-sdk
 
 # Setup terminal, and turn on 256 colors
 set -x TERM 'xterm-256color'
-# [ -n "$TMUX" ] && export TERM screen-256color
+# [ -n "$TMUX" ] &&
+set -x TERM screen-256color
 
 # Enable color in grep
 set -x GREP_OPTIONS '--color=auto'
@@ -51,36 +53,12 @@ set -x GREP_COLOR '3;33'
 
 # This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions
 set -x ARCHFLAGS '-arch x86_64'
-
 set -x LESS '--ignore-case --raw-control-chars'
 set -x PAGER 'less'
-
-# CTAGS Sorting in VIM/Emacs is better behaved with this in place
-set -x LC_COLLATE C
-
-# Custom GC options for custom compiled 1.9.3 rubies
-set -x RUBY_GC_MALLOC_LIMIT 1000000000
-set -x RUBY_GC_HEAP_FREE_SLOTS 500000
-set -x RUBY_GC_HEAP_INIT_SLOTS 40000
-
-set -x ECLIPSE_HOME /Applications/Eclipse
-# export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
 
 # This setting is for the new UTF-8 terminal support
 set -x LC_CTYPE en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
-
-set -x MANPATH "/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-
-set -x MYSQL /usr/local/mysql/bin
-set -x DYLD_LIBRARY_PATH /usr/local/mysql/lib:$DYLD_LIBRARY_PATH
-# export DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH
-set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH:.:/usr/local/lib
-
-# setup docker
-# export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-# export DOCKER_TLS_VERIFY=1
-# export DOCKER_HOST=tcp://192.168.59.103:2376 # modify to correct IP/port $(boot2docker ip)
 
 # Setting ag as the default source for fzf
 set -x FZF_DEFAULT_COMMAND 'ag -l -g ""'
@@ -97,6 +75,12 @@ set -x DOTPATH "$HOME/.dotfiles"
 set -x GOROOT "$HOME/opt/go"
 set -x GOPATH "$HOME/go"
 
+set -x MANPATH "/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+set -x MYSQL /usr/local/mysql/bin
+set -x DYLD_LIBRARY_PATH /usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+# export DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH
+set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH:.:/usr/local/lib
+
 set -gx PATH /usr/local/sbin $PATH
 set -gx PATH /usr/local/bin $PATH
 set -gx PATH $DOTPATH/bin $GOROOT/bin $GOPATH/bin $JAVA_HOME/bin $HOME/.gem/ruby/2.2.0/bin/ $HOME/.local/bin $PATH
@@ -105,13 +89,6 @@ set -gx PATH /usr/local/lib/node_modules $PATH
 set -gx PATH /usr/local/opt/go/libexec/bin $PATH
 # make sure gnu-sed works as sed
 set -gx PATH /usr/local/opt/gnu-sed/libexec/gnubin $PATH
-
-alias tmux "tmux -2"
-alias tm "tmux -2"
-alias tma "tmux attach"
-alias tml "tmux list-window"
-alias g "git"
-alias v "vim -X"
 
 function fzf_select_history
   history|fzf|read slct
@@ -127,13 +104,6 @@ function fish_user_key_bindings
   bind \cr fzf_select_history
 end
 
-function gcd
-  ghq list -p|fzf|read slct
-  if [ $slct ]
-    cd $slct
-  end
-end
-
 function fkill
   ps -ef|sed 1d|fzf|awk '{print $2}'|read slct
   if [ $slct ]
@@ -141,59 +111,9 @@ function fkill
   end
 end
 
-function fps
-  ps -ef|sed 1d|fzf|awk '{print $2}'|read slct
-  if [ $slct ]
-    echo $slct
-  end
-end
-
-function fstrace
-  ps -ef|sed 1d|fzf|awk '{print $2}'|read slct
-  if [ $slct ]
-    sudo strace -tt -s 1024 $argv -p $slct
-  end
-end
-
-function cdf
-  set -l q ""
-  if [ $argv[1] ]
-    set q $argv[1]
-  end
-  fzf -q $q|read file
-  if [ $file ]
-    set -l dir (dirname $file)
-    if [ $dir ]
-      cd $dir
-      end
-  end
-end
-
-function gco
-  git branch --all | grep -v HEAD|fzf|read slct
-  if [ $slct ]
-    git checkout (echo "$slct" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
-  end
-end
-
-function gpush
-  git branch -r | grep -v HEAD|fzf|read slct
-  if [ $slct ]
-    eval git push -v (echo $slct | sed "s/\// /")
-  end
-end
-
-function gpull
-  git branch -r | grep -v HEAD|fzf|read slct
-  if [ $slct ]
-    eval git pull -v (echo $slct | sed "s/\// /")
-  end
-end
-
-function gl
-  git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" $argv | fzf --ansi --no-sort --reverse --tiebreak=index --toggle-sort=\` --bind "ctrl-m:execute: echo '{}' | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show --color=always % | less -R'"
-end
-
+source /usr/local/share/chruby/chruby.fish
+source $HOME/.config/fish/functions/aliases.fish
+# source $HOME/.config/fish/functions/fish_prompt.fish
 
 # prompt
 function _hg_branch_name

@@ -58,13 +58,14 @@ function! LoadPlugs()
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch' " unix shell commands for vim
   Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-dispatch'
     " - {Visual}S<arg> surrounds selection
     " - cs/ds<arg1><arg2> change / delete
     " - ys<obj><arg> surrounds text object
     " - yss<arg> for entire line
   Plug 'tpope/vim-repeat'
   Plug 'romainl/vim-qf'
-  Plug 'editorconfig/editorconfig-vim'
+  " Plug 'editorconfig/editorconfig-vim'
   Plug 'janko-m/vim-test'
   Plug 'skalnik/vim-vroom'
   Plug 'Valloric/ListToggle'
