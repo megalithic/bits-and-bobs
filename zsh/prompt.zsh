@@ -31,7 +31,7 @@ ZSH_VCS_PROMPT_USING_PYTHON='true'
 ZSH_VCS_PROMPT_CONFLICTS_SIGIL='✖ '
 ZSH_VCS_PROMPT_LOGGING_LEVEL=0
 
-PURE_GIT_PULL=0
+PURE_GIT_PULL=1
 
 # Setup zsh-git-prompt
 # https://github.com/olivierverdier/zsh-git-prompt
