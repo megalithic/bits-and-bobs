@@ -8,6 +8,9 @@
 # .zlogin: [[ -o login ]]
 #
 
+# vi mode
+bindkey -v
+
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
@@ -86,5 +89,3 @@ source ~/.dotfiles/bin/z.sh
 # We already source these with the glob pattern around L18.
 # ===========================================================================
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-bindkey -e

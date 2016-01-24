@@ -129,8 +129,8 @@ function! LoadPlugs()
   Plug 'unblevable/quick-scope'
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
-  Plug 'bronson/vim-visual-star-search'
-  Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
+  " Plug 'bronson/vim-visual-star-search'
+  " Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
   Plug 'ervandew/supertab'
   Plug 'shougo/deoplete.nvim'
   Plug 'ctrlpvim/ctrlp.vim'
@@ -161,7 +161,8 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  Plug 'SirVer/ultisnips'
+  " Plug 'SirVer/ultisnips'
+  Plug 'alexlafroscia/ultisnips'
   " " SnipMate and its dependencies:
   Plug 'fortes/vim-personal-snippets'
   Plug 'MarcWeber/vim-addon-mw-utils'
@@ -472,11 +473,11 @@ let g:airline_mode_map = {
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_verbose=0
 let g:neomake_warning_sign = {
-    \ 'text': '>',
+    \ 'text': '⚑',
     \ 'texthl': 'WarningMsg',
     \ }
 let g:neomake_error_sign = {
-    \ 'text': '>>',
+    \ 'text': '✖',
     \ 'texthl': 'ErrorMsg',
     \ }
 
@@ -776,7 +777,7 @@ autocmd BufWrite * silent call DeleteTrailingWS()
 " Auto lint on buffer write and enter
 if exists(':Neomake')
   " Check for lint errors on open & write
-  autocmd BufRead,BufWritePost,BufEnter *.js,*.jsx silent! Neomake standard|redraw
+  autocmd BufWritePost *.js,*.jsx silent! Neomake standard|redraw
 endif
 
 augroup ColorColumnGroup
