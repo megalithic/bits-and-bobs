@@ -64,21 +64,11 @@ chruby ruby-2.1.3
 export NVM_DIR="$HOME/.nvm"
 [[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
 
-# setup hub (aliased to git)
-eval "$(hub alias -s)"
-
 # z.sh init
 source ~/.dotfiles/bin/z.sh
 
 # always launch docker dev env
 # eval $(docker-machine env dev) # breaks tmux and auto-run from iterm2
-
-# Use custom terminfo if exists (for neovim keybinding issues)
-# https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
-# [[ -f "~/.dotfiles/zsh/$TERM.ti" ]] && infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.dotfiles/zsh/$TERM.ti; tic ~/.dotfiles/zsh/$TERM.ti
-#
-## [[ -f "~/.dotfiles/zsh/$TERM.ti" ]] && tic ~/.dotfiles/zsh/$TERM.ti
-# infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.dotfiles/zsh/$TERM.ti; tic ~/.dotfiles/zsh/$TERM.ti
 
 # iTerm2 shell integration
 # test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh

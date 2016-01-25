@@ -125,7 +125,7 @@ set-option -g status-fg yellow
 set-option -g status-attr dim
 
 set-window-option -g window-status-bg colour234
-set-window-option -g window-status-fg colour238 #yellow
+set-window-option -g window-status-fg colour239
 set-window-option -g window-status-attr dim
 
 set-window-option -g window-status-current-fg brightred
@@ -134,10 +134,10 @@ set-window-option -g window-status-current-attr bright
 
 set-option -g message-fg colour166
 
-set-window-option -g clock-mode-colour colour64 #green
+set-window-option -g clock-mode-colour colour64
 
-set-option -g display-panes-active-colour colour33 #blue
-set-option -g display-panes-colour colour166 #orange
+set-option -g display-panes-active-colour colour33
+set-option -g display-panes-colour colour166
 
 set-window-option -g window-status-format ' ◦ #W '
 set-window-option -g window-status-current-format ' ◦ #W '
@@ -147,9 +147,9 @@ set-window-option -g window-status-current-format "#[fg=blue] ● #W #[fg=colour
 # ---------------------------------------------------------
 # http://manpages.ubuntu.com/manpages/precise/en/man3/strftime.3.html
 set -g status-left-length 60
-set -g status-left "#[fg=green]#h|#S #[fg=brightblue] ⓦ #(dig +short myip.opendns.com @resolver1.opendns.com) #[fg=yellow]ⓛ #(ifconfig en0 | ag 'inet ' | awk '{print $2}') #(ifconfig en1 | ag 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | ag 'inet ' | awk '{print \"vpn \" $2}') "
+set -g status-left "#[fg=green]#S #[fg=brightblue]#(dig +short myip.opendns.com @resolver1.opendns.com) #[fg=yellow]■ #(ifconfig en0 | ag 'inet ' | awk '{print $2}') #(ifconfig en1 | ag 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | ag 'inet ' | awk '{print \"vpn \" $2}') "
 set -g status-right-length 120
-set -g status-right "#(~/.dotfiles/bin/radiant) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #{cpu_percentage}"
+set -g status-right "#(~/.dotfiles/bin/radiant) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
 
 # TMUX PLUGIN MANAGER
 # ===========================================================================
