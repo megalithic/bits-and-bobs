@@ -46,14 +46,44 @@ function! LoadPlugs()
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
 
   """"" Filetypes ===========================================================
-  Plug 'sheerun/vim-polyglot'
+  " Plug 'sheerun/vim-polyglot'
+
+  "" Function (JavaScript)
+  Plug 'othree/yajs.vim', { 'for': 'javascript' }
+  Plug 'gavocanov/vim-js-indent'
+  Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+  Plug 'mxw/vim-jsx'
+  Plug 'elzr/vim-json', { 'for': 'json' }
+  Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
+  Plug 'heavenshell/vim-jsdoc'
+  Plug 'othree/jspc.vim'
+  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'itspriddle/vim-jquery'
+  Plug 'kchmck/vim-coffee-script'
+
+  "" Presentation (CSS / SCSS / LESS)
   Plug 'ap/vim-css-color'
+  Plug 'groenewege/vim-less'
   Plug 'othree/csscomplete.vim'
+  Plug 'JulesWang/css.vim'
+        \| Plug 'hail2u/vim-css3-syntax'
+        \| Plug 'cakebaker/scss-syntax.vim'
+
+  "" Structure (HTML / HAML / SLIM)
+  Plug 'othree/html5.vim'
+  Plug 'tpope/vim-haml'
+  Plug 'othree/xml.vim'
+
+  "" Markdown
+  Plug 'vim-pandoc/vim-pandoc-syntax'
   Plug 'suan/vim-instant-markdown', {
     \   'do': 'npm install -g instant-markdown-d'
     \ }
-  Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
-  Plug '1995eaton/vim-better-javascript-completion'
+
+  "" Ruby / Rails
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'tpope/vim-rails'
+  Plug 'ingydotnet/yaml-vim'
 
   """"" Utilities ===========================================================
   Plug 'tpope/vim-commentary'
@@ -61,6 +91,7 @@ function! LoadPlugs()
   Plug 'ciaranm/detectindent'
   Plug 'zaiste/tmux.vim'
   Plug 'haya14busa/incsearch.vim'
+  Plug 'osyo-manga/vim-anzu'
   Plug 'jordwalke/VimAutoMakeDirectory'
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-endwise' " automagically add end/endfunction/endif/etc
@@ -108,11 +139,11 @@ function! LoadPlugs()
     \| Plug 'kana/vim-textobj-line'
     \| Plug 'mattn/vim-textobj-url'
     \| Plug 'rhysd/vim-textobj-conflict'
+  Plug 'paradigm/TextObjectify'
 
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
-  " Plug 'rhysd/committia.vim'
   Plug 'rhysd/conflict-marker.vim'
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 
@@ -121,9 +152,7 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  " Plug 'SirVer/ultisnips'
-  Plug 'alexlafroscia/ultisnips'
-  " " SnipMate and its dependencies:
+  Plug 'SirVer/ultisnips'
   Plug 'fortes/vim-personal-snippets'
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'tomtom/tlib_vim'
