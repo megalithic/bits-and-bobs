@@ -50,15 +50,15 @@ function! LoadPlugs()
 
   "" Function (JavaScript)
   Plug 'othree/yajs.vim', { 'for': 'javascript' }
-  Plug 'gavocanov/vim-js-indent'
-  Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-  Plug 'mxw/vim-jsx'
   Plug 'elzr/vim-json', { 'for': 'json' }
   Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
   Plug 'heavenshell/vim-jsdoc'
   Plug 'othree/jspc.vim'
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'itspriddle/vim-jquery'
+  Plug 'gavocanov/vim-js-indent'
+  Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+  Plug 'mxw/vim-jsx'
   Plug 'kchmck/vim-coffee-script'
 
   "" Presentation (CSS / SCSS / LESS)
@@ -112,7 +112,6 @@ function! LoadPlugs()
   Plug 'gregsexton/MatchTag', { 'for': 'html' }
   Plug 'docunext/closetag.vim'
   Plug 'lukaszb/vim-web-indent'
-  Plug 'othree/jspc.vim'
   Plug 'luochen1990/rainbow'
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
 
@@ -139,7 +138,6 @@ function! LoadPlugs()
     \| Plug 'kana/vim-textobj-line'
     \| Plug 'mattn/vim-textobj-url'
     \| Plug 'rhysd/vim-textobj-conflict'
-  Plug 'paradigm/TextObjectify'
 
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
