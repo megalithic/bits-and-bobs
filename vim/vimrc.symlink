@@ -433,11 +433,11 @@ let g:airline_mode_map = {
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_verbose=0
 let g:neomake_warning_sign = {
-    \ 'text': '⚑',
+    \ 'text': '◦',
     \ 'texthl': 'WarningMsg',
     \ }
 let g:neomake_error_sign = {
-    \ 'text': '✖',
+    \ 'text': '☓',
     \ 'texthl': 'ErrorMsg',
     \ }
 " let g:neomake_open_list   = 2
@@ -742,7 +742,7 @@ autocmd BufWrite * silent call DeleteTrailingWS()
 " Auto lint on buffer write and enter
 if exists(':Neomake')
   " Check for lint errors on open & write
-  autocmd BufWritePost,BufEnter,BufReadPost *.js,*.jsx silent! Neomake standard|redraw
+  autocmd BufWritePost *.js,*.jsx silent! Neomake standard|redraw
 endif
 
 augroup ColorColumnGroup
