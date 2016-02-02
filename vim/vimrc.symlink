@@ -38,18 +38,20 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
+  Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
-  Plug 'bling/vim-airline'
-  Plug 'benekastah/neomake', { 'on': ['Neomake'] }
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'benekastah/neomake', { 'commit': 'e06f85e', 'on': ['Neomake'] }
 
   """"" Filetypes ===========================================================
   " Plug 'sheerun/vim-polyglot'
 
   "" Function (JavaScript)
   Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-  " Plug 'othree/yajs.vim', { 'for': 'javascript' }
+  " Plug 'othree/yajs.vim', { 'for': 'javascript' } " weird comment colors
   Plug 'pangloss/vim-javascript'
   Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
   Plug 'othree/jspc.vim'
@@ -180,10 +182,10 @@ runtime macros/matchit.vim
 """"" UI ====================================================================
 """"""" Theme / Terminal
 set background=dark
-colorscheme base16-eighties
+" colorscheme base16-eighties
+colorscheme OceanicNext
 " let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" colorscheme gruvbox
 
 filetype plugin indent on
 syntax enable
@@ -446,6 +448,7 @@ let g:airline_symbols.modified = '✭'
 let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 0
+" let g:airline_extensions = ['mode','crypt','paste','iminsert','branch','filename','readonly','filetype','fileencoding','fileformat','percentage','line number','column number','whitespace']
 let g:airline_mode_map = {
     \ 'n' : 'NORMAL',
     \ 'i' : 'INSERT',
@@ -769,7 +772,7 @@ autocmd BufWrite * silent call DeleteTrailingWS()
 " Auto lint on buffer write and enter
 if exists(':Neomake')
   " Check for lint errors on open & write
-  autocmd BufWritePost *.js,*.jsx silent! Neomake standard|redraw
+  autocmd BufRead,BufWritePost,BufEnter *.js,*.jsx silent! Neomake standard|redraw
 endif
 
 augroup ColorColumnGroup
