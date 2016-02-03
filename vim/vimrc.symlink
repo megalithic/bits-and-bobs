@@ -38,7 +38,6 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
-  Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
@@ -50,9 +49,9 @@ function! LoadPlugs()
   " Plug 'sheerun/vim-polyglot'
 
   "" Function (JavaScript)
-  " Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-  Plug 'othree/yajs.vim', { 'for': 'javascript' } " weird comment colors
-  Plug 'pangloss/vim-javascript'
+  Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+  " Plug 'othree/yajs.vim', { 'for': 'javascript' } " weird comment colors
+  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
   Plug 'othree/jspc.vim'
   Plug 'othree/javascript-libraries-syntax.vim'
@@ -183,7 +182,6 @@ runtime macros/matchit.vim
 """"""" Theme / Terminal
 set background=dark
 colorscheme base16-eighties
-" colorscheme OceanicNext
 " let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 

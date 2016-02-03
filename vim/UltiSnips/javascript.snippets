@@ -13,7 +13,7 @@ endsnippet
 snippet fori "for...in" b
 for (let ${1:prop} in ${2:Things}) {
 	if ($2.hasOwnProperty($1)) {
-		${0:let ${3:value} = $2[$1];}
+		${0:let ${3:value} = $2[$1]}
 	}
 }
 endsnippet
@@ -57,7 +57,7 @@ endsnippet
 snippet case "case" b
 case ${1}:
 	${0:${VISUAL}}
-	break;
+	break
 endsnippet
 
 
@@ -112,7 +112,7 @@ snippet fl "flow" b
 endsnippet
 
 snippet cl "console.log(...)" b
-console.log($0);
+console.log($0)
 endsnippet
 
 snippet re "require" b
@@ -131,9 +131,9 @@ def formatVariableName(path):
 	else:
 		return re.sub(r'[_\-]', '', lastPart.title())
 snip.rv = formatVariableName(t[1])
-` = require('${1}');$0
+` = require('${1}')$0
 endsnippet
 
 snippet me "module.exports" b
-module.exports = ${1:`!p snip.rv = pascal_case_basename(snip.basename)`};$0
+module.exports = ${1:`!p snip.rv = pascal_case_basename(snip.basename)`}$0
 endsnippet
