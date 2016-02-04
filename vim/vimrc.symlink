@@ -38,6 +38,7 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
+  Plug 'morhetz/gruvbox'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
@@ -48,18 +49,19 @@ function! LoadPlugs()
   """"" Filetypes ===========================================================
   " Plug 'sheerun/vim-polyglot'
 
-  "" Function (JavaScript)
-  Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-  " Plug 'othree/yajs.vim', { 'for': 'javascript' } " weird comment colors
+  "" Functional (JavaScript)
+  " Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+  Plug 'othree/yajs.vim', { 'tag': '1.6', 'for': 'javascript' } " weird comment colors
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-  Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-  Plug 'othree/jspc.vim'
+  Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'mxw/vim-jsx'
-  Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
-  Plug 'elzr/vim-json', { 'for': 'json' }
-  Plug 'gavocanov/vim-js-indent'
+  Plug 'othree/jspc.vim'
   Plug 'heavenshell/vim-jsdoc'
+
+  " Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
+  " Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+  " Plug 'elzr/vim-json', { 'for': 'json' }
 
   "" Presentation (CSS / SCSS / LESS)
   Plug 'groenewege/vim-less'
@@ -97,6 +99,7 @@ function! LoadPlugs()
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch' " unix shell commands for vim
   Plug 'tpope/vim-surround'
+  " Plug 'kassio/neoterm'
   Plug 'tpope/vim-dispatch'
     " - {Visual}S<arg> surrounds selection
     " - cs/ds<arg1><arg2> change / delete
@@ -182,7 +185,9 @@ runtime macros/matchit.vim
 """"""" Theme / Terminal
 set background=dark
 colorscheme base16-eighties
+" colorscheme gruvbox
 " let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
+" let g:gruvbox_contrast_dark="soft"
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 filetype plugin indent on
@@ -201,10 +206,7 @@ if !has('nvim')
 endif
 
 set enc=utf-8
-set shell=/usr/local/bin/zsh
-" set shell=/usr/local/bin/zsh\ --login
-" set shellcmdflag+=i
-" set shell=bash\ -i " for some reason this works better than the above
+set shell=$SHELL
 
 """"""" Updated vim regex engine
 set re=1
@@ -335,7 +337,10 @@ set lazyredraw "may be the cause of lots of issues
 
 """"""" Mode change speedups
 set noesckeys
-set timeout timeoutlen=1000 ttimeoutlen=100
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+" set timeout timeoutlen=1000 ttimeoutlen=100
 
 """"""" Misc (Needs documentation / understanding)
 set fcs=fold:-
@@ -359,7 +364,8 @@ set re=1
 set t_vb=
 set tm=500
 set dictionary+=/usr/share/dict/words
-set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
+set encoding=utf-8 nobomb fileencoding=utf-8 termencoding=utf-8
+scriptencoding utf-8
 
 if has("clipboard")                   " If the feature is available
   set clipboard=unnamed               " copy to the system clipboard
