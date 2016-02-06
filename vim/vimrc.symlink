@@ -109,7 +109,7 @@ function! LoadPlugs()
   Plug 'romainl/vim-qf'
   " Plug 'editorconfig/editorconfig-vim'
   Plug 'janko-m/vim-test'
-  Plug 'skalnik/vim-vroom'
+  " Plug 'skalnik/vim-vroom'
   Plug 'Valloric/ListToggle'
   Plug 'gregsexton/MatchTag', { 'for': 'html' }
   Plug 'docunext/closetag.vim'
@@ -153,12 +153,12 @@ function! LoadPlugs()
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
   Plug 'SirVer/ultisnips'
-  Plug 'fortes/vim-personal-snippets'
-  Plug 'MarcWeber/vim-addon-mw-utils'
-  Plug 'tomtom/tlib_vim'
-  Plug 'honza/vim-snippets'
-  Plug 'justinj/vim-react-snippets'
-  Plug 'jwhitley/vim-matchit'
+  " Plug 'fortes/vim-personal-snippets'
+  " Plug 'MarcWeber/vim-addon-mw-utils'
+  " Plug 'tomtom/tlib_vim'
+  " Plug 'honza/vim-snippets'
+  " Plug 'justinj/vim-react-snippets'
+  " Plug 'jwhitley/vim-matchit'
 endfunction
 
 """"" Install vim-plug Plugins (fail nicely) ====================================
@@ -962,9 +962,9 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
 """""" Testing (vroom/ruby, mocha, karma, etc)
-au FileType ruby silent! map <unique> <Leader>t :VroomRunTestFile<CR>
-au FileType ruby silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
-au FileType ruby silent! map <unique> <Leader>l :VroomRunLastTest<CR>
+" au FileType ruby silent! map <unique> <Leader>t :VroomRunTestFile<CR>
+" au FileType ruby silent! map <unique> <Leader>T :VroomRunNearestTest<CR>
+" au FileType ruby silent! map <unique> <Leader>l :VroomRunLastTest<CR>
 " au FileType javascript silent! map <unique> <Leader>t :call RunCurrentSpecFile()<CR>
 " au FileType javascript silent! map <unique> <Leader>T :call RunNearestSpec()<CR>
 " au FileType javascript silent! map <unique> <Leader>l :call RunLastSpec()<CR>
