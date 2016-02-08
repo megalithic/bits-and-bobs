@@ -117,6 +117,7 @@ require_brew imagemagick
 require_brew imagesnap
 # jq is a JSON grep
 require_brew jq
+require_brew keybase
 require_brew multimarkdown
 require_brew mercurial
 
