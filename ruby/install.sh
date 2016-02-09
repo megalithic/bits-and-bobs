@@ -3,20 +3,21 @@
 source ./setup/lib.sh
 
 ruby-install ruby 2.1.3
+ruby-install ruby 2.2.3
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 source ~/.bashrc
 source ~/.zshrc
 
-chruby ruby-2.1.3
+chruby ruby-2.2.3
 
 #Permit user to write to system rubies and gems ...
 sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
 
 #Installing critical Ruby gems for Rails development ...
 require_gem bourbon
-require_gem bundler
+require_gem bundler -v 1.10.6
 require_gem compass
 require_gem curses
 require_gem git-up

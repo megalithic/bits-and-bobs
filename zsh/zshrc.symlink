@@ -56,7 +56,7 @@ unset config_files
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 RUBIES=(~/.rubies/*)
-chruby ruby-2.1.3
+chruby ruby-2.2.3
 # check for bundler, if it doesn't exist, install it
 # (gem list | grep bundler) || gem install bundler
 
