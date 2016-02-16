@@ -73,9 +73,13 @@ source ~/.dotfiles/bin/z.sh
 # iTerm2 shell integration
 # test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
+# Fish-like auto-suggestions
+# source ~/.dotfiles/zsh/site-functions/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # ===========================================================================
 # STOP!!!
 # NOTE: DO NOT PUT `source`s for *.zsh files local to ~/.dotfiles/zsh folder.
 # We already source these with the glob pattern around L18.
 # ===========================================================================
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

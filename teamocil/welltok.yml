@@ -33,6 +33,7 @@ windows:
         - docker ps
       - commands:
         - cd cafewell
+        - chruby ruby-2.2.3
         - bundle
         - bundle exec rake db:migrate
         - nvm use
