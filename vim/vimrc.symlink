@@ -38,8 +38,6 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
-  Plug 'mhinz/vim-janah'
-  Plug 'morhetz/gruvbox'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim

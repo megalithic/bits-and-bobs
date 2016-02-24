@@ -4,7 +4,7 @@ windows:
     root: "~"
     focus: true
     panes:
-      - weechat-curses
+      - irc
   - name: "services"
     root: "~/code/welltok"
     layout: tiled
@@ -41,7 +41,7 @@ windows:
         - killport 3000 # kill thin/rails in case it's already running
         - be foreman start
       - commands:
-        - cd rewards-dashboard-voltron
+        - cd rewards-admin
         - nvm use
         - npm install
         - npm start
