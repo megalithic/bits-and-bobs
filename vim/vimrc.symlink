@@ -38,18 +38,16 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
+  Plug 'junegunn/seoul256.vim'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'benekastah/neomake', { 'commit': 'e06f85e', 'on': ['Neomake'] }
+  Plug 'benekastah/neomake', { 'on': ['Neomake'] }
 
   """"" Filetypes ===========================================================
-  " Plug 'sheerun/vim-polyglot'
-
   "" Functional (JavaScript)
-  " Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
   Plug 'othree/yajs.vim', { 'tag': '1.6', 'for': 'javascript' } " weird comment colors
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
@@ -57,10 +55,6 @@ function! LoadPlugs()
   Plug 'mxw/vim-jsx'
   Plug 'othree/jspc.vim'
   Plug 'heavenshell/vim-jsdoc'
-
-  " Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
-  " Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-  " Plug 'elzr/vim-json', { 'for': 'json' }
 
   "" Presentation (CSS / SCSS / LESS)
   Plug 'groenewege/vim-less'
@@ -71,7 +65,6 @@ function! LoadPlugs()
 
   "" Structure (HTML / HAML / SLIM)
   Plug 'othree/html5.vim'
-  " Plug 'tpope/vim-haml'
   Plug 'othree/xml.vim'
 
   "" Markdown
@@ -89,7 +82,6 @@ function! LoadPlugs()
   Plug 'tpope/vim-commentary'
   Plug 'sickill/vim-pasta'
   Plug 'ciaranm/detectindent'
-  Plug 'zaiste/tmux.vim'
   Plug 'haya14busa/incsearch.vim'
   Plug 'osyo-manga/vim-anzu'
   Plug 'jordwalke/VimAutoMakeDirectory'
@@ -98,7 +90,6 @@ function! LoadPlugs()
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch' " unix shell commands for vim
   Plug 'tpope/vim-surround'
-  " Plug 'kassio/neoterm'
   Plug 'tpope/vim-dispatch'
     " - {Visual}S<arg> surrounds selection
     " - cs/ds<arg1><arg2> change / delete
@@ -106,10 +97,7 @@ function! LoadPlugs()
     " - yss<arg> for entire line
   Plug 'tpope/vim-repeat'
   Plug 'romainl/vim-qf'
-  " Plug 'editorconfig/editorconfig-vim'
   Plug 'janko-m/vim-test'
-  " Plug 'skalnik/vim-vroom'
-  Plug 'Valloric/ListToggle'
   Plug 'gregsexton/MatchTag', { 'for': 'html' }
   Plug 'docunext/closetag.vim'
   Plug 'lukaszb/vim-web-indent'
@@ -120,8 +108,6 @@ function! LoadPlugs()
   Plug 'unblevable/quick-scope'
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
-  " Plug 'bronson/vim-visual-star-search'
-  " Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
   Plug 'ervandew/supertab'
   Plug 'shougo/deoplete.nvim'
   Plug 'ctrlpvim/ctrlp.vim'
@@ -146,7 +132,6 @@ function! LoadPlugs()
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
-  Plug 'rhysd/conflict-marker.vim'
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 
   """"" Snippets ============================================================
@@ -155,10 +140,10 @@ function! LoadPlugs()
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
   Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
   " Plug 'fortes/vim-personal-snippets'
   " Plug 'MarcWeber/vim-addon-mw-utils'
   " Plug 'tomtom/tlib_vim'
-  " Plug 'honza/vim-snippets'
   " Plug 'justinj/vim-react-snippets'
   " Plug 'jwhitley/vim-matchit'
 endfunction
@@ -186,7 +171,9 @@ runtime macros/matchit.vim
 """"" UI ====================================================================
 """"""" Theme / Terminal
 set background=dark
-colorscheme base16-eighties
+colorscheme base16-ocean
+" colorscheme seoul256
+" let g:seoul256_background = 235
 " colorscheme gruvbox
 " let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
 " let g:gruvbox_contrast_dark="soft"
@@ -467,7 +454,7 @@ let g:airline_mode_map = {
 
 """"""" neomake
 let g:neomake_javascript_enabled_makers = ['standard']
-let g:neomake_verbose=0
+let g:neomake_verbose=3
 let g:neomake_warning_sign = {
     \ 'text': '◦',
     \ 'texthl': 'WarningMsg',
@@ -476,8 +463,6 @@ let g:neomake_error_sign = {
     \ 'text': '☓',
     \ 'texthl': 'ErrorMsg',
     \ }
-" let g:neomake_open_list   = 2
-" let g:neomake_list_height = 10
 
 " aggregate errors
 let g:neomake_serialize = 1
