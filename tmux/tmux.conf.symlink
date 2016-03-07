@@ -37,7 +37,7 @@ set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:X
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
 # Mices!
-setw -g mouse on
+# setw -g mouse on
 set-option -g mouse-select-pane on
 set-option -g mouse-select-window on
 set-option -g mouse-resize-pane on
