@@ -115,7 +115,6 @@ function! LoadPlugs()
   " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   " Plug 'junegunn/fzf.vim'
   Plug 'mileszs/ack.vim'
-  Plug 'inside/vim-search-pulse'
   Plug 'kopischke/vim-fetch'
   Plug 'kana/vim-operator-user'
   " provide ai and ii for indent blocks
@@ -140,7 +139,7 @@ function! LoadPlugs()
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
   Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
+  " Plug 'honza/vim-snippets'
   " Plug 'fortes/vim-personal-snippets'
   " Plug 'MarcWeber/vim-addon-mw-utils'
   " Plug 'tomtom/tlib_vim'
@@ -217,7 +216,7 @@ set ruler " show the cursor position all the time
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
-" set cul " turn on cursorline highlighting -- needed for linenumber HL too
+set cul " turn on cursorline highlighting -- needed for linenumber HL too
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
 set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
@@ -229,15 +228,14 @@ set laststatus=2 " so we always get airline displaying / always show status
 set noshowmode
 
 " change vim cursor depending on the mode
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+" if exists('$TMUX')
+"   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" else
+"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" endif
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
@@ -454,7 +452,7 @@ let g:airline_mode_map = {
 
 """"""" neomake
 let g:neomake_javascript_enabled_makers = ['standard']
-let g:neomake_verbose=3
+let g:neomake_verbose = 0
 let g:neomake_warning_sign = {
     \ 'text': '◦',
     \ 'texthl': 'WarningMsg',
@@ -463,9 +461,6 @@ let g:neomake_error_sign = {
     \ 'text': '☓',
     \ 'texthl': 'ErrorMsg',
     \ }
-
-" aggregate errors
-let g:neomake_serialize = 1
 
 """"""" rainbow
 let g:rainbow_conf = {
@@ -581,9 +576,6 @@ let g:ackprg="ag --column --nogroup --line-numbers --vimgrep"
 let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
 " https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
 let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
-
-""""""" vim-search-pulse
-let g:vim_search_pulse_mode = 'cursor_line'
 
 """"""" webapi-vim / gist-vim
 let g:gist_put_url_to_clipboard_after_post  = 1
@@ -761,11 +753,9 @@ augroup END
 " Delete trailing whitespace on write
 autocmd BufWrite * silent call DeleteTrailingWS()
 
-" Auto lint on buffer write and enter
-if exists(':Neomake')
-  " Check for lint errors on open & write
-  autocmd BufRead,BufWritePost,BufEnter *.js,*.jsx silent! Neomake standard|redraw
-endif
+" Check for lint errors on open & write
+" autocmd BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
+autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
 
 augroup ColorColumnGroup
   " Color Column (only on insert)
@@ -816,9 +806,6 @@ augroup filetypes
 
   autocmd BufNewFile,BufRead */ssh/config  setf sshconfig
   autocmd BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
-
-  " load rainbow parens
-  " autocmd FileType js,jsx,css,scss,sass,less,json call rainbow#load()
 
   " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
   autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
@@ -958,10 +945,6 @@ nmap <silent> <leader>g :TestVisit<CR>
 " au FileType javascript silent! map <unique> <Leader>T :call RunNearestSpec()<CR>
 " au FileType javascript silent! map <unique> <Leader>l :call RunLastSpec()<CR>
 " au FileType javascript silent! map <unique> <Leader>a :call RunAllSpecs()<CR>
-
-""""""" VOLTRON.JS
-" Run `npm run build` from a JS or SCSS file
-au FileType *.{scss,js,jsx} nnoremap <leader>b :Dispatch npm run build<cr>
 
 """"""" Gist/Github
 " Send visual selection to gist.github.com as a private, filetyped Gist

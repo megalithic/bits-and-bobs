@@ -1,12 +1,13 @@
-export SUDO_EDITOR='vim'
-export EDITOR='vim'
-export VISUAL='vim'
+export SUDO_EDITOR='nvim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 export ZDOTDIR=$HOME
 export VIM_APP_DIR='/Applications/MacVim.app/Contents/MacOs/'
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export BREW_PATH="$(brew --prefix)"
 export BROWSER=chrome
 export _Z_DATA="$HOME/.z-history"
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 # by default: export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 # we take out the slash, period, angle brackets, dash here.

@@ -25,12 +25,14 @@ windows:
         - npm install
         - npm run dev
       - commands:
-        - cd ep-dev-edition
-        - docker-machine start dev
-        - eval $(docker-machine env dev)
+        - cd rewards-admin
+        - node ./test/support/run-mock-server.js
+        # - cd ep-dev-edition
+        # - docker-machine start dev
+        # - eval $(docker-machine env dev)
         # - make reset
         # - cd ~/code/welltok
-        - docker ps
+        # - docker ps
       - commands:
         - cd cafewell
         - chruby ruby-2.2.3

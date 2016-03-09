@@ -49,6 +49,7 @@ brew tap homebrew/versions # To be able to install ruby versions older than 1.9.
 brew tap Goles/battery
 brew tap nviennot/tmate
 brew tap caskroom/versions > /dev/null 2>&1
+brew tap choppsv1/term24
 
 bot "installing homebrew command-line tools..."
 
@@ -62,8 +63,11 @@ require_brew findutils
 
 # Install Bash 4
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
-#install bash
-#install bash-completion
+require_brew bash
+require_brew bash-completion
+require_brew homebrew/versions/bash-completion2
+require_brew bash-git-prompt
+require_brew bash-preexec
 
 require_brew ack
 # will need to install latest JDK also:

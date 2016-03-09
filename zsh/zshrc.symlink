@@ -8,6 +8,9 @@
 # .zlogin: [[ -o login ]]
 #
 
+# was loading this via iterm2:
+# (tmux ls | grep -vq attached && tmux at) || tmux
+
 # vi mode
 bindkey -v
 
