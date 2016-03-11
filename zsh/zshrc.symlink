@@ -16,6 +16,7 @@ bindkey -v
 
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
+export DOTFILES=$HOME/.dotfiles
 
 # use .localrc for SUPER SECRET STUFF that you don't
 # want in your public, versioned repo.

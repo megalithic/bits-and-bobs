@@ -39,6 +39,7 @@ alias d=z
 ## - TMUX -------------------------------------------------
 alias tmux="TERM=screen-256color-bce tmux -u -2"
 alias tm="(tmux ls | grep -vq attached && tmux at) || tmux"
+alias mux=tm
 
 alias takeover="tmux detach -a"
 

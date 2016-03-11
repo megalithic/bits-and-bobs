@@ -1,0 +1,77 @@
+#!/bin/sh
+
+cask_args appdir: '/Applications'
+
+tap 'caskroom/cask'
+tap 'caskroom/fonts'
+tap 'homebrew/dupes'
+tap 'homebrew/versions'
+tap 'caskroom/versions'
+tap 'choppsv1/term24'
+tap 'homebrew/brewdler'
+tap 'kopischke/ctags'
+tap 'Goles/battery'
+tap 'nviennot/tmate'
+tap 'neovim/homebrew-neovim'
+
+brew 'coreutils'
+brew 'moreutils'
+brew 'findutils'
+
+brew 'ack'
+brew 'bash'
+brew 'bash-completion'
+brew 'homebrew/versions/bash-completion2'
+brew 'bash-git-prompt'
+brew 'bash-preexec'
+brew 'chruby'
+brew 'elasticsearch'
+brew 'exif'
+brew 'ffind'
+brew 'fzf'
+brew 'gist'
+brew 'git'
+brew 'git-extras'
+brew 'git-flow'
+brew 'heroku-toolbelt'
+brew 'homebrew/dupes/grep'
+brew 'htop-osx'
+brew 'hub'
+brew "imagemagick"
+brew 'imagesnap'
+brew 'httpie'
+brew 'mysql'
+brew 'neovim', args: ['with-lua', 'with-perl', 'with-ruby']
+brew 'nvm'
+brew 'openssl'
+brew 'postgresql
+brew 'reattach-to-user-namespace', args: ['wrap-pbcopy-and-pbpaste']
+brew 'ruby-install'
+brew 'the_silver_searcher'
+brew 'tree'
+brew 'choppsv1/term24/tmux'
+brew 'vim', args: ['with-lua', 'with-perl', 'with-python3', 'with-python', 'with-ruby', 'override-system-vi', 'with-luajit', 'override-system-vim', 'with-clientserver']
+brew 'macvim', args: ['with-lua', 'with-perl', 'with-python3', 'with-python', 'with-ruby', 'with-custom-icons', 'with-luajit']
+brew 'weechat', args: ['with-ruby', 'with-python', 'with-perl']
+brew 'wget', args: ['enable-iri']
+brew 'zsh'
+brew 'zsh-completions'
+brew 'zsh-lovers'
+brew 'zsh-syntax-highlighting'
+
+cask 'alfred'
+cask 'caskroom/fonts/font-hack'
+cask 'dash'
+cask 'dropbox'
+cask 'firefox'
+cask 'google-chrome'
+cask 'hipchat'
+cask 'iterm2'
+cask 'java'
+cask 'karabiner'
+cask 'licecap'
+cask 'radiant-player'
+cask 'screenhero'
+cask 'slack'
+cask 'spotify'
+cask 'virtualbox'
