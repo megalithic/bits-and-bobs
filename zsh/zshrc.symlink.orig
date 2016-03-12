@@ -1,0 +1,89 @@
+#!/usr/bin/bash
+#
+# There are different zsh shell modes, and files that manage those:
+#
+# .zshenv: (always) <-- vim responds to stuff in here
+# .zprofile: [[ -o login ]]
+# .zshrc: [[ -o interactive ]]
+# .zlogin: [[ -o login ]]
+#
+
+# was loading this via iterm2:
+# (tmux ls | grep -vq attached && tmux at) || tmux
+
+# vi mode
+bindkey -v
+
+# shortcut to this dotfiles path is $ZSH
+export ZSH=$HOME/.dotfiles
+export DOTFILES=$HOME/.dotfiles
+
+# use .localrc for SUPER SECRET STUFF that you don't
+# want in your public, versioned repo.
+if [[ -a ~/.localrc ]]
+then
+  source ~/.localrc
+fi
+
+# all of our zsh files
+typeset -U config_files
+config_files=($ZSH/**/*.zsh)
+
+#load the path files
+for file in ${(M)config_files:#*/path.zsh}
+do
+  source $file
+done
+
+# load everything but the path and completion files
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
+do
+  source $file
+done
+
+# initialize autocomplete here, otherwise functions won't be loaded
+autoload -U compinit
+compinit
+
+# load every completion after autocomplete loads
+for file in ${(M)config_files:#*/completion.zsh}
+do
+  source $file
+done
+
+unset config_files
+
+# setup fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# setup chruby
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+RUBIES=(~/.rubies/*)
+chruby ruby-2.2.3
+# check for bundler, if it doesn't exist, install it
+# (gem list | grep bundler) || gem install bundler
+
+# setup nvm
+export NVM_DIR="$HOME/.nvm"
+[[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
+
+# z.sh init
+source ~/.dotfiles/bin/z.sh
+
+# always launch docker dev env
+# eval $(docker-machine env dev) # breaks tmux and auto-run from iterm2
+
+# iTerm2 shell integration
+# test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+
+# Fish-like auto-suggestions
+# source ~/.dotfiles/zsh/site-functions/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# ===========================================================================
+# STOP!!!
+# NOTE: DO NOT PUT `source`s for *.zsh files local to ~/.dotfiles/zsh folder.
+# We already source these with the glob pattern around L18.
+# ===========================================================================
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

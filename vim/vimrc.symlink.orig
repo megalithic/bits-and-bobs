@@ -228,16 +228,14 @@ set laststatus=2 " so we always get airline displaying / always show status
 set noshowmode
 
 " change vim cursor depending on the mode
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
-" Set cursor to vertical line when in insert mode.
-if exists('$ITERM_SESSION_ID') && !exists('$TMUX')
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-else
-  let &t_SI = "\<Esc>[3 q"
-  let &t_EI = "\<Esc>[0 q"
-end
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+" if exists('$TMUX')
+"   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" else
+"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" endif
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html

@@ -18,37 +18,32 @@ bind-key a last-pane
 # ===========================================================================
 set -g history-limit 25000
 set -g set-titles on
-
+# This helps when exiting insert mode in Vim: http://superuser.com/a/252717/65504.
+set -sg escape-time 0
 # 256 color support
 set -g terminal-overrides 'xterm:colors=256'
 set -g default-terminal "screen-256color"
 set-option -g default-shell "/usr/local/bin/zsh"
-
 # Fixes for ssh-agent.
 set -g update-environment "SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION"
-
 # Start window numbers from 1
 set -g base-index 1
 # Fix LSOpenURLsWithRole() error on OS X. Requires reattach-to-user-namespace to be installed.
 # set-option -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
-# set-option -g default-command "reattach-to-user-namespace -l $SHELL"
-
+set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 # allow the cursor to be changed by vim
-set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:XT:Ms=\E]52;%p1%s;%p2%s\007:Cc=\E]12;%p1%s\007:Cr=\E]112\007:Cs=\E]50;CursorShape=%?%p1%{3}%<%t%{0}%e%p1%{2}%-%;%d\007'
-
+# set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:XT:Ms=\E]52;%p1%s;%p2%s\007:Cc=\E]12;%p1%s\007:Cr=\E]112\007:Cs=\E]50;CursorShape=%?%p1%{3}%<%t%{0}%e%p1%{2}%-%;%d\007'
 # all for internal terminals to be scrolled
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
-# mices!
-set -g mouse-utf8 on
-set -g mouse on
+# Mices!
+# setw -g mouse on
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
+set-option -g mouse-resize-pane on
+set-option -g mouse-utf8 on
+set-window-option -g mode-mouse copy-mode
 
-# Disable assume-paste-time, so that iTerm2's "Send Hex Codes" feature works with tmux 2.1.
-# https://github.com/edruder/maximum-awesome/commit/9e3d07f450ac60ec142c82e8b2ffb2777bf99fb4
-set-option -g assume-paste-time 0
-
-# Allow the arrow key to be used immediately after changing windows
-set-option -g repeat-time 0
 
 # KEY BINDINGS
 # ===========================================================================
@@ -75,8 +70,9 @@ bind '|' split-window -h -c "#{pane_current_path}"
 bind '_' split-window -v -c "#{pane_current_path}"
 bind -r C-t new-window -c "#{pane_current_path}"
 bind -r C-x kill-pane
-bind -r C-q kill-pane
 bind p previous-window
+bind -r C-space select-pane -t :.+
+bind -r C-f resize-pane
 
 # Vi-like movements between panes
 bind h select-pane -L
@@ -89,6 +85,15 @@ bind -r J resize-pane -D 5
 bind -r K resize-pane -U 5
 bind -r L resize-pane -R 5
 
+# Smart pane switching with awareness of vim (requires vim-tmux-navigator) splits
+# https://github.com/ivanbrennan/dotfiles/blob/master/tmux.conf
+# * these are broken in tmux-2.1
+# bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(weechat|view|n?vim?)(diff)?$' && tmux send-keys C-h) || tmux select-pane -L"
+# bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(weechat|view|n?vim?)(diff)?$' && tmux send-keys C-j) || tmux select-pane -D"
+# bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(weechat|view|n?vim?)(diff)?$' && tmux send-keys C-k) || tmux select-pane -U"
+# bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(weechat|view|n?vim?)(diff)?$' && tmux send-keys C-l) || tmux select-pane -R"
+# bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(weechat|view|n?vim?)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+
 # Smart pane switching with awareness of vim splits (from https://github.com/christoomey/vim-tmux-navigator)
 is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(weechat|view|n?vim?)(diff)?$"'
 bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
@@ -98,7 +103,8 @@ bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
 bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 
 # nvim trickery
-set -g escape-time 1
+set -g escape-time 10
+
 
 # VI MODE
 # ===========================================================================
@@ -128,9 +134,6 @@ set-window-option -g monitor-activity off
 set-window-option -g xterm-keys on
 set-window-option -g automatic-rename on
 set-window-option -g aggressive-resize on
-
-# Display alert messages for 1.0 seconds
-set-option -g display-time 1000
 
 # Colors
 # ---------------------------------------------------------
@@ -179,6 +182,13 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-copycat'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-open'
+# set -g @plugin 'tmux-plugins/tmux-logging'
+# # set -g @plugin 'tmux-plugins/tmux-battery'
+# # set -g @plugin 'tmux-plugins/tmux-sessionist'
+# # set -g @plugin 'tmux-plugins/tmux-pain-control'
+# # set -g @plugin 'tmux-plugins/tmux-online-status'
+# # set -g @plugin 'tmux-plugins/tmux-resurrect'
+# # set -g @plugin 'tmux-plugins/tmux-continuum'
 
 # # install tpm if not already installed
 # if "test ! -d ~/.tmux/plugins/tpm" \
