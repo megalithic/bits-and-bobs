@@ -45,6 +45,8 @@ function! LoadPlugs()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
+  " Plug 'benekastah/neomake', { 'commit': 'e06f85e', 'on': ['Neomake'] }
+  Plug 'wincent/terminus'
 
   """"" Filetypes ===========================================================
   "" Functional (JavaScript)
@@ -231,13 +233,23 @@ set noshowmode
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Set cursor to vertical line when in insert mode.
-if exists('$ITERM_SESSION_ID') && !exists('$TMUX')
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-else
-  let &t_SI = "\<Esc>[3 q"
-  let &t_EI = "\<Esc>[0 q"
-end
+" if exists('$ITERM_PROFILE')
+"   if exists('$TMUX')
+"     let &t_SI = "\<Esc>[3 q"
+"     let &t_EI = "\[0 q"
+"   else
+"     let &t_SI = "\]50;CursorShape=1\x7"
+"     let &t_EI = "\]50;CursorShape=0\x7"
+"   endif
+" end
+
+" if exists('$ITERM_SESSION_ID') && !exists('$TMUX')
+"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" else
+"   let &t_SI = "\<Esc>[3 q"
+"   let &t_EI = "\<Esc>[0 q"
+" end
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
@@ -453,7 +465,18 @@ let g:airline_mode_map = {
     \ }
 
 """"""" neomake
+let g:neomake_javascript_standard_maker = {
+    \ 'exe': './node_modules/.bin/standard',
+    \ 'args': ['--verbose'],
+    \ 'errorformat': '  %f:%l:%c: %m'
+    \ }
+let g:neomake_jsx_standard_maker = {
+    \ 'exe': './node_modules/.bin/standard',
+    \ 'args': ['--verbose'],
+    \ 'errorformat': '  %f:%l:%c: %m'
+    \ }
 let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_verbose = 0
 let g:neomake_warning_sign = {
     \ 'text': '◦',
@@ -463,6 +486,7 @@ let g:neomake_error_sign = {
     \ 'text': '☓',
     \ 'texthl': 'ErrorMsg',
     \ }
+let g:neomake_serialize = 1
 
 """"""" rainbow
 let g:rainbow_conf = {
