@@ -4,15 +4,63 @@
 # brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/02f04ef70ddad41a81c735d709b2a3b23a3a4b91/tmux.rb
 # * may need to unlink existing installed version of tmux
 
-# PREFIX BINDING
+# Don't lose ENV
+set -ga update-environment ' ITERM_PROFILE TMUX_STATUS_LEFT'
+
+# KEY BINDINGS
 # ===========================================================================
 unbind C-b
-unbind-key C-a
+unbind C-a
+unbind C-c
+unbind C-t
+unbind C-y
+unbind C-p
+unbind [
+unbind ]
+unbind C-space
+unbind space
+unbind C-f
+unbind f
+
+# prefix like it's gnu-screen
 set-option -g prefix C-a
 set -g prefix C-a
 bind C-a send-prefix
 bind-key C-a send-prefix
-bind-key a last-pane
+
+# Clipboard
+bind-key C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+bind-key C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+bind C-d detach			# the same as d so you don't have to depress Ctrl
+bind -r C-R source-file ~/.tmux.conf \; display-message "Configuration reloaded."
+bind-key r refresh-client
+
+# Splitting panes
+bind '|' split-window -h -c "#{pane_current_path}"
+bind '_' split-window -v -c "#{pane_current_path}"
+bind -r C-t new-window -c "#{pane_current_path}"
+bind -r C-x kill-pane
+bind -r C-q kill-pane
+bind p previous-window
+
+# Vi-like movements between panes
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# Smart pane switching with awareness of vim splits (from https://github.com/christoomey/vim-tmux-navigator)
+is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(weechat|view|n?vim?)(diff)?$"'
+bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 
 # GENERAL SETTINGS
 # ===========================================================================
@@ -52,53 +100,6 @@ set-option -g assume-paste-time 0
 
 # Allow the arrow key to be used immediately after changing windows
 set-option -g repeat-time 0
-
-# KEY BINDINGS
-# ===========================================================================
-unbind C-c
-unbind C-t
-unbind C-y
-unbind C-p
-unbind [
-unbind ]
-unbind C-space
-unbind space
-unbind C-f
-unbind f
-
-# Clipboard
-bind-key C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-bind-key C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
-bind C-d detach			# the same as d so you don't have to depress Ctrl
-bind -r C-R source-file ~/.tmux.conf \; display-message "Configuration reloaded."
-bind-key r refresh-client
-
-# Splitting panes
-bind '|' split-window -h -c "#{pane_current_path}"
-bind '_' split-window -v -c "#{pane_current_path}"
-bind -r C-t new-window -c "#{pane_current_path}"
-bind -r C-x kill-pane
-bind -r C-q kill-pane
-bind p previous-window
-
-# Vi-like movements between panes
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
-
-bind -r H resize-pane -L 5
-bind -r J resize-pane -D 5
-bind -r K resize-pane -U 5
-bind -r L resize-pane -R 5
-
-# Smart pane switching with awareness of vim splits (from https://github.com/christoomey/vim-tmux-navigator)
-is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(weechat|view|n?vim?)(diff)?$"'
-bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
-bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
-bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
-bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
-bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 
 # nvim trickery
 set -g escape-time 1
@@ -169,7 +170,7 @@ set-window-option -g window-status-current-format "#[fg=blue] ● #W #[fg=colour
 set -g status-left-length 60
 set -g status-left "#[fg=green]#S #[fg=brightblue]#(dig +short myip.opendns.com @resolver1.opendns.com) #[fg=yellow]■ #(ifconfig en0 | ag 'inet ' | awk '{print $2}') #(ifconfig en1 | ag 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | ag 'inet ' | awk '{print \"vpn \" $2}') "
 set -g status-right-length 120
-set -g status-right "#(~/.dotfiles/bin/radiant) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
+set -g status-right "#(~/.dotfiles/bin/radiant-tmux) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
 
 # TMUX PLUGIN MANAGER
 # ===========================================================================

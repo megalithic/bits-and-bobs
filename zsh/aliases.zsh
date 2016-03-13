@@ -31,6 +31,7 @@ alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pa
 alias unixts="date +%s"
 alias xit="exit"
 alias please='sudo $(fc -ln -1)'
+alias count='wc -l'
 
 ## - Z -------------------------------------------------
 alias c=z
@@ -63,20 +64,8 @@ alias b="brew"
 ## - PYTHON -----------------------------------------------
 alias py="python"
 
-## - VIM --------------------------------------------------
-# alias vim="mvim -v"
-alias vi="vim"
-alias vmi="vim"
-alias im=vim
-alias vm="vim"
-alias m="vim"
-alias vimprofile="less ~/tmp/profile.log | sort -k 2"
+## - (NEO)VIM --------------------------------------------------
 
-# presently not working in neovim:
-# - copy/paste (vim-pasta)
-# - python bindings (neocomplete)
-# - cursor changes (insert/normal mode)
-# alias vim="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim" # just wanna use neovim
 alias updatenvim="brew update; brew reinstall --HEAD neovim"
 alias nv="nvim"
 alias vim="nvim"
@@ -216,19 +205,18 @@ alias reset="git reset --hard HEAD"
 alias gs="git status -s"
 alias gt="git tree"
 alias log="git log --stat"
-alias dangled="git fsck --no-reflog | awk '/dangling commit/ {print $3}'" #gitk --all $( git fsck --no-reflog | awk '/dangling commit/ {print $3}' )
 alias mxm="git fetch mxm && git merge mxm/develop"
 alias show='git show --pretty="format:" --name-only '
-alias feature='git flow feature'
 alias branch='git for-each-ref --sort=-committerdate refs/heads/ | less'
 alias glog="git l"
-alias conflict="git diff --name-only --diff-filter=U"
+alias dangled="git fsck --no-reflog | awk '/dangling commit/ {print $3}'" #gitk --all $( git fsck --no-reflog | awk '/dangling commit/ {print $3}' )
+alias conflicts="git diff --name-only --diff-filter=U"
+alias conflicted="git ls-files -u | cut -f 2 | sort -u"
+alias uncommit="git reset --soft 'HEAD^'" # re-commit with `git commit -c ORIG_HEAD`
 alias gap="git add --patch"
 alias gaa="git aa"
-alias uncommit="git reset --soft 'HEAD^'" # re-commit with `git commit -c ORIG_HEAD`
 alias gex="git archive master | tar -x -C" # update this to support more than the master branch
 alias rebase="git pull --rebase origin master"
-alias conflicted="git ls-files -u | cut -f 2 | sort -u"
 alias grm="git status | grep deleted | awk '{\$1=\$2=\"\"; print \$0}' | \
            perl -pe 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
 
@@ -238,7 +226,6 @@ alias rn='react-native'
 ## - RUBY / RAILS -----------------------------------------------
 alias be="bundle exec"
 alias br="bundle exec ruby"
-alias beg="bundle exec guard"
 alias b="bundle"
 alias bu="bundle"
 alias gen="bundle exec rails g"
@@ -248,25 +235,11 @@ alias dbt="rake db:test:prepare"
 alias dbrb="rake db:rollback STEP=1"
 alias spork="bundle exec spork"
 alias guard="bundle exec guard start"
-alias rbox="rails c test -s"
 alias nodeapp="nodemon app.js 3000"
 alias rs="bundle exec rails server"
 alias rsp="bundle exec rails server -p"
-alias rsprod="bundle exec rails server -e production"
 alias rc="bundle exec rails console"
 alias bec=rc
-
-# Unicode emotions; WHY DO I HAVE THESE FEELS!?
-alias srs="echod  '\n ಠ_ಠ\n' | pbcopy"
-alias srsheh="echo '\n ಠ‿ಠ\n' | pbcopy"
-alias srsmad="echo '\n ಠ▃ಠ\n' | pbcopy"
-alias srswha="echo '\n ಠ.ಠ\n' | pbcopy"
-alias flip="echo '\n（╯°□°）╯︵ ┻━┻\n' | pbcopy"
-alias flipsrs="echo '\n（╯ಠ▃ಠ）╯︵ ┻━┻\n' | pbcopy"
-alias flipfix="echo '\n（┬──┬ ノ( ゜-゜ノ)\n' | pbcopy"
-alias crysrs="echo '\n ಥ_ಥ\n' | pbcopy"
-alias crywobble="echo '\n ಥ﹏ಥ\n' | pbcopy"
-alias yeaaaaaah="echo '\n •_•)\n( •_•)>⌐■-■\n(⌐■_■)\n' | pbcopy"
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -278,8 +251,22 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+
 alias whois="whois -h whois-servers.net"
 
 # Flush Directory Service cache; http://osxdaily.com/2014/11/20/flush-dns-cache-mac-os-x/
-alias dnsflush="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
+alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+alias flush="dscacheutil -flushcache"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
+
+# enable yubikey and ssh
+alias remote="osascript -e 'tell application \"yubiswitch\" to KeyOn' && ssh remote.github.com -t gh-screen && osascript -e 'tell application \"yubiswitch\" to KeyOff' "
+
+# zmv ftw
+autoload -U zmv
+# alias for zmv for no quotes
+# mmv *.c.orig orig/*.c
+alias mmv='noglob zmv -W'

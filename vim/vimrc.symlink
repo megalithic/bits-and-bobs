@@ -38,15 +38,14 @@ set nocompatible
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
-  Plug 'junegunn/seoul256.vim'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
-  " Plug 'benekastah/neomake', { 'commit': 'e06f85e', 'on': ['Neomake'] }
-  Plug 'wincent/terminus'
+  " Plug 'wincent/terminus'
+  " Plug 'jszakmeister/vim-togglecursor'
 
   """"" Filetypes ===========================================================
   "" Functional (JavaScript)
@@ -92,7 +91,6 @@ function! LoadPlugs()
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch' " unix shell commands for vim
   Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-dispatch'
     " - {Visual}S<arg> surrounds selection
     " - cs/ds<arg1><arg2> change / delete
     " - ys<obj><arg> surrounds text object
@@ -173,11 +171,6 @@ runtime macros/matchit.vim
 """"""" Theme / Terminal
 set background=dark
 colorscheme base16-ocean
-" colorscheme seoul256
-" let g:seoul256_background = 235
-" colorscheme gruvbox
-" let base16colorspace=256  " Access colors present in 256 colorspace (must be before colorscheme def)
-" let g:gruvbox_contrast_dark="soft"
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 filetype plugin indent on
@@ -412,15 +405,11 @@ set secure " disable unsafe commands in local .vimrc files
 let g:JSHintHighlightErrorLine = 1
 let javascript_enable_domhtmlcss = 1
 let javascript_fold = 0
-" let g:javascript_conceal = 1
-" let g:javascript_conceal_function   = "ƒ"
-" let g:javascript_conceal_this       = "@"
-" let g:javascript_conceal_return     = "⇚"
 let loaded_matchit = 1
 let ruby_fold = 0
 let g:js_indent_log = 1
 
-let g:used_javascript_libs = 'underscore,chai,react,flux'
+let g:used_javascript_libs = 'underscore,chai,react,flux,mocha'
 
 """"""" golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
@@ -430,7 +419,7 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 """"""" vim-airline
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline_theme='base16' "bubblegum
+let g:airline_theme='wombat' "bubblegum
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -1149,10 +1138,6 @@ augroup terminal_insert
   autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
   autocmd BufWinEnter,WinEnter term://* startinsert
 augroup END
-
-""""""" VOLTRON.JS
-" Run `npm run build` from a JS or SCSS file
-au FileType *.{scss,js,jsx} nnoremap <leader>b :Dispatch npm run build<cr>
 
 """"""" Misc (organize this please!)
 " Insert newline below
