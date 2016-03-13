@@ -41,6 +41,9 @@ function! LoadPlugs()
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
+  " Plug 'tejr/vim-tmux'
+  Plug 'tmux-plugins/vim-tmux'
+  Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
@@ -56,6 +59,10 @@ function! LoadPlugs()
   Plug 'mxw/vim-jsx'
   Plug 'othree/jspc.vim'
   Plug 'heavenshell/vim-jsdoc'
+  " Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+  " Plug 'carlitux/deoplete-ternjs'
+
+  " Plug 'tyru/current-func-info.vim'
 
   "" Presentation (CSS / SCSS / LESS)
   Plug 'groenewege/vim-less'
@@ -130,7 +137,8 @@ function! LoadPlugs()
 
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
-  Plug 'tpope/vim-fugitive'
+  " Plug 'tpope/vim-fugitive'
+  Plug 'lambdalisue/vim-gita'
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 
   """"" Snippets ============================================================
@@ -221,6 +229,7 @@ set number "relativenumber / number
 set splitbelow
 set laststatus=2 " so we always get airline displaying / always show status
 set noshowmode
+set noshowcmd
 
 " change vim cursor depending on the mode
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -419,7 +428,7 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 """"""" vim-airline
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline_theme='wombat' "bubblegum
+let g:airline_theme='distinguished'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -523,14 +532,6 @@ let g:qs_enable = 0
 
 """"""" supertab
 " handy stuff: https://github.com/ervandew/supertab/issues/53
-" Enable omnicomplete for supported filetypes
-autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
-autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 let g:SuperTabDefaultCompletionTypeDiscovery = [
       \ "&completefunc:<c-x><c-u>",
       \ "&omnifunc:<c-x><c-o>",
@@ -549,6 +550,13 @@ let g:SuperTabDefaultCompletionType = 'context'
 """"""" deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
+
+""""""" ternjs
+" if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+  autocmd FileType javascript nnoremap <silent><buffer> gb :<C-u>TernDef<CR>
+" endif
 
 """"""" ctrlp
 let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
@@ -849,6 +857,21 @@ augroup filetypes
   autocmd Filetype fish setlocal textwidth=79
   " Enable folding of block structures in fish.
   autocmd Filetype fish setlocal foldmethod=expr
+
+  """"""" omnicompletions
+  " Extreme info on omnicompletions, must read more:
+  " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
+  "
+  autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
+  autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS " default
+  " autocmd FileType javascript setlocal omnifunc=tern#Complete " ternjs
+  autocmd FileType javascript setlocal completefunc=jspc#omni " jspc
 augroup END
 
 
@@ -878,9 +901,11 @@ hi Search term=underline ctermbg=144
 " italicize comments
 " hi Comment cterm=italic
 
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 match ExtraWhitespace /\s\+\%#\@<!$/
 
+" Highlight VCS conflict markers
+" @see {@link https://bitbucket.org/sjl/dotfiles/src/83aac563abc9d0116894ac61db2c63c9a05f72be/vim/vimrc?at=default&fileviewer=file-view-default#vimrc-233}
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " =============================================================================
 " Keybindings #bindings
@@ -913,9 +938,11 @@ set rtp+=/usr/local/opt/fzf
 nmap <leader>c :Commentary<cr>
 vmap <leader>c :Commentary<cr>
 
-""""""" Vundle
+""""""" vim-plug
 noremap <F5> :PlugUpdate<cr>
 map <F5> :PlugUpdate<cr>
+noremap <S-F5> :PlugClean!<cr>
+map <S-F5> :PlugClean!<cr>
 
 """"""" CTags
 " noremap <F6> :!ctags -R<cr>

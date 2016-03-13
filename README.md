@@ -1,5 +1,5 @@
 
-![Keep it secret, keep it safe](https://dl.dropboxusercontent.com/u/81794/megadotfiles.png)
+![all the dots](https://dl.dropboxusercontent.com/u/81794/megadotfiles.png)
 
 ## megadotfiles
 
