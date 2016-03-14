@@ -113,6 +113,7 @@ function! LoadPlugs()
   Plug 'EinfachToll/DidYouMean'
   Plug 'ervandew/supertab'
   Plug 'shougo/deoplete.nvim'
+  Plug 'Konfekt/FastFold'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'FelikZ/ctrlp-py-matcher'
   " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -452,12 +453,10 @@ let g:airline_mode_map = {
 
 """"""" neomake
 let g:neomake_javascript_standard_maker = {
-    \ 'exe': './node_modules/.bin/standard',
     \ 'args': ['--verbose'],
     \ 'errorformat': '  %f:%l:%c: %m'
     \ }
 let g:neomake_jsx_standard_maker = {
-    \ 'exe': './node_modules/.bin/standard',
     \ 'args': ['--verbose'],
     \ 'errorformat': '  %f:%l:%c: %m'
     \ }
