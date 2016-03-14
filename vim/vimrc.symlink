@@ -758,9 +758,11 @@ if exists('+colorcolumn')
     autocmd!
     autocmd BufEnter,WinEnter * set syntax=ON
     autocmd BufEnter,WinEnter * set number
+    autocmd BufEnter,WinEnter * set cursorline
 
     autocmd BufLeave,WinLeave * set syntax=OFF
     autocmd BufLeave,WinLeave * set nonumber
+    autocmd BufLeave,WinLeave * set nocursorline
   augroup END
 endif
 
