@@ -137,8 +137,7 @@ function! LoadPlugs()
 
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
-  " Plug 'tpope/vim-fugitive'
-  Plug 'lambdalisue/vim-gita'
+  Plug 'tpope/vim-fugitive'
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 
   """"" Snippets ============================================================
