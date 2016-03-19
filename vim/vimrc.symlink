@@ -99,13 +99,13 @@ function! LoadPlugs()
     " - ys<obj><arg> surrounds text object
     " - yss<arg> for entire line
   Plug 'tpope/vim-repeat'
-  Plug 'romainl/vim-qf'
   Plug 'janko-m/vim-test'
   Plug 'gregsexton/MatchTag', { 'for': 'html' }
   Plug 'docunext/closetag.vim'
   Plug 'lukaszb/vim-web-indent'
   Plug 'luochen1990/rainbow'
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
+  " Plug 'blueyed/vim-diminactive'
 
   """"" Code Navigation======================================================
   Plug 'unblevable/quick-scope'
@@ -537,6 +537,11 @@ let g:SuperTabDefaultCompletionType = 'context'
 """"""" deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
+" let g:deoplete#disable_auto_complete = 0
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
 
 """"""" ternjs
 " if exists('g:plugs["tern_for_vim"]')
@@ -608,23 +613,6 @@ let g:UltiSnipsListSnippets="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-""""""" committia.vim
-" let g:committia_use_singlecolumn='always'
-" let g:committia_hooks = {}
-" function! g:committia_hooks.edit_open(info)
-"   " Additional settings
-"   setlocal spell
-
-"   " If no commit message, start with insert mode
-"   if a:info.vcs ==# 'git' && getline(1) ==# ''
-"     startinsert
-"   end
-
-"   " Scroll the diff window from insert mode
-"   " Map <C-n> and <C-p>
-"   imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
-"   imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
-" endfunction
 
 " =============================================================================
 " Custom Functions #cfunctions
@@ -659,34 +647,37 @@ function! DeleteTrailingWS()
   exe "normal `z"
 endfunction
 
-" Neovim Terminal
-" tnoremap <F12> <C-\><C-n>
-" set switchbuf+=useopen
-" function! TermEnter()
-"   let bufcount = bufnr("$")
-"   let currbufnr = 1
-"   let nummatches = 0
-"   let firstmatchingbufnr = 0
-"   while currbufnr <= bufcount
-"     if(bufexists(currbufnr))
-"       let currbufname = bufname(currbufnr)
-"       if(match(currbufname, "term://") > -1)
-"         echo currbufnr . ": ". bufname(currbufnr)
-"         let nummatches += 1
-"         let firstmatchingbufnr = currbufnr
-"         break
-"       endif
-"     endif
-"     let currbufnr = currbufnr + 1
-"   endwhile
-"   if(nummatches >= 1)
-"     execute ":sbuffer ". firstmatchingbufnr
-"     startinsert
-"   else
-"     execute ":terminal"
-"   endif
-" endfunction
-" map <F12> :call TermEnter()<CR>
+fu! QuickfixToggle()
+  if gettabvar(tabpagenr(), 'quickfix_window', 0)
+    if t:quickfix_window == winnr()
+      " jump back to the previous window if inside the quickfix
+      " window
+      wincmd p
+    endif
+    cclose
+    let t:quickfix_window = 0
+  else
+    copen
+    let t:quickfix_window = winnr()
+  endif
+endfu
+nnoremap <silent> <F3> :call QuickfixToggle()<cr>
+
+fu! LocationListToggle()
+  if getwinvar(winnr(), 'locationlist_window', 0)
+    lclose
+    let w:locationlist_window = 0
+  else
+    " prevent errors on empty loclist
+    if !empty(getloclist(0))
+      lopen
+      let w:locationlist_window = 1
+    else
+      echomsg "LocList is empty"
+    endif
+  endif
+endfu
+nnoremap <silent> <F4> :call LocationListToggle()<cr>
 
 " prevent replacing paste buffer on paste:
 " vp doesn't replace paste buffer
@@ -766,8 +757,8 @@ augroup END
 autocmd BufWrite * silent call DeleteTrailingWS()
 
 " Check for lint errors on open & write
-" autocmd BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
-autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
+autocmd BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
+" autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
 
 augroup ColorColumnGroup
   " Color Column (only on insert)
@@ -870,15 +861,12 @@ augroup END
 " Make those debugger statements painfully obvious
 au BufEnter *.rb syn match error contained "\<binding.pry\>"
 au BufEnter *.rb syn match error contained "\<debugger\>"
-au BufEnter *.js syn match error contained "\<debugger\>"
 
 au ColorScheme * hi ExtraWhitespace ctermbg=red guibg=red
-" au ColorScheme * hi error ctermbg=red guibg=red
 au Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
 
 hi ColorColumn ctermfg=white ctermbg=238 guibg=#262626
 hi ExtraWhitespace ctermbg=red guibg=red
-hi SyntasticError ctermbg=red term=bold
 hi CursorLineNr term=bold ctermbg=144
 
 " ⇊ for better tmate UX for other pairers, uncomment ⇊
