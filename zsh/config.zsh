@@ -12,6 +12,10 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 
+# for eager loading all files for ternjs
+#  - https://github.com/carlitux/deoplete-ternjs
+ulimit -n 2048
+
 setopt NO_BG_NICE # don't nice background tasks
 setopt NO_HUP
 setopt NO_LIST_BEEP
