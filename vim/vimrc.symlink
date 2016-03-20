@@ -56,8 +56,8 @@ function! LoadPlugs()
   Plug 'mxw/vim-jsx'
   Plug 'othree/jspc.vim'
   Plug 'heavenshell/vim-jsdoc'
-  " Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-  " Plug 'carlitux/deoplete-ternjs'
+  Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+  Plug 'carlitux/deoplete-ternjs'
   " Plug 'tyru/current-func-info.vim'
 
   "" Presentation (CSS / SCSS / LESS)
@@ -122,12 +122,10 @@ function! LoadPlugs()
   " provide al and il for current line
   " provide a_ and i_ for underscores
   " provide a- and i-
-  " provide a= and i= for conflicts
   Plug 'kana/vim-textobj-user'
     \| Plug 'kana/vim-textobj-indent'
     \| Plug 'kana/vim-textobj-line'
     \| Plug 'mattn/vim-textobj-url'
-    \| Plug 'rhysd/vim-textobj-conflict'
 
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'

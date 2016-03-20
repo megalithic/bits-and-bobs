@@ -1,6 +1,6 @@
 typeset -g -A key # TODO: need to figure out what this is doing
 
-bindkey -e # use emacs key bindings # potentially breaking? first char gobbled on focus in zsh? remove to fix it, but lose the below bindings
+# bindkey -e # use emacs key bindings # potentially breaking? first char gobbled on focus in zsh? remove to fix it, but lose the below bindings
 # bindkey -v # use vi key bindings # potentially breaking? first char gobbled on focus in zsh? remove to fix it, but lose the below bindings
 
 bindkey '^H' delete-word # iterm
