@@ -5,6 +5,7 @@ export ZDOTDIR=$HOME
 export VIM_APP_DIR='/Applications/MacVim.app/Contents/MacOs/'
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export BREW_PATH="$(brew --prefix)"
+export PYTHONPATH="$BREW_PATH/bin/python3"
 export BROWSER=chrome
 export _Z_DATA="$HOME/.z-history"
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
