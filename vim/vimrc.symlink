@@ -355,6 +355,8 @@ endif
 """"""" Neovim
 if has('nvim')
   runtime! python_setup.vim
+  let g:python_host_prog = '/usr/local/bin/python'
+  let g:python3_host_prog = '/usr/local/bin/python3'
 endif
 
 " Neovim copy/paste support from system clipboard
@@ -445,7 +447,7 @@ let g:neomake_jsx_standard_maker = {
     \ }
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_jsx_enabled_makers = ['standard']
-let g:neomake_verbose = 0
+let g:neomake_verbose = 3
 let g:neomake_warning_sign = {
     \ 'text': '◦',
     \ 'texthl': 'WarningMsg',
@@ -521,7 +523,7 @@ let g:SuperTabDefaultCompletionType = 'context'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 " let g:deoplete#disable_auto_complete = 0
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
