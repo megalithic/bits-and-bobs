@@ -1,13 +1,12 @@
 source ~/.dotfiles/zsh/path.zsh
 
-# setup chruby
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-RUBIES=(~/.rubies/*)
-chruby ruby-2.2.3
-# check for bundler, if it doesn't exist, install it
-# (gem list | grep bundler) || gem install bundler
+# # setup chruby
+# source /usr/local/share/chruby/chruby.sh
+# source /usr/local/share/chruby/auto.sh
+# RUBIES=(~/.rubies/*)
+# chruby ruby-2.2.3
+# # check for bundler, if it doesn't exist, install it
+# # (gem list | grep bundler) || gem install bundler
 
-# setup nvm
-export NVM_DIR="$HOME/.nvm"
-[[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
+# # setup nvm
+# [[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
