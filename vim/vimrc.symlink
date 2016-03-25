@@ -444,7 +444,7 @@ let g:neomake_jsx_standard_maker = {
     \ }
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_jsx_enabled_makers = ['standard']
-let g:neomake_verbose = 3
+let g:neomake_verbose = 1
 let g:neomake_warning_sign = {
     \ 'text': '◦',
     \ 'texthl': 'WarningMsg',
@@ -745,7 +745,7 @@ augroup END
 autocmd BufWrite * silent call DeleteTrailingWS()
 
 " Check for lint errors on open & write
-" autocmd BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
+autocmd BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
 " autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
 
 augroup ColorColumnGroup
