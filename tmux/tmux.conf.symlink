@@ -15,6 +15,10 @@ unbind C-c
 unbind C-t
 unbind C-y
 unbind C-p
+unbind C-h
+unbind C-j
+unbind C-k
+unbind C-l
 unbind [
 unbind ]
 unbind C-space
@@ -48,11 +52,6 @@ bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
-
-bind -r H resize-pane -L 5
-bind -r J resize-pane -D 5
-bind -r K resize-pane -U 5
-bind -r L resize-pane -R 5
 
 # Smart pane switching with awareness of vim splits (from https://github.com/christoomey/vim-tmux-navigator)
 is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(weechat|view|n?vim?)(diff)?$"'
