@@ -30,7 +30,6 @@ setopt IGNORE_EOF
 #   like: git comm-[tab]
 setopt COMPLETE_ALIASES
 
-zle -N newtab
 
 # ===== Basics
 setopt NO_BEEP # don't beep on error
@@ -66,21 +65,13 @@ setopt always_to_end # When completing from the middle of a word, move the curso
 setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
 setopt complete_in_word # Allow completion from within a word/phrase
 
-# unsetopt menu_complete # do not autoselect the first completion entry
-
-# ===== Correction
-setopt correct # spelling correction for commands
-setopt correctall # spelling correction for arguments
-unsetopt correct
-unsetopt correct_all
-# setopt nocorrectall
-DISABLE_CORRECTION="true"
-
 # ===== Prompt
 setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
-# setopt transient_rprompt # only show the rprompt on the current prompt
+setopt transient_rprompt # only show the rprompt on the current prompt
 
 # ===== Scripts and Functions
 setopt multios # perform implicit tees or cats when multiple redirections are attempted
 
 KEYTIMEOUT=1
+
+zle -N newtab
