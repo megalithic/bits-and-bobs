@@ -979,7 +979,7 @@ noremap gk k
 
 """"""" Buffers
 " Switch between last two buffers
-nnoremap <leader><leader> <C-^>
+nnoremap <C-,><C-,> <C-^>
 
 """"""" Splits with vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
