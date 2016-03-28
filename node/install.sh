@@ -19,7 +19,7 @@ bot "NPM Globals..."
 ###############################################################################
 
 require_npm babel
-require_npm babel-eslint
+require_npm babel-eslint@5.0.0
 require_npm bible
 require_npm bower
 require_npm browserify
@@ -39,7 +39,7 @@ require_npm pm2 # http://stackoverflow.com/a/20661027/213904
 require_npm prettyjson
 require_npm react-native-cli
 require_npm speed-test
-require_npm standard
+require_npm standard@5.3.1
 require_npm snazzy
 require_npm traceur
 require_npm trash # https://github.com/sindresorhus/trash
