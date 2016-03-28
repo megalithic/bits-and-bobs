@@ -793,7 +793,7 @@ augroup filetypes
   autocmd BufNewFile,BufRead *.json set filetype=json
   autocmd BufNewFile,BufRead *.slim set filetype=slim
   autocmd BufNewFile,BufRead *.less set filetype=less
-  autocmd BufNewFile,BufRead *.scss set filetype=sass
+  autocmd BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
 
   autocmd BufNewFile,BufRead */ssh/config  setf sshconfig
   autocmd BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
