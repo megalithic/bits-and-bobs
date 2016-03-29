@@ -32,7 +32,7 @@ windows:
         - cd ~/code/welltok
         - docker ps
         - cd rewards-admin
-        - node ./test/support/run-mock-server.js
+        - npm run mock
       - commands:
         - cd cafewell
         - chruby ruby-2.2.3
