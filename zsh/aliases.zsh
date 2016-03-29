@@ -17,7 +17,7 @@ alias new="print -rl -- **/*(Dom[1,5])"
 if $(gls &>/dev/null)
 then
   alias ls="gls -FA --color"
-  alias l="gls -lAhG --color"
+  alias l="gls -lAh --color"
   alias ll="gls -l --color"
   alias la='gls -A --color'
 fi
