@@ -191,7 +191,19 @@ set enc=utf-8
 set shell=$SHELL
 
 " change vim cursor depending on the mode
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" https://github.com/mhinz/dotfiles/blob/d678058913bcd894d420d3670c96f18c7182de43/vim/vimrc#L349-L350
+if has('nvim')
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  " let $TMUX_TUI_ENABLE_SHELL_CURSOR=1
+elseif empty($TMUX)
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+else
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+endif
 
 """"""" Updated vim regex engine
 set re=1
