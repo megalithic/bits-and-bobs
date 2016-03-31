@@ -49,9 +49,9 @@ function! LoadPlugs()
 
   """"" Filetypes ===========================================================
   "" Functional (JavaScript)
-  Plug 'othree/yajs.vim', { 'tag': '1.6', 'for': 'javascript' } " weird comment colors
-  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-  Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
+  Plug 'othree/yajs.vim', { 'tag': '1.6' } " weird comment colors
+  Plug 'pangloss/vim-javascript'
+  Plug 'gavocanov/vim-js-indent'
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'mxw/vim-jsx'
   Plug 'othree/jspc.vim'
@@ -859,31 +859,35 @@ augroup END
 " =============================================================================
 " Highlighting #highlights
 " -----------------------------------------------------------------------------
-" Make those debugger statements painfully obvious
-au BufEnter *.rb syn match error contained "\<binding.pry\>"
-au BufEnter *.rb syn match error contained "\<debugger\>"
-
-au ColorScheme * hi ExtraWhitespace ctermbg=red guibg=red
-au Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
-
-hi ColorColumn ctermfg=white ctermbg=238 guibg=#262626
-hi ExtraWhitespace ctermbg=red guibg=red
-hi CursorLineNr term=bold ctermbg=144
 
 " ⇊ for better tmate UX for other pairers, uncomment ⇊
 " hi CursorLine ctermbg=none
 hi NonText ctermfg=24
 hi SpecialKey ctermfg=24 guibg=NONE
 hi Search term=underline ctermbg=144
+hi Search cterm=NONE ctermfg=grey ctermbg=blue
+hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold
+hi ColorColumn ctermfg=white ctermbg=238 guibg=#262626
+hi ExtraWhitespace ctermbg=red guibg=red
+hi CursorLineNr term=bold ctermbg=144
+
+au BufEnter *.rb syn match error contained "\<binding.pry\>"
+au BufEnter *.rb syn match error /binding\.pry/
+au BufEnter *.js syn match error /debugger/
+au BufEnter *.js syn match Errors /debugger/
+au BufEnter *.rb syn match Errors /binding\.pry/
+
+au ColorScheme * hi ExtraWhitespace ctermbg=red guibg=red
+au Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
 
 " italicize comments
-" hi Comment cterm=italic
+hi Comment cterm=italic
 
 match ExtraWhitespace /\s\+\%#\@<!$/
 
 " Highlight VCS conflict markers
 " @see {@link https://bitbucket.org/sjl/dotfiles/src/83aac563abc9d0116894ac61db2c63c9a05f72be/vim/vimrc?at=default&fileviewer=file-view-default#vimrc-233}
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+" match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " =============================================================================
 " Keybindings #bindings
