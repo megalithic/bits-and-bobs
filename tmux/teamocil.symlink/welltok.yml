@@ -31,19 +31,20 @@ windows:
         - make reset
         - cd ~/code/welltok
         - docker ps
-        - cd rewards-admin
+        - cd rewards-dashboard-voltron
         - npm run mock
       - commands:
         - cd cafewell
-        - chruby ruby-2.2.3
+        # - chruby ruby-2.2.3
+        - nvm use
+        - npm install
         - bundle
         - bundle exec rake db:migrate
-        - nvm use
         - killport 5000 # kill moxy in case it's already running
         - killport 3000 # kill thin/rails in case it's already running
         - be foreman start
       - commands:
-        - cd rewards-admin
+        - cd rewards-dashboard-voltron
         - nvm use
         - npm install
         - npm start
