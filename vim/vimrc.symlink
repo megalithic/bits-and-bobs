@@ -50,18 +50,17 @@ function! LoadPlugs()
   """"" Filetypes ===========================================================
   "" Functional (JavaScript)
   Plug 'othree/yajs.vim', { 'tag': '1.6' } " weird comment colors
-  Plug 'pangloss/vim-javascript'
-  Plug 'gavocanov/vim-js-indent'
-  Plug 'othree/javascript-libraries-syntax.vim'
-  Plug 'mxw/vim-jsx'
-  Plug 'othree/jspc.vim'
-  Plug 'heavenshell/vim-jsdoc'
+  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+  Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
+  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+  Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+  Plug 'othree/jspc.vim', { 'for': 'javascript' }
+  Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
   Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
   Plug 'carlitux/deoplete-ternjs'
   " Plug 'tyru/current-func-info.vim'
 
   "" Presentation (CSS / SCSS / LESS)
-  Plug 'groenewege/vim-less'
   Plug 'othree/csscomplete.vim'
   Plug 'JulesWang/css.vim'
         \| Plug 'hail2u/vim-css3-syntax'
@@ -87,7 +86,6 @@ function! LoadPlugs()
   Plug 'sickill/vim-pasta'
   Plug 'ciaranm/detectindent'
   Plug 'haya14busa/incsearch.vim'
-  Plug 'osyo-manga/vim-anzu'
   Plug 'jordwalke/VimAutoMakeDirectory'
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-endwise' " automagically add end/endfunction/endif/etc
@@ -112,12 +110,12 @@ function! LoadPlugs()
   Plug 'EinfachToll/DidYouMean'
   Plug 'ervandew/supertab'
   Plug 'shougo/deoplete.nvim'
-  Plug 'Konfekt/FastFold'
+  " Plug 'Konfekt/FastFold'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'FelikZ/ctrlp-py-matcher'
   Plug 'mileszs/ack.vim'
   Plug 'kopischke/vim-fetch'
-  Plug 'kana/vim-operator-user'
+  " Plug 'kana/vim-operator-user'
   " provide ai and ii for indent blocks
   " provide al and il for current line
   " provide a_ and i_ for underscores
@@ -191,19 +189,7 @@ set enc=utf-8
 set shell=$SHELL
 
 " change vim cursor depending on the mode
-" https://github.com/mhinz/dotfiles/blob/d678058913bcd894d420d3670c96f18c7182de43/vim/vimrc#L349-L350
-if has('nvim')
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-  " let $TMUX_TUI_ENABLE_SHELL_CURSOR=1
-elseif empty($TMUX)
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-else
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-endif
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 """"""" Updated vim regex engine
 set re=1
@@ -284,7 +270,7 @@ set ignorecase
 set smartcase
 set incsearch
 set showmatch
-set hlsearch
+set hlsearch | nohlsearch
 set gdefault " assume the /g flag is on in :s substitutions
 
 """"""" Completions
@@ -487,8 +473,15 @@ let g:vroom_map_keys = 0
 let g:lt_location_list_toggle_map = '<F3>'
 let g:lt_quickfix_list_toggle_map = '<F4>'
 
-""""""" vim-polyglot
-let g:polyglot_disabled = []
+""""""" incsearch.vim
+" :h g:incsearch#auto_nohlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
 
 """"""" vim-markdown
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
@@ -647,6 +640,23 @@ function! DeleteTrailingWS()
   exe "normal `z"
 endfunction
 
+" Highlight End-of-Line Whitespace
+" https://github.com/haya14busa/dotfiles/blob/master/.vimrc#L809
+function! s:hl_trailing_spaces()
+  " Test
+  highlight! link TrailingSpaces Error
+  syntax match TrailingSpaces containedin=ALL /\s\+$/
+endfunction
+
+function! s:hl_colorscheme_modify()
+  hi! DiffText term=reverse cterm=bold ctermbg=239 gui=bold,italic guibg=#4C4745
+  hi! DiffDelete term=bold ctermfg=180 ctermbg=0 gui=bold guifg=#960050 guibg=#1E0010
+  hi! DiffAdd term=bold ctermbg=0 guibg=#13354A
+  " hi! Visual ctermfg=236 ctermbg=119 guifg=#353535 guibg=#95e454 "eyes burning green
+  hi! default link MatchParen Title
+endfunction
+
+
 fu! QuickfixToggle()
   if gettabvar(tabpagenr(), 'quickfix_window', 0)
     if t:quickfix_window == winnr()
@@ -716,17 +726,6 @@ function! Quick_scope_selective(movement)
     return a:movement . letter
 endfunction
 
-function! FileTypeToggle(num)
-  if a:num > 0 || !exists("b:alt_ftype")
-    let b:alt_ftype = &filetype
-    let   &filetype = input("enter FileType: ")
-  else
-    let     new_alt = &filetype
-    let   &filetype = b:alt_ftype
-    let b:alt_ftype = new_alt
-  end
-endfunction
-
 
 " =============================================================================
 " Autocommands #autocommands
@@ -782,7 +781,6 @@ augroup GitGroup
 
   autocmd BufReadCmd *.git/index exe BufReadIndex()
   autocmd BufEnter *.git/index silent normal gg0j
-  " being handled by committia.vim now:
   autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
 
 augroup END
@@ -830,14 +828,6 @@ augroup filetypes
   " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
   autocmd Filetype ruby setlocal foldmethod=manual
 
-  " FISH
-  " Set up :make to use fish for syntax checking.
-  autocmd Filetype fish compiler fish
-  " Set this to have long lines wrap inside comments.
-  autocmd Filetype fish setlocal textwidth=79
-  " Enable folding of block structures in fish.
-  autocmd Filetype fish setlocal foldmethod=expr
-
   """"""" omnicompletions
   " Extreme info on omnicompletions, must read more:
   " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
@@ -860,30 +850,35 @@ augroup END
 " Highlighting #highlights
 " -----------------------------------------------------------------------------
 
+" highlight whitespace
+autocmd BufWinEnter,ColorScheme,Syntax * call s:hl_trailing_spaces()
+autocmd BufWinEnter,ColorScheme * call s:hl_colorscheme_modify()
+
+highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 " ⇊ for better tmate UX for other pairers, uncomment ⇊
 " hi CursorLine ctermbg=none
-hi NonText ctermfg=24
-hi SpecialKey ctermfg=24 guibg=NONE
-hi Search term=underline ctermbg=144
-hi Search cterm=NONE ctermfg=grey ctermbg=blue
-hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold
-hi ColorColumn ctermfg=white ctermbg=238 guibg=#262626
-hi ExtraWhitespace ctermbg=red guibg=red
-hi CursorLineNr term=bold ctermbg=144
+" hi NonText ctermfg=24
+" hi SpecialKey ctermfg=24 guibg=NONE
+" hi Search term=underline ctermbg=144
+" hi Search cterm=NONE ctermfg=grey ctermbg=blue
+" hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold
+" hi ColorColumn ctermfg=white ctermbg=238 guibg=#262626
+" hi ExtraWhitespace ctermbg=red guibg=red
+" hi CursorLineNr term=bold ctermbg=144
 
-au BufEnter *.rb syn match error contained "\<binding.pry\>"
-au BufEnter *.rb syn match error /binding\.pry/
-au BufEnter *.js syn match error /debugger/
-au BufEnter *.js syn match Errors /debugger/
-au BufEnter *.rb syn match Errors /binding\.pry/
+" au BufEnter *.rb syn match error contained "\<binding.pry\>"
+" au BufEnter *.rb syn match error /binding\.pry/
+" au BufEnter *.js syn match error /debugger/
+" au BufEnter *.js syn match Errors /debugger/
+" au BufEnter *.rb syn match Errors /binding\.pry/
 
-au ColorScheme * hi ExtraWhitespace ctermbg=red guibg=red
-au Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
+" au ColorScheme * hi ExtraWhitespace ctermbg=red guibg=red
+" au Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
 
-" italicize comments
-hi Comment cterm=italic
+" " italicize comments
+" hi Comment cterm=italic
 
-match ExtraWhitespace /\s\+\%#\@<!$/
+" match ExtraWhitespace /\s\+\%#\@<!$/
 
 " Highlight VCS conflict markers
 " @see {@link https://bitbucket.org/sjl/dotfiles/src/83aac563abc9d0116894ac61db2c63c9a05f72be/vim/vimrc?at=default&fileviewer=file-view-default#vimrc-233}
