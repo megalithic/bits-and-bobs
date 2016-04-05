@@ -4,9 +4,6 @@
 # brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/02f04ef70ddad41a81c735d709b2a3b23a3a4b91/tmux.rb
 # * may need to unlink existing installed version of tmux
 
-# Don't lose ENV
-set -ga update-environment ' ITERM_PROFILE TMUX_STATUS_LEFT'
-
 # KEY BINDINGS
 # ===========================================================================
 unbind C-b
@@ -67,27 +64,19 @@ set -g history-limit 25000
 set -g set-titles on
 
 # 256 color support
-set -g terminal-overrides 'xterm:colors=256'
+# set -g terminal-overrides 'xterm:colors=256'
+# https://github.com/elmcast/.vim
+set-option -ga terminal-overrides ",screen-256color:Tc"
 set -g default-terminal "screen-256color"
 set-option -g default-shell "/usr/local/bin/zsh"
-
-# Fixes for ssh-agent.
-set -g update-environment "SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION"
 
 # Start window numbers from 1
 set -g base-index 1
 # Fix LSOpenURLsWithRole() error on OS X. Requires reattach-to-user-namespace to be installed.
 # set-option -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
-# set-option -g default-command "reattach-to-user-namespace -l $SHELL"
-
-# allow the cursor to be changed by vim
-# set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:XT:Ms=\E]52;%p1%s;%p2%s\007:Cc=\E]12;%p1%s\007:Cr=\E]112\007:Cs=\E]50;CursorShape=%?%p1%{3}%<%t%{0}%e%p1%{2}%-%;%d\007'
-
-# all for internal terminals to be scrolled
-set -g terminal-overrides 'xterm*:smcup@:rmcup@'
+set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
 # mices!
-set -g mouse-utf8 on
 set -g mouse on
 
 # enable focus events for wincent/terminus
@@ -122,11 +111,9 @@ bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 # ---------------------------------------------------------
 set-option -g status on
 set-option -g status-interval 2
-set-option -g status-utf8 on
 set-option -g status-justify "centre" #don't change this spelling
 set-option -g status-position top
 
-set-window-option -g utf8 on
 set-window-option -g monitor-activity off
 set-window-option -g xterm-keys on
 set-window-option -g automatic-rename on
@@ -143,14 +130,6 @@ set-option -g display-time 1000
 # set inactive/active window styles
 set -g window-style 'fg=colour247,bg=colour236'
 set -g window-active-style 'fg=colour250,bg=black'
-# set the pane border colors
-# set -g pane-border-fg colour250
-# set -g pane-border-bg colour236
-# set -g pane-active-border-fg colour250
-# set -g pane-active-border-bg colour250
-
-# set-option -g pane-border-fg colour235
-# set-option -g pane-active-border-fg red
 
 set-option -g status-bg colour234
 set-option -g status-fg yellow
@@ -194,9 +173,5 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-copycat'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-open'
-
-# # install tpm if not already installed
-# if "test ! -d ~/.tmux/plugins/tpm" \
-#    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
 
 run-shell '~/.tmux/plugins/tpm/tpm'
