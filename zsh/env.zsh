@@ -2,7 +2,6 @@ export SUDO_EDITOR='nvim'
 export EDITOR='nvim'
 export VISUAL='nvim'
 export ZDOTDIR=$HOME
-export VIM_APP_DIR='/Applications/MacVim.app/Contents/MacOs/'
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export BREW_PATH="$(brew --prefix)"
 export NVIMRUNTIME='/usr/local/share/nvim/runtime'
