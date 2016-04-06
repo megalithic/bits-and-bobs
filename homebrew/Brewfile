@@ -48,6 +48,7 @@ brew 'hub'
 brew 'imagemagick'
 brew 'imagesnap'
 brew 'httpie'
+brew 'homebrew/binary/kwm'
 brew 'mysql'
 brew 'neovim', args: ['--HEAD', 'with-lua', 'with-perl', 'with-ruby']
 brew 'nvm'
