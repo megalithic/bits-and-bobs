@@ -38,10 +38,10 @@ function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
   Plug 'megalithic/golden-ratio'
-  " Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
-  " Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
-  " Plug 'tmux-plugins/vim-tmux'
-  " Plug 'tmux-plugins/vim-tmux-focus-events'
+  Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
+  Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
+  Plug 'tmux-plugins/vim-tmux'
+  Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
