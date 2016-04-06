@@ -262,6 +262,10 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
 
+# Show/hide the desktop
+alias hidedesk="defaults write com.apple.finder CreateDesktop false; killall Finder; open /Applications/TotalFinder"
+alias showdesk="defaults write com.apple.finder CreateDesktop true; killall Finder; open /Applications/TotalFinder"
+
 # enable yubikey and ssh
 alias remote="osascript -e 'tell application \"yubiswitch\" to KeyOn' && ssh remote.github.com -t gh-screen && osascript -e 'tell application \"yubiswitch\" to KeyOff' "
 

@@ -74,7 +74,7 @@ set-option -g default-shell "/usr/local/bin/zsh"
 set -g base-index 1
 # Fix LSOpenURLsWithRole() error on OS X. Requires reattach-to-user-namespace to be installed.
 # set-option -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
-set-option -g default-command "reattach-to-user-namespace -l $SHELL"
+# set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
 # mices!
 set -g mouse on

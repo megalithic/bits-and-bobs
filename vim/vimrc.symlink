@@ -58,6 +58,7 @@ function! LoadPlugs()
   Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
   Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
   Plug 'carlitux/deoplete-ternjs'
+  Plug 'kchmck/vim-coffee-script'
   " Plug 'tyru/current-func-info.vim'
 
   "" Presentation (CSS / SCSS / LESS)
@@ -353,6 +354,8 @@ endif
 """"""" Neovim
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_skip_check = 1
+let g:python3_host_skip_check = 1
 
 " Neovim copy/paste support from system clipboard
 if has("nvim")
