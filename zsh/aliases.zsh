@@ -1,7 +1,19 @@
 # delete symlinks (remove evertyhing after '*' to just search for symlinks): find /home -maxdepth 1 -lname '*' -exec rm {} \;
 # create the target folder and move the source to the new destination: mkdir -p ~/.dotfiles/git/bak && mv git* "$_"
 
-# alias top="htop"
+# Auto-correction exceptions
+# -----------------------------------------------------------------------------
+alias bundle='nocorrect bundle'
+alias cabal='nocorrect cabal'
+alias man='nocorrect man'
+alias mkdir='nocorrect mkdir'
+alias mv='nocorrect mv'
+alias cp='nocorrect cp'
+alias stack='nocorrect stack'
+alias sudo='nocorrect sudo'
+
+# Files & directories
+# -----------------------------------------------------------------------------
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -32,13 +44,25 @@ alias unixts="date +%s"
 alias xit="exit"
 alias please='sudo $(fc -ln -1)'
 alias count='wc -l'
+alias dirsize="du -sh * | sort -n"
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+alias dus='du -sckx * | sort -nr'
 
-## - Z -------------------------------------------------
+# ZMV
+# -----------------------------------------------------------------------------
+autoload -U zmv
+# alias for zmv for no quotes
+# mmv *.c.orig orig/*.c
+alias mmv='noglob zmv -W'
+
+# Z
+# -----------------------------------------------------------------------------
 alias c=z
 alias d=z
 
-## - TMUX -------------------------------------------------
-# alias tmux="TERM=screen-256color-bce tmux -u -2"
+# TMUX
+# -----------------------------------------------------------------------------
+alias tmux="tmux -u -2"
 alias tm="(tmux ls | grep -vq attached && tmux at) || tmux"
 alias mux=tm
 
@@ -53,24 +77,28 @@ alias tok="cd ~; teamocil --here welltok"
 # https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
 # alias ag="ag --nobreak --nonumbers --noheading . | fzf"
 
-## - DOCKER -----------------------------------------------
+# DOCKER
+# -----------------------------------------------------------------------------
 # alias docker="sudo docker -H $DOCKER_HOST"
 alias docker-ip=dockerip
 alias docker-ubuntu="docker run -i -t ubuntu /bin/bash"
 
-## - BREW -------------------------------------------------
+# BREW
+# -----------------------------------------------------------------------------
 alias b="brew"
 
-## - PYTHON -----------------------------------------------
+# PYTHON
+# -----------------------------------------------------------------------------
 alias py="python"
 
-## - (NEO)VIM --------------------------------------------------
-
+# (NEO)VIM
+# -----------------------------------------------------------------------------
 alias updatenvim="brew update; brew reinstall --HEAD neovim"
 alias nv="nvim"
 alias vim="nvim"
 
-## - EDITS -----------------------------------------------
+# CONFIG EDITS
+# -----------------------------------------------------------------------------
 alias ez="v ~/.zshrc"
 alias eza="v ~/.dotfiles/zsh/aliases.zsh"
 alias ezf="v ~/.dotfiles/zsh/functions.zsh"
@@ -84,7 +112,8 @@ alias ezkb="v ~/.dotfiles/zsh/keybindings.zsh"
 alias ev="v ~/.dotfiles/vim/vimrc.symlink"
 alias et="v ~/.dotfiles/tmux/tmux.conf.symlink"
 
-## - FOLDERS -----------------------------------------------
+# FOLDERS
+# -----------------------------------------------------------------------------
 alias dot="cd ~/.dotfiles"
 alias code="cd ~/code"
 alias dev="cd ~/code"
@@ -104,7 +133,8 @@ alias gop="cd $GOPATH"
 alias geny="/Applications/Genymotion\ Shell.app/Contents/MacOS/genyshell -c "
 alias genyplay="/Applications/Genymotion.app/Contents/MacOS/player.app/Contents/MacOS/player --vm-name "
 
-## - POSTGRES -----------------------------------------------
+# POSTGRES
+# -----------------------------------------------------------------------------
 alias startpg="pg_ctl -D /usr/local/var/postgres -l logfile start" #`pg_ctl -D /usr/local/var/postgres -l ~/code/logs/server.log start` OR `postgres -D /usr/local/var/postgres` OR `pg_ctl -D /usr/local/var/postgres -l logfile start`
 alias stoppg="pg_ctl -D /usr/local/var/postgres -l logfile stop" #`postgres -D /usr/local/var/postgres`
 alias pgstart="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
@@ -115,33 +145,27 @@ alias pgstop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.p
   #     launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
   # Or, if you don't want/need launchctl, you can just run:
   #     pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
-
 alias pgsetup="sh ~/Dropbox/scripts/postgresql_db_setup.sh"
 
-alias server="python -m SimpleHTTPServer"
-# alias srv=server
-alias chromedebug="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --js-flags=--stack_trace_limit=-1 --user-data-dir=/tmp/jsleakcheck"
-alias chrome="open -a '/Applications/Google Chrome.app' --args --disable-web-security"
-
-# Kill all the tabs in Chrome to free up memory
-# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
-# Thanks @sindersorhus: https://github.com/mathiasbynens/dotfiles/commit/bd9429af1cfdc7f4caa73e6f98773ed69a161c9c
-alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-
-alias dirsize="du -sh * | sort -n"
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-alias dus='du -sckx * | sort -nr'
-
-# alias chk='ps auxwww | ag'
-alias die='pkill -9 -f'
-alias port='lsof -i :'
-
-alias mg="mongod run --config /usr/local/Cellar/mongodb/2.0.2-x86_64/mongod.conf"
+# REDIS
+# -----------------------------------------------------------------------------
 alias startred="redis-server /usr/local/etc/redis.conf"
 alias redisstart="startred"
 alias redstart="startred"
 alias redcli="redis-cli"
 
+# MISC
+# -----------------------------------------------------------------------------
+alias server="python -m SimpleHTTPServer"
+# alias srv=server
+alias chromedebug="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --js-flags=--stack_trace_limit=-1 --user-data-dir=/tmp/jsleakcheck"
+alias chrome="open -a '/Applications/Google Chrome.app' --args --disable-web-security"
+# Kill all the tabs in Chrome to free up memory
+# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+# Thanks @sindersorhus: https://github.com/mathiasbynens/dotfiles/commit/bd9429af1cfdc7f4caa73e6f98773ed69a161c9c
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+alias die='pkill -9 -f'
+alias port='lsof -i :'
 alias ex=extract
 alias cleanrails="rm -rf .DS_Store .gitignore .rspec .rvmrc Gemfile GuardFile README.md"
 alias sourcez=". $HOME/.zshrc"
@@ -159,12 +183,9 @@ alias ip="ipconfig getifaddr"
 alias clr=clear
 alias syncoctoprint="scp pi@octopi.local:/home/pi/.octoprint/config.yaml $HOME/Dropbox/3d/configs/octoprint"
 
-## - ANDROID -----------------------------------------------
-alias fb="moto-fastboot-osx64"
-
-## - GIT -----------------------------------------------
+# GIT
+# -----------------------------------------------------------------------------
 alias git='/usr/local/bin/git'
-
 # # Use `hub` as our git wrapper:
 # #   http://defunkt.github.com/hub/
 # hub_path=$(which hub)
@@ -220,10 +241,12 @@ alias rebase="git pull --rebase origin master"
 alias grm="git status | grep deleted | awk '{\$1=\$2=\"\"; print \$0}' | \
            perl -pe 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
 
-## - React/React-Native -----------------------------------------------
+# REACT / REACT-NATIVE
+# -----------------------------------------------------------------------------
 alias rn='react-native'
 
-## - RUBY / RAILS -----------------------------------------------
+# RUBY/RAILS
+# -----------------------------------------------------------------------------
 alias be="bundle exec"
 alias br="bundle exec ruby"
 alias b="bundle"
@@ -268,9 +291,3 @@ alias showdesk="defaults write com.apple.finder CreateDesktop true; killall Find
 
 # enable yubikey and ssh
 alias remote="osascript -e 'tell application \"yubiswitch\" to KeyOn' && ssh remote.github.com -t gh-screen && osascript -e 'tell application \"yubiswitch\" to KeyOff' "
-
-# zmv ftw
-autoload -U zmv
-# alias for zmv for no quotes
-# mmv *.c.orig orig/*.c
-alias mmv='noglob zmv -W'
