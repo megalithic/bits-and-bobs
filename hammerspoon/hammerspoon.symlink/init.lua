@@ -6,11 +6,9 @@ local imagePath = basePath .. 'assets/'
 
 
 -- require 'events'
--- require 'windows'
+require 'windows'
 -- require 'battery'
 -- require 'random'
-
-require 'wincent'
 
 
 -- lock laptop
