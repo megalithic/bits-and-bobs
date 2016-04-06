@@ -7,7 +7,6 @@ battery: usage:
   general:
     -h, --help    print this message
     -p            use pmset (more accurate)
-    -t            output tmux status bar format
     -a            output ascii bar instead of spark's
 
   colors:
@@ -25,7 +24,6 @@ fi
 # For default behavior
 setDefaults() {
   pmset_on=0
-  output_tmux=0
   ascii=0
   ascii_bar='=========='
   good_color="#a5b979"
@@ -83,39 +81,21 @@ run_battery() {
 apply_colors() {
   # Green
   if [[ $BATTERY_STATUS -ge 75 ]]; then
-    if ((output_tmux)); then
-      COLOR="<span style='color: $good_color'>"
-    else
-      COLOR="<span style='color: $good_color'>"
-      # COLOR=$good_color
-    fi
+    COLOR="<span style='color: $good_color'>"
 
   # Yellow
   elif [[ $BATTERY_STATUS -ge 25 ]] && [[ $BATTERY_STATUS -lt 75 ]]; then
-    if ((output_tmux)); then
-      COLOR="<span style='color: $middle_color'>"
-    else
-      COLOR="<span style='color: $middle_color'>"
-      # COLOR=$middle_color
-    fi
+    COLOR="<span style='color: $middle_color'>"
 
   # Red
   elif [[ $BATTERY_STATUS -lt 25 ]]; then
-    if ((output_tmux)); then
-      COLOR="<span style='color: $warn_color'>"
-    else
-      COLOR="<span style='color: $warn_color'>"
-      # COLOR=$warn_color
-    fi
+    COLOR="<span style='color: $warn_color'>"
   fi
 }
 
 print_status() {
   # Print the battery status
   if ((connected)); then
-    # GRAPH="⚡"
-    # GRAPH="☑"
-    # GRAPH="⚇"
     BATTERY_STATUS="[$BATTERY_STATUS%]"
 
   elif ((ascii)); then
@@ -133,12 +113,7 @@ print_status() {
     BATTERY_STATUS="$BATTERY_STATUS%"
   fi
 
-  if ((output_tmux)); then
-    printf "%s%s %s%s" "$COLOR" "$BATTERY_STATUS" "#[default]" "$GRAPH"
-  else
-    printf "%s%s %s%s" "$COLOR" "$BATTERY_STATUS" "</span>" "$GRAPH"
-    # printf "\e[0;%sm%s %s \e[m\n"  "$COLOR" "$BATTERY_STATUS" "$GRAPH"
-  fi
+  printf "%s%s %s%s" "$COLOR" "$BATTERY_STATUS" "</span>" "$GRAPH"
 }
 
 # Read args
@@ -152,12 +127,6 @@ while getopts ":g:m:w:tap" opt; do
       ;;
     w)
       warn_color=$OPTARG
-      ;;
-    t)
-      output_tmux=1
-      good_color="green"
-      middle_color="yellow"
-      warn_color="red"
       ;;
     a)
       ascii=1

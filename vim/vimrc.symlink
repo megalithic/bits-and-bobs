@@ -30,7 +30,6 @@
 " =============================================================================
 
 filetype off
-set nocompatible
 
 " =============================================================================
 " Plugins / Config #plugins
@@ -39,10 +38,10 @@ function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
   Plug 'megalithic/golden-ratio'
-  Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
-  Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
-  Plug 'tmux-plugins/vim-tmux'
-  Plug 'tmux-plugins/vim-tmux-focus-events'
+  " Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
+  " Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
+  " Plug 'tmux-plugins/vim-tmux'
+  " Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
@@ -73,9 +72,6 @@ function! LoadPlugs()
 
   "" Markdown
   Plug 'vim-pandoc/vim-pandoc-syntax'
-  Plug 'suan/vim-instant-markdown', {
-    \   'do': 'npm install -g instant-markdown-d'
-    \ }
 
   "" Ruby / Rails
   Plug 'vim-ruby/vim-ruby'
@@ -99,7 +95,7 @@ function! LoadPlugs()
     " - yss<arg> for entire line
   Plug 'tpope/vim-repeat'
   Plug 'janko-m/vim-test'
-  Plug 'gregsexton/MatchTag', { 'for': 'html' }
+  Plug 'gregsexton/MatchTag', { 'for': ['html', 'erb'] }
   Plug 'docunext/closetag.vim'
   Plug 'lukaszb/vim-web-indent'
   Plug 'luochen1990/rainbow'
@@ -136,7 +132,7 @@ function! LoadPlugs()
   " https://medium.com/brigade-engineering/sharpen-your-vim-with-snippets-767b693886db
   " Make keybindings play nice with YCM, Supertab, Ultisnips:
   " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/22253548#22253548
-  Plug 'SirVer/ultisnips'
+  " Plug 'SirVer/ultisnips'
   " Plug 'honza/vim-snippets'
   " Plug 'fortes/vim-personal-snippets'
   " Plug 'MarcWeber/vim-addon-mw-utils'
@@ -172,22 +168,6 @@ colorscheme base16-ocean
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 filetype plugin indent on
-syntax enable
-
-" in case t_Co alone doesn't work, add this as well:
-let &t_AB="\e[48;5;%dm"
-let &t_AF="\e[38;5;%dm"
-set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
-set t_Co=256
-
-let $TERM='screen-256color'
-
-if !has('nvim')
-  set term=screen-256color
-endif
-
-set enc=utf-8
-set shell=$SHELL
 
 " change vim cursor depending on the mode
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -220,13 +200,8 @@ set noerrorbells
 set novisualbell
 set number "relativenumber / number
 set splitbelow
-set laststatus=2 " so we always get airline displaying / always show status
 set noshowmode
 set noshowcmd
-
-" Prevent Vim from clobbering the scrollback buffer. See
-" http://www.shallowsky.com/linux/noaltscreen.html
-" set t_ti= t_te=
 
 """"" Behavior ==============================================================
 """"""" Swaps / Backups / Sessions / History
@@ -254,12 +229,9 @@ endif
 set noswapfile "override because i hate swap files
 
 set sessionoptions-=options " Do not save settings and mappings to sessions
-set history=100
 
 """"""" Indentions / Tabs
-set autoindent
 set smartindent
-set smarttab
 set cindent
 set tabstop=2
 set shiftwidth=2
@@ -269,9 +241,7 @@ set expandtab
 """"""" Grepping / Searching
 set ignorecase
 set smartcase
-set incsearch
 set showmatch
-set hlsearch | nohlsearch
 set gdefault " assume the /g flag is on in :s substitutions
 
 """"""" Completions
@@ -283,7 +253,6 @@ set complete=.,w,b,u,U,t,i,d
 " set complete-=i "don't complete in included files
 
 """"""" Ignores
-set wildmenu
 set wildmode=list:longest
 set wildmode=longest:full,full
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
@@ -303,18 +272,15 @@ set wildignore+=classes
 set wildignore+=lib
 
 """"""" File handling
-set ttyfast
 set autowrite
-set autoread
 set fileformats=unix,mac,dos
-set lazyredraw "may be the cause of lots of issues
+" set lazyredraw "may be the cause of lots of issues
 
 """"""" Mode change speedups
 set noesckeys
 set notimeout
 set ttimeout
 set ttimeoutlen=10
-" set timeout timeoutlen=1000 ttimeoutlen=100
 
 """"""" Misc (Needs documentation / understanding)
 set fcs=fold:-
@@ -322,24 +288,20 @@ set matchtime=3
 set showbreak=↪
 set report=0 " Show all changes.
 set hidden
-set backspace=indent,eol,start
 set shiftround
 " set formatoptions=qrn1 " automatic formating.
 set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
 set formatoptions-=r " don't start new lines w/ comment leader on pressing 'o'
 set shortmess=atI " don't show the intro message when starting vim.
 set matchpairs+=<:>
-let loaded_matchparen = 1 " this turns off pair matching highlight (slow)
+let loaded_matchparen = 0 " this turns on pair matching highlight (is slow witht his on)
 set virtualedit+=block
 set nofoldenable " dont fold by default
 set magic
 set mat=2
 set re=1
-set t_vb=
 set tm=500
 set dictionary+=/usr/share/dict/words
-set encoding=utf-8 nobomb fileencoding=utf-8 termencoding=utf-8
-scriptencoding utf-8
 
 if has("clipboard")                   " If the feature is available
   set clipboard=unnamed               " copy to the system clipboard
@@ -354,15 +316,15 @@ endif
 """"""" Neovim
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
-let g:python_host_skip_check = 1
-let g:python3_host_skip_check = 1
+" let g:python_host_skip_check = 1
+" let g:python3_host_skip_check = 1
 
 " Neovim copy/paste support from system clipboard
-if has("nvim")
-  vnoremap <silent> y y:call ClipboardYank()<cr>
-  vnoremap <silent> d d:call ClipboardYank()<cr>
-  nnoremap <silent> p :call ClipboardPaste()<cr>p
-endif
+" if has("nvim")
+"   vnoremap <silent> y y:call ClipboardYank()<cr>
+"   vnoremap <silent> d d:call ClipboardYank()<cr>
+"   nnoremap <silent> p :call ClipboardPaste()<cr>p
+" endif
 
 
 " treat certain characters as full keyword boundaries, e.g. `-`
@@ -383,14 +345,7 @@ set secure " disable unsafe commands in local .vimrc files
 " -----------------------------------------------------------------------------
 "
 """"""" Why do I even have these settings? Please clean.
-let g:JSHintHighlightErrorLine = 1
-let javascript_enable_domhtmlcss = 1
-let javascript_fold = 0
-let loaded_matchit = 1
 let ruby_fold = 0
-let g:js_indent_log = 1
-
-let g:used_javascript_libs = 'underscore,chai,react,flux,mocha'
 
 """"""" golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
@@ -468,10 +423,6 @@ let test#strategy = "neovim"
 let test#javascript#mocha#options = "--colors --compilers js:babel/register"
 let test#javascript#mocha#file_pattern = ".test.js"
 
-""""""" vim-vroom
-let g:vroom_use_colors=1
-let g:vroom_map_keys = 0
-
 """"""" listtoggle
 let g:lt_location_list_toggle_map = '<F3>'
 let g:lt_quickfix_list_toggle_map = '<F4>'
@@ -490,19 +441,17 @@ map g# <Plug>(incsearch-nohl-g#)
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
 let g:vim_markdown_frontmatter=1
 
-""""""" vim-instant-markdown
-let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
-
 """"""" vim-javascript-syntax
-let g:used_javascript_libs='react'
+let g:JSHintHighlightErrorLine = 1
+let javascript_enable_domhtmlcss = 1
+let javascript_fold = 0
+let loaded_matchit = 1
+let g:js_indent_log = 1
+let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angular'
 
 """"""" vim-jsx
 let g:jsx_ext_required = 0
 let g:jsx_pragma_required = 0
-
-""""""" vim-mocha
-" let g:mocha_js_command = '!./node_modules/.bin/mocha --compilers js:babel/register {spec}'
 
 """"""" quick-scope
 let g:qs_enable = 0
@@ -514,20 +463,10 @@ let g:SuperTabDefaultCompletionTypeDiscovery = [
       \ "&omnifunc:<c-x><c-o>",
       \ ]
 let g:SuperTabDefaultCompletionType = 'context'
-" let g:SuperTabCrMapping = 0
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-" let g:SuperTabContextDefaultCompletionType = '<c-x><c-u>' " breaks case-sensitive completion
-"
-" figure out what this does:
-" autocmd FileType *
-"       \ if &omnifunc != '' |
-"       \     call SuperTabChain(&omnifunc, '<c-p>') |
-"       \ endif
 
 """"""" deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
-" let g:deoplete#disable_auto_complete = 1
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
@@ -643,23 +582,6 @@ function! DeleteTrailingWS()
   exe "normal `z"
 endfunction
 
-" Highlight End-of-Line Whitespace
-" https://github.com/haya14busa/dotfiles/blob/master/.vimrc#L809
-function! s:hl_trailing_spaces()
-  " Test
-  highlight! link TrailingSpaces Error
-  syntax match TrailingSpaces containedin=ALL /\s\+$/
-endfunction
-
-function! s:hl_colorscheme_modify()
-  hi! DiffText term=reverse cterm=bold ctermbg=239 gui=bold,italic guibg=#4C4745
-  hi! DiffDelete term=bold ctermfg=180 ctermbg=0 gui=bold guifg=#960050 guibg=#1E0010
-  hi! DiffAdd term=bold ctermbg=0 guibg=#13354A
-  " hi! Visual ctermfg=236 ctermbg=119 guifg=#353535 guibg=#95e454 "eyes burning green
-  hi! default link MatchParen Title
-endfunction
-
-
 fu! QuickfixToggle()
   if gettabvar(tabpagenr(), 'quickfix_window', 0)
     if t:quickfix_window == winnr()
@@ -704,12 +626,12 @@ function! s:Repl()
 endfunction
 
 " Neovim support for system clipboard in OSX
-function! ClipboardYank()
-  call system('pbcopy', @@)
-endfunction
-function! ClipboardPaste()
-  let @@ = system('pbpaste')
-endfunction
+" function! ClipboardYank()
+"   call system('pbcopy', @@)
+" endfunction
+" function! ClipboardPaste()
+"   let @@ = system('pbpaste')
+" endfunction
 
 " QuickScope, used in conjunction with keybinding overrides
 function! Quick_scope_selective(movement)
@@ -800,7 +722,6 @@ augroup filetypes
   autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
   autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} let b:deoplete_disable_auto_complete=1
   autocmd FileType markdown set tw=80
-  " autocmd BufWritePost *.{md,mdwn,mkd,mkdn,mark*} InstantMarkdownPreview " automagically do a thing with your markdown file
 
   " filetype
   autocmd BufNewFile,BufRead *.json set filetype=json
@@ -852,11 +773,6 @@ augroup END
 " =============================================================================
 " Highlighting #highlights
 " -----------------------------------------------------------------------------
-
-" highlight whitespace
-autocmd BufWinEnter,ColorScheme,Syntax * call s:hl_trailing_spaces()
-autocmd BufWinEnter,ColorScheme * call s:hl_colorscheme_modify()
-
 highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 highlight Search term=underline guibg=#afaf87 guifg=#333333
 highlight Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold
