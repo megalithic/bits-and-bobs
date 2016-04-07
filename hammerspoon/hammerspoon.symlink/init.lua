@@ -5,8 +5,9 @@ local basePath = os.getenv('HOME') .. '/.hammerspoon/'
 local imagePath = basePath .. 'assets/'
 
 
--- require 'events'
 require 'windows'
+require 'apps'
+-- require 'events'
 -- require 'battery'
 -- require 'random'
 
@@ -24,18 +25,3 @@ function lockComputer()
   -- hs.caffeinate.lockScreen()
 end
 hs.hotkey.bind({"cmd", "ctrl", "shift"}, 'L', lockComputer)
-
--- auto-reload configurations
-----------------------------------------------------------
--- function reloadConfig(files)
---   for _, file in pairs(files) do
---     if file:sub(-4) == '.lua' then
---       hs.alert.show("Config Reloaded")
---       -- hs.notify.new({title="Hammerspoon", informativeText="Config reloaded"}):send()
---       hs.reload()
---     end
---   end
--- end
-
--- hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R",  reloadConfig)
--- hs.pathwatcher.new(basePath, reloadConfig):start()

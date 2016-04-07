@@ -1,14 +1,17 @@
+-----------------------------------------------------------------------------------
+--/ windows and events /--
+-----------------------------------------------------------------------------------
 hs.grid.GRIDWIDTH  = 12
 hs.grid.GRIDHEIGHT = 12
-hs.grid.MARGINX    = 0
-hs.grid.MARGINY    = 0
+hs.grid.MARGINX    = 10
+hs.grid.MARGINY    = 25
 
 hs.window.animationDuration = 0 -- disable animations
 
 local screenCount = #hs.screen.allScreens()
 local logLevel = 'debug' -- generally want 'debug' or 'info'
 local log = hs.logger.new('replicant', logLevel)
-local internalDisplayRes = '1920x1200'
+local internalDisplayRes = '2880x1800'
 
 local cmdAlt   = {"cmd", "alt"}
 local ctrlAlt   = {"ctrl", "alt"}
@@ -44,8 +47,7 @@ local layoutConfig = {
   end),
 
   _after_ = (function()
-    -- Make sure Textual appears in front of Skype, and iTerm in front of
-    -- others.
+    -- Make sure  iTerm in front of everything.
     activate('com.googlecode.iterm2')
   end),
 
@@ -70,7 +72,7 @@ local layoutConfig = {
   ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      hs.grid.set(window, grid.fullScreen)
+      hs.grid.set(window, grid.fullScreen, hs.screen.primaryScreen())
     else
       hs.grid.set(window, grid.leftHalf, hs.screen.primaryScreen())
     end
@@ -268,6 +270,39 @@ function watchWindow(window)
     end
   end
 end
+
+border = nil
+function drawFocusedWindowBorder()
+  if border then
+    border:delete()
+  end
+
+  local win = hs.window.focusedWindow()
+  if win == nil then return end
+
+  local f = win:frame()
+  local fx = f.x - 2
+  local fy = f.y - 2
+  local fw = f.w + 4
+  local fh = f.h + 4
+
+  border = hs.drawing.rectangle(hs.geometry.rect(fx, fy, fw, fh))
+  border:setStrokeWidth(1)
+  -- border:setStrokeColor({["red"]=0.75,["blue"]=0.14,["green"]=0.83,["alpha"]=0.80})
+  border:setStrokeColor({["red"]=1,["blue"]=1,["green"]=1,["alpha"]=0.80})
+  border:setRoundedRectRadii(5.0, 5.0)
+  border:setStroke(true):setFill(false)
+  border:setLevel("floating")
+  border:show()
+end
+
+-- PRESENTLY DISABLED
+-- drawFocusedWindowBorder()
+-- windows = hs.window.filter.new(nil)
+-- windows:subscribe(hs.window.filter.windowFocused, function () drawFocusedWindowBorder() end)
+-- windows:subscribe(hs.window.filter.windowUnfocused, function () drawFocusedWindowBorder() end)
+-- windows:subscribe(hs.window.filter.windowMoved, function () drawFocusedWindowBorder() end)
+
 
 function initEventHandling()
   -- Watch for application-level events.

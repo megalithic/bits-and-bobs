@@ -70,6 +70,10 @@ set-option -ga terminal-overrides ",screen-256color:Tc"
 set -g default-terminal "screen-256color"
 set-option -g default-shell "/usr/local/bin/zsh"
 
+# fix for NVIM_TUI_ENABLE_CURSOR_SHAPE in tmux
+# https://github.com/nathanaelkane/dotfiles/commit/9607d826b9d408595de2e3fe7de0abec1e94fa86
+set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
+
 # Start window numbers from 1
 set -g base-index 1
 # Fix LSOpenURLsWithRole() error on OS X. Requires reattach-to-user-namespace to be installed.
