@@ -3,8 +3,8 @@
 -----------------------------------------------------------------------------------
 hs.grid.GRIDWIDTH  = 12
 hs.grid.GRIDHEIGHT = 12
-hs.grid.MARGINX    = 10
-hs.grid.MARGINY    = 25
+hs.grid.MARGINX    = 5
+hs.grid.MARGINY    = 5
 
 hs.window.animationDuration = 0 -- disable animations
 

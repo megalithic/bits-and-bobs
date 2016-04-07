@@ -13,15 +13,12 @@ Pre-install stuffs: You'll obviously need git installed; if you're using
 10.9+, just hit up `xcode-select --install`, click 'Install' when the
 dialog pops up, disco.
 
-Note: if the above doesn't work to get XCode CLI Tools installed, you can try
-the code I have in [setup/bootstrap:L35-59](https://github.com/megalithic/dotfiles/blob/master/setup/bootstrap#L35-L59).
-
 Now that the pre-reqs are out of the way, run this:
 
 ```sh
 curl https://raw.githubusercontent.com/megalithic/dotfiles/master/setup/bootstrap | sh
 
-# OR
+# OR, failing that, manually clone and run:
 
 git clone https://github.com/megalithic/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
@@ -30,9 +27,6 @@ setup/bootstrap
 
 This will symlink the appropriate files in `.dotfiles` to your home directory.
 Everything is configured and tweaked within `~/.dotfiles`.
-
-The main file you'll want to change right off the bat is `zsh/zshrc.symlink`,
-which sets up a few paths that'll be different on your particular machine.
 
 ## topical
 
@@ -74,33 +68,9 @@ can let `setup/bootstrap` handle the cloning of your private repo to
 ~/.dotfiles/private, which will execute an install script, assuming it's
 located at `~/.dotfiles/private/install.sh`.
 
-For some submodule info, rather, [a cheatsheet](http://blog.jacius.info/git-submodule-cheat-sheet/).
+Handy references
 
-## additional reading
-
-There are many great dotfiles repos to check out and in general get inspiration
-and code snippets from... Here's a few that I like to keep a record of.
-
-- [zach holman](https://github.com/holman/dotfiles/) (the one this very repo is
-based on)
-- [addy osmani](https://github.com/addyosmani/dotfiles/)
-- [ben alman](https://github.com/cowboy/dotfiles/)
-- [paul irish](https://github.com/paulirish/dotfiles)
-- [mathias bynens](https://github.com/mathiasbynens/dotfiles)
-- [yan pritzker (yadr)](https://github.com/skwp/dotfiles)
-- [paul miller](https://github.com/paulmillr/dotfiles)
-- [l0stsoul - good for front-end dev](https://github.com/L0stSoul/vim-config)
-- [great medium post about dotfiles and an install scheme](https://medium.com/p/43c3602fd789)
-- [zanshin](https://github.com/zanshin/dotfiles)
-- [thoughtbot](https://github.com/thoughtbot/dotfiles)
-- [wolfy87](https://github.com/Wolfy87/dotfiles)
-- [albert togg's good uses of this original repo (see brew setup)](https://github.com/albertogg/dotfiles)
-- [joe lencioni's awesome dotfiles. fantastic vim stuff here](https://github.com/lencioni/dotfiles)
-
-.. I'll continually add more as I come across them.
-
-References for various things:
-
+- [patched fonts](https://github.com/powerline/fonts)
 - [xterm color chart](https://raw.github.com/foize/go.sgr/master/xterm_color_chart.png)
 
 ## bugs
