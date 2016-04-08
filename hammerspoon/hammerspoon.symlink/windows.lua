@@ -13,10 +13,12 @@ local logLevel = 'debug' -- generally want 'debug' or 'info'
 local log = hs.logger.new('replicant', logLevel)
 local internalDisplayRes = '2880x1800'
 
-local cmdAlt   = {"cmd", "alt"}
-local ctrlAlt   = {"ctrl", "alt"}
+local cmdAlt = {"cmd", "alt"}
+local cmdShift = {"cmd", "shift"}
+local cmdCtrl = {"cmd", "ctrl"}
+local ctrlAlt = {"ctrl", "alt"}
+local hyper = {"cmd", "ctrl", "shift"}
 local mash = {"cmd", "alt", "ctrl"}
-local hyper = {"cmd", "shift"}
 local mashShift = {"cmd", "alt", "ctrl", "shift" }
 
 local grid = {
@@ -386,37 +388,37 @@ end
 -- Key bindings.
 --
 
-hs.hotkey.bind(cmdAlt, 'up', chain({
+hs.hotkey.bind(cmdCtrl, 'k', chain({
   grid.topHalf,
   grid.topThird,
   grid.topTwoThirds,
 }))
 
-hs.hotkey.bind(cmdAlt, 'right', chain({
+hs.hotkey.bind(cmdCtrl, 'l', chain({
   grid.rightHalf,
   grid.rightThird,
   grid.rightTwoThirds,
 }))
 
-hs.hotkey.bind(cmdAlt, 'down', chain({
+hs.hotkey.bind(cmdCtrl, 'j', chain({
   grid.bottomHalf,
   grid.bottomThird,
   grid.bottomTwoThirds,
 }))
 
-hs.hotkey.bind(cmdAlt, 'left', chain({
+hs.hotkey.bind(cmdCtrl, 'h', chain({
   grid.leftHalf,
   grid.leftThird,
   grid.leftTwoThirds,
 }))
 
-hs.hotkey.bind(mash, 'up', chain({
+hs.hotkey.bind(hyper, 'k', chain({
   grid.fullScreen,
   grid.centeredBig,
   grid.centeredSmall,
 }))
 
-hs.hotkey.bind(mash, 'down', chain({
+hs.hotkey.bind(hyper, 'j', chain({
   grid.topLeft,
   grid.topRight,
   grid.bottomRight,
@@ -439,14 +441,14 @@ hs.hotkey.bind(mash, 'f3', (function()
   hs.openConsole()
 end))
 
-hs.hotkey.bind(mash, "right", function()
+hs.hotkey.bind(hyper, "l", function()
   hs.alert.show("Prev Monitor")
   local win = hs.window.focusedWindow()
   local nextScreen = win:screen():previous()
   win:moveToScreen(nextScreen)
 end)
 
-hs.hotkey.bind(mash, "left", function()
+hs.hotkey.bind(hyper, "h", function()
   hs.alert.show("Next Monitor")
   local win = hs.window.focusedWindow()
   local nextScreen = win:screen():next()
