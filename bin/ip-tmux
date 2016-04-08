@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+external=$(dig +short myip.opendns.com @resolver1.opendns.com)
+vpn=$(ifconfig utun0 | ag 'inet ' | awk '{print $2}')
+en0=$(ifconfig en0 | ag 'inet ' | awk '{print $2}')
+en1=$(ifconfig en1 | ag 'inet ' | awk '{print "en1 " $2}')
+
+output="#[fg=brightblue]$external #[fg=colour136][$vpn] #[fg=white]■ #[fg=yellow]$en0 #[fg=darkyellow]$en1"
+
+echo "$output"
