@@ -412,13 +412,13 @@ hs.hotkey.bind(cmdCtrl, 'h', chain({
   grid.leftTwoThirds,
 }))
 
-hs.hotkey.bind(hyper, 'k', chain({
+hs.hotkey.bind(ctrlAlt, 'k', chain({
   grid.fullScreen,
   grid.centeredBig,
   grid.centeredSmall,
 }))
 
-hs.hotkey.bind(hyper, 'j', chain({
+hs.hotkey.bind(ctrlAlt, 'j', chain({
   grid.topLeft,
   grid.topRight,
   grid.bottomRight,
@@ -441,14 +441,14 @@ hs.hotkey.bind(mash, 'f3', (function()
   hs.openConsole()
 end))
 
-hs.hotkey.bind(hyper, "l", function()
+hs.hotkey.bind(ctrlAlt, "l", function()
   hs.alert.show("Prev Monitor")
   local win = hs.window.focusedWindow()
   local nextScreen = win:screen():previous()
   win:moveToScreen(nextScreen)
 end)
 
-hs.hotkey.bind(hyper, "h", function()
+hs.hotkey.bind(ctrlAlt, "h", function()
   hs.alert.show("Next Monitor")
   local win = hs.window.focusedWindow()
   local nextScreen = win:screen():next()
@@ -457,6 +457,7 @@ end)
 --
 -- Auto-reload config on change.
 --
+
 
 function reloadConfig(files)
   for _, file in pairs(files) do
@@ -467,5 +468,12 @@ function reloadConfig(files)
     end
   end
 end
+
 -- hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R",  reloadConfig)
 hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', reloadConfig):start()
+
+hs.hotkey.bind(cmdCtrl, "r", function()
+  hs.alert.show("Config Reloaded")
+  tearDownEventHandling()
+  hs.reload()
+end)
