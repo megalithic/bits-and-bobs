@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+max=300
+for (( i=1; i <= $max; ++i ))
+do
+  echo $i
+  echo -e "\ue$i"
+done
