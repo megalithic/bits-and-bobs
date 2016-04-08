@@ -65,7 +65,7 @@ located at `~/.dotfiles/private/install.sh`.
 
 ## Handy references ##
 
-- [patched fonts](https://github.com/powerline/fonts)
+- [patched fonts](https://github.com/powerline/fonts) [more (with tools)](https://github.com/gabrielelana/awesome-terminal-fonts/tree/patching-strategy)
 - [xterm color chart](https://raw.github.com/foize/go.sgr/master/xterm_color_chart.png)
 
 ## Those that came before me ##
