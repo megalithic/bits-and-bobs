@@ -52,7 +52,11 @@ local layoutConfig = {
   end),
 
   ['com.flexibits.fantastical2.mac'] = (function(window)
-    hs.grid.set(window, grid.fullScreen, internalDisplay())
+    hs.grid.set(window, grid.centeredBig, internalDisplay())
+  end),
+
+  ['com.agilebits.onepassword4'] = (function(window)
+    hs.grid.set(window, grid.centeredBig, internalDisplay())
   end),
 
   ['com.google.Chrome'] = (function(window, forceScreenCount)
