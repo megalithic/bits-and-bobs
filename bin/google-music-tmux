@@ -18,7 +18,7 @@ if [[ ! -z $has_jq ]] && [[ -f "$playback" ]]; then
   title=$( cat "$playback" | jq '.song.title' )
 
   # not running the app
-  if [ ! -z $is_running ]; then
+  if [ "$is_running" = "" ]; then
     output=""
   else
     # is running the app
