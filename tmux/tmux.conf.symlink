@@ -30,8 +30,8 @@ bind C-a send-prefix
 bind-key C-a send-prefix
 
 # Clipboard
-bind-key C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-bind-key C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+# bind-key C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+# bind-key C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
 bind C-d detach			# the same as d so you don't have to depress Ctrl
 bind -r C-R source-file ~/.tmux.conf \; display-message "Configuration reloaded."
 bind-key r refresh-client
@@ -103,10 +103,12 @@ bind Escape copy-mode
 setw -g mode-keys vi
 # Setup 'v' to being selection as in vim
 bind-key -t vi-copy v begin-selection
-bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+# bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+bind-key -t vi-copy y copy-pipe "pbcopy"
 # Update default binding of 'Enter' to also use copy-pipe
 unbind -t vi-copy Enter
-bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+# bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+bind-key -t vi-copy Enter copy-pipe "pbcopy"
 
 
 # STATUS BAR

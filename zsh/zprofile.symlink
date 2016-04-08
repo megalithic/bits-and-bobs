@@ -15,3 +15,5 @@
 #     chruby $(cat ~/.ruby-version)
 #   fi
 # fi
+
+# vim: set ft=zsh:

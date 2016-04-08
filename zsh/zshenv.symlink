@@ -1,12 +1,19 @@
+skip_global_compinit=1
+
 source ~/.dotfiles/zsh/path.zsh
+if [ -x /usr/libexec/path_helper ]; then
+  eval `/usr/libexec/path_helper -s`
+fi
 
-# # setup chruby
-# source /usr/local/share/chruby/chruby.sh
-# source /usr/local/share/chruby/auto.sh
-# RUBIES=(~/.rubies/*)
+
+# setup chruby
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+RUBIES=(~/.rubies/*)
 # chruby ruby-2.2.3
-# # check for bundler, if it doesn't exist, install it
-# # (gem list | grep bundler) || gem install bundler
 
-# # setup nvm
-[[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
+# setup nvm
+# [[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
+source $(brew --prefix nvm)/nvm.sh
+
+# vim: set ft=zsh:
