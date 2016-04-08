@@ -9,7 +9,7 @@
 #
 
 # To profile stuff for zsh startup, uncomment:
-# zmodload zsh/zprof
+zmodload zsh/zprof
 
 # Was loading this via iterm2:
 # (tmux ls | grep -vq attached && tmux at) || tmux
@@ -56,9 +56,18 @@ done
 
 unset config_files
 
+# setup chruby
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+RUBIES=(~/.rubies/*)
+# chruby ruby-2.2.3
+
+# setup n
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+
 # setup fzf
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # z.sh init
 source ~/.dotfiles/bin/z.sh
@@ -70,5 +79,3 @@ source ~/.dotfiles/bin/z.sh
 # ===========================================================================
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# vim: set ft=zsh:

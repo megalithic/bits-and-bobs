@@ -2,17 +2,13 @@
 
 source ./setup/lib.sh
 
-export NVM_DIR=$HOME/.nvm
-source $(brew --prefix nvm)/nvm.sh
+# install n
+curl -L http://git.io/n-install | bash
 
 ###############################################################################
 bot "NVM versions..."
 ###############################################################################
-require_nvm 0.10
-require_nvm 0.12
-require_nvm 4.4
-require_nvm stable
-nvm alias default stable
+n lts
 
 ###############################################################################
 bot "NPM Globals..."

@@ -14,6 +14,3 @@ RUBIES=(~/.rubies/*)
 
 # setup nvm
 # [[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
-source $(brew --prefix nvm)/nvm.sh
-
-# vim: set ft=zsh:

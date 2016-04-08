@@ -48,7 +48,7 @@ function! LoadPlugs()
 
   """"" Filetypes ===========================================================
   "" Functional (JavaScript)
-  Plug 'othree/yajs.vim', { 'tag': '1.6' } " weird comment colors
+  Plug 'othree/yajs.vim' " { 'tag': '1.6' } fixes weird comment colors
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
@@ -81,13 +81,10 @@ function! LoadPlugs()
   """"" Utilities ===========================================================
   Plug 'tpope/vim-commentary'
   Plug 'sickill/vim-pasta'
-  Plug 'ciaranm/detectindent'
-  Plug 'haya14busa/incsearch.vim'
+  " Plug 'ciaranm/detectindent' " auto-detect indent settings
   Plug 'jordwalke/VimAutoMakeDirectory'
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-endwise' " automagically add end/endfunction/endif/etc
-  Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-eunuch' " unix shell commands for vim
   Plug 'tpope/vim-surround'
     " - {Visual}S<arg> surrounds selection
     " - cs/ds<arg1><arg2> change / delete
@@ -97,11 +94,12 @@ function! LoadPlugs()
   Plug 'janko-m/vim-test'
   Plug 'gregsexton/MatchTag', { 'for': ['html', 'erb'] }
   Plug 'docunext/closetag.vim'
-  Plug 'lukaszb/vim-web-indent'
+  " Plug 'lukaszb/vim-web-indent' " hasn't been updated in 4y
   Plug 'luochen1990/rainbow'
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
 
   """"" Code Navigation======================================================
+  Plug 'haya14busa/incsearch.vim'
   Plug 'unblevable/quick-scope'
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
@@ -800,7 +798,7 @@ let g:ctrlp_cmd = 'CtrlP'
 nnoremap <leader>bs :CtrlPBuffer<CR>
 
 """"""" fzf-vim
-set rtp+=/usr/local/opt/fzf
+" set rtp+=/usr/local/opt/fzf
 " nnoremap <silent> <Leader>m :Files<CR>
 " nnoremap <silent> <Leader>a :Ag <CR>
 " nnoremap <silent> <Leader>C        :Colors<CR>
