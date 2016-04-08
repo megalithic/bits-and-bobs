@@ -1,49 +1,44 @@
+![megadots][]
 
-![all the dots](https://dl.dropboxusercontent.com/u/81794/megadotfiles.png)
+## Bits and bobs
 
-## megadotfiles
+I started off with a modified version of my own dotfiles, based on
+[Holman's][holman/dotfiles], but have slowly been updating it to be
+more akin to what [Pengwynn][pengwynn/dotfiles] and
+[Yonk][adamyonk/dotfiles] have built/modified.
 
-Before you go any further... this is all specific to an OSX install; for my linux fam,
-I recommend checking out [@cowboy's dotfiles repo](https://github.com/cowboy/dotfiles), as it has mostly safe
-osx/linux alternatives and is also geared towards bash instead of zsh (my preferred shell).
+Check theirs out, or many others at [octodots][dotfiles].
 
-## install
+![screencap][]
 
-Pre-install stuffs: You'll obviously need git installed; if you're using
-10.9+, just hit up `xcode-select --install`, click 'Install' when the
-dialog pops up, disco.
+## Get your own ##
 
-Now that the pre-reqs are out of the way, run this:
+If you're new to dotfiles, this probably isn't the best starter repository for
+you. While these started as a clone of [Holman's][holman/dotfiles], many
+utilities are unique to my workflow. I recommend other [dotfile frameworks][dotfiles]
+out there.
 
-```sh
-curl https://raw.githubusercontent.com/megalithic/dotfiles/master/setup/bootstrap | sh
+### Installation ###
 
-# OR, failing that, manually clone and run:
+If you want to kick the tires, then simply:
 
-git clone https://github.com/megalithic/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-setup/bootstrap
-```
+- `git clone https://github.com/megalithic/bits-and-bobs.git ~/.dotfiles`
+- `cd ~/.dotfiles`
+- `script/bootstrap`
 
-This will symlink the appropriate files in `.dotfiles` to your home directory.
-Everything is configured and tweaked within `~/.dotfiles`.
+The install script will symlink the appropriate files in `.dotfiles` to your
+home directory. Everything is configured and tweaked within `~/.dotfiles`,
+though. All files and folders ending in `.symlink` get, you guessed it,
+symlinked. For example: `~/.dotfiles/vim/vimrc.symlink` gets symlinked to
+`~/.vimrc`.
 
-## topical
+This also sets up things like homebrew if you're on a mac, and even allows for a
+private repository setup.
 
-Everything's built around topic areas. If you're adding a new area to your
-forked dotfiles — say, "Java" — you can simply add a `java` directory and put
-files in there. Anything with an extension of `.zsh` will get automatically
-included into your shell. Anything with an extension of `.symlink` will get
-symlinked without extension into `$HOME` when you run `setup/bootstrap`.
+I highly recommend you dig into the scripts and configs to see what all
+is going on before you willy-nilly install a stranger's shell scripts. :)
 
-## what's inside
-
-A lot of stuff. Seriously, a lot of stuff. Check them out in the file browser
-above and see what components may mesh up with you.
-[Fork it](https://github.com/megalithic/dotfiles/fork), remove what you don't
-use, and build on what you do use.
-
-## components
+## Main elements ##
 
 There's a few special files in the hierarchy.
 
@@ -53,12 +48,12 @@ There's a few special files in the hierarchy.
   environment.
 - **topic/path.zsh**: Any file named `path.zsh` is loaded first and is
   expected to setup `$PATH` or similar.
-- **topic/completion.zsh**: Any file named `completion.zsh` is loaded
-  last and is expected to setup autocomplete.
 - **topic/\*.symlink**: Any files ending in `*.symlink` get symlinked into
   your `$HOME`. This is so you can keep all of those versioned in your dotfiles
   but still keep those autoloaded files in your home directory. These get
-  symlinked in when you run `setup/bootstrap`.
+  symlinked in when you run `script/bootstrap`.
+- **topic/\*.completion.sh**: Any files ending in `completion.sh` get loaded
+  last so that they get loaded after we set up zsh autocomplete functions.
 
 ## .localrc and sensitive data
 ![Keep it secret, keep it safe](https://dl.dropboxusercontent.com/u/81794/secret_safe.jpg)
@@ -68,25 +63,45 @@ can let `setup/bootstrap` handle the cloning of your private repo to
 ~/.dotfiles/private, which will execute an install script, assuming it's
 located at `~/.dotfiles/private/install.sh`.
 
-Handy references
+## Handy references ##
 
 - [patched fonts](https://github.com/powerline/fonts)
 - [xterm color chart](https://raw.github.com/foize/go.sgr/master/xterm_color_chart.png)
 
-## bugs
+## Those that came before me ##
 
-I want this to work for everyone; that means when you clone it down it should
-work for you even though you may not have `chruby` installed, for example. That
-said, I do use this as *my* dotfiles, so there's a good chance I may break
-something if I forget to make a check for a dependency.
+My original dotfiles and this revamped version began as a fork of
+(and is heavily inspired by) [Zach Holman's dotfiles][holman/dotfiles],
+whose topic-based symlinking approach makes this so easy.
 
-If you're brand-new to the project and run into any blockers, please
-[open an issue](https://github.com/megalithic/dotfiles/issues) and let me know
-what's broke so I can sure this thing up!
+I also have stolen freely from:
 
-## thanks
+* [Wynn Netherland](https://github.com/pengwynn/dotfiles)
+* [Adam Yonk](https://github.com/adamyonk/dotfiles)
+* [Zach Holman](https://github.com/holman/dotfiles)
+* [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
+* [Yan Pritzker](https://github.com/skwp/dotfiles)
+* [Josh Clayton](https://github.com/joshuaclayton/dotfiles)
+* [Adam Jahnke](https://github.com/adamyonk/dotfiles)
+* [Tom Ryder](https://github.com/tejr/dotfiles)
+* [Steve Losh](https://github.com/sjl/dotfiles)
 
-Big up to [@holman](https://github.com/holman/dotfiles) for providing
-a solid starting point for having a mostly automated way of quickly
-getting a new system (OSX for now) install up and running with preferred environment
-tools and workflows.
+## Share your dots
+
+If you've got a great set of dots (or want to get started), check out
+[dotfiles.github.com][dotfiles]. Ping @[octodots][] with great dot sets
+you've found or tips and tricks for your favorite tools. If you have any
+questions about my specific setup here, feel free to hit me up at @[megalithic].
+
+[dotfiles]: http://dotfiles.github.com
+[octodots]: https://twitter.com/octodots
+[megalithic]: https://twitter.com/megalithic
+[yonk]: https://twitter.com/adamyonk
+[pengwynn]: https://twitter.com/pengwynn
+[holman/dotfiles]: https://github.com/holman/dotfiles
+[pengwynn/dotfiles]: https://github.com/pengwynn/dotfiles
+[adamyonk/dotfiles]: https://github.com/adamyonk/dotfiles
+[megadots]:
+https://dl.dropboxusercontent.com/u/81794/megadotfiles.png
+[screencap]:
+https://dl.dropboxusercontent.com/u/81794/screencap.png
