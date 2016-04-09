@@ -166,7 +166,7 @@ filetype plugin indent on
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
-set t_ti= t_te=
+" set t_ti= t_te=
 " set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
 
 " change vim cursor depending on the mode
@@ -891,12 +891,6 @@ nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
-
-" Fix an issue with nvim incorrectly parsing <c-h>
-" https://github.com/christoomey/vim-tmux-navigator/issues/71#issuecomment-148557514
-" Run the following in ~:
-" infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
-" tic $TERM.ti
 
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 

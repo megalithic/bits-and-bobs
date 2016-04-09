@@ -66,8 +66,8 @@ set -g set-titles on
 # 256 color support
 # set -g terminal-overrides 'xterm:colors=256'
 # https://github.com/elmcast/.vim
-set-option -ga terminal-overrides ",screen-256color:Tc"
-set -g default-terminal "screen-256color"
+# set-option -ga terminal-overrides ",screen-256color:Tc"
+# set -g default-terminal "screen-256color"
 set-option -g default-shell "/usr/local/bin/zsh"
 
 # fix for NVIM_TUI_ENABLE_CURSOR_SHAPE in tmux

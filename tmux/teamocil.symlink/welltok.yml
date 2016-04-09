@@ -11,17 +11,14 @@ windows:
     panes:
       - commands:
         - cd currency-service
-        - nvm use
         - npm install
         - npm run dev
       - commands:
         - cd achievement-service
-        - nvm use
         - npm install
         - npm run dev
       - commands:
         - cd munero
-        - nvm use
         - npm install
         - npm run dev
       - commands:
@@ -35,8 +32,7 @@ windows:
         - npm run mock
       - commands:
         - cd cafewell
-        # - chruby ruby-2.2.3
-        - nvm use
+        - chruby ruby-2.2.3
         - npm install
         - bundle
         - bundle exec rake db:migrate
@@ -45,7 +41,6 @@ windows:
         - be foreman start
       - commands:
         - cd rewards-dashboard-voltron
-        - nvm use
         - npm install
         - npm start
   - name: "code"
