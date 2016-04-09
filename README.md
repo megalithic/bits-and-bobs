@@ -40,7 +40,18 @@ is going on before you willy-nilly install a stranger's shell scripts. :)
 
 ## Main elements ##
 
-There's a few special files in the hierarchy.
+A few of the flavors I roll with:
+
+- 24-bit color patched version of [tmux](https://github.com/choppsv1/homebrew-term24)
+- font: Source Code Pro (patched with powerline, octicon, fontawesome glyphs)
+- iTerm2 colorscheme: base16-ocean dark
+- (n)vim colorscheme: base16-ocean dark
+- zsh prompt: a base of [pure](https://github.com/sindresorhus/pure), with some
+modified vcs functionality (for super in-depth vcs status output).
+- several shell scripts for getting the info I want on my tmux statusbar (check
+out `~/.dotfiles/bin` for `-tmux` infused scripts).
+
+The file hierarchy:
 
 - **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
   available everywhere.
