@@ -715,9 +715,20 @@ augroup GitGroup
   autocmd BufReadCmd *.git/index exe BufReadIndex()
   autocmd BufEnter *.git/index silent normal gg0j
   autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
-
 augroup END
 
+" Automatic rename of tmux window
+if exists('$TMUX') && !exists('$NORENAME')
+  au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+  au VimLeave * call system('tmux set-window automatic-rename on')
+endif
+
+augroup HighlightGroup
+  autocmd!
+  " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+  au BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
+  au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
+augroup END
 
 " =============================================================================
 " Filetypes / Syntax #ftypes

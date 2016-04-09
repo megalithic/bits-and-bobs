@@ -63,7 +63,8 @@ alias d=z
 # TMUX
 # -----------------------------------------------------------------------------
 alias tmux="tmux -u -2"
-alias tm="(tmux ls | grep -vq attached && tmux at) || tmux"
+# alias tm="(tmux ls | grep -vq attached && tmux at) || tmux"
+alias tm="tmux attach || tmux new"
 alias mux=tm
 
 alias takeover="tmux detach -a"

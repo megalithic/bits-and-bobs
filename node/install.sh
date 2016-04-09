@@ -3,6 +3,7 @@
 source ./setup/lib.sh
 
 # install n
+# https://github.com/mklement0/n-install
 curl -L http://git.io/n-install | bash
 
 ###############################################################################
