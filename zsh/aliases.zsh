@@ -55,20 +55,12 @@ autoload -U zmv
 # mmv *.c.orig orig/*.c
 alias mmv='noglob zmv -W'
 
-# Z
-# -----------------------------------------------------------------------------
-alias c=z
-alias d=z
-
 # TMUX
 # -----------------------------------------------------------------------------
-alias tmux="tmux -u -2"
 # alias tm="(tmux ls | grep -vq attached && tmux at) || tmux"
 alias tm="tmux attach || tmux new"
 alias mux=tm
-
 alias takeover="tmux detach -a"
-
 alias teama="tmux attach-session -t default"
 alias team="cd ~ && teamocil --here default"
 alias toka="tmux attach-session -t welltok"

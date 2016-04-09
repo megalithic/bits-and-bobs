@@ -689,7 +689,7 @@ augroup END
 autocmd BufWrite * silent call DeleteTrailingWS()
 
 " Check for lint errors on open & write
-autocmd BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
+autocmd BufWritePost *.js silent! Neomake standard|redraw
 " autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
 
 augroup ColorColumnGroup
