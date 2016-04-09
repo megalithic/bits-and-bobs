@@ -28,3 +28,18 @@ hs.hotkey.bind({'cmd'}, 'f5', function() toggle_application("Tweetbot") end)
 hs.hotkey.bind({'cmd'}, 'f8', function() toggle_application("Google Play Music Desktop Player") end)
 hs.hotkey.bind({'cmd', 'shift'}, 'M', function() toggle_application("Messages") end)
 -- hs.hotkey.bind({'ctrl'}, '', nil, nil, nil, function() toggle_application("iTerm2") end)
+
+-- local wf=hs.window.filter
+-- wf_brave = wf.new{'Brave'}
+
+-- -- handle vim-like keybindings in brave
+-- wf_brave:subscribe(wf.windowFocused, function()
+--   hs.hotkey.bind({}, 'j', function()
+--     hs.eventtap.keyStroke({}, "down")
+--   end)
+-- end)
+
+-- wf_brave:unsubscribe(wf.windowUnfocused, function()
+--   hs.hotkey.bind({}, 'j', function()
+--   end)
+-- end)

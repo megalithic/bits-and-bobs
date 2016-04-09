@@ -78,6 +78,8 @@ located at `~/.dotfiles/private/install.sh`.
 
 - [patched fonts](https://github.com/powerline/fonts) [more (with tools)](https://github.com/gabrielelana/awesome-terminal-fonts/tree/patching-strategy)
 - [xterm color chart](https://raw.github.com/foize/go.sgr/master/xterm_color_chart.png)
+- [https://github.com/herrbischoff/awesome-command-line-apps][]
+- [https://github.com/herrbischoff/awesome-osx-command-line][]
 
 ## Those that came before me ##
 

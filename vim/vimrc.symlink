@@ -40,8 +40,6 @@ function! LoadPlugs()
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
-  Plug 'tmux-plugins/vim-tmux'
-  Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
@@ -169,13 +167,10 @@ filetype plugin indent on
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
-set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
+" set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
 
 " change vim cursor depending on the mode
 if has('nvim')
-  " Hack to get C-h working in NeoVim
-  " nmap <BS> <C-W>h
-
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
@@ -200,7 +195,7 @@ set ruler " show the cursor position all the time
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
-set cul " turn on cursorline highlighting -- needed for linenumber HL too
+" set cul " turn on cursorline highlighting -- needed for linenumber HL too
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
 set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
