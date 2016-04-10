@@ -6,12 +6,13 @@ hs.grid.GRIDHEIGHT = 12
 hs.grid.MARGINX    = 3
 hs.grid.MARGINY    = 4
 
+hs.grid.setGrid("12x12")
+hs.grid.setMargins({w = 3, h = 4})
 hs.window.animationDuration = 0 -- disable animations
 
 local screenCount = #hs.screen.allScreens()
 local logLevel = 'debug' -- generally want 'debug' or 'info'
 local log = hs.logger.new('replicant', logLevel)
-local internalDisplayRes = 'Built-in Retina Display'
 
 local cmdAlt = {"cmd", "alt"}
 local cmdShift = {"cmd", "shift"}
@@ -54,11 +55,11 @@ local layoutConfig = {
   end),
 
   ['com.flexibits.fantastical2.mac'] = (function(window)
-    hs.grid.set(window, grid.centeredBig, internalDisplay())
+    hs.grid.set(window, grid.centeredBig, mbpDisplay())
   end),
 
   ['com.agilebits.onepassword4'] = (function(window)
-    hs.grid.set(window, grid.centeredBig, internalDisplay())
+    hs.grid.set(window, grid.centeredBig, mbpDisplay())
   end),
 
   ['com.google.Chrome'] = (function(window, forceScreenCount)
@@ -85,7 +86,7 @@ local layoutConfig = {
   end),
 
   ['com.skype.skype'] = (function(window)
-    hs.grid.set(window, grid.rightHalf, internalDisplay())
+    hs.grid.set(window, grid.rightHalf, mbpDisplay())
   end),
 }
 
@@ -133,10 +134,12 @@ function canManageWindow(window)
     bundleID == 'com.googlecode.iterm2'
 end
 
-function internalDisplay()
-  -- Fun fact: this resolution matches both the 13" MacBook Air and the 15"
-  -- (Retina) MacBook Pro.
-  return hs.screen.find(internalDisplayRes)
+function mbpDisplay()
+  return hs.screen.find('Built-in Retina Display')
+end
+
+function primaryDisplay()
+  return hs.screen.find('Dell P2415Q')
 end
 
 function activateLayout(forceScreenCount)
@@ -426,19 +429,18 @@ hs.hotkey.bind(ctrlAlt, 'j', chain({
 }))
 
 -- activate multi-monitor layouts
-hs.hotkey.bind(mash, 'f1', (function()
-  hs.alert('One-monitor layout')
+hs.hotkey.bind(cmdCtrl, 'f1', (function()
+  hs.alert('MBPr layout')
   activateLayout(1)
 end))
 
-hs.hotkey.bind(mash, 'f2', (function()
-  hs.alert('Two-monitor layout')
-  activateLayout(2)
+hs.hotkey.bind(cmdCtrl, 'f2', (function()
+  hs.alert('Multi-monitor layout')
+  activateLayout(3)
 end))
 
-hs.hotkey.bind(mash, 'f3', (function()
-  hs.alert('Hammerspoon console')
-  hs.openConsole()
+hs.hotkey.bind(ctrlAlt, 'r', (function()
+  hs.toggleConsole()
 end))
 
 hs.hotkey.bind(ctrlAlt, "l", function()
