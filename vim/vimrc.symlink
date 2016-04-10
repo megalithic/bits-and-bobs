@@ -60,9 +60,8 @@ function! LoadPlugs()
 
   "" Presentation (CSS / SCSS / LESS)
   Plug 'othree/csscomplete.vim'
-  Plug 'JulesWang/css.vim'
-        \| Plug 'hail2u/vim-css3-syntax'
-        \| Plug 'cakebaker/scss-syntax.vim'
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'cakebaker/scss-syntax.vim'
 
   "" Structure (HTML / HAML / SLIM)
   Plug 'othree/html5.vim'
@@ -321,17 +320,6 @@ let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 " let g:python_host_skip_check = 1
 " let g:python3_host_skip_check = 1
-
-" Neovim copy/paste support from system clipboard
-" if has("nvim")
-"   vnoremap <silent> y y:call ClipboardYank()<cr>
-"   vnoremap <silent> d d:call ClipboardYank()<cr>
-"   nnoremap <silent> p :call ClipboardPaste()<cr>p
-" endif
-
-
-" treat certain characters as full keyword boundaries, e.g. `-`
-set iskeyword+=-
 
 " if more than 1 files are passed to vim as arg, open them in vertical splits
 if argc() > 1
@@ -628,14 +616,6 @@ function! s:Repl()
   return "p@=RestoreRegister()\<cr>"
 endfunction
 
-" Neovim support for system clipboard in OSX
-" function! ClipboardYank()
-"   call system('pbcopy', @@)
-" endfunction
-" function! ClipboardPaste()
-"   let @@ = system('pbpaste')
-" endfunction
-
 " QuickScope, used in conjunction with keybinding overrides
 function! Quick_scope_selective(movement)
     let needs_disabling = 0
@@ -742,6 +722,8 @@ augroup filetypes
   autocmd BufNewFile,BufRead *.slim set filetype=slim
   autocmd BufNewFile,BufRead *.less set filetype=less
   autocmd BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
+  autocmd BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
+  autocmd FileType sass,scss set iskeyword+=-
 
   autocmd BufNewFile,BufRead */ssh/config  setf sshconfig
   autocmd BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
