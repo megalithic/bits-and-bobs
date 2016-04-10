@@ -3,15 +3,15 @@
 -----------------------------------------------------------------------------------
 hs.grid.GRIDWIDTH  = 12
 hs.grid.GRIDHEIGHT = 12
-hs.grid.MARGINX    = 5
-hs.grid.MARGINY    = 5
+hs.grid.MARGINX    = 3
+hs.grid.MARGINY    = 4
 
 hs.window.animationDuration = 0 -- disable animations
 
 local screenCount = #hs.screen.allScreens()
 local logLevel = 'debug' -- generally want 'debug' or 'info'
 local log = hs.logger.new('replicant', logLevel)
-local internalDisplayRes = '2880x1800'
+local internalDisplayRes = 'Built-in Retina Display'
 
 local cmdAlt = {"cmd", "alt"}
 local cmdShift = {"cmd", "shift"}
