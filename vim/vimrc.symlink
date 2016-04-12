@@ -821,8 +821,8 @@ nnoremap <leader>a :Ack!<space>
 map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
 
 """""" Testing vim-test
-nmap <silent> <leader>t :TestFile<CR>
-nmap <silent> <leader>T :TestNearest<CR>
+nmap <silent> <leader>t !killport 31337<CR>:TestFile<CR>
+nmap <silent> <leader>T !killport 31337<CR>:TestNearest<CR>
 " nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>

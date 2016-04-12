@@ -67,7 +67,7 @@ set -g set-titles on
 # set -g terminal-overrides 'xterm:colors=256'
 # https://github.com/elmcast/.vim
 # set-option -ga terminal-overrides ",screen-256color:Tc"
-# set -g default-terminal "screen-256color"
+set -g default-terminal "xterm-256color"
 set-option -g default-shell "/usr/local/bin/zsh"
 
 # fix for NVIM_TUI_ENABLE_CURSOR_SHAPE in tmux
@@ -174,7 +174,6 @@ set -g status-right "#(~/.dotfiles/bin/google-music-tmux) #(~/.dotfiles/bin/batt
 set-environment -g TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/tmux-plugins/'
 
 set -g @plugin 'tmux-plugins/tpm'
-# set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-copycat'
 set -g @plugin 'tmux-plugins/tmux-yank'
