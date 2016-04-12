@@ -924,10 +924,6 @@ vmap <silent><leader>y "xy
 map <silent><leader>p "xp
 vmap <silent> <expr> p <sid>Repl()
 
-""""""" vim-operator-flashy
-" map y <Plug>(operator-flashy)
-" nmap Y <Plug>(operator-flashy)$
-
 " Go to end of text you've just pasted
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
