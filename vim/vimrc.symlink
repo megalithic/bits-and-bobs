@@ -1,4 +1,4 @@
-" =============================================================================
+;" =============================================================================
 "
 "   ┌┬┐┌─┐┌─┐┌─┐┬  ┬┌┬┐┬ ┬┬┌─┐
 "   │││├┤ │ ┬├─┤│  │ │ ├─┤││   :: DOTFILES > vimrc
@@ -37,6 +37,7 @@ filetype off
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'chriskempson/base16-vim'
+  Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
@@ -158,8 +159,9 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 """"" UI ====================================================================
 """"""" Theme / Terminal
-set background=dark
+" colorscheme OceanicNext
 colorscheme base16-ocean
+set background=dark
 
 filetype plugin indent on
 
