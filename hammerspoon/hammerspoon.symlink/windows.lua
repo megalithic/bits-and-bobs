@@ -1,11 +1,6 @@
 -----------------------------------------------------------------------------------
 --/ windows and events /--
 -----------------------------------------------------------------------------------
-hs.grid.GRIDWIDTH  = 12
-hs.grid.GRIDHEIGHT = 12
-hs.grid.MARGINX    = 3
-hs.grid.MARGINY    = 4
-
 hs.grid.setGrid("12x12")
 hs.grid.setMargins({w = 3, h = 4})
 hs.window.animationDuration = 0 -- disable animations
@@ -71,7 +66,7 @@ local layoutConfig = {
       -- Second/even windows go on the LEFT side.
       -- (Note this is the opposite of what we do with Canary.)
       local windows = windowCount(window:application())
-      local side = windows % 2 == 0 and grid.leftHalf or grid.rightHalf
+      local side = windows % 2 == 0 and grid.leftThird or grid.rightThird
       hs.grid.set(window, side, hs.screen.primaryScreen())
     end
   end),
@@ -81,19 +76,13 @@ local layoutConfig = {
     if count == 1 then
       hs.grid.set(window, grid.fullScreen, hs.screen.primaryScreen())
     else
-      hs.grid.set(window, grid.leftHalf, hs.screen.primaryScreen())
+      hs.grid.set(window, grid.leftTwoThirds, hs.screen.primaryScreen())
     end
-  end),
-
-  ['com.skype.skype'] = (function(window)
-    hs.grid.set(window, grid.rightHalf, mbpDisplay())
-  end),
+  end)
 }
 
---
 -- Utility and helper functions.
---
-
+-----------------------------------------------------------------------------------
 -- Returns the number of standard, non-minimized windows in the application.
 --
 -- (For Chrome, which has two windows per visible window on screen, but only one
@@ -161,7 +150,7 @@ function activateLayout(forceScreenCount)
 end
 
 -- Event-handling
---
+-----------------------------------------------------------------------------------
 -- This will become a lot easier once `hs.window.filter`
 -- (http://www.hammerspoon.org/docs/hs.window.filter.html) moves out of
 -- "experimental" status, but until then, using a manual approach as
@@ -349,7 +338,7 @@ local lastSeenChain = nil
 local lastSeenWindow = nil
 
 -- Chain the specified movement commands.
---
+-----------------------------------------------------------------------------------
 -- This is like the "chain" feature in Slate, but with a couple of enhancements:
 --
 --  - Chains always start on the screen the window is currently on.
@@ -387,20 +376,12 @@ function chain(movements)
   end
 end
 
---
 -- Key bindings.
---
-
-hs.hotkey.bind(cmdCtrl, 'k', chain({
-  grid.topHalf,
-  grid.topThird,
-  grid.topTwoThirds,
-}))
-
-hs.hotkey.bind(cmdCtrl, 'l', chain({
-  grid.rightHalf,
-  grid.rightThird,
-  grid.rightTwoThirds,
+-----------------------------------------------------------------------------------
+hs.hotkey.bind(cmdCtrl, 'h', chain({
+  grid.leftHalf,
+  grid.leftThird,
+  grid.leftTwoThirds,
 }))
 
 hs.hotkey.bind(cmdCtrl, 'j', chain({
@@ -409,16 +390,22 @@ hs.hotkey.bind(cmdCtrl, 'j', chain({
   grid.bottomTwoThirds,
 }))
 
-hs.hotkey.bind(cmdCtrl, 'h', chain({
-  grid.leftHalf,
-  grid.leftThird,
-  grid.leftTwoThirds,
-}))
-
-hs.hotkey.bind(ctrlAlt, 'k', chain({
+hs.hotkey.bind(cmdCtrl, 'k', chain({
   grid.fullScreen,
   grid.centeredBig,
   grid.centeredSmall,
+}))
+
+hs.hotkey.bind(cmdCtrl, 'l', chain({
+  grid.rightHalf,
+  grid.rightThird,
+  grid.rightTwoThirds,
+}))
+
+hs.hotkey.bind(ctrlAlt, 'k', chain({
+  grid.topHalf,
+  grid.topThird,
+  grid.topTwoThirds,
 }))
 
 hs.hotkey.bind(ctrlAlt, 'j', chain({
@@ -443,6 +430,8 @@ hs.hotkey.bind(ctrlAlt, 'r', (function()
   hs.toggleConsole()
 end))
 
+
+-- movie windows between monitors
 hs.hotkey.bind(ctrlAlt, "l", function()
   hs.alert.show("Prev Monitor")
   local win = hs.window.focusedWindow()
@@ -456,11 +445,9 @@ hs.hotkey.bind(ctrlAlt, "h", function()
   local nextScreen = win:screen():next()
   win:moveToScreen(nextScreen)
 end)
---
+
 -- Auto-reload config on change.
---
-
-
+-----------------------------------------------------------------------------------
 function reloadConfig(files)
   for _, file in pairs(files) do
     if file:sub(-4) == '.lua' then

@@ -47,12 +47,12 @@ function! LoadPlugs()
   """"" Filetypes ===========================================================
   "" Functional (JavaScript)
   Plug 'othree/yajs.vim' " { 'tag': '1.6' } fixes weird comment colors
-  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-  Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-  Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-  Plug 'othree/jspc.vim', { 'for': 'javascript' }
-  Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+  Plug 'pangloss/vim-javascript'
+  Plug 'gavocanov/vim-js-indent'
+  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'mxw/vim-jsx'
+  Plug 'othree/jspc.vim'
+  Plug 'heavenshell/vim-jsdoc'
   Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
   Plug 'carlitux/deoplete-ternjs'
   Plug 'kchmck/vim-coffee-script'
@@ -166,7 +166,7 @@ filetype plugin indent on
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
-" set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
+set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
 
 " change vim cursor depending on the mode
 if has('nvim')
@@ -638,18 +638,16 @@ endfunction
 " =============================================================================
 " Autocommands #autocommands
 " -----------------------------------------------------------------------------
-if exists('+colorcolumn')
-  augroup UnSyntaxInactiveGroup
-    autocmd!
-    autocmd BufEnter,WinEnter * set syntax=ON
-    autocmd BufEnter,WinEnter * set number
-    autocmd BufEnter,WinEnter * set cursorline
+augroup UnSyntaxInactiveGroup
+  autocmd!
+  " autocmd BufEnter,WinEnter * set syntax=ON
+  autocmd BufEnter,WinEnter * set number
+  " autocmd BufEnter,WinEnter * set cursorline
 
-    autocmd BufLeave,WinLeave * set syntax=OFF
-    autocmd BufLeave,WinLeave * set nonumber
-    autocmd BufLeave,WinLeave * set nocursorline
-  augroup END
-endif
+  " autocmd BufLeave,WinLeave * set syntax=OFF
+  autocmd BufLeave,WinLeave * set nonumber
+  " autocmd BufLeave,WinLeave * set nocursorline
+augroup END
 
 augroup RestoreCursorPosition
   autocmd!
@@ -672,12 +670,6 @@ augroup ColorColumnGroup
   if exists("&colorcolumn")
     autocmd InsertEnter * set colorcolumn=80
     autocmd InsertLeave * set colorcolumn=""
-  endif
-
-  if exists('+colorcolumn')
-    " set colorcolumn=80
-  else
-    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
   endif
 augroup END
 

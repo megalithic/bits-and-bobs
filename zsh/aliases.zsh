@@ -108,6 +108,7 @@ alias et="v ~/.dotfiles/tmux/tmux.conf.symlink"
 # FOLDERS
 # -----------------------------------------------------------------------------
 alias dot="cd ~/.dotfiles"
+alias ot=dot
 alias code="cd ~/code"
 alias dev="cd ~/code"
 alias music="cd ~/music/Audio"
@@ -168,6 +169,7 @@ alias cls="clr && ls"
 alias ip="ifconfig"
 alias get="curl -OL"
 alias g="grep -r -i --color='auto'"
+alias nvm='n'
 alias irc="weechat-curses"
 alias weechat="weechat-curses"
 alias eechat="weechat-curses"
