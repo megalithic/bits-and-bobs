@@ -36,8 +36,7 @@ filetype off
 " -----------------------------------------------------------------------------
 function! LoadPlugs()
   """"" UI ==================================================================
-  Plug 'chriskempson/base16-vim'
-  Plug 'mhartington/oceanic-next'
+  Plug 'Mattias-/base16-vim' " this fork fixes the stinking term color issues
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
@@ -159,7 +158,6 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 """"" UI ====================================================================
 """"""" Theme / Terminal
-" colorscheme OceanicNext
 colorscheme base16-ocean
 set background=dark
 
