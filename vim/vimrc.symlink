@@ -765,6 +765,13 @@ highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 highlight Search term=underline guibg=#afaf87 guifg=#333333
 highlight Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold
 
+match ErrorMsg 'debugger'
+match ErrorMsg 'binding.pry'
+
+" Highlight VCS conflict markers
+" @see {@link https://bitbucket.org/sjl/dotfiles/src/83aac563abc9d0116894ac61db2c63c9a05f72be/vim/vimrc?at=default&fileviewer=file-view-default#vimrc-233}
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
 " =============================================================================
 " Keybindings #bindings
 " TODO: this area needs lots of cleanup and re-evaluation
