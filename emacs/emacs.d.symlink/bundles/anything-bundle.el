@@ -212,9 +212,17 @@ Repeated invocations toggle between the two most recently open buffers."
 ;; Evil Bindings
 ;; =============================================================================
 ;; (define-key evil-normal-state-map (kbd "RET") 'save-buffer)
-(define-key evil-normal-state-map (kbd "C-j") 'evil-scroll-down)
-(define-key evil-normal-state-map (kbd "C-k") 'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "C-n") 'evil-scroll-down)
+(define-key evil-normal-state-map (kbd "C-p") 'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "C-f") 'evil-scroll-down)
+(define-key evil-normal-state-map (kbd "C-b") 'evil-scroll-up)
 
+(define-key evil-normal-state-map (kbd "C-o") 'evil-window-vnew)
+
+(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
 ;; Make ";" behave like ":" in normal mode
 (define-key evil-normal-state-map (kbd ";") 'evil-ex)
@@ -449,8 +457,8 @@ Repeated invocations toggle between the two most recently open buffers."
 ;; Custom Packages
 ;; =============================================================================
 
-(load "~/.emacs.d/vendor/ujelly-theme/ujelly-theme.el")
-(load-theme 'ujelly)
+(load "~/.emacs.d/vendor/base16-ocean-dark-theme.el")
+(load-theme 'base16-ocean-dark)
 
 ; (let ((bg (face-attribute 'default :background)))
 ;   (custom-set-faces

@@ -475,6 +475,7 @@ let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to b
 let g:ctrlp_switch_buffer=0            " open files in new buffers
 let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
 let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
+let g:ctrlp_mruf_relative = 1          " Show only MRU files in the working directory
 let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
 let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
 let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
@@ -828,8 +829,8 @@ nnoremap <leader>a :Ack!<space>
 map <leader>/ :execute "Ack! " . expand("<cword>") <CR>
 
 """""" Testing vim-test
-nmap <silent> <leader>t !killport 31337<CR>:TestFile<CR>
-nmap <silent> <leader>T !killport 31337<CR>:TestNearest<CR>
+nmap <silent> <leader>t :TestFile<CR>
+nmap <silent> <leader>T :TestNearest<CR>
 " nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
