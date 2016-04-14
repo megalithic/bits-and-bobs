@@ -2,12 +2,12 @@ name: "welltok"
 windows:
   - name: "chats"
     root: "~"
-    focus: true
     panes:
       - irc
   - name: "services"
     root: "~/code/welltok"
     layout: tiled
+    focus: true
     panes:
       - commands:
         - cd currency-service
@@ -30,6 +30,7 @@ windows:
         - docker ps
         - cd rewards-dashboard-voltron
         - npm run mock
+        focus: true
       - commands:
         - cd cafewell
         - chruby ruby-2.2.3
@@ -44,6 +45,6 @@ windows:
         - npm install
         - npm start
   - name: "code"
-    root: "~/code/welltok"
+    root: "~/code/welltok/rewards-dashboard-voltron"
     panes:
       - ls
