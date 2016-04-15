@@ -57,7 +57,7 @@ done
 unset config_files
 
 # iTerm shell integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # setup chruby
 source /usr/local/share/chruby/chruby.sh

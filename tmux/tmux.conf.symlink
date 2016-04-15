@@ -69,7 +69,7 @@ set -g default-shell "/usr/local/bin/zsh"
 # fix for NVIM_TUI_ENABLE_CURSOR_SHAPE in tmux
 # https://github.com/nathanaelkane/dotfiles/commit/9607d826b9d408595de2e3fe7de0abec1e94fa87
 set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
-# set -ga terminal-overrides ',tmux-256color:Tc'
+set -ga terminal-overrides ',tmux-256color:Tc'
 # set -ga terminal-overrides ",screen-256color:Tc"
 # set -ga terminal-overrides ',xterm:colors=256'
 

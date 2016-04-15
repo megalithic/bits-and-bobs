@@ -725,6 +725,7 @@ augroup filetypes
   " filetype
   autocmd BufNewFile,BufRead *.json set filetype=json
   autocmd BufNewFile,BufRead *.slim set filetype=slim
+  autocmd BufNewFile,BufRead *.html set filetype=haml
   autocmd BufNewFile,BufRead *.less set filetype=less
   autocmd BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
   autocmd BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
@@ -775,7 +776,7 @@ augroup END
 " Highlighting #highlights
 " -----------------------------------------------------------------------------
 highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
-highlight Search term=underline guibg=#afaf87 guifg=#333333
+highlight Search gui=underline term=underline guibg=#afaf87 guifg=#333333
 highlight Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold
 highlight Comment cterm=italic term=italic gui=italic
 
@@ -797,18 +798,6 @@ let maplocalleader="\\"
 let g:ctrlp_map = '<leader>m'
 let g:ctrlp_cmd = 'CtrlP'
 nnoremap <leader>bs :CtrlPBuffer<CR>
-
-""""""" fzf-vim
-" set rtp+=/usr/local/opt/fzf
-" nnoremap <silent> <Leader>m :Files<CR>
-" nnoremap <silent> <Leader>a :Ag <CR>
-" nnoremap <silent> <Leader>C        :Colors<CR>
-" nnoremap <silent> <Leader><Enter>  :Buffers<CR>
-
-" inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
-" imap <c-x><c-k> <plug>(fzf-complete-word)
-" imap <c-x><c-f> <plug>(fzf-complete-path)
-" imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 
 """"""" Commenting
 nmap <leader>c :Commentary<cr>
