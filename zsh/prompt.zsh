@@ -369,7 +369,8 @@ prompt_pure_setup() {
 
   # prompt turns red if the previous command didn't exit with 0
   # default: ❯
-  PROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-}%f "
+  # new: 
+  PROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
 }
 
 prompt_pure_setup "$@"

@@ -7,6 +7,7 @@ local imagePath = basePath .. 'assets/'
 
 require 'windows'
 require 'apps'
+-- require 'statsbar'
 -- require 'events'
 -- require 'battery'
 -- require 'random'

@@ -28,9 +28,8 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Hom
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
 # Setup terminal, and turn on 256 colors
-export TERM='xterm-256color'
-# [ -n "$TMUX" ] && export TERM=screen-256color
-# export TERM="screen-256color"
+# export TERM='xterm-256color-italic'
+# [ -n "$TMUX" ] && export TERM=tmux-256color
 
 # Enable color in grep
 export GREP_OPTIONS='--color=auto'

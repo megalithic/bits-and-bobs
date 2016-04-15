@@ -62,22 +62,15 @@ local layoutConfig = {
     if count == 1 then
       hs.grid.set(window, grid.fullScreen)
     else
-      -- First/odd windows go on the RIGHT side of the screen.
-      -- Second/even windows go on the LEFT side.
-      -- (Note this is the opposite of what we do with Canary.)
       local windows = windowCount(window:application())
-      local side = windows % 2 == 0 and grid.leftThird or grid.rightThird
-      hs.grid.set(window, side, hs.screen.primaryScreen())
+      -- local side = windows % 2 == 0 and grid.leftThird or grid.rightThird
+      hs.grid.set(window, grid.fullScreen, hs.screen.allScreens()[3])
     end
   end),
 
   ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
       hs.grid.set(window, grid.fullScreen, hs.screen.primaryScreen())
-    else
-      hs.grid.set(window, grid.leftTwoThirds, hs.screen.primaryScreen())
-    end
   end)
 }
 
@@ -459,7 +452,7 @@ function reloadConfig(files)
 end
 
 -- hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R",  reloadConfig)
-hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', reloadConfig):start()
+-- hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', reloadConfig):start()
 
 hs.hotkey.bind(cmdCtrl, "r", function()
   hs.alert.show("Config Reloaded")

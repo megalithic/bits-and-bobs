@@ -63,16 +63,15 @@ bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 set -g history-limit 25000
 set -g set-titles on
 
-# 256 color support
-# set -g terminal-overrides 'xterm:colors=256'
-# https://github.com/elmcast/.vim
-# set-option -ga terminal-overrides ",screen-256color:Tc"
-set -g default-terminal "xterm-256color"
-set-option -g default-shell "/usr/local/bin/zsh"
+set -g default-terminal "tmux-256color"
+set -g default-shell "/usr/local/bin/zsh"
 
 # fix for NVIM_TUI_ENABLE_CURSOR_SHAPE in tmux
-# https://github.com/nathanaelkane/dotfiles/commit/9607d826b9d408595de2e3fe7de0abec1e94fa86
+# https://github.com/nathanaelkane/dotfiles/commit/9607d826b9d408595de2e3fe7de0abec1e94fa87
 set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
+# set -ga terminal-overrides ',tmux-256color:Tc'
+# set -ga terminal-overrides ",screen-256color:Tc"
+# set -ga terminal-overrides ',xterm:colors=256'
 
 # Start window numbers from 1
 set -g base-index 1

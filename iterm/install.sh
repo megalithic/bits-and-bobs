@@ -1,10 +1,11 @@
 #!/bin/sh
 
-#install iterm2 nightly
-# curl -fLo ~/tmp/iterm2-nightly.zip https://iterm2.com/nightly/latest
-# unzip ~/tmp/iterm2-nightly.zip
-# mv ~/tmp/iTerm.app /Applications/
-# rm ~/tmp/iterm2-nightly.zip
-#
-# tic ~/.dotfiles/terminfo/xterm-256color-italic.terminfo
-# tic ~/.dotfiles/terminfo/screen-256color-italic.terminfo
+# https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
+tic ~/.dotfiles/iterm/xterm-256color-italic.terminfo
+tic ~/.dotfiles/iterm/screen-256color-italic.terminfo
+
+# https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/#comment-2508208541
+{ infocmp -1 xterm-256color ; echo "\tsitm=\\E[3m,\n\tritm=\\E[23m,"; } > xterm-256color.terminfo
+tic xterm-256color.terminfo
+
+tic ~/.dotfiles/iterm/tmux-256color.terminfo
