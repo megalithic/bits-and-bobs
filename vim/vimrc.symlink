@@ -206,7 +206,7 @@ set ruler " show the cursor position all the time
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
-" set cul " turn on cursorline highlighting -- needed for linenumber HL too
+set cul " turn on cursorline highlighting -- needed for linenumber HL too
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
 set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
@@ -653,13 +653,13 @@ endfunction
 " -----------------------------------------------------------------------------
 augroup UnSyntaxInactiveGroup
   autocmd!
-  " autocmd BufEnter,WinEnter * set syntax=ON
+  autocmd BufEnter,WinEnter * set syntax=ON
   autocmd BufEnter,WinEnter * set number
-  " autocmd BufEnter,WinEnter * set cursorline
+  autocmd BufEnter,WinEnter * set cursorline
 
-  " autocmd BufLeave,WinLeave * set syntax=OFF
+  autocmd BufLeave,WinLeave * set syntax=OFF
   autocmd BufLeave,WinLeave * set nonumber
-  " autocmd BufLeave,WinLeave * set nocursorline
+  autocmd BufLeave,WinLeave * set nocursorline
 augroup END
 
 augroup RestoreCursorPosition

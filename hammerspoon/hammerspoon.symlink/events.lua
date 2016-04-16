@@ -1,9 +1,6 @@
 -----------------------------------------------------------------------------------
 --/ event handling /--
 -----------------------------------------------------------------------------------
-
-require 'helpers'
-
 -- This will become a lot easier once `hs.window.filter`
 -- (http://www.hammerspoon.org/docs/hs.window.filter.html) moves out of
 -- "experimental" status, but until then, using a manual approach as
@@ -11,7 +8,12 @@ require 'helpers'
 
 local globalWatcher = nil
 local watchers = {}
+local evt = {} -- to be returned/exported
 local events = hs.uielement.watcher
+local screenCount = #hs.screen.allScreens()
+local logLevel = 'debug' -- generally want 'debug' or 'info'
+local log = hs.logger.new('replicant', logLevel)
+local config = require 'config'
 
 function handleGlobalEvent(name, eventType, app)
   if eventType == hs.application.watcher.launched then
@@ -56,7 +58,7 @@ function handleScreenEvent()
   local screens = hs.screen.allScreens()
   if not (#screens == screenCount) then
     screenCount = #screens
-    activateLayout(screenCount)
+    config.activateLayout(screenCount)
   end
 end
 
@@ -100,11 +102,11 @@ function watchWindow(window)
   local bundleID = application:bundleID()
   local pid = application:pid()
   local windows = watchers[pid].windows
-  if canManageWindow(window) then
+  if config.canManageWindow(window) then
     -- Do initial layout-handling.
     local bundleID = application:bundleID()
-    if layoutConfig[bundleID] then
-      layoutConfig[bundleID](window)
+    if config.layout[bundleID] then
+      config.layout[bundleID](window)
     end
 
     -- Watch for window-closed events.
@@ -122,8 +124,39 @@ function watchWindow(window)
   end
 end
 
--- initialize event handling
-----------------------------------------------------------
+border = nil
+function drawFocusedWindowBorder()
+  if border then
+    border:delete()
+  end
+
+  local win = hs.window.focusedWindow()
+  if win == nil then return end
+
+  local f = win:frame()
+  local fx = f.x - 2
+  local fy = f.y - 2
+  local fw = f.w + 4
+  local fh = f.h + 4
+
+  border = hs.drawing.rectangle(hs.geometry.rect(fx, fy, fw, fh))
+  border:setStrokeWidth(1)
+  -- border:setStrokeColor({["red"]=0.75,["blue"]=0.14,["green"]=0.83,["alpha"]=0.80})
+  border:setStrokeColor({["red"]=1,["blue"]=1,["green"]=1,["alpha"]=0.80})
+  border:setRoundedRectRadii(5.0, 5.0)
+  border:setStroke(true):setFill(false)
+  border:setLevel("floating")
+  border:show()
+end
+
+-- PRESENTLY DISABLED
+-- drawFocusedWindowBorder()
+-- windows = hs.window.filter.new(nil)
+-- windows:subscribe(hs.window.filter.windowFocused, function () drawFocusedWindowBorder() end)
+-- windows:subscribe(hs.window.filter.windowUnfocused, function () drawFocusedWindowBorder() end)
+-- windows:subscribe(hs.window.filter.windowMoved, function () drawFocusedWindowBorder() end)
+
+
 function initEventHandling()
   -- Watch for application-level events.
   globalWatcher = hs.application.watcher.new(handleGlobalEvent)
@@ -142,9 +175,7 @@ function initEventHandling()
   screenWatcher:start()
 end
 
--- teardown event handling
-----------------------------------------------------------
-function tearDownEventHandling()
+function evt.tearDownEventHandling()
   globalWatcher:stop()
   globalWatcher = nil
 
@@ -158,22 +189,4 @@ end
 
 initEventHandling()
 
-local lastSeenChain = nil
-local lastSeenWindow = nil
-
-
--- auto-reload configurations
-----------------------------------------------------------
-function reloadConfig()
-  for _, file in pairs(files) do
-    if file:sub(-4) == '.lua' then
-      hs.alert.show("Config Reloaded")
-      -- hs.notify.new({title="Hammerspoon", informativeText="Config reloaded"}):send()
-      tearDownEventHandling()
-      hs.reload()
-    end
-  end
-end
-
-hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R",  reloadConfig)
-hs.pathwatcher.new(basePath, reloadConfig):start()
+return evt
