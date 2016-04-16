@@ -723,6 +723,7 @@ augroup filetypes
   autocmd FileType markdown set tw=80
 
   " filetype
+  autocmd BufNewFile,BufRead *.js set filetype=javascript.jsx
   autocmd BufNewFile,BufRead *.json set filetype=json
   autocmd BufNewFile,BufRead *.slim set filetype=slim
   autocmd BufNewFile,BufRead *.html set filetype=haml
@@ -741,8 +742,8 @@ augroup filetypes
   autocmd FileType javascript let b:vcm_tab_complete = 'omni'
 
   " make `gf` search for .js files
-  autocmd FileType javascript setlocal suffixesadd=.js
-  autocmd FileType javascript setlocal path+=js,scripts
+  autocmd FileType javascript,javascript.jsx setlocal suffixesadd=.js
+  autocmd FileType javascript,javascript.jsx setlocal path+=js,scripts
 
   " make sure `complete` works as expected for CSS class names whithout
   " messing with motions (eg. '.foo-bar__baz') and we make sure all
