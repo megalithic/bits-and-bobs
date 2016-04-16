@@ -49,12 +49,12 @@ local layoutConfig = {
     activate('com.googlecode.iterm2')
   end),
 
-  ['com.flexibits.fantastical2.mac'] = (function(window)
-    hs.grid.set(window, grid.centeredBig, mbpDisplay())
+  ['com.agilebits.onepassword4'] = (function(window)
+    hs.grid.set(window, grid.centeredBig, hs.screen.primaryDisplay())
   end),
 
   ['com.agilebits.onepassword4'] = (function(window)
-    hs.grid.set(window, grid.centeredBig, mbpDisplay())
+    hs.grid.set(window, grid.centeredBig, hs.screen.primaryDisplay())
   end),
 
   ['com.google.Chrome'] = (function(window, forceScreenCount)
@@ -70,7 +70,11 @@ local layoutConfig = {
 
   ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-      hs.grid.set(window, grid.fullScreen, hs.screen.primaryScreen())
+    if count == 1 then
+      hs.grid.set(window, grid.fullScreen, mbpDisplay())
+    else
+      window:setFullScreen(true)
+    end
   end)
 }
 
