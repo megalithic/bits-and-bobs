@@ -54,6 +54,14 @@ config.layout = {
     config.activate('com.googlecode.iterm2')
   end),
 
+  ['com.tinyspeck.slackmacgap'] = (function(window)
+    if count == 1 then
+      grid.set(window, config.grid.rightThird)
+    else
+      grid.set(window, config.grid.rightThird, config.secondaryDisplay(count))
+    end
+  end),
+
   ['com.nylas.nylas-mail'] = (function(window)
     if count == 1 then
       grid.set(window, config.grid.fullScreen)
