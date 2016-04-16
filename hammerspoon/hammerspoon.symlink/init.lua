@@ -23,7 +23,7 @@ local mashShift = {'cmd', 'alt', 'ctrl', 'shift' }
 -- misc
 --
 hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'L', function()
-  os.execute("open '/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app'")
+  hs.caffeinate.startScreensaver()
   end)
 hs.hotkey.bind(ctrlAlt, 'r', function() hs.toggleConsole() end)
 hs.hotkey.bind(cmdCtrl, "r", function()
