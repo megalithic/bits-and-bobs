@@ -49,8 +49,8 @@ config.grid = {
 -------------------------------------------------------------------------------
 config.layout = {
   _before_ = (function()
-    utils.hide('com.apple.iChat')
-    config.hide('google-play-music-desktop-player')
+    -- utils.hide('com.apple.iChat')
+    -- config.hide('google-play-music-desktop-player')
   end),
 
   _after_ = (function()
