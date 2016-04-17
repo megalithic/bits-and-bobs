@@ -139,7 +139,10 @@ function config.primaryDisplay(count)
     primary = positionForPrimary
   end
 
-  log.df('[wm] targeted primary %s at %s (%s screens)', hs.screen.find(primary):name(), primary.x, screenCount)
+  local position = primary == config.screens.laptop and 0 or primary.x
+  local name = primary == config.screens.laptop and primary or hs.screen.find(primary):name()
+
+  log.df('[wm] targeted primary %s at %s (%s screens)', name, position, screenCount)
   return hs.screen.find(primary)
 end
 
