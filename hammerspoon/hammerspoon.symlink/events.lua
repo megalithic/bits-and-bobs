@@ -30,7 +30,7 @@ end
 function handleAppEvent(element, event)
   if event == events.windowCreated then
     if pcall(function()
-      log.df('[event] window %s created', element:id())
+      log.df('[event] window %s created for %s', element:id(), element:application():bundleID())
     end) then
       watchWindow(element)
     else
@@ -43,7 +43,7 @@ end
 
 function handleWindowEvent(window, event, watcher, info)
   if event == events.elementDestroyed then
-    log.df('[event] window %s destroyed', info.id)
+    log.df('[event] window %s destroyed for %s', info.id, window:application():bundleID())
     watcher:stop()
     watchers[info.pid].windows[info.id] = nil
   else
@@ -65,7 +65,7 @@ end
 function watchApp(app)
   local pid = app:pid()
   if watchers[pid] then
-    log.wf('attempted watch for already-watched PID %d', pid)
+    log.wf('[watchApp] attempted watch for already-watched PID %d', pid)
     return
   end
 
@@ -86,7 +86,7 @@ end
 function unwatchApp(pid)
   local appWatcher = watchers[pid]
   if not appWatcher then
-    log.wf('attempted unwatch for unknown PID %d', pid)
+    log.wf('[unwatchApp] attempted unwatch for unknown PID %d', pid)
     return
   end
 
@@ -111,6 +111,9 @@ function watchWindow(window)
 
     -- Watch for window-closed events.
     local id = window:id()
+
+    log.df('[watchWindow] watching %s (id %s, %s windows)', bundleID, id, config.windowCount(application))
+
     if id then
       if not windows[id] then
         local watcher = window:newWatcher(handleWindowEvent, {
@@ -141,8 +144,7 @@ function drawFocusedWindowBorder()
 
   border = hs.drawing.rectangle(hs.geometry.rect(fx, fy, fw, fh))
   border:setStrokeWidth(1)
-  -- border:setStrokeColor({["red"]=0.75,["blue"]=0.14,["green"]=0.83,["alpha"]=0.80})
-  border:setStrokeColor({["red"]=1,["blue"]=1,["green"]=1,["alpha"]=0.80})
+  border:setStrokeColor({["red"]=0,["blue"]=0,["green"]=0,["alpha"]=1})
   border:setRoundedRectRadii(5.0, 5.0)
   border:setStroke(true):setFill(false)
   border:setLevel("floating")

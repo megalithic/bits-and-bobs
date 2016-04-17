@@ -119,6 +119,7 @@ set-option -g status on
 set-option -g status-interval 1
 set-option -g status-justify "centre" #don't change this spelling
 set-option -g status-position top
+set-option -g allow-rename on
 
 set-window-option -g monitor-activity off
 set-window-option -g xterm-keys on

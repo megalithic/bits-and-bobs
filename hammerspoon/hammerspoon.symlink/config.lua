@@ -1,6 +1,8 @@
 local config = {}
 local screenCount = #hs.screen.allScreens()
 local grid = hs.grid
+local logLevel = 'debug' -- generally want 'debug' or 'info'
+local log = hs.logger.new('replicant', logLevel)
 grid.setGrid("12x12")
 grid.setMargins({w = 3, h = 4})
 hs.window.animationDuration = 0 -- 0 to disable animations
@@ -56,7 +58,8 @@ config.layout = {
     config.activate('com.googlecode.iterm2')
   end),
 
-  ['com.tinyspeck.slackmacgap'] = (function(window)
+  ['com.tinyspeck.slackmacgap'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
     if count == 1 then
       grid.set(window, config.grid.rightThird)
     else
@@ -64,7 +67,8 @@ config.layout = {
     end
   end),
 
-  ['com.nylas.nylas-mail'] = (function(window)
+  ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
     if count == 1 then
       grid.set(window, config.grid.fullScreen)
     else
@@ -72,33 +76,36 @@ config.layout = {
     end
   end),
 
-  ['google-play-music-desktop-player'] = (function(window)
+  ['google-play-music-desktop-player'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
     grid.set(window, '8,0 4x8', config.secondaryDisplay(count))
   end),
 
-  ['com.apple.iChat'] = (function(window)
+  ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, '8,8 4x4', config.secondaryDisplay(count))
   end),
 
-  ['com.nylas.nylas-mail'] = (function(window)
+  ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.leftTwoThirds)
+      grid.set(window, config.grid.leftTwoThirds, config.primaryDisplay(count))
     else
       grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
     end
   end),
 
-  ['com.agilebits.onepassword4'] = (function(window)
-    grid.set(window, config.grid.centeredBig, config.primaryDisplay())
+  ['com.agilebits.onepassword4'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, config.grid.centeredBig, config.primaryDisplay(count))
   end),
 
   ['com.google.Chrome'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
+      grid.set(window, config.getGridLocation(window, count), config.primaryDisplay(count))
     else
-      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
+      grid.set(window, config.getGridLocation(window, count), config.secondaryDisplay(count))
     end
   end),
 
@@ -129,26 +136,26 @@ function config.primaryDisplay(count)
       x = config.screens.primary:position(),
       y = 0
     }
-    primary = position
+    primary = positionForPrimary
   end
 
-  return hs.screen.find(primaryForPrimary)
+  log.df('[wm] targeted primary %s at %s (%s screens)', hs.screen.find(primary):name(), primary.x, screenCount)
+  return hs.screen.find(primary)
 end
 
 function config.secondaryDisplay(count)
-  local secondary = config.screens.secondary
+  local secondary = {
+    x = config.screens.secondary:position(),
+    y = 0
+  }
 
   -- assumes the laptop screen when only one screen found
   if count == 1 then
-    local positionForSecondary = {
-      x = config.screens.primary:position(),
-      y = 0
-    }
-
-    secondary = positionForSecondary
+    secondary = config.screens.laptop
   end
 
-  return hs.screen.find(positionForSecondary)
+  log.df('[wm] targeted secondary %s at %s (%s screens)', hs.screen.find(secondary):name(), secondary.x, screenCount)
+  return hs.screen.find(secondary)
 end
 
 --=================================================================================
@@ -162,6 +169,20 @@ function config.isFullScreen(window)
   return (wf == sf)
 end
 
+
+function config.getGridLocation (window, count)
+  local side = config.grid.fullScreen
+  local windows = config.windowCount(window:application())
+  if (windows > 1) then
+    side = windows % 2 == 0 and config.grid.rightHalf or config.grid.leftHalf
+  end
+
+  log.df('[wm] set %s to grid %s', window:application():bundleID(), side)
+
+  return side
+end
+
+
 -- Returns the number of standard, non-minimized windows in the application.
 -- (For Chrome, which has two windows per visible window on screen, but only one
 -- window per minimized window).
@@ -169,6 +190,7 @@ function config.windowCount(app)
   local count = 0
   if app then
     for _, window in pairs(app:allWindows()) do
+      -- ignores com.googlecode.iterm2
       if window:isStandard() and not window:isMinimized() then
         count = count + 1
       end
