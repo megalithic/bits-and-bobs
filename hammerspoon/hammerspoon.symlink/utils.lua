@@ -1,7 +1,6 @@
 local utils = {}
 
 -- Chain the specified movement commands.
------------------------------------------------------------------------------------
 -- This is like the "chain" feature in Slate, but with a couple of enhancements:
 --
 --  - Chains always start on the screen the window is currently on.
@@ -60,6 +59,53 @@ function utils.toggle_application(_app)
       mainwin:focus()
     end
   end
+end
+
+-- Returns the number of standard, non-minimized windows in the application.
+--
+-- (For Chrome, which has two windows per visible window on screen, but only one
+-- window per minimized window).
+function utils.windowCount(app)
+  local count = 0
+  if app then
+    for _, window in pairs(app:allWindows()) do
+      -- ignores com.googlecode.iterm2
+      if window:isStandard() and not window:isMinimized() then
+        count = count + 1
+      end
+    end
+  end
+  return count
+end
+
+-- hides an application
+--
+function utils.hide(bundleID)
+  local app = hs.application.get(bundleID)
+  if app then
+    app:hide()
+  end
+end
+
+-- activates/shows an application
+--
+function utils.activate(bundleID)
+  local app = hs.application.get(bundleID)
+  if app then
+    app:activate()
+  end
+end
+
+-- determines if a window is manageable (takes into account iterm2)
+--
+function utils.canManageWindow(window)
+  local application = window:application()
+  local bundleID = application:bundleID()
+
+  -- Special handling for iTerm: windows without title bars are
+  -- non-standard.
+  return window:isStandard() or
+    bundleID == 'com.googlecode.iterm2'
 end
 
 return utils

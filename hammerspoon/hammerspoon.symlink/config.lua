@@ -3,6 +3,7 @@ local screenCount = #hs.screen.allScreens()
 local grid = hs.grid
 local logLevel = 'debug' -- generally want 'debug' or 'info'
 local log = hs.logger.new('replicant', logLevel)
+local utils = require 'utils'
 grid.setGrid("12x12")
 grid.setMargins({w = 3, h = 4})
 hs.window.animationDuration = 0 -- 0 to disable animations
@@ -48,14 +49,14 @@ config.grid = {
 -------------------------------------------------------------------------------
 config.layout = {
   _before_ = (function()
-    config.hide('com.apple.iChat')
+    utils.hide('com.apple.iChat')
     config.hide('google-play-music-desktop-player')
   end),
 
   _after_ = (function()
-    config.activate('com.google.Chrome')
+    utils.activate('com.google.Chrome')
     -- Make sure  iTerm in front of everything.
-    config.activate('com.googlecode.iterm2')
+    utils.activate('com.googlecode.iterm2')
   end),
 
   ['com.tinyspeck.slackmacgap'] = (function(window, forceScreenCount)
@@ -83,7 +84,11 @@ config.layout = {
 
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    grid.set(window, '8,8 4x4', config.secondaryDisplay(count))
+    if count == 1 then
+      grid.set(window, '8,8 4x4', config.primaryDisplay(count))
+    else
+      grid.set(window, '8,8 4x4', config.secondaryDisplay(count))
+    end
   end),
 
   ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
@@ -175,7 +180,7 @@ end
 
 function config.getGridLocation (window, count)
   local side = config.grid.fullScreen
-  local windows = config.windowCount(window:application())
+  local windows = utils.windowCount(window:application())
   if (windows > 1) then
     side = windows % 2 == 0 and config.grid.rightHalf or config.grid.leftHalf
   end
@@ -183,47 +188,6 @@ function config.getGridLocation (window, count)
   log.df('[wm] set %s to grid %s', window:application():bundleID(), side)
 
   return side
-end
-
-
--- Returns the number of standard, non-minimized windows in the application.
--- (For Chrome, which has two windows per visible window on screen, but only one
--- window per minimized window).
-function config.windowCount(app)
-  local count = 0
-  if app then
-    for _, window in pairs(app:allWindows()) do
-      -- ignores com.googlecode.iterm2
-      if window:isStandard() and not window:isMinimized() then
-        count = count + 1
-      end
-    end
-  end
-  return count
-end
-
-function config.hide(bundleID)
-  local app = hs.application.get(bundleID)
-  if app then
-    app:hide()
-  end
-end
-
-function config.activate(bundleID)
-  local app = hs.application.get(bundleID)
-  if app then
-    app:activate()
-  end
-end
-
-function config.canManageWindow(window)
-  local application = window:application()
-  local bundleID = application:bundleID()
-
-  -- Special handling for iTerm: windows without title bars are
-  -- non-standard.
-  return window:isStandard() or
-    bundleID == 'com.googlecode.iterm2'
 end
 
 function config.activateLayout(forceScreenCount)
@@ -234,7 +198,7 @@ function config.activateLayout(forceScreenCount)
     if application then
       local windows = application:visibleWindows()
       for _, window in pairs(windows) do
-        if config.canManageWindow(window) then
+        if utils.canManageWindow(window) then
           callback(window, forceScreenCount)
         end
       end

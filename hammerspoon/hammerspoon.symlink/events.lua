@@ -14,6 +14,7 @@ local screenCount = #hs.screen.allScreens()
 local logLevel = 'debug' -- generally want 'debug' or 'info'
 local log = hs.logger.new('replicant', logLevel)
 local config = require 'config'
+local utils = require 'utils'
 
 function handleGlobalEvent(name, eventType, app)
   if eventType == hs.application.watcher.launched then
@@ -102,7 +103,7 @@ function watchWindow(window)
   local bundleID = application:bundleID()
   local pid = application:pid()
   local windows = watchers[pid].windows
-  if config.canManageWindow(window) then
+  if utils.canManageWindow(window) then
     -- Do initial layout-handling.
     local bundleID = application:bundleID()
     if config.layout[bundleID] then
@@ -112,7 +113,7 @@ function watchWindow(window)
     -- Watch for window-closed events.
     local id = window:id()
 
-    log.df('[watchWindow] watching %s (id %s, %s windows)', bundleID, id, config.windowCount(application))
+    log.df('[watchWindow] watching %s (id %s, %s windows)', bundleID, id, utils.windowCount(application))
 
     if id then
       if not windows[id] then
