@@ -3,7 +3,7 @@ local screenCount = #hs.screen.allScreens()
 local grid = hs.grid
 grid.setGrid("12x12")
 grid.setMargins({w = 3, h = 4})
-hs.window.animationDuration = 0.1 -- 0 to disable animations
+hs.window.animationDuration = 0 -- 0 to disable animations
 hs.window.setShadows(false)
 
 -- SCREEN SETUP
@@ -77,6 +77,7 @@ config.layout = {
   end),
 
   ['com.apple.iChat'] = (function(window)
+    local count = forceScreenCount or screenCount
     grid.set(window, '8,8 4x4', config.secondaryDisplay(count))
   end),
 
@@ -135,11 +136,19 @@ function config.primaryDisplay(count)
 end
 
 function config.secondaryDisplay(count)
-  local position = {
-    x = config.screens.secondary:position(),
-    y = 0
-  }
-  return hs.screen.find(position)
+  local secondary = config.screens.secondary
+
+  -- assumes the laptop screen when only one screen found
+  if count == 1 then
+    local positionForSecondary = {
+      x = config.screens.primary:position(),
+      y = 0
+    }
+
+    secondary = positionForSecondary
+  end
+
+  return hs.screen.find(positionForSecondary)
 end
 
 --=================================================================================

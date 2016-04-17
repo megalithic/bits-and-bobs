@@ -780,6 +780,7 @@ highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 highlight Search gui=underline term=underline guibg=#afaf87 guifg=#333333
 highlight Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold
 highlight Comment cterm=italic term=italic gui=italic
+highlight CursorLineNr guifg=white
 
 match ErrorMsg 'debugger'
 match ErrorMsg 'binding.pry'
