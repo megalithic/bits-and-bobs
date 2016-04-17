@@ -41,6 +41,8 @@ function utils.chain(movements)
   end
 end
 
+-- toggles application state
+--
 function utils.toggle_application(_app)
   local app = hs.appfinder.appFromName(_app)
   if not app then

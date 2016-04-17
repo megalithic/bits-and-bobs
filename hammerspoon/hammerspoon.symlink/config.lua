@@ -8,10 +8,12 @@ hs.window.setShadows(false)
 
 -- SCREEN SETUP
 -------------------------------------------------------------------------------
+local primary = hs.screen:primaryScreen()
+local secondary = primary:previous()
 config.screens = {
   laptop = 'Built-in Retina Display',
-  primary = 'DELL P2415Q (2)',
-  secondary = 'DELL P2415Q (1)'
+  primary = primary,
+  secondary = secondary
 }
 
 -- GRID SETUP
@@ -122,14 +124,22 @@ function config.primaryDisplay(count)
   local primary = config.screens.laptop
 
   if count > 1 then
-    primary = config.screens.primary
+    local positionForPrimary = {
+      x = config.screens.primary:position(),
+      y = 0
+    }
+    primary = position
   end
 
-  return hs.screen.find(primary)
+  return hs.screen.find(primaryForPrimary)
 end
 
 function config.secondaryDisplay(count)
-  return hs.screen.find(config.screens.secondary)
+  local position = {
+    x = config.screens.secondary:position(),
+    y = 0
+  }
+  return hs.screen.find(position)
 end
 
 --=================================================================================

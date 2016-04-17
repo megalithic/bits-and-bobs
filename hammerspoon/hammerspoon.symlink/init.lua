@@ -2,10 +2,12 @@
 --/ initialize /--
 -------------------------------------------------------------------------------
 local wm = require 'wm'
+-- local bindings = require 'bindings'
 local utils = require 'utils'
 
 local basePath = os.getenv('HOME') .. '/.hammerspoon/'
 local imagePath = basePath .. 'assets/'
+local log = hs.logger.new('replicant', 'debug')
 
 -- mashers
 -------------------------------------------------------------------------------
@@ -27,6 +29,11 @@ hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'L', function()
   end)
 hs.hotkey.bind(ctrlAlt, 'r', function() hs.toggleConsole() end)
 hs.hotkey.bind(cmdCtrl, "r", function()
+  local win = hs.window:focusedWindow()
+  local screen = win:screen()
+  hs.notify.show('Hammerspoon', tostring(screen:id()), '')
+  log.df('screen id: %s', screen:id())
+
   hs.notify.show('Hammerspoon', 'Config Reloaded...', '')
   wm.events.tearDownEventHandling()
   hs.reload()
