@@ -156,7 +156,7 @@ function drawWindowBorder()
 
   border = hs.drawing.rectangle(hs.geometry.rect(fx, fy, fw, fh))
   border:setStrokeWidth(3)
-  border:setStrokeColor({["red"]=.1,["blue"]=.8,["green"]=.1,["alpha"]=.5})
+  border:setStrokeColor({["red"]=.1,["blue"]=.8,["green"]=.1,["alpha"]=.3})
   border:setRoundedRectRadii(6.0, 6.0)
   border:setStroke(true):setFill(false)
   border:setLevel("floating")
