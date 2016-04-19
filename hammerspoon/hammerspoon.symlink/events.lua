@@ -15,6 +15,8 @@ local logLevel = 'debug' -- generally want 'debug' or 'info'
 local log = hs.logger.new('replicant', logLevel)
 local config = require 'config'
 local utils = require 'utils'
+local wf = hs.window.filter.new(nil)
+local border = nil
 
 function handleGlobalEvent(name, eventType, app)
   if eventType == hs.application.watcher.launched then
@@ -43,6 +45,8 @@ function handleAppEvent(element, event)
 end
 
 function handleWindowEvent(window, event, watcher, info)
+  log.df('[event] new window event (%s) for %s (%s)', event, window:application():bundleID(), info.id)
+
   if event == events.elementDestroyed then
     log.df('[event] window %s destroyed for %s', info.id, window:application():bundleID())
     watcher:stop()
@@ -110,10 +114,17 @@ function watchWindow(window)
       config.layout[bundleID](window)
     end
 
-    -- Watch for window-closed events.
-    local id = window:id()
+    -- Draw border around window (focused/unfocused/moved)
+    -- :subscriptions
+    wf:subscribe(hs.window.filter.windowFocused, function () drawWindowBorder() end)
+    wf:subscribe(hs.window.filter.windowUnfocused, function () drawWindowBorder() end)
+    wf:subscribe(hs.window.filter.windowMoved, function () drawWindowBorder() end)
+    wf:subscribe(hs.window.filter.windowOnScreen, function () drawWindowBorder() end)
 
     log.df('[watchWindow] watching %s (id %s, %s windows)', bundleID, id, utils.windowCount(application))
+
+    -- Watch for window-closed events.
+    local id = window:id()
 
     if id then
       if not windows[id] then
@@ -128,37 +139,29 @@ function watchWindow(window)
   end
 end
 
-border = nil
-function drawFocusedWindowBorder()
+function drawWindowBorder()
   if border then
     border:delete()
   end
 
   local win = hs.window.focusedWindow()
-  if win == nil then return end
+  -- avoid drawing borders on "odd" windows, including iTerm2
+  if win == nil or win:application():bundleID() == 'com.googlecode.iterm2' then return end
 
   local f = win:frame()
-  local fx = f.x - 2
-  local fy = f.y - 2
-  local fw = f.w + 4
-  local fh = f.h + 4
+  local fx = f.x - 1
+  local fy = f.y - 1
+  local fw = f.w + 2
+  local fh = f.h + 2
 
   border = hs.drawing.rectangle(hs.geometry.rect(fx, fy, fw, fh))
-  border:setStrokeWidth(1)
-  border:setStrokeColor({["red"]=0,["blue"]=0,["green"]=0,["alpha"]=1})
-  border:setRoundedRectRadii(5.0, 5.0)
+  border:setStrokeWidth(3)
+  border:setStrokeColor({["red"]=.1,["blue"]=.8,["green"]=.1,["alpha"]=.5})
+  border:setRoundedRectRadii(6.0, 6.0)
   border:setStroke(true):setFill(false)
   border:setLevel("floating")
   border:show()
 end
-
--- PRESENTLY DISABLED
--- drawFocusedWindowBorder()
--- windows = hs.window.filter.new(nil)
--- windows:subscribe(hs.window.filter.windowFocused, function () drawFocusedWindowBorder() end)
--- windows:subscribe(hs.window.filter.windowUnfocused, function () drawFocusedWindowBorder() end)
--- windows:subscribe(hs.window.filter.windowMoved, function () drawFocusedWindowBorder() end)
-
 
 function initEventHandling()
   -- Watch for application-level events.

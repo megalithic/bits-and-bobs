@@ -179,13 +179,20 @@ end
 
 
 function config.getGridLocation (window, count)
+  local app = window:application()
   local side = config.grid.fullScreen
-  local windows = utils.windowCount(window:application())
-  if (windows > 1) then
-    side = windows % 2 == 0 and config.grid.rightHalf or config.grid.leftHalf
+
+  -- we have more than one screen attached
+  if (count > 1) then
+    local windowCount = utils.windowCount(app)
+
+    -- we have more than one window for the given app
+    if (windowCount > 1) then
+      side = windowCount % 2 == 0 and config.grid.rightHalf or config.grid.leftHalf
+    end
   end
 
-  log.df('[wm] set %s to grid %s', window:application():bundleID(), side)
+  log.df('[wm] set %s to grid %s', app:bundleID(), side)
 
   return side
 end

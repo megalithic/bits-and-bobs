@@ -61,6 +61,10 @@ function utils.toggle_application(_app)
   end
 end
 
+function utils.windowsForApp(app)
+  return app:allWindows()
+end
+
 -- Returns the number of standard, non-minimized windows in the application.
 --
 -- (For Chrome, which has two windows per visible window on screen, but only one
@@ -68,7 +72,7 @@ end
 function utils.windowCount(app)
   local count = 0
   if app then
-    for _, window in pairs(app:allWindows()) do
+    for _, window in pairs(utils.windowsForApp(app)) do
       -- ignores com.googlecode.iterm2
       if window:isStandard() and not window:isMinimized() then
         count = count + 1
