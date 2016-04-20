@@ -90,6 +90,7 @@ alias py="python"
 alias updatenvim="brew update; brew reinstall --HEAD neovim"
 alias nv="nvim"
 alias vim="nvim"
+alias im="nvim"
 
 # CONFIG EDITS
 # -----------------------------------------------------------------------------
@@ -182,6 +183,7 @@ alias syncoctoprint="scp pi@octopi.local:/home/pi/.octoprint/config.yaml $HOME/D
 # GIT
 # -----------------------------------------------------------------------------
 alias git='/usr/local/bin/git'
+alias it="git"
 # # Use `hub` as our git wrapper:
 # #   http://defunkt.github.com/hub/
 # hub_path=$(which hub)
