@@ -1,5 +1,9 @@
 local utils = {}
 
+local logLevel = 'debug' -- generally want 'debug' or 'info'
+local log = hs.logger.new('replicant', logLevel)
+utils.log = log
+
 -- Chain the specified movement commands.
 -- This is like the "chain" feature in Slate, but with a couple of enhancements:
 --
@@ -42,22 +46,32 @@ end
 
 -- toggles application state
 --
-function utils.toggle_application(_app)
-  local app = hs.appfinder.appFromName(_app)
+-- FIXME: this function is all sorts of wonky. come up with better.
+function utils.toggleApp(_app)
+  -- accepts app name (lowercased), pid, or bundleID; but we ALWAYS use bundleID
+  local app = hs.application.find(_app)
+
+  if app ~= nil then
+    utils.log.df('[bindings] attempting to toggle %s', app:bundleID())
+  end
+
   if not app then
     -- FIXME: this may not be working properly.. creating extraneous PIDs?
-    hs.application.launchOrFocus(_app)
-    return
+    hs.application.launchOrFocusByBundleID(app)
   end
+
   local mainwin = app:mainWindow()
   if mainwin then
     if mainwin == hs.window.focusedWindow() then
       mainwin:application():hide()
     else
-      mainwin:application():activate(true)
+      activated = mainwin:application():activate(true)
       mainwin:application():unhide()
       mainwin:focus()
     end
+  else
+    -- assumes there is no "mainWindow" for the application in question
+    hs.application.launchOrFocusByBundleID(app)
   end
 end
 

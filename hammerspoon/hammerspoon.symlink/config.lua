@@ -1,8 +1,6 @@
 local config = {}
 local screenCount = #hs.screen.allScreens()
 local grid = hs.grid
-local logLevel = 'debug' -- generally want 'debug' or 'info'
-local log = hs.logger.new('replicant', logLevel)
 local utils = require 'utils'
 grid.setGrid("12x12")
 grid.setMargins({w = 3, h = 4})
@@ -147,7 +145,7 @@ function config.primaryDisplay(count)
   local position = primary == config.screens.laptop and 0 or primary.x
   local name = primary == config.screens.laptop and primary or hs.screen.find(primary):name()
 
-  log.df('[wm] targeted primary %s at %s (%s screens)', name, position, screenCount)
+  utils.log.df('[wm] targeted primary %s at %s (%s screens)', name, position, screenCount)
   return hs.screen.find(primary)
 end
 
@@ -162,7 +160,7 @@ function config.secondaryDisplay(count)
     secondary = config.screens.laptop
   end
 
-  log.df('[wm] targeted secondary %s at %s (%s screens)', hs.screen.find(secondary):name(), secondary.x, screenCount)
+  utils.log.df('[wm] targeted secondary %s at %s (%s screens)', hs.screen.find(secondary):name(), secondary.x, screenCount)
   return hs.screen.find(secondary)
 end
 
@@ -192,7 +190,7 @@ function config.getGridLocation (window, count)
     end
   end
 
-  log.df('[wm] set %s to grid %s', app:bundleID(), side)
+  utils.log.df('[wm] set %s to grid %s', app:bundleID(), side)
 
   return side
 end

@@ -7,7 +7,6 @@ local utils = require 'utils'
 
 local basePath = os.getenv('HOME') .. '/.hammerspoon/'
 local imagePath = basePath .. 'assets/'
-local log = hs.logger.new('replicant', 'debug')
 
 -- mashers
 -------------------------------------------------------------------------------
@@ -36,13 +35,13 @@ hs.hotkey.bind(cmdCtrl, "r", function()
 
 -- apps
 --
-hs.hotkey.bind({'cmd'}, '`', function() utils.toggle_application("Google Chrome") end)
-hs.hotkey.bind({'cmd', 'shift'}, '`', function() utils.toggle_application("Safari") end)
-hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggle_application("Nylas N1") end)
-hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggle_application("Tweetbot") end)
-hs.hotkey.bind({'cmd'}, 'f8', function() utils.toggle_application("Google Play Music Desktop Player") end)
-hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggle_application("Messages") end)
--- hs.hotkey.bind({'ctrl'}, '', nil, nil, nil, function() utils.toggle_application("iTerm2") end)
+hs.hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
+hs.hotkey.bind({'cmd'}, '`', function() utils.toggleApp('com.google.Chrome') end)
+hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
+hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggleApp('tweetbot') end)
+hs.hotkey.bind({'cmd'}, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
+hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggleApp('com.apple.iChat') end)
+-- hs.hotkey.bind({'ctrl'}, '', nil, nil, nil, function() utils.toggleApp("iTerm2") end)
 -- local wf=hs.window.filter
 -- wf_brave = wf.new{'Brave'}
 -- -- handle vim-like keybindings in brave

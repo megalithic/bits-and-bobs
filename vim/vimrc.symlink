@@ -654,11 +654,11 @@ endfunction
 " -----------------------------------------------------------------------------
 augroup UnSyntaxInactiveGroup
   autocmd!
-  autocmd BufEnter,WinEnter * set syntax=ON
+  " autocmd BufEnter,WinEnter * set syntax=ON
   autocmd BufEnter,WinEnter * set number
   " autocmd BufEnter,WinEnter * set cursorline
 
-  autocmd BufLeave,WinLeave * set syntax=OFF
+  " autocmd BufLeave,WinLeave * set syntax=OFF
   autocmd BufLeave,WinLeave * set nonumber
   " autocmd BufLeave,WinLeave * set nocursorline
 augroup END
@@ -724,11 +724,11 @@ augroup filetypes
   autocmd FileType markdown set tw=80
 
   " filetype
-  autocmd BufNewFile,BufRead *.js set filetype=javascript.jsx
-  autocmd BufNewFile,BufRead *.json set filetype=json
-  autocmd BufNewFile,BufRead *.slim set filetype=slim
-  autocmd BufNewFile,BufRead *.html set filetype=haml
-  autocmd BufNewFile,BufRead *.less set filetype=less
+  autocmd BufNewFile,BufRead,BufReadPost *.js set filetype=javascript.jsx
+  autocmd BufNewFile,BufRead,BufReadPost *.json set filetype=json
+  autocmd BufNewFile,BufRead,BufReadPost *.slim set filetype=slim
+  autocmd BufNewFile,BufRead,BufReadPost *.html set filetype=haml
+  autocmd BufNewFile,BufRead,BufReadPost *.less set filetype=less
   autocmd BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
   autocmd BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
   autocmd FileType sass,scss set iskeyword+=-
@@ -740,7 +740,7 @@ augroup filetypes
   autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
   autocmd FileType ruby let b:vcm_tab_complete = "tags"
   autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
-  autocmd FileType javascript let b:vcm_tab_complete = 'omni'
+  autocmd FileType javascript,javascript.jsx let b:vcm_tab_complete = 'omni'
 
   " make `gf` search for .js files
   autocmd FileType javascript,javascript.jsx setlocal suffixesadd=.js

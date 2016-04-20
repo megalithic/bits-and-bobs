@@ -11,8 +11,6 @@ local watchers = {}
 local evt = {} -- to be returned/exported
 local events = hs.uielement.watcher
 local screenCount = #hs.screen.allScreens()
-local logLevel = 'debug' -- generally want 'debug' or 'info'
-local log = hs.logger.new('replicant', logLevel)
 local config = require 'config'
 local utils = require 'utils'
 local wf = hs.window.filter.new(nil)
@@ -20,12 +18,12 @@ local border = nil
 
 function handleGlobalEvent(name, eventType, app)
   if eventType == hs.application.watcher.launched then
-    log.df('[event] launched %s', app:bundleID())
+    utils.log.df('[event] launched %s', app:bundleID())
     watchApp(app)
   elseif eventType == hs.application.watcher.terminated then
     -- Only the PID is set for terminated apps, so can't log bundleID.
     local pid = app:pid()
-    log.df('[event] terminated PID %d', pid)
+    utils.log.df('[event] terminated PID %d', pid)
     unwatchApp(pid)
   end
 end
@@ -33,26 +31,26 @@ end
 function handleAppEvent(element, event)
   if event == events.windowCreated then
     if pcall(function()
-      log.df('[event] window %s created for %s', element:id(), element:application():bundleID())
+      utils.log.df('[event] window %s created for %s', element:id(), element:application():bundleID())
     end) then
       watchWindow(element)
     else
-      log.wf('error thrown trying to access element in handleAppEvent')
+      utils.log.wf('error thrown trying to access element in handleAppEvent')
     end
   else
-    log.wf('unexpected app event %d received', event)
+    utils.log.wf('unexpected app event %d received', event)
   end
 end
 
 function handleWindowEvent(window, event, watcher, info)
-  log.df('[event] new window event (%s) for %s (%s)', event, window:application():bundleID(), info.id)
+  utils.log.df('[event] new window event (%s) for %s (%s)', event, window:application():bundleID(), info.id)
 
   if event == events.elementDestroyed then
-    log.df('[event] window %s destroyed for %s', info.id, window:application():bundleID())
+    utils.log.df('[event] window %s destroyed for %s', info.id, window:application():bundleID())
     watcher:stop()
     watchers[info.pid].windows[info.id] = nil
   else
-    log.wf('unexpected window event %d received', event)
+    utils.log.wf('unexpected window event %d received', event)
   end
 end
 
@@ -70,7 +68,7 @@ end
 function watchApp(app)
   local pid = app:pid()
   if watchers[pid] then
-    log.wf('[watchApp] attempted watch for already-watched PID %d', pid)
+    utils.log.wf('[watchApp] attempted watch for already-watched PID %d', pid)
     return
   end
 
@@ -91,7 +89,7 @@ end
 function unwatchApp(pid)
   local appWatcher = watchers[pid]
   if not appWatcher then
-    log.wf('[unwatchApp] attempted unwatch for unknown PID %d', pid)
+    utils.log.wf('[unwatchApp] attempted unwatch for unknown PID %d', pid)
     return
   end
 
@@ -121,7 +119,7 @@ function watchWindow(window)
     wf:subscribe(hs.window.filter.windowMoved, function () drawWindowBorder() end)
     wf:subscribe(hs.window.filter.windowOnScreen, function () drawWindowBorder() end)
 
-    log.df('[watchWindow] watching %s (id %s, %s windows)', bundleID, id, utils.windowCount(application))
+    utils.log.df('[watchWindow] watching %s (id %s, %s windows)', bundleID, id, utils.windowCount(application))
 
     -- Watch for window-closed events.
     local id = window:id()
@@ -145,8 +143,8 @@ function drawWindowBorder()
   end
 
   local win = hs.window.focusedWindow()
-  -- avoid drawing borders on "odd" windows, including iTerm2
-  if win == nil or win:application():bundleID() == 'com.googlecode.iterm2' then return end
+  -- avoid drawing borders on "odd" windows, including iTerm2, Contexts, etc
+  if win == nil or not utils.canManageWindow(win) or win:application():bundleID() == 'com.googlecode.iterm2' then return end
 
   local f = win:frame()
   local fx = f.x - 1
@@ -156,7 +154,7 @@ function drawWindowBorder()
 
   border = hs.drawing.rectangle(hs.geometry.rect(fx, fy, fw, fh))
   border:setStrokeWidth(3)
-  border:setStrokeColor({["red"]=.1,["blue"]=.8,["green"]=.1,["alpha"]=.3})
+  border:setStrokeColor({["red"]=.8,["blue"]=.1,["green"]=.1,["alpha"]=.3})
   border:setRoundedRectRadii(6.0, 6.0)
   border:setStroke(true):setFill(false)
   border:setLevel("floating")
