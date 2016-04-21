@@ -71,7 +71,7 @@ function utils.toggleApp(_app)
     end
   else
     -- assumes there is no "mainWindow" for the application in question
-    hs.application.launchOrFocusByBundleID(app)
+    hs.application.launchOrFocusByBundleID(_app)
   end
 end
 
