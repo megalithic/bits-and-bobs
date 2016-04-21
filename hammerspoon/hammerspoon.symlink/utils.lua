@@ -57,7 +57,7 @@ function utils.toggleApp(_app)
 
   if not app then
     -- FIXME: this may not be working properly.. creating extraneous PIDs?
-    hs.application.launchOrFocusByBundleID(app)
+    hs.application.launchOrFocusByBundleID(_app)
   end
 
   local mainwin = app:mainWindow()
