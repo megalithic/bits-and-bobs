@@ -35,13 +35,24 @@ hs.hotkey.bind(cmdCtrl, "r", function()
 
 -- apps
 --
-hs.hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
+hs.hotkey.bind(cmdShift, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hs.hotkey.bind({'cmd'}, '`', function() utils.toggleApp('com.google.Chrome') end)
 hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
 hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggleApp('tweetbot') end)
 hs.hotkey.bind({'cmd'}, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
 hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggleApp('com.apple.iChat') end)
--- hs.hotkey.bind({'ctrl'}, '', nil, nil, nil, function() utils.toggleApp("iTerm2") end)
+hs.hotkey.bind({''}, "f12", function()
+  local win = hs.window.focusedWindow()
+
+  if win ~= nil then -- and win:application():bundleID() == 'com.google.Chrome' then
+    print(win:title())
+    print(win:application():name())
+    hs.eventtap.keyStroke({'cmd', 'opt'}, "i")
+  else
+    print("Window not found")
+  end
+end)
+--
 -- local wf=hs.window.filter
 -- wf_brave = wf.new{'Brave'}
 -- -- handle vim-like keybindings in brave
@@ -51,8 +62,7 @@ hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggleApp('com.apple.iCha
 --   end)
 -- end)
 -- wf_brave:unsubscribe(wf.windowUnfocused, function()
---   hs.hotkey.bind({}, 'j', function()
---   end)
+--   hs.hotkey:delete()
 -- end)
 
 

@@ -142,9 +142,10 @@ function drawWindowBorder()
     border:delete()
   end
 
+  local ignoredWindows = utils.Set {'iTerm2', 'Electron Helper', 'TotalFinderCrashWatcher', 'CCXProcess', 'Adobe CEF Helper'}
   local win = hs.window.focusedWindow()
   -- avoid drawing borders on "odd" windows, including iTerm2, Contexts, etc
-  if win == nil or not utils.canManageWindow(win) or win:application():bundleID() == 'com.googlecode.iterm2' then return end
+  if win == nil or not utils.canManageWindow(win) or ignoredWindows[win:application():name()] then return end
 
   local f = win:frame()
   local fx = f.x - 1

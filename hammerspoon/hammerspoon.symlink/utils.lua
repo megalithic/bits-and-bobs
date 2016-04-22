@@ -52,26 +52,30 @@ function utils.toggleApp(_app)
   local app = hs.application.find(_app)
 
   if app ~= nil then
-    utils.log.df('[bindings] attempting to toggle %s', app:bundleID())
+    utils.log.df('[apps] attempting to toggle %s', app:bundleID())
   end
 
   if not app then
     -- FIXME: this may not be working properly.. creating extraneous PIDs?
+    utils.log.df('[apps] launchOrFocusByBundleID(%s) | not app 1', _app)
     hs.application.launchOrFocusByBundleID(_app)
-  end
-
-  local mainwin = app:mainWindow()
-  if mainwin then
-    if mainwin == hs.window.focusedWindow() then
-      mainwin:application():hide()
-    else
-      activated = mainwin:application():activate(true)
-      mainwin:application():unhide()
-      mainwin:focus()
-    end
   else
-    -- assumes there is no "mainWindow" for the application in question
-    hs.application.launchOrFocusByBundleID(_app)
+    local mainWin = app:mainWindow()
+    if mainWin then
+      if mainWin == hs.window.focusedWindow() then
+        utils.log.df('[apps] hiding %s', app:bundleID())
+        mainWin:application():hide()
+      else
+        utils.log.df('[apps] activating/unhiding/focusing %s', app:bundleID())
+        mainWin:application():activate(true)
+        mainWin:application():unhide()
+        mainWin:focus()
+      end
+    else
+      -- assumes there is no "mainWindow" for the application in question
+      utils.log.df('[apps] launchOrFocusByBundleID(%s)', app)
+      hs.application.launchOrFocusByBundleID(app:bundleID())
+    end
   end
 end
 
@@ -124,6 +128,14 @@ function utils.canManageWindow(window)
   -- non-standard.
   return window:isStandard() or
     bundleID == 'com.googlecode.iterm2'
+end
+
+-- creates a set for easier traversal and searching
+-- - takes an array as a table, e.g. Set {'foo', 'bar'}
+function utils.Set (list)
+  local set = {}
+  for _, l in ipairs(list) do set[l] = true end
+  return set
 end
 
 return utils
