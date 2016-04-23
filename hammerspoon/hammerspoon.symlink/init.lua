@@ -41,17 +41,18 @@ hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggleApp('com.nylas.nylas-mail')
 hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggleApp('tweetbot') end)
 hs.hotkey.bind({'cmd'}, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
 hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggleApp('com.apple.iChat') end)
-hs.hotkey.bind({''}, "f12", function()
+hs.hotkey.bind('', 'F12', 'Loading Developer Console', nil, function()
   local win = hs.window.focusedWindow()
 
-  if win ~= nil then -- and win:application():bundleID() == 'com.google.Chrome' then
+  if win ~= nil and win:application():bundleID() == 'com.google.Chrome' then
     print(win:title())
     print(win:application():name())
-    hs.eventtap.keyStroke({'cmd', 'opt'}, "i")
+    hs.eventtap.keyStroke({'cmd', 'opt'}, "I")
   else
     print("Window not found")
   end
-end)
+end, nil)
+
 --
 -- local wf=hs.window.filter
 -- wf_brave = wf.new{'Brave'}

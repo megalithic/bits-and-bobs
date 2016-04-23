@@ -57,6 +57,18 @@ config.layout = {
     utils.activate('com.googlecode.iterm2')
   end),
 
+  -- we have a default so that unspecified app windows do something sane and expected
+  ['default'] = (function(window, forceScreenCount)
+    -- local count = forceScreenCount or screenCount
+    -- if count == 1 then
+    --   grid.set(window, config.grid.centerBig)
+    -- else
+    --   grid.set(window, config.grid.rightThird, config.secondaryDisplay(count))
+    -- end
+
+    grid.set(window, config.grid.centerBig)
+  end),
+
   ['com.tinyspeck.slackmacgap'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
@@ -199,7 +211,7 @@ function config.activateLayout(forceScreenCount)
   config.layout._before_()
 
   for bundleID, callback in pairs(config.layout) do
-    local application = hs.application.get(bundleID)
+    local application = bundleID ~= 'default' or hs.application.get(bundleID)
     if application then
       local windows = application:visibleWindows()
       for _, window in pairs(windows) do

@@ -1,4 +1,4 @@
-;" =============================================================================
+" =============================================================================
 "
 "   ┌┬┐┌─┐┌─┐┌─┐┬  ┬┌┬┐┬ ┬┬┌─┐
 "   │││├┤ │ ┬├─┤│  │ │ ├─┤││   :: DOTFILES > vimrc
@@ -94,6 +94,7 @@ function! LoadPlugs()
   " Plug 'lukaszb/vim-web-indent' " hasn't been updated in 4y
   Plug 'luochen1990/rainbow'
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
+  Plug 'kassio/neoterm'
 
   """"" Code Navigation======================================================
   Plug 'haya14busa/incsearch.vim'
@@ -174,17 +175,6 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
-if exists('$ITERM_PROFILE')
-  if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-  endif
-endif
 
 """"""" Updated vim regex engine
 set re=1
@@ -289,7 +279,7 @@ set wildignore+=lib
 """"""" File handling
 set autowrite
 set fileformats=unix,mac,dos
-" set lazyredraw "may be the cause of lots of issues
+set lazyredraw "may be the cause of lots of issues
 
 """"""" Mode change speedups
 set noesckeys
@@ -814,6 +804,13 @@ map <F5> :PlugUpdate<cr>
 noremap <S-F5> :PlugClean!<cr>
 map <S-F5> :PlugClean!<cr>
 
+""""""" neoterm
+" hide/close terminal
+" nnoremap <silent> <C-c>th :call neoterm#close()<cr>
+" clear terminal
+" nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+" nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 
 """"""" QuickScope
 nnoremap <expr> <silent> f Quick_scope_selective('f')
@@ -896,7 +893,7 @@ noremap K <nop>
 vnoremap u <nop>
 
 """"""" Writing / quitting
-nnoremap <leader>w :w<cr>
+nnoremap <silent> <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
 " Sudo write (,W)
 noremap <silent><leader>W :w !sudo tee %<CR>

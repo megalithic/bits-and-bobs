@@ -110,6 +110,8 @@ function watchWindow(window)
     local bundleID = application:bundleID()
     if config.layout[bundleID] then
       config.layout[bundleID](window)
+    -- else
+    --   config.layout['default'](window)
     end
 
     -- Draw border around window (focused/unfocused/moved)
