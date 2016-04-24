@@ -35,14 +35,14 @@ bind-key r refresh-client
 
 # Splitting panes
 bind '|' split-window -h -c "#{pane_current_path}"
-bind -r C-space split-window -h -c "#{pane_current_path}"
-bind -r C-n split-window -h -c "#{pane_current_path}"
 bind '_' split-window -v -c "#{pane_current_path}"
+bind '-' split-window -v -c "#{pane_current_path}"
 bind -r C-b split-window -v -c "#{pane_current_path}"
 bind -r C-t new-window -c "#{pane_current_path}"
 bind -r C-x kill-pane
 bind -r C-q kill-pane
 bind p previous-window
+bind -r C-Space last-window
 
 # Vi-like movements between panes
 bind h select-pane -L
@@ -144,7 +144,6 @@ set -g display-time 1000
 
 # Colors
 # ---------------------------------------------------------
-
 # NEW ACTIVE/INACTIVE PANE/WINDOW color stuff
 # http://stackoverflow.com/questions/25532773/change-background-color-of-active-or-inactive-pane-in-tmux/33553372#33553372
 # set inactive/active window styles
@@ -189,6 +188,14 @@ set -g status-right "#(~/.dotfiles/bin/google-music-tmux) #(~/.dotfiles/bin/batt
 
 # TMUX PLUGIN MANAGER
 # ===========================================================================
+
+# Settings
+# ---------------------------------------------------------
+# See Bruno's setup for plugin settings:
+# https://github.com/bruno-/dotfiles/blob/master/home/.tmux.conf
+
+# Installation
+# ---------------------------------------------------------
 # tmux plugin manager: github.com/tmux-plugins/tpm
 set-environment -g TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/tmux-plugins/'
 
@@ -199,5 +206,9 @@ set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-open'
 set -g @plugin 'tmux-plugins/tmux-urlview'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+
+# install tpm if not already installed
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
 
 run-shell '~/.tmux/plugins/tpm/tpm'

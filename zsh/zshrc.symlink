@@ -88,3 +88,4 @@ BASE16_SHELL="$HOME/.dotfiles/iterm/base16-$BASE16_THEME.dark.sh"
 # ===========================================================================
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+

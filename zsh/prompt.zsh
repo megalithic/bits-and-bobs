@@ -31,6 +31,41 @@ ZSH_VCS_PROMPT_LOGGING_LEVEL=0
 
 PURE_GIT_PULL=1
 
+prompt_vi_mode() {
+  # ----------------------------------------------------------------------
+  # setup vi mode in the prompt
+  # ------------------------------------------------------------------- {{
+  function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/[N]}/(main|viins)/[I]}"
+    RPS2=$RPS1
+
+    vimode="${${KEYMAP/vicmd/[N]}/(main|viins)/[I]}"
+    zle reset-prompt
+  }
+
+  function zle-line-finish {
+    vimode='I'
+    zle reset-prompt
+    zle -R
+  }
+
+  zle -N zle-line-init
+  zle -N zle-keymap-select
+  zle -N zle-line-finish
+
+  # fix ctrl-c mode display
+  TRAPINT() {
+    vimode='I'
+    return $(( 128 + $1 ))
+  }
+
+  # Ensure that the prompt is redrawn when the terminal size changes.
+  TRAPWINCH() {
+    zle && { zle reset-prompt; zle -R }
+  }
+  # ------------------------------------------------------------------- }}
+}
+
 # turns seconds into human readable time
 # 165392 => 1d 21h 56m 32s
 # https://github.com/sindresorhus/pretty-time-zsh
@@ -149,10 +184,10 @@ prompt_pure_preprompt_render() {
   # construct preprompt, beginning with path
   # local preprompt="%F{blue}%~%f"
   local preprompt="%F{blue}$(prompt_format_pwd)%f"
+  # vi mode
+  # preprompt+="%F{white}%f${vimode}%f"
   # git info
-  #
   preprompt+="%F{$git_color}%f$(git_super_status)%f"
-  # preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
   # git pull/push arrows
   preprompt+="%F{cyan}${prompt_pure_git_arrows}%f"
   # username and machine if applicable
@@ -226,6 +261,9 @@ prompt_pure_precmd() {
 
   # shows the full path in the title
   prompt_pure_set_title 'expand-prompt' '%~'
+
+  # setup vi-mode
+  prompt_vi_mode
 
   # get vcs info
   vcs_info
