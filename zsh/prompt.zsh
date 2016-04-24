@@ -118,8 +118,6 @@ prompt_pure_update_vi_prompt() {
     return 1
   }
 
-  # VI_MODE_PROMPT="${${KEYMAP/vicmd/$VI_MODE_NORMAL}/(main|viins)/$VI_MODE_INSERT}"
-
   case ${KEYMAP} in
     (vicmd)       VI_MODE_PROMPT="%{%F{white}%}$VI_MODE_NORMAL%f"; print -n -- "\E]50;CursorShape=0\C-G";; # block cursor
     (main|viins)  VI_MODE_PROMPT="%{%F{green}%}$VI_MODE_INSERT%f"; print -n -- "\E]50;CursorShape=1\C-G";; # vert line cursor
