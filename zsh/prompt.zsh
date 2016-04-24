@@ -31,40 +31,149 @@ ZSH_VCS_PROMPT_LOGGING_LEVEL=0
 
 PURE_GIT_PULL=1
 
-prompt_vi_mode() {
-  # ----------------------------------------------------------------------
-  # setup vi mode in the prompt
-  # ------------------------------------------------------------------- {{
-  function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/[N]}/(main|viins)/[I]}"
-    RPS2=$RPS1
+# ----------------------------------------------------------------------
+# vi mode indicator
+# ------------------------------------------------------------------- {{
+# vi mode indicator in prompt (http://superuser.com/questions/151803/how-do-i-customize-zshs-vim-mode)
+# also: https://github.com/pjg/dotfiles/blob/master/.zshrc
+#
+# http://unix.stackexchange.com/a/163645
+terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
 
-    vimode="${${KEYMAP/vicmd/[N]}/(main|viins)/[I]}"
-    zle reset-prompt
-  }
+insert-mode () { echo "[I]" }
+normal-mode () { echo "[N]" }
 
-  function zle-line-finish {
-    vimode='I'
-    zle reset-prompt
-    zle -R
-  }
+vi_mode="$(insert-mode)"
+vi_mode_ps1_output="$vi_mode"
 
-  zle -N zle-line-init
-  zle -N zle-keymap-select
-  zle -N zle-line-finish
+set_vi_mode_and_cursor () {
+  case ${KEYMAP} in
+    (vicmd)       vi_mode="%{%F{white}%}$(normal-mode)"; print -n -- "\E]50;CursorShape=0\C-G";; # block cursor
+    (main|viins)  vi_mode="%{%F{green}%}$(insert-mode)"; print -n -- "\E]50;CursorShape=1\C-G";; # vert line cursor
+    (*)           vi_mode="%{%F{green}%}$(insert-mode)"; print -n -- "\E]50;CursorShape=1\C-G";; # vert line cursor
+  esac
 
-  # fix ctrl-c mode display
-  TRAPINT() {
-    vimode='I'
-    return $(( 128 + $1 ))
-  }
-
-  # Ensure that the prompt is redrawn when the terminal size changes.
-  TRAPWINCH() {
-    zle && { zle reset-prompt; zle -R }
-  }
-  # ------------------------------------------------------------------- }}
+  vi_mode_ps1_output="%{$terminfo_down_sc$vi_mode$terminfo[rc]%}"
+  # echo -n "$vi_mode_ps1_output"
 }
+
+function zle-line-init zle-keymap-select {
+  set_vi_mode_and_cursor
+  zle reset-prompt
+  zle -R
+}
+
+function zle-line-finish {
+  print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
+}
+
+TRAPINT () {
+  # Fix a bug when you C-c in CMD mode and you'd be prompted with CMD mode indicator, while in fact you would be in INS mode
+  # Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the SIGINT, so if anything else depends on it, we will not break it
+  vi_mode="%{%F{green}%}$(insert-mode)"
+  vi_mode_ps1_output="%{$terminfo_down_sc$vi_mode$terminfo[rc]%}"
+  print -n -- "\E]50;CursorShape=1\C-G" # vert line cursor
+  return $(( 128 + $1 ))
+}
+TRAPWINCH () {
+  # Ensure that the prompt is redrawn when the terminal size changes.
+  zle && { zle reset-prompt; zle -R }
+}
+
+# vim_ins_mode="%{%F{green}%}[INS]"
+# vim_cmd_mode="%{%F{white}%}[CMD]"
+# vim_mode=$vim_ins_mode
+
+# function zle-keymap-select {
+#   vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+#   RPS1="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+#   RPS2=$RPS1
+#   zle reset-prompt
+# }
+# zle -N zle-keymap-select
+
+# function zle-line-finish {
+#   vim_mode=$vim_ins_mode
+# }
+# zle -N zle-line-finish
+
+# Fix a bug when you C-c in CMD mode and you'd be prompted with CMD mode indicator, while in fact you would be in INS mode
+# Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the SIGINT, so if anything else depends on it, we will not break it
+# function TRAPINT() {
+#   vim_mode=$vim_ins_mode
+#   return $(( 128 + $1 ))
+# }
+
+# prompt_vi_mode_indicator() {
+#   # ----------------------------------------------------------------------
+#   # setup vi mode in the prompt
+#   # ------------------------------------------------------------------- {{
+#   function zle-line-init zle-keymap-select {
+#     RPS1="${${KEYMAP/vicmd/[N]}/(main|viins)/[I]}"
+#     RPS2=$RPS1
+
+#     zle reset-prompt
+#   }
+
+#   function zle-keymap-select {
+#     vimode="${${KEYMAP/vicmd/[N]}/(main|viins)/[I]}"
+#     zle reset-prompt
+#     zle -R
+#   }
+
+#   function zle-line-finish {
+#     vimode='I'
+#     zle reset-prompt
+#     zle -R
+#   }
+
+#   zle -N zle-line-init
+#   zle -N zle-keymap-select
+#   zle -N zle-line-finish
+#   zle -N edit-command-line
+
+#   # fix ctrl-c mode display
+#   TRAPINT() {
+#     vimode='I'
+#     return $(( 128 + $1 ))
+#   }
+
+#   # Ensure that the prompt is redrawn when the terminal size changes.
+#   TRAPWINCH() {
+#     zle && { zle reset-prompt; zle -R }
+#   }
+#   # ------------------------------------------------------------------- }}
+# }
+
+# prompt_vi_mode_colors() {
+#   # use cursor as indicator of vi mode
+#   zle-keymap-select () {
+#   if [ $KEYMAP = vicmd ]; then
+#     if [[ $TMUX = '' ]]; then
+#       echo -ne "\033]12;Red\007"
+#     else
+#       printf '\033Ptmux;\033\033]12;red\007\033\\'
+#     fi
+#   else
+#     if [[ $TMUX = '' ]]; then
+#       echo -ne "\033]12;Grey\007"
+#     else
+#       printf '\033Ptmux;\033\033]12;grey\007\033\\'
+#     fi
+#   fi
+#   }
+#   zle-line-init () {
+#   zle -K viins
+#   echo -ne "\033]12;Grey\007"
+#   }
+#   zle -N zle-keymap-select
+#   zle -N zle-line-init
+# }
+
+# prompt_vi_mode_output() {
+#   # print -Pn "${${KEYMAP/vicmd/ [N] }/(main|viins)/ [I] }"
+#   printf "${vimode}"
+# }
 
 # turns seconds into human readable time
 # 165392 => 1d 21h 56m 32s
@@ -103,6 +212,10 @@ prompt_pure_clear_screen() {
   prompt_pure_preprompt_render precmd
 }
 
+prompt_pure_vi_mode_indicator() {
+  prompt_vi_mode_indicator=
+}
+
 prompt_pure_check_git_arrows() {
   # reset git arrows
   prompt_pure_git_arrows=
@@ -126,6 +239,11 @@ prompt_pure_check_git_arrows() {
   [[ -n $arrows ]] && prompt_pure_git_arrows=" ${arrows}"
 }
 
+prompt_pure_background_jobs_indicator() {
+  # background jobs indicator in prompt (https://gist.github.com/remy/6079223)
+  [[ $(jobs -l | wc -l) -gt 0 ]] && echo " ⚙ "
+}
+
 prompt_pure_set_title() {
   # tell the terminal we are setting the title
   print -n '\e]0;'
@@ -146,6 +264,11 @@ prompt_pure_preexec() {
   [[ $2 =~ (git|hub)\ .*(pull|fetch) ]] && async_flush_jobs 'prompt_pure'
 
   prompt_pure_cmd_timestamp=$EPOCHSECONDS
+
+  # for vi-mode for some reason?
+  # http://unix.stackexchange.com/a/163645
+  #
+  # print -rn -- $terminfo[el];
 
   # shows the current dir and executed command in the title while a process is active
   prompt_pure_set_title 'ignore-escape' "$PWD:t: $2"
@@ -184,14 +307,19 @@ prompt_pure_preprompt_render() {
   # construct preprompt, beginning with path
   # local preprompt="%F{blue}%~%f"
   local preprompt="%F{blue}$(prompt_format_pwd)%f"
+  #
   # vi mode
-  # preprompt+="%F{white}%f${vimode}%f"
+  # preprompt+=$terminfo[el]
+  # preprompt+=$terminfo_down_sc$vi_mode$terminfo[rc]
+  #
   # git info
   preprompt+="%F{$git_color}%f$(git_super_status)%f"
   # git pull/push arrows
   preprompt+="%F{cyan}${prompt_pure_git_arrows}%f"
   # username and machine if applicable
   preprompt+=$prompt_pure_username
+  # background jobs running
+  preprompt+="%F{gray}$(prompt_pure_background_jobs_indicator)%f"
   # execution time
   preprompt+="%F{yellow}${prompt_pure_cmd_exec_time}%f"
 
@@ -263,7 +391,7 @@ prompt_pure_precmd() {
   prompt_pure_set_title 'expand-prompt' '%~'
 
   # setup vi-mode
-  prompt_vi_mode
+  # prompt_vi_mode
 
   # get vcs info
   vcs_info
@@ -380,6 +508,11 @@ prompt_pure_setup() {
   autoload -Uz git_super_status
   autoload -Uz async && async
 
+  # fire vi mode functions
+  zle -N zle-keymap-select
+  zle -N zle-line-init
+  zle -N zle-line-finish
+
   add-zsh-hook precmd prompt_pure_precmd
   add-zsh-hook preexec prompt_pure_preexec
 
@@ -408,6 +541,7 @@ prompt_pure_setup() {
   # prompt turns red if the previous command didn't exit with 0
   # default: ❯
   # new: 
+  # PROMPT="${vi_mode_ps1_output} %(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
   PROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
 }
 
