@@ -95,6 +95,7 @@ function! LoadPlugs()
   Plug 'luochen1990/rainbow'
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
   Plug 'kassio/neoterm'
+  Plug 'rizzatti/dash.vim'
 
   """"" Code Navigation======================================================
   Plug 'haya14busa/incsearch.vim'
@@ -644,11 +645,11 @@ endfunction
 " -----------------------------------------------------------------------------
 augroup UnSyntaxInactiveGroup
   autocmd!
-  " autocmd BufEnter,WinEnter * set syntax=ON
+  autocmd BufEnter,WinEnter * set syntax=ON
   autocmd BufEnter,WinEnter * set number
   " autocmd BufEnter,WinEnter * set cursorline
 
-  " autocmd BufLeave,WinLeave * set syntax=OFF
+  autocmd BufLeave,WinLeave * set syntax=OFF
   autocmd BufLeave,WinLeave * set nonumber
   " autocmd BufLeave,WinLeave * set nocursorline
 augroup END
@@ -688,11 +689,13 @@ augroup GitGroup
   autocmd BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
 augroup END
 
+" FIXME: this may be breaking auto rename of irc buffers, etc
 " Automatic rename of tmux window
-if exists('$TMUX') && !exists('$NORENAME')
-  au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-  " au VimLeave * call system('tmux set-window automatic-rename on')
-endif
+"
+" if exists('$TMUX') && !exists('$NORENAME')
+"   au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+"   " au VimLeave * call system('tmux set-window automatic-rename on')
+" endif
 
 augroup HighlightGroup
   autocmd!
@@ -769,7 +772,7 @@ augroup END
 " -----------------------------------------------------------------------------
 highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 highlight Search gui=underline term=underline guibg=#afaf87 guifg=#333333
-highlight Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold
+highlight Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold
 highlight Comment cterm=italic term=italic gui=italic
 highlight CursorLineNr guifg=white
 
@@ -806,7 +809,7 @@ map <S-F5> :PlugClean!<cr>
 
 """"""" neoterm
 " hide/close terminal
-" nnoremap <silent> <C-c>th :call neoterm#close()<cr>
+nnoremap <silent> <leader>z :call neoterm#close()<cr>
 " clear terminal
 " nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
 " kills the current job (send a <c-c>)
@@ -909,7 +912,8 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 " clear incsearch term
-nnoremap <silent><Leader><space> :nohls<CR>
+" nnoremap <silent><Leader><space> :nohls<CR>
+nnoremap  <silent><leader><space> :syntax sync fromstart<cr>:nohlsearch<cr>:redrawstatus!<cr>:redraw!<cr>
 nnoremap / /\v
 vnoremap / /\v
 " Keep search matches in the middle of the window.
@@ -1058,6 +1062,9 @@ inoremap <c-a> <esc>I
 " http://vimbits.com/bits/25
 nnoremap j gj
 nnoremap k gk
+
+" run Dash (on MAC) to search for word under cursor
+nmap <silent> <leader>d <Plug>DashSearch
 
 " =============================================================================
 " Abbreviations #abbrev

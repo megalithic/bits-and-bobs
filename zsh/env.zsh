@@ -21,6 +21,7 @@ export ACK_COLOR_MATCH='red'
 # export CC=/usr/bin/gcc
 export DISPLAY=:0.0
 
+# reduce ESC key delay to 0.1
 export KEYTIMEOUT=1
 
 # so I can run USPTO/jboss stuff sensibly

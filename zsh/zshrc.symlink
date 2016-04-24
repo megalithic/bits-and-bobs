@@ -9,13 +9,13 @@
 #
 
 # To profile stuff for zsh startup, uncomment:
-zmodload zsh/zprof
+# zmodload zsh/zprof
 
 # Was loading this via iterm2:
 # (tmux ls | grep -vq attached && tmux at) || tmux
 
-# emacs mode
-bindkey -e
+# vi mode
+bindkey -v
 
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles

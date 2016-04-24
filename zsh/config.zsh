@@ -4,6 +4,10 @@
 #   export PS1='%3~$(git_info_for_prompt)%# '
 # fi
 
+# umask
+# https://github.com/pjg/dotfiles/blob/master/.zshrc#L24
+umask 022
+
 fpath=($ZSH/functions $fpath)
 
 autoload -U $ZSH/functions/*(:t)
@@ -25,6 +29,8 @@ setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
 setopt IGNORE_EOF
+# Report the status of background jobs immediately, rather than waiting until just before printing a prompt.
+setopt notify
 
 # don't expand aliases _before_ completion has finished
 #   like: git comm-[tab]

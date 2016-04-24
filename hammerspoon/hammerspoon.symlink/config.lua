@@ -57,15 +57,7 @@ config.layout = {
     utils.activate('com.googlecode.iterm2')
   end),
 
-  -- we have a default so that unspecified app windows do something sane and expected
-  ['default'] = (function(window, forceScreenCount)
-    -- local count = forceScreenCount or screenCount
-    -- if count == 1 then
-    --   grid.set(window, config.grid.centerBig)
-    -- else
-    --   grid.set(window, config.grid.rightThird, config.secondaryDisplay(count))
-    -- end
-
+  ['com.kapeli.dashdoc'] = (function(window, forceScreenCount)
     grid.set(window, config.grid.centerBig)
   end),
 
