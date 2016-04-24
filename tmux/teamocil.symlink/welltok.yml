@@ -44,10 +44,10 @@ windows:
         - cd rewards-dashboard-voltron
         - npm install
         - npm start
-      - commands:
-        - cd rewards-wallet-widget
-        - npm install
-        - npm start
+      # - commands:
+      #   - cd rewards-wallet-widget
+      #   - npm install
+      #   - npm start
   - name: "code"
     root: "~/code/welltok/rewards-dashboard-voltron"
     panes:
