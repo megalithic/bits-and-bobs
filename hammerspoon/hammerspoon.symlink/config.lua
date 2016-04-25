@@ -183,6 +183,8 @@ end
 function config.getGridLocation (window, count)
   local app = window:application()
   local side = config.grid.fullScreen
+  local allWindows = utils.windowsForApp(app)
+  -- TODO: account for existing windows for layout
 
   -- we have more than one screen attached
   if (count > 1) then
