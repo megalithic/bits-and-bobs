@@ -190,7 +190,7 @@ function config.getGridLocation (window, count)
 
     -- we have more than one window for the given app
     if (windowCount > 1) then
-      side = windowCount % 2 == 0 and config.grid.rightHalf or config.grid.leftHalf
+      side = windowCount % 2 == 0 and config.grid.leftHalf or config.grid.rightHalf
     end
   end
 

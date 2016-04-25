@@ -1,22 +1,28 @@
 -------------------------------------------------------------------------------
 --/ initialize /--
 -------------------------------------------------------------------------------
+
+-- :: locals
 local wm = require 'wm'
--- local bindings = require 'bindings'
 local utils = require 'utils'
 
-local basePath = os.getenv('HOME') .. '/.hammerspoon/'
-local imagePath = basePath .. 'assets/'
+-- :: globals
+basePath = os.getenv('HOME') .. '/.hammerspoon/'
+imagePath = basePath .. 'assets/'
+configFileWatcher = nil
+
 
 -- mashers
+-- note: alt == opt
 -------------------------------------------------------------------------------
-local cmdAlt = {'cmd', 'alt'}
-local cmdShift = {'cmd', 'shift'}
-local cmdCtrl = {'cmd', 'ctrl'}
-local ctrlAlt = {'ctrl', 'alt'}
-local hyper = {'cmd', 'ctrl', 'shift'}
-local mash = {'cmd', 'alt', 'ctrl'}
-local mashShift = {'cmd', 'alt', 'ctrl', 'shift' }
+cmdAlt = {'cmd', 'alt'}
+cmdShift = {'cmd', 'shift'}
+cmdCtrl = {'cmd', 'ctrl'}
+ctrlAlt = {'ctrl', 'alt'}
+hyper = {'cmd', 'ctrl', 'shift'}
+mash = {'cmd', 'alt', 'ctrl'}
+mashShift = {'cmd', 'alt', 'ctrl', 'shift' }
+
 
 -- key bindings
 -------------------------------------------------------------------------------
@@ -25,33 +31,28 @@ local mashShift = {'cmd', 'alt', 'ctrl', 'shift' }
 --
 hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'L', function()
   hs.caffeinate.startScreensaver()
-  end)
+end)
 hs.hotkey.bind(ctrlAlt, 'r', function() hs.toggleConsole() end)
 hs.hotkey.bind(cmdCtrl, "r", function()
   hs.notify.show('Hammerspoon', 'Config Reloaded', '')
-  wm.events.tearDownEventHandling()
+  -- wm.events.tearDownEventHandling()
   hs.reload()
-  end)
+end)
 
 -- apps
 --
-hs.hotkey.bind(cmdShift, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
+hs.hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hs.hotkey.bind({'cmd'}, '`', function() utils.toggleApp('com.google.Chrome') end)
 hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
 hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggleApp('tweetbot') end)
 hs.hotkey.bind({'cmd'}, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
 hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggleApp('com.apple.iChat') end)
-hs.hotkey.bind('', 'F12', 'Loading Developer Console', nil, function()
+hs.hotkey.bind('', 'F12', function()
   local win = hs.window.focusedWindow()
-
   if win ~= nil and win:application():bundleID() == 'com.google.Chrome' then
-    print(win:title())
-    print(win:application():name())
-    hs.eventtap.keyStroke({'cmd', 'opt'}, "I")
-  else
-    print("Window not found")
+    hs.eventtap.keyStroke({'cmd', 'alt'}, "i")
   end
-end, nil)
+end)
 
 --
 -- local wf=hs.window.filter
@@ -67,31 +68,37 @@ end, nil)
 -- end)
 
 
--- window / grid movements
---
-hs.hotkey.bind(cmdCtrl, 'h', utils.chain({
-  wm.config.grid.leftHalf,
-  wm.config.grid.leftThird,
-  wm.config.grid.leftTwoThirds,
-  }))
+-- window management
+-------------------------------------------------------------------------------
 
-hs.hotkey.bind(cmdCtrl, 'j', utils.chain({
-  wm.config.grid.bottomHalf,
-  wm.config.grid.bottomThird,
-  wm.config.grid.bottomTwoThirds,
-  }))
+hs.hotkey.bind(cmdCtrl, 'h', wm.grid.leftHalf)
+hs.hotkey.bind(cmdCtrl, 'l', wm.grid.rightHalf)
+hs.hotkey.bind(cmdCtrl, 'k', wm.grid.maximize)
+hs.hotkey.bind(cmdCtrl, 'j', wm.grid.center)
 
-hs.hotkey.bind(cmdCtrl, 'k', utils.chain({
-  wm.config.grid.fullScreen,
-  wm.config.grid.centeredBig,
-  wm.config.grid.centeredSmall,
-  }))
+-- hs.hotkey.bind(cmdCtrl, 'j', utils.chain({
+--   wm.config.grid.bottomHalf,
+--   wm.config.grid.bottomThird,
+--   wm.config.grid.bottomTwoThirds,
+--   }))
 
-hs.hotkey.bind(cmdCtrl, 'l', utils.chain({
-  wm.config.grid.rightHalf,
-  wm.config.grid.rightThird,
-  wm.config.grid.rightTwoThirds,
-  }))
+-- hs.hotkey.bind(cmdCtrl, 'k', utils.chain({
+--   wm.config.grid.fullScreen,
+--   wm.config.grid.centeredBig,
+--   wm.config.grid.centeredSmall,
+--   }))
+
+-- hs.hotkey.bind(cmdCtrl, 'h', utils.chain({
+--   wm.config.grid.leftHalf,
+--   wm.config.grid.leftThird,
+--   wm.config.grid.leftTwoThirds,
+--   }))
+
+-- hs.hotkey.bind(cmdCtrl, 'l', utils.chain({
+--   wm.config.grid.rightHalf,
+--   wm.config.grid.rightThird,
+--   wm.config.grid.rightTwoThirds,
+--   }))
 
 hs.hotkey.bind(ctrlAlt, 'k', utils.chain({
   wm.config.grid.topHalf,
@@ -112,6 +119,7 @@ hs.hotkey.bind(ctrlAlt, 'h', function()
   local nextScreen = win:screen():previous()
   win:moveToScreen(nextScreen)
   end)
+
 hs.hotkey.bind(ctrlAlt, 'l', function()
   local win = hs.window.focusedWindow()
   local nextScreen = win:screen():next()
@@ -120,7 +128,6 @@ hs.hotkey.bind(ctrlAlt, 'l', function()
 
 -- activate multi-monitor layouts
 hs.hotkey.bind(cmdCtrl, 'f1', (function()
-  hs.alert('Laptop')
   hs.notify.show('Window Management', 'Switching Layouts', 'Loaded Laptop Layout')
   wm.config.activateLayout(1)
   end))
@@ -129,6 +136,30 @@ hs.hotkey.bind(cmdCtrl, 'f2', (function()
   wm.config.activateLayout(2)
   end))
 
+
 -- ensure cli tools are installed
 -------------------------------------------------------------------------------
 hs.ipc.cliInstall()
+
+-- setup auto-reloading of config (could be dangerous)
+-------------------------------------------------------------------------------
+function reloadConfig(files)
+  if configFileWatcher ~= nil then
+    configFileWatcher:stop()
+    configFileWatcher = nil
+  end
+
+  doReload = false
+  for _,file in pairs(files) do
+      if file:sub(-4) == ".lua" then
+          doReload = true
+      end
+  end
+  if doReload then
+    hs.reload()
+    hs.notify.show('Hammerspoon', 'Reload completed', '')
+  end
+end
+
+configFileWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/init.lua", reloadConfig)
+configFileWatcher:start()
