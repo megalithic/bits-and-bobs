@@ -692,10 +692,10 @@ augroup END
 " FIXME: this may be breaking auto rename of irc buffers, etc
 " Automatic rename of tmux window
 "
-" if exists('$TMUX') && !exists('$NORENAME')
-"   au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-"   " au VimLeave * call system('tmux set-window automatic-rename on')
-" endif
+if exists('$TMUX') && !exists('$NORENAME')
+  au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+  au VimLeave * call system('tmux set-window automatic-rename on')
+endif
 
 augroup HighlightGroup
   autocmd!
@@ -913,7 +913,8 @@ map g/ <Plug>(incsearch-stay)
 
 " clear incsearch term
 " nnoremap <silent><Leader><space> :nohls<CR>
-nnoremap  <silent><leader><space> :syntax sync fromstart<cr>:nohlsearch<cr>:redrawstatus!<cr>:redraw!<cr>
+" nnoremap  <silent><leader><space> :syntax sync fromstart<cr>:nohlsearch<cr>:redrawstatus!<cr>:redraw!<cr>
+nnoremap  <silent><leader><space> :syntax sync fromstart<cr>:nohlsearch<cr>:redrawstatus!<cr>
 nnoremap / /\v
 vnoremap / /\v
 " Keep search matches in the middle of the window.

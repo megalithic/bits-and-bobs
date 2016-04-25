@@ -91,7 +91,7 @@ set -g assume-paste-time 0
 set -g repeat-time 0
 
 # nvim trickery
-set -g escape-time 1
+set -g escape-time 0
 
 # VI MODE
 # ===========================================================================
