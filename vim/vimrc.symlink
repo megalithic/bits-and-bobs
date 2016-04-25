@@ -692,10 +692,10 @@ augroup END
 " FIXME: this may be breaking auto rename of irc buffers, etc
 " Automatic rename of tmux window
 "
-if exists('$TMUX') && !exists('$NORENAME')
-  au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-  au VimLeave * call system('tmux set-window automatic-rename on')
-endif
+" if exists('$TMUX') && !exists('$NORENAME')
+"   au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+"   au VimLeave * call system('tmux set-window automatic-rename on')
+" endif
 
 augroup HighlightGroup
   autocmd!
@@ -880,6 +880,10 @@ nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
+inoremap <silent> <C-H> :TmuxNavigateLeft<cr>
+inoremap <silent> <C-J> :TmuxNavigateDown<cr>
+inoremap <silent> <C-K> :TmuxNavigateUp<cr>
+inoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
