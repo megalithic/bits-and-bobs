@@ -62,7 +62,7 @@ bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 # ===========================================================================
 set -sg	update-environment TERM_PROFILE
 set -g history-limit 25000
-set -g set-titles off
+set -g set-titles on
 
 set -g default-terminal "tmux-256color"
 set -g default-shell "/usr/local/bin/zsh"
