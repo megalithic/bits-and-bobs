@@ -42,6 +42,18 @@ hs.hotkey.bind(cmdCtrl, "r", function()
   hs.reload()
 end)
 
+-- media
+--
+local mediaApp = {
+  name='Goole Play Music Desktop Player',
+  bundleID='google-play-music-desktop-player'
+
+}
+-- insert key on my ducky shine 3
+-- hs.hotkey.bind('ctrl', 114, function() hs.applescript('tell application "System Events" tell application "'..mediaApp.name..'" to activate key code 123 set visible of process "'..mediaApp.name..'" to false') end)
+-- hs.hotkey.bind('ctrl', 'home', function() hs.applescript('tell application "System Events" tell application "'..mediaApp.name..'" to activate key code 49 set visible of process "'..mediaApp.name..'" to false') end)
+-- hs.hotkey.bind('ctrl', 'pageup', function() hs.applescript('tell application "System Events" tell application "'..mediaApp.name..'" to activate key code 124 set visible of process "'..mediaApp.name..'" to false') end)
+
 -- apps
 --
 hs.hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)

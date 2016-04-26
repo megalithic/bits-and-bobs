@@ -35,7 +35,9 @@ allWindows:subscribe(wf.windowNotOnScreen, function() redrawBorder() end)
 function handleGlobalEvent(name, eventType, app)
   if eventType == hs.application.watcher.launched then
     utils.log.df('[event] launched %s', app:bundleID())
-    watchApp(app)
+    if app:bundleID() ~= 'org.hammerspoon.Hammerspoon' or app:bundleID() ~= 'com.contextsformac.Contexts' then
+      watchApp(app)
+    end
   elseif eventType == hs.application.watcher.terminated then
     -- Only the PID is set for terminated apps, so can't log bundleID.
     local pid = app:pid()
@@ -83,7 +85,7 @@ end
 
 function watchApp(app)
   local pid = app:pid()
-  if watchers[pid] then
+  if watchers[pid] or app:bundleID() == 'org.hammerspoon.Hammerspoon' or app:bundleID() == 'com.contextsformac.Contexts' then
     utils.log.wf('[watchApp] attempted watch for already-watched PID %d', pid)
     return
   end
@@ -193,7 +195,7 @@ function redrawBorder ()
     windowBorder:delete()
   end
 
-  local ignoredWindows = utils.Set {'iTerm2', 'Electron Helper', 'TotalFinderCrashWatcher', 'CCXProcess', 'Adobe CEF Helper'}
+  local ignoredWindows = utils.Set {'iTerm2', 'Electron Helper', 'TotalFinderCrashWatcher', 'CCXProcess', 'Adobe CEF Helper', 'Hammerspoon'}
   local win = hs.window.focusedWindow()
 
   -- avoid drawing borders on "odd" windows, including iTerm2, Contexts, etc
@@ -204,9 +206,9 @@ function redrawBorder ()
 
   windowBorder = hs.drawing.rectangle(hs.geometry.rect( topLeft['x'], topLeft['y'], size['w'], size['h']))
 
-  windowBorder:setStrokeColor({["red"]=.8,["blue"]=.1,["green"]=.1,["alpha"]=.4})
+  windowBorder:setStrokeColor({["red"]=0,["blue"]=.2,["green"]=.1,["alpha"]=.1})
   windowBorder:setRoundedRectRadii(6.0, 6.0)
-  windowBorder:setStrokeWidth(3)
+  windowBorder:setStrokeWidth(2)
   windowBorder:setStroke(true)
   windowBorder:setFill(false)
   windowBorder:setLevel("floating")
@@ -218,10 +220,13 @@ function initEventHandling()
   globalWatcher = hs.application.watcher.new(handleGlobalEvent)
   globalWatcher:start()
 
+  local ignoredApps = utils.Set {'org.hammerspoon.Hammerspoon', 'com.contextsformac.Contexts'}
+
   -- Watch already-running applications.
   local apps = hs.application.runningApplications()
   for _, app in pairs(apps) do
-    if app:bundleID() ~= 'org.hammerspoon.Hammerspoon' then
+    -- if not ignoredApps(app:bundleID()) then
+    if app:bundleID() ~= 'org.hammerspoon.Hammerspoon' or app:bundleID() ~= 'com.contextsformac.Contexts' then
       watchApp(app)
     end
   end
