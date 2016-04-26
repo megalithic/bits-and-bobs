@@ -94,7 +94,6 @@ function! LoadPlugs()
   " Plug 'lukaszb/vim-web-indent' " hasn't been updated in 4y
   Plug 'luochen1990/rainbow'
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
-  Plug 'kassio/neoterm'
   Plug 'rizzatti/dash.vim'
 
   """"" Code Navigation======================================================
@@ -807,14 +806,6 @@ map <F5> :PlugUpdate<cr>
 noremap <S-F5> :PlugClean!<cr>
 map <S-F5> :PlugClean!<cr>
 
-""""""" neoterm
-" hide/close terminal
-nnoremap <silent> <leader>z :call neoterm#close()<cr>
-" clear terminal
-" nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
-" kills the current job (send a <c-c>)
-" nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
-
 """"""" QuickScope
 nnoremap <expr> <silent> f Quick_scope_selective('f')
 nnoremap <expr> <silent> F Quick_scope_selective('F')
@@ -880,10 +871,6 @@ nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
-inoremap <silent> <C-H> :TmuxNavigateLeft<cr>
-inoremap <silent> <C-J> :TmuxNavigateDown<cr>
-inoremap <silent> <C-K> :TmuxNavigateUp<cr>
-inoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
