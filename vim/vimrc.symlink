@@ -181,8 +181,8 @@ set re=1
 
 """"""" Layout
 set linebreak
-" set textwidth=79 " will auto wrap content when set
-set nowrap " `on` is 'wrap'
+set textwidth=80
+set wrap " `nowrap` for off
 set wrapscan
 
 " :Hardwrap    -  turns on hardwrapping
@@ -706,64 +706,99 @@ augroup END
 " =============================================================================
 " Filetypes / Syntax #ftypes
 " -----------------------------------------------------------------------------
-augroup filetypes
-  " clear commands before resetting
-  autocmd!
+" Markdown {{{
+augroup ft_markdown
+  au!
+
+  au FileType markdown set tw=80
+  au FileType text,markdown let b:vcm_tab_complete = 'dict'
+
+  au BufNewFile,BufRead *.m*down setlocal filetype=markdown foldlevel=1
 
   " Markdown turn off lazyredraw
-  autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
-  autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} let b:deoplete_disable_auto_complete=1
-  autocmd FileType markdown set tw=80
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} let b:deoplete_disable_auto_complete=1
+augroup END
+" }}}
 
-  " filetype
-  autocmd BufNewFile,BufRead,BufReadPost *.js set filetype=javascript.jsx
-  autocmd BufNewFile,BufRead,BufReadPost *.json set filetype=json
-  autocmd BufNewFile,BufRead,BufReadPost *.slim set filetype=slim
-  autocmd BufNewFile,BufRead,BufReadPost *.html set filetype=haml
-  autocmd BufNewFile,BufRead,BufReadPost *.less set filetype=less
-  autocmd BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
-  autocmd BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
-  autocmd FileType sass,scss set iskeyword+=-
+" Vim {{{
+augroup ft_vim
+  au!
 
-  autocmd BufNewFile,BufRead */ssh/config  setf sshconfig
-  autocmd BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
+  au FileType vim setlocal foldmethod=marker keywordprg=:help
+  au FileType help setlocal textwidth=78
+  au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+augroup END
+" }}}
 
-  " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
-  autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
-  autocmd FileType ruby let b:vcm_tab_complete = "tags"
-  autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
-  autocmd FileType javascript,javascript.jsx let b:vcm_tab_complete = 'omni'
+" Sass/Scss {{{
+augroup ft_sass
+  au!
+
+  au BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
+  au BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
+  au FileType sass,scss set iskeyword+=-
+  au FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
+augroup END
+" }}}
+
+" JavaScript {{{
+augroup ft_js
+  au!
+
+
+  au BufNewFile,BufRead,BufReadPost *.js set filetype=javascript.jsx
+  au FileType javascript,javascript.jsx let b:vcm_tab_complete = 'omni'
 
   " make `gf` search for .js files
-  autocmd FileType javascript,javascript.jsx setlocal suffixesadd=.js
-  autocmd FileType javascript,javascript.jsx setlocal path+=js,scripts
+  au FileType javascript,javascript.jsx setlocal suffixesadd=.js
+  au FileType javascript,javascript.jsx setlocal path+=js,scripts
+
+  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
+  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
+  if exists('g:plugs["tern_for_vim"]')
+    au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
+  endif
+augroup END
+" }}}
+
+" Unsorted Filetypes {{{
+augroup filetypes
+  " clear commands before resetting
+  au!
+
+  " filetype
+  au BufNewFile,BufRead,BufReadPost *.json set filetype=json
+  au BufNewFile,BufRead,BufReadPost *.slim set filetype=slim
+  au BufNewFile,BufRead,BufReadPost *.html set filetype=haml
+  au BufNewFile,BufRead */ssh/config  setf sshconfig
+  au BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
+
+  " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
+  au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+  au FileType ruby let b:vcm_tab_complete = "tags"
 
   " make sure `complete` works as expected for CSS class names whithout
   " messing with motions (eg. '.foo-bar__baz') and we make sure all
   " delimiters (_,-,$,%,.) are treated as word separators outside insert mode
-  autocmd InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
-  autocmd InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
+  au InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
+  au InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
 
   " Fix slow Ruby editing
   " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
-  autocmd Filetype ruby setlocal foldmethod=manual
+  au Filetype ruby setlocal foldmethod=manual
 
   """"""" omnicompletions
   " Extreme info on omnicompletions, must read more:
   " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
   "
-  autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
-  autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
-  autocmd FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
-  if exists('g:plugs["tern_for_vim"]')
-    autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
-  endif
+  au FileType * setlocal omnifunc=syntaxcomplete#Complete
+  au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  au FileType python setlocal omnifunc=pythoncomplete#Complete
+  au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  au FileType ruby setlocal omnifunc=rubycomplete#Complete
 augroup END
+" }}}
 
 
 " =============================================================================
