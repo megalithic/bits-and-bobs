@@ -11,15 +11,33 @@ local watchers = {}
 local evt = {} -- to be returned/exported
 local events = hs.uielement.watcher
 local screenCount = #hs.screen.allScreens()
+local wf = hs.window.filter
+local windowBorder = nil
+
 local config = require 'config'
 local utils = require 'utils'
-local wf = hs.window.filter.new(nil)
-local border = nil
 
+---------------------------------------------------------------------------- {{
+-- SETUP WINDOW FILTER SUBSCRIPTIONS
+-- :: watch relevant window events to do interesting things
+
+allWindows = wf.new(nil, 'allWindows')
+allWindows:subscribe(wf.windowCreated, function() redrawBorder() end)
+allWindows:subscribe(wf.windowFocused, function() redrawBorder() end)
+allWindows:subscribe(wf.windowMoved, function() redrawBorder() end)
+allWindows:subscribe(wf.windowUnfocused, function() redrawBorder() end)
+allWindows:subscribe(wf.windowOnScreen, function() redrawBorder() end)
+allWindows:subscribe(wf.windowNotOnScreen, function() redrawBorder() end)
+
+-- }}
+--
+--
 function handleGlobalEvent(name, eventType, app)
   if eventType == hs.application.watcher.launched then
     utils.log.df('[event] launched %s', app:bundleID())
-    watchApp(app)
+    if app:bundleID() ~= 'org.hammerspoon.Hammerspoon' or app:bundleID() ~= 'com.contextsformac.Contexts' then
+      watchApp(app)
+    end
   elseif eventType == hs.application.watcher.terminated then
     -- Only the PID is set for terminated apps, so can't log bundleID.
     local pid = app:pid()
@@ -67,7 +85,7 @@ end
 
 function watchApp(app)
   local pid = app:pid()
-  if watchers[pid] then
+  if watchers[pid] or app:bundleID() == 'org.hammerspoon.Hammerspoon' or app:bundleID() == 'com.contextsformac.Contexts' then
     utils.log.wf('[watchApp] attempted watch for already-watched PID %d', pid)
     return
   end
@@ -114,13 +132,6 @@ function watchWindow(window)
     --   config.layout['default'](window)
     end
 
-    -- Draw border around window (focused/unfocused/moved)
-    -- :subscriptions
-    wf:subscribe(hs.window.filter.windowFocused, function () drawWindowBorder() end)
-    wf:subscribe(hs.window.filter.windowUnfocused, function () drawWindowBorder() end)
-    wf:subscribe(hs.window.filter.windowMoved, function () drawWindowBorder() end)
-    wf:subscribe(hs.window.filter.windowOnScreen, function () drawWindowBorder() end)
-
     utils.log.df('[watchWindow] watching %s (id %s, %s windows)', bundleID, id, utils.windowCount(application))
 
     -- Watch for window-closed events.
@@ -139,29 +150,69 @@ function watchWindow(window)
   end
 end
 
-function drawWindowBorder()
-  if border then
-    border:delete()
+---------------------------------------------------------------------------- {{
+-- WINDOW FILTER EVENTS
+
+function handleCreated ()
+  local win = hs.window.focusedWindow()
+  -- utils.log.df('[wm] window created ("%s" for %s)', win:title(), win:application():bundleID())
+  redrawBorder()
+end
+
+function handleFocused ()
+  local win = hs.window.focusedWindow()
+  -- utils.log.df('[wm] window focused ("%s" for %s)', win:title(), win:application():bundleID())
+  redrawBorder()
+end
+
+function handleMoved ()
+  local win = hs.window.focusedWindow()
+  -- Note: this includes moved, resized, and maximize/fullscreen toggled
+  -- utils.log.df('[wm] window moved|resized|toggled ("%s" for %s)', win:title(), win:application():bundleID())
+  redrawBorder()
+end
+
+function handleUnfocused ()
+  -- local win = hs.window.focusedWindow()
+  -- utils.log.df('[wm] window unfocused ("%s" for %s)', win:title(), win:application():bundleID())
+  redrawBorder()
+end
+
+function handleOnScreen ()
+  local win = hs.window.focusedWindow()
+  -- utils.log.df('[wm] window onscreen ("%s" for %s)', win:title(), win:application():bundleID())
+  redrawBorder()
+end
+
+function handleNotOnScreen ()
+  -- utils.log.df('[wm] window onscreen ("%s" for %s)', win:title(), win:application():bundleID())
+  redrawBorder()
+end
+
+function redrawBorder ()
+  -- clean up existing borders
+  if windowBorder ~= nil then
+    windowBorder:delete()
   end
 
-  local ignoredWindows = utils.Set {'iTerm2', 'Electron Helper', 'TotalFinderCrashWatcher', 'CCXProcess', 'Adobe CEF Helper'}
+  local ignoredWindows = utils.Set {'iTerm2', 'Electron Helper', 'TotalFinderCrashWatcher', 'CCXProcess', 'Adobe CEF Helper', 'Hammerspoon'}
   local win = hs.window.focusedWindow()
+
   -- avoid drawing borders on "odd" windows, including iTerm2, Contexts, etc
   if win == nil or not utils.canManageWindow(win) or ignoredWindows[win:application():name()] then return end
 
-  local f = win:frame()
-  local fx = f.x - 1
-  local fy = f.y - 1
-  local fw = f.w + 2
-  local fh = f.h + 2
+  local topLeft = win:topLeft()
+  local size = win:size()
 
-  border = hs.drawing.rectangle(hs.geometry.rect(fx, fy, fw, fh))
-  border:setStrokeWidth(3)
-  border:setStrokeColor({["red"]=.8,["blue"]=.1,["green"]=.1,["alpha"]=.3})
-  border:setRoundedRectRadii(6.0, 6.0)
-  border:setStroke(true):setFill(false)
-  border:setLevel("floating")
-  border:show()
+  windowBorder = hs.drawing.rectangle(hs.geometry.rect( topLeft['x'], topLeft['y'], size['w'], size['h']))
+
+  windowBorder:setStrokeColor({["red"]=0,["blue"]=.2,["green"]=.1,["alpha"]=.1})
+  windowBorder:setRoundedRectRadii(6.0, 6.0)
+  windowBorder:setStrokeWidth(2)
+  windowBorder:setStroke(true)
+  windowBorder:setFill(false)
+  windowBorder:setLevel("floating")
+  windowBorder:show()
 end
 
 function initEventHandling()
@@ -169,10 +220,13 @@ function initEventHandling()
   globalWatcher = hs.application.watcher.new(handleGlobalEvent)
   globalWatcher:start()
 
+  local ignoredApps = utils.Set {'org.hammerspoon.Hammerspoon', 'com.contextsformac.Contexts'}
+
   -- Watch already-running applications.
   local apps = hs.application.runningApplications()
   for _, app in pairs(apps) do
-    if app:bundleID() ~= 'org.hammerspoon.Hammerspoon' then
+    -- if not ignoredApps(app:bundleID()) then
+    if app:bundleID() ~= 'org.hammerspoon.Hammerspoon' or app:bundleID() ~= 'com.contextsformac.Contexts' then
       watchApp(app)
     end
   end

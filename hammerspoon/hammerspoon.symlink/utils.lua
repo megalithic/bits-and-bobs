@@ -2,6 +2,8 @@ local utils = {}
 
 local logLevel = 'debug' -- generally want 'debug' or 'info'
 local log = hs.logger.new('replicant', logLevel)
+local lastSeenChain = nil
+local lastSeenWindow = nil
 utils.log = log
 
 -- Chain the specified movement commands.
@@ -12,9 +14,7 @@ utils.log = log
 --    one chain to another, or on switching from one app to another, or from one
 --    window to another.
 --
-local lastSeenChain = nil
-local lastSeenWindow = nil
-function utils.chain(movements)
+utils.chain = function (movements)
   local chainResetInterval = 2 -- seconds
   local cycleLength = #movements
   local sequenceNumber = 1
@@ -47,7 +47,7 @@ end
 -- toggles application state
 --
 -- FIXME: this function is all sorts of wonky. come up with better.
-function utils.toggleApp(_app)
+utils.toggleApp = function (_app)
   -- accepts app name (lowercased), pid, or bundleID; but we ALWAYS use bundleID
   local app = hs.application.find(_app)
 
@@ -79,7 +79,7 @@ function utils.toggleApp(_app)
   end
 end
 
-function utils.windowsForApp(app)
+utils.windowsForApp = function (app)
   return app:allWindows()
 end
 
@@ -87,7 +87,7 @@ end
 --
 -- (For Chrome, which has two windows per visible window on screen, but only one
 -- window per minimized window).
-function utils.windowCount(app)
+utils.windowCount = function (app)
   local count = 0
   if app then
     for _, window in pairs(utils.windowsForApp(app)) do
@@ -102,7 +102,7 @@ end
 
 -- hides an application
 --
-function utils.hide(bundleID)
+utils.hide = function (bundleID)
   local app = hs.application.get(bundleID)
   if app then
     app:hide()
@@ -111,7 +111,7 @@ end
 
 -- activates/shows an application
 --
-function utils.activate(bundleID)
+utils.activate = function (bundleID)
   local app = hs.application.get(bundleID)
   if app then
     app:activate()
@@ -120,7 +120,7 @@ end
 
 -- determines if a window is manageable (takes into account iterm2)
 --
-function utils.canManageWindow(window)
+utils.canManageWindow = function (window)
   local application = window:application()
   local bundleID = application:bundleID()
 
@@ -132,10 +132,15 @@ end
 
 -- creates a set for easier traversal and searching
 -- - takes an array as a table, e.g. Set {'foo', 'bar'}
-function utils.Set (list)
+utils.Set = function (list)
   local set = {}
   for _, l in ipairs(list) do set[l] = true end
   return set
+end
+
+utils.print = function(...)
+  hs.rawprint(...)
+  console.printStyledtext(...)
 end
 
 return utils
