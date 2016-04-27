@@ -905,7 +905,7 @@ map g/ <Plug>(incsearch-stay)
 " clear incsearch term
 " nnoremap <silent><Leader><space> :nohls<CR>
 " nnoremap  <silent><leader><space> :syntax sync fromstart<cr>:nohlsearch<cr>:redrawstatus!<cr>:redraw!<cr>
-nnoremap  <silent><leader><space> :syntax sync fromstart<cr>:nohlsearch<cr>:redrawstatus!<cr>
+nnoremap  <silent><ESC> :syntax sync fromstart<cr>:nohlsearch<cr>:redrawstatus!<cr><ESC>
 nnoremap / /\v
 vnoremap / /\v
 " Keep search matches in the middle of the window.
