@@ -69,6 +69,7 @@ function! LoadPlugs()
 
   "" Markdown
   Plug 'vim-pandoc/vim-pandoc-syntax'
+  Plug 'nelstrom/vim-markdown-folding'
 
   "" Ruby / Rails
   Plug 'vim-ruby/vim-ruby'
@@ -103,12 +104,12 @@ function! LoadPlugs()
   Plug 'EinfachToll/DidYouMean'
   Plug 'ervandew/supertab'
   Plug 'shougo/deoplete.nvim'
-  " Plug 'Konfekt/FastFold'
+  Plug 'Konfekt/FastFold'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'FelikZ/ctrlp-py-matcher'
   Plug 'mileszs/ack.vim'
   Plug 'kopischke/vim-fetch'
-  " Plug 'kana/vim-operator-user'
+  Plug 'kana/vim-operator-user'
   " provide ai and ii for indent blocks
   " provide al and il for current line
   " provide a_ and i_ for underscores
@@ -117,6 +118,7 @@ function! LoadPlugs()
     \| Plug 'kana/vim-textobj-indent'
     \| Plug 'kana/vim-textobj-line'
     \| Plug 'mattn/vim-textobj-url'
+    \| Plug 'kana/vim-textobj-fold'
 
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
@@ -235,6 +237,16 @@ set noswapfile "override because i hate swap files
 
 set sessionoptions-=options " Do not save settings and mappings to sessions
 
+""""""" Folding
+set foldmethod=indent   "fold based on indent
+set foldnestmax=5      "deepest fold is 5 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1
+set foldlevelstart=0
+let ruby_fold = 1
+let javascript_fold = 1
+set fcs=fold:-
+
 """"""" Indentions / Tabs
 set smartindent
 set cindent
@@ -288,7 +300,6 @@ set ttimeout
 set ttimeoutlen=10
 
 """"""" Misc (Needs documentation / understanding)
-set fcs=fold:-
 set matchtime=3
 set showbreak=↪
 set report=0 " Show all changes.
@@ -301,7 +312,6 @@ set shortmess=atI " don't show the intro message when starting vim.
 set matchpairs+=<:>
 let loaded_matchparen = 0 " this turns on pair matching highlight (is slow witht his on)
 set virtualedit+=block
-set nofoldenable " dont fold by default
 set magic
 set mat=2
 set re=1
@@ -339,7 +349,6 @@ set secure " disable unsafe commands in local .vimrc files
 " -----------------------------------------------------------------------------
 "
 """"""" Why do I even have these settings? Please clean.
-let ruby_fold = 0
 
 """"""" golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
@@ -438,7 +447,6 @@ let g:vim_markdown_frontmatter=1
 """"""" vim-javascript-syntax
 let g:JSHintHighlightErrorLine = 1
 let javascript_enable_domhtmlcss = 1
-let javascript_fold = 0
 let loaded_matchit = 1
 let g:js_indent_log = 1
 let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angular'
@@ -1057,6 +1065,18 @@ nnoremap k gk
 
 " run Dash (on MAC) to search for word under cursor
 nmap <silent> <leader>d <Plug>DashSearch
+
+" Handy code-folding bindings
+" - `za` toggles current fold open/close
+" - `zc` closes current fold; or parent, if current is already closed
+" - `zj` navigates down to top of next fold
+" - `zk` navigates up to bottom of previous fold
+"
+" Refs
+" # http://vimcasts.org/episodes/how-to-fold/
+" # https://www.linux.com/learn/vim-tips-folding-fun
+" # sjl's fold setup: https://bitbucket.org/sjl/dotfiles/src/9bead8a9b4350c57f8a24a8119607a83a9592afe/vim/vimrc?at=default&fileviewer=file-view-default
+nnoremap <Space> za
 
 " =============================================================================
 " Abbreviations #abbrev
