@@ -42,27 +42,31 @@ hs.hotkey.bind(cmdCtrl, "r", function()
   hs.reload()
 end)
 
--- media
---
+-- :: media
+-- / uses (newly added) hs.eventtap.event.newSystemKeyEvent()
+-- / https://github.com/Hammerspoon/hammerspoon/commit/a8ad4974777edc5b5db19176faf9dd2fe7b65c6f
 local mediaApp = {
   name='Goole Play Music Desktop Player',
   bundleID='google-play-music-desktop-player'
-
 }
--- insert key on my ducky shine 3
--- hs.hotkey.bind('ctrl', 114, function() hs.applescript('tell application "System Events" tell application "'..mediaApp.name..'" to activate key code 123 set visible of process "'..mediaApp.name..'" to false') end)
--- hs.hotkey.bind('ctrl', 'home', function() hs.applescript('tell application "System Events" tell application "'..mediaApp.name..'" to activate key code 49 set visible of process "'..mediaApp.name..'" to false') end)
--- hs.hotkey.bind('ctrl', 'pageup', function() hs.applescript('tell application "System Events" tell application "'..mediaApp.name..'" to activate key code 124 set visible of process "'..mediaApp.name..'" to false') end)
+-- insert key on ducky shine 3
+hs.hotkey.bind('ctrl', 114, function() hs.eventtap.event.newSystemKeyEvent('PREVIOUS', false) end)
+-- home key on ducky shine 3
+hs.hotkey.bind('ctrl', 115, function() hs.eventtap.event.newSystemKeyEvent('PLAY', false) end)
+-- pageup key on ducky shine 3
+hs.hotkey.bind('ctrl', 116, function() hs.eventtap.event.newSystemKeyEvent('NEXT', false) end)
 
--- apps
---
+-- :: apps
 hs.hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hs.hotkey.bind({'cmd'}, '`', function() utils.toggleApp('com.google.Chrome') end)
 hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
 hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggleApp('tweetbot') end)
 hs.hotkey.bind({'cmd'}, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
 hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggleApp('com.apple.iChat') end)
-hs.hotkey.bind('', 'F12', function()
+
+-- :: sub-app
+-- / Chrome Dev Tools
+hs.hotkey.bind('', 'F12', function ()
   local win = hs.window.focusedWindow()
   if win ~= nil and win:application():bundleID() == 'com.google.Chrome' then
     hs.eventtap.keyStroke({'cmd', 'alt'}, "i")
@@ -146,7 +150,7 @@ hs.hotkey.bind(cmdCtrl, 'f2', (function()
 
 -- ensure cli tools are installed
 -------------------------------------------------------------------------------
-hs.ipc.cliInstall()
+-- hs.ipc.cliInstall()
 
 print("++ Running: "..hs.processInfo.bundlePath)
 print("++ Accessibility: "..tostring(hs.accessibilityState()))
