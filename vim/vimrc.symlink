@@ -1076,7 +1076,7 @@ nmap <silent> <leader>d <Plug>DashSearch
 " # http://vimcasts.org/episodes/how-to-fold/
 " # https://www.linux.com/learn/vim-tips-folding-fun
 " # sjl's fold setup: https://bitbucket.org/sjl/dotfiles/src/9bead8a9b4350c57f8a24a8119607a83a9592afe/vim/vimrc?at=default&fileviewer=file-view-default
-nnoremap <Space> za
+" nnoremap <Space> za
 
 " =============================================================================
 " Abbreviations #abbrev
