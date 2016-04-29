@@ -317,6 +317,7 @@ set mat=2
 set re=1
 set tm=500
 set dictionary+=/usr/share/dict/words
+set spellfile=~/.vim/spell/en.utf-8.add
 
 if has("clipboard")                   " If the feature is available
   set clipboard=unnamed               " copy to the system clipboard
@@ -358,7 +359,7 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 """"""" vim-airline
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline_theme='distinguished'
+let g:airline_theme='base16'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -394,8 +395,11 @@ let g:airline_mode_map = {
 
 """"""" neomake
 " -- Settings derived from:
-" https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
+" -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
+" --
 let g:neomake_airline = 1
+let g:neomake_verbose = 0
+let g:neomake_serialize = 1
 
 let g:neomake_error_sign = {
   \ 'text': '☓',
@@ -407,62 +411,23 @@ let g:neomake_warning_sign = {
   \ 'texthl': 'Error',
   \ }
 
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neomake_scss_scsslint_args = ['-c', globpath(&rtp, 'misc/scss-lint.yml')]
+
+let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_javascript_standard_maker = {
+  \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+  \ 'errorformat': '  %f:%l:%c: %m'
+  \ }
+
+let g:neomake_jsx_enabled_makers = ['standard']
+let g:neomake_jsx_standard_maker =
+  \ g:neomake_javascript_standard_maker
+
+" Check for lint errors on write
+au BufWritePost *.js silent! Neomake standard|redraw
+au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
+" autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
 " autocmd! BufWritePost * Neomake
-
-function! s:standard()
-  let g:neomake_javascript_enabled_makers = ['standard']
-  let g:neomake_javascript_standard_maker = {
-    \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-    \ 'errorformat': '  %f:%l:%c: %m'
-    \ }
-
-  let g:neomake_jsx_enabled_makers = ['standard']
-  let g:neomake_jsx_standard_maker =
-    \ g:neomake_javascript_standard_maker
-  Neomake
-endfunction
-
-command! Standard :call <SID>standard()
-
-function! s:semistandard()
-  let g:neomake_javascript_enabled_makers = ['semistandard']
-  let g:neomake_javascript_semistandard_maker = {
-    \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-    \ 'errorformat': '  %f:%l:%c: %m'
-    \ }
-
-  let g:neomake_jsx_enabled_makers = ['semistandard']
-  let g:neomake_jsx_semistandard_maker =
-    \ g:neomake_javascript_semistandard_maker
-  Neomake
-endfunction
-
-command! Semistandard :call <SID>semistandard()
-
-" -- My original standard/neomake settings
-" let g:neomake_javascript_standard_maker = {
-"     \ 'args': ['--verbose'],
-"     \ 'errorformat': '  %f:%l:%c: %m'
-"     \ }
-" let g:neomake_jsx_standard_maker = {
-"     \ 'args': ['--verbose'],
-"     \ 'errorformat': '  %f:%l:%c: %m'
-"     \ }
-" let g:neomake_javascript_enabled_makers = ['standard']
-" let g:neomake_jsx_enabled_makers = ['standard']
-" let g:neomake_verbose = 0
-" let g:neomake_warning_sign = {
-"     \ 'text': '◦',
-"     \ 'texthl': 'WarningMsg',
-"     \ }
-" let g:neomake_error_sign = {
-"     \ 'text': '☓',
-"     \ 'texthl': 'ErrorMsg',
-"     \ }
-" let g:neomake_serialize = 1
 
 """"""" rainbow
 let g:rainbow_conf = {
@@ -723,11 +688,6 @@ augroup END
 " Delete trailing whitespace on write
 autocmd BufWrite * silent call DeleteTrailingWS()
 
-" Check for lint errors on open & write
-autocmd BufWritePost *.js silent! Neomake standard|redraw
-autocmd BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
-" autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
-
 augroup ColorColumnGroup
   " Color Column (only on insert)
   if exists("&colorcolumn")
@@ -765,62 +725,111 @@ augroup END
 " =============================================================================
 " Filetypes / Syntax #ftypes
 " -----------------------------------------------------------------------------
-augroup filetypes
-  " clear commands before resetting
-  autocmd!
-
-  " Markdown turn off lazyredraw
-  autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
-  autocmd BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} let b:deoplete_disable_auto_complete=1
-  autocmd FileType markdown set tw=80
-
-  " filetype
-  autocmd BufNewFile,BufRead,BufReadPost *.js set filetype=javascript.jsx
-  autocmd BufNewFile,BufRead,BufReadPost *.json set filetype=json
-  autocmd BufNewFile,BufRead,BufReadPost *.slim set filetype=slim
-  autocmd BufNewFile,BufRead,BufReadPost *.html set filetype=haml
-  autocmd BufNewFile,BufRead,BufReadPost *.less set filetype=less
-  autocmd BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
-  autocmd BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
-  autocmd FileType sass,scss set iskeyword+=-
-
-  autocmd BufNewFile,BufRead */ssh/config  setf sshconfig
-  autocmd BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
-
-  " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
-  autocmd FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
-  autocmd FileType ruby let b:vcm_tab_complete = "tags"
-  autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
-  autocmd FileType javascript,javascript.jsx let b:vcm_tab_complete = 'omni'
+augroup ft_javascript
+  au!
+  au BufNewFile,BufRead,BufReadPost *.js set filetype=javascript.jsx
+  au BufNewFile,BufRead,BufReadPost *.json set filetype=json
+  au FileType javascript,javascript.jsx let b:vcm_tab_complete = 'omni'
 
   " make `gf` search for .js files
-  autocmd FileType javascript,javascript.jsx setlocal suffixesadd=.js
-  autocmd FileType javascript,javascript.jsx setlocal path+=js,scripts
+  au FileType javascript,javascript.jsx setlocal suffixesadd=.js
+  au FileType javascript,javascript.jsx setlocal suffixesadd=.jsx
+  au FileType javascript,javascript.jsx setlocal path+=js,scripts
 
+  " Expands 'class=' to 'className='
+  au FileType javascript.jsx iabbrev class== className=
+augroup END
+
+augroup javascript_shortcuts
+  " https://github.com/rstacruz/vimfiles/blob/master/plugin/z-javascript-functions.vim
+  au!
+  au FileType javascript call <SID>set_js_shortcuts()
+augroup END
+
+function! s:set_js_shortcuts()
+  inoremap <buffer> @. this.
+
+  imap <buffer> fn<CR> function () {<CR>
+  imap <buffer> =><CR> => {<CR>
+  imap <buffer> -><CR> () => {<CR>
+
+  imap <buffer> clog( console.log(
+  imap <buffer> cerr( console.error(
+  imap <buffer> cer( console.error(
+  imap <buffer> gebid( document.getElementById(
+  imap <buffer> rcc( React.createClass(
+  imap <buffer> rcc<CR> React.createClass({<CR>
+endfunction
+
+augroup ft_scss
+  au!
   " make sure `complete` works as expected for CSS class names whithout
   " messing with motions (eg. '.foo-bar__baz') and we make sure all
   " delimiters (_,-,$,%,.) are treated as word separators outside insert mode
-  autocmd InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
-  autocmd InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
+  au InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
+  au InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
+
+  " https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/css3-syntax.vim
+  au FileType css,css.scss,sass,scss setlocal iskeyword+=-
+  au FileType css,css.scss,sass,scss setlocal formatoptions+=croql
+  au BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
+  au BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
+augroup END
+
+augroup ft_markdown
+  au!
+  " Markdown turn off lazyredraw
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} let b:deoplete_disable_auto_complete=1
+  au FileType markdown set tw=80
+  au FileType text,markdown let b:vcm_tab_complete = 'dict'
+augroup END
+
+augroup ft_ruby
+  au!
+  au FileType ruby let b:vcm_tab_complete = "tags"
+augroup END
+
+augroup ft_haml
+  au!
+  au BufNewFile,BufRead,BufReadPost *.html set filetype=haml
+augroup END
+
+augroup ft_ssh
+  au!
+  au BufNewFile,BufRead */ssh/config  setf sshconfig
+  au BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
+augroup END
+
+augroup ft_misc
+  au!
+
+
+
+
+  " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
+  au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+
+
 
   " Fix slow Ruby editing
   " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
-  autocmd Filetype ruby setlocal foldmethod=manual
+  au Filetype ruby setlocal foldmethod=manual
 
   """"""" omnicompletions
   " Extreme info on omnicompletions, must read more:
   " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
   "
-  autocmd FileType * setlocal omnifunc=syntaxcomplete#Complete
-  autocmd FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
-  autocmd FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
+  au FileType * setlocal omnifunc=syntaxcomplete#Complete
+  au FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
+  au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  au FileType python setlocal omnifunc=pythoncomplete#Complete
+  au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  au FileType ruby setlocal omnifunc=rubycomplete#Complete
+  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
+  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
   if exists('g:plugs["tern_for_vim"]')
-    autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
+    au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
   endif
 augroup END
 

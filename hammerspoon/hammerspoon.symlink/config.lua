@@ -3,7 +3,7 @@ local screenCount = #hs.screen.allScreens()
 local grid = hs.grid
 local utils = require 'utils'
 grid.setGrid("12x12")
-grid.setMargins({w = 3, h = 4})
+grid.setMargins({w = 2, h = 2})
 hs.window.animationDuration = 0 -- 0 to disable animations
 hs.window.setShadows(false)
 
@@ -64,7 +64,7 @@ config.layout = {
   ['com.tinyspeck.slackmacgap'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.rightThird)
+      grid.set(window, config.grid.rightHalf)
     else
       grid.set(window, config.grid.rightThird, config.secondaryDisplay(count))
     end
@@ -73,7 +73,7 @@ config.layout = {
   ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.fullScreen)
+      grid.set(window, config.grid.leftHalf)
     else
       grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
     end
@@ -90,15 +90,6 @@ config.layout = {
       grid.set(window, '8,8 4x4', config.primaryDisplay(count))
     else
       grid.set(window, '8,8 4x4', config.secondaryDisplay(count))
-    end
-  end),
-
-  ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.leftTwoThirds, config.primaryDisplay(count))
-    else
-      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
     end
   end),
 
