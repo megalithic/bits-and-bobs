@@ -57,7 +57,7 @@ hs.hotkey.bind('ctrl', 115, function() hs.eventtap.event.newSystemKeyEvent('PLAY
 hs.hotkey.bind('ctrl', 116, function() hs.eventtap.event.newSystemKeyEvent('NEXT', false) end)
 
 -- :: apps
-hs.hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
+hs.hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hs.hotkey.bind({'cmd'}, '`', function() utils.toggleApp('com.google.Chrome') end)
 hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
 hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggleApp('tweetbot') end)
