@@ -62,7 +62,11 @@ hs.hotkey.bind({'cmd'}, '`', function() utils.toggleApp('com.google.Chrome') end
 hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
 hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggleApp('tweetbot') end)
 hs.hotkey.bind({'cmd'}, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
+hs.hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('com.sajidanwar.Radiant-Player') end)
 hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggleApp('com.apple.iChat') end)
+
+-- https://github.com/cmsj/hammerspoon-config/blob/master/init.lua#L616
+hs.hotkey.bind(cmdCtrl, 'n', function() hs.task.new("/usr/bin/open", nil, {os.getenv("HOME")}):start() end)
 
 -- :: sub-app
 -- / Chrome Dev Tools
@@ -72,19 +76,6 @@ hs.hotkey.bind('', 'F12', function ()
     hs.eventtap.keyStroke({'cmd', 'alt'}, "i")
   end
 end)
-
---
--- local wf=hs.window.filter
--- wf_brave = wf.new{'Brave'}
--- -- handle vim-like keybindings in brave
--- wf_brave:subscribe(wf.windowFocused, function()
---   hs.hotkey.bind({}, 'j', function()
---     hs.eventtap.keyStroke({}, "down")
---   end)
--- end)
--- wf_brave:unsubscribe(wf.windowUnfocused, function()
---   hs.hotkey:delete()
--- end)
 
 
 -- window manipulation

@@ -57,10 +57,11 @@ utils.toggleApp = function (_app)
 
   if not app then
     -- FIXME: this may not be working properly.. creating extraneous PIDs?
-    utils.log.df('[apps] launchOrFocusByBundleID(%s) | not app 1', _app)
+    utils.log.df('[apps] launchOrFocusByBundleID(%s) (not PID-managed app?)', _app)
     hs.application.launchOrFocusByBundleID(_app)
   else
     local mainWin = app:mainWindow()
+    utils.log.df('[apps] mainWin: %s', mainWin)
     if mainWin then
       if mainWin == hs.window.focusedWindow() then
         utils.log.df('[apps] hiding %s', app:bundleID())
@@ -72,9 +73,14 @@ utils.toggleApp = function (_app)
         mainWin:focus()
       end
     else
-      -- assumes there is no "mainWindow" for the application in question
+      -- assumes there is no "mainWindow" for the application in question, probably iTerm2
       utils.log.df('[apps] launchOrFocusByBundleID(%s)', app)
-      hs.application.launchOrFocusByBundleID(app:bundleID())
+      if (app:focusedWindow() == hs.window.focusedWindow()) then
+        app:hide()
+      else
+        app:unhide()
+        hs.application.launchOrFocusByBundleID(app:bundleID())
+      end
     end
   end
 end

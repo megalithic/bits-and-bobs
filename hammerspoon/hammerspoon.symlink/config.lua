@@ -40,7 +40,7 @@ config.grid = {
   bottomLeft = '0,6 6x6',
   fullScreen = '0,0 12x12',
   centeredBig = '3,3 6x6',
-  centeredSmall = '4,4 4x4',
+  centeredSmall = '4,4 4x4'
 }
 
 -- LAYOUT SETUP
@@ -53,8 +53,7 @@ config.layout = {
 
   _after_ = (function()
     utils.activate('com.google.Chrome')
-    -- Make sure  iTerm in front of everything.
-    utils.activate('com.googlecode.iterm2')
+    utils.activate('com.googlecode.iterm2') -- Make sure iTerm in front of everything.
   end),
 
   ['com.kapeli.dashdoc'] = (function(window, forceScreenCount)
@@ -83,6 +82,10 @@ config.layout = {
     local count = forceScreenCount or screenCount
     grid.set(window, '8,0 4x8', config.secondaryDisplay(count))
   end),
+  ['com.sajidanwar.Radiant-Player'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, '8,0 4x8', config.secondaryDisplay(count))
+  end),
 
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
@@ -96,6 +99,10 @@ config.layout = {
   ['com.agilebits.onepassword4'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.centeredBig, config.primaryDisplay(count))
+  end),
+  ['2BUA8C4S2C.com.agilebits.onepassword4-helper'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, config.grid.centeredSmall, config.secondaryDisplay(count))
   end),
 
   ['com.google.Chrome'] = (function(window, forceScreenCount)
