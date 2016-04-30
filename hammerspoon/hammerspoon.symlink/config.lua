@@ -39,6 +39,7 @@ config.grid = {
   bottomRightThird = '8,8 4x4',
   bottomLeft = '0,6 6x6',
   fullScreen = '0,0 12x12',
+  centeredHuge = '1,1 10x10',
   centeredBig = '3,3 6x6',
   centeredSmall = '4,4 4x4'
 }
@@ -110,7 +111,12 @@ config.layout = {
     if count == 1 then
       grid.set(window, config.getGridLocation(window, count), config.primaryDisplay(count))
     else
-      grid.set(window, config.getGridLocation(window, count), config.secondaryDisplay(count))
+      if (window:title() == 'Postman') then
+        grid.set(window, config.grid.centeredHuge, config.secondaryDisplay(count))
+      else
+        grid.set(window, config.getGridLocation(window, count), config.secondaryDisplay(count))
+      end
+
     end
   end),
 
