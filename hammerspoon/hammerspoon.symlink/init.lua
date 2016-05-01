@@ -22,17 +22,16 @@ cmdAlt = {'cmd', 'alt'}
 cmdShift = {'cmd', 'shift'}
 cmdCtrl = {'cmd', 'ctrl'}
 ctrlAlt = {'ctrl', 'alt'}
-hyper = {'cmd', 'ctrl', 'shift'}
+mashShift = {'cmd', 'ctrl', 'shift'}
 mash = {'cmd', 'alt', 'ctrl'}
-mashShift = {'cmd', 'alt', 'ctrl', 'shift' }
+hyper = {'cmd', 'alt', 'ctrl', 'shift' }
 
 
 -- key bindings
 -------------------------------------------------------------------------------
 
--- misc
---
-hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'L', function()
+-- :: misc
+hs.hotkey.bind(mashShift, 'L', function()
   hs.caffeinate.startScreensaver()
 end)
 hs.hotkey.bind(ctrlAlt, 'r', function() hs.toggleConsole() end)
@@ -50,20 +49,20 @@ local mediaApp = {
   bundleID='google-play-music-desktop-player'
 }
 -- insert key on ducky shine 3
-hs.hotkey.bind('ctrl', 114, function() hs.eventtap.event.newSystemKeyEvent('PREVIOUS', false) end)
+hs.hotkey.bind('ctrl', 114, function() hs.eventtap.event.newSystemKeyEvent('PREVIOUS', true):post() end)
 -- home key on ducky shine 3
-hs.hotkey.bind('ctrl', 115, function() hs.eventtap.event.newSystemKeyEvent('PLAY', false) end)
+hs.hotkey.bind('ctrl', 115, function() hs.eventtap.event.newSystemKeyEvent('PLAY', true):post() end)
 -- pageup key on ducky shine 3
-hs.hotkey.bind('ctrl', 116, function() hs.eventtap.event.newSystemKeyEvent('NEXT', false) end)
+hs.hotkey.bind('ctrl', 116, function() hs.eventtap.event.newSystemKeyEvent('NEXT', true):post() end)
 
 -- :: apps
 hs.hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
-hs.hotkey.bind({'cmd'}, '`', function() utils.toggleApp('com.google.Chrome') end)
-hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
-hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggleApp('tweetbot') end)
-hs.hotkey.bind({'cmd'}, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
+hs.hotkey.bind('cmd', '`', function() utils.toggleApp('com.google.Chrome') end)
+hs.hotkey.bind('cmd', 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
+hs.hotkey.bind('cmd', 'f5', function() utils.toggleApp('tweetbot') end)
+hs.hotkey.bind('cmd', 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
 hs.hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('com.sajidanwar.Radiant-Player') end)
-hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggleApp('com.apple.iChat') end)
+hs.hotkey.bind('cmd', 'shift', 'M', function() utils.toggleApp('com.apple.iChat') end)
 
 -- https://github.com/cmsj/hammerspoon-config/blob/master/init.lua#L616
 hs.hotkey.bind(cmdCtrl, 'n', function() hs.task.new("/usr/bin/open", nil, {os.getenv("HOME")}):start() end)
@@ -73,7 +72,7 @@ hs.hotkey.bind(cmdCtrl, 'n', function() hs.task.new("/usr/bin/open", nil, {os.ge
 hs.hotkey.bind('', 'F12', function ()
   local win = hs.window.focusedWindow()
   if win ~= nil and win:application():bundleID() == 'com.google.Chrome' then
-    hs.eventtap.keyStroke({'cmd', 'alt'}, "i")
+    hs.eventtap.keyStroke(cmdAlt, "i")
   end
 end)
 
