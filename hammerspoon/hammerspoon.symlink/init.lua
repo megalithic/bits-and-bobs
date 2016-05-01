@@ -5,18 +5,30 @@
 -- :: requires / imports
 local wm = require 'wm'
 local utils = require 'utils'
-local layout = require 'layout'
+-- local layout = require 'layout'
+local config = require 'config'
 keys = require 'keys'
 
--- :: locals
-local screenCount = #hs.screen.allScreens()
+-- :: apis
 local wf = hs.window.filter
+
+-- :: locals
+local wf = hs.window.filter
+local screenCount = #hs.screen.allScreens()
 local windowBorder = nil
+local frameCache = {}
+local primary = hs.screen:primaryScreen()
+local secondary = primary:previous()
 
 -- :: globals
 basePath = os.getenv('HOME') .. '/.hammerspoon/'
 imagePath = basePath .. 'assets/'
 hostname = hs.host.localizedName()
+screens = {
+  laptop = 'Built-in Retina Display',
+  alpha = primary,
+  omega = secondary
+}
 
 -- :: watchers
 local configFileWatcher = nil
@@ -25,11 +37,7 @@ local screenWatcher = nil
 local windowWatcher = nil
 
 -- :: logging
-local log = hs.logger.new('replicant', 'debug')
--- hs.hotkey.setLogLevel("verbose")
--- hs.windowfilter.setLogLevel('verbose')
--- hs.windowwatcher.setLogLevel('verbose')
--- hs.delayed.setLogLevel('verbose')
+local log = hs.logger.new('--/ replicant /==', 'debug')
 
 -- :: settings
 hs.ipc.cliInstall()
@@ -46,74 +54,30 @@ mashShift = {'cmd', 'alt', 'ctrl', 'shift' }
 
 
 -- watcher handlers
--- -------------------------------------------------------------------------{{{
+-- -------------------------------------------------------------------------
 
 -- :: application watcher
 function handleApplicationWatcher (appName, eventType, appObject)
+  log.df("handleApplicationWatcher(%s, %s, %s)", appName, eventType, appObject)
+
   if (eventType == hs.application.watcher.activated) then
-    -- FIXME: do something better to handle specific app callbacks
-    --  see applyLayout() below
-    if (appName == "Finder") then
-      -- Bring all Finder windows forward when one gets activated
-      appObject:selectMenuItem({"Window", "Bring All to Front"})
-    elseif (appName == "iTunes") then
-      -- Ensure the MiniPlayer window is visible and correctly placed, since it likes to hide an awful lot
-      state = appObject:findMenuItem({"Window", "MiniPlayer"})
-      if state and not state["ticked"] then
-          appObject:selectMenuItem({"Window", "MiniPlayer"})
-      end
-      _animationDuration = hs.window.animationDuration
-      hs.window.animationDuration = 0
-      hs.layout.apply({ iTunesMiniPlayerLayout })
-      hs.window.animationDuration = _animationDuration
-    end
+    -- Original code that handled this eventType:
+    -- https://github.com/cmsj/hammerspoon-config/blob/master/init.lua#L257
   elseif (eventType == hs.application.watcher.launching) then
-    if (appName == "Call of Duty: Modern Warfare 3") then
-      print("CoD Starting")
-      hs.itunes.pause()
-      local tbDisplay = hs.screen.findByName("Thunderbolt Display")
-      if (tbDisplay) then
-        tbDisplay:setPrimary()
-      end
-    end
+    -- Original code that handled this eventType:
+    -- https://github.com/cmsj/hammerspoon-config/blob/master/init.lua#L272
   elseif (eventType == hs.application.watcher.terminated) then
-    if (appName == "Call of Duty: Modern Warfare 3") then
-      print("CoD Stopping")
-      local mbDisplay = hs.screen.findByName("Color LCD")
-      if (mbDisplay) then
-        mbDisplay:setPrimary()
-      end
-      if hs.screen.findByName("Thunderbolt Display") then
-        hs.layout.apply(dual_display)
-      end
-    end
+    -- Original code that handled this eventType:
+    -- https://github.com/cmsj/hammerspoon-config/blob/master/init.lua#L281
   end
-end
-
-function applyLayout (forceScreenCount)
-  config.layout._before_()
-
-  for bundleID, callback in pairs(config.layout) do
-    local application = bundleID ~= 'default' or hs.application.get(bundleID)
-    if application then
-      local windows = application:visibleWindows()
-      for _, window in pairs(windows) do
-        if utils.canManageWindow(window) then
-          callback(window, forceScreenCount)
-        end
-      end
-    end
-  end
-
-  config.layout._after_()
 end
 
 
 -- :: screen watcher
-function screensChangedCallback ()
-  print("screensChangedCallback")
+function handleScreenWatcher ()
+  log.df("handleScreenWatcher()")
 
---[=====[
+--[[
   -- from csmj config:
   newNumberOfScreens = #hs.screen.allScreens()
   -- FIXME: This is awful if we swap primary screen to the external display.
@@ -126,14 +90,14 @@ function screensChangedCallback ()
     end
   end
   lastNumberOfScreens = newNumberOfScreens
---]=====]
+--]]
 
   -- Make sure that something noteworthy (display count) actually changed.
   --  We no longer check geometry because we were seeing spurious events.
   local screens = hs.screen.allScreens()
   if not (#screens == screenCount) then
     screenCount = #screens
-    config.activateLayout(screenCount)
+    activateLayout(screenCount)
   end
 end
 
@@ -157,11 +121,9 @@ function handleConfigFileWatcher (files)
   end
 end
 
--- }}}
-
 
 -- window filter subscriptions
-----------------------------------------------------------------------------{{{
+----------------------------------------------------------------------------
 
 allWindows = wf.new(nil, 'allWindows')
 allWindows:subscribe(wf.windowCreated, function() drawBorder() end)
@@ -171,11 +133,9 @@ allWindows:subscribe(wf.windowUnfocused, function() drawBorder() end)
 allWindows:subscribe(wf.windowOnScreen, function() drawBorder() end)
 allWindows:subscribe(wf.windowNotOnScreen, function() drawBorder() end)
 
--- {{{
-
 
 -- window filter handlers
-----------------------------------------------------------------------------{{{
+----------------------------------------------------------------------------
 
 function drawBorder ()
   -- clean up existing borders
@@ -203,11 +163,72 @@ function drawBorder ()
   windowBorder:show()
 end
 
--- {{{
+
+-- layout handlers
+----------------------------------------------------------------------------
+
+function applyLayout (forceScreenCount)
+  config.layout._before_()
+
+  for bundleID, callback in pairs(config.layout) do
+    local application = bundleID ~= 'default' or hs.application.get(bundleID)
+    if application then
+      local windows = application:visibleWindows()
+      for _, window in pairs(windows) do
+        if utils.canManageWindow(window) then
+          callback(window, forceScreenCount)
+        end
+      end
+    end
+  end
+
+  config.layout._after_()
+end
+
+
+-- layouts
+----------------------------------------------------------------------------
+--   Format reminder:
+--     {"App name", "Window name", "Display Name", "unitrect", "framerect", "fullframerect"},
+
+local custom = {
+  centerSmall = {"iTunes", "MiniPlayer", display_imac, nil, nil, hs.geometry.rect(0, -48, 400, 48)},
+  centerBig = {},
+  bottomLeftQuarter = {},
+  bottomLeftHalf = {},
+  bottomRightQuarter = {},
+  bottomRightHalf = {},
+  topLeftQuarter = {},
+  topLeftHalf = {},
+  topRightQuarter = {},
+  topRightHalf = {},
+}
+
+local laptop = {
+  {"iTerm2",                            nil,          screens.laptop, hs.layout.maximized, nil, nil},
+  {"Google Chrome",                     nil,          screens.laptop, hs.layout.maximized, nil, nil},
+  {"Nylas N1",                          nil,          screens.laptop, hs.layout.left50, nil, nil},
+  {"Slack",                             nil,          screens.laptop, hs.layout.right50, nil, nil},
+  {"1Password",                         nil,          screens.laptop, hs.layout.maximized, nil, nil},
+  {"Fantastical 2",                     nil,          screens.laptop, hs.layout.maximized, nil, nil},
+  {"Messages",                          nil,          screens.laptop, hs.layout.maximized, nil, nil},
+  {"Google Play Music Desktop Player",  nil,          screens.laptop, hs.layout.maximized, nil, nil},
+}
+
+local desktop = {
+  {"iTerm2",                            nil,          screens.alpha, hs.layout.maximized, nil, nil},
+  {"Google Chrome",                     nil,          screens.omega, hs.layout.maximized, nil, nil},
+  {"Nylas N1",                          nil,          screens.omega, hs.layout.left50, nil, nil},
+  {"Slack",                             nil,          screens.omega, hs.layout.right50, nil, nil},
+  {"1Password",                         nil,          screens.alpha, hs.geometry.unitrect(0, 0.5, 3/8, 0.5), nil, nil},
+  {"Fantastical 2",                     nil,          screens.alpha, hs.geometry.unitrect(0.75, 0, 0.25, 0.95), nil, nil},
+  {"Messages",                          nil,          screens.omega, hs.geometry.unitrect(3/8, 0.5, 3/8, 0.5), nil, nil},
+  {"Google Play Music Desktop Player",  nil,          screens.omega, hs.geometry.unitrect(0, 0.25, 3/8, 0.25), nil, nil},
+}
 
 
 -- key bindings
-----------------------------------------------------------------------------{{{
+----------------------------------------------------------------------------
 
 -- :: misc
 hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'L', function()
@@ -227,19 +248,23 @@ local mediaApp = {
   bundleID='google-play-music-desktop-player'
 }
 -- insert key on ducky shine 3
--- hs.hotkey.bind('ctrl', 114, function() hs.eventtap.event.newSystemKeyEvent('PREVIOUS') end)
+hs.hotkey.bind('ctrl', 114, function() hs.eventtap.event.newSystemKeyEvent('PREVIOUS', true):post() end)
 -- home key on ducky shine 3
--- hs.hotkey.bind('ctrl', 115, function() hs.eventtap.event.newSystemKeyEvent('PLAY') end)
+hs.hotkey.bind('ctrl', 115, function() hs.eventtap.event.newSystemKeyEvent('PLAY', true):post() end)
 -- pageup key on ducky shine 3
--- hs.hotkey.bind('ctrl', 116, function() hs.eventtap.event.newSystemKeyEvent('NEXT') end)
+hs.hotkey.bind('ctrl', 116, function() hs.eventtap.event.newSystemKeyEvent('NEXT', true):post() end)
 
 -- :: apps
-hs.hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
+hs.hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hs.hotkey.bind({'cmd'}, '`', function() utils.toggleApp('com.google.Chrome') end)
 hs.hotkey.bind({'cmd'}, 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
 hs.hotkey.bind({'cmd'}, 'f5', function() utils.toggleApp('tweetbot') end)
 hs.hotkey.bind({'cmd'}, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
+hs.hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('com.sajidanwar.Radiant-Player') end)
 hs.hotkey.bind({'cmd', 'shift'}, 'M', function() utils.toggleApp('com.apple.iChat') end)
+
+-- https://github.com/cmsj/hammerspoon-config/blob/master/init.lua#L616
+hs.hotkey.bind(cmdCtrl, 'n', function() hs.task.new("/usr/bin/open", nil, {os.getenv("HOME")}):start() end)
 
 -- :: sub-app
 -- / Chrome Dev Tools
@@ -250,11 +275,9 @@ hs.hotkey.bind('', 'F12', function ()
   end
 end)
 
--- }}}
-
 
 -- window manipulation
-----------------------------------------------------------------------------{{{
+----------------------------------------------------------------------------
 --
 hs.hotkey.bind(cmdCtrl, 'h', utils.chain({
   wm.config.grid.leftHalf,
@@ -339,11 +362,9 @@ hs.hotkey.bind(cmdCtrl, 'f2', function ()
   wm.config.activateLayout(2)
   end)
 
--- }}}
-
 
 -- watcher starters
--- -------------------------------------------------------------------------{{{
+-- -------------------------------------------------------------------------
 
 -- :: applications
 applicationWatcher = hs.application.watcher.new(handleApplicationWatcher)
@@ -357,15 +378,12 @@ configFileWatcher:start()
 screenWatcher = hs.screen.watcher.new(handleScreenWatcher)
 screenWatcher:start()
 
--- }}}
 
 -- misc
--- -------------------------------------------------------------------------{{{
+-- -------------------------------------------------------------------------
 
 print("++ Running: "..hs.processInfo.bundlePath)
 print("++ Accessibility: "..tostring(hs.accessibilityState()))
 
 collectgarbage("setstepmul", 1000)
 collectgarbage("setpause", 1)
-
--- }}

@@ -3,7 +3,7 @@ local screenCount = #hs.screen.allScreens()
 local grid = hs.grid
 local utils = require 'utils'
 grid.setGrid("12x12")
-grid.setMargins({w = 3, h = 4})
+grid.setMargins({w = 2, h = 2})
 hs.window.animationDuration = 0 -- 0 to disable animations
 hs.window.setShadows(false)
 
@@ -39,8 +39,9 @@ config.grid = {
   bottomRightThird = '8,8 4x4',
   bottomLeft = '0,6 6x6',
   fullScreen = '0,0 12x12',
+  centeredHuge = '1,1 10x10',
   centeredBig = '3,3 6x6',
-  centeredSmall = '4,4 4x4',
+  centeredSmall = '4,4 4x4'
 }
 
 -- LAYOUT SETUP
@@ -53,8 +54,7 @@ config.layout = {
 
   _after_ = (function()
     utils.activate('com.google.Chrome')
-    -- Make sure  iTerm in front of everything.
-    utils.activate('com.googlecode.iterm2')
+    utils.activate('com.googlecode.iterm2') -- Make sure iTerm in front of everything.
   end),
 
   ['com.kapeli.dashdoc'] = (function(window, forceScreenCount)
@@ -64,7 +64,7 @@ config.layout = {
   ['com.tinyspeck.slackmacgap'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.rightThird)
+      grid.set(window, config.grid.rightHalf)
     else
       grid.set(window, config.grid.rightThird, config.secondaryDisplay(count))
     end
@@ -73,13 +73,17 @@ config.layout = {
   ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.fullScreen)
+      grid.set(window, config.grid.leftHalf)
     else
       grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
     end
   end),
 
   ['google-play-music-desktop-player'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, '8,0 4x8', config.secondaryDisplay(count))
+  end),
+  ['com.sajidanwar.Radiant-Player'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, '8,0 4x8', config.secondaryDisplay(count))
   end),
@@ -93,18 +97,13 @@ config.layout = {
     end
   end),
 
-  ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.leftTwoThirds, config.primaryDisplay(count))
-    else
-      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
-    end
-  end),
-
   ['com.agilebits.onepassword4'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.centeredBig, config.primaryDisplay(count))
+  end),
+  ['2BUA8C4S2C.com.agilebits.onepassword4-helper'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, config.grid.centeredSmall, config.secondaryDisplay(count))
   end),
 
   ['com.google.Chrome'] = (function(window, forceScreenCount)
@@ -112,7 +111,12 @@ config.layout = {
     if count == 1 then
       grid.set(window, config.getGridLocation(window, count), config.primaryDisplay(count))
     else
-      grid.set(window, config.getGridLocation(window, count), config.secondaryDisplay(count))
+      if (window:title() == 'Postman') then
+        grid.set(window, config.grid.centeredHuge, config.secondaryDisplay(count))
+      else
+        grid.set(window, config.getGridLocation(window, count), config.secondaryDisplay(count))
+      end
+
     end
   end),
 

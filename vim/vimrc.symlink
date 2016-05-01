@@ -69,6 +69,7 @@ function! LoadPlugs()
 
   "" Markdown
   Plug 'vim-pandoc/vim-pandoc-syntax'
+  Plug 'nelstrom/vim-markdown-folding'
 
   "" Ruby / Rails
   Plug 'vim-ruby/vim-ruby'
@@ -103,12 +104,12 @@ function! LoadPlugs()
   Plug 'EinfachToll/DidYouMean'
   Plug 'ervandew/supertab'
   Plug 'shougo/deoplete.nvim'
-  " Plug 'Konfekt/FastFold'
+  Plug 'Konfekt/FastFold'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'FelikZ/ctrlp-py-matcher'
   Plug 'mileszs/ack.vim'
   Plug 'kopischke/vim-fetch'
-  " Plug 'kana/vim-operator-user'
+  Plug 'kana/vim-operator-user'
   " provide ai and ii for indent blocks
   " provide al and il for current line
   " provide a_ and i_ for underscores
@@ -117,6 +118,7 @@ function! LoadPlugs()
     \| Plug 'kana/vim-textobj-indent'
     \| Plug 'kana/vim-textobj-line'
     \| Plug 'mattn/vim-textobj-url'
+    \| Plug 'kana/vim-textobj-fold'
 
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
@@ -235,6 +237,16 @@ set noswapfile "override because i hate swap files
 
 set sessionoptions-=options " Do not save settings and mappings to sessions
 
+""""""" Folding
+set foldmethod=indent   "fold based on indent
+set foldnestmax=5      "deepest fold is 5 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1
+set foldlevelstart=0
+let ruby_fold = 1
+let javascript_fold = 1
+set fcs=fold:-
+
 """"""" Indentions / Tabs
 set smartindent
 set cindent
@@ -288,7 +300,6 @@ set ttimeout
 set ttimeoutlen=10
 
 """"""" Misc (Needs documentation / understanding)
-set fcs=fold:-
 set matchtime=3
 set showbreak=↪
 set report=0 " Show all changes.
@@ -301,12 +312,12 @@ set shortmess=atI " don't show the intro message when starting vim.
 set matchpairs+=<:>
 let loaded_matchparen = 0 " this turns on pair matching highlight (is slow witht his on)
 set virtualedit+=block
-set nofoldenable " dont fold by default
 set magic
 set mat=2
 set re=1
 set tm=500
 set dictionary+=/usr/share/dict/words
+set spellfile=~/.vim/spell/en.utf-8.add
 
 if has("clipboard")                   " If the feature is available
   set clipboard=unnamed               " copy to the system clipboard
@@ -339,7 +350,6 @@ set secure " disable unsafe commands in local .vimrc files
 " -----------------------------------------------------------------------------
 "
 """"""" Why do I even have these settings? Please clean.
-let ruby_fold = 0
 
 """"""" golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
@@ -349,7 +359,7 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 """"""" vim-airline
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline_theme='distinguished'
+let g:airline_theme='base16'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -384,26 +394,40 @@ let g:airline_mode_map = {
     \ }
 
 """"""" neomake
-let g:neomake_javascript_standard_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '  %f:%l:%c: %m'
-    \ }
-let g:neomake_jsx_standard_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '  %f:%l:%c: %m'
-    \ }
-let g:neomake_javascript_enabled_makers = ['standard']
-let g:neomake_jsx_enabled_makers = ['standard']
+" -- Settings derived from:
+" -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
+" --
+let g:neomake_airline = 1
 let g:neomake_verbose = 0
-let g:neomake_warning_sign = {
-    \ 'text': '◦',
-    \ 'texthl': 'WarningMsg',
-    \ }
-let g:neomake_error_sign = {
-    \ 'text': '☓',
-    \ 'texthl': 'ErrorMsg',
-    \ }
 let g:neomake_serialize = 1
+
+let g:neomake_error_sign = {
+  \ 'text': '☓',
+  \ 'texthl': 'Error',
+  \ }
+
+let g:neomake_warning_sign = {
+  \ 'text': '◦',
+  \ 'texthl': 'Error',
+  \ }
+
+let g:neomake_scss_scsslint_args = ['-c', globpath(&rtp, 'misc/scss-lint.yml')]
+
+let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_javascript_standard_maker = {
+  \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+  \ 'errorformat': '  %f:%l:%c: %m'
+  \ }
+
+let g:neomake_jsx_enabled_makers = ['standard']
+let g:neomake_jsx_standard_maker =
+  \ g:neomake_javascript_standard_maker
+
+" Check for lint errors on write
+au BufWritePost *.js silent! Neomake standard|redraw
+au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
+" autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
+" autocmd! BufWritePost * Neomake
 
 """"""" rainbow
 let g:rainbow_conf = {
@@ -438,7 +462,6 @@ let g:vim_markdown_frontmatter=1
 """"""" vim-javascript-syntax
 let g:JSHintHighlightErrorLine = 1
 let javascript_enable_domhtmlcss = 1
-let javascript_fold = 0
 let loaded_matchit = 1
 let g:js_indent_log = 1
 let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angular'
@@ -665,10 +688,6 @@ augroup END
 " Delete trailing whitespace on write
 autocmd BufWrite * silent call DeleteTrailingWS()
 
-" Check for lint errors on open & write
-autocmd BufWritePost *.js silent! Neomake standard|redraw
-" autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
-
 augroup ColorColumnGroup
   " Color Column (only on insert)
   if exists("&colorcolumn")
@@ -706,99 +725,108 @@ augroup END
 " =============================================================================
 " Filetypes / Syntax #ftypes
 " -----------------------------------------------------------------------------
-" Markdown {{{
-augroup ft_markdown
+augroup ft_javascript
   au!
-
-  au FileType markdown set tw=80
-  au FileType text,markdown let b:vcm_tab_complete = 'dict'
-
-  au BufNewFile,BufRead *.m*down setlocal filetype=markdown foldlevel=1
-
-  " Markdown turn off lazyredraw
-  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
-  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} let b:deoplete_disable_auto_complete=1
-augroup END
-" }}}
-
-" Vim {{{
-augroup ft_vim
-  au!
-
-  au FileType vim setlocal foldmethod=marker keywordprg=:help
-  au FileType help setlocal textwidth=78
-  au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
-augroup END
-" }}}
-
-" Sass/Scss {{{
-augroup ft_sass
-  au!
-
-  au BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
-  au BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
-  au FileType sass,scss set iskeyword+=-
-  au FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
-augroup END
-" }}}
-
-" JavaScript {{{
-augroup ft_js
-  au!
-
-
   au BufNewFile,BufRead,BufReadPost *.js set filetype=javascript.jsx
+  au BufNewFile,BufRead,BufReadPost *.json set filetype=json
   au FileType javascript,javascript.jsx let b:vcm_tab_complete = 'omni'
 
   " make `gf` search for .js files
   au FileType javascript,javascript.jsx setlocal suffixesadd=.js
+  au FileType javascript,javascript.jsx setlocal suffixesadd=.jsx
   au FileType javascript,javascript.jsx setlocal path+=js,scripts
 
-  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
-  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
-  if exists('g:plugs["tern_for_vim"]')
-    au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
-  endif
+  " Expands 'class=' to 'className='
+  au FileType javascript.jsx iabbrev class== className=
 augroup END
-" }}}
 
-" Unsorted Filetypes {{{
-augroup filetypes
-  " clear commands before resetting
+augroup javascript_shortcuts
+  " https://github.com/rstacruz/vimfiles/blob/master/plugin/z-javascript-functions.vim
   au!
+  au FileType javascript call <SID>set_js_shortcuts()
+augroup END
 
-  " filetype
-  au BufNewFile,BufRead,BufReadPost *.json set filetype=json
-  au BufNewFile,BufRead,BufReadPost *.slim set filetype=slim
-  au BufNewFile,BufRead,BufReadPost *.html set filetype=haml
-  au BufNewFile,BufRead */ssh/config  setf sshconfig
-  au BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
+function! s:set_js_shortcuts()
+  inoremap <buffer> @. this.
 
-  " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
-  au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
-  au FileType ruby let b:vcm_tab_complete = "tags"
+  imap <buffer> fn<CR> function () {<CR>
+  imap <buffer> =><CR> => {<CR>
+  imap <buffer> -><CR> () => {<CR>
+  imap <buffer> clog( console.log(
+  imap <buffer> cerr( console.error(
+  imap <buffer> cer( console.error(
+  imap <buffer> gebid( document.getElementById(
+  imap <buffer> rcc( React.createClass(
+  imap <buffer> rcc<CR> React.createClass({<CR>
+endfunction
 
+augroup ft_scss
+  au!
   " make sure `complete` works as expected for CSS class names whithout
   " messing with motions (eg. '.foo-bar__baz') and we make sure all
   " delimiters (_,-,$,%,.) are treated as word separators outside insert mode
   au InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
   au InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
 
-  " Fix slow Ruby editing
-  " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
-  au Filetype ruby setlocal foldmethod=manual
+  " https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/css3-syntax.vim
+  au FileType css,css.scss,sass,scss setlocal iskeyword+=-
+  au FileType css,css.scss,sass,scss setlocal formatoptions+=croql
+  au BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
+  au BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
+augroup END
 
+augroup ft_markdown
+  au!
+  " Markdown turn off lazyredraw
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} let b:deoplete_disable_auto_complete=1
+  au FileType markdown set tw=80
+  au FileType text,markdown let b:vcm_tab_complete = 'dict'
+augroup END
+
+augroup ft_ruby
+  au!
+  au FileType ruby let b:vcm_tab_complete = "tags"
+augroup END
+
+augroup ft_haml
+  au!
+  au BufNewFile,BufRead,BufReadPost *.html set filetype=haml
+augroup END
+
+augroup ft_ssh
+  au!
+  au BufNewFile,BufRead */ssh/config  setf sshconfig
+  au BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
+augroup END
+
+augroup ft_completions
   """"""" omnicompletions
   " Extreme info on omnicompletions, must read more:
   " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
   "
   au FileType * setlocal omnifunc=syntaxcomplete#Complete
+  au FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
   au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   au FileType python setlocal omnifunc=pythoncomplete#Complete
   au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   au FileType ruby setlocal omnifunc=rubycomplete#Complete
+  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
+  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
+  if exists('g:plugs["tern_for_vim"]')
+    au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
+  endif
 augroup END
-" }}}
+
+augroup ft_misc
+  au!
+  " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
+  au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+
+  " Fix slow Ruby editing
+  " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
+  au Filetype ruby setlocal foldmethod=manual
+augroup END
 
 
 " =============================================================================
@@ -1092,6 +1120,18 @@ nnoremap k gk
 
 " run Dash (on MAC) to search for word under cursor
 nmap <silent> <leader>d <Plug>DashSearch
+
+" Handy code-folding bindings
+" - `za` toggles current fold open/close
+" - `zc` closes current fold; or parent, if current is already closed
+" - `zj` navigates down to top of next fold
+" - `zk` navigates up to bottom of previous fold
+"
+" Refs
+" # http://vimcasts.org/episodes/how-to-fold/
+" # https://www.linux.com/learn/vim-tips-folding-fun
+" # sjl's fold setup: https://bitbucket.org/sjl/dotfiles/src/9bead8a9b4350c57f8a24a8119607a83a9592afe/vim/vimrc?at=default&fileviewer=file-view-default
+" nnoremap <Space> za
 
 " =============================================================================
 " Abbreviations #abbrev
