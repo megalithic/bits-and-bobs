@@ -239,9 +239,11 @@ alias rebase="git pull --rebase origin master"
 alias grm="git status | grep deleted | awk '{\$1=\$2=\"\"; print \$0}' | \
            perl -pe 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
 
+
 # REACT / REACT-NATIVE
 # -----------------------------------------------------------------------------
 alias rn='react-native'
+
 
 # RUBY/RAILS
 # -----------------------------------------------------------------------------
@@ -262,11 +264,15 @@ alias rsp="bundle exec rails server -p"
 alias rc="bundle exec rails console"
 alias bec=rc
 
+
+# MISC / RANDOM
+# -----------------------------------------------------------------------------
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip_wifi="ipconfig getifaddr en0"
 alias localip_display="ipconfig getifaddr en2"
 alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
+alias findlan="nmap -sP 192.168.1.0/24"
 
 # Enhanced WHOIS lookups
 alias whois="whois -h whois-servers.net"
@@ -289,3 +295,6 @@ alias showdesk="defaults write com.apple.finder CreateDesktop true; killall Find
 
 # enable yubikey and ssh
 alias remote="osascript -e 'tell application \"yubiswitch\" to KeyOn' && ssh remote.github.com -t gh-screen && osascript -e 'tell application \"yubiswitch\" to KeyOff' "
+
+# edit home-assistant (hass) config on rpi2
+alias hassconfig="nvim scp://pi@ha//var/opt/homeassistant/configuration.yaml"

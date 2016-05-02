@@ -73,7 +73,7 @@ brew 'tmate'
 brew 'urlview'
 brew 'tree'
 brew 'vim', args: ['with-lua', 'with-perl', 'with-python3', 'with-python', 'with-ruby', 'override-system-vi', 'with-luajit', 'override-system-vim', 'with-clientserver']
-brew 'weechat', args: ['with-ruby', 'with-python', 'with-perl']
+brew 'weechat', args: ['with-ruby', 'with-python', 'with-perl', 'with-lua', 'with-aspell', 'with-javascript', 'with-curl', 'with-guile']
 brew 'wget', args: ['enable-iri']
 brew 'zsh'
 brew 'zsh-completions'

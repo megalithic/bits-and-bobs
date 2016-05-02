@@ -2,11 +2,11 @@ export SUDO_EDITOR='nvim'
 export EDITOR='nvim'
 export VISUAL='nvim'
 export ZDOTDIR=$HOME
+export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export BREW_PATH="$(brew --prefix)"
 export BREW_CASK_PATH="/opt/homebrew-cask/Caskroom"
 export NVIMRUNTIME='/usr/local/share/nvim/runtime'
-export NVM_DIR="$HOME/.nvm"
 # export NVIM_PYTHON_LOG_FILE='~/tmp/nvim_python.log'
 # export PYTHONPATH="$BREW_PATH/bin/python3.5"
 export BROWSER=chrome
