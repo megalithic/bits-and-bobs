@@ -22,8 +22,12 @@ unbind C-space
 unbind space
 unbind C-f
 unbind f
+unbind up
+unbind down
+unbind left
+unbind right
 
-# prefix like it's gnu-screen
+# Prefix like it's gnu-screen
 set -g prefix C-a
 set -g prefix C-a
 bind C-a send-prefix
@@ -43,6 +47,12 @@ bind -r C-x kill-pane
 bind -r C-q kill-pane
 bind p previous-window
 bind -r C-Space last-window
+
+# Resizing panes
+bind-key -n C-Up resize-pane -U 15
+bind-key -n C-Down resize-pane -D 15
+bind-key -n C-Left resize-pane -L 25
+bind-key -n C-Right resize-pane -R 25
 
 # Vi-like movements between panes
 bind h select-pane -L

@@ -273,7 +273,7 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip_wifi="ipconfig getifaddr en0"
 alias localip_display="ipconfig getifaddr en2"
 alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
-alias findlan="nmap -sP 192.168.1.0/24"
+alias findlan="sudo nmap -sP -n 192.168.1.0/24"
 
 # Enhanced WHOIS lookups
 alias whois="whois -h whois-servers.net"
