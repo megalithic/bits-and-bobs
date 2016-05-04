@@ -88,6 +88,7 @@ alias py="python"
 # (NEO)VIM
 # -----------------------------------------------------------------------------
 alias updatenvim="brew update; brew reinstall --HEAD neovim"
+alias nvimupdate=updatenvim
 alias nv="nvim"
 alias vim="nvim"
 alias im="nvim"
@@ -298,3 +299,5 @@ alias remote="osascript -e 'tell application \"yubiswitch\" to KeyOn' && ssh rem
 
 # edit home-assistant (hass) config on rpi2
 alias hassconfig="nvim scp://pi@ha//var/opt/homeassistant/configuration.yaml"
+alias homeconfig=hassconfig
+alias haconfig=hassconfig

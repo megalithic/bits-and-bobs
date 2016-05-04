@@ -189,7 +189,7 @@ brew install macvim --with-lua --with-perl --with-python3 --with-python --with-r
 require_brew link macvim
 
 require_brew watch
-brew install weechat --with-ruby --with-python --with-perl
+brew install weechat --with-ruby --with-python --with-perl --with-lua --with-javascript --with-curl --with-guile --with-aspell
 brew install wget --enable-iri
 require_brew xz
 require_brew zsh
