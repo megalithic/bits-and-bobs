@@ -89,6 +89,10 @@ utils.windowsForApp = function (app)
   return app:allWindows()
 end
 
+utils.validWindowsForApp = function (app)
+  return app:allWindows()
+end
+
 -- Returns the number of standard, non-minimized windows in the application.
 --
 -- (For Chrome, which has two windows per visible window on screen, but only one
@@ -97,8 +101,7 @@ utils.windowCount = function (app)
   local count = 0
   if app then
     for _, window in pairs(utils.windowsForApp(app)) do
-      -- ignores com.googlecode.iterm2
-      if window:isStandard() and not window:isMinimized() then
+      if utils.canManageWindow(window) and app:bundleID() ~= 'com.googlecode.iterm2' then
         count = count + 1
       end
     end
@@ -127,12 +130,11 @@ end
 -- determines if a window is manageable (takes into account iterm2)
 --
 utils.canManageWindow = function (window)
-  local application = window:application()
-  local bundleID = application:bundleID()
+  local bundleID = window:application():bundleID()
 
   -- Special handling for iTerm: windows without title bars are
   -- non-standard.
-  return window:isStandard() or
+  return window:isStandard() and not window:isMinimized() or
     bundleID == 'com.googlecode.iterm2'
 end
 

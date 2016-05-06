@@ -2,9 +2,18 @@
 --/ initialize /--
 -------------------------------------------------------------------------------
 
--- :: locals
+-- :: imports/requires
 local wm = require 'wm'
 local utils = require 'utils'
+local config = require 'config'
+
+-- :: locals
+local wf = hs.window.filter
+local screenCount = #hs.screen.allScreens()
+local windowBorder = nil
+local frameCache = {}
+local primary = hs.screen:primaryScreen()
+local secondary = primary:previous()
 
 -- :: globals
 basePath = os.getenv('HOME') .. '/.hammerspoon/'
@@ -15,9 +24,132 @@ configFileWatcher = nil
 require("hs.hotkey").setLogLevel("warning")
 
 
--- mashers
--- note: alt == opt
+-- window filter subscriptions
+-- :: watch relevant window events to do interesting things
+----------------------------------------------------------------------------
+allWindows = wf.new(nil, 'allWindows')
+allWindows:subscribe(wf.windowCreated, function() handleCreated() end)
+allWindows:subscribe(wf.windowFocused, function() handleFocused() end)
+allWindows:subscribe(wf.windowMoved, function() handleMoved() end)
+allWindows:subscribe(wf.windowUnfocused, function() handleUnfocused() end)
+allWindows:subscribe(wf.windowOnScreen, function() handleOnScreen() end)
+allWindows:subscribe(wf.windowNotOnScreen, function() handleNotOnScreen() end)
+
+
+-- window filter eventhandlers
+----------------------------------------------------------------------------
+
+function handleCreated ()
+  local win = hs.window.focusedWindow()
+  if win ~= nil then
+    utils.log.df('[wf] window created ("%s" for %s)', win:title(), win:application():bundleID())
+
+    handleApplicationLayout(win, win:application())
+    drawWindowBorder(win)
+  end
+end
+
+function handleFocused ()
+  local win = hs.window.focusedWindow()
+  if win ~= nil then
+    utils.log.df('[wf] window focused ("%s" for %s)', win:title(), win:application():bundleID())
+
+    drawWindowBorder(win)
+  end
+end
+
+function handleMoved ()
+  local win = hs.window.focusedWindow()
+  if win ~= nil then
+    utils.log.df('[wf] window moved|resized|toggled ("%s" for %s)', win:title(), win:application():bundleID())
+
+    drawWindowBorder(win)
+  end
+end
+
+function handleUnfocused ()
+  local win = hs.window.focusedWindow()
+  if win ~= nil then
+    utils.log.df('[wf] window unfocused ("%s" for %s on %s at %s)', win:title(), win:application():bundleID(), win:screen():name(), win:screen():position())
+
+    windowBorder:delete()
+  end
+end
+
+function handleOnScreen ()
+  local win = hs.window.focusedWindow()
+  if win ~= nil then
+    utils.log.df('[wf] window on screen ("%s" for %s on %s at %s)', win:title(), win:application():bundleID(), win:screen():name(), win:screen():position())
+
+    drawWindowBorder(win)
+  end
+end
+
+function handleNotOnScreen ()
+  local win = hs.window.focusedWindow()
+  if win ~= nil then
+    utils.log.df('[wf] window not on screen ("%s" for %s)', win:title(), win:application():bundleID())
+
+    windowBorder:delete()
+  end
+end
+
+
+-- window filter helpers
+----------------------------------------------------------------------------
+
+
+function handleApplicationLayout (win, app)
+  utils.log.df('[wf] found %s valid windows for %s', utils.windowCount(app), app:name())
+
+  if utils.canManageWindow(win) then
+    local bundleID = app:bundleID()
+
+    if config.layout[bundleID] then
+      for _, window in pairs(utils.windowsForApp(app)) do
+        if utils.canManageWindow(window) then
+          utils.log.df('[app] applying layout for %s in %s', window:title(), app:name())
+          config.layout[bundleID](window)
+        end
+      end
+    -- else
+    --   config.layout['default'](window)
+    end
+  end
+end
+
+
+function drawWindowBorder (win)
+  -- clean up existing borders
+  if windowBorder ~= nil then
+    windowBorder:delete()
+  end
+
+  local ignoredWindows = utils.Set {'iTerm2', 'Electron Helper', 'TotalFinderCrashWatcher', 'CCXProcess', 'Adobe CEF Helper', 'Hammerspoon'}
+  local win = (win ~= nil) and win or hs.window.focusedWindow()
+
+  -- avoid drawing borders on "odd" windows, including iTerm2, Contexts, etc
+  if win == nil or not utils.canManageWindow(win) or ignoredWindows[win:application():name()] then return end
+
+  local topLeft = win:topLeft()
+  local size = win:size()
+
+  windowBorder = hs.drawing.rectangle(hs.geometry.rect( topLeft['x'], topLeft['y'], size['w'], size['h']))
+
+  windowBorder:setStrokeColor({["red"]=0,["blue"]=.2,["green"]=.1,["alpha"]=.1})
+  windowBorder:setRoundedRectRadii(6.0, 6.0)
+  windowBorder:setStrokeWidth(2)
+  windowBorder:setStroke(true)
+  windowBorder:setFill(false)
+  windowBorder:setLevel("floating")
+  windowBorder:show()
+end
+
+
+-- key bindings
 -------------------------------------------------------------------------------
+
+-- :: mashers (alt == opt)
 cmdAlt = {'cmd', 'alt'}
 cmdShift = {'cmd', 'shift'}
 cmdCtrl = {'cmd', 'ctrl'}
@@ -25,10 +157,6 @@ ctrlAlt = {'ctrl', 'alt'}
 mashShift = {'cmd', 'ctrl', 'shift'}
 mash = {'cmd', 'alt', 'ctrl'}
 hyper = {'cmd', 'alt', 'ctrl', 'shift' }
-
-
--- key bindings
--------------------------------------------------------------------------------
 
 -- :: misc
 hs.hotkey.bind(mashShift, 'L', function()

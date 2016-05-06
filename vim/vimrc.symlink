@@ -43,6 +43,7 @@ function! LoadPlugs()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
+  Plug 'justinmk/vim-dirvish'
 
   """"" Filetypes ===========================================================
   "" Functional (JavaScript)
@@ -709,11 +710,11 @@ augroup END
 
 " FIXME: this may be breaking auto rename of irc buffers, etc
 " Automatic rename of tmux window
-"
-" if exists('$TMUX') && !exists('$NORENAME')
-"   au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-"   au VimLeave * call system('tmux set-window automatic-rename on')
-" endif
+
+if exists('$TMUX') && !exists('$NORENAME')
+  au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+  au VimLeave * call system('tmux set-window automatic-rename on')
+endif
 
 augroup HighlightGroup
   autocmd!
@@ -738,6 +739,13 @@ augroup ft_javascript
 
   " Expands 'class=' to 'className='
   au FileType javascript.jsx iabbrev class== className=
+
+  " omnicompletion
+  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
+  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
+  if exists('g:plugs["tern_for_vim"]')
+    au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
+  endif
 augroup END
 
 augroup javascript_shortcuts
@@ -774,6 +782,9 @@ augroup ft_scss
   au FileType css,css.scss,sass,scss setlocal formatoptions+=croql
   au BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
   au BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
+
+  " omnicompletion
+  au FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
 augroup END
 
 augroup ft_markdown
@@ -804,13 +815,11 @@ augroup END
 augroup ft_misc
   au!
 
-
-
+  " enable fugitive with dirvish
+  autocmd FileType dirvish call fugitive#detect(@%)
 
   " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
   au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
-
-
 
   " Fix slow Ruby editing
   " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
@@ -819,18 +828,11 @@ augroup ft_misc
   """"""" omnicompletions
   " Extreme info on omnicompletions, must read more:
   " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
-  "
   au FileType * setlocal omnifunc=syntaxcomplete#Complete
-  au FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
   au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   au FileType python setlocal omnifunc=pythoncomplete#Complete
   au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   au FileType ruby setlocal omnifunc=rubycomplete#Complete
-  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
-  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
-  if exists('g:plugs["tern_for_vim"]')
-    au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
-  endif
 augroup END
 
 

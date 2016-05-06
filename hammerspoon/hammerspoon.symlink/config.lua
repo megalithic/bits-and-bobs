@@ -187,7 +187,6 @@ end
 function config.getGridLocation (window, count)
   local app = window:application()
   local side = config.grid.fullScreen
-  local allWindows = utils.windowsForApp(app)
   -- TODO: account for existing windows for layout
 
   -- we have more than one screen attached
@@ -196,7 +195,7 @@ function config.getGridLocation (window, count)
 
     -- we have more than one window for the given app
     if (windowCount > 1) then
-      side = windowCount % 2 == 0 and config.grid.rightHalf or config.grid.leftHalf
+      side = windowCount % 2 == 0 and config.grid.leftHalf or config.grid.leftHalf
     end
   end
 

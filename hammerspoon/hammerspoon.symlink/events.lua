@@ -21,13 +21,13 @@ local utils = require 'utils'
 -- SETUP WINDOW FILTER SUBSCRIPTIONS
 -- :: watch relevant window events to do interesting things
 
-allWindows = wf.new(nil, 'allWindows')
-allWindows:subscribe(wf.windowCreated, function() redrawBorder() end)
-allWindows:subscribe(wf.windowFocused, function() redrawBorder() end)
-allWindows:subscribe(wf.windowMoved, function() redrawBorder() end)
-allWindows:subscribe(wf.windowUnfocused, function() redrawBorder() end)
-allWindows:subscribe(wf.windowOnScreen, function() redrawBorder() end)
-allWindows:subscribe(wf.windowNotOnScreen, function() redrawBorder() end)
+-- allWindows = wf.new(nil, 'allWindows')
+-- allWindows:subscribe(wf.windowCreated, function() redrawBorder() end)
+-- allWindows:subscribe(wf.windowFocused, function() redrawBorder() end)
+-- allWindows:subscribe(wf.windowMoved, function() redrawBorder() end)
+-- allWindows:subscribe(wf.windowUnfocused, function() redrawBorder() end)
+-- allWindows:subscribe(wf.windowOnScreen, function() redrawBorder() end)
+-- allWindows:subscribe(wf.windowNotOnScreen, function() redrawBorder() end)
 
 -- }}
 --
@@ -51,7 +51,7 @@ function handleAppEvent(element, event)
     if pcall(function()
       utils.log.df('[event] window %s created for %s', element:id(), element:application():bundleID())
     end) then
-      watchWindow(element)
+      -- watchWindow(element)
     else
       utils.log.wf('error thrown trying to access element in handleAppEvent')
     end
