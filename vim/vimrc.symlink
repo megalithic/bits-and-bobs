@@ -104,7 +104,10 @@ function! LoadPlugs()
   Plug 'wellle/targets.vim'
   Plug 'EinfachToll/DidYouMean'
   Plug 'ervandew/supertab'
-  Plug 'shougo/deoplete.nvim'
+  function! DoUpdateRemotePlugins(arg)
+    UpdateRemotePlugins
+  endfunction
+  Plug 'shougo/deoplete.nvim', { 'do': function('DoUpdateRemotePlugins') }
   Plug 'Konfekt/FastFold'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'FelikZ/ctrlp-py-matcher'

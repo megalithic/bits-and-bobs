@@ -27,13 +27,13 @@ require("hs.hotkey").setLogLevel("warning")
 -- window filter subscriptions
 -- :: watch relevant window events to do interesting things
 ----------------------------------------------------------------------------
-allWindows = wf.new(nil, 'allWindows')
-allWindows:subscribe(wf.windowCreated, function() handleCreated() end)
-allWindows:subscribe(wf.windowFocused, function() handleFocused() end)
-allWindows:subscribe(wf.windowMoved, function() handleMoved() end)
-allWindows:subscribe(wf.windowUnfocused, function() handleUnfocused() end)
-allWindows:subscribe(wf.windowOnScreen, function() handleOnScreen() end)
-allWindows:subscribe(wf.windowNotOnScreen, function() handleNotOnScreen() end)
+-- allWindows = wf.new(nil, 'allWindows')
+-- allWindows:subscribe(wf.windowCreated, function() handleCreated() end)
+-- allWindows:subscribe(wf.windowFocused, function() handleFocused() end)
+-- allWindows:subscribe(wf.windowMoved, function() handleMoved() end)
+-- allWindows:subscribe(wf.windowUnfocused, function() handleUnfocused() end)
+-- allWindows:subscribe(wf.windowOnScreen, function() handleOnScreen() end)
+-- allWindows:subscribe(wf.windowNotOnScreen, function() handleNotOnScreen() end)
 
 
 -- window filter eventhandlers
