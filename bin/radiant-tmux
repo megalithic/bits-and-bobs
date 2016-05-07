@@ -12,7 +12,7 @@ NOW_PLAYING=$(osascript <<EOF
         return "#[fg=colour240] ♫ - paused #[fg=default]"
       else if state is 2 then
         -- playing
-        return "#[fg=red] ♫ " & track & " - " & artist & "#[fg=default]"
+        return "#[fg=colour247] ♫ " & track & " - " & artist & "#[fg=default]"
       else if state is 0 then
         if artist is missing value then
           -- stopped

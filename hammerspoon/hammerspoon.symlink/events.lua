@@ -51,7 +51,7 @@ function handleAppEvent(element, event)
     if pcall(function()
       utils.log.df('[event] window %s created for %s', element:id(), element:application():bundleID())
     end) then
-      -- watchWindow(element)
+      watchWindow(element)
     else
       utils.log.wf('error thrown trying to access element in handleAppEvent')
     end

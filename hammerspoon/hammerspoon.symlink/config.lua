@@ -5,7 +5,7 @@ local utils = require 'utils'
 grid.setGrid("12x12")
 grid.setMargins({w = 2, h = 2})
 hs.window.animationDuration = 0 -- 0 to disable animations
-hs.window.setShadows(false)
+-- hs.window.setShadows(false)
 
 -- SCREEN SETUP
 -------------------------------------------------------------------------------

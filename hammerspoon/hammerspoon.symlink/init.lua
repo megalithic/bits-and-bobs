@@ -44,7 +44,7 @@ function handleCreated ()
   if win ~= nil then
     utils.log.df('[wf] window created ("%s" for %s)', win:title(), win:application():bundleID())
 
-    handleApplicationLayout(win, win:application())
+    -- handleApplicationLayout(win, win:application())
     drawWindowBorder(win)
   end
 end

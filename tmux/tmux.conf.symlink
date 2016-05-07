@@ -194,7 +194,7 @@ setw -g window-status-current-format "#[fg=blue] ● #W #[fg=colour28]"
 set -g status-left-length 60
 set -g status-left "#[fg=green]#S #(~/.dotfiles/bin/ip-tmux) #{prefix_highlight}"
 set -g status-right-length 120
-set -g status-right "#(~/.dotfiles/bin/google-music-tmux) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
+set -g status-right "#(~/.dotfiles/bin/google-music-tmux) #(~/.dotfiles/bin/radiant-tmux) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
 
 # TMUX PLUGIN MANAGER
 # ===========================================================================

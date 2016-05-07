@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
 # Google Play Music Desktop Player playback output for tmux
-# - requires the JSON parsing lib, jq (https://stedolan.github.io/jq)
+# - requires ag (https://github.com/ggreer/the_silver_searcher)
+# - requires jq (https://stedolan.github.io/jq)
 #
 # Seth Messer
 # https://twitter.com/megalithic
