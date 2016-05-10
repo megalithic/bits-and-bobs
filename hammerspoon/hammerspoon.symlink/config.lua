@@ -2,6 +2,7 @@ local config = {}
 local screenCount = #hs.screen.allScreens()
 local grid = hs.grid
 local utils = require 'utils'
+local hostname = hs.host.localizedName()
 grid.setGrid("12x12")
 grid.setMargins({w = 2, h = 2})
 hs.window.animationDuration = 0 -- 0 to disable animations
@@ -83,6 +84,7 @@ config.layout = {
     local count = forceScreenCount or screenCount
     grid.set(window, '8,0 4x8', config.secondaryDisplay(count))
   end),
+
   ['com.sajidanwar.Radiant-Player'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, '8,0 4x8', config.secondaryDisplay(count))
@@ -101,6 +103,7 @@ config.layout = {
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.centeredBig, config.primaryDisplay(count))
   end),
+
   ['2BUA8C4S2C.com.agilebits.onepassword4-helper'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.centeredSmall, config.secondaryDisplay(count))
@@ -109,27 +112,21 @@ config.layout = {
   ['com.google.Chrome'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.getGridLocation(window, count), config.primaryDisplay(count))
+      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
     else
-      if (window:title() == 'Postman') then
+      if window:title() == 'Postman' then
         grid.set(window, config.grid.centeredHuge, config.secondaryDisplay(count))
       else
         grid.set(window, config.getGridLocation(window, count), config.secondaryDisplay(count))
       end
-
     end
   end),
 
   ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.fullScreen)
+    if config.isFullScreen(window) then
+      window:setFullScreen(false)
     else
-      if config.isFullScreen(window) then
-        window:setFullScreen(false)
-      else
-        window:setFullScreen(true)
-      end
+      window:setFullScreen(true)
     end
   end)
 }
@@ -140,7 +137,7 @@ config.layout = {
 -- NOTE: if you have more than 2 displays, please
 -- alter the following display functions as necessary
 function config.primaryDisplay(count)
-  local primary = config.screens.laptop
+  local primary = hostname == 'replibox' and config.screens.primary or config.screens.laptop
 
   if count > 1 then
     local positionForPrimary = {
@@ -150,25 +147,24 @@ function config.primaryDisplay(count)
     primary = positionForPrimary
   end
 
-  local position = primary == config.screens.laptop and 0 or primary.x
-  local name = primary == config.screens.laptop and primary or hs.screen.find(primary):name()
-
-  utils.log.df('[wm] targeted primary %s at %s (%s screens)', name, position, screenCount)
+  utils.log.df('[screens] targeted primary %s at %s (%s screens)', hs.screen.find(primary):name(), primary.x or primary, screenCount)
   return hs.screen.find(primary)
 end
 
 function config.secondaryDisplay(count)
-  local secondary = {
+  local secondary = hostname == 'replibox' and config.screens.secondary or config.screens.laptop
+
+  local positionForSecondary = {
     x = config.screens.secondary:position(),
     y = 0
   }
+  secondary = positionForSecondary
 
-  -- assumes the laptop screen when only one screen found
   if count == 1 then
-    secondary = config.screens.laptop
+    secondary = hostname == 'replibox' and config.screens.primary or config.screens.laptop
   end
 
-  utils.log.df('[wm] targeted secondary %s at %s (%s screens)', hs.screen.find(secondary):name(), secondary.x, screenCount)
+  utils.log.df('[screens] targeted secondary %s at %s (%s screens)', hs.screen.find(secondary):name(), secondary.x or secondary, screenCount)
   return hs.screen.find(secondary)
 end
 
@@ -195,7 +191,7 @@ function config.getGridLocation (window, count)
 
     -- we have more than one window for the given app
     if (windowCount > 1) then
-      side = windowCount % 2 == 0 and config.grid.leftHalf or config.grid.leftHalf
+      side = windowCount % 2 == 0 and config.grid.rightHalf or config.grid.leftHalf
     end
   end
 
@@ -204,16 +200,17 @@ function config.getGridLocation (window, count)
   return side
 end
 
-function config.activateLayout(forceScreenCount)
+function config.activateLayout(screenCountOverride)
   config.layout._before_()
 
   for bundleID, callback in pairs(config.layout) do
-    local application = bundleID ~= 'default' or hs.application.get(bundleID)
+    local application = hs.application.get(bundleID)
     if application then
       local windows = application:visibleWindows()
       for _, window in pairs(windows) do
         if utils.canManageWindow(window) then
-          callback(window, forceScreenCount)
+          utils.log.df('[layout] activating layout with screenCountOverride (%s)', screenCountOverride)
+          callback(window, screenCountOverride)
         end
       end
     end

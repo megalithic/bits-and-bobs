@@ -57,6 +57,7 @@ function! LoadPlugs()
   Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
   Plug 'carlitux/deoplete-ternjs'
   Plug 'kchmck/vim-coffee-script'
+  Plug 'maksimr/vim-jsbeautify'
   " Plug 'tyru/current-func-info.vim'
 
   "" Presentation (CSS / SCSS / LESS)
@@ -592,6 +593,8 @@ function! BufEnterCommit()
   " force spell when doing a git commit
   if bufname("%")=="COMMIT_EDITMSG"
     let b:deoplete_disable_auto_complete=1
+    let g:deoplete#enable_at_startup = 0
+    call deoplete#disable()
     set spell
     set spelllang=en
   endif
@@ -749,6 +752,13 @@ augroup ft_javascript
   if exists('g:plugs["tern_for_vim"]')
     au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
   endif
+
+  " js-beautify
+  autocmd FileType javascript vnoremap <buffer>  <c-b> :call RangeJsBeautify()<cr>
+  autocmd FileType json vnoremap <buffer> <c-b> :call RangeJsonBeautify()<cr>
+  autocmd FileType jsx vnoremap <buffer> <c-b> :call RangeJsxBeautify()<cr>
+  autocmd FileType html vnoremap <buffer> <c-b> :call RangeHtmlBeautify()<cr>
+  autocmd FileType css vnoremap <buffer> <c-b> :call RangeCSSBeautify()<cr>
 augroup END
 
 augroup javascript_shortcuts
@@ -794,7 +804,7 @@ augroup ft_markdown
   au!
   " Markdown turn off lazyredraw
   au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
-  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} let b:deoplete_disable_auto_complete=1
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} call deoplete#disable()
   au FileType markdown set tw=80
   au FileType text,markdown let b:vcm_tab_complete = 'dict'
 augroup END

@@ -37,11 +37,13 @@ bind C-d detach			# the same as d so you don't have to depress Ctrl
 bind -r C-R source-file ~/.tmux.conf \; display-message "Configuration reloaded."
 bind-key r refresh-client
 
+# put us in copy-mode, where i typically then hit ctrl-b again to scroll up
+bind -r C-b copy-mode -u
+
 # Splitting panes
-bind '|' split-window -h -c "#{pane_current_path}"
-bind '_' split-window -v -c "#{pane_current_path}"
-bind '-' split-window -v -c "#{pane_current_path}"
-bind -r C-b split-window -v -c "#{pane_current_path}"
+bind '|' split-window -v -c "#{pane_current_path}"
+bind '_' split-window -h -c "#{pane_current_path}"
+bind '-' split-window -h -c "#{pane_current_path}"
 bind -r C-t new-window -c "#{pane_current_path}"
 bind -r C-x kill-pane
 bind -r C-q kill-pane
