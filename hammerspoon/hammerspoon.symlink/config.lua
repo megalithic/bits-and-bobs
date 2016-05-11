@@ -147,7 +147,7 @@ function config.primaryDisplay(count)
     primary = positionForPrimary
   end
 
-  utils.log.df('[screens] targeted primary %s at %s (%s screens)', hs.screen.find(primary):name(), primary.x or primary, screenCount)
+  -- utils.log.df('[screens] targeted primary %s at %s (%s screens)', hs.screen.find(primary):name(), primary, screenCount)
   return hs.screen.find(primary)
 end
 
