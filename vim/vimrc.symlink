@@ -303,6 +303,7 @@ set noesckeys
 set notimeout
 set ttimeout
 set ttimeoutlen=10
+set timeoutlen=10
 
 """"""" Misc (Needs documentation / understanding)
 set matchtime=3
@@ -364,7 +365,8 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 """"""" vim-airline
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline_theme='base16'
+let g:airline#extensions#neomake#enabled = 1
+let g:airline_theme='base16_ocean'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -386,7 +388,6 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_symbols.modified = '✭'
 let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 0
-let g:airline#extensions#tabline#enabled = 0
 " let g:airline_extensions = ['mode','crypt','paste','iminsert','branch','filename','readonly','filetype','fileencoding','fileformat','percentage','line number','column number','whitespace']
 let g:airline_mode_map = {
     \ 'n' : 'NORMAL',
@@ -443,7 +444,7 @@ let g:rainbow_active = 1
 """"""" vim-test
 let g:test#preserve_screen = 1
 let test#strategy = "neovim"
-let test#javascript#mocha#options = "--colors --compilers js:babel/register"
+let test#javascript#mocha#options = "--colors --compilers js:babel/register --timeout 30000"
 let test#javascript#mocha#file_pattern = ".test.js"
 
 """"""" listtoggle
@@ -1051,11 +1052,9 @@ map 0 ^
 
 """"""" Selections
 " reselect pasted content:
-noremap gV `[v`]
+nnoremap gV `[v`]
 " select all text in the file
-noremap <leader>v ggVG
-" select entire file https://github.com/akalyaev/dotfiles/blob/master/vimrc#L129
-nnoremap <leader>v ggV`]
+nnoremap <leader>v ggVG
 " Easier linewise reselection of what you just pasted.
 nnoremap <leader>V V`]
 " duplicate whatever’s selected, to the next line
