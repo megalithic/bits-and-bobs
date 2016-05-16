@@ -90,6 +90,11 @@ config.layout = {
     grid.set(window, '8,0 4x8', config.secondaryDisplay(count))
   end),
 
+  ['com.spotify.client'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, '8,0 4x8', config.secondaryDisplay(count))
+  end),
+
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
