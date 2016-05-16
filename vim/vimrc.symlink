@@ -44,6 +44,7 @@ function! LoadPlugs()
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
   Plug 'justinmk/vim-dirvish'
+  Plug 'tpope/vim-dispatch'
 
   """"" Filetypes ===========================================================
   "" Functional (JavaScript)
@@ -430,9 +431,9 @@ let g:neomake_jsx_standard_maker =
   \ g:neomake_javascript_standard_maker
 
 " Check for lint errors on write
-au BufWritePost *.js silent! Neomake standard|redraw
+au BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
 au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
-" autocmd BufRead,BufWritePost,BufEnter *.js Neomake|redraw
+" au BufWritePost *.js silent! Neomake standard|redraw
 " autocmd! BufWritePost * Neomake
 
 """"""" rainbow
@@ -444,7 +445,7 @@ let g:rainbow_active = 1
 """"""" vim-test
 let g:test#preserve_screen = 1
 let test#strategy = "neovim"
-let test#javascript#mocha#options = "--colors --compilers js:babel/register --timeout 30000"
+let test#javascript#mocha#options = "--colors --compilers js:babel/register --timeout 30000 --bail --full-trace --delay"
 let test#javascript#mocha#file_pattern = ".test.js"
 
 """"""" listtoggle

@@ -188,7 +188,7 @@ hs.hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iter
 hs.hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hs.hotkey.bind('cmd', '`', function() utils.toggleApp('com.google.Chrome') end)
 hs.hotkey.bind('cmd', 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
-hs.hotkey.bind('cmd', 'f5', function() utils.toggleApp('tweetbot') end)
+hs.hotkey.bind('cmd', 'f5', function() utils.toggleApp('com.tapbots.TweetbotMac') end)
 hs.hotkey.bind('cmd', 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
 hs.hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('com.sajidanwar.Radiant-Player') end)
 hs.hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)

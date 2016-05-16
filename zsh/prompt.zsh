@@ -45,6 +45,7 @@ PURE_GIT_PULL=1
 VI_MODE_PROMPT="$PURE_PROMPT_SYMBOL"
 VI_MODE_INSERT="▸"
 VI_MODE_NORMAL="▹"
+VI_MODE_ENABLED=0
 
 # turns seconds into human readable time
 # 165392 => 1d 21h 56m 32s
@@ -130,14 +131,18 @@ prompt_pure_update_vi_prompt() {
 TRAPINT () {
   # Fix a bug when you C-c in CMD mode and you'd be prompted with CMD mode indicator, while in fact you would be in INS mode
   # Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the SIGINT, so if anything else depends on it, we will not break it
-  VI_MODE_PROMPT="%{%F{green}%}$VI_MODE_INSERT%f"
-  print -n -- "\E]50;CursorShape=1\C-G" # vert line cursor
-  return $(( 128 + $1 ))
+  if (( ${VI_MODE_ENABLED:-1} )); then
+    VI_MODE_PROMPT="%{%F{green}%}$VI_MODE_INSERT%f"
+    print -n -- "\E]50;CursorShape=1\C-G" # vert line cursor
+    return $(( 128 + $1 ))
+  fi
 }
 
 TRAPWINCH () {
   # Ensure that the prompt is redrawn when the terminal size changes.
-  zle && { zle reset-prompt; zle -R }
+  if (( ${VI_MODE_ENABLED:-1} )); then
+    zle && { zle reset-prompt; zle -R }
+  fi
 }
 
 function zle-line-init zle-keymap-select {
@@ -148,9 +153,11 @@ function zle-line-finish {
   print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
 }
 
-zle -N zle-line-init
-zle -N zle-keymap-select
-zle -N zle-line-finish
+if (( ${VI_MODE_ENABLED:-1} )); then
+  zle -N zle-line-init
+  zle -N zle-keymap-select
+  zle -N zle-line-finish
+fi
 
 
 prompt_pure_set_title() {

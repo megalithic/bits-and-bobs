@@ -41,9 +41,9 @@ bind-key r refresh-client
 bind -r C-b copy-mode -u
 
 # Splitting panes
-bind '|' split-window -v -c "#{pane_current_path}"
-bind '_' split-window -h -c "#{pane_current_path}"
-bind '-' split-window -h -c "#{pane_current_path}"
+bind '|' split-window -h -c "#{pane_current_path}"
+bind '_' split-window -v -c "#{pane_current_path}"
+bind '-' split-window -v -c "#{pane_current_path}"
 bind -r C-t new-window -c "#{pane_current_path}"
 bind -r C-x kill-pane
 bind -r C-q kill-pane

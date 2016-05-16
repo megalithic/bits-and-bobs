@@ -59,6 +59,7 @@ alias mmv='noglob zmv -W'
 # TMUX
 # -----------------------------------------------------------------------------
 # alias tm="(tmux ls | grep -vq attached && tmux at) || tmux"
+alias tmux='tmux -vvvv'
 alias tm="tmux attach || tmux new"
 alias mux=tm
 alias takeover="tmux detach -a"
@@ -301,3 +302,6 @@ alias remote="osascript -e 'tell application \"yubiswitch\" to KeyOn' && ssh rem
 alias hassconfig="nvim scp://pi@ha//var/opt/homeassistant/configuration.yaml"
 alias homeconfig=hassconfig
 alias haconfig=hassconfig
+alias halogs='ssh -t pi@ha "tail -f /var/opt/homeassistant/home-assistant.log -n1000"'
+alias harestart='ssh -t pi@ha "sudo service hass-daemon restart"'
+alias hastop='ssh -t pi@ha "sudo service hass-daemon stop"'

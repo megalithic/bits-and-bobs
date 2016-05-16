@@ -15,7 +15,7 @@
 # (tmux ls | grep -vq attached && tmux at) || tmux
 
 # vi mode
-bindkey -v
+bindkey -e
 
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
