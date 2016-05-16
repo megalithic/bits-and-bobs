@@ -112,52 +112,52 @@ prompt_pure_background_jobs_indicator() {
   [[ $(jobs -l | wc -l) -gt 0 ]] && echo " ⚙ "
 }
 
-prompt_pure_update_vi_prompt() {
-  # Pure prompt wiki: https://github.com/sindresorhus/pure/wiki
-  zle || {
-    print "error: pure_update_vim_prompt must be called when zle is active"
-    return 1
-  }
+# prompt_pure_update_vi_prompt() {
+#   # Pure prompt wiki: https://github.com/sindresorhus/pure/wiki
+#   zle || {
+#     print "error: pure_update_vim_prompt must be called when zle is active"
+#     return 1
+#   }
 
-  case ${KEYMAP} in
-    (vicmd)       VI_MODE_PROMPT="%{%F{white}%}$VI_MODE_NORMAL%f"; print -n -- "\E]50;CursorShape=0\C-G";; # block cursor
-    (main|viins)  VI_MODE_PROMPT="%{%F{green}%}$VI_MODE_INSERT%f"; print -n -- "\E]50;CursorShape=1\C-G";; # vert line cursor
-    (*)           VI_MODE_PROMPT="%{%F{green}%}$VI_MODE_INSERT%f"; print -n -- "\E]50;CursorShape=1\C-G";; # vert line cursor
-  esac
+#   case ${KEYMAP} in
+#     (vicmd)       VI_MODE_PROMPT="%{%F{white}%}$VI_MODE_NORMAL%f"; print -n -- "\E]50;CursorShape=0\C-G";; # block cursor
+#     (main|viins)  VI_MODE_PROMPT="%{%F{green}%}$VI_MODE_INSERT%f"; print -n -- "\E]50;CursorShape=1\C-G";; # vert line cursor
+#     (*)           VI_MODE_PROMPT="%{%F{green}%}$VI_MODE_INSERT%f"; print -n -- "\E]50;CursorShape=1\C-G";; # vert line cursor
+#   esac
 
-  zle .reset-prompt
-}
+#   zle .reset-prompt
+# }
 
-TRAPINT () {
-  # Fix a bug when you C-c in CMD mode and you'd be prompted with CMD mode indicator, while in fact you would be in INS mode
-  # Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the SIGINT, so if anything else depends on it, we will not break it
-  if (( ${VI_MODE_ENABLED:-1} )); then
-    VI_MODE_PROMPT="%{%F{green}%}$VI_MODE_INSERT%f"
-    print -n -- "\E]50;CursorShape=1\C-G" # vert line cursor
-    return $(( 128 + $1 ))
-  fi
-}
+# TRAPINT () {
+#   # Fix a bug when you C-c in CMD mode and you'd be prompted with CMD mode indicator, while in fact you would be in INS mode
+#   # Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the SIGINT, so if anything else depends on it, we will not break it
+#   if (( ${VI_MODE_ENABLED:-1} )); then
+#     VI_MODE_PROMPT="%{%F{green}%}$VI_MODE_INSERT%f"
+#     print -n -- "\E]50;CursorShape=1\C-G" # vert line cursor
+#     return $(( 128 + $1 ))
+#   fi
+# }
 
-TRAPWINCH () {
-  # Ensure that the prompt is redrawn when the terminal size changes.
-  if (( ${VI_MODE_ENABLED:-1} )); then
-    zle && { zle reset-prompt; zle -R }
-  fi
-}
+# TRAPWINCH () {
+#   # Ensure that the prompt is redrawn when the terminal size changes.
+#   if (( ${VI_MODE_ENABLED:-1} )); then
+#     zle && { zle reset-prompt; zle -R }
+#   fi
+# }
 
-function zle-line-init zle-keymap-select {
-  prompt_pure_update_vi_prompt
-}
+# function zle-line-init zle-keymap-select {
+#   prompt_pure_update_vi_prompt
+# }
 
-function zle-line-finish {
-  print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
-}
+# function zle-line-finish {
+#   print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
+# }
 
-if (( ${VI_MODE_ENABLED:-1} )); then
-  zle -N zle-line-init
-  zle -N zle-keymap-select
-  zle -N zle-line-finish
-fi
+# if (( ${VI_MODE_ENABLED:-1} )); then
+#   zle -N zle-line-init
+#   zle -N zle-keymap-select
+#   zle -N zle-line-finish
+# fi
 
 
 prompt_pure_set_title() {
@@ -411,11 +411,6 @@ prompt_pure_setup() {
   autoload -Uz git_super_status
   autoload -Uz async && async
 
-#   # fire vi mode functions
-#   zle -N zle-keymap-select
-#   zle -N zle-line-init
-#   zle -N zle-line-finish
-
   add-zsh-hook precmd prompt_pure_precmd
   add-zsh-hook preexec prompt_pure_preexec
 
@@ -444,8 +439,8 @@ prompt_pure_setup() {
   # prompt turns red if the previous command didn't exit with 0
   # default: ❯
   # new: 
-  PROMPT='%(?.%F{magenta}.%F{red})${VI_MODE_PROMPT}${PURE_PROMPT_SYMBOL:-❯}%f '
-  # PROMPT='%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
+  # PROMPT='%(?.%F{magenta}.%F{red})${VI_MODE_PROMPT}${PURE_PROMPT_SYMBOL:-❯}%f '
+  PROMPT='%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
   # PROMPT='%(?.%F{magenta}.%F{red}❯%F{magenta})${PURE_PROMPT_SYMBOL:-❯}%f '
 }
 

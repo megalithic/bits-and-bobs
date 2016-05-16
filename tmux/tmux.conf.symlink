@@ -87,7 +87,8 @@ set -ga terminal-overrides ',tmux-256color:Tc'
 # Start window numbers from 1
 set -g base-index 1
 # Fix LSOpenURLsWithRole() error on OS X. Requires reattach-to-user-namespace to be installed.
-set -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
+set -g default-command "reattach-to-user-namespace -l $SHELL"
+# set -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
 
 # mices!
 set -g mouse on
