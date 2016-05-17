@@ -122,6 +122,8 @@ config.layout = {
       if window:title() == 'Postman' then
         grid.set(window, config.grid.centeredHuge, config.secondaryDisplay(count))
       else
+        -- set original/first chrome window to the left and let the next
+        -- grid.set() to handle the rest..
         grid.set(window, config.getGridLocation(window, count), config.secondaryDisplay(count))
       end
     end
@@ -196,6 +198,14 @@ function config.getGridLocation (window, count)
 
     -- we have more than one window for the given app
     if (windowCount > 1) then
+      -- local gw = grid.GRIDWIDTH
+      -- local gh = grid.GRIDHEIGHT
+      -- local goMiddle = {x = gw/4, y = gh/4, w = gw/2, h = gh/2}
+      -- local goLeft = {x = gw, y = 0, w = gw/2, h = gh}
+      -- local goRight = {x = gw/2, y = 0, w = gw/2, h = gh}
+      -- local goTopLeft = {x = 0, y = 0, w = gw/2, h = gh/2}
+      -- grid.set(window, goRight, config.secondaryDisplay(count))
+
       side = windowCount % 2 == 0 and config.grid.rightHalf or config.grid.leftHalf
     end
   end
