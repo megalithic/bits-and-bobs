@@ -103,6 +103,7 @@ function applicationHandler (appName, eventType, appObject)
     utils.log.df('[application] event; incoming watcher event, "unhidden"')
   elseif (eventType == hs.application.watcher.launching) then
     utils.log.df('[application] event; incoming watcher event, "launching"')
+    screenHandler()
   elseif (eventType == hs.application.watcher.launched) then
     utils.log.df('[application] event; incoming watcher event, "launched"')
     screenHandler()
@@ -113,8 +114,8 @@ function applicationHandler (appName, eventType, appObject)
 end
 
 -- SCREEN
-function screenHandler ()
-  newNumberOfScreens = #hs.screen.allScreens()
+function screenHandler (forcedScreenCount)
+  newNumberOfScreens = forcedScreenCount or #hs.screen.allScreens()
 
   utils.log.df('[screen] event; new number of screens, %s', newNumberOfScreens)
 
@@ -173,24 +174,19 @@ end
 
 -- CAFFEINATE
 function caffeinateHandler (eventType)
-  utils.log.df('[caffeine] event; raw event data %s', eventType)
+  utils.log.df('[caffeine] event; event type %s', eventType)
 
   if (eventType == hs.caffeinate.watcher.screensDidSleep) then
-    -- if hs.itunes.isPlaying() then
-    --   hs.itunes.pause()
-    -- end
-    -- local output = hs.audiodevice.defaultOutputDevice()
-    -- if output:muted() then
-    --   shouldUnmuteOnScreenWake = false
-    -- else
-    --   shouldUnmuteOnScreenWake = true
-    -- end
-    -- output:setMuted(true)
+    -- turn off office lamp
+    utils.log.df('[caffeine] event; attempting to turn off office lamp')
+    hs.execute('~/.dotfiles/bin/hs-to-ha switch.office_lamp off', true)
   elseif (eventType == hs.caffeinate.watcher.screensDidWake) then
-    -- if shouldUnmuteOnScreenWake then
-    --   hs.audiodevice.defaultOutputDevice():setMuted(false)
-    -- end
+    -- turn on office lamp
+    utils.log.df('[caffeine] event; attempting to turn on office lamp')
+    hs.execute('~/.dotfiles/bin/hs-to-ha switch.office_lamp on', true)
   end
+
+  screenHandler(2)
 end
 
 -- TEARDOWN
@@ -270,53 +266,35 @@ allWindows:subscribe(wf.windowNotOnScreen, function(win, appName, eventType) han
 
 function handleCreated (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-
-  if win ~= nil then
-    screenHandler()
-    windowHandler(win, appName, eventType)
-    drawWindowBorder(win)
-  end
+  windowHandler(win, appName, eventType)
+  drawWindowBorder(win)
+  screenHandler()
 end
 
 function handleFocused (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-
-  if win ~= nil then
-    drawWindowBorder(win)
-  end
+  drawWindowBorder(win)
 end
 
 function handleMoved (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-
-  if win ~= nil then
-    screenHandler()
-    drawWindowBorder(win)
-  end
+  drawWindowBorder(win)
+  screenHandler()
 end
 
 function handleUnfocused (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-
-  if win ~= nil then
-    drawWindowBorder(win)
-  end
+  drawWindowBorder(win)
 end
 
 function handleOnScreen (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-
-  if win ~= nil then
-    drawWindowBorder(win)
-  end
+  drawWindowBorder(win)
 end
 
 function handleNotOnScreen (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-
-  if win ~= nil then
-    drawWindowBorder(win)
-  end
+  drawWindowBorder(win)
 end
 
 
@@ -453,12 +431,12 @@ end)
 --   }))
 
 -- move windows between monitors
-hs.hotkey.bind(mashShift, 'h', function()
+hs.hotkey.bind(ctrlAlt, 'h', function()
   local win = hs.window.focusedWindow()
   local nextScreen = win:screen():previous()
   win:moveToScreen(nextScreen)
   end)
-hs.hotkey.bind(mashShift, 'l', function()
+hs.hotkey.bind(ctrlAlt, 'l', function()
   local win = hs.window.focusedWindow()
   local nextScreen = win:screen():next()
   win:moveToScreen(nextScreen)
@@ -478,6 +456,7 @@ screenHandler() -- must call this to have it do a thing initially
 wifiWatcher = hs.wifi.watcher.new(wifiHandler)
 wifiWatcher:start()
 
+utils.log.df('[hostname] %s', hostname)
 if (hostname == 'replibox') then
   usbWatcher = hs.usb.watcher.new(usbHandler)
   usbWatcher:start()
