@@ -93,6 +93,10 @@ utils.validWindowsForApp = function (app)
   return app:allWindows()
 end
 
+utils.validWindowsForWindow = function (window)
+  return utils.canManageWindow(window)
+end
+
 -- Returns the number of standard, non-minimized windows in the application.
 --
 -- (For Chrome, which has two windows per visible window on screen, but only one
@@ -149,6 +153,28 @@ end
 utils.print = function(...)
   hs.rawprint(...)
   console.printStyledtext(...)
+end
+
+utils.switch = function (c)
+  local swtbl = {
+    casevar = c,
+    caseof = function (self, code)
+      local f
+      if (self.casevar) then
+        f = code[self.casevar] or code.default
+      else
+        f = code.missing or code.default
+      end
+      if f then
+        if type(f)=="function" then
+          return f(self.casevar,self)
+        else
+          error("case "..tostring(self.casevar).." not a function")
+        end
+      end
+    end
+  }
+  return swtbl
 end
 
 return utils
