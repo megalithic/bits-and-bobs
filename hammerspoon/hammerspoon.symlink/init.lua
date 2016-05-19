@@ -88,27 +88,26 @@ local dual_display = {
 
 -- APPLICATION
 function applicationHandler (appName, eventType, appObject)
-
   if (eventType == hs.application.watcher.activated) then
-    utils.log.df('[application] event; incoming watcher event, "activated"')
+    utils.log.df('[application] "activated" event; %s', appName)
     if (appName == "Finder") then
       -- Bring all Finder windows forward when one gets activated
       appObject:selectMenuItem({"Window", "Bring All to Front"})
     end
   elseif (eventType == hs.application.watcher.deactivated) then
-    utils.log.df('[application] event; incoming watcher event, "deactivated"')
+    utils.log.df('[application] "deactivated" event; %s', appName)
   elseif (eventType == hs.application.watcher.hidden) then
-    utils.log.df('[application] event; incoming watcher event, "hidden"')
+    utils.log.df('[application] "hidden" event; %s', appName)
   elseif (eventType == hs.application.watcher.unhidden) then
-    utils.log.df('[application] event; incoming watcher event, "unhidden"')
+    utils.log.df('[application] "unhidden" event; %s', appName)
   elseif (eventType == hs.application.watcher.launching) then
-    utils.log.df('[application] event; incoming watcher event, "launching"')
+    utils.log.df('[application] "launching" event; %s', appName)
     screenHandler()
   elseif (eventType == hs.application.watcher.launched) then
-    utils.log.df('[application] event; incoming watcher event, "launched"')
+    utils.log.df('[application] "launched" event; %s', appName)
     screenHandler()
   elseif (eventType == hs.application.watcher.terminated) then
-    utils.log.df('[application] event; incoming watcher event, "terminated"')
+    utils.log.df('[application] "terminated" event; %s', appName)
     screenHandler()
   end
 end
@@ -144,12 +143,9 @@ function wifiHandler ()
 
   utils.log.df('[wifi] event; old SSID (%s), new SSID (%s)', lastSSID or "nil", newSSID or "nil")
 
-  -- print("ssidChangedCallback: old:"..(lastSSID or "nil").." new:"..(newSSID or "nil"))
   if newSSID == homeSSID and lastSSID ~= homeSSID then
-    -- We have gone from something that isn't my home WiFi, to something that is
     -- home_arrived()
   elseif newSSID ~= homeSSID and lastSSID == homeSSID then
-    -- We have gone from something that is my home WiFi, to something that isn't
     -- home_departed()
   end
 
@@ -159,17 +155,6 @@ end
 -- USB
 function usbHandler (data)
   utils.log.df('[usb] event; raw data %s', hs.inspect(data))
-
-  -- print("usbDeviceCallback: "..hs.inspect(data))
-  -- if (data["productName"] == "ScanSnap S1300i") then
-  --   event = data["eventType"]
-  --   if (event == "added") then
-  --     hs.application.launchOrFocus("ScanSnap Manager")
-  --   elseif (event == "removed") then
-  --     app = hs.appfinder.appFromName("ScanSnap Manager")
-  --     app:kill()
-  --   end
-  -- end
 end
 
 -- CAFFEINATE
@@ -179,11 +164,11 @@ function caffeinateHandler (eventType)
   if (eventType == hs.caffeinate.watcher.screensDidSleep) then
     -- turn off office lamp
     utils.log.df('[caffeine] event; attempting to turn off office lamp')
-    hs.execute('~/.dotfiles/bin/hs-to-ha switch.office_lamp off', true)
+    hs.execute('~/.dotfiles/bin/hs-to-ha script.hammerspoon_office_lamp off', true)
   elseif (eventType == hs.caffeinate.watcher.screensDidWake) then
     -- turn on office lamp
     utils.log.df('[caffeine] event; attempting to turn on office lamp')
-    hs.execute('~/.dotfiles/bin/hs-to-ha switch.office_lamp on', true)
+    hs.execute('~/.dotfiles/bin/hs-to-ha script.hammerspoon_office_lamp on', true)
   end
 
   screenHandler(2)
@@ -258,7 +243,7 @@ allWindows:subscribe(wf.windowMoved, function(win, appName, eventType) handleMov
 allWindows:subscribe(wf.windowUnfocused, function(win, appName, eventType) handleUnfocused(win, appName, eventType) end)
 allWindows:subscribe(wf.windowOnScreen, function(win, appName, eventType) handleOnScreen(win, appName, eventType) end)
 allWindows:subscribe(wf.windowNotOnScreen, function(win, appName, eventType) handleNotOnScreen(win, appName, eventType) end)
--- allWindows:subscribe(wf.windowsChanged, function(win, appName) handleWindowsChanged(win, appName) end)
+-- allWindows:subscribe(wf.windowsChanged, function(win, appName) handleWindowsChanged(win, appName, eventType) end)
 
 
 -- window filter eventhandlers
@@ -267,34 +252,34 @@ allWindows:subscribe(wf.windowNotOnScreen, function(win, appName, eventType) han
 function handleCreated (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
   windowHandler(win, appName, eventType)
-  drawWindowBorder(win)
+  -- drawWindowBorder(win)
   screenHandler()
 end
 
 function handleFocused (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-  drawWindowBorder(win)
+  -- drawWindowBorder(win)
 end
 
 function handleMoved (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-  drawWindowBorder(win)
+  -- drawWindowBorder(win)
   screenHandler()
 end
 
 function handleUnfocused (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-  drawWindowBorder(win)
+  -- drawWindowBorder(win)
 end
 
 function handleOnScreen (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-  drawWindowBorder(win)
+  -- drawWindowBorder(win)
 end
 
 function handleNotOnScreen (win, appName, eventType)
   utils.log.df('[window] event "%s"; %s for %s', eventType, win:title(), appName)
-  drawWindowBorder(win)
+  -- drawWindowBorder(win)
 end
 
 

@@ -7,4 +7,18 @@
 # USAGE:
 # $ hs-to-ha switch.office_lamp off
 
-curl -X POST -H "x-ha-access: $HA_PASS" -d '{"entity_id": "'"$1"'"}' https://megalithic.dyndns.org:443/api/services/switch/turn_$2
+# case "$1" in
+# 'switch')
+#   curl -X POST -H "x-ha-access: $HA_PASS" -d '{"entity_id": "'"$1"'"}' https://megalithic.dyndns.org:443/api/services/switch/turn_$2
+# ;;
+
+# 'ha')
+#   curl -X POST -H "x-ha-access: $HA_PASS" -d '{"entity_id": "'"$1"'"}' https://megalithic.dyndns.org:443/api/services/homeassistant/turn_on
+# ;;
+
+# 'restart')
+#   echo "Usage: $0 [start|stop]"
+# ;;
+# esac
+
+curl -X POST -H "x-ha-access: $HA_PASS" -d '{"entity_id": "'"$1"'"}' https://megalithic.dyndns.org:443/api/services/homeassistant/turn_on

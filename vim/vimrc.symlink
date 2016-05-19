@@ -418,6 +418,9 @@ let g:neomake_warning_sign = {
   \ 'texthl': 'Error',
   \ }
 
+let g:neomake_yaml_enabled_makers = ['yamllint']
+
+let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_scss_scsslint_args = ['-c', globpath(&rtp, 'misc/scss-lint.yml')]
 
 let g:neomake_javascript_enabled_makers = ['standard']
@@ -433,6 +436,7 @@ let g:neomake_jsx_standard_maker =
 " Check for lint errors on write
 au BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
 au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
+au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
 " au BufWritePost *.js silent! Neomake standard|redraw
 " autocmd! BufWritePost * Neomake
 
