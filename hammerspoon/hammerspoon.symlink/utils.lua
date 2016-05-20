@@ -1,10 +1,11 @@
+-----------------------------------------------------------------------------------
+--/ utils and helpers /--
+-----------------------------------------------------------------------------------
 local utils = {}
+utils.log = hs.logger.new('replicant', 'debug') -- debug or info
 
-local logLevel = 'debug' -- generally want 'debug' or 'info'
-local log = hs.logger.new('replicant', logLevel)
 local lastSeenChain = nil
 local lastSeenWindow = nil
-utils.log = log
 
 -- Chain the specified movement commands.
 -- This is like the "chain" feature in Slate, but with a couple of enhancements:
@@ -44,37 +45,35 @@ utils.chain = function (movements)
   end
 end
 
--- toggles application state
---
--- FIXME: this function is all sorts of wonky. come up with better.
+-- TOGGLE the given app
 utils.toggleApp = function (_app)
   -- accepts app name (lowercased), pid, or bundleID; but we ALWAYS use bundleID
   local app = hs.application.find(_app)
 
   if app ~= nil then
-    utils.log.df('[apps] attempting to toggle %s', app:bundleID())
+    utils.log.df('[app launcher] event; attempting to toggle %s', app:bundleID())
   end
 
   if not app then
     -- FIXME: this may not be working properly.. creating extraneous PIDs?
-    utils.log.df('[apps] launchOrFocusByBundleID(%s) (not PID-managed app?)', _app)
+    utils.log.df('[app launcher] event; launchOrFocusByBundleID(%s) (not PID-managed app?)', _app)
     hs.application.launchOrFocusByBundleID(_app)
   else
     local mainWin = app:mainWindow()
-    utils.log.df('[apps] mainWin: %s', mainWin)
+    utils.log.df('[app launcher] event; main window: %s', mainWin)
     if mainWin then
       if mainWin == hs.window.focusedWindow() then
-        utils.log.df('[apps] hiding %s', app:bundleID())
+        utils.log.df('[app launcher] event; hiding %s', app:bundleID())
         mainWin:application():hide()
       else
-        utils.log.df('[apps] activating/unhiding/focusing %s', app:bundleID())
+        utils.log.df('[app launcher] event; activating/unhiding/focusing %s', app:bundleID())
         mainWin:application():activate(true)
         mainWin:application():unhide()
         mainWin:focus()
       end
     else
       -- assumes there is no "mainWindow" for the application in question, probably iTerm2
-      utils.log.df('[apps] launchOrFocusByBundleID(%s)', app)
+      utils.log.df('[app launcher] event; launchOrFocusByBundleID(%s)', app)
       if (app:focusedWindow() == hs.window.focusedWindow()) then
         app:hide()
       else
@@ -84,6 +83,7 @@ utils.toggleApp = function (_app)
     end
   end
 end
+
 
 utils.windowsForApp = function (app)
   return app:allWindows()
@@ -150,11 +150,8 @@ utils.Set = function (list)
   return set
 end
 
-utils.print = function(...)
-  hs.rawprint(...)
-  console.printStyledtext(...)
-end
-
+-- acts like a switch/case statement
+-- UNTESTED
 utils.switch = function (c)
   local swtbl = {
     casevar = c,

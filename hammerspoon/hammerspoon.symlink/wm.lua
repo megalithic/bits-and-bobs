@@ -7,11 +7,11 @@
 -- we basically just setup for our events and configuration to load up, so
 -- `init` doesn't have to import a bunch of extra stuff it doesn't care about.
 
-local events = require 'events'
-local config = require 'config'
-local wm = {}
+local utils = require 'utils'
+utils.log.df('[wm] event; loading window management')
 
-wm.config = config
-wm.events = events
+local wm = {}
+wm.events = require 'events'
+wm.config = require 'config'
 
 return wm

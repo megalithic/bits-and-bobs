@@ -1,74 +1,148 @@
 -----------------------------------------------------------------------------------
---/ event handling /--
+--/ events /--
 -----------------------------------------------------------------------------------
--- This will become a lot easier once `hs.window.filter`
--- (http://www.hammerspoon.org/docs/hs.window.filter.html) moves out of
--- "experimental" status, but until then, using a manual approach as
--- demonstrated at: https://gist.github.com/tmandry/a5b1ab6d6ea012c1e8c5
 
-local globalWatcher = nil
-local watchers = {}
-local evt = {} -- to be returned/exported
-local events = hs.uielement.watcher
-local screenCount = #hs.screen.allScreens()
-local wf = hs.window.filter
-local windowBorder = nil
+local events = {}
 
+-- :: imports/requires
 local config = require 'config'
 local utils = require 'utils'
+local wf = hs.window.filter
+local eventsWatcher = hs.uielement.watcher
 
----------------------------------------------------------------------------- {{
--- SETUP WINDOW FILTER SUBSCRIPTIONS
--- :: watch relevant window events to do interesting things
+-- :: globals
+local watchers = {}
+local globalAppWatcher = nil
+local screenWatcher = nil
+local wifiWatcher = nil
+local usbWatcher = nil
+local caffeinateWatcher = nil
+local screenCount = #hs.screen.allScreens()
+local windowBorder = nil
 
+
+-- window filter event handlers
+----------------------------------------------------------------------------
+function drawWindowBorder (win)
+  -- clean up existing borders
+  if windowBorder ~= nil then
+    windowBorder:delete()
+  end
+
+  local ignoredWindows = utils.Set {'iTerm2', 'Electron Helper', 'TotalFinderCrashWatcher', 'CCXProcess', 'Adobe CEF Helper', 'Hammerspoon'}
+  -- local win = (win ~= nil) and win or hs.window.focusedWindow()
+
+  -- avoid drawing borders on "odd" windows, including iTerm2, Contexts, etc
+  if win == nil or not utils.canManageWindow(win) or ignoredWindows[win:application():name()] then return end
+
+  local topLeft = win:topLeft()
+  local size = win:size()
+
+  windowBorder = hs.drawing.rectangle(hs.geometry.rect(topLeft['x'], topLeft['y'], size['w'], size['h']))
+
+  windowBorder:setStrokeColor({["red"]=.2,["blue"]=.2,["green"]=.1,["alpha"]=.5})
+  windowBorder:setRoundedRectRadii(6.0, 6.0)
+  windowBorder:setStrokeWidth(2)
+  windowBorder:setStroke(true)
+  windowBorder:setFill(false)
+  windowBorder:setLevel("floating")
+  windowBorder:show()
+end
+
+function handleCreated (win, appName, eventType)
+  utils.log.df('[wf] event "%s"; %s for %s', eventType, win:title(), appName)
+  -- drawWindowBorder(win)
+end
+
+function handleDestroyed (win, appName, eventType)
+  utils.log.df('[wf] event "%s"; %s for %s', eventType, win:title(), appName)
+  -- drawWindowBorder(win)
+end
+
+function handleFocused (win, appName, eventType)
+  utils.log.df('[wf] event "%s"; %s for %s (%s)', eventType, win:title(), appName, hs.application(appName):bundleID())
+  -- drawWindowBorder(win)
+end
+
+function handleMoved (win, appName, eventType)
+  utils.log.df('[wf] event "%s"; %s for %s', eventType, win:title(), appName)
+  -- drawWindowBorder(win)
+end
+
+function handleUnfocused (win, appName, eventType)
+  utils.log.df('[wf] event "%s"; %s for %s', eventType, win:title(), appName)
+  -- drawWindowBorder(win)
+end
+
+function handleOnScreen (win, appName, eventType)
+  utils.log.df('[wf] event "%s"; %s for %s', eventType, win:title(), appName)
+  -- drawWindowBorder(win)
+end
+
+function handleNotOnScreen (win, appName, eventType)
+  utils.log.df('[wf] event "%s"; %s for %s', eventType, win:title(), appName)
+  -- drawWindowBorder(win)
+end
+
+function handleNotVisible (win, appName, eventType)
+  utils.log.df('[wf] event "%s"; %s for %s', eventType, win:title(), appName)
+  -- drawWindowBorder(win)
+end
+
+
+-- window filter subscriptions
+----------------------------------------------------------------------------
 -- allWindows = wf.new(nil, 'allWindows')
--- allWindows:subscribe(wf.windowCreated, function() redrawBorder() end)
--- allWindows:subscribe(wf.windowFocused, function() redrawBorder() end)
--- allWindows:subscribe(wf.windowMoved, function() redrawBorder() end)
--- allWindows:subscribe(wf.windowUnfocused, function() redrawBorder() end)
--- allWindows:subscribe(wf.windowOnScreen, function() redrawBorder() end)
--- allWindows:subscribe(wf.windowNotOnScreen, function() redrawBorder() end)
+-- allWindows:subscribe(wf.windowCreated, handleCreated)
+-- allWindows:subscribe(wf.windowDestroyed, handleDestroyed)
+-- allWindows:subscribe(wf.windowFocused, handleFocused)
+-- allWindows:subscribe(wf.windowMoved, handleMoved)
+-- allWindows:subscribe(wf.windowUnfocused, handleUnfocused)
+-- allWindows:subscribe(wf.windowOnScreen, handleOnScreen)
+-- allWindows:subscribe(wf.windowNotOnScreen, handleNotOnScreen)
+-- allWindows:subscribe(wf.windowNotVisible, handleNotVisible)
+-- allWindows:subscribe(wf.windowsChanged, handleWindowsChanged)
 
--- }}
---
---
-function handleGlobalEvent(name, eventType, app)
+
+-- event handlers
+----------------------------------------------------------------------------
+function handleGlobalAppEvent(name, eventType, app)
   if eventType == hs.application.watcher.launched then
-    utils.log.df('[event] launched %s', app:bundleID())
+    utils.log.df('[global] app event; launched %s', app:bundleID())
     if app:bundleID() ~= 'org.hammerspoon.Hammerspoon' or app:bundleID() ~= 'com.contextsformac.Contexts' then
       watchApp(app)
     end
   elseif eventType == hs.application.watcher.terminated then
     -- Only the PID is set for terminated apps, so can't log bundleID.
     local pid = app:pid()
-    utils.log.df('[event] terminated PID %d', pid)
+    utils.log.df('[global] app event; terminated PID %d', pid)
     unwatchApp(pid)
   end
 end
 
 function handleAppEvent(element, event)
-  if event == events.windowCreated then
+  if event == eventsWatcher.windowCreated then
     if pcall(function()
-      utils.log.df('[event] window %s created for %s', element:id(), element:application():bundleID())
+      utils.log.df('[app] event; window %s created for %s', element:id(), element:application():bundleID())
     end) then
       watchWindow(element)
     else
-      utils.log.wf('error thrown trying to access element in handleAppEvent')
+      utils.log.wf('[error] app error; thrown trying to access element (%s) in handleAppEvent', element)
     end
   else
-    utils.log.wf('unexpected app event %d received', event)
+    utils.log.wf('[error] app error; unexpected app event (%d) received', event)
   end
 end
 
 function handleWindowEvent(window, event, watcher, info)
-  utils.log.df('[event] new window event (%s) for %s (%s)', event, window:application():bundleID(), info.id)
+  utils.log.df('[window] event; new window event (%s) for %s (%s)', event, window:application():bundleID(), info.id)
 
-  if event == events.elementDestroyed then
-    utils.log.df('[event] window %s destroyed for %s', info.id, window:application():bundleID())
+  if event == eventsWatcher.elementDestroyed then
+    utils.log.df('[window] event; %s destroyed for %s', info.id, window:application():bundleID())
     watcher:stop()
     watchers[info.pid].windows[info.id] = nil
   else
-    utils.log.wf('unexpected window event %d received', event)
+    utils.log.wf('[error] window error; unexpected window event (%d) received', event)
   end
 end
 
@@ -77,16 +151,19 @@ function handleScreenEvent()
   -- changed. We no longer check geometry because we were seeing spurious
   -- events.
   local screens = hs.screen.allScreens()
-  if not (#screens == screenCount) then
+
+  utils.log.df('[screen] event; new screens (%s), previous screens (%s)', #screens, screenCount)
+
+  if #screens ~= screenCount then
     screenCount = #screens
-    config.activateLayout(screenCount)
+    config.applyLayout(screenCount)
   end
 end
 
 function watchApp(app)
   local pid = app:pid()
   if watchers[pid] or app:bundleID() == 'org.hammerspoon.Hammerspoon' or app:bundleID() == 'com.contextsformac.Contexts' then
-    utils.log.wf('[watchApp] attempted watch for already-watched PID %d', pid)
+    utils.log.wf('[warning] app warning; attempted watch for already-watched app PID %d', pid)
     return
   end
 
@@ -96,7 +173,7 @@ function watchApp(app)
     watcher = watcher,
     windows = {},
   }
-  watcher:start({events.windowCreated})
+  watcher:start({eventsWatcher.windowCreated})
 
   -- Watch already-existing windows.
   for _, window in pairs(app:allWindows()) do
@@ -107,7 +184,7 @@ end
 function unwatchApp(pid)
   local appWatcher = watchers[pid]
   if not appWatcher then
-    utils.log.wf('[unwatchApp] attempted unwatch for unknown PID %d', pid)
+    utils.log.wf('[warning] app warning; attempted unwatch for unknown app PID %d', pid)
     return
   end
 
@@ -124,19 +201,17 @@ function watchWindow(window)
   local pid = application:pid()
   local windows = watchers[pid].windows
   if utils.canManageWindow(window) then
+
     -- Do initial layout-handling.
     local bundleID = application:bundleID()
-    if config.layout[bundleID] then
-      config.layout[bundleID](window)
-    -- else
-    --   config.layout['default'](window)
-    end
-
-    utils.log.df('[watchWindow] watching %s (id %s, %s windows)', bundleID, id, utils.windowCount(application))
-
-    -- Watch for window-closed events.
     local id = window:id()
 
+    if config.layout[bundleID] then
+      utils.log.df('[window] event; watching %s (window %s, ID %s, %s windows) and applying layout for window/app', bundleID, window:title(), id, utils.windowCount(application))
+      config.layout[bundleID](window)
+    end
+
+    -- Watch for window-closed events.
     if id then
       if not windows[id] then
         local watcher = window:newWatcher(handleWindowEvent, {
@@ -144,81 +219,60 @@ function watchWindow(window)
           pid = pid,
         })
         windows[id] = watcher
-        watcher:start({events.elementDestroyed})
+        watcher:start({eventsWatcher.elementDestroyed})
       end
     end
   end
 end
 
----------------------------------------------------------------------------- {{
--- WINDOW FILTER EVENTS
+-- WIFI
+function handleWifiEvent ()
+  newSSID = hs.wifi.currentNetwork()
+  local homeSSID = config.homeSSID
+  local lastSSID = config.lastSSID
 
-function handleCreated ()
-  local win = hs.window.focusedWindow()
-  -- utils.log.df('[wm] window created ("%s" for %s)', win:title(), win:application():bundleID())
-  redrawBorder()
-end
+  utils.log.df('[wifi] event; old SSID (%s), new SSID (%s)', lastSSID or "nil", newSSID or "nil")
 
-function handleFocused ()
-  local win = hs.window.focusedWindow()
-  -- utils.log.df('[wm] window focused ("%s" for %s)', win:title(), win:application():bundleID())
-  redrawBorder()
-end
-
-function handleMoved ()
-  local win = hs.window.focusedWindow()
-  -- Note: this includes moved, resized, and maximize/fullscreen toggled
-  -- utils.log.df('[wm] window moved|resized|toggled ("%s" for %s)', win:title(), win:application():bundleID())
-  redrawBorder()
-end
-
-function handleUnfocused ()
-  -- local win = hs.window.focusedWindow()
-  -- utils.log.df('[wm] window unfocused ("%s" for %s)', win:title(), win:application():bundleID())
-  redrawBorder()
-end
-
-function handleOnScreen ()
-  local win = hs.window.focusedWindow()
-  -- utils.log.df('[wm] window onscreen ("%s" for %s)', win:title(), win:application():bundleID())
-  redrawBorder()
-end
-
-function handleNotOnScreen ()
-  -- utils.log.df('[wm] window onscreen ("%s" for %s)', win:title(), win:application():bundleID())
-  redrawBorder()
-end
-
-function redrawBorder ()
-  -- clean up existing borders
-  if windowBorder ~= nil then
-    windowBorder:delete()
+  if newSSID == homeSSID and lastSSID ~= homeSSID then
+    -- home_arrived()
+  elseif newSSID ~= homeSSID and lastSSID == homeSSID then
+    -- home_departed()
   end
 
-  local ignoredWindows = utils.Set {'iTerm2', 'Electron Helper', 'TotalFinderCrashWatcher', 'CCXProcess', 'Adobe CEF Helper', 'Hammerspoon'}
-  local win = hs.window.focusedWindow()
-
-  -- avoid drawing borders on "odd" windows, including iTerm2, Contexts, etc
-  if win == nil or not utils.canManageWindow(win) or ignoredWindows[win:application():name()] then return end
-
-  local topLeft = win:topLeft()
-  local size = win:size()
-
-  windowBorder = hs.drawing.rectangle(hs.geometry.rect( topLeft['x'], topLeft['y'], size['w'], size['h']))
-
-  windowBorder:setStrokeColor({["red"]=0,["blue"]=.2,["green"]=.1,["alpha"]=.1})
-  windowBorder:setRoundedRectRadii(6.0, 6.0)
-  windowBorder:setStrokeWidth(2)
-  windowBorder:setStroke(true)
-  windowBorder:setFill(false)
-  windowBorder:setLevel("floating")
-  windowBorder:show()
+  lastSSID = newSSID
 end
 
-function initEventHandling()
+-- USB
+function handleUsbEvent (data)
+  utils.log.df('[usb] event; raw data %s', hs.inspect(data))
+end
+
+-- CAFFEINATE
+function handleCaffeinateEvent (eventType)
+  utils.log.df('[caffeine] event; event type %s', eventType)
+
+  if (eventType == hs.caffeinate.watcher.screensDidSleep) then
+    -- turn off office lamp
+    utils.log.df('[caffeine] event; attempting to turn off office lamp')
+    hs.execute('~/.dotfiles/bin/hs-to-ha script.hammerspoon_office_lamp_off', true)
+  elseif (eventType == hs.caffeinate.watcher.screensDidWake) then
+    -- turn on office lamp
+    utils.log.df('[caffeine] event; attempting to turn on office lamp')
+    hs.execute('~/.dotfiles/bin/hs-to-ha script.hammerspoon_office_lamp_on', true)
+  end
+end
+
+
+function events.initEventHandling ()
+  utils.log.df('[init] event; initializing watchers')
+
+  -- Watch for screen changes.
+  screenWatcher = hs.screen.watcher.new(handleScreenEvent)
+  screenWatcher:start()
+
   -- Watch for application-level events.
-  globalWatcher = hs.application.watcher.new(handleGlobalEvent)
-  globalWatcher:start()
+  globalAppWatcher = hs.application.watcher.new(handleGlobalAppEvent)
+  globalAppWatcher:start()
 
   local ignoredApps = utils.Set {'org.hammerspoon.Hammerspoon', 'com.contextsformac.Contexts'}
 
@@ -231,23 +285,46 @@ function initEventHandling()
     end
   end
 
-  -- Watch for screen changes.
-  screenWatcher = hs.screen.watcher.new(handleScreenEvent)
-  screenWatcher:start()
+  -- Watch for wifi/ssid changes.
+  wifiWatcher = hs.wifi.watcher.new(handleWifiEvent)
+  wifiWatcher:start()
+
+  -- Only init these watchers for desktop
+  if (config.hostname == 'replibox') then
+    -- Watch for usb device changes.
+    usbWatcher = hs.usb.watcher.new(handleUsbEvent)
+    usbWatcher:start()
+
+    -- Watch for screen energy mode changes.
+    caffeinateWatcher = hs.caffeinate.watcher.new(handleCaffeinateEvent)
+    caffeinateWatcher:start()
+  end
 end
 
-function evt.tearDownEventHandling()
-  globalWatcher:stop()
-  globalWatcher = nil
+function events.tearDownEventHandling ()
+  utils.log.df('[teardown] event; tearing down watchers')
 
-  screenWatcher:stop()
-  screenWatcher = nil
+  globalAppWatcher:stop()
+  globalAppWatcher = nil
 
   for pid, _ in pairs(watchers) do
     unwatchApp(pid)
   end
+
+  screenWatcher:stop()
+  screenWatcher = nil
+
+  wifiWatcher:stop()
+  wifiWatcher = nil
+
+  usbWatcher:stop()
+  usbWatcher = nil
+
+  caffeinateWatcher:stop()
+  caffeinateWatcher = nil
+
+  -- potentially a bad thing to do this..
+  -- allWindows:unsubscribeAll()
 end
 
-initEventHandling()
-
-return evt
+return events
