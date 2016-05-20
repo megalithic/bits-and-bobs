@@ -7,6 +7,7 @@ local events = {}
 -- :: imports/requires
 local config = require 'config'
 local utils = require 'utils'
+local redshift = require 'hs.redshift'
 local wf = hs.window.filter
 local eventsWatcher = hs.uielement.watcher
 
@@ -30,7 +31,6 @@ function drawWindowBorder (win)
   end
 
   local ignoredWindows = utils.Set {'iTerm2', 'Electron Helper', 'TotalFinderCrashWatcher', 'CCXProcess', 'Adobe CEF Helper', 'Hammerspoon'}
-  -- local win = (win ~= nil) and win or hs.window.focusedWindow()
 
   -- avoid drawing borders on "odd" windows, including iTerm2, Contexts, etc
   if win == nil or not utils.canManageWindow(win) or ignoredWindows[win:application():name()] then return end
@@ -262,21 +262,33 @@ function handleCaffeinateEvent (eventType)
   end
 end
 
+-- REDSHIFT
+-- ripped from https://github.com/asmagill/hammerspoon-config/blob/master/utils/_keys/redshift.lua
+redshift.start(2800,'21:00','7:00','4h')
+_loopSleepWatcher = hs.caffeinate.watcher.new(function (event)
+  local cw = hs.caffeinate.watcher
+  if ({ [cw.systemDidWake] = 1, [cw.screensaverDidStop] = 1, })[event] then
+    redshift.start(2800,'21:00','7:00','4h')
+  elseif ({ [cw.systemWillSleep] = 1, [cw.screensaverDidStart] = 1, })[event] then
+    redshift.stop()
+  end
+end):start()
 
+-- INIT ALL THE EVENTS
 function events.initEventHandling ()
   utils.log.df('[init] event; initializing watchers')
 
-  -- Watch for screen changes.
+  -- Watch for screen changes
   screenWatcher = hs.screen.watcher.new(handleScreenEvent)
   screenWatcher:start()
 
-  -- Watch for application-level events.
+  -- Watch for application-level events
   globalAppWatcher = hs.application.watcher.new(handleGlobalAppEvent)
   globalAppWatcher:start()
 
   local ignoredApps = utils.Set {'org.hammerspoon.Hammerspoon', 'com.contextsformac.Contexts'}
 
-  -- Watch already-running applications.
+  -- Watch already-running applications
   local apps = hs.application.runningApplications()
   for _, app in pairs(apps) do
     -- if not ignoredApps(app:bundleID()) then
@@ -285,22 +297,23 @@ function events.initEventHandling ()
     end
   end
 
-  -- Watch for wifi/ssid changes.
+  -- Watch for wifi/ssid changes
   wifiWatcher = hs.wifi.watcher.new(handleWifiEvent)
   wifiWatcher:start()
 
-  -- Only init these watchers for desktop
+  -- Only init these watchers for my desktop
   if (config.hostname == 'replibox') then
     -- Watch for usb device changes.
     usbWatcher = hs.usb.watcher.new(handleUsbEvent)
     usbWatcher:start()
 
-    -- Watch for screen energy mode changes.
+    -- Watch for screen energy mode changes
     caffeinateWatcher = hs.caffeinate.watcher.new(handleCaffeinateEvent)
     caffeinateWatcher:start()
   end
 end
 
+-- TEAR DOWN ALL THE EVENTS
 function events.tearDownEventHandling ()
   utils.log.df('[teardown] event; tearing down watchers')
 

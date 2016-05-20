@@ -84,6 +84,13 @@ utils.toggleApp = function (_app)
   end
 end
 
+utils.handleMediaKeyEvents = function (event, alertText)
+  hs.eventtap.event.newSystemKeyEvent(event, true):post()
+  if alertText then
+    hs.alert.closeAll()
+    hs.alert.show(alertText, 1)
+  end
+end
 
 utils.windowsForApp = function (app)
   return app:allWindows()
