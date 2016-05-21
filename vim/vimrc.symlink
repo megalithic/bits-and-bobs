@@ -93,7 +93,7 @@ function! LoadPlugs()
     " - yss<arg> for entire line
   Plug 'tpope/vim-repeat'
   Plug 'janko-m/vim-test'
-  Plug 'gregsexton/MatchTag', { 'for': ['html', 'erb'] }
+  Plug 'Valloric/MatchTagAlways', { 'for': ['html', 'erb'] }
   Plug 'docunext/closetag.vim'
   " Plug 'lukaszb/vim-web-indent' " hasn't been updated in 4y
   Plug 'luochen1990/rainbow'
@@ -183,6 +183,7 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
+" set rtp+=~/.fzf
 
 """"""" Updated vim regex engine
 set re=1
@@ -198,7 +199,7 @@ set wrapscan
 command! Hardwrap set fo=want tw=80 nowrap
 command! Nohardwrap set fo=croq wrap linebreak nolist
 
-set synmaxcol=800 " turn off syntax highlight beyond 800 chars
+set synmaxcol=500 " turn off syntax highlight beyond 500 chars
 set showcmd " show incomplete commands
 set ruler " show the cursor position all the time
 set scrolloff=5
@@ -424,9 +425,21 @@ let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_scss_scsslint_args = ['-c', globpath(&rtp, 'misc/scss-lint.yml')]
 
 let g:neomake_javascript_enabled_makers = ['standard']
+" let g:neomake_javascript_standard_maker = {
+"   \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+"   \ 'errorformat': '  %f:%l:%c: %m'
+"   \ }
+
+" function! neomake#makers#ft#javascript#standard()
+"   return {
+"         \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+"         \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+"         \ '%W%f: line %l\, col %c\, Warning - %m'
+"         \ }
+" endfunction
 let g:neomake_javascript_standard_maker = {
   \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-  \ 'errorformat': '  %f:%l:%c: %m'
+  \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m, %W%f: line %l\, col %c\, Warning - %m'
   \ }
 
 let g:neomake_jsx_enabled_makers = ['standard']
@@ -437,8 +450,14 @@ let g:neomake_jsx_standard_maker =
 au BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
 au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
 au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
-" au BufWritePost *.js silent! Neomake standard|redraw
-" autocmd! BufWritePost * Neomake
+
+function! JscsFix()
+  let l:winview = winsaveview()
+  % ! jscs -x
+  call winrestview(l:winview)
+endfunction
+command JscsFix :call JscsFix()
+" noremap <leader>j :JscsFix<CR>
 
 """"""" rainbow
 let g:rainbow_conf = {
@@ -1130,6 +1149,12 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 " Insert the directory of the current buffer in command line mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+" stop arrow keys from typing A B C D
+map OA <up>
+map OB <Down>
+map OD <left>
+map OC <right>
 
 " Insert mode movements
 " Ctrl-e: Go to end of line

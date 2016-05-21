@@ -60,6 +60,15 @@ config.layout = {
     utils.activate('com.googlecode.iterm2') -- iTerm2 is front-most
   end),
 
+  ['com.tapbots.TweetbotMac'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    if count == 1 then
+      grid.set(window, config.grid.leftTwoThirds)
+    else
+      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
+    end
+  end),
+
   ['com.tinyspeck.slackmacgap'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
@@ -86,7 +95,7 @@ config.layout = {
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, '5,5 3x3', config.primaryDisplay(count))
+      grid.set(window, '5,5 3x3')
     else
       grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
     end
@@ -110,12 +119,12 @@ config.layout = {
   ['com.google.Chrome'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
+      grid.set(window, config.grid.fullScreen)
     else
       if window:title() == 'Postman' then
         grid.set(window, config.grid.centeredLarge, config.secondaryDisplay(count))
       else
-        grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
+        grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
       end
     end
   end),
@@ -123,13 +132,9 @@ config.layout = {
   ['com.mozilla.Firefox'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
+      grid.set(window, config.grid.fullScreen)
     else
-      if window:title() == 'Postman' then
-        grid.set(window, config.grid.centeredLarge, config.secondaryDisplay(count))
-      else
-        grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
-      end
+      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
     end
   end),
 
