@@ -65,6 +65,7 @@ function! LoadPlugs()
   Plug 'othree/csscomplete.vim'
   Plug 'hail2u/vim-css3-syntax'
   Plug 'cakebaker/scss-syntax.vim'
+  Plug 'othree/svg-properties-syntax.vim'
 
   "" Structure (HTML / HAML / SLIM)
   Plug 'othree/html5.vim'
@@ -693,6 +694,25 @@ function! Quick_scope_selective(movement)
     return a:movement . letter
 endfunction
 
+" Pulse the cursorline when focus is regained
+function! s:Pulse()
+  setlocal cursorline
+  redraw
+  sleep 100m
+
+  setlocal nocursorline
+  redraw
+  sleep 100m
+
+  setlocal cursorline
+  redraw
+  sleep 100m
+
+  setlocal nocursorline
+  redraw
+endfunction
+autocmd FocusGained * call s:Pulse()
+
 
 " =============================================================================
 " Autocommands #autocommands
@@ -719,6 +739,9 @@ augroup END
 
 " Delete trailing whitespace on write
 autocmd BufWrite * silent call DeleteTrailingWS()
+
+" Treat buffers from stdin as scratch.
+autocmd StdinReadPost * :set buftype=nofile
 
 augroup ColorColumnGroup
   " Color Column (only on insert)
@@ -837,6 +860,7 @@ augroup END
 augroup ft_ruby
   au!
   au FileType ruby let b:vcm_tab_complete = "tags"
+  au FileType ruby setlocal iskeyword+=_
 augroup END
 
 augroup ft_haml
@@ -877,14 +901,20 @@ augroup END
 " =============================================================================
 " Highlighting #highlights
 " -----------------------------------------------------------------------------
-highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
-highlight Search gui=underline term=underline guibg=#afaf87 guifg=#333333
-highlight Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold
-highlight Comment cterm=italic term=italic gui=italic
-highlight CursorLineNr guifg=white
+hi IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
+hi clear Search
+hi Search gui=underline term=underline guibg=#afaf87 guifg=#333333
+hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold
+hi Comment cterm=italic term=italic gui=italic
+hi CursorLineNr guifg=white
 
 match ErrorMsg 'debugger'
 match ErrorMsg 'binding.pry'
+
+au BufEnter *.js syn match ErrorMsg /console.log/
+au BufEnter *.js syn match ErrorMsg /debugger/
+au Filetype coffee syn match ErrorMsg /console.log/
+au BufEnter *.rb syn match ErrorMsg /binding.pry/
 
 " Highlight VCS conflict markers
 " @see {@link https://bitbucket.org/sjl/dotfiles/src/83aac563abc9d0116894ac61db2c63c9a05f72be/vim/vimrc?at=default&fileviewer=file-view-default#vimrc-233}
@@ -981,6 +1011,14 @@ nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
+
+" Jump to window <n>:
+" http://stackoverflow.com/a/6404246/151007
+let i = 1
+while i <= 9
+  execute 'nnoremap <Leader>'.i.' :'.i.'wincmd w<CR>'
+  let i = i + 1
+endwhile
 
 " Make arrowkey do something usefull, resize the viewports accordingly
 nnoremap <Left> <nop>
@@ -1149,12 +1187,6 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 " Insert the directory of the current buffer in command line mode
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-" stop arrow keys from typing A B C D
-map OA <up>
-map OB <Down>
-map OD <left>
-map OC <right>
 
 " Insert mode movements
 " Ctrl-e: Go to end of line
