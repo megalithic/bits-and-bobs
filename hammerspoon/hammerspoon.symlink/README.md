@@ -28,3 +28,5 @@ using it all willy-nilly.
 - [API Docs](http://www.hammerspoon.org/docs/)
 - [Lowne's Hammerspoon extensions](https://github.com/lowne/hammerspoon-extensions/blob/master/example.lua)
 - [Chris' personal config](https://github.com/cmsj/hammerspoon-config/blob/master/init.lua)
+- [devdelay](https://github.com/devdelay/home-assistant-config)
+- [asmagill-redshift](https://github.com/asmagill/hammerspoon-config/blob/master/utils/_keys/redshift.lua)

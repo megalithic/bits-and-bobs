@@ -264,11 +264,11 @@ end
 
 -- REDSHIFT
 -- ripped from https://github.com/asmagill/hammerspoon-config/blob/master/utils/_keys/redshift.lua
-redshift.start(2800,'21:00','7:00','4h')
+redshift.start(3400,'21:00','6:30','1h')
 _loopSleepWatcher = hs.caffeinate.watcher.new(function (event)
   local cw = hs.caffeinate.watcher
   if ({ [cw.systemDidWake] = 1, [cw.screensaverDidStop] = 1, })[event] then
-    redshift.start(2800,'21:00','7:00','4h')
+    redshift.start(3400,'21:00','6:30','1h')
   elseif ({ [cw.systemWillSleep] = 1, [cw.screensaverDidStart] = 1, })[event] then
     redshift.stop()
   end

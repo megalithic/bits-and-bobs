@@ -680,11 +680,11 @@ endfunction
 " -----------------------------------------------------------------------------
 augroup UnSyntaxInactiveGroup
   autocmd!
-  autocmd FocusGained,BufEnter,WinEnter * set syntax=ON
-  autocmd FocusGained,BufEnter,WinEnter * set number
+  autocmd BufEnter,WinEnter * set syntax=ON
+  autocmd BufEnter,WinEnter * set number
   " autocmd BufEnter,WinEnter * set cursorline
 
-  autocmd FocusLost,BufLeave,WinLeave * set syntax=OFF
+  autocmd BufLeave,WinLeave * set syntax=OFF
   autocmd BufLeave,WinLeave * set nonumber
   " autocmd BufLeave,WinLeave * set nocursorline
 augroup END
