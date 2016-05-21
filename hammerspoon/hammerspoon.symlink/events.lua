@@ -14,7 +14,6 @@ local eventsWatcher = hs.uielement.watcher
 -- :: globals
 local watchers = {}
 local globalAppWatcher = nil
-local screenWatcher = nil
 local wifiWatcher = nil
 local usbWatcher = nil
 local caffeinateWatcher = nil
@@ -150,7 +149,6 @@ function handleScreenEvent()
   -- Make sure that something noteworthy (display count) actually
   -- changed. We no longer check geometry because we were seeing spurious
   -- events.
-  local screens = hs.screen.allScreens()
 
   utils.log.df('[screen] event; new screens (%s), previous screens (%s)', #screens, screenCount)
 
@@ -264,15 +262,15 @@ end
 
 -- REDSHIFT
 -- ripped from https://github.com/asmagill/hammerspoon-config/blob/master/utils/_keys/redshift.lua
-redshift.start(3400,'21:00','6:30','1h')
-_loopSleepWatcher = hs.caffeinate.watcher.new(function (event)
-  local cw = hs.caffeinate.watcher
-  if ({ [cw.systemDidWake] = 1, [cw.screensaverDidStop] = 1, })[event] then
-    redshift.start(3400,'21:00','6:30','1h')
-  elseif ({ [cw.systemWillSleep] = 1, [cw.screensaverDidStart] = 1, })[event] then
-    redshift.stop()
-  end
-end):start()
+-- redshift.start(3400,'21:00','6:30','1h')
+-- _loopSleepWatcher = hs.caffeinate.watcher.new(function (event)
+--   local cw = hs.caffeinate.watcher
+--   if ({ [cw.systemDidWake] = 1, [cw.screensaverDidStop] = 1, })[event] then
+--     redshift.start(3400,'21:00','6:30','1h')
+--   elseif ({ [cw.systemWillSleep] = 1, [cw.screensaverDidStart] = 1, })[event] then
+--     redshift.stop()
+--   end
+-- end):start()
 
 -- INIT ALL THE EVENTS
 function events.initEventHandling ()
@@ -311,6 +309,8 @@ function events.initEventHandling ()
     caffeinateWatcher = hs.caffeinate.watcher.new(handleCaffeinateEvent)
     caffeinateWatcher:start()
   end
+
+  config.applyLayout()
 end
 
 -- TEAR DOWN ALL THE EVENTS

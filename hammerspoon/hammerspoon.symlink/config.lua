@@ -24,12 +24,10 @@ hs.window.animationDuration = 0 -- 0 to disable animations
 hs.window.setShadows(true)
 
 -- :: screens
-local primary = hs.screen:primaryScreen()
-local secondary = primary:previous()
 config.screens = {
   laptop = 'Built-in Retina Display',
-  primary = primary,
-  secondary = secondary
+  primary = 724049870,
+  secondary = 724069583
 }
 
 -- GRID SETUP
@@ -62,17 +60,13 @@ config.layout = {
 
   ['com.tapbots.TweetbotMac'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.leftTwoThirds)
-    else
-      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
-    end
+    grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
   end),
 
   ['com.tinyspeck.slackmacgap'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.rightHalf)
+      grid.set(window, config.grid.rightHalf, config.primaryDisplay(count))
     else
       grid.set(window, config.grid.rightOneThird, config.secondaryDisplay(count))
     end
@@ -81,7 +75,7 @@ config.layout = {
   ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.leftHalf)
+      grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))
     else
       grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
     end
@@ -94,11 +88,7 @@ config.layout = {
 
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, '5,5 3x3')
-    else
-      grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
-    end
+    grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
   end),
 
   ['com.agilebits.onepassword4'] = (function(window, forceScreenCount)
@@ -107,9 +97,14 @@ config.layout = {
   end),
 
   ['org.hammerspoon.Hammerspoon'] = (function(window, forceScreenCount)
-     local count = forceScreenCount or screenCount
-     grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
-   end),
+    local count = forceScreenCount or screenCount
+    grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
+  end),
+
+  ['com.apple.systempreferences'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, config.grid.centeredLarge, config.primaryDisplay(count))
+  end),
 
   ['2BUA8C4S2C.com.agilebits.onepassword4-helper'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
@@ -119,7 +114,7 @@ config.layout = {
   ['com.google.Chrome'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.fullScreen)
+      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
     else
       if window:title() == 'Postman' then
         grid.set(window, config.grid.centeredLarge, config.secondaryDisplay(count))
@@ -132,22 +127,11 @@ config.layout = {
   ['com.mozilla.Firefox'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.fullScreen)
+      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
     else
       grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
     end
   end),
-
-  -- FIXME: presently iTerm2 handles it's own placement :confused:
-  -- sooooooo, we ignore trying to fight iTerm2 for now.
-  --
-  -- ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
-  --   if config.isFullScreen(window) then
-  --     window:setFullScreen(false)
-  --   else
-  --     window:setFullScreen(true)
-  --   end
-  -- end)
 }
 
 
@@ -156,18 +140,27 @@ config.layout = {
 -- NOTE: if you have more than 2 displays, please
 -- alter the following display functions as necessary
 function config.primaryDisplay(count)
-  if (hostname == 'replibox') then
+  if (config.hostname == 'replibox') then
+    utils.log.df('[layout] event; using primary screen %s', hs.screen.find(config.screens.primary))
     return hs.screen.find(config.screens.primary)
   end
 
+  utils.log.df('[layout] event; using laptop screen %s', hs.screen.find(config.screens.laptop))
   return hs.screen.find(config.screens.laptop)
 end
 
 function config.secondaryDisplay(count)
-  if (hostname == 'replibox') then
+  if (config.hostname == 'replibox') then
+    if count == 1 then
+      utils.log.df('[layout] event; using primary screen %s', hs.screen.find(config.screens.primary))
+      return hs.screen.find(config.screens.primary)
+    end
+
+    utils.log.df('[layout] event; using secondary screen %s', hs.screen.find(config.screens.secondary))
     return hs.screen.find(config.screens.secondary)
   end
 
+  utils.log.df('[layout] event; using laptop screen %s', hs.screen.find(config.screens.laptop))
   return hs.screen.find(config.screens.laptop)
 end
 
@@ -183,6 +176,7 @@ function config.applyLayout(screenCountOverride)
   local count = screenCountOverride or screenCount
 
   utils.log.df('[layout] event; applying layouts for %s screens', count)
+
   config.layout._before_()
 
   for bundleID, callback in pairs(config.layout) do
@@ -191,8 +185,8 @@ function config.applyLayout(screenCountOverride)
       local windows = application:visibleWindows()
       for _, window in pairs(windows) do
         if utils.canManageWindow(window) then
-          utils.log.df('[layout] event; layout applied for app: %s, window: %s, screen count: %s', application:name(), window, count)
           callback(window, count)
+          utils.log.df('[layout] event; layout applied for app: %s, window: %s, screen count: %s', application:name(), window:title(), count)
         end
       end
     end
