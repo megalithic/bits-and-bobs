@@ -1,5 +1,6 @@
 private
 .DS_Store
+**/*.DS_Store
 **/.DS_Store
 teamocil/teamocil
 npm-debug.log
@@ -7,3 +8,4 @@ npm-debug.log
 **/noter.rb
 **/*.ti
 **/.cask
+config/config.symlink/nvim/plugged
