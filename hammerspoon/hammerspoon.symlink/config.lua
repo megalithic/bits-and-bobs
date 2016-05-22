@@ -103,7 +103,7 @@ config.layout = {
 
   ['com.apple.systempreferences'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    grid.set(window, config.grid.centeredLarge, config.primaryDisplay(count))
+    grid.set(window, config.grid.centeredSmall, config.primaryDisplay(count))
   end),
 
   ['2BUA8C4S2C.com.agilebits.onepassword4-helper'] = (function(window, forceScreenCount)

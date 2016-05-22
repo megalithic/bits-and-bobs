@@ -220,6 +220,8 @@ function watchWindow(window)
         watcher:start({eventsWatcher.elementDestroyed})
       end
     end
+  else
+    utils.log.df('[window] event; unable to watch unmanageable %s (window %s, ID %s, %s windows)', bundleID, window:title(), id, utils.windowCount(application))
   end
 end
 

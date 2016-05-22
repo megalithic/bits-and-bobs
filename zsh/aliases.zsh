@@ -105,7 +105,7 @@ alias ezc="v ~/.dotfiles/zsh/config.zsh"
 alias eze="v ~/.dotfiles/zsh/env.zsh"
 alias ezp="v ~/.dotfiles/zsh/path.zsh"
 alias ezkb="v ~/.dotfiles/zsh/keybindings.zsh"
-alias ev="v ~/.dotfiles/vim/vimrc.symlink"
+alias ev="v ~/.dotfiles/config/config.symlink/nvim/init.vim"
 alias et="v ~/.dotfiles/tmux/tmux.conf.symlink"
 
 # FOLDERS

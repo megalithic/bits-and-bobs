@@ -15,7 +15,6 @@ tap 'neovim/homebrew-neovim'
 tap 'homebrew/bundle'
 tap 'homebrew/dev-tools'
 tap 'homebrew/services'
-tap 'railwaycat/emacsmacport'
 tap 'mopidy/mopidy'
 
 brew 'coreutils'
@@ -28,12 +27,10 @@ brew 'bash-completion'
 brew 'homebrew/versions/bash-completion2'
 brew 'bash-git-prompt'
 brew 'bash-preexec'
-brew 'cask' # <-- this is an emacs package manager
 brew 'choppsv1/term24/tmux'
 # brew 'tmux', args: ['--HEAD']
 brew 'chruby'
 brew 'diff-so-fancy'
-brew 'railwaycat/emacsmacport/emacs-mac'
 brew 'erlang'
 brew 'elasticsearch'
 brew 'extract_url'
@@ -76,7 +73,6 @@ brew 'tig'
 brew 'tmate'
 brew 'urlview'
 brew 'tree'
-brew 'vim', args: ['with-lua', 'with-perl', 'with-python3', 'with-python', 'with-ruby', 'override-system-vi', 'with-luajit', 'override-system-vim', 'with-clientserver']
 brew 'weechat', args: ['with-ruby', 'with-python', 'with-perl', 'with-lua', 'with-aspell', 'with-javascript', 'with-curl', 'with-guile']
 brew 'wget', args: ['enable-iri']
 brew 'zsh'
