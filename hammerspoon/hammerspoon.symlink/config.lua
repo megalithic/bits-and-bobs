@@ -132,6 +132,15 @@ config.layout = {
       grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
     end
   end),
+
+  ['com.electron.brave'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    if count == 1 then
+      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
+    else
+      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
+    end
+  end),
 }
 
 
