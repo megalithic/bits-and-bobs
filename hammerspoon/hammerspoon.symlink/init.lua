@@ -68,14 +68,27 @@ hotkey.bind('', 'F12', function ()
   end
 end)
 -- / Tmux window selection via cmd + 1-9
-for i = 1, 9 do
-  hotkey.bind('cmd', ''..i..'', function ()
-    local win = hs.window.focusedWindow()
-    if win ~= nil and win:application():bundleID() == 'com.googlecode.iterm2' then
-      hs.execute('tmux select-window -t '..i, true)
-    end
-  end)
-end
+-- for i = 1, 9 do
+--   hotkey.bind('cmd', ''..i..'', function ()
+--     local win = hs.window.focusedWindow()
+--     if win ~= nil and win:application():bundleID() == 'com.googlecode.iterm2' then
+--       hs.execute('tmux select-window -t '..i, true)
+--     end
+--   end)
+-- end
+
+-- hotkey.bind('cmd', '1', function ()
+--   local win = hs.window.focusedWindow()
+--   if win ~= nil and win:application():bundleID() == 'com.googlecode.iterm2' then
+--     hs.execute("tmux select-window -t 1", true)
+--   end
+-- end)
+-- hotkey.bind('cmd', '2', function ()
+--   local win = hs.window.focusedWindow()
+--   if win ~= nil and win:application():bundleID() == 'com.googlecode.iterm2' then
+--     hs.execute("tmux select-window -t 2", true)
+--   end
+-- end)
 
 -- :: redshift
 hotkey.bind(cmdCtrl, 'F11', function()
