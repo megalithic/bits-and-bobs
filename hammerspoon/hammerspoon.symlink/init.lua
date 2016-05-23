@@ -36,12 +36,12 @@ hotkey.bind(ctrlAlt, 'r', function() hs.toggleConsole() end)
 hotkey.bind(cmdCtrl, 'g', function() hs.grid.toggleShow() end)
 hotkey.bind(mashShift, 'L', function()
   hs.caffeinate.startScreensaver()
-  end)
+end)
 hotkey.bind(cmdCtrl, 'r', function()
   wm.events.tearDownEventHandling()
   hs.reload()
   hs.notify.show('Hammerspoon', 'Config Reloaded', '')
-  end)
+end)
 
 -- :: media
 hotkey.bind('ctrl', 114, function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- insert key
@@ -67,60 +67,69 @@ hotkey.bind('', 'F12', function ()
     hs.eventtap.keyStroke(cmdAlt, "i")
   end
 end)
+-- / Tmux window selection via cmd + 1-9
+for i = 1, 9 do
+  hotkey.bind('cmd', ''..i..'', function ()
+    local win = hs.window.focusedWindow()
+    if win ~= nil and win:application():bundleID() == 'com.googlecode.iterm2' then
+      hs.execute('tmux select-window -t '..i, true)
+    end
+  end)
+end
 
 -- :: redshift
 hotkey.bind(cmdCtrl, 'F11', function()
   hs.notify.show('Hammerspoon', 'Redshift', 'Toggle Invert')
   redshift.toggleInvert()
-  end)
+end)
 
 hotkey.bind(cmdCtrl, 'F12', function()
   hs.notify.show('Hammerspoon', 'Redshift', 'Toggle Redshift')
   redshift.toggle()
-  end)
+end)
 
 -- :: window manipulation
 hotkey.bind(cmdCtrl, 'h', utils.chain({
   wm.config.grid.leftHalf,
   wm.config.grid.leftOneThird,
   wm.config.grid.leftTwoThirds,
-  }))
+}))
 
 hotkey.bind(cmdCtrl, 'k', utils.chain({
   wm.config.grid.fullScreen,
-  }))
+}))
 
 hotkey.bind(cmdCtrl, 'l', utils.chain({
   wm.config.grid.rightHalf,
   wm.config.grid.rightOneThird,
   wm.config.grid.rightTwoThirds,
-  }))
+}))
 
 hotkey.bind(cmdCtrl, 'j', utils.chain({
   wm.config.grid.centeredLarge,
   wm.config.grid.centeredMedium,
   wm.config.grid.centeredSmall,
-  }))
+}))
 
 hotkey.bind(ctrlAlt, 'h', function()
   local win = hs.window.focusedWindow()
   local nextScreen = win:screen():previous()
   win:moveToScreen(nextScreen)
-  end)
+end)
 
 hotkey.bind(ctrlAlt, 'l', function()
   local win = hs.window.focusedWindow()
   local nextScreen = win:screen():next()
   win:moveToScreen(nextScreen)
-  end)
+end)
 
 -- :: monitor layout overrides
 hotkey.bind(cmdCtrl, '1', (function()
   wm.config.applyLayout(1)
   hs.notify.show('Hammerspoon', 'Loading single-monitor layout', '')
-  end))
+end))
 
 hotkey.bind(cmdCtrl, '2', (function()
   wm.config.applyLayout(2)
   hs.notify.show('Hammerspoon', 'Loading dual-monitor layout', '')
-  end))
+end))
