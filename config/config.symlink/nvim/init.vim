@@ -440,7 +440,7 @@ let g:neomake_javascript_enabled_makers = ['standard']
 " endfunction
 let g:neomake_javascript_standard_maker = {
   \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-  \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m, %W%f: line %l\, col %c\, Warning - %m'
+  \ 'errorformat': '  %f:%l:%c: %m'
   \ }
 
 let g:neomake_jsx_enabled_makers = ['standard']
@@ -452,12 +452,12 @@ au BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
 au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
 au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
 
-function! JscsFix()
-  let l:winview = winsaveview()
-  % ! jscs -x
-  call winrestview(l:winview)
-endfunction
-command JscsFix :call JscsFix()
+" function! JscsFix()
+"   let l:winview = winsaveview()
+"   % ! jscs -x
+"   call winrestview(l:winview)
+" endfunction
+" command JscsFix :call JscsFix()
 " noremap <leader>j :JscsFix<CR>
 
 """"""" rainbow

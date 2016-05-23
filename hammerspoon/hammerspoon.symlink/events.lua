@@ -149,6 +149,7 @@ function handleScreenEvent()
   -- Make sure that something noteworthy (display count) actually
   -- changed. We no longer check geometry because we were seeing spurious
   -- events.
+  local screens = hs.screen.allScreens()
 
   utils.log.df('[screen] event; new screens (%s), previous screens (%s)', #screens, screenCount)
 
