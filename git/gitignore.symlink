@@ -15,3 +15,5 @@ zeus.json
 *.swp
 *.rbc
 ~/.weeslack/slack.cache
+**/fonts
+fonts

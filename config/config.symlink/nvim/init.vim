@@ -711,7 +711,7 @@ function! s:Pulse()
   setlocal nocursorline
   redraw
 endfunction
-autocmd FocusGained * call s:Pulse()
+" autocmd FocusGained * call s:Pulse()
 
 
 " =============================================================================

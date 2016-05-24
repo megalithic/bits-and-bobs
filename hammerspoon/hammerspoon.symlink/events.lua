@@ -7,7 +7,6 @@ local events = {}
 -- :: imports/requires
 local config = require 'config'
 local utils = require 'utils'
-local redshift = require 'hs.redshift'
 local wf = hs.window.filter
 local eventsWatcher = hs.uielement.watcher
 
@@ -263,17 +262,6 @@ function handleCaffeinateEvent (eventType)
   end
 end
 
--- REDSHIFT
--- ripped from https://github.com/asmagill/hammerspoon-config/blob/master/utils/_keys/redshift.lua
-redshift.start(3400,'21:00','6:30','1h')
-_loopSleepWatcher = hs.caffeinate.watcher.new(function (event)
-  local cw = hs.caffeinate.watcher
-  if ({ [cw.systemDidWake] = 1, [cw.screensaverDidStop] = 1, })[event] then
-    redshift.start(3400,'21:00','6:30','1h')
-  elseif ({ [cw.systemWillSleep] = 1, [cw.screensaverDidStart] = 1, })[event] then
-    redshift.stop()
-  end
-end):start()
 
 -- INIT ALL THE EVENTS
 function events.initEventHandling ()

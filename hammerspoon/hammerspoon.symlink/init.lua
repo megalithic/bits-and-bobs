@@ -3,15 +3,13 @@
 -------------------------------------------------------------------------------
 
 -- :: imports/requires
+-- require 'mpd'
+require 'redshift'
+
 local utils = require 'utils'
 local wm = require 'wm'
 local hotkey = require 'hs.hotkey'
-local redshift = require 'hs.redshift'
 local settings   = require 'hs.settings'
-
--- :: settings
-settings.clear('hs.redshift.inverted.override')
-settings.clear('hs.redshift.disabled.override')
 
 -- Ensure the IPC command line client is available
 -- NOTE: this is failing with some hs and hs.1 type stuff
@@ -76,30 +74,6 @@ end)
 --     end
 --   end)
 -- end
-
--- hotkey.bind('cmd', '1', function ()
---   local win = hs.window.focusedWindow()
---   if win ~= nil and win:application():bundleID() == 'com.googlecode.iterm2' then
---     hs.execute("tmux select-window -t 1", true)
---   end
--- end)
--- hotkey.bind('cmd', '2', function ()
---   local win = hs.window.focusedWindow()
---   if win ~= nil and win:application():bundleID() == 'com.googlecode.iterm2' then
---     hs.execute("tmux select-window -t 2", true)
---   end
--- end)
-
--- :: redshift
-hotkey.bind(cmdCtrl, 'F11', function()
-  hs.notify.show('Hammerspoon', 'Redshift', 'Toggle Invert')
-  redshift.toggleInvert()
-end)
-
-hotkey.bind(cmdCtrl, 'F12', function()
-  hs.notify.show('Hammerspoon', 'Redshift', 'Toggle Redshift')
-  redshift.toggle()
-end)
 
 -- :: window manipulation
 hotkey.bind(cmdCtrl, 'h', utils.chain({
