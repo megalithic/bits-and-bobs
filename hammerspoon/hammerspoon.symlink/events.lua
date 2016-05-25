@@ -286,9 +286,12 @@ function events.initEventHandling ()
     end
   end
 
-  -- Watch for wifi/ssid changes
-  wifiWatcher = hs.wifi.watcher.new(handleWifiEvent)
-  wifiWatcher:start()
+  -- Only init these watchers for my laptop
+  if (config.hostname ~= 'replibox') then
+    -- Watch for wifi/ssid changes
+    wifiWatcher = hs.wifi.watcher.new(handleWifiEvent)
+    wifiWatcher:start()
+  end
 
   -- Only init these watchers for my desktop
   if (config.hostname == 'replibox') then
@@ -318,14 +321,18 @@ function events.tearDownEventHandling ()
   screenWatcher:stop()
   screenWatcher = nil
 
-  wifiWatcher:stop()
-  wifiWatcher = nil
+  if (config.hostname ~= 'replibox') then
+    wifiWatcher:stop()
+    wifiWatcher = nil
+  end
 
-  usbWatcher:stop()
-  usbWatcher = nil
+  if (config.hostname == 'replibox') then
+    usbWatcher:stop()
+    usbWatcher = nil
 
-  caffeinateWatcher:stop()
-  caffeinateWatcher = nil
+    caffeinateWatcher:stop()
+    caffeinateWatcher = nil
+  end
 
   -- potentially a bad thing to do this..
   -- allWindows:unsubscribeAll()
