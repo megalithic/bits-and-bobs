@@ -15,5 +15,3 @@ zeus.json
 *.rbc
 ~/.weeslack/slack.cache
 ~/.config/nvim/plugged
-**/fonts
-fonts
