@@ -98,6 +98,11 @@ config.layout = {
     grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
   end),
 
+  ['com.github.radiant-player'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
+  end),
+
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
