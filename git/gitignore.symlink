@@ -11,9 +11,9 @@ tmp/**/*
 !tmp/cache/.keep
 zeus.json
 .svn
-*~
 *.swp
 *.rbc
 ~/.weeslack/slack.cache
+~/.config/nvim/plugged
 **/fonts
 fonts

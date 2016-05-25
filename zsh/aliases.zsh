@@ -196,36 +196,9 @@ alias it="git"
 alias gpreq="~/.dotfiles/bin/git-pr"
 alias preq=gpreq
 alias req=gpreq
-alias push="git push -u"
-alias pull="git pull"
-alias grm="git rm -r"
-alias gc="git clone"
-alias clone="git clone"
-alias gcv="git commit -v"
-alias gcm="git commit -m"
-alias com="git commit"
-alias gf="git fetch"
-alias gm="git merge"
-alias gmt="git mergetool"
-# alias gcom="git checkout master"
-# alias gcod="git checkout development"
-# alias gpom="git push origin master"
-# alias gpod="git push origin development"
-# alias gpum="git push upstream master"
-alias gfo="git fetch origin"
-alias gpo="git push origin -u"
-# alias gfom="git fetch && git merge origin/master"
-# alias gfod="git fetch && git merge origin/development" # will need to change this to origin/develop for NORMAL github repo setup
-# alias gfum="git fetch upstream && git merge upstream/master"
-alias gg="git grep -niI --color=auto"
-alias gco="git checkout"
 alias changes="git diff --cached"
-alias gd="git diff"
 alias reset="git reset --hard HEAD"
-alias gs="git status -s"
-alias gt="git tree"
 alias log="git log --stat"
-alias mxm="git fetch mxm && git merge mxm/develop"
 alias show='git show --pretty="format:" --name-only '
 alias branch='git for-each-ref --sort=-committerdate refs/heads/ | less'
 alias glog="git l"
@@ -233,12 +206,10 @@ alias dangled="git fsck --no-reflog | awk '/dangling commit/ {print $3}'" #gitk 
 alias conflicts="git diff --name-only --diff-filter=U"
 alias conflicted="git ls-files -u | cut -f 2 | sort -u"
 alias uncommit="git reset --soft 'HEAD^'" # re-commit with `git commit -c ORIG_HEAD`
-alias gap="git add --patch"
-alias gaa="git aa"
 alias gex="git archive master | tar -x -C" # update this to support more than the master branch
-alias rebase="git pull --rebase origin master"
-alias grm="git status | grep deleted | awk '{\$1=\$2=\"\"; print \$0}' | \
-           perl -pe 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
+# alias rebase="git pull --rebase origin master"
+# alias grm="git status | grep deleted | awk '{\$1=\$2=\"\"; print \$0}' | \
+#            perl -pe 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
 
 
 # REACT / REACT-NATIVE

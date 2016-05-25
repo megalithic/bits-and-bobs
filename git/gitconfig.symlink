@@ -36,6 +36,7 @@
   cv = commit -v
   cm = commit -m
   ca = commit --amend
+  cp = commit -p
 
   co = checkout
   cob = checkout -b

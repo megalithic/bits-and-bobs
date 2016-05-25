@@ -74,7 +74,9 @@ config.layout = {
 
   ['com.flexibits.fantastical2.mac'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
+    if utils.canManageWindow(window) then
+      grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
+    end
   end),
 
   ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
