@@ -167,26 +167,26 @@ config.layout = {
 -- alter the following display functions as necessary
 function config.primaryDisplay(count)
   if (config.hostname == 'replibox') then
-    utils.log.df('[layout] screen event; using primary screen %s', hs.screen.find(config.screens.primary))
+    -- utils.log.df('[layout] screen event; using primary screen %s', hs.screen.find(config.screens.primary))
     return hs.screen.find(config.screens.primary)
   end
 
-  utils.log.df('[layout] screen event; using laptop screen %s', hs.screen.find(config.screens.laptop))
+  -- utils.log.df('[layout] screen event; using laptop screen %s', hs.screen.find(config.screens.laptop))
   return hs.screen.find(config.screens.laptop)
 end
 
 function config.secondaryDisplay(count)
   if (config.hostname == 'replibox') then
     if count == 1 then
-      utils.log.df('[layout] screen event; using primary screen %s', hs.screen.find(config.screens.primary))
+      -- utils.log.df('[layout] screen event; using primary screen %s', hs.screen.find(config.screens.primary))
       return hs.screen.find(config.screens.primary)
     end
 
-    utils.log.df('[layout] screen event; using secondary screen %s', hs.screen.find(config.screens.secondary))
+    -- utils.log.df('[layout] screen event; using secondary screen %s', hs.screen.find(config.screens.secondary))
     return hs.screen.find(config.screens.secondary)
   end
 
-  utils.log.df('[layout] screen event; using laptop screen %s', hs.screen.find(config.screens.laptop))
+  -- utils.log.df('[layout] screen event; using laptop screen %s', hs.screen.find(config.screens.laptop))
   return hs.screen.find(config.screens.laptop)
 end
 
