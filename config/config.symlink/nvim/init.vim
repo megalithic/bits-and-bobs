@@ -36,15 +36,16 @@ filetype off
 " -----------------------------------------------------------------------------
 function! LoadPlugs()
   """"" UI ==================================================================
-  Plug 'Mattias-/base16-vim' " this fork fixes the stinking term color issues
-  Plug 'morhetz/gruvbox'
+  " Plug 'morhetz/gruvbox'
+  " Plug 'junegunn/seoul256.vim'
+  " Plug 'Mattias-/base16-vim' " this fork fixes the stinking term color issues
+  Plug 'snooc/base16-vim'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
-  " Plug 'justinmk/vim-dirvish'
   Plug 'ap/vim-readdir'
   Plug 'tpope/vim-dispatch'
 
@@ -114,6 +115,8 @@ function! LoadPlugs()
   endfunction
   Plug 'shougo/deoplete.nvim', { 'do': function('DoUpdateRemotePlugins') }
   Plug 'Konfekt/FastFold'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'FelikZ/ctrlp-py-matcher'
   Plug 'mileszs/ack.vim'
@@ -170,11 +173,11 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 """"" UI ====================================================================
 """"""" Theme / Terminal
-" colorscheme base16-ocean
 set background=dark
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark="soft"
-colorscheme gruvbox
+" let g:gruvbox_italic=1
+" let g:gruvbox_contrast_dark="soft"
+" colorscheme gruvbox
+colorscheme base16-ocean
 
 filetype plugin indent on
 
@@ -373,7 +376,7 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#neomake#enabled = 1
-let g:airline_theme='gruvbox' "'base16_ocean'
+let g:airline_theme='base16_ocean' "'base16_ocean'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
