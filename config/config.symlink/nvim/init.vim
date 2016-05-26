@@ -91,10 +91,10 @@ function! LoadPlugs()
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-endwise' " automagically add end/endfunction/endif/etc
   Plug 'tpope/vim-surround'
-    " - {Visual}S<arg> surrounds selection
-    " - cs/ds<arg1><arg2> change / delete
-    " - ys<obj><arg> surrounds text object
-    " - yss<arg> for entire line
+  " - {Visual}S<arg> surrounds selection
+  " - cs/ds<arg1><arg2> change / delete
+  " - ys<obj><arg> surrounds text object
+  " - yss<arg> for entire line
   Plug 'tpope/vim-repeat'
   Plug 'janko-m/vim-test'
   Plug 'Valloric/MatchTagAlways', { 'for': ['html', 'erb'] }
@@ -127,10 +127,10 @@ function! LoadPlugs()
   " provide a_ and i_ for underscores
   " provide a- and i-
   Plug 'kana/vim-textobj-user'
-    \| Plug 'kana/vim-textobj-indent'
-    \| Plug 'kana/vim-textobj-line'
-    \| Plug 'mattn/vim-textobj-url'
-    \| Plug 'kana/vim-textobj-fold'
+        \| Plug 'kana/vim-textobj-indent'
+        \| Plug 'kana/vim-textobj-line'
+        \| Plug 'mattn/vim-textobj-url'
+        \| Plug 'kana/vim-textobj-fold'
 
   """"" Git/Gist ============================================================
   Plug 'tpope/vim-git'
@@ -226,28 +226,16 @@ set noshowcmd
 
 """"" Behavior ==============================================================
 """"""" Swaps / Backups / Sessions / History
-set undodir=/tmp
+if !isdirectory($HOME."/tmp") && exists("*mkdir")
+  call mkdir($HOME."/tmp", "p", 0700)
+endif
+set undodir=$HOME/tmp
 set undofile
 set undoreload=500
 set undolevels=500
-
-if !strlen($SUDO_USER) && has("unix")
-  " Don't store swaps in . -- store in ~/.vim/tmp/swap/%path%to%orig.swp
-  set directory=~/.vim/tmp/swap//,.,/var/tmp
-  " Don't store backups in . -- store in ~/.vim/tmp/backup/%path%to%orig~
-  set backupdir=~/.vim/tmp/backup//,.,/var/tmp
-  " Create tmp/ dir if it doesn't exist
-  if !isdirectory($HOME."/.vim/tmp") && exists("*mkdir")
-    call mkdir($HOME."/.vim/tmp/swap", "p", 0700)
-    call mkdir($HOME."/.vim/tmp/backup", "p", 0700)
-  endif
-else
-  set nobackup
-  set nowritebackup
-  set noswapfile
-endif
-
-set noswapfile "override because i hate swap files
+set nobackup
+set nowritebackup
+set noswapfile
 
 set sessionoptions-=options " Do not save settings and mappings to sessions
 
@@ -400,14 +388,14 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 0
 " let g:airline_extensions = ['mode','crypt','paste','iminsert','branch','filename','readonly','filetype','fileencoding','fileformat','percentage','line number','column number','whitespace']
 let g:airline_mode_map = {
-    \ 'n' : 'NORMAL',
-    \ 'i' : 'INSERT',
-    \ 'R' : 'REPLACE',
-    \ 'v' : 'VISUAL',
-    \ 'V' : 'V-LINE',
-    \ 'c' : 'CMD   ',
-    \ '': 'V-BLCK',
-    \ }
+      \ 'n' : 'NORMAL',
+      \ 'i' : 'INSERT',
+      \ 'R' : 'REPLACE',
+      \ 'v' : 'VISUAL',
+      \ 'V' : 'V-LINE',
+      \ 'c' : 'CMD   ',
+      \ '': 'V-BLCK',
+      \ }
 
 """"""" neomake
 " -- Settings derived from:
@@ -418,14 +406,14 @@ let g:neomake_verbose = 0
 let g:neomake_serialize = 1
 
 let g:neomake_error_sign = {
-  \ 'text': '☓',
-  \ 'texthl': 'Error',
-  \ }
+      \ 'text': '☓',
+      \ 'texthl': 'Error',
+      \ }
 
 let g:neomake_warning_sign = {
-  \ 'text': '◦',
-  \ 'texthl': 'Error',
-  \ }
+      \ 'text': '◦',
+      \ 'texthl': 'Error',
+      \ }
 
 let g:neomake_yaml_enabled_makers = ['yamllint']
 
@@ -446,13 +434,13 @@ let g:neomake_javascript_enabled_makers = ['standard']
 "         \ }
 " endfunction
 let g:neomake_javascript_standard_maker = {
-  \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-  \ 'errorformat': '  %f:%l:%c: %m'
-  \ }
+      \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+      \ 'errorformat': '  %f:%l:%c: %m'
+      \ }
 
 let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker =
-  \ g:neomake_javascript_standard_maker
+      \ g:neomake_javascript_standard_maker
 
 " Check for lint errors on write
 au BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
@@ -469,8 +457,8 @@ au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
 
 """"""" rainbow
 let g:rainbow_conf = {
-  \ 'separately' : { 'agsv' : 0 }
-  \ }
+      \ 'separately' : { 'agsv' : 0 }
+      \ }
 let g:rainbow_active = 1
 
 """"""" vim-test
@@ -553,21 +541,21 @@ let g:ctrlp_max_files = 0              " no restriction on results/file list
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
-    \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
-    \ }
+      \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
+      \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
+      \ }
 let g:ctrlp_user_command = 'ag %s -i -l --nocolor --nogroup --hidden -g ""'
 let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
-    \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-    \ 'AcceptSelection("t")': ['<c-t>'],
-    \ 'AcceptSelection("v")': ['<cr>', '<RightMouse>'],
-    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
-    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
-    \ 'PrtHistory(-1)':       ['<c-n>'],
-    \ 'PrtHistory(1)':        ['<c-p>'],
-    \ 'ToggleFocus()':        ['<c-tab>'],
-    \}
+      \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
+      \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+      \ 'AcceptSelection("t")': ['<c-t>'],
+      \ 'AcceptSelection("v")': ['<cr>', '<RightMouse>'],
+      \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+      \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+      \ 'PrtHistory(-1)':       ['<c-n>'],
+      \ 'PrtHistory(1)':        ['<c-p>'],
+      \ 'ToggleFocus()':        ['<c-tab>'],
+      \}
 
 """"""" ack.vim
 set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
@@ -685,20 +673,20 @@ endfunction
 
 " QuickScope, used in conjunction with keybinding overrides
 function! Quick_scope_selective(movement)
-    let needs_disabling = 0
-    if !g:qs_enable
-        QuickScopeToggle
-        redraw
-        let needs_disabling = 1
-    endif
+  let needs_disabling = 0
+  if !g:qs_enable
+    QuickScopeToggle
+    redraw
+    let needs_disabling = 1
+  endif
 
-    let letter = nr2char(getchar())
+  let letter = nr2char(getchar())
 
-    if needs_disabling
-        QuickScopeToggle
-    endif
+  if needs_disabling
+    QuickScopeToggle
+  endif
 
-    return a:movement . letter
+  return a:movement . letter
 endfunction
 
 " Pulse the cursorline when focus is regained
@@ -738,10 +726,10 @@ augroup END
 augroup RestoreCursorPosition
   autocmd!
   autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   execute 'normal! g`"zvzz' |
-    " \   execute 'normal g`\"' |
-    \ endif
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   execute 'normal! g`"zvzz' |
+  " \   execute 'normal g`\"' |
+        \ endif
 augroup END
 
 " Delete trailing whitespace on write
