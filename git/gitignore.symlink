@@ -15,3 +15,5 @@ zeus.json
 *.rbc
 ~/.weeslack/slack.cache
 ~/.config/nvim/plugged
+~/.config/nvim/.init.vim-rplugin~
+~/.config/nvim/.init.vim-rplugin\~
