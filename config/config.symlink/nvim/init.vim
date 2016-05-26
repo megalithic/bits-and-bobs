@@ -37,6 +37,7 @@ filetype off
 function! LoadPlugs()
   """"" UI ==================================================================
   Plug 'Mattias-/base16-vim' " this fork fixes the stinking term color issues
+  Plug 'morhetz/gruvbox'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
@@ -168,8 +169,12 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 """"" UI ====================================================================
 """"""" Theme / Terminal
-colorscheme base16-ocean
+" colorscheme base16-ocean
 set background=dark
+let g:gruvbox_italic=1
+let g:gruvbox_italicize_strings=1
+let g:gruvbox_contrast_dark="soft"
+colorscheme gruvbox
 
 filetype plugin indent on
 
@@ -184,14 +189,12 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
-" set rtp+=~/.fzf
-
 """"""" Updated vim regex engine
 set re=1
 
 """"""" Layout
 set linebreak
-" set textwidth=79 " will auto wrap content when set
+set textwidth=79 " will auto wrap content when set
 set nowrap " `on` is 'wrap'
 set wrapscan
 
@@ -369,7 +372,7 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#neomake#enabled = 1
-let g:airline_theme='base16_ocean'
+let g:airline_theme='gruvbox' "'base16_ocean'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif

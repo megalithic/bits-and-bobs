@@ -31,7 +31,6 @@ hyper = {'cmd', 'alt', 'ctrl', 'shift' }
 
 -- :: utility
 hotkey.bind(ctrlAlt, 'r', function() hs.toggleConsole() end)
-hotkey.bind(cmdCtrl, 'g', function() hs.grid.toggleShow() end)
 hotkey.bind(mashShift, 'L', function()
   hs.caffeinate.startScreensaver()
 end)
