@@ -40,6 +40,7 @@ function! LoadPlugs()
   " Plug 'junegunn/seoul256.vim'
   " Plug 'Mattias-/base16-vim' " this fork fixes the stinking term color issues
   Plug 'w0ng/vim-hybrid'
+  Plug 'kristijanhusak/vim-hybrid-material'
   Plug 'snooc/base16-vim'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
@@ -185,7 +186,8 @@ set background=dark
 
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-colorscheme hybrid
+let g:enable_bold_font = 1
+colorscheme hybrid_material
 
 filetype plugin indent on
 

@@ -18,8 +18,8 @@ RUBIES=(~/.rubies/*)
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # hybrid
-HYBRID_SHELL="$HOME/.dotfiles/iterm/hybrid.sh"
-[[ -s $HYBRID_SHELL ]] && source $HYBRID_SHELL
+# HYBRID_SHELL="$HOME/.dotfiles/iterm/hybrid.sh"
+# [[ -s $HYBRID_SHELL ]] && source $HYBRID_SHELL
 
 # # base-16
 # BASE16_THEME="ocean"
