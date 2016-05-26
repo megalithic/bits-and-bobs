@@ -15,6 +15,9 @@ nvim/plugged
 nvim/autoload
 nvim/.init.*
 config/config.symlink/nvim/plugged/**/*
+config/config.symlink/nvim/plugged/*
+config/config.symlink/nvim/autoload/*
+config/config.symlink/nvim/*.init.*
 ~/.config/nvim/autoload
 ~/.config/nvim/plugged
 ~/.config/nvim/.init.*
