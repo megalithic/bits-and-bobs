@@ -39,6 +39,7 @@ function! LoadPlugs()
   " Plug 'morhetz/gruvbox'
   " Plug 'junegunn/seoul256.vim'
   " Plug 'Mattias-/base16-vim' " this fork fixes the stinking term color issues
+  Plug 'w0ng/vim-hybrid'
   Plug 'snooc/base16-vim'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
@@ -61,8 +62,9 @@ function! LoadPlugs()
   Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
   Plug 'carlitux/deoplete-ternjs'
   Plug 'kchmck/vim-coffee-script'
-  Plug 'maksimr/vim-jsbeautify'
   " Plug 'tyru/current-func-info.vim'
+
+  Plug 'ElmCast/elm-vim'
 
   "" Presentation (CSS / SCSS / LESS)
   Plug 'othree/csscomplete.vim'
@@ -86,6 +88,7 @@ function! LoadPlugs()
   """"" Utilities ===========================================================
   Plug 'tpope/vim-commentary'
   Plug 'sickill/vim-pasta'
+  Plug 'Chiel92/vim-autoformat'
   " Plug 'ciaranm/detectindent' " auto-detect indent settings
   Plug 'jordwalke/VimAutoMakeDirectory'
   Plug 'Raimondi/delimitMate'
@@ -177,7 +180,12 @@ set background=dark
 " let g:gruvbox_italic=1
 " let g:gruvbox_contrast_dark="soft"
 " colorscheme gruvbox
-colorscheme base16-ocean
+
+" colorscheme base16-ocean
+
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+colorscheme hybrid
 
 filetype plugin indent on
 
