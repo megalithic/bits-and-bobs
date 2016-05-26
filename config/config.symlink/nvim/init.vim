@@ -361,7 +361,8 @@ set secure " disable unsafe commands in local .vimrc files
 " Plugin Settings #psettings
 " -----------------------------------------------------------------------------
 "
-""""""" Why do I even have these settings? Please clean.
+""""""" vim-readdir
+let g:loaded_netrwPlugin = 1
 
 """"""" golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
