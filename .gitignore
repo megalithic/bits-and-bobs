@@ -8,5 +8,16 @@ npm-debug.log
 **/noter.rb
 **/*.ti
 **/.cask
-**/plugged
+**/nvim/plugged
+**/nvim/autoload
+**/nvim/.init.*
+nvim/plugged
+nvim/autoload
+nvim/.init.*
 config/config.symlink/nvim/plugged/**/*
+~/.config/nvim/autoload
+~/.config/nvim/plugged
+~/.config/nvim/.init.*
+**/plugged
+**/autoload
+**/.init.vim*

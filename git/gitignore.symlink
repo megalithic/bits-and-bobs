@@ -14,7 +14,12 @@ zeus.json
 *.swp
 *.rbc
 ~/.weeslack/slack.cache
+~/.config/nvim/autoload
 ~/.config/nvim/plugged
-~/.config/nvim/.init.vim-*
+~/.config/nvim/.init.*
 **/plugged
+**/autoload
 **/.init.vim*
+~/.dotfiles/config/config.symlink/nvim/plugged
+~/.dotfiles/config/config.symlink/nvim/autoload
+~/.dotfiles/config/config.symlink/nvim/.init.*
