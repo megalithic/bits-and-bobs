@@ -18,6 +18,10 @@ RUBIES=(~/.rubies/*)
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # base-16
-BASE16_THEME="ocean"
-BASE16_SHELL="$HOME/.dotfiles/iterm/base16-$BASE16_THEME.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# BASE16_THEME="ocean"
+# BASE16_SHELL="$HOME/.dotfiles/iterm/base16-$BASE16_THEME.dark.sh"
+# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+# gruvbox
+GRUVBOX_SHELL="$HOME/.dotfiles/iterm/gruvbox_256palette_osx.sh"
+[[ -s $GRUVBOX_SHELL ]] && source $GRUVBOX_SHELL

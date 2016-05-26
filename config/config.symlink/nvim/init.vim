@@ -44,7 +44,8 @@ function! LoadPlugs()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'benekastah/neomake', { 'on': ['Neomake'] }
-  Plug 'justinmk/vim-dirvish'
+  " Plug 'justinmk/vim-dirvish'
+  Plug 'ap/vim-readdir'
   Plug 'tpope/vim-dispatch'
 
   """"" Filetypes ===========================================================
@@ -172,7 +173,6 @@ runtime macros/matchit.vim
 " colorscheme base16-ocean
 set background=dark
 let g:gruvbox_italic=1
-let g:gruvbox_italicize_strings=1
 let g:gruvbox_contrast_dark="soft"
 colorscheme gruvbox
 
