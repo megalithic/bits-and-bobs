@@ -182,12 +182,12 @@ set background=dark
 " let g:gruvbox_contrast_dark="soft"
 " colorscheme gruvbox
 
-" colorscheme base16-ocean
+colorscheme base16-ocean
 
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-let g:enable_bold_font = 1
-colorscheme hybrid_material
+" let g:hybrid_custom_term_colors = 1
+" let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+" let g:enable_bold_font = 1
+" colorscheme hybrid_material
 
 filetype plugin indent on
 

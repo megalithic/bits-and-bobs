@@ -96,6 +96,7 @@ alias im="nvim"
 # CONFIG EDITS
 # -----------------------------------------------------------------------------
 alias ez="v ~/.zshrc"
+alias ezz="v ~/.zshenv"
 alias eza="v ~/.dotfiles/zsh/aliases.zsh"
 alias ezf="v ~/.dotfiles/zsh/functions.zsh"
 alias vars="v ~/.localrc"

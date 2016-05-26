@@ -109,7 +109,7 @@ prompt_pure_check_git_arrows() {
 
 prompt_pure_background_jobs_indicator() {
   # background jobs indicator in prompt (https://gist.github.com/remy/6079223)
-  [[ $(jobs -l | wc -l) -gt 0 ]] && echo " ⚙ "
+  [[ $(jobs -l | wc -l) -gt 0 ]] && echo "  "
 }
 
 # prompt_pure_update_vi_prompt() {
