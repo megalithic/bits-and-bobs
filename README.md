@@ -18,17 +18,6 @@ you. While these started as a clone of [Holman's][holman/dotfiles], many
 utilities are unique to my workflow. I recommend other [dotfile frameworks][dotfiles]
 out there.
 
-### Tools I use ###
-
-- Homebrew
-- iTerm2
-- zsh
-- Tmux
-- Teamocil
-- Neovim
-- Weechat
-- Hammerspoon
-
 ### Installation ###
 
 If you want to kick the tires, then simply:
@@ -53,14 +42,18 @@ is going on before you willy-nilly install a stranger's shell scripts. :)
 
 A few of the flavors I roll with:
 
+- Homebrew
+- Hammerspoon
 - 24-bit color patched version of [tmux](https://github.com/choppsv1/homebrew-term24)
-- font: Source Code Pro (patched with powerline, octicon, fontawesome glyphs)
+- Teamocil for automagic tmux layouts
+- Several shell scripts for getting the info I want on my tmux statusbar (take
+a gander at `~/.dotfiles/bin` for `tmux-` prefixed scripts).
+- Font: Source Code Pro (patched with powerline, octicon, fontawesome glyphs)
 - iTerm2 colorscheme: base16-ocean dark
-- (n)vim colorscheme: base16-ocean dark
-- zsh prompt: a base of [pure](https://github.com/sindresorhus/pure), with some
-modified vcs functionality (for super in-depth vcs status output).
-- several shell scripts for getting the info I want on my tmux statusbar (check
-out `~/.dotfiles/bin` for `-tmux` infused scripts).
+- Neovim colorscheme: base16-ocean dark
+- Zsh prompt: a base of [pure](https://github.com/sindresorhus/pure), with some
+modified VCS functionality (for super in-depth vcs status output).
+- Weechat
 
 The file hierarchy:
 
