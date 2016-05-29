@@ -259,6 +259,8 @@ function handleCaffeinateEvent (eventType)
     -- turn on office lamp
     utils.log.df('[caffeine] event; attempting to turn on office lamp')
     hs.execute('~/.dotfiles/bin/hs-to-ha script.hammerspoon_office_lamp_on', true)
+
+    config.applyLayout(screenCount)
   end
 end
 

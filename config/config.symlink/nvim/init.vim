@@ -39,8 +39,6 @@ function! LoadPlugs()
   " Plug 'morhetz/gruvbox'
   " Plug 'junegunn/seoul256.vim'
   " Plug 'Mattias-/base16-vim' " this fork fixes the stinking term color issues
-  Plug 'w0ng/vim-hybrid'
-  Plug 'kristijanhusak/vim-hybrid-material'
   Plug 'snooc/base16-vim'
   Plug 'megalithic/golden-ratio'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
@@ -532,6 +530,15 @@ if exists('g:plugs["tern_for_vim"]')
   let g:tern_request_timeout = 1
 endif
 
+""""""" FZF
+let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'enter': 'vsplit'
+  \ }
+
 """"""" ctrlp
 let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
 let g:ctrlp_switch_buffer=0            " open files in new buffers
@@ -549,7 +556,7 @@ let g:ctrlp_max_height = 20            " restrict match list to a maxheight of 4
 let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
 let g:ctrlp_max_files = 0              " no restriction on results/file list
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
       \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
@@ -882,8 +889,7 @@ augroup END
 augroup ft_misc
   au!
 
-  " enable fugitive with dirvish
-  autocmd FileType dirvish call fugitive#detect(@%)
+  autocmd BufNewFile,BufRead *.conf set filetype=dosini
 
   " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
   au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
@@ -934,10 +940,14 @@ let maplocalleader="\\"
 
 nnoremap <leader>s :so $MYVIMRC<CR>
 
+""""""" FZF
+nnoremap <silent> <leader>m :FZF<CR>
+
+
 """"""" CtrlP
-let g:ctrlp_map = '<leader>m'
-let g:ctrlp_cmd = 'CtrlP'
-nnoremap <leader>bs :CtrlPBuffer<CR>
+" let g:ctrlp_map = '<leader>m'
+" let g:ctrlp_cmd = 'CtrlP'
+" nnoremap <leader>bs :CtrlPBuffer<CR>
 
 """"""" Commenting
 nmap <leader>c :Commentary<cr>

@@ -18,6 +18,17 @@ you. While these started as a clone of [Holman's][holman/dotfiles], many
 utilities are unique to my workflow. I recommend other [dotfile frameworks][dotfiles]
 out there.
 
+### Tools I use ###
+
+- Homebrew
+- iTerm2
+- zsh
+- Tmux
+- Teamocil
+- Neovim
+- Weechat
+- Hammerspoon
+
 ### Installation ###
 
 If you want to kick the tires, then simply:

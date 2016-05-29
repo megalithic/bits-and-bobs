@@ -16,6 +16,7 @@ tap 'homebrew/bundle'
 tap 'homebrew/dev-tools'
 tap 'homebrew/services'
 tap 'mopidy/mopidy'
+tap 'rogual/neovim-dot-app'
 
 brew 'coreutils'
 brew 'moreutils'
@@ -56,6 +57,7 @@ brew 'mopidy-spotify'
 brew 'mopidy-soundcloud'
 brew 'mysql'
 brew 'neovim', args: ['--HEAD', 'with-lua', 'with-perl', 'with-ruby']
+brew 'neovim-dot-app'
 brew 'openssl'
 brew 'phantomjs'
 brew 'p7zip'
@@ -115,5 +117,6 @@ cask 'usb-overdrive'
 cask 'virtualbox'
 cask 'yubiswitch'
 
+linkapps 'neovim-dot-app'
 # install manually:
 # Google Play Music Desktop Player
