@@ -58,6 +58,11 @@ config.layout = {
     utils.activate('com.googlecode.iterm2') -- iTerm2 is front-most
   end),
 
+  ['BalsamiqMockups3.EDE15CF69E11F7F7D45B5430C7D37CC6C3545E3C.1'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, config.grid.centeredLarge, config.secondaryDisplay(count))
+  end),
+
   ['com.tapbots.TweetbotMac'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
