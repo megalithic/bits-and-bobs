@@ -60,7 +60,7 @@ config.layout = {
 
   ['BalsamiqMockups3.EDE15CF69E11F7F7D45B5430C7D37CC6C3545E3C.1'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    grid.set(window, config.grid.centeredLarge, config.secondaryDisplay(count))
+    grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),
 
   ['com.tapbots.TweetbotMac'] = (function(window, forceScreenCount)
@@ -85,6 +85,15 @@ config.layout = {
   end),
 
   ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    if count == 1 then
+      grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))
+    else
+      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
+    end
+  end),
+
+  ['it.bloop.airmail2'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
       grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))

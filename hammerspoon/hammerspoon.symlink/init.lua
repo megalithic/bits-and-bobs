@@ -18,6 +18,12 @@ hs.ipc.cliInstall()
 -- :: initialize all the things!
 wm.events.initEventHandling()
 
+-- :: additional setup
+hs.audiodevice.defaultInputDevice():setMuted(true) -- ensure input is muted by default
+hs.audiodevice.defaultInputDevice():setInputVolume(0) -- ensure input is muted by default
+utils.log.df('[audio] default input device, %s, is muted? %s', hs.audiodevice.defaultInputDevice(), hs.audiodevice.defaultInputDevice():muted())
+utils.log.df('[audio] default input device, %s, input volume: %s', hs.audiodevice.defaultInputDevice(), hs.audiodevice.defaultInputDevice():inputVolume())
+
 
 -- key bindings
 -------------------------------------------------------------------------------
@@ -49,7 +55,8 @@ hotkey.bind('ctrl', 116, function() utils.handleMediaKeyEvents('NEXT', 'next ⇥
 hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('cmd', '`', function() utils.toggleApp('com.google.Chrome') end)
-hotkey.bind('cmd', 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
+hotkey.bind('cmd', 'f4', function() utils.toggleApp('it.bloop.airmail2') end)
+hotkey.bind(cmdShift, 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
 hotkey.bind('cmd', 'f5', function() utils.toggleApp('com.tapbots.TweetbotMac') end)
 hotkey.bind('cmd', 'f8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
@@ -73,6 +80,19 @@ end)
 --     end
 --   end)
 -- end
+
+-- :: toggle input device muting (similar to Shush.app, but not push-to-talk)
+-- hotkey.bind('', 'f1', nil, nil, function ()
+--   local input = hs.audiodevice.defaultInputDevice()
+--   if input:muted() then
+--     input:setMuted(false)
+--     input:setInputVolume(50)
+--   else
+--     input:setMuted(true)
+--     input:setInputVolume(0)
+--   end
+-- end)
+
 
 -- :: window manipulation
 hotkey.bind(cmdCtrl, 'h', utils.chain({

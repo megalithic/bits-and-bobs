@@ -49,6 +49,10 @@ autoload -U compinit
 compinit
 
 autoload -Uz colors
+# http://unix.stackexchange.com/a/91978
+# https://github.com/seebi/dircolors-solarized
+# eval `dircolors ~/.dircolors`
+
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
