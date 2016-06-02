@@ -44,22 +44,12 @@ do
   source $file
 done
 
+# color stuffs
+eval `gdircolors ~/.dircolors`
+
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
 compinit
-
-# autoload -Uz colors
-# http://unix.stackexchange.com/a/91978
-# https://github.com/seebi/dircolors-solarized
-# eval `dircolors ~/.dircolors`
-if whence dircolors >/dev/null; then
-  eval "$(dircolors -b)"
-  zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-  # alias ls='ls --color'
-else
-  export CLICOLOR=1
-  zstyle ':completion:*:default' list-colors ''
-fi
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
@@ -89,10 +79,6 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 # z.sh init
 source ~/.dotfiles/bin/z.sh
 
-# base-16
-BASE16_THEME="ocean"
-BASE16_SHELL="$HOME/.dotfiles/iterm/base16-$BASE16_THEME.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # ===========================================================================
 # STOP!!!
