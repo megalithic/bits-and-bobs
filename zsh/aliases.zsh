@@ -240,6 +240,10 @@ alias bec=rc
 
 # MISC / RANDOM
 # -----------------------------------------------------------------------------
+
+# http://unix.stackexchange.com/a/174596
+alias dircolors="gdircolors"
+
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip_wifi="ipconfig getifaddr en0"
