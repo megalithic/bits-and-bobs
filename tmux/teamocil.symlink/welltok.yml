@@ -1,9 +1,10 @@
 name: "welltok"
 windows:
   - name: "chats"
-    root: "~"
+    root: "~/.dotfiles"
     panes:
-      - irc
+      - commands:
+        - irc
   - name: "services"
     root: "~/code/welltok"
     layout: tiled
@@ -12,20 +13,25 @@ windows:
       - commands:
         - cd currency-service
         - git co master
+        - git pull
         - npm install
-        - npm run dev
+        # - npm run dev
       - commands:
         - cd achievement-service
         - git co master
+        - git pull
         - npm install
-        - npm run dev
+        # - npm run dev
       - commands:
         - cd munero
         - git co master
+        - git pull
         - npm install
-        - npm run dev
+        # - npm run dev
       - commands:
         - cd ep-dev-edition
+        - git co master
+        - git pull
         - docker-machine start dev
         - eval $(docker-machine env dev)
         - make reset
@@ -40,7 +46,6 @@ windows:
         - npm install
         - bundle
         - bundle exec rake db:migrate
-        - die redis
         - killport 5000 # kill moxy in case it's already running
         - killport 3000 # kill thin/rails in case it's already running
         - be foreman start
