@@ -95,19 +95,19 @@ alias im="nvim"
 
 # CONFIG EDITS
 # -----------------------------------------------------------------------------
-alias ez="v ~/.zshrc"
-alias ezz="v ~/.zshenv"
-alias eza="v ~/.dotfiles/zsh/aliases.zsh"
-alias ezf="v ~/.dotfiles/zsh/functions.zsh"
-alias vars="v ~/.localrc"
-alias ezl="v ~/.localrc"
-alias ezo="v ~/.dotfiles/zsh/config.zsh"
-alias ezc="v ~/.dotfiles/zsh/config.zsh"
-alias eze="v ~/.dotfiles/zsh/env.zsh"
-alias ezp="v ~/.dotfiles/zsh/path.zsh"
-alias ezkb="v ~/.dotfiles/zsh/keybindings.zsh"
-alias ev="v ~/.dotfiles/config/config.symlink/nvim/init.vim"
-alias et="v ~/.dotfiles/tmux/tmux.conf.symlink"
+alias ez="nvim ~/.zshrc"
+alias ezz="nvim ~/.zshenv"
+alias eza="nvim ~/.dotfiles/zsh/aliases.zsh"
+alias ezf="nvim ~/.dotfiles/zsh/functions.zsh"
+alias vars="nvim ~/.localrc"
+alias ezl="nvim ~/.localrc"
+alias ezo="nvim ~/.dotfiles/zsh/config.zsh"
+alias ezc="nvim ~/.dotfiles/zsh/config.zsh"
+alias eze="nvim ~/.dotfiles/zsh/env.zsh"
+alias ezp="nvim ~/.dotfiles/zsh/path.zsh"
+alias ezkb="nvim ~/.dotfiles/zsh/keybindings.zsh"
+alias ev="nvim ~/.dotfiles/config/config.symlink/nvim/init.vim"
+alias et="nvim ~/.dotfiles/tmux/tmux.conf.symlink"
 
 # FOLDERS
 # -----------------------------------------------------------------------------
