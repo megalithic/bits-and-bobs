@@ -58,6 +58,11 @@ config.layout = {
     utils.activate('com.googlecode.iterm2') -- iTerm2 is front-most
   end),
 
+  ['com.webex.meetingmanager'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, config.grid.centeredLarge, config.secondaryDisplay(count))
+  end),
+
   ['BalsamiqMockups3.EDE15CF69E11F7F7D45B5430C7D37CC6C3545E3C.1'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
