@@ -7,10 +7,6 @@ export __GIT_PROMPT_DIR=${0:A:h}
 
 export GIT_PROMPT_EXECUTABLE=${GIT_PROMPT_USE_PYTHON:-"python"}
 
-# Initialize colors.
-autoload -U colors
-colors
-
 # Allow for functions in the prompt.
 setopt PROMPT_SUBST
 

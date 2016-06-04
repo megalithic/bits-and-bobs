@@ -18,6 +18,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## Interface
   Plug 'snooc/base16-vim'
+  Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -142,6 +143,7 @@ runtime macros/matchit.vim
 " ## UI
 set background=dark
 colorscheme base16-ocean
+colorscheme OceanicNext
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
@@ -348,7 +350,7 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#neomake#enabled = 1
-let g:airline_theme='base16_ocean' "'base16_ocean'
+let g:airline_theme='oceanicnext' "'base16_ocean'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif

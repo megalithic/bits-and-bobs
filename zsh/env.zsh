@@ -29,10 +29,6 @@ export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vf
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home"
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
-# Setup terminal, and turn on 256 colors
-# export TERM='xterm-256color-italic'
-# [ -n "$TMUX" ] && export TERM=tmux-256color
-
 # Enable color in grep
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='3;33'
