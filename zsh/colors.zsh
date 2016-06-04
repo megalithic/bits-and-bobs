@@ -1,26 +1,34 @@
-autoload colors && colors
+# autoload colors && colors
 
 # The variables are wrapped in %{%}. This should be the case for every
 # variable that does not contain space.
-for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-  eval PR_$COLOR='%{$fg_no_bold[${(L)COLOR}]%}'
-  eval PR_BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
-done
+# for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
+#   eval PR_$COLOR='%{$fg_no_bold[${(L)COLOR}]%}'
+#   eval PR_BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
+# done
 
-eval RESET='$reset_color'
-export PR_RED PR_GREEN PR_YELLOW PR_BLUE PR_WHITE PR_BLACK
-export PR_BOLD_RED PR_BOLD_GREEN PR_BOLD_YELLOW PR_BOLD_BLUE
-export PR_BOLD_WHITE PR_BOLD_BLACK
+# eval RESET='$reset_color'
+# export PR_RED PR_GREEN PR_YELLOW PR_BLUE PR_WHITE PR_BLACK
+# export PR_BOLD_RED PR_BOLD_GREEN PR_BOLD_YELLOW PR_BOLD_BLUE
+# export PR_BOLD_WHITE PR_BOLD_BLACK
 
 # Clear LSCOLORS
 unset LSCOLORS
 
 # Main change, you can see directories on a dark background
-export LSCOLORS=gxfxcxdxbxegedabagacad
-
+# export LSCOLORS=gxfxcxdxbxegedabagacad
+export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+# export CLICOLOR=true
 export CLICOLOR=1
-# export LS_COLORS=exfxcxdxbxegedabagacad
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.dotfiles/zsh/base16-ocean.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+# color stuffs
+eval `gdircolors $HOME/.dotfiles/zsh/dir_colors.symlink`
+
+# Fallback to built in ls colors
+# zstyle ':completion:*' list-colors ''
+# ref: https://github.com/robbyrussell/oh-my-zsh/issues/1563#issuecomment-53638038
+zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"

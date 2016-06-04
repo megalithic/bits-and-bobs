@@ -44,18 +44,15 @@ do
   source $file
 done
 
-# color stuffs
-eval `gdircolors ~/.dircolors`
-
-# initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit
-compinit
-
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
 do
   source $file
 done
+
+# initialize autocomplete here, otherwise functions won't be loaded
+autoload -U compinit
+compinit
 
 unset config_files
 

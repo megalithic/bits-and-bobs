@@ -29,10 +29,11 @@ alias new="print -rl -- **/*(Dom[1,5])"
 #   `brew install coreutils`
 if $(gls &>/dev/null)
 then
-  alias ls="gls -FA --color"
-  alias l="gls -lAh --color"
-  alias ll="gls -l --color"
-  alias la='gls -A --color'
+  alias gls="gls --color=auto --group-directories-first"
+  alias ls="gls -FA"
+  alias l="gls -lAh"
+  alias ll="gls -l"
+  alias la="gls -A"
 fi
 alias s="ls"
 alias last='ls *(.om[1])'

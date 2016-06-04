@@ -102,6 +102,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'haya14busa/incsearch.vim'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
+  Plug 'mileszs/ack.vim'
   function! DoUpdateRemotePlugins(arg)
     UpdateRemotePlugins
   endfunction
@@ -973,12 +974,11 @@ let maplocalleader="\\"
 nnoremap <leader>s :so $MYVIMRC<CR>
 
 " ## FZF
-nnoremap <silent> <leader>m :FZF<CR>
+" nnoremap <silent> <leader>m :FZF<CR>
 
 " ## CtrlP
-" let g:ctrlp_map = '<leader>m'
-" let g:ctrlp_cmd = 'CtrlP'
-" nnoremap <leader>bs :CtrlPBuffer<CR>
+let g:ctrlp_map = '<leader>m'
+let g:ctrlp_cmd = 'CtrlP'
 
 " ## Commenting
 nmap <leader>c :Commentary<cr>
