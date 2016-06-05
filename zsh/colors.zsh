@@ -29,7 +29,7 @@ BASE16_SHELL="$HOME/.dotfiles/zsh/oceanic-next.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # color stuffs
-eval `gdircolors $HOME/.dotfiles/zsh/dir_colors.symlink`
+eval `gdircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
 
 # Fallback to built in ls colors
 # zstyle ':completion:*' list-colors ''
