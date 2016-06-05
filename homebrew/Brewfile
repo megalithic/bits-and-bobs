@@ -69,6 +69,7 @@ brew 'terminal-notifier'
 brew 'the_silver_searcher'
 brew 'tig'
 brew 'tmate'
+brew 'TomeAnthony/brews/itermocil'
 brew 'urlview'
 brew 'tree'
 brew 'weechat', args: ['with-ruby', 'with-python', 'with-perl', 'with-lua', 'with-aspell', 'with-javascript', 'with-curl', 'with-guile']
