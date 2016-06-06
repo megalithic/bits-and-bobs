@@ -76,7 +76,7 @@ set -sg	update-environment TERM_PROFILE
 set -g history-limit 25000
 set -g set-titles on
 
-set -g default-terminal "tmux-256color"
+set -g default-terminal "tmux-256color-italic"
 set -g default-shell "/usr/local/bin/zsh"
 
 # fix for NVIM_TUI_ENABLE_CURSOR_SHAPE in tmux
