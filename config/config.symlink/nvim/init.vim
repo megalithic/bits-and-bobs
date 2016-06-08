@@ -71,6 +71,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tejr/vim-tmux'
   Plug 'honza/dockerfile.vim'
   Plug 'ElmCast/elm-vim'
+  Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin'
 
   " ----------------------------------------------------------------------------
   " ## Utilities
@@ -466,6 +467,13 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
+" ## vim-lua-ftplugin
+let g:lua_check_syntax = 0
+let g:lua_complete_omni = 1
+let g:lua_complete_dynamic = 0
+let g:lua_define_completion_mappings = 0
+let g:deoplete#omni#functions_lua = 'xolox#lua#omnifunc'
+
 " ## vim-markdown
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
 let g:vim_markdown_frontmatter=1
@@ -484,35 +492,35 @@ let g:jsx_pragma_required = 0
 " ## quick-scope
 let g:qs_enable = 0
 
-" ## supertab
-" handy stuff: https://github.com/ervandew/supertab/issues/53
-let g:SuperTabDefaultCompletionTypeDiscovery = [
-      \ "&completefunc:<c-x><c-u>",
-      \ "&omnifunc:<c-x><c-o>",
-      \ ]
-let g:SuperTabDefaultCompletionType = 'context'
-
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#auto_completion_start_length = 2
+let g:deoplete#max_list = 10
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#enable_smart_case = 1
-" let g:deoplete#auto_completion_start_length = 2
-" let g:deoplete#disable_auto_complete = 0
-" let g:deoplete#enable_refresh_always=1
-" let g:deoplete#file#enable_buffer_path=1
+let g:deoplete#sources_ = []
+let g:deoplete#sources_md = ['dictionary', 'file', 'member']
+let g:deoplete#sources_pandoc = ['dictionary', 'file', 'member']
+let g:deoplete#sources_vim = ['buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources_txt = ['buffer','dictionary', 'file', 'member']
+let g:deoplete#sources_mmd = ['dictionary', 'file', 'member']
+let g:deoplete#sources_ghmarkdown = ['dictionary', 'file', 'member']
+let g:deoplete#sources_ruby = ['buffer', 'member', 'file']
+let g:deoplete#sources_css = ['buffer', 'member', 'file', 'omni']
+let g:deoplete#sources_scss = ['buffer', 'member', 'file', 'omni']
+let g:deoplete#sources_html = ['buffer', 'member', 'file', 'omni']
 
 " let g:deoplete#sources={}
 " let g:deoplete#sources._    = ['buffer', 'file']
-" let g:deoplete#sources.ruby = ['buffer', 'member', 'file']
 " let g:deoplete#sources.vim  = ['buffer', 'member', 'file']
 " let g:deoplete#sources['javascript.jsx'] = ['buffer', 'member', 'file']
+" let g:deoplete#sources.ruby = ['buffer', 'member', 'file']
 " let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni']
 " let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni']
 " let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni']
@@ -525,13 +533,24 @@ if exists('g:plugs["tern_for_vim"]')
 endif
 
 " ## FZF
+set rtp+=~/.fzf
 let g:fzf_buffers_jump = 1
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit',
   \ 'enter': 'vsplit'
   \ }
+" function! s:buflist()
+"     redir => ls
+"     silent ls
+"     redir END
+"     return split(ls, '\n')
+" endfunction
+" function! s:bufopen(e)
+"     execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+" endfunction
 
 " ## ctrlp
 let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
@@ -625,7 +644,7 @@ function! DeleteTrailingWS()
   exe "normal `z"
 endfunction
 
-fu! QuickfixToggle()
+function! QuickfixToggle()
   if gettabvar(tabpagenr(), 'quickfix_window', 0)
     if t:quickfix_window == winnr()
       " jump back to the previous window if inside the quickfix
@@ -641,7 +660,7 @@ fu! QuickfixToggle()
 endfu
 nnoremap <silent> <F3> :call QuickfixToggle()<cr>
 
-fu! LocationListToggle()
+function! LocationListToggle()
   if getwinvar(winnr(), 'locationlist_window', 0)
     lclose
     let w:locationlist_window = 0
@@ -911,12 +930,27 @@ let maplocalleader="\\"
 
 nnoremap <leader>s :so $MYVIMRC<CR>
 
-" ## FZF
-" nnoremap <silent> <leader>m :FZF<CR>
+" ## Deoplete
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 
 " ## CtrlP
 let g:ctrlp_map = '<leader>m'
 let g:ctrlp_cmd = 'CtrlP'
+
+" ## FZF
+" Search files really fast
+nnoremap <silent> <Leader>a :Ag<CR>
+" search open buffers
+nnoremap <silent> <Leader>m :Files .<CR>
+" nnoremap <silent> <A-i> :History:<CR>
+" nnoremap <silent> <A-e> :Buffers<CR>
+" if the file isn't active, switch to it
+nnoremap <BS> :Files .<CR>
+" " Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " ## Commenting
 nmap <leader>c :Commentary<cr>
