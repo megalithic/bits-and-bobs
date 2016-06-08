@@ -88,15 +88,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'janko-m/vim-test'
   Plug 'Valloric/MatchTagAlways', { 'for': ['html', 'erb'] }
   Plug 'cohama/lexima.vim'
+  Plug 'luochen1990/rainbow'
   Plug 'junegunn/rainbow_parentheses.vim'
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
-  Plug 'diepm/vim-rest-console', { 'for': 'rest' }
-  Plug 'nelstrom/vim-qargs', { 'on': 'Qargs' }
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation
-  Plug 'SirVer/ultisnips', { 'on': '<Plug>(tab)' }
-  Plug 'honza/vim-snippets'
   Plug 'ap/vim-readdir'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
@@ -143,13 +140,13 @@ runtime macros/matchit.vim
 " ## UI
 set background=dark
 colorscheme base16-ocean
-colorscheme OceanicNext
+" colorscheme OceanicNext
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
 " Can these mugs be removed?
-set t_ti= t_te=
-set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
+" set t_ti= t_te=
+" set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
 
 " change vim cursor depending on the mode
 if has('nvim')
@@ -200,10 +197,7 @@ set noshowcmd
 " -----------------------------------------------------------------------------
 " ## Behavior
 " Swaps / Backups / Sessions / History
-if !isdirectory($HOME."/tmp") && exists("*mkdir")
-  call mkdir($HOME."/tmp", "p", 0700)
-endif
-set undodir=$HOME/tmp
+set undodir=/tmp
 set undofile
 set undoreload=500
 set undolevels=500
@@ -448,10 +442,15 @@ let g:rainbow_conf = {
 let g:rainbow_active = 1
 
 " ## vim-test
-let g:test#preserve_screen = 1
-let test#strategy = "neovim"
-let test#javascript#mocha#options = "--colors --compilers js:babel/register --timeout 30000 --bail --full-trace --delay"
-let test#javascript#mocha#file_pattern = ".test.js"
+function! SplitStrategy(cmd)
+  botright new | call termopen(a:cmd) | startinsert
+endfunction
+let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
+let g:test#strategy = 'terminal_split'
+
+" let g:test#preserve_screen = 1
+let g:test#javascript#mocha#options = "--colors --compilers js:babel/register --timeout 15000 --delay"
+let g:test#javascript#mocha#file_pattern = ".test.js"
 
 " ## listtoggle
 let g:lt_location_list_toggle_map = '<F3>'
@@ -496,83 +495,33 @@ let g:SuperTabDefaultCompletionType = 'context'
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_completion_start_length = 2
-let g:deoplete#disable_auto_complete = 0
-let g:deoplete#enable_refresh_always=1
-let g:deoplete#file#enable_buffer_path=1
-
-let g:deoplete#sources={}
-let g:deoplete#sources._    = ['buffer', 'file', 'ultisnips']
-let g:deoplete#sources.ruby = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.vim  = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources['javascript.jsx'] = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#auto_completion_start_length = 2
+" let g:deoplete#disable_auto_complete = 0
+" let g:deoplete#enable_refresh_always=1
+" let g:deoplete#file#enable_buffer_path=1
+
+" let g:deoplete#sources={}
+" let g:deoplete#sources._    = ['buffer', 'file']
+" let g:deoplete#sources.ruby = ['buffer', 'member', 'file']
+" let g:deoplete#sources.vim  = ['buffer', 'member', 'file']
+" let g:deoplete#sources['javascript.jsx'] = ['buffer', 'member', 'file']
+" let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni']
+" let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni']
+" let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni']
+
 " ## ternjs
 if exists('g:plugs["tern_for_vim"]')
   let g:tern_show_argument_hints = 'on_hold'
   let g:tern_show_signature_in_pum = 1
   let g:tern_request_timeout = 1
-endif
-
-" ## <tab> / <s-tab> / <c-v><tab> | super-duper-tab
-function! s:can_complete(func, prefix)
-  if empty(a:func) || call(a:func, [1, '']) < 0
-    return 0
-  endif
-  let result = call(a:func, [0, matchstr(a:prefix, '\k\+$')])
-  return !empty(type(result) == type([]) ? result : result.words)
-endfunction
-
-function! s:super_duper_tab(k, o)
-  if pumvisible()
-    return a:k
-  endif
-
-  let line = getline('.')
-  let col = col('.') - 2
-  if line[col] !~ '\k\|[/~.]'
-    return a:o
-  endif
-
-  let prefix = expand(matchstr(line[0:col], '\S*$'))
-  if prefix =~ '^[~/.]'
-    return "\<c-x>\<c-f>"
-  endif
-  if s:can_complete(&omnifunc, prefix)
-    return "\<c-x>\<c-o>"
-  endif
-  if s:can_complete(&completefunc, prefix)
-    return "\<c-x>\<c-u>"
-  endif
-  return a:k
-endfunction
-
-if has_key(g:plugs, 'ultisnips')
-  let g:UltiSnipsUsePythonVersion = 3
-
-  " UltiSnips will be loaded only when tab is first pressed in insert mode
-  if !exists(':UltiSnipsEdit')
-    inoremap <silent> <Plug>(tab) <c-r>=plug#load('ultisnips')?UltiSnips#ExpandSnippet():''<cr>
-    imap <tab> <Plug>(tab)
-  endif
-
-  let g:SuperTabMappingForward  = "<tab>"
-  let g:SuperTabMappingBackward = "<s-tab>"
-  function! SuperTab(m)
-    return s:super_duper_tab(a:m == 'n' ? "\<c-n>" : "\<c-p>",
-                           \ a:m == 'n' ? "\<tab>" : "\<s-tab>")
-  endfunction
-else
-  inoremap <expr> <tab>   <SID>super_duper_tab("\<c-n>", "\<tab>")
-  inoremap <expr> <s-tab> <SID>super_duper_tab("\<c-p>", "\<s-tab>")
 endif
 
 " ## FZF
@@ -600,8 +549,8 @@ let g:ctrlp_split_window = 0
 let g:ctrlp_max_height = 20            " restrict match list to a maxheight of 40
 let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
 let g:ctrlp_max_files = 0              " no restriction on results/file list
-let g:ctrlp_working_path_mode = 0
-" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctlrp_clear_cache_on_exit = 1
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
       \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
@@ -639,20 +588,6 @@ if has('macunix')
   let g:gist_clip_command = 'pbcopy'
 endif
 
-" ## ultisnips
-" better key bindings for UltiSnipsExpandTrigger
-" Use tab to expand snippet and move to next target. Shift tab goes back.
-" <C-tab> lists available snippets for the file
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" ## deoplete
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
-" ,<Tab> for regular tab
-inoremap <Leader><Tab> <Space><Space>
-
 " ## ternjs
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
@@ -676,6 +611,7 @@ function! BufEnterCommit()
   if bufname("%")=="COMMIT_EDITMSG"
     let b:deoplete_disable_auto_complete=1
     let g:deoplete#enable_at_startup = 0
+    let b:deoplete_ignore_sources = ['buffer']
     call deoplete#disable()
     set spell
     set spelllang=en
@@ -787,7 +723,7 @@ augroup RestoreCursorPosition
   autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \   execute 'normal! g`"zvzz' |
-  " \   execute 'normal g`\"' |
+      " \   execute 'normal g`\"' |
         \ endif
 augroup END
 
@@ -795,7 +731,7 @@ augroup END
 autocmd BufWrite * silent call DeleteTrailingWS()
 
 " Treat buffers from stdin as scratch.
-autocmd StdinReadPost * :set buftype=nofile
+" autocmd StdinReadPost * :set buftype=nofile
 
 augroup ColorColumnGroup
   " Color Column (only on insert)
@@ -950,12 +886,12 @@ augroup END
 
 
 " -/ Highlighting #highlights /------------------------------------------------
-hi IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 hi clear Search
+hi IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 hi Search gui=underline term=underline guibg=#afaf87 guifg=#333333
 hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold
-hi Comment cterm=italic term=italic gui=italic
 hi CursorLineNr guifg=white
+hi Comment cterm=italic term=italic gui=italic
 
 match ErrorMsg 'debugger'
 match ErrorMsg 'binding.pry'
@@ -1051,8 +987,8 @@ noremap gk k
 nnoremap <C-,><C-,> <C-^>
 
 " ## Splits with vim-tmux-navigator
-let g:tmux_navigator_no_mappings = 1
-let g:tmux_navigator_save_on_switch = 1
+" let g:tmux_navigator_no_mappings = 1
+" let g:tmux_navigator_save_on_switch = 1
 nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
@@ -1060,13 +996,6 @@ nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
-" Jump to window <n>:
-" ref: http://stackoverflow.com/a/6404246/151007
-let i = 1
-while i <= 9
-  execute 'nnoremap <Leader>'.i.' :'.i.'wincmd w<CR>'
-  let i = i + 1
-endwhile
 
 " Kill arrow keys
 nnoremap <Left> <nop>
@@ -1185,11 +1114,8 @@ noremap  <Leader>; :!
 noremap  <Leader>: :<Up>
 
 " remap q for recording to Q
-" nnoremap Q q
-" nnoremap q <Nop>
-
-" Quick replay 'q' macro
-nnoremap Q @q
+nnoremap Q q
+nnoremap q <Nop>
 
 
 " allow deleting selection without updating the clipboard (yank buffer)

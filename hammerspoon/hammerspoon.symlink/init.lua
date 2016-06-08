@@ -4,7 +4,7 @@
 
 -- :: imports/requires
 -- require 'mpd'
-require 'redshift'
+-- require 'redshift'
 
 local utils = require 'utils'
 local wm = require 'wm'

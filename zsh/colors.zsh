@@ -24,8 +24,8 @@ unset LSCOLORS
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export CLICOLOR=1
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.dotfiles/zsh/oceanic-next.dark.sh"
+# Shell Colors
+SHELL_COLORS="$HOME/.dotfiles/zsh/oceanic-next.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # color stuffs
