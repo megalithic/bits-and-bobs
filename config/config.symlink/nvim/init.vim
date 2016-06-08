@@ -100,6 +100,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'haya14busa/incsearch.vim'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
+  Plug 'jonmorehouse/vim-nav'
   Plug 'EinfachToll/DidYouMean'
   Plug 'mileszs/ack.vim'
   function! DoUpdateRemotePlugins(arg)
@@ -141,12 +142,6 @@ runtime macros/matchit.vim
 " ## UI
 set background=dark
 colorscheme base16-ocean
-
-" Prevent Vim from clobbering the scrollback buffer. See
-" http://www.shallowsky.com/linux/noaltscreen.html
-" Can these mugs be removed?
-" set t_ti= t_te=
-" set t_ut= " improve screen clearing by using the background color (for tmux/256 color stuffs)
 
 " change vim cursor depending on the mode
 if has('nvim')
@@ -911,8 +906,19 @@ augroup END
 hi IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 hi Search gui=underline term=underline guibg=#afaf87 guifg=#333333
 hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold
-hi CursorLineNr guifg=white
 hi Comment cterm=italic term=italic gui=italic
+" hi ColorColumn ctermbg=bg ctermfg=235 cterm=NONE guibg=bg guifg=#262626 gui=NONE
+" hi signColumn ctermbg=bg ctermfg=230 cterm=NONE guibg=bg guifg=#ffffd7 gui=NONE
+" hi LineNr ctermbg=bg ctermfg=137 cterm=NONE guibg=bg guifg=#af875f gui=NONE
+" hi ColorColumn ctermbg=bg ctermfg=235 cterm=NONE guibg=bg guifg=#262626 gui=NONE
+" hi signColumn ctermbg=bg ctermfg=230 cterm=NONE guibg=bg guifg=#ffffd7 gui=NONE
+" hi CursorLine ctermbg=235 ctermfg=NONE cterm=NONE guibg=#262626 guifg=NONE gui=NONE
+hi LineNr guibg=bg guifg=#665F59 gui=NONE
+hi CursorLineNr ctermbg=bg ctermfg=223 cterm=NONE guibg=bg guifg=#af875f gui=bold
+hi qfLineNr ctermbg=bg ctermfg=95 cterm=NONE guibg=bg guifg=#875f5f gui=NONE
+
+" example of just for base16-ocean
+" au ColorScheme base16-ocean highlight Normal ctermbg=160
 
 match ErrorMsg 'debugger'
 match ErrorMsg 'binding.pry'
