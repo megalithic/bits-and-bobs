@@ -141,7 +141,6 @@ runtime macros/matchit.vim
 " ## UI
 set background=dark
 colorscheme base16-ocean
-" colorscheme OceanicNext
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
@@ -368,15 +367,19 @@ let g:airline_symbols.modified = '✭'
 let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 0
 " let g:airline_extensions = ['mode','crypt','paste','iminsert','branch','filename','readonly','filetype','fileencoding','fileformat','percentage','line number','column number','whitespace']
-let g:airline_mode_map = {
-      \ 'n' : 'NORMAL',
-      \ 'i' : 'INSERT',
-      \ 'R' : 'REPLACE',
-      \ 'v' : 'VISUAL',
-      \ 'V' : 'V-LINE',
-      \ 'c' : 'CMD   ',
-      \ '': 'V-BLCK',
-      \ }
+ let g:airline_mode_map = {
+       \ '__' : '-',
+       \ 'n'  : 'N',
+       \ 'i'  : 'I',
+       \ 'R'  : 'R',
+       \ 'c'  : 'C',
+       \ 'v'  : 'V',
+       \ 'V'  : 'V',
+       \ '' : 'V',
+       \ 's'  : 'S',
+       \ 'S'  : 'S',
+       \ '' : 'S',
+       \ }
 
 " ## neomake
 " -- Settings derived from:
@@ -905,7 +908,6 @@ augroup END
 
 
 " -/ Highlighting #highlights /------------------------------------------------
-hi clear Search
 hi IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 hi Search gui=underline term=underline guibg=#afaf87 guifg=#333333
 hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold

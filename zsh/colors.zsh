@@ -25,8 +25,8 @@ export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export CLICOLOR=1
 
 # Shell Colors
-SHELL_COLORS="$HOME/.dotfiles/zsh/oceanic-next.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+SHELL_COLORS="$HOME/.dotfiles/zsh/base16-ocean.dark.sh"
+[[ -s $SHELL_COLORS ]] && source $SHELL_COLORS
 
 # color stuffs
 eval `gdircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
