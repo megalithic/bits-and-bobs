@@ -280,7 +280,7 @@ alias showdesk="defaults write com.apple.finder CreateDesktop true; killall Find
 alias remote="osascript -e 'tell application \"yubiswitch\" to KeyOn' && ssh remote.github.com -t gh-screen && osascript -e 'tell application \"yubiswitch\" to KeyOff' "
 
 # edit home-assistant (hass) config on rpi2
-alias hassconfig="nvim scp://pi@192.168.1.106//ha/hass/configuration.yaml"
+alias hassconfig="nvim scp://pi@192.168.1.106//var/opt/homeassistant/configuration.yaml"
 alias homeconfig=hassconfig
 alias haconfig=hassconfig
 alias hasslogs='ssh -t pi@192.168.1.106 "tail -f /var/opt/homeassistant/home-assistant.log -n250"'

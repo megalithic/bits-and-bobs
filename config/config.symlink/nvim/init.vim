@@ -107,10 +107,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'EinfachToll/DidYouMean'
   Plug 'mileszs/ack.vim'
   Plug 'ervandew/supertab'
-  function! DoUpdateRemotePlugins(arg)
+  function! HandleRemotePluginUpdates(arg)
     UpdateRemotePlugins
   endfunction
-  Plug 'shougo/deoplete.nvim', { 'do': function('DoUpdateRemotePlugins') }
+  Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'Konfekt/FastFold' " deoplete wants this for some reason :/
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -333,7 +333,8 @@ set secure " disable unsafe commands in local .vimrc files
 
 " -/ Plugin Settings #psettings /----------------------------------------------
 " ## vim-readdir
-let g:loaded_netrwPlugin = 1
+" let g:loaded_netrw = 1
+" let g:loaded_netrwPlugin = 1
 
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
@@ -956,7 +957,7 @@ let maplocalleader="\\"
 nnoremap <leader>s :so $MYVIMRC<CR>
 
 " ## Deoplete
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+" inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 
 " ## CtrlP
 " let g:ctrlp_map = '<leader>m'
