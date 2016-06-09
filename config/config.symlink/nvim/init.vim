@@ -647,10 +647,11 @@ function! BufEnterCommit()
     start
   end
   " force spell when doing a git commit
-  if bufname("%")=="COMMIT_EDITMSG"
+  if bufname("%") == "COMMIT_EDITMSG"
     let b:deoplete_disable_auto_complete=1
     let g:deoplete#enable_at_startup = 0
     let b:deoplete_ignore_sources = ['buffer']
+    let g:deoplete_ignore_sources = ['buffer']
     call deoplete#disable()
     set spell
     set spelllang=en
@@ -766,12 +767,12 @@ augroup RestoreCursorPosition
         \ endif
 augroup END
 
-" Delete trailing whitespace on write
-autocmd BufWrite * silent call DeleteTrailingWS()
+" Automagically push file to remote location for mirror.vim projects
+autocmd BufWrite ~/.dotfiles/private/homeassistant/* :MirrorPush
 
 " Treat buffers from stdin as scratch.
 " autocmd StdinReadPost * :set buftype=nofile
-
+"
 augroup ColorColumnGroup
   " Color Column (only on insert)
   if exists("&colorcolumn")
@@ -793,7 +794,6 @@ augroup END
 
 " FIXME: this may be breaking auto rename of irc buffers, etc
 " Automatic rename of tmux window
-
 if exists('$TMUX') && !exists('$NORENAME')
   au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
   au VimLeave * call system('tmux set-window automatic-rename on')
@@ -802,8 +802,11 @@ endif
 augroup HighlightGroup
   autocmd!
   " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-  au BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
-  au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
+
+  " Delete trailing whitespace on write
+  autocmd BufWrite * silent call DeleteTrailingWS()
 augroup END
 
 " -/ Filetypes #ftypes /-------------------------------------------------------
