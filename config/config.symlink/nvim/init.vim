@@ -92,6 +92,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'luochen1990/rainbow'
   Plug 'junegunn/rainbow_parentheses.vim'
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
+  Plug 'docunext/closetag.vim'
+  Plug 'tpope/vim-endwise'
+  Plug 'zenbro/mirror.vim'
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation
@@ -103,10 +106,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'jonmorehouse/vim-nav'
   Plug 'EinfachToll/DidYouMean'
   Plug 'mileszs/ack.vim'
+  Plug 'ervandew/supertab'
   function! DoUpdateRemotePlugins(arg)
     UpdateRemotePlugins
   endfunction
   Plug 'shougo/deoplete.nvim', { 'do': function('DoUpdateRemotePlugins') }
+  Plug 'Konfekt/FastFold' " deoplete wants this for some reason :/
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'ctrlpvim/ctrlp.vim'
@@ -490,6 +495,13 @@ let g:jsx_pragma_required = 0
 " ## quick-scope
 let g:qs_enable = 0
 
+" handy stuff: https://github.com/ervandew/supertab/issues/53
+let g:SuperTabDefaultCompletionTypeDiscovery = [
+      \ "&completefunc:<c-x><c-u>",
+      \ "&omnifunc:<c-x><c-o>",
+      \ ]
+let g:SuperTabDefaultCompletionType = 'context'
+
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
@@ -502,17 +514,17 @@ if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 
-let g:deoplete#sources_ = []
-let g:deoplete#sources_md = ['dictionary', 'file', 'member']
-let g:deoplete#sources_pandoc = ['dictionary', 'file', 'member']
-let g:deoplete#sources_vim = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources_txt = ['buffer','dictionary', 'file', 'member']
-let g:deoplete#sources_mmd = ['dictionary', 'file', 'member']
-let g:deoplete#sources_ghmarkdown = ['dictionary', 'file', 'member']
-let g:deoplete#sources_ruby = ['buffer', 'member', 'file']
-let g:deoplete#sources_css = ['buffer', 'member', 'file', 'omni']
-let g:deoplete#sources_scss = ['buffer', 'member', 'file', 'omni']
-let g:deoplete#sources_html = ['buffer', 'member', 'file', 'omni']
+" let g:deoplete#sources_ = []
+" let g:deoplete#sources_md = ['dictionary', 'file', 'member']
+" let g:deoplete#sources_pandoc = ['dictionary', 'file', 'member']
+" let g:deoplete#sources_vim = ['buffer', 'member', 'file', 'ultisnips']
+" let g:deoplete#sources_txt = ['buffer','dictionary', 'file', 'member']
+" let g:deoplete#sources_mmd = ['dictionary', 'file', 'member']
+" let g:deoplete#sources_ghmarkdown = ['dictionary', 'file', 'member']
+" let g:deoplete#sources_ruby = ['buffer', 'member', 'file']
+" let g:deoplete#sources_css = ['buffer', 'member', 'file', 'omni']
+" let g:deoplete#sources_scss = ['buffer', 'member', 'file', 'omni']
+" let g:deoplete#sources_html = ['buffer', 'member', 'file', 'omni']
 
 " let g:deoplete#sources={}
 " let g:deoplete#sources._    = ['buffer', 'file']
@@ -607,6 +619,15 @@ endif
 
 " ## ternjs
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" ## ultisnips
+" better key bindings for UltiSnipsExpandTrigger
+" Use tab to expand snippet and move to next target. Shift tab goes back.
+" <C-tab> lists available snippets for the file
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " -/ Custom Functions #cfunctions /--------------------------------------------
 " Used by Fugitive
@@ -887,10 +908,6 @@ augroup ft_misc
   " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
   au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 
-  " Fix slow Ruby editing
-  " http://stackoverflow.com/questions/22949067/macvim-quite-slow-when-syntax-is-set-to-ruby
-  au Filetype ruby setlocal foldmethod=manual
-
   """"""" omnicompletions
   " Extreme info on omnicompletions, must read more:
   " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
@@ -942,14 +959,14 @@ nnoremap <leader>s :so $MYVIMRC<CR>
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 
 " ## CtrlP
-let g:ctrlp_map = '<leader>m'
-let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_map = '<leader>m'
+" let g:ctrlp_cmd = 'CtrlP'
 
 " ## FZF
 " Search files really fast
 nnoremap <silent> <Leader>a :Ag<CR>
 " search open buffers
-nnoremap <silent> <Leader>m :Files .<CR>
+nnoremap <silent> <Leader>m :Files<CR>
 " nnoremap <silent> <A-i> :History:<CR>
 " nnoremap <silent> <A-e> :Buffers<CR>
 " if the file isn't active, switch to it
