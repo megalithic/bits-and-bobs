@@ -109,7 +109,11 @@ config.layout = {
 
   ['com.spotify.client'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
+    if count == 1 then
+      grid.set(window, '4,0 4x5', config.secondaryDisplay(count))
+    else
+      grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
+    end
   end),
 
   ['google-play-music-desktop-player'] = (function(window, forceScreenCount)
@@ -124,7 +128,11 @@ config.layout = {
 
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
+    if count == 1 then
+      grid.set(window, '4,5 4x4', config.secondaryDisplay(count))
+    else
+      grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
+    end
   end),
 
   ['com.agilebits.onepassword4'] = (function(window, forceScreenCount)

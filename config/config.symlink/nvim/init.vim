@@ -489,8 +489,6 @@ let g:SuperTabDefaultCompletionType = 'context'
 
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
-let b:deoplete_disable_auto_complete = 1
-let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 " let g:deoplete#auto_completion_start_length = 2
