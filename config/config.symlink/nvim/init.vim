@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ## Interface
   Plug 'snooc/base16-vim'
   Plug 'mhartington/oceanic-next'
+  Plug 'joshdick/onedark.vim'
   Plug 'megalithic/golden-ratio'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -26,39 +27,40 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
-  Plug 'othree/yajs.vim' " { 'tag': '1.6' } fixes weird comment colors
-  Plug 'pangloss/vim-javascript'
-  Plug 'jelera/vim-javascript-syntax'
+  Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
   " Plug 'gavocanov/vim-js-indent'
-  Plug 'othree/javascript-libraries-syntax.vim'
-  Plug 'mxw/vim-jsx'
-  " Plug 'othree/jspc.vim'
-  Plug 'heavenshell/vim-jsdoc'
-  Plug 'sheerun/vim-json'
-  Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-  Plug 'carlitux/deoplete-ternjs'
-  Plug 'kchmck/vim-coffee-script'
+  Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'sheerun/vim-json', { 'for': ['json'] }
+  Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
+  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i' }
+  Plug 'kchmck/vim-coffee-script', { 'for': ['json'] }
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
-  Plug 'othree/csscomplete.vim'
-  Plug 'hail2u/vim-css3-syntax'
-  Plug 'cakebaker/scss-syntax.vim'
+  Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] }
+  Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] }
+  Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass'] }
   Plug 'othree/svg-properties-syntax.vim'
+  Plug 'kewah/vim-cssfmt', { 'on':  ['Cssfmt', 'CssfmtVisual'] }
+  Plug 'stephenway/postcss.vim', { 'for': ['css', 'scss', 'sass'] }
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al
-  Plug 'othree/html5.vim'
-  Plug 'othree/xml.vim'
-  Plug 'tpope/vim-markdown'
+  Plug 'othree/html5.vim', { 'for': ['html'] }
+  Plug 'othree/xml.vim', { 'for': ['xml'] }
+  Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'vim-pandoc/vim-pandoc-syntax'
-  Plug 'nelstrom/vim-markdown-folding'
-  Plug 'ingydotnet/yaml-vim'
-  Plug 'tpope/vim-haml'
+  Plug 'ingydotnet/yaml-vim', { 'for': ['yaml'] }
+  Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }
 
   " ----------------------------------------------------------------------------
   " ## Ruby, Rails, et al
-  Plug 'vim-ruby/vim-ruby'
+  Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
 
@@ -68,10 +70,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-fugitive'
   Plug 'jreybert/vimagit'
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
-  Plug 'tejr/vim-tmux'
-  Plug 'honza/dockerfile.vim'
-  Plug 'ElmCast/elm-vim'
-  Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin'
+  Plug 'tejr/vim-tmux', { 'for': ['tmux'] }
+  Plug 'honza/dockerfile.vim', { 'for': ['dockerfile', 'docker'] }
+  Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
+  Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] }
 
   " ----------------------------------------------------------------------------
   " ## Utilities
@@ -146,12 +148,14 @@ runtime macros/matchit.vim
 " -----------------------------------------------------------------------------
 " ## UI
 set background=dark
+" let g:onedark_terminal_italics = 1
+" colorscheme onedark
 colorscheme base16-ocean
 
 " change vim cursor depending on the mode
 if has('nvim')
   set termguicolors
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
   let g:python_host_prog = '/usr/local/bin/python2'
   let g:python3_host_prog = '/usr/local/bin/python3'
@@ -188,7 +192,7 @@ set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
 set noerrorbells
 set novisualbell
-set number "relativenumber number
+set number relativenumber "relativenumber number
 set splitbelow
 set splitright
 set noshowmode
@@ -345,7 +349,7 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#neomake#enabled = 1
-let g:airline_theme='oceanicnext' "'base16_ocean'
+let g:airline_theme='base16_ocean' "'base16_ocean'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -367,20 +371,19 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_symbols.modified = '✭'
 let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 0
-" let g:airline_extensions = ['mode','crypt','paste','iminsert','branch','filename','readonly','filetype','fileencoding','fileformat','percentage','line number','column number','whitespace']
- let g:airline_mode_map = {
-       \ '__' : '-',
-       \ 'n'  : 'N',
-       \ 'i'  : 'I',
-       \ 'R'  : 'R',
-       \ 'c'  : 'C',
-       \ 'v'  : 'V',
-       \ 'V'  : 'V',
-       \ '' : 'V',
-       \ 's'  : 'S',
-       \ 'S'  : 'S',
-       \ '' : 'S',
-       \ }
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
 
 " ## neomake
 " -- Settings derived from:
@@ -406,39 +409,20 @@ let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_scss_scsslint_args = ['-c', globpath(&rtp, 'misc/scss-lint.yml')]
 
 let g:neomake_javascript_enabled_makers = ['standard']
-" let g:neomake_javascript_standard_maker = {
-"   \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-"   \ 'errorformat': '  %f:%l:%c: %m'
-"   \ }
-
-" function! neomake#makers#ft#javascript#standard()
-"   return {
-"         \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-"         \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-"         \ '%W%f: line %l\, col %c\, Warning - %m'
-"         \ }
-" endfunction
 let g:neomake_javascript_standard_maker = {
       \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
       \ 'errorformat': '  %f:%l:%c: %m'
       \ }
 
 let g:neomake_jsx_enabled_makers = ['standard']
-let g:neomake_jsx_standard_maker =
-      \ g:neomake_javascript_standard_maker
+let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
+
 
 " Check for lint errors on write
 au BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
 au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
 au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
 
-" function! JscsFix()
-"   let l:winview = winsaveview()
-"   % ! jscs -x
-"   call winrestview(l:winview)
-" endfunction
-" command JscsFix :call JscsFix()
-" noremap <leader>j :JscsFix<CR>
 
 " ## rainbow
 let g:rainbow_conf = {
@@ -505,9 +489,11 @@ let g:SuperTabDefaultCompletionType = 'context'
 
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
+let b:deoplete_disable_auto_complete = 1
+let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
-let g:deoplete#auto_completion_start_length = 2
+" let g:deoplete#auto_completion_start_length = 2
 let g:deoplete#max_list = 10
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -515,6 +501,7 @@ if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 
+" let g:deoplete#sources={}
 " let g:deoplete#sources_ = []
 " let g:deoplete#sources_md = ['dictionary', 'file', 'member']
 " let g:deoplete#sources_pandoc = ['dictionary', 'file', 'member']
@@ -522,6 +509,7 @@ endif
 " let g:deoplete#sources_txt = ['buffer','dictionary', 'file', 'member']
 " let g:deoplete#sources_mmd = ['dictionary', 'file', 'member']
 " let g:deoplete#sources_ghmarkdown = ['dictionary', 'file', 'member']
+" let g:deoplete#sources_javascript = ['buffer', 'member', 'file', 'omni']
 " let g:deoplete#sources_ruby = ['buffer', 'member', 'file']
 " let g:deoplete#sources_css = ['buffer', 'member', 'file', 'omni']
 " let g:deoplete#sources_scss = ['buffer', 'member', 'file', 'omni']
@@ -530,18 +518,17 @@ endif
 " let g:deoplete#sources={}
 " let g:deoplete#sources._    = ['buffer', 'file']
 " let g:deoplete#sources.vim  = ['buffer', 'member', 'file']
-" let g:deoplete#sources['javascript.jsx'] = ['buffer', 'member', 'file']
+" let g:deoplete#sources.javascript = ['buffer', 'member', 'file', 'omni']
+" let g:deoplete#sources['javascript.jsx'] = ['buffer', 'member', 'file', 'omni']
 " let g:deoplete#sources.ruby = ['buffer', 'member', 'file']
 " let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni']
 " let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni']
 " let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni']
 
 " ## ternjs
-if exists('g:plugs["tern_for_vim"]')
-  let g:tern_show_argument_hints = 'on_hold'
-  let g:tern_show_signature_in_pum = 1
-  let g:tern_request_timeout = 1
-endif
+" let g:tern_show_argument_hints = 'on_hold'
+" let g:tern_show_signature_in_pum = 1
+" let g:tern_request_timeout = 1
 
 " ## FZF
 set rtp+=~/.fzf
@@ -619,7 +606,7 @@ if has('macunix')
 endif
 
 " ## ternjs
-autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> gb :TernDef<CR>
 
 " ## ultisnips
 " better key bindings for UltiSnipsExpandTrigger
@@ -652,6 +639,7 @@ function! BufEnterCommit()
     let g:deoplete#enable_at_startup = 0
     let b:deoplete_ignore_sources = ['buffer']
     let g:deoplete_ignore_sources = ['buffer']
+    let g:deoplete#ignore_sources = {'buffer'}
     call deoplete#disable()
     set spell
     set spelllang=en
@@ -747,6 +735,11 @@ endfunction
 
 
 " -/ Autocommands #autocommands /----------------------------------------------
+augroup Misc
+  autocmd!
+  autocmd! BufWritePost init.vim,vimrc.local,.vimrc so $MYVIMRC
+augroup END
+
 augroup UnSyntaxInactiveGroup
   autocmd!
   autocmd BufEnter,WinEnter * set syntax=ON
@@ -754,7 +747,7 @@ augroup UnSyntaxInactiveGroup
   " autocmd BufEnter,WinEnter * set cursorline
 
   autocmd BufLeave,WinLeave * set syntax=OFF
-  autocmd BufLeave,WinLeave * set nonumber
+  autocmd BufLeave,WinLeave * set nonumber norelativenumber
   " autocmd BufLeave,WinLeave * set nocursorline
 augroup END
 
@@ -783,6 +776,8 @@ augroup END
 
 augroup GitGroup
   autocmd!
+  autocmd Filetype gitcommit setl spell textwidth=72
+
   " Handles tpope/fugitive auto-commands
   autocmd BufNewFile,BufRead .git/index setlocal nolist
   autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -827,9 +822,9 @@ augroup ft_javascript
   " omnicompletion
   au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
   au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
-  if exists('g:plugs["tern_for_vim"]')
-    au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
-  endif
+  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
+
+  autocmd BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
 
   " js-beautify
   autocmd FileType javascript vnoremap <buffer>  <c-b> :call RangeJsBeautify()<cr>
@@ -957,8 +952,6 @@ au BufEnter *.rb syn match ErrorMsg /binding.pry/
 let mapleader=","
 let maplocalleader="\\"
 
-nnoremap <leader>s :so $MYVIMRC<CR>
-
 " ## Deoplete
 " inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 
@@ -973,8 +966,6 @@ nnoremap <silent> <Leader>a :Ag<CR>
 nnoremap <silent> <Leader>m :Files<CR>
 " nnoremap <silent> <A-i> :History:<CR>
 " nnoremap <silent> <A-e> :Buffers<CR>
-" if the file isn't active, switch to it
-nnoremap <BS> :Files .<CR>
 " " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
