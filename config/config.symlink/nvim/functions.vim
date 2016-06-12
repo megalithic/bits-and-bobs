@@ -19,7 +19,6 @@ function! BufEnterCommit()
 
   let b:deoplete_disable_auto_complete=1
   let b:deoplete_ignore_sources = ['buffer']
-  call deoplete#disable()
   set spell
   set spelllang=en
 endfunction

@@ -224,6 +224,6 @@ iab itinarary itinerary
 
 
 " -/ Runtime Paths /------------------------------------------------
-set rtp+=~/.fzf
-set rtp+=~/.config/nvim
 set rtp+=~/.config/nvim/plugged/deoplete.nvim
+set rtp+=~/.config/nvim/plugged/deoplete-ternjs
+set rtp+=~/.config/nvim/plugged/tern_for_vim

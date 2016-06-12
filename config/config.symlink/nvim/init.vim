@@ -27,18 +27,18 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
-  Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'gavocanov/vim-js-indent'
-  Plug 'othree/es.next.syntax.vim'
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'jelera/vim-javascript-syntax', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'gavocanov/vim-js-indent', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'othree/es.next.syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'othree/jspc.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'heavenshell/vim-jsdoc', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'sheerun/vim-json', { 'for': ['json'] }
-  Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
-  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i' }
+  Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
+  Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['json'] }
 
   " ----------------------------------------------------------------------------
@@ -46,9 +46,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] }
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] }
   Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass'] }
-  Plug 'othree/svg-properties-syntax.vim'
   Plug 'kewah/vim-cssfmt', { 'on':  ['Cssfmt', 'CssfmtVisual'] }
   Plug 'stephenway/postcss.vim', { 'for': ['css', 'scss', 'sass'] }
+  Plug 'othree/svg-properties-syntax.vim', { 'for': ['svg'] }
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al
@@ -112,7 +112,7 @@ call plug#begin('~/.config/nvim/plugged')
     UpdateRemotePlugins
   endfunction
   Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
-  Plug 'Konfekt/FastFold' " deoplete wants this for some reason :/
+  Plug 'Konfekt/FastFold' " deoplete wants this for some reason.. i don't even :/
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   " Plug 'mileszs/ack.vim'

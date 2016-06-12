@@ -1,13 +1,16 @@
 " -/ Plugin Settings /----------------------------------------------
+
 " ## vim-readdir
 " let g:loaded_netrw = 1
 " let g:loaded_netrwPlugin = 1
 
+" ----------------------------------------------------------------------------
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
 let g:golden_ratio_wrap_ignored = 0
 let g:golden_ratio_ignore_horizontal_splits = 1
 
+" ----------------------------------------------------------------------------
 " ## vim-airline
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
@@ -48,6 +51,7 @@ let g:airline_mode_map = {
       \ '' : 'S',
       \ }
 
+" ----------------------------------------------------------------------------
 " ## neomake
 " -- Settings derived from:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
@@ -63,34 +67,41 @@ let g:neomake_scss_scsslint_args = ['-c', globpath(&rtp, 'misc/scss-lint.yml')]
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_javascript_standard_maker = {
       \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-      \ 'errorformat': '  %f:%l:%c: %m'
+      \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m'
       \ }
+      " \ 'errorformat': '  %f:%l:%c: %m'
 let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
-" Check for lint errors on write
+let g:neomake_json_enabled_makers = ['jsonlint']
+
+" do the lintings!
 au BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
 au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
 au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
+au BufWritePost *.json silent! Neomake jsonlint|redraw
 
+" ----------------------------------------------------------------------------
 " ## rainbow_parentheses.vim
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
+" ----------------------------------------------------------------------------
 " ## vim-test
 function! SplitStrategy(cmd)
   botright new | call termopen(a:cmd) | startinsert
 endfunction
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split'
-
-" let g:test#preserve_screen = 1
+let g:test#preserve_screen = 1
 let g:test#javascript#mocha#options = "--colors --compilers js:babel/register --timeout 15000 --delay"
 let g:test#javascript#mocha#file_pattern = ".test.js"
 
-" ## listtoggle
+" ----------------------------------------------------------------------------
+" ## list-toggle
 let g:lt_location_list_toggle_map = '<F3>'
 let g:lt_quickfix_list_toggle_map = '<F4>'
 
+" ----------------------------------------------------------------------------
 " ## incsearch.vim
 " :h g:incsearch#auto_nohlsearch
 let g:incsearch#auto_nohlsearch = 1
@@ -101,6 +112,7 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
+" ----------------------------------------------------------------------------
 " ## vim-lua-ftplugin
 let g:lua_check_syntax = 0
 let g:lua_complete_omni = 1
@@ -108,10 +120,12 @@ let g:lua_complete_dynamic = 0
 let g:lua_define_completion_mappings = 0
 let g:deoplete#omni#functions_lua = 'xolox#lua#omnifunc'
 
+" ----------------------------------------------------------------------------
 " ## vim-markdown
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
 let g:vim_markdown_frontmatter=1
 
+" ----------------------------------------------------------------------------
 " ## vim-javascript-syntax
 let g:JSHintHighlightErrorLine = 1
 let javascript_enable_domhtmlcss = 1
@@ -119,22 +133,26 @@ let loaded_matchit = 1
 let g:js_indent_log = 1
 let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angular,enzyme'
 
+" ----------------------------------------------------------------------------
 " ## vim-jsx
 let g:jsx_ext_required = 0
 let g:jsx_pragma_required = 0
 
+" ----------------------------------------------------------------------------
 " ## quick-scope
 let g:qs_enable = 0
 
+" ----------------------------------------------------------------------------
 " ## supertab
 " handy stuff: https://github.com/ervandew/supertab/issues/53
 let g:SuperTabDefaultCompletionTypeDiscovery = [ "&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>" ]
 let g:SuperTabDefaultCompletionType = 'context'
 
+" ----------------------------------------------------------------------------
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_refresh_always = 1
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#enable_refresh_always = 1
 " let g:deoplete#enable_camel_case = 1
 " let g:deoplete#enable_ignore_case = 1
 " let g:deoplete#file#enable_buffer_path = 1
@@ -174,15 +192,19 @@ endif
 " let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni']
 " let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni']
 
+" ----------------------------------------------------------------------------
 " ## tern_for_vim
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 
+" ----------------------------------------------------------------------------
 " ## ternjs
 let g:tern_show_argument_hints = 'on_hold'
-let g:tern_show_signature_in_pum = 0
+let g:tern_show_signature_in_pum = 1
 let g:tern_request_timeout = 1
+au FileType javascript,javascript.jsx nnoremap <silent> <buffer> gb :TernDef<CR>
 
+" ----------------------------------------------------------------------------
 " ## FZF
 let g:fzf_buffers_jump = 1
 let g:fzf_filemru_bufwrite = 1
@@ -194,16 +216,7 @@ let g:fzf_action = {
   \ 'enter': 'vsplit'
   \ }
 
-" function! s:buflist()
-"     redir => ls
-"     silent ls
-"     redir END
-"     return split(ls, '\n')
-" endfunction
-" function! s:bufopen(e)
-"     execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-" endfunction
-
+" ----------------------------------------------------------------------------
 " ## ctrlp
 let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
 let g:ctrlp_switch_buffer=0            " open files in new buffers
@@ -235,6 +248,7 @@ let g:ctrlp_prompt_mappings = {
       \ 'ToggleFocus()':        ['<c-tab>'],
       \}
 
+" ----------------------------------------------------------------------------
 " ## ack.vim
 set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
 let &grepprg = 'command ag --nogroup --nocolor --line-numbers --column'
@@ -243,6 +257,7 @@ let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
 " https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
 let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
 
+" ----------------------------------------------------------------------------
 " ## webapi-vim / gist-vim
 let g:gist_put_url_to_clipboard_after_post  = 1
 let g:gist_show_privates                    = 1
@@ -255,9 +270,7 @@ if has('macunix')
   let g:gist_clip_command = 'pbcopy'
 endif
 
-" ## ternjs
-autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> gb :TernDef<CR>
-
+" ----------------------------------------------------------------------------
 " ## ultisnips
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
