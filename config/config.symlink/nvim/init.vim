@@ -147,3 +147,4 @@ source $HOME/.config/nvim/functions.vim
 source $HOME/.config/nvim/autocommands.vim
 source $HOME/.config/nvim/ftsyntax.vim
 source $HOME/.config/nvim/keys.vim
+source $HOME/.config/nvim/highlights.vim

@@ -16,17 +16,12 @@ function! BufEnterCommit()
   if getline('.') == ''
     start
   end
-  " force spell when doing a git commit
-  if bufname("%") == "COMMIT_EDITMSG"
-    let b:deoplete_disable_auto_complete=1
-    let g:deoplete#enable_at_startup = 0
-    let b:deoplete_ignore_sources = ['buffer']
-    let g:deoplete_ignore_sources = ['buffer']
-    let g:deoplete#ignore_sources = {'buffer'}
-    call deoplete#disable()
-    set spell
-    set spelllang=en
-  endif
+
+  let b:deoplete_disable_auto_complete=1
+  let b:deoplete_ignore_sources = ['buffer']
+  call deoplete#disable()
+  set spell
+  set spelllang=en
 endfunction
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)

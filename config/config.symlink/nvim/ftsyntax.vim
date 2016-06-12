@@ -13,11 +13,6 @@ augroup ft_javascript
   " Expands 'class=' to 'className='
   au FileType javascript.jsx iabbrev class== className=
 
-  " omnicompletion
-  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
-  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
-  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
-
   autocmd BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
 
   " js-beautify
@@ -62,9 +57,6 @@ augroup ft_scss
   au FileType css,css.scss,sass,scss setlocal formatoptions+=croql
   au BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
   au BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
-
-  " omnicompletion
-  au FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
 augroup END
 
 augroup ft_markdown
@@ -101,23 +93,19 @@ augroup ft_misc
 
   " autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
   au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+augroup END
 
-  """"""" omnicompletions
+augroup completions
+  au!
   " Extreme info on omnicompletions, must read more:
   " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
   au FileType * setlocal omnifunc=syntaxcomplete#Complete
   au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  au FileType css,scss,sass,less setlocal omnifunc=csscomplete#CompleteCSS
+  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
+  au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
+  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
   au FileType python setlocal omnifunc=pythoncomplete#Complete
   au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   au FileType ruby setlocal omnifunc=rubycomplete#Complete
-augroup END
-
-augroup vimrc_deoplete
-  autocmd!
-  autocmd VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
-  autocmd VimEnter * call deoplete#custom#set('_', 'converters',
-        \ ['converter_auto_paren', 'converter_remove_overlap'])
-  autocmd VimEnter * call deoplete#custom#set('vim', 'converters',
-        \ ['add_vim_versions'])
-  autocmd VimEnter * call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
 augroup END

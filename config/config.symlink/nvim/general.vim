@@ -198,26 +198,6 @@ endif
 set exrc
 set secure " disable unsafe commands in local .vimrc files
 
-
-" -/ Highlighting /------------------------------------------------
-hi IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
-hi Search gui=underline term=underline guibg=#afaf87 guifg=#333333
-hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold
-hi Comment cterm=italic term=italic gui=italic
-" hi ColorColumn ctermbg=bg ctermfg=235 cterm=NONE guibg=bg guifg=#262626 gui=NONE
-" hi signColumn ctermbg=bg ctermfg=230 cterm=NONE guibg=bg guifg=#ffffd7 gui=NONE
-" hi LineNr ctermbg=bg ctermfg=137 cterm=NONE guibg=bg guifg=#af875f gui=NONE
-" hi ColorColumn ctermbg=bg ctermfg=235 cterm=NONE guibg=bg guifg=#262626 gui=NONE
-" hi signColumn ctermbg=bg ctermfg=230 cterm=NONE guibg=bg guifg=#ffffd7 gui=NONE
-" hi CursorLine ctermbg=235 ctermfg=NONE cterm=NONE guibg=#262626 guifg=NONE gui=NONE
-hi LineNr guibg=bg guifg=#665F59 gui=NONE
-hi CursorLineNr ctermbg=bg ctermfg=223 cterm=NONE guibg=bg guifg=#af875f gui=bold
-hi qfLineNr ctermbg=bg ctermfg=95 cterm=NONE guibg=bg guifg=#875f5f gui=NONE
-
-" Highlight VCS conflict markers
-" match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-
 " -/ Abbreviations/Spelling /------------------------------------------------
 " Autocorrect my common typos in insert-mode
 iab Connectiosn Connections

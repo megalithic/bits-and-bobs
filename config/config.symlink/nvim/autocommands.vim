@@ -23,7 +23,7 @@ augroup vimrcEx
   " NOTE: the syntax highlighting fails when using FZF
   " FIXME: we really want to still be able to flip between syntax highlighting
   " on and off.
-  au WinEnter * set syntax=ON
+  au WinEnter,BufRead * set syntax=ON
   au BufEnter,WinEnter * set number relativenumber
   au WinLeave * set syntax=OFF
   au BufLeave,WinLeave * set nonumber norelativenumber
@@ -49,6 +49,7 @@ augroup vimrcEx
   au BufReadCmd *.git/index exe BufReadIndex()
   au BufEnter *.git/index silent normal gg0j
   au BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
+  au Filetype gitcommit exe BufEnterCommit()
 
   " ----------------------------------------------------------------------------
   " ## Automagically rename tmux window to current filename
@@ -77,4 +78,13 @@ augroup vimrcEx
     autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
     autocmd BufWinEnter,WinEnter term://* startinsert
   endif
+
+  " ----------------------------------------------------------------------------
+  " ## Debug deoplete
+  " autocmd VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
+  " autocmd VimEnter * call deoplete#custom#set('_', 'converters',
+  "       \ ['converter_auto_paren', 'converter_remove_overlap'])
+  " autocmd VimEnter * call deoplete#custom#set('vim', 'converters',
+  "       \ ['add_vim_versions'])
+  " autocmd VimEnter * call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
 augroup END
