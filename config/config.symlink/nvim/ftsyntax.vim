@@ -15,8 +15,8 @@ augroup ft_javascript
 
   " omnicompletion
   au FileType javascript,jsx,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS " default
-  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
   au FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete " tern
+  au FileType javascript,jsx,javascript.jsx setlocal completefunc=jspc#omni " jspc
 
   autocmd BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
 
@@ -114,7 +114,7 @@ augroup END
 
 augroup vimrc_deoplete
   autocmd!
-  autocmd VimEnter * call deoplete#enable_logging('DEBUG', expand('$XDG_RUNTIME_DIR/deoplete.log'))
+  autocmd VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
   autocmd VimEnter * call deoplete#custom#set('_', 'converters',
         \ ['converter_auto_paren', 'converter_remove_overlap'])
   autocmd VimEnter * call deoplete#custom#set('vim', 'converters',

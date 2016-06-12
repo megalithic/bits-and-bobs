@@ -20,9 +20,12 @@ augroup vimrcEx
 
   " ----------------------------------------------------------------------------
   " ## Toggle certain accoutrements when entering and leaving a buffer & window
-  au BufEnter,WinEnter * set syntax=ON
+  " NOTE: the syntax highlighting fails when using FZF
+  " FIXME: we really want to still be able to flip between syntax highlighting
+  " on and off.
+  au WinEnter * set syntax=ON
   au BufEnter,WinEnter * set number relativenumber
-  au BufLeave,WinLeave * set syntax=OFF
+  au WinLeave * set syntax=OFF
   au BufLeave,WinLeave * set nonumber norelativenumber
 
   " ----------------------------------------------------------------------------
@@ -36,7 +39,7 @@ augroup vimrcEx
 
   " ----------------------------------------------------------------------------
   " ## Treat buffers from stdin as scratch.
-  " autocmd StdinReadPost * :set buftype=nofile
+  autocmd StdinReadPost * :set buftype=nofile
 
   " ----------------------------------------------------------------------------
   " ## Manage GIT related scenarios

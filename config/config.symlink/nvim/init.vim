@@ -30,7 +30,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
-  " Plug 'gavocanov/vim-js-indent'
+  Plug 'gavocanov/vim-js-indent'
+  Plug 'othree/es.next.syntax.vim'
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -91,12 +92,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'janko-m/vim-test'
   Plug 'Valloric/MatchTagAlways', { 'for': ['html', 'erb'] }
   Plug 'cohama/lexima.vim'
-  " Plug 'luochen1990/rainbow'
   Plug 'junegunn/rainbow_parentheses.vim'
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] }
   Plug 'docunext/closetag.vim'
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim'
+  " Plug 'luochen1990/rainbow'
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation
@@ -112,14 +113,11 @@ call plug#begin('~/.config/nvim/plugged')
   endfunction
   Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'Konfekt/FastFold' " deoplete wants this for some reason :/
-  " Plug 'mileszs/ack.vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  " Plug 'mileszs/ack.vim'
   " Plug 'ctrlpvim/ctrlp.vim'
   " Plug 'FelikZ/ctrlp-py-matcher'
-  Plug 'tpope/vim-dispatch'
-  Plug 'wincent/ferret'
-  Plug 'kopischke/vim-fetch' " open file at column/line number
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
@@ -144,7 +142,7 @@ call plug#end()
 runtime macros/matchit.vim
 
 source $HOME/.config/nvim/general.vim
-source $HOME/.config/nvim/plugins.vim
+source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/functions.vim
 source $HOME/.config/nvim/autocommands.vim
 source $HOME/.config/nvim/ftsyntax.vim
