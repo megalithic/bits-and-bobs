@@ -14,7 +14,7 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<tab>"
 " ## FZF
 " nnoremap <silent> <leader>m :FZF -m<CR>
 " nnoremap <silent> <leader>a :Ag<CR>
-nnoremap <silent> <leader>m :exe 'Files ' . <SID>fzf_root()<CR>
+nnoremap <silent> <leader>m :exe 'FZF ' . <SID>fzf_root()<CR>
 nnoremap <silent> <leader>a :execute 'Ag ' . input('Ag/')<CR>
 
 " " Insert mode completion
