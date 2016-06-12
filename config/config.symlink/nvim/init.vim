@@ -118,6 +118,7 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'mileszs/ack.vim'
   " Plug 'ctrlpvim/ctrlp.vim'
   " Plug 'FelikZ/ctrlp-py-matcher'
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
