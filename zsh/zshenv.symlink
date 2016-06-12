@@ -7,7 +7,6 @@ fi
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # setup chruby
 source /usr/local/share/chruby/chruby.sh
@@ -17,4 +16,4 @@ RUBIES=(~/.rubies/*)
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
-source ~/.dotfiles/zsh/colors.zsh
+# source ~/.dotfiles/zsh/colors.zsh

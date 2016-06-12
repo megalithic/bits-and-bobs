@@ -126,27 +126,29 @@ let g:jsx_pragma_required = 0
 " ## quick-scope
 let g:qs_enable = 0
 
+" ## supertab
 " handy stuff: https://github.com/ervandew/supertab/issues/53
-let g:SuperTabDefaultCompletionTypeDiscovery = [
-      \ "&completefunc:<c-x><c-u>",
-      \ "&omnifunc:<c-x><c-o>",
-      \ ]
+let g:SuperTabDefaultCompletionTypeDiscovery = [ "&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>" ]
 let g:SuperTabDefaultCompletionType = 'context'
 
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
-" let g:deoplete#enable_debug = 1
-" let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_refresh_always = 1
 " let g:deoplete#enable_camel_case = 1
 " let g:deoplete#enable_ignore_case = 1
 " let g:deoplete#file#enable_buffer_path = 1
 " let g:deoplete#auto_completion_start_length = 2
 " let g:deoplete#max_list = 100
+" let g:deoplete#enable_debug = 1
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
+
+" let g:deoplete#sources = {}
+" let g:deoplete#sources._ = ['buffer', 'member', 'file', 'ultisnips']
 
 " let g:deoplete#sources={}
 " let g:deoplete#sources_ = []
@@ -172,13 +174,16 @@ endif
 " let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni']
 " let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni']
 
+" ## tern_for_vim
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+
 " ## ternjs
 let g:tern_show_argument_hints = 'on_hold'
-let g:tern_show_signature_in_pum = 1
+let g:tern_show_signature_in_pum = 0
 let g:tern_request_timeout = 1
 
 " ## FZF
-set rtp+=~/.fzf
 let g:fzf_buffers_jump = 1
 let g:fzf_filemru_bufwrite = 1
 let g:fzf_layout = { 'down': '~30%' }

@@ -24,9 +24,9 @@ augroup vimrcEx
   " FIXME: we really want to still be able to flip between syntax highlighting
   " on and off.
   au WinEnter,BufRead * set syntax=ON
-  au BufEnter,WinEnter * set number relativenumber
+  au BufEnter,WinEnter * set number "relativenumber
   au WinLeave * set syntax=OFF
-  au BufLeave,WinLeave * set nonumber norelativenumber
+  au BufLeave,WinLeave * set nonumber "norelativenumber
 
   " ----------------------------------------------------------------------------
   " ## Automagically update remote homeassistant files upon editing locally

@@ -56,7 +56,7 @@ set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
 set noerrorbells
 set novisualbell
-set number relativenumber "relativenumber number
+set number  "relativenumber number
 set splitbelow
 set splitright
 set noshowmode
@@ -198,6 +198,7 @@ endif
 set exrc
 set secure " disable unsafe commands in local .vimrc files
 
+
 " -/ Abbreviations/Spelling /------------------------------------------------
 " Autocorrect my common typos in insert-mode
 iab Connectiosn Connections
@@ -220,3 +221,9 @@ iab taht that
 iab teh the
 iab itinirary itinerary
 iab itinarary itinerary
+
+
+" -/ Runtime Paths /------------------------------------------------
+set rtp+=~/.fzf
+set rtp+=~/.config/nvim
+set rtp+=~/.config/nvim/plugged/deoplete.nvim
