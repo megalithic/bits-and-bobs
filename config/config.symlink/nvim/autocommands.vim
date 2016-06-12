@@ -48,7 +48,7 @@ augroup vimrcEx
   au BufReadPost fugitive://* set bufhidden=delete
   au BufReadCmd *.git/index exe BufReadIndex()
   au BufEnter *.git/index silent normal gg0j
-  " au BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
+  au BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
   au Filetype gitcommit exe BufEnterCommit()
 
   " ----------------------------------------------------------------------------
