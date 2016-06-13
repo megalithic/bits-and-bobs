@@ -26,8 +26,8 @@ hs.window.setShadows(true)
 -- :: screens
 config.screens = {
   laptop = 'Built-in Retina Display',
-  primary = 724049870,
-  secondary = 724069583
+  primary = 724049871,
+  secondary = 724069582
 }
 
 -- GRID SETUP
