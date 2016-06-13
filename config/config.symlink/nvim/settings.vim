@@ -5,6 +5,10 @@
 " let g:loaded_netrwPlugin = 1
 
 " ----------------------------------------------------------------------------
+" ## vim-polyglot
+let g:polyglot_disabled = ['elm']
+
+" ----------------------------------------------------------------------------
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
 let g:golden_ratio_wrap_ignored = 0
@@ -104,12 +108,6 @@ let g:lt_quickfix_list_toggle_map = '<F4>'
 " ## incsearch.vim
 " :h g:incsearch#auto_nohlsearch
 let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
 
 " ----------------------------------------------------------------------------
 " ## vim-lua-ftplugin
@@ -155,7 +153,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 " let g:deoplete#enable_refresh_always = 1
 " let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#auto_completion_start_length = 2
+" let g:deoplete#auto_completion_start_length = 2 " causes an error
 " let g:deoplete#max_list = 100
 " let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_debug = 1

@@ -138,9 +138,15 @@ noremap <silent><leader>W :w !sudo tee %<CR>
 vnoremap <c-z> <esc>zv`<ztgv
 
 " ## Search / Substitutions / Replacements / incsearch.vim
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+nnoremap /  <Plug>(incsearch-forward)
+nnoremap ?  <Plug>(incsearch-backward)
+nnoremap g/ <Plug>(incsearch-stay)
+nnoremap n  <Plug>(incsearch-nohl-n)
+nnoremap N  <Plug>(incsearch-nohl-N)
+nnoremap *  <Plug>(incsearch-nohl-*)
+nnoremap #  <Plug>(incsearch-nohl-#)
+nnoremap g* <Plug>(incsearch-nohl-g*)
+nnoremap g# <Plug>(incsearch-nohl-g#)
 
 nnoremap / /\v
 vnoremap / /\v
