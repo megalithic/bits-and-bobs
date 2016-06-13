@@ -1,7 +1,7 @@
 " -/ Filetypes/Syntax /-------------------------------------------------------
 augroup ft_javascript
   au!
-  au BufEnter,BufNewFile,BufRead,BufReadPost *.js set filetype=javascript.jsx
+  au BufEnter,BufNewFile,BufRead,BufReadPost *.js set ft=javascript.jsx
 
   " make `gf` search for .js files
   au FileType javascript,javascript.jsx setl suffixesadd=.js
@@ -12,6 +12,7 @@ augroup ft_javascript
   au FileType javascript.jsx iabbrev class== className=
 
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
+  au BufNewFile,BufRead .tern-project set ft=json
 
   " js-beautify
   au FileType javascript vnoremap <buffer>  <c-b> :call RangeJsBeautify()<cr>
@@ -24,7 +25,7 @@ augroup END
 augroup javascript_shortcuts
   " https://github.com/rstacruz/vimfiles/blob/master/plugin/z-javascript-functions.vim
   au!
-  au FileType javascript call <SID>set_js_shortcuts()
+  au FileType javascript,javascript.jsx call <SID>set_js_shortcuts()
 augroup END
 
 function! s:set_js_shortcuts()
@@ -53,14 +54,14 @@ augroup ft_scss
   " https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/css3-syntax.vim
   au FileType css,css.scss,sass,scss setl iskeyword+=-
   au FileType css,css.scss,sass,scss setl formatoptions+=croql
-  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss set filetype=sass
-  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss.css set filetype=sass
+  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss set ft=sass
+  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss.css set ft=sass
 augroup END
 
 augroup ft_markdown
   au!
   " Markdown turn off lazyredraw
-  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw filetype=markdown
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw ft=markdown
   au FileType markdown set tw=80
 augroup END
 
@@ -71,7 +72,7 @@ augroup END
 
 augroup ft_haml
   au!
-  au BufNewFile,BufRead,BufReadPost *.html set filetype=haml
+  au BufNewFile,BufRead,BufReadPost *.html set ft=haml
 augroup END
 
 augroup ft_ssh
@@ -84,9 +85,8 @@ augroup ft_misc
   au!
   autocmd FileType javascript,javascript.jsx,lisp,clojure,scheme,sass,scss RainbowParentheses
 
-  autocmd BufNewFile,BufRead *.conf set filetype=conf
+  autocmd BufNewFile,BufRead *.conf set ft=conf
 
-  au FileType json autocmd BufWritePre <buffer> %!python -m json.tool
   au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 augroup END
 
@@ -97,9 +97,9 @@ augroup completions
   au FileType * setl omnifunc=syntaxcomplete#Complete
   au FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
   au FileType css,scss,sass,less setl omnifunc=csscomplete#CompleteCSS
-  au FileType javascript,jsx,javascript.jsx setl omnifunc=javascriptcomplete#CompleteJS " default
-  au FileType javascript,jsx,javascript.jsx setl completefunc=jspc#omni " jspc
-  au FileType javascript,jsx,javascript.jsx setl omnifunc=tern#Complete " tern
+  au FileType javascript,javascript.jsx setl omnifunc=javascriptcomplete#CompleteJS " default
+  au FileType javascript,javascript.jsx setl completefunc=jspc#omni " jspc
+  au FileType javascript,javascript.jsx setl omnifunc=tern#Complete " tern
   au FileType python setl omnifunc=pythoncomplete#Complete
   au FileType xml setl omnifunc=xmlcomplete#CompleteTags
   au FileType ruby setl omnifunc=rubycomplete#Complete

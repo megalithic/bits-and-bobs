@@ -4,13 +4,21 @@ let maplocalleader="\\"
 
 nnoremap <c-s> :source $MYVIMRC<cr>
 
+" ----------------------------------------------------------------------------
 " ## Deoplete
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<tab>"
+autocmd InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
 
+" ----------------------------------------------------------------------------
+" ## Tern
+au FileType javascript,javascript.jsx nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" ----------------------------------------------------------------------------
 " ## CtrlP
 " let g:ctrlp_map = '<leader>m'
 " let g:ctrlp_cmd = 'CtrlP'
 
+" ----------------------------------------------------------------------------
 " ## FZF
 " nnoremap <silent> <leader>m :FZF -m<CR>
 " nnoremap <silent> <leader>a :Ag<CR>
@@ -29,16 +37,19 @@ function! s:fzf_root()
   return fnamemodify(substitute(path, ".git", "", ""), ":p:h")
 endfunction
 
+" ----------------------------------------------------------------------------
 " ## Commenting
 nmap <leader>c :Commentary<cr>
 vmap <leader>c :Commentary<cr>
 
+" ----------------------------------------------------------------------------
 " ## vim-plug
 noremap <F5> :PlugUpdate<cr>
 map <F5> :PlugUpdate<cr>
 noremap <S-F5> :PlugClean!<cr>
 map <S-F5> :PlugClean!<cr>
 
+" ----------------------------------------------------------------------------
 " ## QuickScope
 nnoremap <expr> <silent> f Quick_scope_selective('f')
 nnoremap <expr> <silent> F Quick_scope_selective('F')
@@ -49,11 +60,13 @@ vnoremap <expr> <silent> F Quick_scope_selective('F')
 vnoremap <expr> <silent> t Quick_scope_selective('t')
 vnoremap <expr> <silent> T Quick_scope_selective('T')
 
+" ----------------------------------------------------------------------------
 " ## Fugitive
 nnoremap <leader>H :Gbrowse<cr>
 vnoremap <leader>H :Gbrowse<cr>
 nnoremap <leader>gb :Gblame<cr>
 
+" ----------------------------------------------------------------------------
 " ## Testing vim-test
 nmap <silent> <leader>t :TestFile<CR>
 nmap <silent> <leader>T :TestNearest<CR>
@@ -61,11 +74,13 @@ nmap <silent> <leader>T :TestNearest<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
+" ----------------------------------------------------------------------------
 " ## Gist/Github
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
 vnoremap <leader>G :Gist -p<cr>
 
+" ----------------------------------------------------------------------------
 " ## Surround
 vmap [ S]
 vmap ( S)
@@ -73,10 +88,22 @@ vmap { S}
 vmap ' S'
 vmap " S"
 
+" ----------------------------------------------------------------------------
+" ## Splits with vim-tmux-navigator
+" let g:tmux_navigator_no_mappings = 1
+" let g:tmux_navigator_save_on_switch = 1
+nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
+nnoremap <C-o> :vnew<cr>:e<space><c-d>
+
+" ----------------------------------------------------------------------------
 " ## Code Formatting
 map <leader>pj :%!python -m json.tool<CR>
 map <leader>px :%!xmllint % --format<CR>
 
+" ----------------------------------------------------------------------------
 " ## Quick edit of certain files
 nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
 nnoremap <leader>ez :vsplit ~/.zshrc<cr>
@@ -87,15 +114,6 @@ noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
-
-" ## Splits with vim-tmux-navigator
-" let g:tmux_navigator_no_mappings = 1
-" let g:tmux_navigator_save_on_switch = 1
-nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
-nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
 " Kill arrow keys
 nnoremap <Left> <nop>

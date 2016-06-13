@@ -27,6 +27,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
+  " Plug 'sheerun/vim-polyglot'
   Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'jelera/vim-javascript-syntax', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
@@ -37,8 +38,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/jspc.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'heavenshell/vim-jsdoc', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'sheerun/vim-json', { 'for': ['json'] }
-  Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
-  Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['json'] }
 
   " ----------------------------------------------------------------------------
@@ -52,7 +51,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al
-  Plug 'othree/html5.vim', { 'for': ['html'] }
+  Plug 'othree/html5.vim', { 'for': ['html', 'haml', 'js', 'javascript.jsx'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
   Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -112,7 +111,8 @@ call plug#begin('~/.config/nvim/plugged')
     UpdateRemotePlugins
   endfunction
   Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
-  Plug 'Konfekt/FastFold' " deoplete wants this for some reason.. i don't even :/
+  Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
+  Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   " Plug 'mileszs/ack.vim'

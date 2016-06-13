@@ -67,15 +67,14 @@ let g:neomake_scss_scsslint_args = ['-c', globpath(&rtp, 'misc/scss-lint.yml')]
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_javascript_standard_maker = {
       \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-      \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m'
+      \ 'errorformat': '  %f:%l:%c: %m'
       \ }
-      " \ 'errorformat': '  %f:%l:%c: %m'
 let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 let g:neomake_json_enabled_makers = ['jsonlint']
 
 " do the lintings!
-au BufRead,BufWritePost,BufEnter *.js silent! Neomake standard|redraw
+au BufWritePost *.js silent! Neomake standard|redraw
 au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
 au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
 au BufWritePost *.json silent! Neomake jsonlint|redraw
@@ -152,21 +151,21 @@ let g:SuperTabDefaultCompletionType = 'context'
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
 " let g:deoplete#enable_smart_case = 1
-" let g:deoplete#enable_refresh_always = 1
 " let g:deoplete#enable_camel_case = 1
-" let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_ignore_case = 1
+" let g:deoplete#enable_refresh_always = 1
 " let g:deoplete#file#enable_buffer_path = 1
-" let g:deoplete#auto_completion_start_length = 2
+let g:deoplete#auto_completion_start_length = 2
 " let g:deoplete#max_list = 100
+" let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_debug = 1
 
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 
-" let g:deoplete#sources = {}
-" let g:deoplete#sources._ = ['buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = ['buffer', 'member', 'file', 'dictionary', 'ultisnips', 'omni']
 
 " let g:deoplete#sources={}
 " let g:deoplete#sources_ = []
@@ -202,7 +201,7 @@ let g:tern#arguments = ["--persistent"]
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_show_signature_in_pum = 1
 let g:tern_request_timeout = 1
-au FileType javascript,javascript.jsx nnoremap <silent> <buffer> gb :TernDef<CR>
+" let g:tern_map_keys = 1
 
 " ----------------------------------------------------------------------------
 " ## FZF

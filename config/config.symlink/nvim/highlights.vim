@@ -34,6 +34,7 @@ augroup after_colorscheme
 augroup END
 
 
+hi Comment cterm=italic term=italic gui=italic
 hi IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 hi Search gui=underline term=underline guibg=#afaf87 guifg=#333333
 hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold

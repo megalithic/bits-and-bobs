@@ -11,6 +11,10 @@ augroup vimrcEx
   autocmd VimResized * execute "normal! \<c-w>="
 
   " ----------------------------------------------------------------------------
+  " ## Handle auto-closing of quickfix buffer
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+
+  " ----------------------------------------------------------------------------
   " ## Always put me back a the last known cursor position
   au BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -36,10 +40,6 @@ augroup vimrcEx
   " ## Toggle colorcolumn when in insert mode for visual 80char indicator
   au InsertEnter * set colorcolumn=80
   au InsertLeave * set colorcolumn=""
-
-  " ----------------------------------------------------------------------------
-  " ## Treat buffers from stdin as scratch.
-  autocmd StdinReadPost * :set buftype=nofile
 
   " ----------------------------------------------------------------------------
   " ## Manage GIT related scenarios
