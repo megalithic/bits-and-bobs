@@ -22,7 +22,6 @@ bot "NPM Globals..."
 ###############################################################################
 npm i -g babel
 npm i -g babel-eslint@5.0.0
-npm i -g babel-standard
 npm i -g bible
 npm i -g bower
 npm i -g browserify
