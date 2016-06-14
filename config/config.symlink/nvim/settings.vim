@@ -148,22 +148,31 @@ let g:SuperTabDefaultCompletionType = 'context'
 " ----------------------------------------------------------------------------
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_camel_case = 1
 " let g:deoplete#enable_smart_case = 1
-" let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_ignore_case = 1
+" let g:deoplete#enable_ignore_case = 1
 " let g:deoplete#enable_refresh_always = 1
 " let g:deoplete#file#enable_buffer_path = 1
 " let g:deoplete#auto_completion_start_length = 2 " causes an error
 " let g:deoplete#max_list = 100
 " let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_debug = 1
-
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
-
-let g:deoplete#sources = {}
+"
+let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
+let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
+let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
+let g:deoplete#keyword_patterns = get(g:, 'deoplete#keyword_patterns', {})
+let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
+let g:deoplete#sources = get(g:, 'deoplete#sources', {})
 let g:deoplete#sources._ = ['buffer', 'member', 'file', 'dictionary', 'ultisnips', 'omni']
+
+call deoplete#custom#set('_', 'converters', [
+	\ 'converter_remove_paren',
+	\ 'converter_remove_overlap',
+	\ 'converter_truncate_abbr',
+	\ 'converter_truncate_menu',
+	\ 'converter_auto_delimiter',
+	\ ])
 
 " let g:deoplete#sources={}
 " let g:deoplete#sources_ = []
@@ -196,7 +205,7 @@ let g:tern#arguments = ["--persistent"]
 
 " ----------------------------------------------------------------------------
 " ## ternjs
-let g:tern_show_argument_hints = 'on_hold'
+let g:tern_show_argument_hints = 'on_move' " originally on_hold
 let g:tern_show_signature_in_pum = 1
 let g:tern_request_timeout = 1
 " let g:tern_map_keys = 1
@@ -272,6 +281,7 @@ endif
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"

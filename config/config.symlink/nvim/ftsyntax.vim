@@ -22,27 +22,6 @@ augroup ft_javascript
   au FileType css vnoremap <buffer> <c-b> :call RangeCSSBeautify()<cr>
 augroup END
 
-augroup javascript_shortcuts
-  " https://github.com/rstacruz/vimfiles/blob/master/plugin/z-javascript-functions.vim
-  au!
-  au FileType javascript,javascript.jsx call <SID>set_js_shortcuts()
-augroup END
-
-function! s:set_js_shortcuts()
-  inoremap <buffer> @. this.
-
-  imap <buffer> fn<CR> function () {<CR>
-  imap <buffer> =><CR> => {<CR>
-  imap <buffer> -><CR> () => {<CR>
-
-  imap <buffer> clog( console.log(
-  imap <buffer> cerr( console.error(
-  imap <buffer> cer( console.error(
-  imap <buffer> gebid( document.getElementById(
-  imap <buffer> rcc( React.createClass(
-  imap <buffer> rcc<CR> React.createClass({<CR>
-endfunction
-
 augroup ft_scss
   au!
   " make sure `complete` works as expected for CSS class names whithout
@@ -83,9 +62,9 @@ augroup END
 
 augroup ft_misc
   au!
-  autocmd FileType javascript,javascript.jsx,lisp,clojure,scheme,sass,scss RainbowParentheses
+  au FileType javascript,javascript.jsx,lisp,clojure,scheme,sass,scss RainbowParentheses
 
-  autocmd BufNewFile,BufRead *.conf set ft=conf
+  au BufNewFile,BufRead *.conf set ft=conf
 
   au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 augroup END
@@ -97,9 +76,12 @@ augroup completions
   au FileType * setl omnifunc=syntaxcomplete#Complete
   au FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
   au FileType css,scss,sass,less setl omnifunc=csscomplete#CompleteCSS
-  au FileType javascript,javascript.jsx setl omnifunc=javascriptcomplete#CompleteJS " default
-  au FileType javascript,javascript.jsx setl completefunc=jspc#omni " jspc
-  au FileType javascript,javascript.jsx setl omnifunc=tern#Complete " tern
+
+  au FileType javascript,javascript.jsx,jsx setl omnifunc=javascriptcomplete#CompleteJS " default
+  au FileType javascript,javascript.jsx,jsx setl completefunc=jspc#omni " jspc
+  au FileType javascript,javascript.jsx,jsx setl omnifunc=tern#Complete " tern
+  au FileType javascript,javascript.jsx,jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " supertab / tern
+
   au FileType python setl omnifunc=pythoncomplete#Complete
   au FileType xml setl omnifunc=xmlcomplete#CompleteTags
   au FileType ruby setl omnifunc=rubycomplete#Complete

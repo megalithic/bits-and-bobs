@@ -6,12 +6,45 @@ nnoremap <c-s> :source $MYVIMRC<cr>
 
 " ----------------------------------------------------------------------------
 " ## Deoplete
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<tab>"
-autocmd InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
+function! InsertTabWrapper()
+  let col = col('.') - 1
+  if pumvisible()
+    return "\<C-n>"
+  elseif !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return deoplete#mappings#manual_complete()
+  endif
+endfunction
+
+inoremap <silent> <Tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <silent> <expr> <S-Tab> pumvisible() ? '<C-p>' : ''
+
+" Movement within 'ins-completion-menu'
+imap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+imap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+" Scroll pages in menu
+inoremap <expr><C-f> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<Right>"
+inoremap <expr><C-b> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<Left>"
+imap     <expr><C-d> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+imap     <expr><C-u> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+" Undo completion
+inoremap <expr><C-g> deoplete#mappings#undo_completion()
+
+" Redraw candidates
+inoremap <expr><C-l> deoplete#mappings#refresh()
+
+" function! s:is_whitespace() "{{{
+" 	let col = col('.') - 1
+" 	return ! col || getline('.')[col - 1] =~? '\s'
+" endfunction "}}}
 
 " ----------------------------------------------------------------------------
 " ## Tern
-au FileType javascript,javascript.jsx nnoremap <silent> <buffer> gb :TernDef<CR>
+" au FileType javascript,javascript.jsx nnoremap <silent> <buffer> <S-d> :TernDef<CR>
+" au FileType javascript,javascript.jsx nnoremap <silent> <S-c> :TernDoc<CR>
 
 " ----------------------------------------------------------------------------
 " ## CtrlP

@@ -89,6 +89,7 @@ call plug#begin('~/.config/nvim/plugged')
   " - yss<arg> for entire line
   Plug 'tpope/vim-repeat' " repeats plugin-execution mappings as well, with `.`
   Plug 'Valloric/MatchTagAlways', { 'for': ['html', 'xml', 'erb'] } " highlights the opening/closing tags for the block you're in
+  Plug 'Raimondi/delimitMate' " auto-closes quotes, parenthesis, brackets, etc.
   Plug 'cohama/lexima.vim' " auto-closes many delimiters and can repeat with a `.`
   Plug 'junegunn/rainbow_parentheses.vim' " nicely colors nested pairs of [], (), {}
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] } " a set of mappings for several langs: html, xml, erb, php, more

@@ -75,16 +75,17 @@ augroup vimrcEx
   " ## Terminal
   if has('nvim')
     " Automatically go into insert mode when entering terminal window
-    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    autocmd BufWinEnter,WinEnter term://* startinsert
+    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    au BufWinEnter,WinEnter term://* startinsert
   endif
 
   " ----------------------------------------------------------------------------
-  " ## Debug deoplete
-  " autocmd VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
-  " autocmd VimEnter * call deoplete#custom#set('_', 'converters',
+  " ## Deoplete
+  au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
+  " au VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
+  " au VimEnter * call deoplete#custom#set('_', 'converters',
   "       \ ['converter_auto_paren', 'converter_remove_overlap'])
-  " autocmd VimEnter * call deoplete#custom#set('vim', 'converters',
+  " au VimEnter * call deoplete#custom#set('vim', 'converters',
   "       \ ['add_vim_versions'])
-  " autocmd VimEnter * call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
+  " au VimEnter * call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
 augroup END

@@ -103,9 +103,9 @@ set gdefault " assume the /g flag is on in :s substitutions
 
 " -----------------------------------------------------------------------------
 " ## Completions
-set ofu=syntaxcomplete#Complete " Set omni-completion method.
+set omnifunc=syntaxcomplete#Complete " Set omni-completion method.
 set completeopt=longest,menuone,preview
-set omnifunc=syntaxcomplete#Complete
+" set completeopt-=preview
 set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
 " set complete-=i "don't complete in included files
