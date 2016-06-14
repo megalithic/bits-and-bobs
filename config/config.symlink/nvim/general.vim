@@ -66,9 +66,9 @@ set noshowcmd
 " ## Behavior
 " Swaps / Backups / Sessions / History
 set undofile
-set undodir=~/.config/nvim/undo
+set undodir=~/tmp/nvim/undo
 set undolevels=1000
-set undoreload=10000
+set undoreload=1000
 set nobackup
 set nowritebackup
 set noswapfile
