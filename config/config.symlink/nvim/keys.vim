@@ -6,45 +6,61 @@ nnoremap <c-s> :source $MYVIMRC<cr>
 
 " ----------------------------------------------------------------------------
 " ## Deoplete
-function! InsertTabWrapper()
+" function! InsertTabWrapper()
+"   let col = col('.') - 1
+"   if pumvisible()
+"     return "\<C-n>"
+"   elseif !col || getline('.')[col - 1] !~ '\k'
+"     return "\<tab>"
+"   else
+"     return deoplete#mappings#manual_complete()
+"   endif
+" endfunction
+
+" inoremap <silent> <Tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <silent> <expr> <S-Tab> pumvisible() ? '<C-p>' : ''
+
+" " Movement within 'ins-completion-menu'
+" imap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+" imap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+" " Scroll pages in menu
+" inoremap <expr><C-f> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<Right>"
+" inoremap <expr><C-b> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<Left>"
+" imap     <expr><C-d> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+" imap     <expr><C-u> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+" " Undo completion
+" inoremap <expr><C-g> deoplete#mappings#undo_completion()
+
+" " Redraw candidates
+" inoremap <expr><C-l> deoplete#mappings#refresh()
+
+imap <silent><expr><Tab>
+      \ pumvisible() ? "\<C-n>"
+      \ : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
+      \ : (<SID>is_whitespace() ? "\<Tab>"
+      \ : deoplete#mappings#manual_complete()))
+
+smap <silent><expr><Tab>
+      \ pumvisible() ? "\<C-n>"
+      \ : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
+      \ : (<SID>is_whitespace() ? "\<Tab>"
+      \ : deoplete#mappings#manual_complete()))
+
+inoremap <expr><S-Tab>
+      \ pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:is_whitespace()
   let col = col('.') - 1
-  if pumvisible()
-    return "\<C-n>"
-  elseif !col || getline('.')[col - 1] !~ '\k'
-    return "\<tab>"
-  else
-    return deoplete#mappings#manual_complete()
-  endif
+  return ! col || getline('.')[col - 1] =~? '\s'
 endfunction
 
-inoremap <silent> <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <silent> <expr> <S-Tab> pumvisible() ? '<C-p>' : ''
+" inoremap <expr><BS>
+"       \ deoplete#mappings#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-g>
+"       \ deoplete#mappings#undo_completion()
 
-" Movement within 'ins-completion-menu'
-imap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-imap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-
-" Scroll pages in menu
-inoremap <expr><C-f> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<Right>"
-inoremap <expr><C-b> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<Left>"
-imap     <expr><C-d> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-imap     <expr><C-u> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-
-" Undo completion
-inoremap <expr><C-g> deoplete#mappings#undo_completion()
-
-" Redraw candidates
-inoremap <expr><C-l> deoplete#mappings#refresh()
-
-" function! s:is_whitespace() "{{{
-" 	let col = col('.') - 1
-" 	return ! col || getline('.')[col - 1] =~? '\s'
-" endfunction "}}}
-
-" ----------------------------------------------------------------------------
-" ## Tern
-" au FileType javascript,javascript.jsx nnoremap <silent> <buffer> <S-d> :TernDef<CR>
-" au FileType javascript,javascript.jsx nnoremap <silent> <S-c> :TernDoc<CR>
 
 " ----------------------------------------------------------------------------
 " ## CtrlP
@@ -171,15 +187,15 @@ noremap <silent><leader>W :w !sudo tee %<CR>
 vnoremap <c-z> <esc>zv`<ztgv
 
 " ## Search / Substitutions / Replacements / incsearch.vim
-nnoremap /  <Plug>(incsearch-forward)
-nnoremap ?  <Plug>(incsearch-backward)
-nnoremap g/ <Plug>(incsearch-stay)
-nnoremap n  <Plug>(incsearch-nohl-n)
-nnoremap N  <Plug>(incsearch-nohl-N)
-nnoremap *  <Plug>(incsearch-nohl-*)
-nnoremap #  <Plug>(incsearch-nohl-#)
-nnoremap g* <Plug>(incsearch-nohl-g*)
-nnoremap g# <Plug>(incsearch-nohl-g#)
+" nnoremap /  <Plug>(incsearch-forward)
+" nnoremap ?  <Plug>(incsearch-backward)
+" nnoremap g/ <Plug>(incsearch-stay)
+" nnoremap n  <Plug>(incsearch-nohl-n)
+" nnoremap N  <Plug>(incsearch-nohl-N)
+" nnoremap *  <Plug>(incsearch-nohl-*)
+" nnoremap #  <Plug>(incsearch-nohl-#)
+" nnoremap g* <Plug>(incsearch-nohl-g*)
+" nnoremap g# <Plug>(incsearch-nohl-g#)
 
 nnoremap / /\v
 vnoremap / /\v
@@ -284,10 +300,11 @@ noremap L $
 vnoremap L g_
 
 " make the tab key match bracket pairs
-map <TAB> %
 silent! unmap [%
 silent! unmap ]%
+map <tab> %
 noremap <tab> %
+nnoremap <tab> %
 vnoremap <tab> %
 " Better mark jumping (line + col)
 nnoremap ' <nop>

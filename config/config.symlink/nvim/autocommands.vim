@@ -82,6 +82,7 @@ augroup vimrcEx
   " ----------------------------------------------------------------------------
   " ## Deoplete
   au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
+
   " au VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
   " au VimEnter * call deoplete#custom#set('_', 'converters',
   "       \ ['converter_auto_paren', 'converter_remove_overlap'])

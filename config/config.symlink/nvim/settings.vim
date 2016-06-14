@@ -5,10 +5,6 @@
 " let g:loaded_netrwPlugin = 1
 
 " ----------------------------------------------------------------------------
-" ## vim-polyglot
-let g:polyglot_disabled = ['elm']
-
-" ----------------------------------------------------------------------------
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
 let g:golden_ratio_wrap_ignored = 0
@@ -16,9 +12,6 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 
 " ----------------------------------------------------------------------------
 " ## vim-airline
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#neomake#enabled = 1
 let g:airline_theme='base16_ocean' "'base16_ocean'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -55,19 +48,35 @@ let g:airline_mode_map = {
       \ '' : 'S',
       \ }
 
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#neomake#enabled = 1
+
+" disable unused extensions (performance)
+let g:airline#extensions#bufferline#enabled = 0
+let g:airline#extensions#capslock#enabled   = 0
+let g:airline#extensions#csv#enabled        = 0
+let g:airline#extensions#ctrlspace#enabled  = 0
+let g:airline#extensions#eclim#enabled      = 0
+let g:airline#extensions#hunks#enabled      = 0
+let g:airline#extensions#nrrwrgn#enabled    = 0
+let g:airline#extensions#promptline#enabled = 0
+let g:airline#extensions#taboo#enabled      = 0
+let g:airline#extensions#tagbar#enabled     = 0
+let g:airline#extensions#virtualenv#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
+
 " ----------------------------------------------------------------------------
 " ## neomake
 " -- Settings derived from:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
 " --
 let g:neomake_airline = 1
+let g:neomake_serialize = 0
 let g:neomake_verbose = 0
-let g:neomake_serialize = 1
+let g:neomake_list_height = 20
 let g:neomake_error_sign = { 'text': '☓', 'texthl': 'Error' }
 let g:neomake_warning_sign = { 'text': '◦', 'texthl': 'Error' }
-let g:neomake_yaml_enabled_makers = ['yamllint']
-let g:neomake_scss_enabled_makers = ['scsslint']
-let g:neomake_scss_scsslint_args = ['-c', globpath(&rtp, 'misc/scss-lint.yml')]
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_javascript_standard_maker = {
       \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
@@ -75,13 +84,12 @@ let g:neomake_javascript_standard_maker = {
       \ }
 let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
-let g:neomake_json_enabled_makers = ['jsonlint']
 
 " do the lintings!
-au BufWritePost *.js silent! Neomake standard|redraw
-au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
-au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
-au BufWritePost *.json silent! Neomake jsonlint|redraw
+au BufRead,BufWritePost *.js Neomake | redraw
+" au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
+" au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
+" au BufWritePost *.json silent! Neomake jsonlint|redraw
 
 " ----------------------------------------------------------------------------
 " ## rainbow_parentheses.vim
@@ -142,17 +150,18 @@ let g:qs_enable = 0
 " ----------------------------------------------------------------------------
 " ## supertab
 " handy stuff: https://github.com/ervandew/supertab/issues/53
-let g:SuperTabDefaultCompletionTypeDiscovery = [ "&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>" ]
-let g:SuperTabDefaultCompletionType = 'context'
+" let g:SuperTabDefaultCompletionTypeDiscovery = [ "&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>" ]
+" let g:SuperTabDefaultCompletionType = 'context'
+" let g:SuperTabDefaultCompletionType = '<c-n>'
 
 " ----------------------------------------------------------------------------
 " ## deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_camel_case = 1
+let g:deoplete#file#enable_buffer_path = 1
 " let g:deoplete#enable_smart_case = 1
 " let g:deoplete#enable_ignore_case = 1
 " let g:deoplete#enable_refresh_always = 1
-" let g:deoplete#file#enable_buffer_path = 1
 " let g:deoplete#auto_completion_start_length = 2 " causes an error
 " let g:deoplete#max_list = 100
 " let g:deoplete#disable_auto_complete = 1
@@ -162,17 +171,17 @@ let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
 let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
 let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
 let g:deoplete#keyword_patterns = get(g:, 'deoplete#keyword_patterns', {})
-let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
+" let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
 let g:deoplete#sources = get(g:, 'deoplete#sources', {})
-let g:deoplete#sources._ = ['buffer', 'member', 'file', 'dictionary', 'ultisnips', 'omni']
+let g:deoplete#sources._ = ['buffer', 'member', 'file', 'dictionary', 'ultisnips', 'snips', 'tern', 'ternjs', 'omni']
 
-call deoplete#custom#set('_', 'converters', [
-	\ 'converter_remove_paren',
-	\ 'converter_remove_overlap',
-	\ 'converter_truncate_abbr',
-	\ 'converter_truncate_menu',
-	\ 'converter_auto_delimiter',
-	\ ])
+" call deoplete#custom#set('_', 'converters', [
+"       \ 'converter_remove_paren',
+"       \ 'converter_remove_overlap',
+"       \ 'converter_truncate_abbr',
+"       \ 'converter_truncate_menu',
+"       \ 'converter_auto_delimiter',
+"       \ ])
 
 " let g:deoplete#sources={}
 " let g:deoplete#sources_ = []
@@ -205,9 +214,9 @@ let g:tern#arguments = ["--persistent"]
 
 " ----------------------------------------------------------------------------
 " ## ternjs
-let g:tern_show_argument_hints = 'on_move' " originally on_hold
+let g:tern_show_argument_hints = 'on_hold'
 let g:tern_show_signature_in_pum = 1
-let g:tern_request_timeout = 1
+let g:tern_request_timeout = 3
 " let g:tern_map_keys = 1
 
 " ----------------------------------------------------------------------------
@@ -281,8 +290,27 @@ endif
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsListSnippets="<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" ----------------------------------------------------------------------------
+" ## neosnippet
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#expand_word_boundary = 1
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+" Tell Neosnippet about the other snippets
+" let g:neosnippet#snippets_directory='~/.config/repos/github.com/Shougo/neosnippet-snippets/neosnippets, ~/Github/ionic-snippets, ~/.config/repos/github.com/matthewsimo/angular-vim-snippets/snippets'
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"

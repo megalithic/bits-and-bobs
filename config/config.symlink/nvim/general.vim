@@ -50,7 +50,7 @@ set ruler " show the cursor position all the time
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
-" set cul " turn on cursorline highlighting -- needed for linenumber HL too
+set cul " turn on cursorline highlighting -- needed for linenumber HL too
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
 set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
@@ -65,10 +65,10 @@ set noshowcmd
 " -----------------------------------------------------------------------------
 " ## Behavior
 " Swaps / Backups / Sessions / History
-set undodir=/tmp
 set undofile
-set undoreload=500
-set undolevels=500
+set undodir=~/.config/nvim/undo
+set undolevels=1000
+set undoreload=10000
 set nobackup
 set nowritebackup
 set noswapfile
@@ -100,12 +100,13 @@ set ignorecase
 set smartcase
 set showmatch
 set gdefault " assume the /g flag is on in :s substitutions
+set hlsearch
 
 " -----------------------------------------------------------------------------
 " ## Completions
 set omnifunc=syntaxcomplete#Complete " Set omni-completion method.
-set completeopt=longest,menuone,preview
-" set completeopt-=preview
+set completeopt=menu,longest,menuone,preview
+set completeopt-=preview
 set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
 " set complete-=i "don't complete in included files
