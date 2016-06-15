@@ -50,7 +50,7 @@ set ruler " show the cursor position all the time
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
-set cul " turn on cursorline highlighting -- needed for linenumber HL too
+" set cul " turn on cursorline highlighting -- needed for linenumber HL too
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
 set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
@@ -76,14 +76,14 @@ set sessionoptions-=options " Do not save settings and mappings to sessions
 
 " -----------------------------------------------------------------------------
 " ## Folding
-set foldmethod=indent   "fold based on indent
-set foldnestmax=5      "deepest fold is 5 levels
 set nofoldenable        "dont fold by default
-set foldlevel=99
-set foldlevelstart=0
-set fcs=fold:-
-let ruby_fold = 1
-let javascript_fold = 1
+" set foldmethod=indent   "fold based on indent
+" set foldnestmax=5      "deepest fold is 5 levels
+" set foldlevel=99
+" set foldlevelstart=0
+" set fcs=fold:-
+" let ruby_fold = 1
+" let javascript_fold = 1
 
 " -----------------------------------------------------------------------------
 " ## Indentions

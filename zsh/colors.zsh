@@ -28,10 +28,11 @@ export CLICOLOR=1
 SHELL_COLORS="$HOME/.dotfiles/zsh/base16-ocean.dark.sh"
 [[ -s $SHELL_COLORS ]] && source $SHELL_COLORS
 
-# color stuffs
-eval `gdircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
+# -------- do not want here right now; breaking stuff
+# # color stuffs
+# eval `gdircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
 
-# Fallback to built in ls colors
-# zstyle ':completion:*' list-colors ''
-# ref: https://github.com/robbyrussell/oh-my-zsh/issues/1563#issuecomment-53638038
-zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
+# # Fallback to built in ls colors
+# # zstyle ':completion:*' list-colors ''
+# # ref: https://github.com/robbyrussell/oh-my-zsh/issues/1563#issuecomment-53638038
+# zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"

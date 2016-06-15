@@ -170,6 +170,8 @@ let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
 let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
 let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
+let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\w*'
+let g:deoplete#omni#input_patterns["javascript.jsx"] = '[^. \t]\.\w*'
 let g:deoplete#keyword_patterns = get(g:, 'deoplete#keyword_patterns', {})
 " let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
 let g:deoplete#sources = get(g:, 'deoplete#sources', {})
@@ -215,8 +217,9 @@ let g:tern#arguments = ["--persistent"]
 " ----------------------------------------------------------------------------
 " ## ternjs
 let g:tern_show_argument_hints = 'on_hold'
+let g:tern_show_argument_hints = 1
 let g:tern_show_signature_in_pum = 1
-let g:tern_request_timeout = 3
+let g:tern_request_timeout = 1
 " let g:tern_map_keys = 1
 
 " ----------------------------------------------------------------------------

@@ -27,6 +27,9 @@ function! s:after_colorscheme()
   hi LineNr guibg=bg guifg=#665F59 gui=NONE
   hi CursorLineNr ctermbg=bg ctermfg=223 cterm=NONE guibg=bg guifg=#af875f gui=bold
   hi qfLineNr ctermbg=bg ctermfg=95 cterm=NONE guibg=bg guifg=#875f5f gui=NONE
+
+  hi VendorPrefix guifg=#00ffff gui=bold
+  match VendorPrefix /-\(moz\|webkit\|o\|ms\)-[a-zA-Z-]\+/
 endfunction
 
 

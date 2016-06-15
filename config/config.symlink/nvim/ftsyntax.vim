@@ -80,7 +80,7 @@ augroup completions
   au FileType javascript,javascript.jsx,jsx setl omnifunc=javascriptcomplete#CompleteJS " default
   au FileType javascript,javascript.jsx,jsx setl completefunc=jspc#omni " jspc
   au FileType javascript,javascript.jsx,jsx setl omnifunc=tern#Complete " tern
-  au FileType javascript,javascript.jsx,jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " supertab / tern
+  " au FileType javascript,javascript.jsx,jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " supertab / tern
 
   au FileType python setl omnifunc=pythoncomplete#Complete
   au FileType xml setl omnifunc=xmlcomplete#CompleteTags
