@@ -19,8 +19,8 @@ hs.ipc.cliInstall()
 wm.events.initEventHandling()
 
 -- :: additional setup
-hs.audiodevice.defaultInputDevice():setMuted(true) -- ensure input is muted by default
-hs.audiodevice.defaultInputDevice():setInputVolume(0) -- ensure input is muted by default
+-- hs.audiodevice.defaultInputDevice():setMuted(true) -- ensure input is muted by default
+-- hs.audiodevice.defaultInputDevice():setInputVolume(0) -- ensure input is muted by default
 utils.log.df('[audio] default input device, %s, is muted? %s', hs.audiodevice.defaultInputDevice(), hs.audiodevice.defaultInputDevice():muted())
 utils.log.df('[audio] default input device, %s, input volume: %s', hs.audiodevice.defaultInputDevice(), hs.audiodevice.defaultInputDevice():inputVolume())
 
