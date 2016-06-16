@@ -46,7 +46,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al
-  Plug 'othree/html5.vim', { 'for': ['html', 'haml', 'js', 'javascript.jsx'] }
+  Plug 'othree/html5.vim', { 'for': ['html', 'haml', 'javascript', 'javascript.jsx'] }
   Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'ingydotnet/yaml-vim', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }
@@ -57,6 +57,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ## Ruby, Rails, et al
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
+  Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
 
   " ----------------------------------------------------------------------------
@@ -73,7 +74,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ----------------------------------------------------------------------------
   " ## Utilities
   Plug 'janko-m/vim-test' " tester for mocha and ruby
-  Plug 'benekastah/neomake', { 'on': ['Neomake'] } " async linting
+  Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'Chiel92/vim-autoformat' " uses external formatters to 'auto-format' code

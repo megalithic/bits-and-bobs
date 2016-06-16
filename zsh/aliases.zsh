@@ -61,7 +61,7 @@ alias mmv='noglob zmv -W'
 # TMUX
 # -----------------------------------------------------------------------------
 # alias tm="(tmux ls | grep -vq attached && tmux at) || tmux"
-alias tm="tmux attach || tmux new"
+alias tm=tmux #"tmux attach || tmux new"
 alias mux=tm
 alias takeover="tmux detach -a"
 alias teama="tmux attach-session -t default"

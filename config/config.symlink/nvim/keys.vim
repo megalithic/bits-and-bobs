@@ -6,35 +6,10 @@ nnoremap <c-s> :source $MYVIMRC<cr>
 
 " ----------------------------------------------------------------------------
 " ## Deoplete
-" function! InsertTabWrapper()
-"   let col = col('.') - 1
-"   if pumvisible()
-"     return "\<C-n>"
-"   elseif !col || getline('.')[col - 1] !~ '\k'
-"     return "\<tab>"
-"   else
-"     return deoplete#mappings#manual_complete()
-"   endif
-" endfunction
-
-" inoremap <silent> <Tab> <c-r>=InsertTabWrapper()<cr>
-" inoremap <silent> <expr> <S-Tab> pumvisible() ? '<C-p>' : ''
-
-" " Movement within 'ins-completion-menu'
-" imap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-" imap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-
-" " Scroll pages in menu
-" inoremap <expr><C-f> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<Right>"
-" inoremap <expr><C-b> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<Left>"
-" imap     <expr><C-d> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-" imap     <expr><C-u> pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-
-" " Undo completion
-" inoremap <expr><C-g> deoplete#mappings#undo_completion()
-
-" " Redraw candidates
-" inoremap <expr><C-l> deoplete#mappings#refresh()
+imap <silent><expr><CR> pumvisible() ?
+      \ (neosnippet#expandable() ? neosnippet#mappings#expand_impl()
+      \ : deoplete#mappings#close_popup())
+      \ : "\<CR>"
 
 imap <silent><expr><Tab>
       \ pumvisible() ? "\<C-n>"
@@ -50,6 +25,14 @@ smap <silent><expr><Tab>
 
 inoremap <expr><S-Tab>
       \ pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" <CR>: close popup and save indent.
+" inoremap <silent> <CR> <C-r>=<SID>handle_cr()<CR>
+" function! s:handle_cr()
+"   return neosnippet#expandable_or_jumpable() ?
+"         \ neosnippet#mappings#expand_or_jump_impl()
+"         \ : pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+" endfunction
 
 function! s:is_whitespace()
   let col = col('.') - 1
@@ -378,15 +361,3 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 inoremap <c-e> <esc>A
 " Ctrl-a: Go to begin of line
 inoremap <c-a> <esc>I
-
-" ## Code-Folding
-" - `za` toggles current fold open/close
-" - `zc` closes current fold; or parent, if current is already closed
-" - `zj` navigates down to top of next fold
-" - `zk` navigates up to bottom of previous fold
-" Refs
-" - http://vimcasts.org/episodes/how-to-fold/
-" - https://www.linux.com/learn/vim-tips-folding-fun
-" - sjl's fold setup: https://bitbucket.org/sjl/dotfiles/src/9bead8a9b4350c57f8a24a8119607a83a9592afe/vim/vimrc?at=default&fileviewer=file-view-default
-" nnoremap <Space> za
-

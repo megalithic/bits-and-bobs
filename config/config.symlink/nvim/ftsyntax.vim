@@ -8,9 +8,6 @@ augroup ft_javascript
   au FileType javascript,javascript.jsx setl suffixesadd=.jsx
   au FileType javascript,javascript.jsx setl path+=js,scripts
 
-  " Expands 'class=' to 'className='
-  au FileType javascript.jsx iabbrev class== className=
-
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
 
@@ -77,6 +74,7 @@ augroup completions
   au FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
   au FileType css,scss,sass,less setl omnifunc=csscomplete#CompleteCSS
 
+  au FileType coffee setl omnifunc=javascriptcomplete#CompleteJS
   au FileType javascript,javascript.jsx,jsx setl omnifunc=javascriptcomplete#CompleteJS " default
   au FileType javascript,javascript.jsx,jsx setl completefunc=jspc#omni " jspc
   au FileType javascript,javascript.jsx,jsx setl omnifunc=tern#Complete " tern

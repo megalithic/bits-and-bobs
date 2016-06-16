@@ -22,6 +22,7 @@ brew 'moreutils'
 brew 'findutils'
 
 brew 'ack'
+brew 'ansifilter'
 brew 'bash'
 brew 'bash-completion'
 brew 'homebrew/versions/bash-completion2'

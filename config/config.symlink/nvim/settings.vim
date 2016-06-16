@@ -74,9 +74,11 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:neomake_airline = 1
 let g:neomake_serialize = 0
 let g:neomake_verbose = 0
-let g:neomake_list_height = 20
+" let g:neomake_list_height = 20
+let g:neomake_open_list = 2
 let g:neomake_error_sign = { 'text': '☓', 'texthl': 'Error' }
 let g:neomake_warning_sign = { 'text': '◦', 'texthl': 'Error' }
+let g:neomake_scss_enabled_makers = ['stylelint']
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_javascript_standard_maker = {
       \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
@@ -86,10 +88,15 @@ let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
-au BufRead,BufWritePost *.js Neomake | redraw
-" au BufWritePost *.scss,*.scss.css,*.sass silent! Neomake scsslint|redraw
-" au BufWritePost *.yml,*.yaml silent! Neomake yamllint|redraw
-" au BufWritePost *.json silent! Neomake jsonlint|redraw
+au! BufReadPost,BufWritePost * Neomake " | redraw
+
+" ----------------------------------------------------------------------------
+" ## JSDoc
+let g:jsdoc_allow_input_prompt=1
+let g:jsdoc_input_description=1
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_access_descriptions=2
+let g:jsdoc_additional_descriptions=1
 
 " ----------------------------------------------------------------------------
 " ## rainbow_parentheses.vim
@@ -123,7 +130,6 @@ let g:lua_check_syntax = 0
 let g:lua_complete_omni = 1
 let g:lua_complete_dynamic = 0
 let g:lua_define_completion_mappings = 0
-let g:deoplete#omni#functions_lua = 'xolox#lua#omnifunc'
 
 " ----------------------------------------------------------------------------
 " ## vim-markdown
@@ -156,58 +162,56 @@ let g:qs_enable = 0
 
 " ----------------------------------------------------------------------------
 " ## deoplete
+set completeopt+=noinsert
+" set completeopt+=menuone
+set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_camel_case = 1
-let g:deoplete#file#enable_buffer_path = 1
-" let g:deoplete#enable_smart_case = 1
-" let g:deoplete#enable_ignore_case = 1
-" let g:deoplete#enable_refresh_always = 1
-" let g:deoplete#auto_completion_start_length = 2 " causes an error
-" let g:deoplete#max_list = 100
-" let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_debug = 1
-"
+
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#enable_prefetch = 1
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#enable_ignore_case = 'ignorecase'
+let g:deoplete#auto_completion_start_length = 0
+let g:min_pattern_length = 0
+
+" we don't want the completion menu to auto pop-up when we are in text files
+let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
+
 let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
+let g:deoplete#omni#functions.javascript = 'tern#Complete'
+let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
+" let g:deoplete#omni#functions.['javascript.jsx'] = 'tern#Complete'
+
+let g:monster#completion#rcodetools#backend = "async_rct_complete"
+
 let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
+let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
+" let g:deoplete#omni_patterns.['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
+
 let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
+let g:deoplete#omni#input_patterns.html = '<[^>]*'
+let g:deoplete#omni#input_patterns.xml = '<[^>]*'
+let g:deoplete#omni#input_patterns.md = '<[^>]*'
+let g:deoplete#omni#input_patterns.css = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni#input_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni#input_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni#input_patterns.go = '[^.[:digit:] *\t]\.\w*'
+let g:deoplete#omni#input_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
+let g:deoplete#omni#input_patterns.coffee = '\h\w*\|[^. \t]\.\w*'
+" let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
+" let g:deoplete#omni#input_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
 let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\w*'
 let g:deoplete#omni#input_patterns["javascript.jsx"] = '[^. \t]\.\w*'
+
 let g:deoplete#keyword_patterns = get(g:, 'deoplete#keyword_patterns', {})
 " let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
+let g:deoplete#keyword_patterns.default = '\h\w*'
+let g:deoplete#keyword_patterns.html = '</\?\%([[:alnum:]_:-]\+\s*\)\?\%(/\?>\)\?\|&\h\%(\w*;\)\?\|\h[[:alnum:]_:-]*'
+
 let g:deoplete#sources = get(g:, 'deoplete#sources', {})
-let g:deoplete#sources._ = ['buffer', 'member', 'file', 'dictionary', 'ultisnips', 'snips', 'tern', 'ternjs', 'omni']
-
-" call deoplete#custom#set('_', 'converters', [
-"       \ 'converter_remove_paren',
-"       \ 'converter_remove_overlap',
-"       \ 'converter_truncate_abbr',
-"       \ 'converter_truncate_menu',
-"       \ 'converter_auto_delimiter',
-"       \ ])
-
-" let g:deoplete#sources={}
-" let g:deoplete#sources_ = []
-" let g:deoplete#sources_md = ['dictionary', 'file', 'member']
-" let g:deoplete#sources_pandoc = ['dictionary', 'file', 'member']
-" let g:deoplete#sources_vim = ['buffer', 'member', 'file', 'ultisnips']
-" let g:deoplete#sources_txt = ['buffer','dictionary', 'file', 'member']
-" let g:deoplete#sources_mmd = ['dictionary', 'file', 'member']
-" let g:deoplete#sources_ghmarkdown = ['dictionary', 'file', 'member']
-" let g:deoplete#sources_javascript = ['buffer', 'member', 'file', 'omni']
-" let g:deoplete#sources_ruby = ['buffer', 'member', 'file']
-" let g:deoplete#sources_css = ['buffer', 'member', 'file', 'omni']
-" let g:deoplete#sources_scss = ['buffer', 'member', 'file', 'omni']
-" let g:deoplete#sources_html = ['buffer', 'member', 'file', 'omni']
-
-" let g:deoplete#sources={}
-" let g:deoplete#sources._    = ['buffer', 'file']
-" let g:deoplete#sources.vim  = ['buffer', 'member', 'file']
-" let g:deoplete#sources.javascript = ['buffer', 'member', 'file', 'omni']
-" let g:deoplete#sources['javascript.jsx'] = ['buffer', 'member', 'file', 'omni']
-" let g:deoplete#sources.ruby = ['buffer', 'member', 'file']
-" let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni']
-" let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni']
-" let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni']
+let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'neosnippet', 'ternjs', 'omni']
 
 " ----------------------------------------------------------------------------
 " ## tern_for_vim
@@ -228,11 +232,25 @@ let g:fzf_buffers_jump = 1
 let g:fzf_filemru_bufwrite = 1
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit',
-  \ 'enter': 'vsplit'
-  \ }
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit',
+      \ 'enter': 'vsplit'
+      \ }
+" please confirm these!
+let g:fzf_colors = {
+      \ 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
 " ----------------------------------------------------------------------------
 " ## ctrlp
@@ -293,6 +311,7 @@ endif
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
+" let g:UltiSnipsUsePythonVersion = 3
 " let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
 " let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsListSnippets="<c-tab>"
@@ -304,16 +323,8 @@ endif
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#expand_word_boundary = 1
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+" imap <C-k> <Plug>(neosnippet_expand_or_jump)
+" smap <C-k> <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k> <Plug>(neosnippet_expand_target)
 " Tell Neosnippet about the other snippets
 " let g:neosnippet#snippets_directory='~/.config/repos/github.com/Shougo/neosnippet-snippets/neosnippets, ~/Github/ionic-snippets, ~/.config/repos/github.com/matthewsimo/angular-vim-snippets/snippets'
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: "\<TAB>"

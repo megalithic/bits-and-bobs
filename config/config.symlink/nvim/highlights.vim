@@ -28,6 +28,11 @@ function! s:after_colorscheme()
   hi CursorLineNr ctermbg=bg ctermfg=223 cterm=NONE guibg=bg guifg=#af875f gui=bold
   hi qfLineNr ctermbg=bg ctermfg=95 cterm=NONE guibg=bg guifg=#875f5f gui=NONE
 
+  " ref: https://github.com/aslijiasheng/jacksonvimrc/blob/0a3421a10282bafffa1c660c40cc61b1a44671a1/vimrc/jackson/plugin.vim#L846
+  hi Pmenu    gui=NONE    guifg=#c5c8c6 guibg=#373b41
+  hi PmenuSel gui=reverse guifg=#c5c8c6 guibg=#373b41
+  hi PmenuSbar ctermbg=255
+
   hi VendorPrefix guifg=#00ffff gui=bold
   match VendorPrefix /-\(moz\|webkit\|o\|ms\)-[a-zA-Z-]\+/
 endfunction
