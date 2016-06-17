@@ -70,6 +70,10 @@ function! s:fzf_root()
 endfunction
 
 " ----------------------------------------------------------------------------
+" ## JSDoc
+au! FileType js,jsx,javascript,javascript.jsx nnoremap <leader>D :JsDoc<cr>
+
+" ----------------------------------------------------------------------------
 " ## Commenting
 nmap <leader>c :Commentary<cr>
 vmap <leader>c :Commentary<cr>
