@@ -92,6 +92,7 @@ au! BufReadPost,BufWritePost * Neomake " | redraw
 
 " ----------------------------------------------------------------------------
 " ## JSDoc
+" https://github.com/heavenshell/vim-jsdoc#configuration
 let g:jsdoc_allow_input_prompt=1
 let g:jsdoc_input_description=1
 let g:jsdoc_enable_es6 = 1
