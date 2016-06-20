@@ -212,7 +212,7 @@ set -g status-right "#(~/.dotfiles/bin/tmux-google-music) #(~/.dotfiles/bin/tmux
 # ---------------------------------------------------------
 # See Bruno's setup for plugin settings:
 # https://github.com/bruno-/dotfiles/blob/master/home/.tmux.conf
-set -g @continuum-restore 'on'
+set -g @continuum-restore 'off'
 set -g @continuum-save-interval '60'
 
 set -g @resurrect-save 'S'

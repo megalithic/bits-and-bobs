@@ -93,6 +93,7 @@ alias updatenvim="brew update; brew reinstall --HEAD neovim; pip3 install -U --u
 alias nvimupdate=updatenvim
 alias nv="nvim"
 alias vim="nvim"
+alias vi="nvim"
 alias im="nvim"
 
 # CONFIG EDITS

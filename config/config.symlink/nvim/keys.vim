@@ -17,6 +17,12 @@ imap <silent><expr><Tab>
       \ : (<SID>is_whitespace() ? "\<Tab>"
       \ : deoplete#mappings#manual_complete()))
 
+imap <silent><expr><Tab>
+      \ pumvisible() ? "\<C-n>"
+      \ : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
+      \ : (<SID>is_whitespace() ? "\<Tab>"
+      \ : deoplete#mappings#manual_complete()))
+
 smap <silent><expr><Tab>
       \ pumvisible() ? "\<C-n>"
       \ : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"

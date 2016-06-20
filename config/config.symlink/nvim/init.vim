@@ -33,10 +33,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'heavenshell/vim-jsdoc', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'jelera/vim-javascript-syntax', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript'] }
+  Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffee'] }
   Plug 'elzr/vim-json', { 'for': ['json'] }
-  Plug 'moll/vim-node', { 'for': ['js', 'javascript', 'javascript.jsx'] }
-  Plug 'flowtype/vim-flow', { 'for': ['js', 'javascript', 'javascript.jsx'], 'do': 'npm i -g flow-bin' }
+  Plug 'moll/vim-node', { 'for': ['js', 'javascript'] }
+  " Plug 'flowtype/vim-flow', { 'for': ['js', 'javascript', 'javascript.jsx'], 'do': 'npm i -g flow-bin' }
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
@@ -47,7 +47,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al
-  Plug 'othree/html5.vim', { 'for': ['html', 'haml', 'javascript', 'javascript.jsx'] }
+  Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
   Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'ingydotnet/yaml-vim', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }

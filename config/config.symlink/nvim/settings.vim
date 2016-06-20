@@ -72,10 +72,10 @@ let g:airline#extensions#whitespace#enabled = 0
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
 " --
 let g:neomake_airline = 1
-let g:neomake_serialize = 0
+let g:neomake_serialize = 1
 let g:neomake_verbose = 0
-" let g:neomake_list_height = 20
-let g:neomake_open_list = 2
+" let g:neomake_list_height = 10
+" let g:neomake_open_list = 2
 let g:neomake_error_sign = { 'text': '☓', 'texthl': 'Error' }
 let g:neomake_warning_sign = { 'text': '◦', 'texthl': 'Error' }
 let g:neomake_scss_enabled_makers = ['stylelint']
@@ -88,7 +88,7 @@ let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
-au! BufReadPost,BufWritePost * Neomake " | redraw
+au! BufReadPost,BufWritePost * Neomake | redraw
 
 " ----------------------------------------------------------------------------
 " ## JSDoc
@@ -170,8 +170,8 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_camel_case = 1
 " let g:deoplete#enable_debug = 1
 
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#enable_prefetch = 1
+" let g:deoplete#enable_refresh_always = 1
+" let g:deoplete#enable_prefetch = 1
 let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#enable_ignore_case = 'ignorecase'
 let g:deoplete#auto_completion_start_length = 0
@@ -239,19 +239,19 @@ let g:fzf_action = {
       \ 'enter': 'vsplit'
       \ }
 " please confirm these!
-let g:fzf_colors = {
-      \ 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
+" let g:fzf_colors = {
+"       \ 'fg':      ['fg', 'Normal'],
+"       \ 'bg':      ['bg', 'Normal'],
+"       \ 'hl':      ['fg', 'Comment'],
+"       \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"       \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"       \ 'hl+':     ['fg', 'Statement'],
+"       \ 'info':    ['fg', 'PreProc'],
+"       \ 'prompt':  ['fg', 'Conditional'],
+"       \ 'pointer': ['fg', 'Exception'],
+"       \ 'marker':  ['fg', 'Keyword'],
+"       \ 'spinner': ['fg', 'Label'],
+"       \ 'header':  ['fg', 'Comment'] }
 
 " ----------------------------------------------------------------------------
 " ## ctrlp
