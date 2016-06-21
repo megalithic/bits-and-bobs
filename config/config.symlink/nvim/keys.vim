@@ -6,50 +6,83 @@ nnoremap <c-s> :source $MYVIMRC<cr>
 
 " ----------------------------------------------------------------------------
 " ## Deoplete
-imap <silent><expr><CR> pumvisible() ?
-      \ (neosnippet#expandable() ? neosnippet#mappings#expand_impl()
-      \ : deoplete#mappings#close_popup())
+imap <expr><CR>
+      \ pumvisible()
+      \ ? (neosnippet#expandable()
+      \   ? neosnippet#mappings#expand_impl()
+      \   : deoplete#mappings#close_popup())
+      \ : "\<CR>"
+
+smap <expr><CR>
+      \ pumvisible()
+      \ ? (neosnippet#expandable()
+      \   ? neosnippet#mappings#expand_impl()
+      \   : deoplete#mappings#close_popup())
       \ : "\<CR>"
 
 imap <silent><expr><Tab>
-      \ pumvisible() ? "\<C-n>"
-      \ : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
-      \ : (<SID>is_whitespace() ? "\<Tab>"
-      \ : deoplete#mappings#manual_complete()))
-
-imap <silent><expr><Tab>
-      \ pumvisible() ? "\<C-n>"
-      \ : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
-      \ : (<SID>is_whitespace() ? "\<Tab>"
-      \ : deoplete#mappings#manual_complete()))
+      \ pumvisible()
+      \ ? "\<C-n>"
+      \ : (neosnippet#expandable_or_jumpable()
+      \   ? "\<Plug>(neosnippet_expand_or_jump)"
+      \   : (<SID>is_whitespace()
+      \     ? "\<Tab>"
+      \     : deoplete#mappings#manual_complete()))
 
 smap <silent><expr><Tab>
-      \ pumvisible() ? "\<C-n>"
-      \ : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
-      \ : (<SID>is_whitespace() ? "\<Tab>"
-      \ : deoplete#mappings#manual_complete()))
+      \ pumvisible()
+      \ ? "\<C-n>"
+      \ : (neosnippet#expandable_or_jumpable()
+      \   ? "\<Plug>(neosnippet_expand_or_jump)"
+      \   : (<SID>is_whitespace()
+      \     ? "\<Tab>"
+      \     : deoplete#mappings#manual_complete()))
 
-inoremap <expr><S-Tab>
-      \ pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" <CR>: close popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>handle_cr()<CR>
-" function! s:handle_cr()
-"   return neosnippet#expandable_or_jumpable() ?
-"         \ neosnippet#mappings#expand_or_jump_impl()
-"         \ : pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
-" endfunction
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+snoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:is_whitespace()
-  let col = col('.') - 1
-  return ! col || getline('.')[col - 1] =~? '\s'
+  let col = col(".") - 1
+  return ! col || getline(".")[col - 1] =~? "\s"
 endfunction
 
-" inoremap <expr><BS>
-"       \ deoplete#mappings#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-g>
-"       \ deoplete#mappings#undo_completion()
+" ----------------------------------------------------------------------------
+" ## Ultisnips
+" function! g:UltiSnips_Complete()
+"   call UltiSnips#ExpandSnippet()
+"   if g:ulti_expand_res == 0
+"     if pumvisible()
+"       return '\<C-n>'
+"     else
+"       call UltiSnips#JumpForwards()
+"       if g:ulti_jump_forwards_res == 0
+"         return '\<TAB>'
+"       endif
+"     endif
+"   endif
+"   return ''
+" endfunction
 
+" function! g:UltiSnips_Reverse()
+"   call UltiSnips#JumpBackwards()
+"   if g:ulti_jump_backwards_res == 0
+"     return '\<C-P>'
+"   endif
+
+"   return ''
+" endfunction
+
+
+" if !exists('g:UltiSnipsJumpForwardTrigger')
+"   let g:UltiSnipsJumpForwardTrigger = '<tab>'
+" endif
+
+" if !exists('g:UltiSnipsJumpBackwardTrigger')
+"   let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+" endif
+
+" au InsertEnter * exec 'inoremap <silent> ' . g:UltiSnipsExpandTrigger . ' <C-R>=g:UltiSnips_Complete()<cr>'
+" au InsertEnter * exec 'inoremap <silent> ' . g:UltiSnipsJumpBackwardTrigger . ' <C-R>=g:UltiSnips_Reverse()<cr>'
 
 " ----------------------------------------------------------------------------
 " ## CtrlP

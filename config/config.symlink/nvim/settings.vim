@@ -164,10 +164,9 @@ let g:qs_enable = 0
 " ----------------------------------------------------------------------------
 " ## deoplete
 set completeopt+=noinsert
-" set completeopt+=menuone
 set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_smart_case = 1
 " let g:deoplete#enable_debug = 1
 
 " let g:deoplete#enable_refresh_always = 1
@@ -214,6 +213,10 @@ let g:deoplete#keyword_patterns.html = '</\?\%([[:alnum:]_:-]\+\s*\)\?\%(/\?>\)\
 let g:deoplete#sources = get(g:, 'deoplete#sources', {})
 let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'neosnippet', 'ternjs', 'omni']
 
+call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
+call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
+call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
+
 " ----------------------------------------------------------------------------
 " ## tern_for_vim
 let g:tern#command = ["tern"]
@@ -231,7 +234,7 @@ let g:tern_request_timeout = 1
 " ## FZF
 let g:fzf_buffers_jump = 1
 let g:fzf_filemru_bufwrite = 1
-let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_layout = { 'down': '~25%' }
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-x': 'split',
@@ -312,8 +315,8 @@ endif
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
-" let g:UltiSnipsUsePythonVersion = 3
-" let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
+let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
 " let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsListSnippets="<c-tab>"
 " let g:UltiSnipsJumpForwardTrigger="<tab>"

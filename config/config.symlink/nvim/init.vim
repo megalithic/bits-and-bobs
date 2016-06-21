@@ -114,8 +114,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
+  " Plug 'SirVer/ultisnips' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
   Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
-  " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   " Plug 'mileszs/ack.vim'
   " Plug 'ctrlpvim/ctrlp.vim'
   " Plug 'FelikZ/ctrlp-py-matcher'
