@@ -67,6 +67,10 @@ let g:airline#extensions#virtualenv#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
 " ----------------------------------------------------------------------------
+" ## vim-flow
+let g:flow#autoclose = 1
+
+" ----------------------------------------------------------------------------
 " ## neomake
 " -- Settings derived from:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
@@ -75,10 +79,9 @@ let g:neomake_airline = 1
 let g:neomake_serialize = 1
 let g:neomake_verbose = 0
 " let g:neomake_list_height = 10
-" let g:neomake_open_list = 2
+let g:neomake_open_list = 0
 let g:neomake_error_sign = { 'text': '☓', 'texthl': 'Error' }
 let g:neomake_warning_sign = { 'text': '◦', 'texthl': 'Error' }
-let g:neomake_scss_enabled_makers = ['stylelint']
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_javascript_standard_maker = {
       \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
@@ -88,7 +91,7 @@ let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
-au! BufReadPost,BufWritePost * Neomake | redraw
+au! BufReadPost,BufWritePost {*.js,*.rb} Neomake | redraw
 
 " ----------------------------------------------------------------------------
 " ## JSDoc
