@@ -12,7 +12,7 @@ set -e
 echo ''
 
 info () {
-  printf "  [ \033[00;34m..\033[0m ] $1"
+  printf "  [ \033[00;34m..\033[0m ] $1 \n"
 }
 user () {
   printf "\r  [ \033[0;33m?\033[0m ] $1 "
@@ -173,6 +173,7 @@ brew_things () {
     success "dependencies installed"
 
     info "running topic installers"
+
     source $DOTFILES_ROOT/setup/install
   fi
 }
