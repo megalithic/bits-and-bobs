@@ -10,8 +10,7 @@ ruby-install ruby 2.2.3
 info "sourcing things"
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
-source ~/.bashrc
-source ~/.zshrc
+RUBIES=(~/.rubies/*)
 
 chruby ruby-2.2.3
 
