@@ -35,6 +35,7 @@ setup_zsh () {
     running "changing your login shell to zsh"
     echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
     chsh -s $(which zsh);ok
+    zsh
   else
     bot "looks like you are already using zsh. woot!"
   fi

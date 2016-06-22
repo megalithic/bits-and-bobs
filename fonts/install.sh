@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # Copy fonts to ~/Library/Fonts
-cp $ZSH/fonts/**/*.*tf ~/Library/Fonts/
+cp $HOME/.dotfiles/fonts/**/*tf ~/Library/Fonts/

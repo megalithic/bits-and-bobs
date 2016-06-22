@@ -4,20 +4,22 @@ source ./setup/lib.sh
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-running "checking for existing homebrew install"
+info "checking for existing homebrew install"
 if test ! $(which brew)
 then
-  action "existing install not found, installing homebrew"
+  info "existing install not found, installing homebrew"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  success "installed homebrew"
 fi
-ok
 
-running "updating homebrew"
+info "updating homebrew"
 brew update
+success "updated homebrew"
 
 
-action "installing homebrew bundler"
+info "installing homebrew bundler"
 brew tap homebrew/bundle
 brew bundle
+success "installed homebrew bundler and Brewfile formulae"
 
-ok
+success "finished homebrew setup"

@@ -71,6 +71,13 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:flow#autoclose = 1
 
 " ----------------------------------------------------------------------------
+" ## godown-vim
+" should the preview be shown automatically when a markdown buffer is opened
+let g:godown_autorun = 0
+" the port to run the Godown server on
+let g:godown_port = 1337
+
+" ----------------------------------------------------------------------------
 " ## neomake
 " -- Settings derived from:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim

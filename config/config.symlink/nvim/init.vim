@@ -49,6 +49,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ## HAML, HTML, XML, Markdown, YAML, et al
   Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
   Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
+  Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'ingydotnet/yaml-vim', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }

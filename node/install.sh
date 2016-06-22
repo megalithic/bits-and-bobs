@@ -7,18 +7,19 @@ source ./setup/lib.sh
 curl -L http://git.io/n-install | bash
 
 ###############################################################################
-bot "NVM versions..."
+info "installing n"
 ###############################################################################
 n lts
+n 4.3
 
 ###############################################################################
-bot "Setup AVN"
+info "installing avn"
 ###############################################################################
 npm i -g avn avn-n
 avn setup
 
 ###############################################################################
-bot "NPM Globals..."
+info "installing globals"
 ###############################################################################
 npm i -g babel
 npm i -g babel-eslint@5.0.0
@@ -50,3 +51,4 @@ npm i -g vimdebug
 npm i -g vtop # https://github.com/MrRio/vtop
 npm i -g yo
 
+success "finished node setup"
