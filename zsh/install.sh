@@ -11,6 +11,4 @@ touch $HOME/.z-history
 sudo cp $HOME/.dotfiles/zsh/zprofile.symlink /etc/zprofile
 sudo cp $HOME/.dotfiles/zsh/zshenv.symlink /etc/zshenv
 
-source $HOME/.dotfiles/zsh/zshrc.symlink
-
 success "finished extra zsh setup"
