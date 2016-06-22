@@ -14,21 +14,38 @@ echo ''
 info () {
   printf "  [ \033[00;34m..\033[0m ] $1"
 }
-
 user () {
   printf "\r  [ \033[0;33m?\033[0m ] $1 "
 }
-
 success () {
   printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
 }
-
 fail () {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   echo ''
   exit
 }
 
+
+# I prefer ZSH, set it up as *the shell*
+setup_zsh () {
+  echo $0 | grep zsh > /dev/null 2>&1 | true
+
+  if [[ ${PIPESTATUS[0]} != 0 ]]; then
+    running "changing your login shell to zsh"
+    echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+    chsh -s $(which zsh);ok
+  else
+    bot "looks like you are already using zsh. woot!"
+  fi
+}
+
+
+# At present, this may/may not be the only way i can easily get
+# my stuff from githubs without a password.
+#
+# FIXME: Find a better way to deal with this, so that I don't have
+# to create a new pub/private key each time this is run, bug @pengwynn mayhaps?
 setup_ssh_key () {
   if ! [ -f '~/.ssh/id_rsa.pub' ]
   then
@@ -62,6 +79,7 @@ setup_ssh_key () {
   fi
 }
 
+# Handles symlinking files and such (dealing with existing files, etc)
 link_file () {
   local src=$1 dst=$2
 
@@ -137,8 +155,30 @@ link_file () {
   fi
 }
 
-install_dotfiles () {
-  info 'installing dotfiles'
+# Primarily handles OSX specific things like homebrew bundling, and osx defaults
+brew_things () {
+  # If we're on a Mac, let's install and setup homebrew.
+  if [ "$(uname -s)" == "Darwin" ]
+  then
+    info "installing dependencies"
+    export ZSH=$HOME/.dotfiles
+
+    # Set OS X defaults
+    # FIXME: confirm valid defaults for El Capitan
+    # $ZSH/osx/set-defaults.sh
+
+    # Homebrew install and bundling via Brewfile
+    $ZSH/homebrew/install.sh
+    success "dependencies installed"
+
+    info "running topic installers"
+    source $DOTFILES_ROOT/setup/install
+  fi
+}
+
+# Initiates the symlinking of dotfiles and such
+symlink_dots () {
+  info 'symlink dots'
 
   local overwrite_all=false backup_all=false skip_all=false
 
@@ -149,6 +189,7 @@ install_dotfiles () {
   done
 }
 
+# Pulls down my private repo (git URL provided by user)
 setup_private_repo () {
   info "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private ..."
 
@@ -170,35 +211,11 @@ setup_private_repo () {
   fi
 }
 
+# run everything!
+setup_zsh
 setup_ssh_key
-
-echo $0 | grep zsh > /dev/null 2>&1 | true
-if [[ ${PIPESTATUS[0]} != 0 ]]; then
-  running "changing your login shell to zsh"
-  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-  chsh -s $(which zsh);ok
-else
-  bot "looks like you are already using zsh. woot!"
-fi
-
-install_dotfiles
-
-# If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  # if source bin/dot > /tmp/dotfiles-dot 2>&1
-  if source bin/dot > /tmp/dotfiles-dot
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
-
-  info "running topic installers"
-  source $DOTFILES_ROOT/setup/install
-fi
-
+brew_things
+symlink_dots
 setup_private_repo
 
 echo ''
