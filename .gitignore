@@ -28,3 +28,4 @@ config/config.symlink/nvim/autoload/plug.vim
 **/plugged
 **/autoload
 **/.init.vim*
+/Brewfile
