@@ -18,6 +18,7 @@ success "updated homebrew"
 
 
 info "installing homebrew bundler"
+ln -sfv $HOME/.dotfiles/homebrew/Brewfile $HOME/.dotfiles/Brewfile
 brew tap homebrew/bundle
 brew bundle
 success "installed homebrew bundler and Brewfile formulae"
