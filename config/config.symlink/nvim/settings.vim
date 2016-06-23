@@ -177,6 +177,7 @@ set completeopt+=noinsert
 set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
+let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_debug = 1
 
 " let g:deoplete#enable_refresh_always = 1
