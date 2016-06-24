@@ -5,84 +5,84 @@ let maplocalleader="\\"
 nnoremap <c-s> :source $MYVIMRC<cr>
 
 " ----------------------------------------------------------------------------
-" ## Deoplete
-imap <expr><CR>
-      \ pumvisible()
-      \ ? (neosnippet#expandable()
-      \   ? neosnippet#mappings#expand_impl()
-      \   : deoplete#mappings#close_popup())
-      \ : "\<CR>"
+" ## deoplete
+" imap <expr><CR>
+"       \ pumvisible()
+"       \ ? (neosnippet#expandable()
+"       \   ? neosnippet#mappings#expand_impl()
+"       \   : deoplete#mappings#close_popup())
+"       \ : "\<CR>"
 
-smap <expr><CR>
-      \ pumvisible()
-      \ ? (neosnippet#expandable()
-      \   ? neosnippet#mappings#expand_impl()
-      \   : deoplete#mappings#close_popup())
-      \ : "\<CR>"
+" smap <expr><CR>
+"       \ pumvisible()
+"       \ ? (neosnippet#expandable()
+"       \   ? neosnippet#mappings#expand_impl()
+"       \   : deoplete#mappings#close_popup())
+"       \ : "\<CR>"
 
-imap <silent><expr><Tab>
-      \ pumvisible()
-      \ ? "\<C-n>"
-      \ : (neosnippet#expandable_or_jumpable()
-      \   ? "\<Plug>(neosnippet_expand_or_jump)"
-      \   : (<SID>is_whitespace()
-      \     ? "\<Tab>"
-      \     : deoplete#mappings#manual_complete()))
+" imap <silent><expr><Tab>
+"       \ pumvisible()
+"       \ ? "\<C-n>"
+"       \ : (neosnippet#expandable_or_jumpable()
+"       \   ? "\<Plug>(neosnippet_expand_or_jump)"
+"       \   : (<SID>is_whitespace()
+"       \     ? "\<Tab>"
+"       \     : deoplete#mappings#manual_complete()))
 
-smap <silent><expr><Tab>
-      \ pumvisible()
-      \ ? "\<C-n>"
-      \ : (neosnippet#expandable_or_jumpable()
-      \   ? "\<Plug>(neosnippet_expand_or_jump)"
-      \   : (<SID>is_whitespace()
-      \     ? "\<Tab>"
-      \     : deoplete#mappings#manual_complete()))
+" smap <silent><expr><Tab>
+"       \ pumvisible()
+"       \ ? "\<C-n>"
+"       \ : (neosnippet#expandable_or_jumpable()
+"       \   ? "\<Plug>(neosnippet_expand_or_jump)"
+"       \   : (<SID>is_whitespace()
+"       \     ? "\<Tab>"
+"       \     : deoplete#mappings#manual_complete()))
 
-inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-snoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+" snoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:is_whitespace()
-  let col = col(".") - 1
-  return ! col || getline(".")[col - 1] =~? "\s"
-endfunction
+" function! s:is_whitespace()
+"   let col = col(".") - 1
+"   return ! col || getline(".")[col - 1] =~? "\s"
+" endfunction
 
 " ----------------------------------------------------------------------------
-" ## Ultisnips
-" function! g:UltiSnips_Complete()
-"   call UltiSnips#ExpandSnippet()
-"   if g:ulti_expand_res == 0
-"     if pumvisible()
-"       return '\<C-n>'
-"     else
-"       call UltiSnips#JumpForwards()
-"       if g:ulti_jump_forwards_res == 0
-"         return '\<TAB>'
-"       endif
-"     endif
-"   endif
-"   return ''
-" endfunction
+" ## ultisnips
+function! g:UltiSnips_Complete()
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res == 0
+    if pumvisible()
+      return "\<C-n>"
+    else
+      call UltiSnips#JumpForwards()
+      if g:ulti_jump_forwards_res == 0
+        return "\<TAB>"
+      endif
+    endif
+  endif
+  return ""
+endfunction
 
-" function! g:UltiSnips_Reverse()
-"   call UltiSnips#JumpBackwards()
-"   if g:ulti_jump_backwards_res == 0
-"     return '\<C-P>'
-"   endif
+function! g:UltiSnips_Reverse()
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
 
-"   return ''
-" endfunction
+  return ""
+endfunction
 
 
-" if !exists('g:UltiSnipsJumpForwardTrigger')
-"   let g:UltiSnipsJumpForwardTrigger = '<tab>'
-" endif
+if !exists("g:UltiSnipsJumpForwardTrigger")
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
 
-" if !exists('g:UltiSnipsJumpBackwardTrigger')
-"   let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-" endif
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
 
-" au InsertEnter * exec 'inoremap <silent> ' . g:UltiSnipsExpandTrigger . ' <C-R>=g:UltiSnips_Complete()<cr>'
-" au InsertEnter * exec 'inoremap <silent> ' . g:UltiSnipsJumpBackwardTrigger . ' <C-R>=g:UltiSnips_Reverse()<cr>'
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 
 " ----------------------------------------------------------------------------
 " ## CtrlP
