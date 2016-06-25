@@ -105,7 +105,7 @@ set hlsearch
 " -----------------------------------------------------------------------------
 " ## Completions
 set omnifunc=syntaxcomplete#Complete " Set omni-completion method.
-" set completeopt=menu,menuone
+set completeopt=menu,menuone
 set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
 " set complete-=i "don't complete in included files

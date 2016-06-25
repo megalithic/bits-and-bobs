@@ -47,9 +47,9 @@ hotkey.bind(cmdCtrl, 'r', function()
 end)
 
 -- :: media
-hotkey.bind('ctrl', 114, function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- insert key
-hotkey.bind('ctrl', 115, function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end) -- home key
-hotkey.bind('ctrl', 116, function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end) -- pageup key
+hotkey.bind(cmdShift, 27, function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- insert key
+hotkey.bind(cmdShift, 51, function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end) -- home key
+hotkey.bind(cmdShift, 24, function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end) -- pageup key
 
 -- :: apps
 hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
@@ -65,12 +65,12 @@ hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)
 
 -- :: sub-app
 -- / Chrome Dev Tools
-hotkey.bind('', 'F12', function ()
-  local win = hs.window.focusedWindow()
-  if win ~= nil and win:application():bundleID() == 'com.google.Chrome' then
-    hs.eventtap.keyStroke(cmdAlt, "i")
-  end
-end)
+-- hotkey.bind('', 'F12', function ()
+--   local win = hs.window.focusedWindow()
+--   if win ~= nil and win:application():bundleID() == 'com.google.Chrome' then
+--     hs.eventtap.keyStroke(cmdAlt, "i")
+--   end
+-- end)
 -- / Tmux window selection via cmd + 1-9
 -- for i = 1, 9 do
 --   hotkey.bind('cmd', ''..i..'', function ()

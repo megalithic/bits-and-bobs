@@ -5,11 +5,11 @@ source ./setup/lib.sh
 
 info "installing n"
 # https://github.com/mklement0/n-install
-curl -L https://git.io/n-install | bash -s -- -y lts 4.3
+curl -L https://git.io/n-install | bash -s -- -y 6.0 lts 4.2 4.3 4.4
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 info "installing avn"
-npm i -g avn avn-n
+npm i -g avn avn-n avn-nvm
 avn setup
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
