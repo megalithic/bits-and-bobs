@@ -24,14 +24,14 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
-  " Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  Plug 'gavocanov/vim-js-indent', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  " Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  " Plug 'gavocanov/vim-js-indent', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'othree/es.next.syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  Plug 'othree/jspc.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  " Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  " Plug 'othree/jspc.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'heavenshell/vim-jsdoc', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  Plug 'jelera/vim-javascript-syntax', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  " Plug 'jelera/vim-javascript-syntax', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffee'] }
   Plug 'elzr/vim-json', { 'for': ['json'] }
@@ -117,7 +117,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
   Plug 'SirVer/ultisnips' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
-  Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
+  " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
   " Plug 'mileszs/ack.vim'
   " Plug 'ctrlpvim/ctrlp.vim'
   " Plug 'FelikZ/ctrlp-py-matcher'

@@ -67,8 +67,17 @@ let g:airline#extensions#virtualenv#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
 " ----------------------------------------------------------------------------
+" ## vim-javascript
+let g:javascript_plugin_flow = 1
+let g:javascript_plugin_jsdoc = 1
+
+" ----------------------------------------------------------------------------
 " ## vim-flow
 let g:flow#autoclose = 1
+
+" ----------------------------------------------------------------------------
+" ## vim-json
+let g:vim_json_syntax_conceal = 0
 
 " ----------------------------------------------------------------------------
 " ## godown-vim

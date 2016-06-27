@@ -54,6 +54,7 @@ hotkey.bind(cmdShift, 24, function() utils.handleMediaKeyEvents('NEXT', 'next â‡
 -- :: apps
 hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
+hotkey.bind('ctrl', 'return', function() utils.toggleApp('com.google.Chrome') end)
 hotkey.bind('cmd', '`', function() utils.toggleApp('com.google.Chrome') end)
 hotkey.bind(cmdShift, 'f4', function() utils.toggleApp('it.bloop.airmail2') end)
 hotkey.bind('cmd', 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
