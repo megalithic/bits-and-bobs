@@ -6,7 +6,6 @@ teamocil/teamocil
 npm-debug.log
 **/.swp
 **/noter.rb
-**/*.ti
 **/.cask
 **/nvim/plugged
 **/nvim/autoload

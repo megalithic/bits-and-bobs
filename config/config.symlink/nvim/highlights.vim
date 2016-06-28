@@ -40,6 +40,7 @@ endfunction
 
 augroup after_colorscheme
   au!
+  hi Comment cterm=italic term=italic gui=italic
   au ColorScheme * call s:after_colorscheme()
 augroup END
 
