@@ -7,7 +7,8 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export BREW_PATH="$(brew --prefix)"
 export BREW_CASK_PATH="/opt/homebrew-cask/Caskroom"
 export NVIMRUNTIME='/usr/local/share/nvim/runtime'
-export TERMINFO=/usr/share/terminfo
+export TERMINFO=$HOME/.terminfo
+# export TERMINFO=/usr/share/terminfo
 # export NVIM_PYTHON_LOG_FILE='~/tmp/nvim_python.log'
 # export PYTHONPATH="$BREW_PATH/bin/python3.5"
 export BROWSER=chrome
