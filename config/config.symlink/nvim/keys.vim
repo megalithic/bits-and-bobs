@@ -5,86 +5,6 @@ let maplocalleader="\\"
 nnoremap <c-s> :source $MYVIMRC<cr>
 
 " ----------------------------------------------------------------------------
-" ## deoplete
-" imap <expr><CR>
-"       \ pumvisible()
-"       \ ? (neosnippet#expandable()
-"       \   ? neosnippet#mappings#expand_impl()
-"       \   : deoplete#mappings#close_popup())
-"       \ : "\<CR>"
-
-" smap <expr><CR>
-"       \ pumvisible()
-"       \ ? (neosnippet#expandable()
-"       \   ? neosnippet#mappings#expand_impl()
-"       \   : deoplete#mappings#close_popup())
-"       \ : "\<CR>"
-
-" imap <silent><expr><Tab>
-"       \ pumvisible()
-"       \ ? "\<C-n>"
-"       \ : (neosnippet#expandable_or_jumpable()
-"       \   ? "\<Plug>(neosnippet_expand_or_jump)"
-"       \   : (<SID>is_whitespace()
-"       \     ? "\<Tab>"
-"       \     : deoplete#mappings#manual_complete()))
-
-" smap <silent><expr><Tab>
-"       \ pumvisible()
-"       \ ? "\<C-n>"
-"       \ : (neosnippet#expandable_or_jumpable()
-"       \   ? "\<Plug>(neosnippet_expand_or_jump)"
-"       \   : (<SID>is_whitespace()
-"       \     ? "\<Tab>"
-"       \     : deoplete#mappings#manual_complete()))
-
-" inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-" snoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" function! s:is_whitespace()
-"   let col = col(".") - 1
-"   return ! col || getline(".")[col - 1] =~? "\s"
-" endfunction
-
-" ----------------------------------------------------------------------------
-" ## ultisnips
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res == 0
-    if pumvisible()
-      return "\<C-n>"
-    else
-      call UltiSnips#JumpForwards()
-      if g:ulti_jump_forwards_res == 0
-        return "\<TAB>"
-      endif
-    endif
-  endif
-  return ""
-endfunction
-
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
-
-  return ""
-endfunction
-
-
-if !exists("g:UltiSnipsJumpForwardTrigger")
-  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
-
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
-
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-
-" ----------------------------------------------------------------------------
 " ## CtrlP
 " let g:ctrlp_map = '<leader>m'
 " let g:ctrlp_cmd = 'CtrlP'
@@ -167,10 +87,11 @@ vmap " S"
 " ## Splits with vim-tmux-navigator
 " let g:tmux_navigator_no_mappings = 1
 " let g:tmux_navigator_save_on_switch = 1
-nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 
 " ----------------------------------------------------------------------------
@@ -211,17 +132,6 @@ noremap <silent><leader>W :w !sudo tee %<CR>
 " ## Vim process management
 " background VIM
 vnoremap <c-z> <esc>zv`<ztgv
-
-" ## Search / Substitutions / Replacements / incsearch.vim
-" nnoremap /  <Plug>(incsearch-forward)
-" nnoremap ?  <Plug>(incsearch-backward)
-" nnoremap g/ <Plug>(incsearch-stay)
-" nnoremap n  <Plug>(incsearch-nohl-n)
-" nnoremap N  <Plug>(incsearch-nohl-N)
-" nnoremap *  <Plug>(incsearch-nohl-*)
-" nnoremap #  <Plug>(incsearch-nohl-#)
-" nnoremap g* <Plug>(incsearch-nohl-g*)
-" nnoremap g# <Plug>(incsearch-nohl-g#)
 
 nnoremap / /\v
 vnoremap / /\v

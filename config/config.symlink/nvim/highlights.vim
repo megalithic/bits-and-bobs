@@ -15,8 +15,8 @@ function! s:after_colorscheme()
   hi Conceal cterm=bold ctermbg=NONE ctermfg=67
 
   hi Comment cterm=italic term=italic gui=italic
-  hi IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
-  hi Search gui=underline term=underline guibg=#afaf87 guifg=#333333
+  hi Search gui=underline term=underline cterm=underline ctermfg=232 ctermbg=230 guibg=#afaf87 guifg=#333333
+  hi IncSearchCursor ctermfg=232 ctermbg=214 guifg=232 guibg=214
   hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold
   " hi ColorColumn ctermbg=bg ctermfg=235 cterm=NONE guibg=bg guifg=#262626 gui=NONE
   " hi signColumn ctermbg=bg ctermfg=230 cterm=NONE guibg=bg guifg=#ffffd7 gui=NONE

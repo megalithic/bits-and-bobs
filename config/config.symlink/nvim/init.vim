@@ -17,21 +17,22 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## Interface
-  Plug 'snooc/base16-vim' " consistently, my favorite colorscheme package
+  " Plug 'snooc/base16-vim' " consistently, my favorite colorscheme package
+  Plug 'chriskempson/base16-vim' " consistently, my favorite colorscheme package
   Plug 'megalithic/golden-ratio' " vertical split layout manager
   Plug 'vim-airline/vim-airline' " statusbar
   Plug 'vim-airline/vim-airline-themes' " themes for the statusbar
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
-  Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   " Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   " Plug 'gavocanov/vim-js-indent', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'othree/es.next.syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  " Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  " Plug 'othree/jspc.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'othree/jspc.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'heavenshell/vim-jsdoc', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  " Plug 'jelera/vim-javascript-syntax', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'jelera/vim-javascript-syntax', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffee'] }
   Plug 'elzr/vim-json', { 'for': ['json'] }
@@ -53,7 +54,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ingydotnet/yaml-vim', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
-  Plug 'vim-pandoc/vim-pandoc-syntax'
 
   " ----------------------------------------------------------------------------
   " ## Ruby, Rails, et al
@@ -104,8 +104,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
+  " Plug 'wincent/loupe'
   " Plug 'haya14busa/incsearch.vim' " improved incremental searching
-  " Plug 'ervandew/supertab'
+  Plug 'ervandew/supertab'
   function! HandleRemotePluginUpdates(arg)
     UpdateRemotePlugins
   endfunction

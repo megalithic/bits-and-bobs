@@ -58,3 +58,17 @@ function! Quick_scope_selective(movement)
 
   return a:movement . letter
 endfunction
+
+" Auto highlight the word under the cursor after a period of no cursor movement
+function! AutoHighlightToggle()
+  let @/ = ''
+  augroup auto_highlight
+    au!
+    au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+  augroup end
+  setl updatetime=1000
+  echo 'Highlight current word: ON'
+  return 1
+endfunction
+" TODO: figure out if we want to use this feature or not
+" call AutoHighlightToggle()
