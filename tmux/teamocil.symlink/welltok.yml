@@ -15,19 +15,19 @@ windows:
         - git co master
         - git pull
         - npm install
-        # - npm run dev
+        - npm start
       - commands:
         - cd achievement-service
         - git co master
         - git pull
         - npm install
-        # - npm run dev
+        - npm start
       - commands:
         - cd munero
         - git co master
         - git pull
         - npm install
-        # - npm run dev
+        - npm start
       - commands:
         - cd ep-dev-edition
         - git co master
