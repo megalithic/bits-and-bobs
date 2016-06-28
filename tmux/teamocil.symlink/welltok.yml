@@ -53,10 +53,9 @@ windows:
         - cd rewards-dashboard
         - npm install
         - npm start
-      # - commands:
-      #   - cd rewards-wallet-widget
-      #   - npm install
-      #   - npm start
+      - commands:
+        - cd rewards-dashboard
+        - npm run mock
   - name: "code"
     root: "~/code/welltok/rewards-dashboard"
     panes:

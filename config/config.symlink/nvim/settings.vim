@@ -174,7 +174,9 @@ let g:jsx_pragma_required = 0
 let g:qs_enable = 0
 
 " ----------------------------------------------------------------------------
-" ## supertab
+" ## Supertab
+" let g:SuperTabDefaultCompletionType    = '<C-n>'
+" let g:SuperTabCrMapping                = 0
 " handy stuff: https://github.com/ervandew/supertab/issues/53
 " let g:SuperTabDefaultCompletionTypeDiscovery = [ "&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>" ]
 " let g:SuperTabDefaultCompletionType = 'context'
@@ -182,8 +184,7 @@ let g:qs_enable = 0
 
 " ----------------------------------------------------------------------------
 " ## deoplete
-set completeopt+=noinsert
-set completeopt-=preview
+" set completeopt+=noinsert
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#disable_auto_complete = 0
@@ -329,11 +330,6 @@ let g:gist_update_on_write                  = 2
 if has('macunix')
   let g:gist_clip_command = 'pbcopy'
 endif
-
-" ----------------------------------------------------------------------------
-" ## supertab
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabCrMapping                = 0
 
 " ----------------------------------------------------------------------------
 " ## ultisnips

@@ -5,6 +5,30 @@ let maplocalleader="\\"
 nnoremap <c-s> :source $MYVIMRC<cr>
 
 " ----------------------------------------------------------------------------
+" ## Deoplete
+inoremap <silent> <CR> <C-r>=<SID>close_and_linebreak()<CR>
+function! s:close_and_linebreak()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+endfunction
+
+" ----------------------------------------------------------------------------
+" ## Neosnippet
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+" Plugin key-mappings.
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+
+" ----------------------------------------------------------------------------
 " ## CtrlP
 " let g:ctrlp_map = '<leader>m'
 " let g:ctrlp_cmd = 'CtrlP'

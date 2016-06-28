@@ -14,6 +14,9 @@ augroup vimrcEx
   " ## Handle auto-closing of quickfix buffer
   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 
+  " No formatting on o key newlines
+  autocmd BufNewFile,BufEnter * set formatoptions-=o
+
   " ----------------------------------------------------------------------------
   " ## Always put me back a the last known cursor position
   au BufReadPost *
@@ -27,10 +30,10 @@ augroup vimrcEx
   " NOTE: the syntax highlighting fails when using FZF
   " FIXME: we really want to still be able to flip between syntax highlighting
   " on and off.
-  au WinEnter,BufRead * set syntax=ON
-  au BufEnter,WinEnter * set number "relativenumber
-  au WinLeave * set syntax=OFF
-  au BufLeave,WinLeave * set nonumber "norelativenumber
+  au WinEnter,BufCreate * set syntax=on
+  au WinEnter,BufEnter * set number relativenumber
+  au WinLeave,BufLeave * set syntax=off
+  au WinLeave,BufLeave * set nonumber norelativenumber
 
   " ----------------------------------------------------------------------------
   " ## Automagically update remote homeassistant files upon editing locally

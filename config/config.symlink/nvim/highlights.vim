@@ -35,14 +35,15 @@ function! s:after_colorscheme()
 
   hi VendorPrefix guifg=#00ffff gui=bold
   match VendorPrefix /-\(moz\|webkit\|o\|ms\)-[a-zA-Z-]\+/
+
+  " Highlight VCS conflict markers
+  match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 endfunction
 
 
 augroup after_colorscheme
   au!
-  hi Comment cterm=italic term=italic gui=italic
+  call s:after_colorscheme()
   au ColorScheme * call s:after_colorscheme()
 augroup END
 
-" Highlight VCS conflict markers
-" match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
