@@ -1,6 +1,10 @@
 # ==/ FZF Helpers /============================================================
 # graciously thieved from: https://github.com/junegunn/fzf/wiki/Examples
 
+prev() {
+  git ls-files | fzf --preview "pygmentize {}" --color light --margin 5,20
+}
+
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
