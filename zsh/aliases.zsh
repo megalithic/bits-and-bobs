@@ -89,7 +89,7 @@ alias py="python"
 
 # (NEO)VIM
 # -----------------------------------------------------------------------------
-alias updatenvim="brew update; brew reinstall --HEAD neovim; pip3 install -U --user neovim; pip2 install -U --user neovim; pip2 install --upgrade pip"
+alias updatenvim="brew update; brew reinstall --HEAD neovim; pip3 install -U --user neovim; pip2 install -U --user neovim; pip2 install --upgrade pip; nvim +PlugUpdate +qall"
 alias nvimupdate=updatenvim
 alias nv="nvim"
 alias vim="nvim"
