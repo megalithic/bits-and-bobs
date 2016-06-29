@@ -13,10 +13,10 @@ endfunction
 
 " ----------------------------------------------------------------------------
 " ## Neosnippet
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+imap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)"
       \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+smap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)"
       \: "\<TAB>"
 " For snippet_complete marker.

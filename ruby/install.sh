@@ -22,6 +22,7 @@ info "installing gems"
 require_gem bourbon
 require_gem bundler -v 1.10.6
 require_gem compass
+require_gem coderay
 require_gem curses
 require_gem git-up
 require_gem foreman

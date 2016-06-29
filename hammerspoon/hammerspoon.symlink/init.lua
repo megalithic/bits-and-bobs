@@ -29,6 +29,7 @@ utils.log.df('[audio] default input device, %s, input volume: %s', hs.audiodevic
 -------------------------------------------------------------------------------
 cmdAlt = {'cmd', 'alt'}
 cmdShift = {'cmd', 'shift'}
+ctrlShift = {'ctrl', 'shift'}
 cmdCtrl = {'cmd', 'ctrl'}
 ctrlAlt = {'ctrl', 'alt'}
 mashShift = {'cmd', 'ctrl', 'shift'}
@@ -47,17 +48,17 @@ hotkey.bind(cmdCtrl, 'r', function()
 end)
 
 -- :: media
-hotkey.bind(cmdShift, 27, function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- insert key
-hotkey.bind(cmdShift, 51, function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end) -- home key
-hotkey.bind(cmdShift, 24, function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end) -- pageup key
+hotkey.bind(ctrlShift, 27, function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- (- key)
+hotkey.bind(ctrlShift, 51, function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end) -- (= key)
+hotkey.bind(ctrlShift, 24, function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end) -- (BS key)
 
 -- :: apps
 hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('ctrl', 'return', function() utils.toggleApp('com.google.Chrome') end)
 hotkey.bind('cmd', '`', function() utils.toggleApp('com.google.Chrome') end)
-hotkey.bind(cmdShift, 'f4', function() utils.toggleApp('it.bloop.airmail2') end)
 hotkey.bind('cmd', 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
+hotkey.bind(ctrlShift, '4', function() utils.toggleApp('com.nylas.nylas-mail') end)
 hotkey.bind('cmd', 'f5', function() utils.toggleApp('com.tapbots.TweetbotMac') end)
 hotkey.bind('cmd', 'f8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
