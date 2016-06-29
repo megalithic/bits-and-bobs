@@ -177,7 +177,7 @@ alias ip="ifconfig"
 alias get="curl -OL"
 alias g="grep -r -i --color='auto'"
 alias nvm='n'
-alias irc="weechat-curses"
+alias irc="sh ~/.dotfiles/zsh/base16-ocean.dark.sh; weechat-curses"
 alias weechat="weechat-curses"
 alias eechat="weechat-curses"
 alias rc=irc

@@ -29,18 +29,6 @@ windows:
         - npm install
         - npm start
       - commands:
-        - cd ep-dev-edition
-        - git co master
-        - git pull
-        - docker-machine start dev
-        - eval $(docker-machine env dev)
-        - make reset
-        - cd ~/code/welltok
-        - docker ps
-        - cd rewards-dashboard
-        - npm run mock
-        focus: true
-      - commands:
         - cd cafewell
         - chruby ruby-2.2.3
         - npm install
@@ -56,6 +44,16 @@ windows:
       - commands:
         - cd rewards-dashboard
         - npm run mock
+      - commands:
+        - cd ep-dev-edition
+        - git co master
+        - git pull
+        - docker-machine start dev
+        - eval $(docker-machine env dev)
+        - make reset
+        - cd ~/code/welltok
+        - docker ps
+        focus: true
   - name: "code"
     root: "~/code/welltok/rewards-dashboard"
     panes:
