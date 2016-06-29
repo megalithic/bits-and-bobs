@@ -62,6 +62,7 @@ hotkey.bind(ctrlShift, '4', function() utils.toggleApp('com.nylas.nylas-mail') e
 hotkey.bind('cmd', 'f5', function() utils.toggleApp('com.tapbots.TweetbotMac') end)
 hotkey.bind('cmd', 'f8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind('cmd', 51, function() utils.toggleApp('com.spotify.client') end)
+hotkey.bind(cmdShift, '8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
 hotkey.bind(mashShift, 'f8', function() utils.toggleApp('com.sajidanwar.Radiant-Player') end)
 hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)

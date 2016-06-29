@@ -188,7 +188,7 @@ let g:qs_enable = 0
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#disable_auto_complete = 0
-" let g:deoplete#enable_debug = 1
+let g:deoplete#enable_debug = 1
 
 " let g:deoplete#enable_refresh_always = 1
 " let g:deoplete#enable_prefetch = 1
@@ -336,13 +336,13 @@ endif
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
-let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
-let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips']
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsListSnippets = "<c-tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" let g:UltiSnipsUsePythonVersion = 3
+" let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
+" let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips']
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsListSnippets = "<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " ----------------------------------------------------------------------------
 " ## neosnippet
