@@ -113,6 +113,7 @@ set -g escape-time 0
 bind Escape copy-mode
 # Use vim keybindings
 setw -g mode-keys vi
+set -g @shell_mode 'vi'
 
 # Setup 'v' to being selection as in vim
 bind-key -t vi-copy v begin-selection
@@ -127,11 +128,11 @@ bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 # Various keybindings to try:
 # https://github.com/hamvocke/dotfiles/blob/master/tmux/.tmux.conf#L48
 # fix pbcopy/pbpaste
-if 'command -v reattach-to-user-namespace >/dev/null' \
-    'set -gq @osx-pasteboard true'
+# if 'command -v reattach-to-user-namespace >/dev/null' \
+#     'set -gq @osx-pasteboard true'
 
-if 'tmux show -gv @osx-clipboard' \
-    'set -g default-command "reattach-to-user-namespace -l $SHELL"'
+# if 'tmux show -gv @osx-clipboard' \
+#     'set -g default-command "reattach-to-user-namespace -l $SHELL"'
 
 # present a menu of URLs to open from the visible pane. sweet.
 bind-key u capture-pane \;\
