@@ -82,7 +82,7 @@ let g:vim_json_syntax_conceal = 0
 " ----------------------------------------------------------------------------
 " ## godown-vim
 " should the preview be shown automatically when a markdown buffer is opened
-let g:godown_autorun = 1
+let g:godown_autorun = 0
 " the port to run the Godown server on
 let g:godown_port = 1337
 
