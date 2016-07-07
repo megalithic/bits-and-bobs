@@ -37,7 +37,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffee'] }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'moll/vim-node', { 'for': ['js', 'javascript'] }
-  Plug 'flowtype/vim-flow', { 'for': ['js', 'javascript', 'javascript.jsx'], 'do': 'npm i -g flow-bin' }
+  " Plug 'flowtype/vim-flow', { 'for': ['js', 'javascript', 'javascript.jsx'], 'do': 'npm i -g flow-bin' }
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
