@@ -29,15 +29,6 @@ windows:
         - npm install
         - npm start
       - commands:
-        - cd cafewell
-        - chruby ruby-2.2.3
-        - npm install
-        - bundle
-        - bundle exec rake db:migrate
-        - killport 5000 # kill moxy in case it's already running
-        - killport 3000 # kill thin/rails in case it's already running
-        - be foreman start
-      - commands:
         - cd rewards-dashboard
         - npm install
         - npm start
@@ -54,6 +45,15 @@ windows:
         - cd ~/code/welltok
         - docker ps
         focus: true
+      - commands:
+        - cd cafewell
+        - chruby ruby-2.2.3
+        - npm install
+        - bundle
+        - bundle exec rake db:migrate
+        - killport 5000 # kill moxy in case it's already running
+        - killport 3000 # kill thin/rails in case it's already running
+        - be foreman start
   - name: "code"
     root: "~/code/welltok/rewards-dashboard"
     panes:

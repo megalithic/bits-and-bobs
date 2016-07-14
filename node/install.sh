@@ -35,6 +35,7 @@ npm i -g node-inspector
 npm i -g pm2 # http://stackoverflow.com/a/20661027/213904
 npm i -g prettyjson
 npm i -g react-native-cli
+npm i -g sloc
 npm i -g speed-test
 npm i -g standard@5.3.1
 npm i -g snazzy
