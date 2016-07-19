@@ -10,7 +10,7 @@ colorscheme base16-ocean
 " change vim cursor depending on the mode
 if has('nvim')
   set termguicolors
-  set guifont=Sauce\ Code\ Powerline:h12
+  " set guifont=Sauce\ Code\ Powerline:h12
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
   let g:python_host_prog = '/usr/local/bin/python2'

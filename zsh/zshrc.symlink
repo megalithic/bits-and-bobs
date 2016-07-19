@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/sh
 #
 # There are different zsh shell modes, and files that manage those:
 #

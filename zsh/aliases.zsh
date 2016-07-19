@@ -69,6 +69,10 @@ alias team="cd ~ && teamocil --here default"
 alias toka="tmux attach-session -t welltok"
 alias tok="cd ~; teamocil --here welltok"
 
+# welltok stuffs
+# -----------------------------------------------------------------------------
+alias nsa="sudo sentinelctl"
+
 ## - ag/ack/grep/fzf --------------------------------------
 # https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
 # alias ag="ag --nobreak --nonumbers --noheading . | fzf"
