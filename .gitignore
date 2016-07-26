@@ -21,6 +21,7 @@ config/config.symlink/nvim/*.init.*
 config/config.symlink/nvim/.init.vim-rplugin*
 config/config.symlink/nvim/deoplete.log
 config/config.symlink/nvim/autoload/plug.vim
+config/config.symlink/configstore/*.json
 ~/.config/nvim/autoload
 ~/.config/nvim/plugged
 ~/.config/nvim/.init.*
