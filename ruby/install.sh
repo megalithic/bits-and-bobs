@@ -39,6 +39,7 @@ require_gem pygmentize
 require_gem mdless
 require_gem rcodetools
 require_gem fastri
+require_gem terminal-notifier
 
 #Installing gems that need system ruby ...
 sudo chruby-exec system -- gem install weechat terminal-notifier

@@ -106,7 +106,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'EinfachToll/DidYouMean'
   " Plug 'wincent/loupe'
   " Plug 'haya14busa/incsearch.vim' " improved incremental searching
-  " Plug 'ervandew/supertab'
+  Plug 'ervandew/supertab'
   function! HandleRemotePluginUpdates(arg)
     UpdateRemotePlugins
   endfunction
