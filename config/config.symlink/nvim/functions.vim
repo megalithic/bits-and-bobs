@@ -1,6 +1,33 @@
 " -/ Custom Functions /--------------------------------------------
 " _________________________________________________________________
-"
+
+
+" ----------------------------------------------------------------------------
+" ## UTILS
+
+" Tab wrapper
+function! TabComplete() abort
+  let l:col = col('.') - 1
+
+  if pumvisible()
+    return "\<C-n>"
+  else
+    if !l:col || getline('.')[l:col - 1] !~# '\k'
+      return "\<TAB>"
+    else
+      return "\<C-n>"
+    endif
+  endif
+endfunction
+" Manual Tag complete
+function! ManualTagComplete() abort
+  if pumvisible()
+    return g:deoplete#mappings#close_popup()
+  else
+    return g:deoplete#mappings#manual_complete('tag')
+  endif
+endfunction
+
 " Used by Fugitive
 function! BufReadIndex()
   " Use j/k in status

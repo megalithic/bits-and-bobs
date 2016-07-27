@@ -174,8 +174,8 @@ let g:qs_enable = 0
 
 " ----------------------------------------------------------------------------
 " ## Supertab
-" let g:SuperTabDefaultCompletionType    = '<C-n>'
-" let g:SuperTabCrMapping                = 0
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
 " handy stuff: https://github.com/ervandew/supertab/issues/53
 " let g:SuperTabDefaultCompletionTypeDiscovery = [ "&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>" ]
 " let g:SuperTabDefaultCompletionType = 'context'
@@ -183,59 +183,72 @@ let g:qs_enable = 0
 
 " ----------------------------------------------------------------------------
 " ## deoplete
+let g:deoplete#enable_at_startup=1
+let g:deoplete#enable_refresh_always=0
+let g:deoplete#file#enable_buffer_path=1
+
+let g:deoplete#sources={}
+let g:deoplete#sources._    = ['buffer', 'file', 'ultisnips']
+let g:deoplete#sources.ruby = ['buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources.vim  = ['buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources['javascript.jsx'] = ['buffer', 'file', 'ultisnips', 'ternjs']
+let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+
 " set completeopt+=noinsert
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#disable_auto_complete = 0
-let g:deoplete#enable_debug = 0
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#disable_auto_complete = 0
+" let g:deoplete#enable_debug = 0
 
-" let g:deoplete#enable_refresh_always = 1
-" let g:deoplete#enable_prefetch = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#enable_ignore_case = 'ignorecase'
-let g:deoplete#auto_completion_start_length = 0
-let g:min_pattern_length = 0
+" " let g:deoplete#enable_refresh_always = 1
+" " let g:deoplete#enable_prefetch = 1
+" let g:deoplete#file#enable_buffer_path = 1
+" let g:deoplete#enable_ignore_case = 'ignorecase'
+" let g:deoplete#auto_completion_start_length = 0
+" let g:min_pattern_length = 0
 
-" we don't want the completion menu to auto pop-up when we are in text files
-let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
+" " we don't want the completion menu to auto pop-up when we are in text files
+" let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
 
-let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
-let g:deoplete#omni#functions.javascript = 'tern#Complete'
-let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
-" let g:deoplete#omni#functions.['javascript.jsx'] = 'tern#Complete'
+" let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
+" let g:deoplete#omni#functions.javascript = 'tern#Complete'
+" let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
+" " let g:deoplete#omni#functions.['javascript.jsx'] = 'tern#Complete'
 
-let g:monster#completion#rcodetools#backend = "async_rct_complete"
+" let g:monster#completion#rcodetools#backend = "async_rct_complete"
 
-let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
-let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
-" let g:deoplete#omni_patterns.['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
+" let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
+" let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
+" " let g:deoplete#omni_patterns.['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
 
-let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
-let g:deoplete#omni#input_patterns.html = '<[^>]*'
-let g:deoplete#omni#input_patterns.xml = '<[^>]*'
-let g:deoplete#omni#input_patterns.md = '<[^>]*'
-let g:deoplete#omni#input_patterns.css = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni#input_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni#input_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni#input_patterns.go = '[^.[:digit:] *\t]\.\w*'
-let g:deoplete#omni#input_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
-let g:deoplete#omni#input_patterns.coffee = '\h\w*\|[^. \t]\.\w*'
-" let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
-" let g:deoplete#omni#input_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
-let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\w*'
-let g:deoplete#omni#input_patterns["javascript.jsx"] = '[^. \t]\.\w*'
+" let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
+" let g:deoplete#omni#input_patterns.html = '<[^>]*'
+" let g:deoplete#omni#input_patterns.xml = '<[^>]*'
+" let g:deoplete#omni#input_patterns.md = '<[^>]*'
+" let g:deoplete#omni#input_patterns.css = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni#input_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni#input_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni#input_patterns.go = '[^.[:digit:] *\t]\.\w*'
+" let g:deoplete#omni#input_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
+" let g:deoplete#omni#input_patterns.coffee = '\h\w*\|[^. \t]\.\w*'
+" " let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
+" " let g:deoplete#omni#input_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
+" let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\w*'
+" let g:deoplete#omni#input_patterns["javascript.jsx"] = '[^. \t]\.\w*'
 
-let g:deoplete#keyword_patterns = get(g:, 'deoplete#keyword_patterns', {})
-" let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
-let g:deoplete#keyword_patterns.default = '\h\w*'
-let g:deoplete#keyword_patterns.html = '</\?\%([[:alnum:]_:-]\+\s*\)\?\%(/\?>\)\?\|&\h\%(\w*;\)\?\|\h[[:alnum:]_:-]*'
+" let g:deoplete#keyword_patterns = get(g:, 'deoplete#keyword_patterns', {})
+" " let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
+" let g:deoplete#keyword_patterns.default = '\h\w*'
+" let g:deoplete#keyword_patterns.html = '</\?\%([[:alnum:]_:-]\+\s*\)\?\%(/\?>\)\?\|&\h\%(\w*;\)\?\|\h[[:alnum:]_:-]*'
 
-let g:deoplete#sources = get(g:, 'deoplete#sources', {})
-let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'neosnippet', 'ternjs', 'omni']
+" let g:deoplete#sources = get(g:, 'deoplete#sources', {})
+" let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'neosnippet', 'ternjs', 'omni']
 
-call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
-call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
-call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
+" call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
+" call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
+" call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
 
 " ----------------------------------------------------------------------------
 " ## tern_for_vim
@@ -335,13 +348,20 @@ endif
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
-" let g:UltiSnipsUsePythonVersion = 3
-" let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
-" let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips']
-" let g:UltiSnipsExpandTrigger = "<tab>"
-" let g:UltiSnipsListSnippets = "<c-tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<tab>"
-" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
+let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips']
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsListSnippets = "<c-tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" Disable built-in cx-ck to be able to go backward
+inoremap <C-x><C-k> <NOP>
+let g:UltiSnipsExpandTrigger='<C-j>'
+let g:UltiSnipsListSnippets='<C-s>'
+let g:UltiSnipsJumpForwardTrigger='<C-j>'
+let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
 " ----------------------------------------------------------------------------
 " ## neosnippet

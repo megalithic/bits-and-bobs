@@ -11,8 +11,14 @@ function! s:close_and_linebreak()
   return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
 endfunction
 
-" ----------------------------------------------------------------------------
-" ## Neosnippet
+" Insert <TAB> or select next match
+inoremap <silent> <expr> <Tab> TabComplete()
+
+" Manually trigger tag autocomplete
+inoremap <silent> <expr> <C-]> TagComplete()
+
+" <BS>: close popup and delete backword char
+inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 
 " ----------------------------------------------------------------------------
 " ## CtrlP
@@ -109,6 +115,10 @@ nnoremap <C-o> :vnew<cr>:e<space><c-d>
 " ## Code Formatting
 map <leader>pj :%!python -m json.tool<CR>
 map <leader>px :%!xmllint % --format<CR>
+
+" ----------------------------------------------------------------------------
+" find merge conflict markers
+nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<cr>
 
 " ----------------------------------------------------------------------------
 " ## Quick edit of certain files

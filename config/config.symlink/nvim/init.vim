@@ -27,7 +27,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ## JavaScript, et al
   Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  " Plug 'gavocanov/vim-js-indent', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
+  Plug 'gavocanov/vim-js-indent', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'othree/es.next.syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'othree/jspc.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
@@ -102,26 +102,21 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ap/vim-readdir' " simple directory browser
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
+  Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
   " Plug 'wincent/loupe'
   " Plug 'haya14busa/incsearch.vim' " improved incremental searching
-  Plug 'ervandew/supertab'
-  function! HandleRemotePluginUpdates(arg)
-    UpdateRemotePlugins
-  endfunction
-  Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
+  " Plug 'ervandew/supertab'
+  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
-  Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
-  " Plug 'SirVer/ultisnips' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
-  " Plug 'mileszs/ack.vim'
-  " Plug 'ctrlpvim/ctrlp.vim'
-  " Plug 'FelikZ/ctrlp-py-matcher'
+  " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
+  Plug 'SirVer/ultisnips' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
