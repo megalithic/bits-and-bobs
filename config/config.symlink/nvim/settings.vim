@@ -179,7 +179,6 @@ let g:SuperTabCrMapping                = 0
 
 " ----------------------------------------------------------------------------
 " ## deoplete
-set completeopt+=noinsert
 let g:deoplete#enable_at_startup=1
 let g:deoplete#enable_refresh_always=0
 let g:deoplete#file#enable_buffer_path=1
