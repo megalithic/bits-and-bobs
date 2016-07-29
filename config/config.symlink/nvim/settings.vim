@@ -176,16 +176,14 @@ let g:qs_enable = 0
 " ## Supertab
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
-" handy stuff: https://github.com/ervandew/supertab/issues/53
-" let g:SuperTabDefaultCompletionTypeDiscovery = [ "&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>" ]
-" let g:SuperTabDefaultCompletionType = 'context'
-" let g:SuperTabDefaultCompletionType = '<c-n>'
 
 " ----------------------------------------------------------------------------
 " ## deoplete
+set completeopt+=noinsert
 let g:deoplete#enable_at_startup=1
 let g:deoplete#enable_refresh_always=0
 let g:deoplete#file#enable_buffer_path=1
+" let g:deoplete#enable_debug = 0
 
 let g:deoplete#sources={}
 let g:deoplete#sources._    = ['buffer', 'file', 'ultisnips']
@@ -196,11 +194,16 @@ let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni', 'ultisnips']
 let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni', 'ultisnips']
 let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
 
+let g:monster#completion#rcodetools#backend = "async_rct_complete"
+
+" we don't want the completion menu to auto pop-up when we are in text files
+let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
+
+
 " set completeopt+=noinsert
 " let g:deoplete#enable_at_startup = 1
 " let g:deoplete#enable_smart_case = 1
 " let g:deoplete#disable_auto_complete = 0
-" let g:deoplete#enable_debug = 0
 
 " " let g:deoplete#enable_refresh_always = 1
 " " let g:deoplete#enable_prefetch = 1
@@ -209,15 +212,11 @@ let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
 " let g:deoplete#auto_completion_start_length = 0
 " let g:min_pattern_length = 0
 
-" " we don't want the completion menu to auto pop-up when we are in text files
-" let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
-
 " let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
 " let g:deoplete#omni#functions.javascript = 'tern#Complete'
 " let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
 " " let g:deoplete#omni#functions.['javascript.jsx'] = 'tern#Complete'
 
-" let g:monster#completion#rcodetools#backend = "async_rct_complete"
 
 " let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
 " let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
@@ -358,7 +357,8 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Disable built-in cx-ck to be able to go backward
 inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger='<C-j>'
+let g:UltiSnipsExpandTrigger='<CR>'
+" let g:UltiSnipsExpandTrigger='<C-j>'
 let g:UltiSnipsListSnippets='<C-s>'
 let g:UltiSnipsJumpForwardTrigger='<C-j>'
 let g:UltiSnipsJumpBackwardTrigger='<C-k>'

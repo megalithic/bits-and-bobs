@@ -68,7 +68,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
   Plug 'jreybert/vimagit' " more git tools integrated into vim
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim' " easily post to gist.github.com
-  Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
+  " Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
   Plug 'honza/dockerfile.vim', { 'for': ['dockerfile', 'docker'] }
@@ -110,13 +110,15 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'ervandew/supertab'
   Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
+  " Plug 'roxma/SimpleAutoComplPop'
   Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
   " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
-  Plug 'SirVer/ultisnips' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
+  " Plug 'SirVer/ultisnips' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
