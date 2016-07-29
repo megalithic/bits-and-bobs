@@ -350,15 +350,14 @@ endif
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips']
-let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger = "<cr>"
 let g:UltiSnipsListSnippets = "<c-tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<cr>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Disable built-in cx-ck to be able to go backward
 inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger='<CR>'
-" let g:UltiSnipsExpandTrigger='<C-j>'
+let g:UltiSnipsExpandTrigger='<C-j>'
 let g:UltiSnipsListSnippets='<C-s>'
 let g:UltiSnipsJumpForwardTrigger='<C-j>'
 let g:UltiSnipsJumpBackwardTrigger='<C-k>'

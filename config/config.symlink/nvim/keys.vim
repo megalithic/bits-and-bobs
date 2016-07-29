@@ -5,11 +5,7 @@ let maplocalleader="\\"
 nnoremap <c-s> :source $MYVIMRC<cr>
 
 " ----------------------------------------------------------------------------
-" ## Deoplete
-inoremap <silent> <CR> <C-r>=<SID>close_and_linebreak()<CR>
-function! s:close_and_linebreak()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-endfunction
+" ## Tab/Deoplete Stuffs
 
 " Insert <TAB> or select next match
 inoremap <silent> <expr> <Tab> TabComplete()

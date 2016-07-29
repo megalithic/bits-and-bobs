@@ -19,6 +19,7 @@ function! TabComplete() abort
     endif
   endif
 endfunction
+
 " Manual Tag complete
 function! ManualTagComplete() abort
   if pumvisible()
@@ -27,6 +28,15 @@ function! ManualTagComplete() abort
     return g:deoplete#mappings#manual_complete('tag')
   endif
 endfunction
+
+" Manual Tag complete
+" function! ExpandSnippet() abort
+"   if pumvisible()
+"     return g:ulti_expand_or_jump_res
+"   else
+"     return g:deoplete#mappings#manual_complete('tag')
+"   endif
+" endfunction
 
 " Used by Fugitive
 function! BufReadIndex()
