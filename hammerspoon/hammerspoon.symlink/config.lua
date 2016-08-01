@@ -98,6 +98,15 @@ config.layout = {
     end
   end),
 
+  ['ctrlla.Polymail'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    if count == 1 then
+      grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))
+    else
+      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
+    end
+  end),
+
   ['it.bloop.airmail2'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
