@@ -5,6 +5,16 @@ function killport() {
   lsof -t -i tcp:$1 | xargs kill
 }
 
+function dnd () {
+  osascript -e "
+    tell application \"System Events\" to tell process \"SystemUIServer\"
+      key down option
+      click menu bar item 1 of menu bar 2
+      key up option
+    end tell
+  "
+}
+
 wherearewe()
 {
   if [[ -n "$SSH_CLIENT$SSH2_CLIENT$SSH_TTY" ]] ; then
