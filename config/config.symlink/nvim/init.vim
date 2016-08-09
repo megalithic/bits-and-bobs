@@ -68,7 +68,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
   Plug 'jreybert/vimagit' " more git tools integrated into vim
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim' " easily post to gist.github.com
-  " Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
+  Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
+  Plug 'lambdatoast/elm.vim', { 'for': ['elm'] }
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
   Plug 'honza/dockerfile.vim', { 'for': ['dockerfile', 'docker'] }
