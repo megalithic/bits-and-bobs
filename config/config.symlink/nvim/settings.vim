@@ -71,6 +71,13 @@ let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 
 " ----------------------------------------------------------------------------
+" ## elm
+let g:elm_detailed_complete = 1
+let g:elm_format_autosave = 1
+let g:elm_syntastic_show_warnings = 1
+let g:elm_make_show_warnings = 1
+
+" ----------------------------------------------------------------------------
 " ## vim-flow
 let g:flow#autoclose = 1
 
@@ -152,7 +159,7 @@ let g:lua_define_completion_mappings = 0
 
 " ----------------------------------------------------------------------------
 " ## vim-markdown
-let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh', 'elm']
 let g:vim_markdown_frontmatter=1
 
 " ----------------------------------------------------------------------------
@@ -286,38 +293,6 @@ let g:fzf_action = {
 "       \ 'marker':  ['fg', 'Keyword'],
 "       \ 'spinner': ['fg', 'Label'],
 "       \ 'header':  ['fg', 'Comment'] }
-
-" ----------------------------------------------------------------------------
-" ## ctrlp
-let g:ctrlp_match_window = 'bottom,order:btt'    " Order matching files top to bottom
-let g:ctrlp_switch_buffer=0            " open files in new buffers
-let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
-let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
-let g:ctrlp_mruf_relative = 1          " Show only MRU files in the working directory
-let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
-let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
-let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
-let g:ctrlp_arg_map = 0
-let g:ctrlp_dotfiles = 0               " do not show (.) dotfiles in match list
-let g:ctrlp_showhidden = 0             " do not show hidden files in match list
-let g:ctrlp_split_window = 0
-let g:ctrlp_max_height = 20            " restrict match list to a maxheight of 40
-let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
-let g:ctrlp_max_files = 0              " no restriction on results/file list
-let g:ctlrp_clear_cache_on_exit = 1
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn|gitkeep)$',
-      \ 'file': '\v\.(exe|so|dll|log|gif|jpg|jpeg|png|psd|DS_Store|ctags|gitattributes)$'
-      \ }
-let g:ctrlp_user_command = 'ag %s -i -l --nocolor --nogroup --hidden -g ""'
-let g:ctrlp_prompt_mappings = {
-      \ 'AcceptSelection("e")': ['<c-e>', '<c-space>', '<2-LeftMouse>'],
-      \ 'AcceptSelection("v")': ['<cr>', '<RightMouse>', 'gv'],
-      \ 'PrtSelectMove("j")':   ['<c-j>', '<c-n>', '<down>', '<s-tab>'],
-      \ 'PrtSelectMove("k")':   ['<c-k>', '<c-p>', '<up>', '<tab>'],
-      \ 'ToggleFocus()':        ['<c-tab>'],
-      \}
 
 " ----------------------------------------------------------------------------
 " ## ack.vim
