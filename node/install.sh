@@ -22,6 +22,7 @@ npm i -g bower
 npm i -g browserify
 npm i -g bunyan
 npm i -g fkill-cli
+npm i -g elm
 npm i -g gulp
 npm i -g hicat
 npm i -g instant-markdown-d
