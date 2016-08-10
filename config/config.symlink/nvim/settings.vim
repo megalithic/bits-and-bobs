@@ -130,12 +130,12 @@ let g:neomake_elixir_diaylze_maker = {
       \   '%f:%l:%m'
       \ }
 
-let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+" let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
+" let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
-let g:neomake_ruby_rubocop_exe = 'bundle'
-let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+" let g:neomake_ruby_rubocop_exe = 'bundle'
+" let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
+" let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
 let g:neomake_javascript_enabled_makers = ['standard', 'eslint']
 let g:neomake_jsx_enabled_makers = ['standard', 'eslint']
@@ -157,7 +157,8 @@ let g:neomake_elixir_mix_maker = {
 " let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
-au! BufReadPost,BufWritePost * Neomake | redraw
+" au! BufReadPost,BufWritePost * Neomake | redraw
+au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
 
 " ----------------------------------------------------------------------------
 " ## JSDoc
