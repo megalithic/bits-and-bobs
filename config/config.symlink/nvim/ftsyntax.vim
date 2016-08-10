@@ -18,7 +18,7 @@ augroup ft_javascript
   au FileType html vnoremap <buffer> <c-b> :call RangeHtmlBeautify()<cr>
   au FileType css vnoremap <buffer> <c-b> :call RangeCSSBeautify()<cr>
 
-  " elm" Elm vim
+  " elm
   au BufWritePost *.elm :ElmMake
   au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
 augroup END
