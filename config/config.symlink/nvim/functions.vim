@@ -123,3 +123,20 @@ function! QuickSpellingFix()
   endif
 endfunction
 command! QuickSpellingFix call QuickSpellingFix()
+
+" Run current file
+function! RunCurrentFile() abort
+  if &filetype ==? 'ruby'
+    let l:command = 'ruby %'
+  elseif &filetype ==? 'sh'
+    let l:command = 'sh %'
+  elseif &filetype ==? 'js'
+    let l:command = 'node %'
+  else
+    echom "Can't run current file (unsupported filetype: " . &filetype . ')'
+  endif
+
+  if exists('command')
+    execute ':terminal ' . l:command
+  endif
+endfunction

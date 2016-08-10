@@ -37,7 +37,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffee'] }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'moll/vim-node', { 'for': ['js', 'javascript'] }
-  " Plug 'flowtype/vim-flow', { 'for': ['js', 'javascript', 'javascript.jsx'], 'do': 'npm i -g flow-bin' }
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
@@ -51,7 +50,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
   Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
-  Plug 'ingydotnet/yaml-vim', { 'for': ['yaml'] }
+  Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
 
@@ -64,12 +63,13 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## Misc, Other, et al
+  Plug 'elixir-lang/vim-elixir', { 'for': ['elixir', 'eelixir'] }
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
   Plug 'jreybert/vimagit' " more git tools integrated into vim
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim' " easily post to gist.github.com
   Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
-  Plug 'lambdatoast/elm.vim', { 'for': ['elm'] }
+  " Plug 'lambdatoast/elm.vim', { 'for': ['elm'] }
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
   Plug 'honza/dockerfile.vim', { 'for': ['dockerfile', 'docker'] }
@@ -106,20 +106,18 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
-  " Plug 'wincent/loupe'
   " Plug 'haya14busa/incsearch.vim' " improved incremental searching
   " Plug 'ervandew/supertab'
   Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
-  " Plug 'roxma/SimpleAutoComplPop'
   Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
   " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
-  " Plug 'SirVer/ultisnips' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  Plug 'justinj/vim-react-snippets', { 'for': ['javascript.jsx'] }
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al

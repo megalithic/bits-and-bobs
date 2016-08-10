@@ -77,6 +77,7 @@ let g:elm_format_autosave = 1
 let g:elm_syntastic_show_warnings = 1
 let g:elm_make_show_warnings = 1
 let g:elm_setup_keybindings = 0
+let g:elm_jump_to_error = 1
 
 " ----------------------------------------------------------------------------
 " ## vim-flow
@@ -103,18 +104,60 @@ let g:neomake_serialize = 1
 let g:neomake_verbose = 0
 " let g:neomake_list_height = 10
 let g:neomake_open_list = 0
+let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
 let g:neomake_error_sign = { 'text': '☓', 'texthl': 'Error' }
-let g:neomake_warning_sign = { 'text': '◦', 'texthl': 'Error' }
-let g:neomake_javascript_enabled_makers = ['standard']
-let g:neomake_javascript_standard_maker = {
-      \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-      \ 'errorformat': '  %f:%l:%c: %m'
+let g:neomake_warning_sign = { 'text': '>', 'texthl': 'Error' }
+
+let g:neomake_elixir_credo_maker = {
+      \ 'exe': 'mix',
+      \ 'args': ['credo'],
+      \ 'append_file': 0,
+      \ 'errorformat':
+      \   '%E┃ [%t] %. %m.,%Z┃       %f:%l%.%#'
       \ }
-let g:neomake_jsx_enabled_makers = ['standard']
-let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
+
+let g:neomake_elixir_diaylze_maker = {
+      \ 'exe': 'mix',
+      \ 'args': [
+      \   'dialyze',
+      \   '--no-check',
+      \   '--unmatched-returns',
+      \   '--error-handling',
+      \   '--race-conditions',
+      \   '--underspecs'
+      \  ],
+      \ 'errorformat':
+      \   '%f:%l:%m'
+      \ }
+
+let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+
+let g:neomake_ruby_rubocop_exe = 'bundle'
+let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+
+let g:neomake_javascript_enabled_makers = ['standard', 'eslint']
+let g:neomake_jsx_enabled_makers = ['standard', 'eslint']
+
+let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'diaylze']
+let g:neomake_elixir_mix_maker = {
+      \ 'args': ['compile'],
+      \ 'errorformat':
+      \   '** %s %f:%l: %m,' .
+      \   '%f:%l: warning: %m'
+      \ }
+
+" let g:neomake_javascript_enabled_makers = ['standard']
+" let g:neomake_javascript_standard_maker = {
+"       \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+"       \ 'errorformat': '  %f:%l:%c: %m'
+"       \ }
+" let g:neomake_jsx_enabled_makers = ['standard']
+" let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
-au! BufReadPost,BufWritePost {*.js,*.rb} Neomake | redraw
+au! BufReadPost,BufWritePost * Neomake | redraw
 
 " ----------------------------------------------------------------------------
 " ## JSDoc
@@ -136,10 +179,13 @@ function! SplitStrategy(cmd)
   botright new | call termopen(a:cmd) | startinsert
 endfunction
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-let g:test#strategy = 'terminal_split'
-let g:test#preserve_screen = 1
+let g:test#strategy = 'terminal_split' " neoterm
+let g:neoterm_position = "vertical"
+" let g:test#preserve_screen = 1
 let g:test#javascript#mocha#options = "--colors --compilers js:babel/register --timeout 15000 --delay"
 let g:test#javascript#mocha#file_pattern = ".test.js"
+let test#elixir#exunit#options = '--trace'
+let test#ruby#rspec#options = '-f d'
 
 " ----------------------------------------------------------------------------
 " ## list-toggle
@@ -187,12 +233,13 @@ let g:SuperTabCrMapping                = 0
 
 " ----------------------------------------------------------------------------
 " ## deoplete
-let g:deoplete#enable_at_startup=1
-let g:deoplete#enable_refresh_always=0
-let g:deoplete#file#enable_buffer_path=1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#auto_completion_start_length = 2
 " let g:deoplete#enable_debug = 0
 
-let g:deoplete#sources={}
+let g:deoplete#sources = {}
 let g:deoplete#sources._    = ['buffer', 'file', 'ultisnips']
 let g:deoplete#sources.ruby = ['buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.vim  = ['buffer', 'member', 'file', 'ultisnips']
@@ -203,9 +250,13 @@ let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
 
 let g:monster#completion#rcodetools#backend = "async_rct_complete"
 
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
+let g:deoplete#omni_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
+let g:deoplete#omni_patterns.elm = '\.'
+
 " we don't want the completion menu to auto pop-up when we are in text files
 let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
-
 
 " set completeopt+=noinsert
 " let g:deoplete#enable_at_startup = 1
@@ -222,12 +273,12 @@ let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
 " let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
 " let g:deoplete#omni#functions.javascript = 'tern#Complete'
 " let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
-" " let g:deoplete#omni#functions.['javascript.jsx'] = 'tern#Complete'
+" let g:deoplete#omni#functions['javascript.jsx'] = 'tern#Complete'
 
 
 " let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
 " let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
-" " let g:deoplete#omni_patterns.['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
+" let g:deoplete#omni_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
 
 " let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
 " let g:deoplete#omni#input_patterns.html = '<[^>]*'

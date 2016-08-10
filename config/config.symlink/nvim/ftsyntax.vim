@@ -20,6 +20,7 @@ augroup ft_javascript
 
   " elm" Elm vim
   au BufWritePost *.elm :ElmMake
+  au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
 augroup END
 
 augroup ft_scss

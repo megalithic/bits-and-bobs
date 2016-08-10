@@ -81,6 +81,14 @@ nmap <silent> <leader>T :TestNearest<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
+" ref: https://github.com/Dkendal/dot-files/blob/master/nvim/.config/nvim/init.vim
+" nmap <silent> <leader>1 :TestNearest<CR>
+" nmap <silent> <leader>! :TestFile<CR>
+" nmap <silent> <leader>@ :TestSuite<CR>
+" nmap <silent> <leader>2 :TestLast<CR>
+" nmap <silent> <leader>3 :TestSuite --next-failure<CR>
+" nmap <silent> <leader># :TestVisit<CR>
+
 " ----------------------------------------------------------------------------
 " ## Gist/Github
 " Send visual selection to gist.github.com as a private, filetyped Gist
@@ -331,3 +339,5 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 inoremap <c-e> <esc>A
 " Ctrl-a: Go to begin of line
 inoremap <c-a> <esc>I
+
+nnoremap <F8> RunCurrentFile()
