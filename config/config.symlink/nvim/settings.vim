@@ -108,53 +108,50 @@ let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
 let g:neomake_error_sign = { 'text': '☓', 'texthl': 'Error' }
 let g:neomake_warning_sign = { 'text': '>', 'texthl': 'Error' }
 
-let g:neomake_elixir_credo_maker = {
-      \ 'exe': 'mix',
-      \ 'args': ['credo'],
-      \ 'append_file': 0,
-      \ 'errorformat':
-      \   '%E┃ [%t] %. %m.,%Z┃       %f:%l%.%#'
-      \ }
-
-let g:neomake_elixir_diaylze_maker = {
-      \ 'exe': 'mix',
-      \ 'args': [
-      \   'dialyze',
-      \   '--no-check',
-      \   '--unmatched-returns',
-      \   '--error-handling',
-      \   '--race-conditions',
-      \   '--underspecs'
-      \  ],
-      \ 'errorformat':
-      \   '%f:%l:%m'
-      \ }
-
-" let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
-" let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
-
-" let g:neomake_ruby_rubocop_exe = 'bundle'
-" let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
-" let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
-
-let g:neomake_javascript_enabled_makers = ['standard', 'eslint']
-let g:neomake_jsx_enabled_makers = ['standard', 'eslint']
-
-let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'diaylze']
-let g:neomake_elixir_mix_maker = {
-      \ 'args': ['compile'],
-      \ 'errorformat':
-      \   '** %s %f:%l: %m,' .
-      \   '%f:%l: warning: %m'
-      \ }
-
-" let g:neomake_javascript_enabled_makers = ['standard']
-" let g:neomake_javascript_standard_maker = {
-"       \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-"       \ 'errorformat': '  %f:%l:%c: %m'
+" let g:neomake_elixir_credo_maker = {
+"       \ 'exe': 'mix',
+"       \ 'args': ['credo'],
+"       \ 'append_file': 0,
+"       \ 'errorformat':
+"       \   '%E┃ [%t] %. %m.,%Z┃       %f:%l%.%#'
 "       \ }
-" let g:neomake_jsx_enabled_makers = ['standard']
-" let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
+
+" let g:neomake_elixir_diaylze_maker = {
+"       \ 'exe': 'mix',
+"       \ 'args': [
+"       \   'dialyze',
+"       \   '--no-check',
+"       \   '--unmatched-returns',
+"       \   '--error-handling',
+"       \   '--race-conditions',
+"       \   '--underspecs'
+"       \  ],
+"       \ 'errorformat':
+"       \   '%f:%l:%m'
+"       \ }
+
+" let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'diaylze']
+" let g:neomake_elixir_mix_maker = {
+"       \ 'args': ['compile'],
+"       \ 'errorformat':
+"       \   '** %s %f:%l: %m,' .
+"       \   '%f:%l: warning: %m'
+"       \ }
+
+let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+
+let g:neomake_ruby_rubocop_exe = 'bundle'
+let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+
+let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_javascript_standard_maker = {
+      \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+      \ 'errorformat': '  %f:%l:%c: %m'
+      \ }
+let g:neomake_jsx_enabled_makers = ['standard']
+let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
 " au! BufReadPost,BufWritePost * Neomake | redraw
