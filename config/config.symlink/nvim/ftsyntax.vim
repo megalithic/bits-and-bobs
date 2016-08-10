@@ -17,6 +17,9 @@ augroup ft_javascript
   au FileType jsx vnoremap <buffer> <c-b> :call RangeJsxBeautify()<cr>
   au FileType html vnoremap <buffer> <c-b> :call RangeHtmlBeautify()<cr>
   au FileType css vnoremap <buffer> <c-b> :call RangeCSSBeautify()<cr>
+
+  " elm" Elm vim
+  au BufWritePost *.elm :ElmMake
 augroup END
 
 augroup ft_scss

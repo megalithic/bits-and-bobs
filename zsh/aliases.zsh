@@ -222,11 +222,6 @@ alias gex="git archive master | tar -x -C" # update this to support more than th
 #            perl -pe 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
 
 
-# REACT / REACT-NATIVE
-# -----------------------------------------------------------------------------
-alias rn='react-native'
-
-
 # RUBY/RAILS
 # -----------------------------------------------------------------------------
 alias be="bundle exec"
@@ -297,3 +292,9 @@ alias haconfig=hassconfig
 alias hasslogs='ssh -t pi@192.168.1.106 "tail -f /var/opt/homeassistant/home-assistant.log -n250"'
 alias hassrestart='ssh -t pi@192.168.1.106 "sudo service hass-daemon restart"'
 alias hassstop='ssh -t pi@192.168.1.106 "sudo service hass-daemon stop"'
+
+
+alias elmserve='elm-reactor -p 8080'
+alias rn='react-native'
+
+
