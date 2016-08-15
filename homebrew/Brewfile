@@ -1,5 +1,8 @@
 #!/bin/sh
 
+update
+upgrade
+
 cask_args appdir: '/Applications'
 
 tap 'caskroom/cask'
@@ -114,5 +117,5 @@ cask 'usb-overdrive'
 cask 'virtualbox'
 cask 'yubiswitch'
 
-# install manually:
-# Google Play Music Desktop Player
+cleanup
+
