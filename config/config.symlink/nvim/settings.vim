@@ -5,6 +5,16 @@
 " let g:loaded_netrwPlugin = 1
 
 " ----------------------------------------------------------------------------
+" ## nvimux
+" let g:nvimux_prefix = '<C-a>'
+" let g:nvimux_quickterm_provider = ''
+" let g:nvimux_new_term = ''
+" let g:nvimux_close_terma = ''
+" let g:nvimux_quickterm_direction = 'botright'
+" let g:nvimux_quickterm_orientation = 'vertical'
+" let g:nvimux_quickterm_size = ''
+
+" ----------------------------------------------------------------------------
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
 let g:golden_ratio_wrap_ignored = 0

@@ -71,6 +71,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ElmCast/elm-vim' " all the elms
   " Plug 'lambdatoast/elm.vim', { 'for': ['elm'] }
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
+  " Plug 'hkupty/nvimux'
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
   Plug 'honza/dockerfile.vim', { 'for': ['dockerfile', 'docker'] }
 
