@@ -10,6 +10,7 @@ local utils = require 'utils'
 local wm = require 'wm'
 local hotkey = require 'hs.hotkey'
 local settings   = require 'hs.settings'
+local ptt = require 'pushToTalk'
 
 -- Ensure the IPC command line client is available
 -- NOTE: this is failing with some hs and hs.1 type stuff
@@ -17,13 +18,6 @@ hs.ipc.cliInstall()
 
 -- :: initialize all the things!
 wm.events.initEventHandling()
-
--- :: additional setup
--- hs.audiodevice.defaultInputDevice():setMuted(true) -- ensure input is muted by default
--- hs.audiodevice.defaultInputDevice():setInputVolume(0) -- ensure input is muted by default
-utils.log.df('[audio] default input device, %s, is muted? %s', hs.audiodevice.defaultInputDevice(), hs.audiodevice.defaultInputDevice():muted())
-utils.log.df('[audio] default input device, %s, input volume: %s', hs.audiodevice.defaultInputDevice(), hs.audiodevice.defaultInputDevice():inputVolume())
-
 
 -- key bindings
 -------------------------------------------------------------------------------
@@ -37,6 +31,7 @@ mash = {'cmd', 'alt', 'ctrl'}
 hyper = {'cmd', 'alt', 'ctrl', 'shift' }
 
 -- :: utility
+ptt.init({'cmd', 'alt'})
 hotkey.bind(ctrlAlt, 'r', function() hs.toggleConsole() end)
 hotkey.bind(mashShift, 'L', function()
   hs.caffeinate.startScreensaver()

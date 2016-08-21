@@ -144,6 +144,16 @@ config.layout = {
     end
   end),
 
+
+  ['co.zeit.hyperterm'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    if count == 1 then
+      grid.set(window, '0,0 8x8', config.primaryDisplay(count))
+    else
+      grid.set(window, '0,0 8x8', config.primaryDisplay(count))
+    end
+  end),
+
   ['com.agilebits.onepassword4'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))

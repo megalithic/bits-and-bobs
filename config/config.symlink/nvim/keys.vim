@@ -114,6 +114,27 @@ nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
+nnoremap <C-t> :tabe<cr>:e<space><c-d>
+
+" tnoremap <silent> <C-h> <C-\><C-n><C-w><C-h>
+" tnoremap <silent> <C-j> <C-\><C-n><C-w><C-j>
+" tnoremap <silent> <C-k> <C-\><C-n><C-w><C-k>
+" tnoremap <silent> <C-l> <C-\><C-n><C-w><C-l>
+
+" inoremap <silent> <C-h> <ESC><C-w><C-h>
+" inoremap <silent> <C-j> <ESC><C-w><C-j>
+" inoremap <silent> <C-k> <ESC><C-w><C-k>
+" inoremap <silent> <C-l> <ESC><C-w><C-l>
+
+tnoremap <C-w>h <C-\><C-n><C-w><C-h>
+tnoremap <C-w>j <C-\><C-n><C-w><C-j>
+tnoremap <C-w>k <C-\><C-n><C-w><C-k>
+tnoremap <C-w>l <C-\><C-n><C-w><C-l>
+
+inoremap <C-w>h <ESC><C-w><C-h>
+inoremap <C-w>j <ESC><C-w><C-j>
+inoremap <C-w>k <ESC><C-w><C-k>
+inoremap <C-w>l <ESC><C-w><C-l>
 
 " ----------------------------------------------------------------------------
 " ## Code Formatting

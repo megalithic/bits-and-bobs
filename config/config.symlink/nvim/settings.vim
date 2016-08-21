@@ -6,13 +6,27 @@
 
 " ----------------------------------------------------------------------------
 " ## nvimux
-" let g:nvimux_prefix = '<C-a>'
-" let g:nvimux_quickterm_provider = ''
-" let g:nvimux_new_term = ''
-" let g:nvimux_close_terma = ''
-" let g:nvimux_quickterm_direction = 'botright'
-" let g:nvimux_quickterm_orientation = 'vertical'
-" let g:nvimux_quickterm_size = ''
+let g:nvimux_quickterm_provider = ''
+let g:nvimux_new_term = ''
+let g:nvimux_close_term = ''
+
+let g:nvimux_custom_bindings = [
+      \['s', ':NvimuxHorizontalSplit<CR>', ['n', 'v', 'i', 't']],
+      \['v', ':NvimuxVerticalSplit<CR>', ['n', 'v', 'i', 't']],
+      \['!', ':IronPromptRepl<CR>', ['n', 'v', 'i', 't']],
+      \['$', ':call ToggleRepl()<CR>', ['n', 'v', 'i', 't']],
+      \['<C-$>', ':call AggrToggleRepl()<CR>', ['n', 'v', 'i', 't']]
+      \]
+
+let g:nvimux_prefix = '<C-a>'
+let g:nvimux_no_neoterm = 1
+let g:nvimux_open_term_by_default = 1
+
+"au VimEnter * if &columns > 200 => set vertical else set horizontal
+let g:nvimux_quickterm_direction = 'botright'
+let g:nvimux_quickterm_orientation = 'vertical'
+let g:nvimux_quickterm_scope = 't'
+let g:nvimux_quickterm_size = '80'
 
 " ----------------------------------------------------------------------------
 " ## golden-ratio
@@ -248,13 +262,16 @@ let g:deoplete#auto_completion_start_length = 2
 " let g:deoplete#enable_debug = 0
 
 let g:deoplete#sources = {}
-let g:deoplete#sources._    = ['buffer', 'file', 'ultisnips']
-let g:deoplete#sources.ruby = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.vim  = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources['javascript.jsx'] = ['buffer', 'file', 'ultisnips', 'ternjs']
-let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+" let g:deoplete#sources._ = ['buffer', 'file', 'ultisnips']
+let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'neosnippet', 'ternjs', 'omni']
+" let g:deoplete#sources.ruby = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+" let g:deoplete#sources.lua = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+" let g:deoplete#sources.elm = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+" let g:deoplete#sources.vim  = ['buffer', 'member', 'file', 'ultisnips']
+" let g:deoplete#sources['javascript.jsx'] = ['buffer', 'file', 'ultisnips', 'ternjs']
+" let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+" let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+" let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
 
 let g:monster#completion#rcodetools#backend = "async_rct_complete"
 
@@ -262,6 +279,14 @@ let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
 let g:deoplete#omni_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
 let g:deoplete#omni_patterns.elm = '\.'
+let g:deoplete#omni_patterns.html = '<[^>]*'
+let g:deoplete#omni_patterns.xml = '<[^>]*'
+let g:deoplete#omni_patterns.md = '<[^>]*'
+let g:deoplete#omni_patterns.css = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+let g:deoplete#omni_patterns.go = '[^.[:digit:] *\t]\.\w*'
+let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
 
 " we don't want the completion menu to auto pop-up when we are in text files
 let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
@@ -278,33 +303,14 @@ let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
 " let g:deoplete#auto_completion_start_length = 0
 " let g:min_pattern_length = 0
 
-" let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
-" let g:deoplete#omni#functions.javascript = 'tern#Complete'
-" let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
-" let g:deoplete#omni#functions['javascript.jsx'] = 'tern#Complete'
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = 'tern#Complete'
+let g:deoplete#omni#functions['javascript.jsx'] = 'tern#Complete'
+let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
 
-
-" let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
-" let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
-" let g:deoplete#omni_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
-
-" let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
-" let g:deoplete#omni#input_patterns.html = '<[^>]*'
-" let g:deoplete#omni#input_patterns.xml = '<[^>]*'
-" let g:deoplete#omni#input_patterns.md = '<[^>]*'
-" let g:deoplete#omni#input_patterns.css = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-" let g:deoplete#omni#input_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-" let g:deoplete#omni#input_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-" let g:deoplete#omni#input_patterns.go = '[^.[:digit:] *\t]\.\w*'
-" let g:deoplete#omni#input_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
-" let g:deoplete#omni#input_patterns.coffee = '\h\w*\|[^. \t]\.\w*'
-" " let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
-" " let g:deoplete#omni#input_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
-" let g:deoplete#omni#input_patterns.javascript = '[^. \t]\.\w*'
-" let g:deoplete#omni#input_patterns["javascript.jsx"] = '[^. \t]\.\w*'
 
 " let g:deoplete#keyword_patterns = get(g:, 'deoplete#keyword_patterns', {})
-" " let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
+" let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
 " let g:deoplete#keyword_patterns.default = '\h\w*'
 " let g:deoplete#keyword_patterns.html = '</\?\%([[:alnum:]_:-]\+\s*\)\?\%(/\?>\)\?\|&\h\%(\w*;\)\?\|\h[[:alnum:]_:-]*'
 

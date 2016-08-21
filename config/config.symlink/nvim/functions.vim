@@ -5,6 +5,30 @@
 " ----------------------------------------------------------------------------
 " ## UTILS
 
+" Iron.vim
+function! IronHelper() abort
+    let s:var = "g:iron_".&ft."_repl"
+    let g:curr_iron_repl = s:var
+    let g:curr_iron_repl_ft = &ft
+    return s:var
+endfunction
+
+function! ToggleRepl() abort
+  if exists("g:curr_iron_repl")
+    call NvimuxRawToggle(g:curr_iron_repl, "IronRepl")
+  else
+    call NvimuxRawToggle(IronHelper(), "IronRepl")
+  endif
+endfunction
+
+function! AggrToggleRepl() abort
+  if exists("g:curr_iron_repl") && g:curr_iron_repl_ft == &ft
+    call NvimuxRawToggle(g:curr_iron_repl, "IronRepl")
+  else
+    call NvimuxRawToggle(IronHelper(), "IronRepl")
+  endif
+endfunction
+
 " Tab wrapper
 function! TabComplete() abort
   let l:col = col('.') - 1

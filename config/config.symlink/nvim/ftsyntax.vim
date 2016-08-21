@@ -61,6 +61,19 @@ augroup ft_ssh
   au BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
 augroup END
 
+augroup ft_ssh
+  au!
+  au FileType python
+         \   let python_highlight_all = 1
+         \ | set cc=80
+         \ | highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+         \ | match OverLength /\%81v.\+/
+         \ | map <leader>ii i import ipdb;ipdb.set_trace()<ESC>
+         \ | set autoindent
+         \ | set smartindent
+         \ | set textwidth=79
+augroup END
+
 augroup ft_misc
   au!
   au FileType javascript,javascript.jsx,lisp,clojure,scheme,sass,scss RainbowParentheses

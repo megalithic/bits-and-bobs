@@ -15,6 +15,10 @@ endif
 " -/ Plugins /--------------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
 
+  function! HandleRemotePluginUpdates(arg)
+    UpdateRemotePlugins
+  endfunction
+
   " ---------------------------------------------------------------------------
   " ## Interface
   " Plug 'snooc/base16-vim' " consistently, my favorite colorscheme package
@@ -62,6 +66,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
 
   " ----------------------------------------------------------------------------
+  " ## Ruby, Rails, et al
+  Plug 'hynek/vim-python-pep8-indent'
+  Plug 'davidhalter/jedi-vim'
+  Plug 'zchee/deoplete-jedi'
+
+  " ----------------------------------------------------------------------------
   " ## Misc, Other, et al
   Plug 'elixir-lang/vim-elixir', { 'for': ['elixir', 'eelixir'] }
   Plug 'tpope/vim-git'
@@ -69,14 +79,15 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'jreybert/vimagit' " more git tools integrated into vim
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim' " easily post to gist.github.com
   Plug 'ElmCast/elm-vim' " all the elms
-  " Plug 'lambdatoast/elm.vim', { 'for': ['elm'] }
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
-  " Plug 'hkupty/nvimux'
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
   Plug 'honza/dockerfile.vim', { 'for': ['dockerfile', 'docker'] }
 
   " ----------------------------------------------------------------------------
   " ## Utilities
+  " Plug 'kassio/neoterm'
+  Plug 'hkupty/nvimux'
+  Plug 'hkupty/iron.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'janko-m/vim-test' " tester for mocha and ruby
   Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
@@ -109,7 +120,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'EinfachToll/DidYouMean'
   " Plug 'haya14busa/incsearch.vim' " improved incremental searching
   " Plug 'ervandew/supertab'
-  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }

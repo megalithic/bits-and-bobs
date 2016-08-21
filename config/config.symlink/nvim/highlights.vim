@@ -27,6 +27,7 @@ function! s:after_colorscheme()
   hi LineNr guibg=bg guifg=#665F59 gui=NONE
   hi CursorLineNr ctermbg=bg ctermfg=223 cterm=NONE guibg=bg guifg=#af875f gui=bold
   hi qfLineNr ctermbg=bg ctermfg=95 cterm=NONE guibg=bg guifg=#875f5f gui=NONE
+  hi TermCursor ctermfg=red
 
   " ref: https://github.com/aslijiasheng/jacksonvimrc/blob/0a3421a10282bafffa1c660c40cc61b1a44671a1/vimrc/jackson/plugin.vim#L846
   hi Pmenu    gui=NONE    guifg=#c5c8c6 guibg=#373b41
