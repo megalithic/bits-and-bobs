@@ -1,0 +1,13 @@
+{
+  "libs": [ "browser", "ecma6" ],
+  "plugins": {
+    "node": true,
+    "node_require": true,
+    "es_modules": true,
+    "complete_strings": true,
+    "doc_comment": true,
+    "modules": true,
+    "webpack": true
+  }
+}
+
