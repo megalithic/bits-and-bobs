@@ -74,7 +74,7 @@ augroup vimrcEx
   au BufEnter *.js syn match error contained "\<console.\>"
   au BufEnter *.coffee syn match error contained "\<debugger\>"
   " Delete trailing whitespace on write
-  au BufWrite * silent call DeleteTrailingWS()
+  au BufWrite * silent if &ft!~?'markdown'|:call DeleteTrailingWS()|endif
 
   " ----------------------------------------------------------------------------
   " ## Terminal
