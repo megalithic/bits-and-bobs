@@ -125,10 +125,12 @@ print_status() {
     # Round the number to the nearest whole number
     rounded_n=$(printf "%.0f" "$n")
 
-    BATTERY_STATUS=" $BATTERY_STATUS%"
+    BATTERY_STATUS="$BATTERY_STATUS%"
+    # BATTERY_STATUS=" $BATTERY_STATUS%"
 
   else
-    BATTERY_STATUS=" $BATTERY_STATUS%"
+    BATTERY_STATUS="$BATTERY_STATUS%"
+    # BATTERY_STATUS=" $BATTERY_STATUS%"
   fi
 
   if ((output_tmux)); then

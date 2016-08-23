@@ -264,14 +264,14 @@ let g:deoplete#auto_completion_start_length = 2
 let g:deoplete#sources = {}
 " let g:deoplete#sources._ = ['buffer', 'file', 'ultisnips']
 let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'neosnippet', 'ternjs', 'omni']
-" let g:deoplete#sources.ruby = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-" let g:deoplete#sources.lua = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-" let g:deoplete#sources.elm = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-" let g:deoplete#sources.vim  = ['buffer', 'member', 'file', 'ultisnips']
-" let g:deoplete#sources['javascript.jsx'] = ['buffer', 'file', 'ultisnips', 'ternjs']
-" let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-" let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-" let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.ruby = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.lua = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.elm = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.vim  = ['buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources['javascript.jsx'] = ['buffer', 'file', 'ultisnips', 'ternjs']
+let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
 
 let g:monster#completion#rcodetools#backend = "async_rct_complete"
 
