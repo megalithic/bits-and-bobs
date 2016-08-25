@@ -206,7 +206,7 @@ setw -g window-status-current-format "#[fg=blue] ● #W #[fg=colour28]"
 set -g status-left-length 60
 set -g status-left "#[fg=green]#S #(~/.dotfiles/bin/ip-tmux) #{prefix_highlight}"
 set -g status-right-length 120
-set -g status-right "#(~/.dotfiles/bin/tmux-spotify) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236]"
+set -g status-right "#(~/.dotfiles/bin/tmux-spotify) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
 
 # TMUX PLUGIN MANAGER
 # ===========================================================================
@@ -215,11 +215,11 @@ set -g status-right "#(~/.dotfiles/bin/tmux-spotify) #(~/.dotfiles/bin/battery -
 # ---------------------------------------------------------
 # See Bruno's setup for plugin settings:
 # https://github.com/bruno-/dotfiles/blob/master/home/.tmux.conf
-set -g @continuum-restore 'off'
-set -g @continuum-save-interval '60'
+# set -g @continuum-restore 'off'
+# set -g @continuum-save-interval '60'
 
-set -g @resurrect-save 'S'
-set -g @resurrect-restore 'E'
+# set -g @resurrect-save 'S'
+# set -g @resurrect-restore 'E'
 
 # Installation
 # ---------------------------------------------------------
@@ -233,9 +233,9 @@ set -g @plugin 'tmux-plugins/tmux-copycat'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-open'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @plugin 'tmux-plugins/tmux-logging'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
+# set -g @plugin 'tmux-plugins/tmux-logging'
 
 # install tpm if not already installed
 if "test ! -d ~/.tmux/plugins/tpm" \

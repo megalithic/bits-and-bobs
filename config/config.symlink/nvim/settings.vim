@@ -203,8 +203,8 @@ endfunction
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split' " neoterm
 let g:neoterm_position = "vertical"
-" let g:test#preserve_screen = 1
-let g:test#javascript#mocha#options = "--colors --compilers js:babel/register --timeout 15000 --delay"
+let g:test#preserve_screen = 1
+let g:test#javascript#mocha#options = "--colors --timeout 15000 --full-trace"
 let g:test#javascript#mocha#file_pattern = ".test.js"
 let test#elixir#exunit#options = '--trace'
 let test#ruby#rspec#options = '-f d'
