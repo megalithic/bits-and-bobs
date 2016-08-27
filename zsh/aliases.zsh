@@ -100,6 +100,15 @@ alias vim="nvim"
 alias vi="nvim"
 alias im="nvim"
 
+# alias nvt="nv +tabe +term +NvimuxVerticalSplit +term +tabnext"
+# alias nvts="nv +tabe +term +NvimuxVerticalSplit +term +NvimuxHorizontalSplit +term +tabnext"
+# # While in a nvim terminal, open file to current session
+# if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
+#   alias nvh='nvr -o'
+#   alias nvv='nvr -O'
+#   alias nvt='nvr --remote-tab'
+# fi
+
 # CONFIG EDITS
 # -----------------------------------------------------------------------------
 alias ez="nvim ~/.zshrc"

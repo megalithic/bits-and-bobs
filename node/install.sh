@@ -31,6 +31,7 @@ npm i -g instant-markdown-d
 npm i -g jscpd
 npm i -g jsinspect
 npm i -g jsonlint
+npm i -g json
 npm i -g livedown
 npm i -g mocha
 npm i -g chai

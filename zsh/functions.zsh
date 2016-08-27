@@ -15,7 +15,7 @@ function dnd () {
   "
 }
 
-wherearewe()
+whereami()
 {
   if [[ -n "$SSH_CLIENT$SSH2_CLIENT$SSH_TTY" ]] ; then
     echo ssh
@@ -32,6 +32,16 @@ wherearewe()
     fi
   fi
 }
+
+# ------------------
+# curl stuffs
+function jcurl() {
+  curl "$@" | json | pygmentize -l json
+}
+function auth-jcurl() {
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -H "X-User-Email: $1" -H "X-User-Token: $2" ${@:3} | json | pygmentize -l json
+}
+
 
 function brewup() {
   brew update --verbose && brew outdated && brew upgrade && brew cleanup
