@@ -66,6 +66,8 @@ alias mux=tm
 alias takeover="tmux detach -a"
 alias teama="tmux attach-session -t default"
 alias team="cd ~ && teamocil --here default"
+alias defa=teama
+alias def=team
 alias toka="tmux attach-session -t welltok"
 alias tok="cd ~; teamocil --here welltok"
 
