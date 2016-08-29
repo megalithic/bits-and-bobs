@@ -43,19 +43,20 @@ hotkey.bind(cmdCtrl, 'r', function()
 end)
 
 -- :: media
-hotkey.bind(ctrlShift, 27, function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- <->
-hotkey.bind(ctrlShift, '\\', function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end)        -- <\>
-hotkey.bind(ctrlShift, 24, function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end)         -- <=>
+hotkey.bind(ctrlShift, 27, function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- < - >
+hotkey.bind(ctrlShift, '\\', function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end)   -- < \ >
+hotkey.bind(ctrlShift, 24, function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end)         -- < = >
 
 -- :: apps
 hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('ctrl', 'return', function() utils.toggleApp('com.google.Chrome') end)
 hotkey.bind('cmd', '`', function() utils.toggleApp('com.google.Chrome') end)
-hotkey.bind('cmd', 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
-hotkey.bind(ctrlShift, '4', function() utils.toggleApp('com.nylas.nylas-mail') end)
-hotkey.bind(cmdShift, 'f4', function() utils.toggleApp('ctrlla.Polymail') end)
-hotkey.bind(mashShift, '4', function() utils.toggleApp('ctrlla.Polymail') end)
+hotkey.bind('cmd', 'f4', function() utils.toggleApp('it.bloop.airmail2') end)
+-- hotkey.bind('cmd', 'f4', function() utils.toggleApp('com.nylas.nylas-mail') end)
+-- hotkey.bind(ctrlShift, '4', function() utils.toggleApp('com.nylas.nylas-mail') end)
+-- hotkey.bind(cmdShift, 'f4', function() utils.toggleApp('ctrlla.Polymail') end)
+-- hotkey.bind(mashShift, '4', function() utils.toggleApp('ctrlla.Polymail') end)
 hotkey.bind('cmd', 'f5', function() utils.toggleApp('com.tapbots.TweetbotMac') end)
 hotkey.bind('cmd', 'f6', function() utils.toggleApp('com.tinyspeck.slackmacgap') end)
 hotkey.bind('cmd', 'f8', function() utils.toggleApp('com.spotify.client') end)
