@@ -4,6 +4,9 @@
 " let g:loaded_netrw = 1
 " let g:loaded_netrwPlugin = 1
 
+" ## codi
+let g:codi#use_buffer_dir = 0
+
 " ----------------------------------------------------------------------------
 " ## nvimux
 let g:nvimux_quickterm_provider = ''

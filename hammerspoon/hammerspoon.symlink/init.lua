@@ -12,10 +12,6 @@ local hotkey = require 'hs.hotkey'
 local settings   = require 'hs.settings'
 local ptt = require 'pushToTalk'
 
--- Ensure the IPC command line client is available
--- NOTE: this is failing with some hs and hs.1 type stuff
-hs.ipc.cliInstall()
-
 -- :: initialize all the things!
 wm.events.initEventHandling()
 

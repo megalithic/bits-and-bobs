@@ -88,6 +88,7 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'kassio/neoterm'
   Plug 'hkupty/nvimux'
   Plug 'hkupty/iron.nvim', { 'do': function('HandleRemotePluginUpdates') }
+  Plug 'still-dreaming-1/codi.vim', { 'branch': 'repl-starting-dir' }
   Plug 'janko-m/vim-test' " tester for mocha and ruby
   Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
   Plug 'tpope/vim-commentary' " (un)comment code

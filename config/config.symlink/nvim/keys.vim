@@ -5,6 +5,10 @@ let maplocalleader="\\"
 nnoremap <c-s> :source $MYVIMRC<cr>
 
 " ----------------------------------------------------------------------------
+" ## Codi
+nnoremap <F2> :Codi<cr>
+
+" ----------------------------------------------------------------------------
 " ## Tab/Deoplete Stuffs
 
 " Insert <TAB> or select next match
