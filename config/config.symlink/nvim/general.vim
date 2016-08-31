@@ -9,21 +9,10 @@ colorscheme base16-ocean
 " change vim cursor depending on the mode
 if has('nvim')
   set termguicolors
-  " set guifont=Sauce\ Code\ Powerline:h12
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
   let g:python_host_prog = '/usr/local/bin/python2'
   let g:python3_host_prog = '/usr/local/bin/python3'
-
-  " TODO: do I need this?
-  " if has('termguicolors')
-  "   " Don't need this in xterm-256color, but do need it inside tmux.
-  "   " (See `:h xterm-true-color`.)
-  "   if &term =~# 'tmux-256color'
-  "     let &t_8f="\e[38;2;%ld;%ld;%ldm"
-  "     let &t_8b="\e[48;2;%ld;%ld;%ldm"
-  "   endif
-  " endif
 endif
 
 set re=1 " Updated vim regex engine
