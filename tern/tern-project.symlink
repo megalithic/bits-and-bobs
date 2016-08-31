@@ -1,5 +1,9 @@
 {
-  "libs": [ "browser", "ecma6" ],
+  "libs": [
+    "browser",
+    "ecma5",
+    "ecma6"
+  ],
   "plugins": {
     "node": true,
     "node_require": true,
@@ -7,7 +11,12 @@
     "complete_strings": true,
     "doc_comment": true,
     "modules": true,
-    "webpack": true
+    "webpack": true,
+    "es_modules": {},
+    "requirejs": {
+      "baseURL": "./",
+      "paths": {}
+    },
+    "webpack": {}
   }
 }
-

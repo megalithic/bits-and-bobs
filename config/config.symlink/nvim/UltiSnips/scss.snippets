@@ -1,78 +1,23 @@
-# Core
-
-snippet imp "@import '...';" b
-@import '${1:file}';
+snippet mt "margin-top"
+margin-top: $0px;
 endsnippet
 
-snippet inc "@include mixin(...);" b
-@include ${1:mixin}(${2:arguments});
+snippet mb "margin-bottom"
+margin-bottom: $0px;
 endsnippet
 
-snippet ext "@extend %placeholder;" b
-@extend %${1:placeholder};
+snippet mr "margin-right"
+margin-right: $0px;
 endsnippet
 
-snippet mixin "@mixin (...) { ... }" b
-@mixin ${1:name}(${2:arguments}) {
-	${VISUAL}$0
-}
+snippet ml "margin-left"
+margin-left: $0px;
 endsnippet
 
-snippet fun "@function (...) { ... }" b
-@function ${1:name}(${2:arguments}) {
-	${VISUAL}$0
-}
+snippet ma "margin all"
+margin: $1px $2px $3px $4px;
 endsnippet
 
-snippet if "@if (...) { ... }" b
-@if ${1:condition} {
-	${VISUAL}$0
-}
-endsnippet
-
-snippet else "@else { ... }"
-@else ${1:condition} {
-	${VISUAL}$0
-}
-endsnippet
-
-snippet for "@for loop" b
-@for ${1:$i} from ${2:1} through ${3:3} {
-	${VISUAL}$0
-}
-endsnippet
-
-snippet each "@each loop" b
-@each ${1:$item} in ${2:item, item, item} {
-	${VISUAL}$0
-}
-endsnippet
-
-snippet while "@while loop" b
-@while ${1:$i} ${2:>} ${3:0} {
-	${VISUAL}$0
-}
-endsnippet
-
-snippet mg "map-get"
-map-get($${1}, ${2});$0
-endsnippet
-
-
-# Custom
-
-snippet en "enhance" b
-@include enhance(${1}${2: until ${3}}) {
-	$0
-}
-endsnippet
-
-snippet deg "degrade" b
-@include degrade(${1}${2: until ${3}}) {
-	$0
-}
-endsnippet
-
-snippet gu "grid-unit"
-grid-unit($1)$0
+snippet wi "width"
+width: $0px;
 endsnippet

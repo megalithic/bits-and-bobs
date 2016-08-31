@@ -26,6 +26,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'megalithic/golden-ratio' " vertical split layout manager
   Plug 'vim-airline/vim-airline' " statusbar
   Plug 'vim-airline/vim-airline-themes' " themes for the statusbar
+  Plug 'ryanoasis/vim-devicons'
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
@@ -35,7 +36,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/es.next.syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'othree/jspc.vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
-  Plug 'heavenshell/vim-jsdoc', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'jelera/vim-javascript-syntax', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'] }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffee'] }
@@ -48,15 +48,18 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
   Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass'] } " scss/sass-specific syntax
   Plug 'stephenway/postcss.vim', { 'for': ['css', 'scss', 'sass'] } " postcss syntax
+  Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al
   Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
   Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
+  Plug 'jtratner/vim-flavored-markdown', { 'for': ['markdown'] }
   Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
+  Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
 
   " ----------------------------------------------------------------------------
   " ## Ruby, Rails, et al
@@ -103,7 +106,8 @@ call plug#begin('~/.config/nvim/plugged')
   " -- yss<arg> for entire line
   Plug 'tpope/vim-repeat' " repeats plugin-execution mappings as well, with `.`
   Plug 'Valloric/MatchTagAlways', { 'for': ['html', 'xml', 'erb'] } " highlights the opening/closing tags for the block you're in
-  Plug 'Raimondi/delimitMate' " auto-closes quotes, parenthesis, brackets, etc.
+  " Plug 'Raimondi/delimitMate' " auto-closes quotes, parenthesis, brackets, etc.
+  Plug 'itmammoth/doorboy.vim' " auto-closes quotes, parenthesis, brackets, etc.
   Plug 'cohama/lexima.vim' " auto-closes many delimiters and can repeat with a `.`
   Plug 'junegunn/rainbow_parentheses.vim' " nicely colors nested pairs of [], (), {}
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] } " a set of mappings for several langs: html, xml, erb, php, more
@@ -119,14 +123,30 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
-  " Plug 'haya14busa/incsearch.vim' " improved incremental searching
+  Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   " Plug 'ervandew/supertab'
+  Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' }
   Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
+  " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  " Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf'
+        \, { 'do': './install --bin' }
+        \| Plug 'junegunn/fzf.vim'
+        \, { 'on': [
+        \ 'History',
+        \ 'Files',
+        \ 'Ag',
+        \ 'Lines',
+        \ 'History',
+        \ 'Commands',
+        \ 'Tags',
+        \ 'Helptags',
+        \ 'GFiles',
+        \ 'GGrep'] }
+
   Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
   " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -147,6 +167,7 @@ call plug#begin('~/.config/nvim/plugged')
         \| Plug 'kana/vim-textobj-function' " Function text object (vaf)
         \| Plug 'glts/vim-textobj-comment' " Comment text object (vac)
   Plug 'wellle/targets.vim' " Improved targets line cin) next parens
+  Plug 'michaeljsmith/vim-indent-object'
   " ^- https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
 
 call plug#end()

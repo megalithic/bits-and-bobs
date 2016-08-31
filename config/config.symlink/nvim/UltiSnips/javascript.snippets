@@ -1,139 +1,74 @@
-global !p
-from snippet_helpers import *
-endglobal
-
-# Loops
-
-snippet for "for loop" !
-for (let ${1:i} = 0, len = ${2:array}.length; $1 < len; $1++) {
-	$0${2/([^.]+).*/$1/}[$1]
+# ===============================================
+# Declarations
+# ===============================================
+snippet fun "function" b
+function $1($2) {
+	$3
 }
 endsnippet
 
-snippet fori "for...in" b
-for (let ${1:prop} in ${2:Things}) {
-	if ($2.hasOwnProperty($1)) {
-		${0:let ${3:value} = $2[$1]}
+# ===============================================
+# Control flow
+# ===============================================
+snippet if "if block" b
+if ($1) {
+	$2
+}
+endsnippet
+
+snippet ife "if/esle block" b
+if ($1) {
+	$2
+} else {
+	$3
+}
+endsnippet
+
+snippet ifef "if/else if/else block" b
+if ($1) {
+	$2
+} else if ($3) {
+	$4
+} else {
+	$5
+}
+endsnippet
+
+snippet switch "switch case statement" b
+switch (${1:variable}) {
+	case ${2:value}: {
+		$3
+		break;
+	}
+	default: {
+		return;
 	}
 }
 endsnippet
 
-snippet foro "for...of" b
-for (let ${1:value} of ${2:Things}) {
-	${0:${VISUAL}}
-}
+# ===============================================
+# Common functions and constructs
+# ===============================================
+snippet log "console log" w
+console.log('${1:message}');
 endsnippet
 
-
-# Conditionals
-
-snippet if "if" b
-if (${1}) {
-	${0:${VISUAL}}
-}
+snippet bt "bind this" w
+bind(this);
 endsnippet
 
-snippet el "else"
-else {
-	${0:${VISUAL}}
-}
+snippet strict "enable strict mode" b
+'use strict';
 endsnippet
 
-snippet eif "else if" !
-else if (${1}) {
-	${0:${VISUAL}}
-}
+snippet req "require statement" b
+require('$1');
 endsnippet
 
-
-# Switches
-
-snippet sw "switch" b
-switch (${1}) {
-	${0:${VISUAL}}
-}
+snippet ret "return"
+return $1;
 endsnippet
 
-snippet case "case" b
-case ${1}:
-	${0:${VISUAL}}
-	break
-endsnippet
-
-
-# Function
-
-snippet fun "function with dynamic docblock" b
-`!p
-# Currently Ultisnips does not support dynamic tabstops, so we cannot add
-# tabstops to the datatype for these param tags until that feature is added.
-def formatTag(argument):
-	return " * @param {{}} {0}".format(argument)
-
-arguments = t[2].split(',')
-arguments = [argument.strip() for argument in arguments if argument]
-
-if len(arguments):
-	tags = map(formatTag, arguments)
-	snip.rv = "/**"
-	for tag in tags:
-		snip += tag
-	snip += ' */'
-	snip += ''
-else:
-	snip.rv = ''
-`${1}: function(${2}) {
-	${0:${VISUAL}}
-},
-endsnippet
-
-
-# JSDoc
-
-snippet /**
-/**
- * ${0:${VISUAL}}
- */
-endsnippet
-
-snippet par "@param {...}"
-@param {${1:type}} ${0:name description}
-endsnippet
-
-snippet ret "@return {...}"
-@return {${1:type}} ${0}
-endsnippet
-
-
-# Misc
-
-snippet fl "flow" b
-/* @flow */
-endsnippet
-
-snippet cl "console.log(...)" b
-console.log($0)
-endsnippet
-
-snippet re "require" b
-const `!p
-def formatVariableName(path):
-	if path == 'react/addons':
-		return 'React'
-
-	lastPart = path.split('/')[-1]
-	if lastPart == 'underscore':
-		return '_'
-	elif lastPart == 'jquery':
-		return '$'
-	elif lastPart == 'i18n':
-		return 'I18n'
-	else:
-		return re.sub(r'[_\-]', '', lastPart.title())
-snip.rv = formatVariableName(t[1])
-` = require('${1}')$0
-endsnippet
-
-snippet me "module.exports" b
-module.exports = ${1:`!p snip.rv = pascal_case_basename(snip.basename)`}$0
+snippet dbg "debugger" b
+debugger;
 endsnippet

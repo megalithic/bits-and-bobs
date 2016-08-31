@@ -28,6 +28,7 @@ require_gem git-up
 require_gem foreman
 require_gem launchy
 require_gem maid
+require_gem neovim
 require_gem pg
 require_gem pry
 require_gem rails
@@ -42,7 +43,7 @@ require_gem fastri
 require_gem terminal-notifier
 
 #Installing gems that need system ruby ...
-sudo chruby-exec system -- gem install weechat terminal-notifier
+sudo chruby-exec system -- gem install weechat terminal-notifier neovim rcodetools fastri rubocop
 
 #Set number of cores available for bundler
 number_of_cores=$(sysctl -n hw.ncpu)

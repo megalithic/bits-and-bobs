@@ -47,15 +47,12 @@ let g:airline_left_sep = ''
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_sep = ''
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.crypt = '🔒'
 let g:airline_symbols.readonly = '🔒'
-let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_symbols.modified = '✭'
 let g:airline_symbols.space = "\ua0"
@@ -74,6 +71,7 @@ let g:airline_mode_map = {
       \ '' : 'S',
       \ }
 
+let g:airline_skip_empty_sections = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#neomake#enabled = 1
@@ -165,12 +163,11 @@ let g:neomake_warning_sign = { 'text': '>', 'texthl': 'Error' }
 "       \   '%f:%l: warning: %m'
 "       \ }
 
-let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+let g:neomake_scss_enabled_checkers = ['scss-lint']
 
 let g:neomake_ruby_rubocop_exe = 'bundle'
 let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
 
 let g:neomake_javascript_enabled_makers = ['standard']
 let g:neomake_javascript_standard_maker = {
@@ -181,8 +178,8 @@ let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
-" au! BufReadPost,BufWritePost * Neomake | redraw
-au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
+au! BufReadPost,BufWritePost * Neomake | redraw
+" au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
 
 " ----------------------------------------------------------------------------
 " ## JSDoc
@@ -221,6 +218,7 @@ let g:lt_quickfix_list_toggle_map = '<F4>'
 " ## incsearch.vim
 " :h g:incsearch#auto_nohlsearch
 let g:incsearch#auto_nohlsearch = 1
+let g:incsearch#is_stay = 1
 
 " ----------------------------------------------------------------------------
 " ## vim-lua-ftplugin
@@ -258,30 +256,36 @@ let g:SuperTabCrMapping                = 0
 
 " ----------------------------------------------------------------------------
 " ## deoplete
+set completeopt-=preview
+" set completeopt+=noinsert
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 0
 let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#auto_completion_start_length = 2
+let g:deoplete#auto_completion_start_length = 3
+let g:deoplete#enable_smart_case = 1
 " let g:deoplete#enable_debug = 0
 
 let g:deoplete#sources = {}
-" let g:deoplete#sources._ = ['buffer', 'file', 'ultisnips']
 let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'neosnippet', 'ternjs', 'omni']
-let g:deoplete#sources.ruby = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.lua = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.elm = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.vim  = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources['javascript.jsx'] = ['buffer', 'file', 'ultisnips', 'ternjs']
-let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+call deoplete#custom#set('buffer', 'mark', 'buffer')
+call deoplete#custom#set('ternjs', 'mark', '')
+call deoplete#custom#set('omni', 'mark', 'omni')
+call deoplete#custom#set('file', 'mark', 'file')
 
-let g:monster#completion#rcodetools#backend = "async_rct_complete"
+function! Preview_func()
+  if &pvw
+    setlocal nonumber norelativenumber
+    endif
+endfunction
+
+autocmd WinEnter * call Preview_func()
+
 
 let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
 let g:deoplete#omni_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
 let g:deoplete#omni_patterns.elm = '\.'
+let g:deoplete#omni_patterns.html = ''
 let g:deoplete#omni_patterns.html = '<[^>]*'
 let g:deoplete#omni_patterns.xml = '<[^>]*'
 let g:deoplete#omni_patterns.md = '<[^>]*'
@@ -294,35 +298,11 @@ let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
 " we don't want the completion menu to auto pop-up when we are in text files
 let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
 
-" set completeopt+=noinsert
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#enable_smart_case = 1
-" let g:deoplete#disable_auto_complete = 0
-
-" " let g:deoplete#enable_refresh_always = 1
-" " let g:deoplete#enable_prefetch = 1
-" let g:deoplete#file#enable_buffer_path = 1
-" let g:deoplete#enable_ignore_case = 'ignorecase'
-" let g:deoplete#auto_completion_start_length = 0
-" let g:min_pattern_length = 0
-
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = 'tern#Complete'
 let g:deoplete#omni#functions['javascript.jsx'] = 'tern#Complete'
 let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
-
-
-" let g:deoplete#keyword_patterns = get(g:, 'deoplete#keyword_patterns', {})
-" let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
-" let g:deoplete#keyword_patterns.default = '\h\w*'
-" let g:deoplete#keyword_patterns.html = '</\?\%([[:alnum:]_:-]\+\s*\)\?\%(/\?>\)\?\|&\h\%(\w*;\)\?\|\h[[:alnum:]_:-]*'
-
-" let g:deoplete#sources = get(g:, 'deoplete#sources', {})
-" let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'neosnippet', 'ternjs', 'omni']
-
-" call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
-" call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
-" call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
+let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 
 " ----------------------------------------------------------------------------
 " ## tern_for_vim
@@ -348,6 +328,8 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
+let g:fzf_files_options =
+      \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
 " please confirm these!
 " let g:fzf_colors = {
 "       \ 'fg':      ['fg', 'Normal'],

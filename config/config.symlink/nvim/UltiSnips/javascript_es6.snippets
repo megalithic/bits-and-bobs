@@ -1,0 +1,51 @@
+# ===============================================
+# Classes, imports, exports
+# ===============================================
+snippet class "es6 class" b
+class $1 {
+	constructor() {
+		$2
+	}
+}
+endsnippet
+
+snippet im "import statement" b
+import $1 from '$2';
+endsnippet
+
+snippet ex "export statement" b
+export default $1;
+endsnippet
+
+# ===============================================
+# Variables
+# ===============================================
+snippet con "constant declaration" b
+const ${1:name} = ${2:value};
+endsnippet
+
+snippet let "block scoped variable declaration" b
+let ${1:name} = ${2:value};
+endsnippet
+
+# ===============================================
+# Functions
+# ===============================================
+snippet map "builtin map function" w
+map((${1:item}) => (
+	$2
+));
+endsnippet
+
+snippet filter "builtin filter function" w
+filter((${1:item}) => (
+	$2
+));
+endsnippet
+
+# ===============================================
+# Misc
+# ===============================================
+snippet fbt "Function bind this"
+this.${1:functionName} = this.$1.bind(this);$0
+endsnippet

@@ -9,16 +9,37 @@ nnoremap <c-s> :source $MYVIMRC<cr>
 nnoremap <F2> :Codi<cr>
 
 " ----------------------------------------------------------------------------
+" ## Autoformat
+nnoremap <F3> :Autoformat<CR>
+
+" ----------------------------------------------------------------------------
 " ## Tab/Deoplete Stuffs
 
 " Insert <TAB> or select next match
-inoremap <silent> <expr> <Tab> TabComplete()
+" inoremap <silent> <expr> <Tab> TabComplete()
 
 " Manually trigger tag autocomplete
-inoremap <silent> <expr> <C-]> TagComplete()
+" inoremap <silent> <expr> <C-]> TagComplete()
 
 " <BS>: close popup and delete backword char
-inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+
+inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
+inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
+inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
+
+let g:ulti_expand_or_jump_res = 0
+function! s:smart_cr()
+  silent! call UltiSnips#ExpandSnippet()
+  return g:ulti_expand_res ? "" :
+        \ (pumvisible() ? "\<c-y>" : "\<cr>")
+endfunction
+
+" ----------------------------------------------------------------------------
+" ## vim-over
+nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
+vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
 
 " ----------------------------------------------------------------------------
 " ## CtrlP
@@ -29,8 +50,11 @@ inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 " ## FZF
 " nnoremap <silent> <leader>m :FZF -m<CR>
 " nnoremap <silent> <leader>a :Ag<CR>
-nnoremap <silent> <leader>m :exe 'FZF ' . <SID>fzf_root()<CR>
-nnoremap <silent> <leader>a :execute 'Ag ' . input('Ag/')<CR>
+" nnoremap <silent> <leader>m <esc>:exe 'FZF ' . <SID>fzf_root()<CR>
+nnoremap <silent> <leader>m <esc>:Files<cr>
+" nnoremap <silent> <leader>a <esc>:exe 'Ag ' . input('Ag/')<CR>
+nnoremap <leader>a <esc>:Ag<space>
+nnoremap <silent> <leader>A  <esc>:exe('Ag '.expand('<cword>'))<cr>
 
 " " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -43,10 +67,6 @@ function! s:fzf_root()
   let path = finddir(".git", expand("%:p:h").";")
   return fnamemodify(substitute(path, ".git", "", ""), ":p:h")
 endfunction
-
-" ----------------------------------------------------------------------------
-" ## JSDoc
-au! FileType js,jsx,javascript,javascript.jsx nnoremap <leader>D :JsDoc<cr>
 
 " ----------------------------------------------------------------------------
 " ## Commenting
@@ -106,6 +126,20 @@ vmap ( S)
 vmap { S}
 vmap ' S'
 vmap " S"
+
+" ----------------------------------------------------------------------------
+" ## incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map // <Plug>(incsearch-fuzzy-/)
+map ?? <Plug>(incsearch-fuzzy-?)
+map n  <Plug>(incsearch-nohl-n)zz
+map N  <Plug>(incsearch-nohl-N)zz
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+map g/ <Plug>(incsearch-fuzzy-stay)
 
 " ----------------------------------------------------------------------------
 " ## Splits with vim-tmux-navigator

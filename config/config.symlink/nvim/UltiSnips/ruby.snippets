@@ -1,42 +1,37 @@
-# RSpec
-
-snippet des "describe '...' do ... end"
-describe '$1' do
-	${0:${VISUAL}}
-end
+# --------------------------------
+# Other ruby snippets
+# --------------------------------
+snippet pry "binding pry"
+binding.pry
 endsnippet
 
-snippet con "context '...' do ... end"
-context '$1' do
-	${0:${VISUAL}}
-end
+snippet req "require"
+require '${0}'
 endsnippet
 
-snippet it "it { ... }"
-it { ${0:${VISUAL}} }
+snippet LP "Load path"
+$LOAD_PATH.unshift(File.expand_path("${1:..}", __FILE__))
 endsnippet
 
-snippet its "its(:...) { ... }"
-its(:$1) { ${0:${VISUAL}} }
+snippet # "hash rocket marker"
+# =>
 endsnippet
 
-snippet itd "it '...' do ... end"
-it '$1' do
-	${0:${VISUAL}}
-end
+snippet ## "comment line separator"
+# --------------------------------
 endsnippet
 
-snippet let "let(:...) { ... }"
-let(:$1) { ${0:${VISUAL}} }
+# --------------------------------
+# Attributes
+# --------------------------------
+snippet atta "attribute accessor"
+attr_accessor :${1:attribute}
 endsnippet
 
-
-# YARD
-
-snippet par "@param"
-@param $1 [$2] $0
+snippet attr "attribute reader"
+attr_reader :${1:attribute}
 endsnippet
 
-snippet ret "@return"
-@return [$1] $0
+snippet attw "attribute writer"
+attr_writer :${1:attribute}
 endsnippet

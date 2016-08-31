@@ -41,7 +41,10 @@ augroup END
 augroup ft_markdown
   au!
   " Markdown turn off lazyredraw
-  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw ft=markdown
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw ft=ghmarkdown
+  au FileType markdown,text,html setlocal spell complete+=kspell
+  au FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
+
   au FileType markdown set tw=80
 augroup END
 
@@ -99,5 +102,5 @@ augroup completions
 
   au FileType python setl omnifunc=pythoncomplete#Complete
   au FileType xml setl omnifunc=xmlcomplete#CompleteTags
-  au FileType ruby setl omnifunc=rubycomplete#Complete
+  " au FileType ruby setl omnifunc=rubycomplete#Complete
 augroup END
