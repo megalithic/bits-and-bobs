@@ -69,10 +69,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
 
   " ----------------------------------------------------------------------------
-  " ## Ruby, Rails, et al
-  Plug 'hynek/vim-python-pep8-indent'
-  Plug 'davidhalter/jedi-vim'
-  Plug 'zchee/deoplete-jedi'
+  " ## Python
+  Plug 'hynek/vim-python-pep8-indent', { 'for': ['python'] }
+  Plug 'davidhalter/jedi-vim', { 'for': ['python'] }
+  Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
 
   " ----------------------------------------------------------------------------
   " ## Misc, Other, et al
@@ -89,8 +89,8 @@ call plug#begin('~/.config/nvim/plugged')
   " ----------------------------------------------------------------------------
   " ## Utilities
   " Plug 'kassio/neoterm'
-  Plug 'hkupty/nvimux'
-  Plug 'hkupty/iron.nvim', { 'do': function('HandleRemotePluginUpdates') }
+  " Plug 'hkupty/nvimux'
+  " Plug 'hkupty/iron.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'still-dreaming-1/codi.vim', { 'branch': 'repl-starting-dir' }
   Plug 'janko-m/vim-test' " tester for mocha and ruby
   Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
@@ -125,7 +125,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'EinfachToll/DidYouMean'
   Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   " Plug 'ervandew/supertab'
-  Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' }
+  Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
@@ -148,9 +148,8 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'GGrep'] }
 
   Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
-  " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-  Plug 'justinj/vim-react-snippets', { 'for': ['javascript.jsx'] }
+  " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
@@ -166,9 +165,10 @@ call plug#begin('~/.config/nvim/plugged')
         \| Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (vir)
         \| Plug 'kana/vim-textobj-function' " Function text object (vaf)
         \| Plug 'glts/vim-textobj-comment' " Comment text object (vac)
-  Plug 'wellle/targets.vim' " Improved targets line cin) next parens
   Plug 'michaeljsmith/vim-indent-object'
-  " ^- https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
+
+  Plug 'wellle/targets.vim' " Improved targets line cin) next parens
+  " ^--- https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
 
 call plug#end()
 

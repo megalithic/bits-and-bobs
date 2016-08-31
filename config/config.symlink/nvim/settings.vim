@@ -178,7 +178,7 @@ let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
-au! BufReadPost,BufWritePost * Neomake | redraw
+au! BufWritePost * Neomake | redraw
 " au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
 
 " ----------------------------------------------------------------------------
@@ -250,11 +250,6 @@ let g:jsx_pragma_required = 0
 let g:qs_enable = 0
 
 " ----------------------------------------------------------------------------
-" ## Supertab
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabCrMapping                = 0
-
-" ----------------------------------------------------------------------------
 " ## deoplete
 set completeopt-=preview
 " set completeopt+=noinsert
@@ -271,7 +266,6 @@ call deoplete#custom#set('buffer', 'mark', 'buffer')
 call deoplete#custom#set('ternjs', 'mark', '')
 call deoplete#custom#set('omni', 'mark', 'omni')
 call deoplete#custom#set('file', 'mark', 'file')
-
 function! Preview_func()
   if &pvw
     setlocal nonumber norelativenumber
@@ -311,11 +305,11 @@ let g:tern#arguments = ["--persistent"]
 
 " ----------------------------------------------------------------------------
 " ## ternjs
-let g:tern_show_argument_hints = 'on_hold'
-let g:tern_show_argument_hints = 1
-let g:tern_show_signature_in_pum = 1
-let g:tern_request_timeout = 1
-" let g:tern_map_keys = 1
+" let g:tern_show_argument_hints = 'on_hold'
+" let g:tern_show_argument_hints = 1
+" let g:tern_show_signature_in_pum = 1
+" let g:tern_request_timeout = 1
+" " let g:tern_map_keys = 1
 
 " ----------------------------------------------------------------------------
 " ## FZF
@@ -328,8 +322,10 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
-let g:fzf_files_options =
-      \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
+
+" show a preview of the file:
+" https://github.com/metakirby5/.dots/blob/master/base/.vimrc#L273
+
 " please confirm these!
 " let g:fzf_colors = {
 "       \ 'fg':      ['fg', 'Normal'],
@@ -375,12 +371,8 @@ endif
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips']
-let g:UltiSnipsExpandTrigger = "<cr>"
-let g:UltiSnipsListSnippets = "<c-tab>"
-let g:UltiSnipsJumpForwardTrigger = "<cr>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-" Disable built-in cx-ck to be able to go backward
+" Disable built-in <C-x><C-k> to be able to go backward
 inoremap <C-x><C-k> <NOP>
 let g:UltiSnipsExpandTrigger='<C-j>'
 let g:UltiSnipsListSnippets='<C-s>'
@@ -390,8 +382,8 @@ let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 " ----------------------------------------------------------------------------
 " ## neosnippet
 " Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#expand_word_boundary = 1
+" let g:neosnippet#enable_snipmate_compatibility = 1
+" let g:neosnippet#expand_word_boundary = 1
 " imap <C-k> <Plug>(neosnippet_expand_or_jump)
 " smap <C-k> <Plug>(neosnippet_expand_or_jump)
 " xmap <C-k> <Plug>(neosnippet_expand_target)

@@ -32,8 +32,9 @@ inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
 let g:ulti_expand_or_jump_res = 0
 function! s:smart_cr()
   silent! call UltiSnips#ExpandSnippet()
+  echo "trying to expand a snippet"
   return g:ulti_expand_res ? "" :
-        \ (pumvisible() ? "\<c-y>" : "\<cr>")
+        \ (pumvisible() ? "\<c-j>" : "\<cr>")
 endfunction
 
 " ----------------------------------------------------------------------------
