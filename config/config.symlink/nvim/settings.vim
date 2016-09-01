@@ -254,8 +254,8 @@ let g:qs_enable = 0
 set completeopt-=preview
 " set completeopt+=noinsert
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#file#enable_buffer_path = 1
+" let g:deoplete#enable_refresh_always = 0
+" let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#auto_completion_start_length = 3
 let g:deoplete#enable_smart_case = 1
 " let g:deoplete#enable_debug = 0
@@ -300,8 +300,8 @@ let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 
 " ----------------------------------------------------------------------------
 " ## tern_for_vim
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
+" let g:tern#command = ["tern"]
+" let g:tern#arguments = ["--persistent"]
 
 " ----------------------------------------------------------------------------
 " ## ternjs
@@ -325,21 +325,6 @@ let g:fzf_action = {
 
 " show a preview of the file:
 " https://github.com/metakirby5/.dots/blob/master/base/.vimrc#L273
-
-" please confirm these!
-" let g:fzf_colors = {
-"       \ 'fg':      ['fg', 'Normal'],
-"       \ 'bg':      ['bg', 'Normal'],
-"       \ 'hl':      ['fg', 'Comment'],
-"       \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"       \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"       \ 'hl+':     ['fg', 'Statement'],
-"       \ 'info':    ['fg', 'PreProc'],
-"       \ 'prompt':  ['fg', 'Conditional'],
-"       \ 'pointer': ['fg', 'Exception'],
-"       \ 'marker':  ['fg', 'Keyword'],
-"       \ 'spinner': ['fg', 'Label'],
-"       \ 'header':  ['fg', 'Comment'] }
 
 " ----------------------------------------------------------------------------
 " ## ack.vim

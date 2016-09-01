@@ -106,7 +106,6 @@ call plug#begin('~/.config/nvim/plugged')
   " -- yss<arg> for entire line
   Plug 'tpope/vim-repeat' " repeats plugin-execution mappings as well, with `.`
   Plug 'Valloric/MatchTagAlways', { 'for': ['html', 'xml', 'erb'] } " highlights the opening/closing tags for the block you're in
-  " Plug 'Raimondi/delimitMate' " auto-closes quotes, parenthesis, brackets, etc.
   Plug 'itmammoth/doorboy.vim' " auto-closes quotes, parenthesis, brackets, etc.
   Plug 'cohama/lexima.vim' " auto-closes many delimiters and can repeat with a `.`
   Plug 'junegunn/rainbow_parentheses.vim' " nicely colors nested pairs of [], (), {}
@@ -124,14 +123,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
   Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
-  " Plug 'ervandew/supertab'
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
-  " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  " Plug 'junegunn/fzf.vim'
   Plug 'junegunn/fzf'
         \, { 'do': './install --bin' }
         \| Plug 'junegunn/fzf.vim'

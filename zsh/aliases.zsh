@@ -308,4 +308,5 @@ alias hassstop='ssh -t pi@192.168.1.106 "sudo service hass-daemon stop"'
 alias elmserve='elm-reactor -p 8080'
 alias rn='react-native'
 
+alias geo='curl -s "http://www.geoiptool.com/en/?IP=${IP}" | textutil -stdin -format html -stdout -convert txt | sed -n "/Host Name/,/Postal code/p"'
 
