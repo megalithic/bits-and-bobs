@@ -144,10 +144,14 @@
   ui = true
   pager = true
 
+#[color "diff"]
+#old = red strike
+#new = green italic
+
 [core]
   pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	editor = env VIM_MINIMAL=1 NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim +startinsert
+	editor = env VIM_MINIMAL=1 nvim +startinsert
   excludesfile = ~/.gitignore
 
 [apply]
@@ -170,11 +174,14 @@
 [rerere]
  enabled = true
  autoupdate = true
+
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
   log = diff-so-fancy | less --tab=4 -RFX
+
 [interactive]
 	diffFilter = diff-so-fancy | less --tabs=4 -RFX
+
 [diff]
 	compactionHeuristic = true
