@@ -144,9 +144,9 @@
   ui = true
   pager = true
 
-#[color "diff"]
-#old = red strike
-#new = green italic
+[color "diff"]
+  old = red strike
+  new = green italic
 
 [core]
   pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
