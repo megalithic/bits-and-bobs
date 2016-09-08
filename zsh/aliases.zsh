@@ -300,7 +300,7 @@ alias remote="osascript -e 'tell application \"yubiswitch\" to KeyOn' && ssh rem
 alias hassconfig="nvim scp://pi@192.168.1.106//var/opt/homeassistant/configuration.yaml"
 alias homeconfig=hassconfig
 alias haconfig=hassconfig
-alias hasslogs='ssh -t pi@192.168.1.106 "tail -f /var/opt/homeassistant/home-assistant.log -n250"'
+alias hasslogs='ssh -t pi@192.168.1.106 "tail -f /var/opt/homeassistant/home-assistant.log -n500 | less"'
 alias hassrestart='ssh -t pi@192.168.1.106 "sudo service hass-daemon restart"'
 alias hassstop='ssh -t pi@192.168.1.106 "sudo service hass-daemon stop"'
 
