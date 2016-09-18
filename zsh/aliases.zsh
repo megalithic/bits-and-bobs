@@ -310,3 +310,5 @@ alias rn='react-native'
 
 alias geo='curl -s "http://www.geoiptool.com/en/?IP=${IP}" | textutil -stdin -format html -stdout -convert txt | sed -n "/Host Name/,/Postal code/p"'
 
+alias sleep='pmset displaysleepnow'
+

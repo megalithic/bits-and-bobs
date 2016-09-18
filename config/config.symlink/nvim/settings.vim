@@ -261,7 +261,9 @@ let g:deoplete#enable_smart_case = 1
 " let g:deoplete#enable_debug = 0
 
 let g:deoplete#sources = {}
-let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'neosnippet', 'ternjs', 'omni']
+let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'omni']
+let g:deoplete#sources.javascript = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+let g:deoplete#sources['javascript.jsx'] = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'ternjs', 'omni']
 call deoplete#custom#set('buffer', 'mark', 'buffer')
 call deoplete#custom#set('ternjs', 'mark', '')
 call deoplete#custom#set('omni', 'mark', 'omni')
@@ -293,15 +295,21 @@ let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
 let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
 
 let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = 'tern#Complete'
-let g:deoplete#omni#functions['javascript.jsx'] = 'tern#Complete'
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+let g:deoplete#omni#functions['javascript.jsx'] = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
 let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
 let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 
 " ----------------------------------------------------------------------------
 " ## tern_for_vim
-" let g:tern#command = ["tern"]
-" let g:tern#arguments = ["--persistent"]
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
 
 " ----------------------------------------------------------------------------
 " ## ternjs
