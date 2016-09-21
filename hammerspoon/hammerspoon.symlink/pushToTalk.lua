@@ -23,7 +23,7 @@ function updateInputVolumes()
     if inputVolumes[device:uid()] == nil then
       local inputVolume = device:inputVolume()
       if inputVolume == 0 then
-        inputVolume = 100
+        inputVolume = 75
       end
       inputVolumes[device:uid()] = inputVolume
       log.i("Setting unmuted volume for " .. device:uid() .. ": " .. inputVolumes[device:uid()])
