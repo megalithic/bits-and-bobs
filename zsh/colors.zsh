@@ -25,10 +25,10 @@ export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export CLICOLOR=1
 
 # Shell Colors
-if [[ $HOST != "replibook" && $HOST != "replibook.local" ]]; then
-  SHELL_COLORS="$HOME/.dotfiles/zsh/base16-ocean.dark.sh"
-  [[ -s $SHELL_COLORS ]] && source $SHELL_COLORS
-fi
+# if [[ $HOST != "replibook" && $HOST != "replibook.local" ]]; then
+  # SHELL_COLORS="$HOME/.dotfiles/zsh/base16-ocean.dark.sh"
+  # [[ -s $SHELL_COLORS ]] && source $SHELL_COLORS
+# fi
 
 # -------- do not want here right now; breaking stuff
 # # color stuffs

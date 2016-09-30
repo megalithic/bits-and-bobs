@@ -38,6 +38,12 @@ function! s:smart_cr()
 endfunction
 
 " ----------------------------------------------------------------------------
+" ## tern
+nnoremap <leader>td :TernDef<CR>
+nnoremap <leader>tp :TernDefPreview<CR>
+nnoremap <leader>tr :TernRefs<CR>
+
+" ----------------------------------------------------------------------------
 " ## vim-over
 nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
 vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/

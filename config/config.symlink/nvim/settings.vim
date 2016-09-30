@@ -38,57 +38,155 @@ let g:golden_ratio_wrap_ignored = 0
 let g:golden_ratio_ignore_horizontal_splits = 1
 
 " ----------------------------------------------------------------------------
-" ## vim-airline
-let g:airline_theme='base16_ocean' "'base16_ocean'
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.readonly = '🔒'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_symbols.modified = '✭'
-let g:airline_symbols.space = "\ua0"
-let g:airline_powerline_fonts = 0
-let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
+" ## lightline
+" let g:lightline = {
+"       \ 'colorscheme': 'seoul256',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'component': {
+"       \   'readonly': '%{&readonly?"⭤":""}',
+"       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+"       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+"       \ },
+"       \ 'component_visible_condition': {
+"       \   'readonly': '(&filetype!="help"&& &readonly)',
+"       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+"       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+"       \ }
+"       \ }
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [
+      \     [ 'mode', 'paste' ],
+      \     [ 'fugitive', 'filename' ] ],
+      \   'right': [
+      \     [ 'neomake', 'lineinfo' ],
+      \     [ 'percent' ],
+      \     [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'tabline': {
+      \   'left': [
+      \     [ 'bufferinfo' ],
+      \     [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
+      \   'right': [ [ 'close' ], ],
+      \ },
+      \ 'component_expand': {
+      \   'buffercurrent': 'lightline#buffer#buffercurrent2',
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'LightLineFugitive',
+      \   'readonly': 'LightLineReadonly',
+      \   'modified': 'LightLineModified',
+      \   'filename': 'LightLineFilename',
+      \   'mode': 'LightLineMode',
+      \   'neomake': 'neomake#statusline#LoclistStatus',
+      \   'bufferbefore': 'lightline#buffer#bufferbefore',
+      \   'bufferafter': 'lightline#buffer#bufferafter',
+      \   'bufferinfo': 'lightline#buffer#bufferinfo',
+      \ },
+      \ 'component_type': {
+      \   'neomake': 'error',
+      \ },
       \ }
 
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#neomake#enabled = 1
+function! LightLineInfo()
+  return expand('⭡ %3l:%-2v')
+endfunction
 
-" disable unused extensions (performance)
-let g:airline#extensions#bufferline#enabled = 0
-let g:airline#extensions#capslock#enabled   = 0
-let g:airline#extensions#csv#enabled        = 0
-let g:airline#extensions#ctrlspace#enabled  = 0
-let g:airline#extensions#eclim#enabled      = 0
-let g:airline#extensions#hunks#enabled      = 0
-let g:airline#extensions#nrrwrgn#enabled    = 0
-let g:airline#extensions#promptline#enabled = 0
-let g:airline#extensions#taboo#enabled      = 0
-let g:airline#extensions#tagbar#enabled     = 0
-let g:airline#extensions#virtualenv#enabled = 0
-let g:airline#extensions#whitespace#enabled = 0
+function! LightLineModified()
+  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightLineFilename()
+  let fname = expand('%:t')
+  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'unite' ? unite#get_status_string() :
+        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! LightLineFugitive()
+  if exists("*fugitive#head")
+    let branch = fugitive#head()
+    return branch !=# '' ? ' '.branch : ''
+  endif
+  return ''
+endfunction
+
+function! LightLineModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! LightLineReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+  let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+
+" disable overwriting the statusline forcibly by other plugins
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
+
+let g:lightline_buffer_readonly_icon = ''
+let g:lightline_buffer_modified_icon = '✭'
+let g:lightline_buffer_git_icon = ' '
+let g:lightline_buffer_separator_icon = ''
+
+let g:lightline_buffer_show_bufnr = 1
+let g:lightline_buffer_rotate = 0
+let g:lightline_buffer_fname_mod = ':t'
+let g:lightline_buffer_excludes = ['vimfiler']
+
+let g:lightline_buffer_maxflen = 30
+let g:lightline_buffer_maxfextlen = 3
+let g:lightline_buffer_minflen = 16
+let g:lightline_buffer_minfextlen = 3
+let g:lightline_buffer_reservelen = 20
 
 " ----------------------------------------------------------------------------
 " ## vim-javascript
@@ -124,7 +222,7 @@ let g:godown_port = 1337
 " -- Settings derived from:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
 " --
-let g:neomake_airline = 1
+" let g:neomake_airline = 1
 let g:neomake_serialize = 1
 let g:neomake_verbose = 0
 " let g:neomake_list_height = 10
@@ -178,7 +276,16 @@ let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
-au! BufWritePost * Neomake | redraw
+" au! BufWritePost * Neomake | redraw
+augroup AutoNeomake
+  autocmd!
+  autocmd BufWritePost * call s:neomake()
+augroup END
+
+function! s:neomake()
+  Neomake
+  call lightline#update()
+endfunction
 " au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
 
 " ----------------------------------------------------------------------------

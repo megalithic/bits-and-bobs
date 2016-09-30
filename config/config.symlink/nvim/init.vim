@@ -21,12 +21,13 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## Interface
-  " Plug 'snooc/base16-vim' " consistently, my favorite colorscheme package
   Plug 'chriskempson/base16-vim' " consistently, my favorite colorscheme package
+  Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
-  Plug 'vim-airline/vim-airline' " statusbar
-  Plug 'vim-airline/vim-airline-themes' " themes for the statusbar
-  Plug 'ryanoasis/vim-devicons'
+  Plug 'itchyny/lightline.vim'
+  " Plug 'vim-airline/vim-airline' " statusbar
+  " Plug 'vim-airline/vim-airline-themes' " themes for the statusbar
+  " Plug 'ryanoasis/vim-devicons'
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
