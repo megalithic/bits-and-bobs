@@ -4,10 +4,10 @@
 " ## UI
 set background=dark
 colorscheme base16-ocean
-colorscheme OceanicNext
+" colorscheme OceanicNext
 
-let g:oceanic_next_terminal_italic = 1
-let g:oceanic_next_terminal_bold = 1
+" let g:oceanic_next_terminal_italic = 1
+" let g:oceanic_next_terminal_bold = 1
 
 " change vim cursor depending on the mode
 if has('nvim')

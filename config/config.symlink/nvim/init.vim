@@ -22,12 +22,9 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## Interface
   Plug 'chriskempson/base16-vim' " consistently, my favorite colorscheme package
-  Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
   Plug 'itchyny/lightline.vim'
-  " Plug 'vim-airline/vim-airline' " statusbar
-  " Plug 'vim-airline/vim-airline-themes' " themes for the statusbar
-  " Plug 'ryanoasis/vim-devicons'
+  Plug 'felixjung/vim-base16-lightline'
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
@@ -98,8 +95,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
-  " Plug 'Chiel92/vim-autoformat' " uses external formatters to 'auto-format' code
-  " Plug 'einars/js-beautify', { 'on': ['Autoformat'], 'do': 'npm i -g js-beautify' }
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
   Plug 'tpope/vim-surround' " surrounds things with things
   " -- {Visual}S<arg> surrounds selection
