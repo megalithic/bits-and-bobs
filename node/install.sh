@@ -48,6 +48,7 @@ npm i -g trash # https://github.com/sindresorhus/trash
 npm i -g webpack
 npm i -g vimdebug
 npm i -g vtop # https://github.com/MrRio/vtop
+npm i -g yarn
 npm i -g yo
 
 success "finished node setup"
