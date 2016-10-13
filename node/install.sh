@@ -15,7 +15,7 @@ avn setup
 
 
 info "installing globals packages"
-npm i -g bible fast fkill-cli elm elm-test elm-oracle eslint eslint-plugin-promise eslint-plugin-react eslint-plugin-flowtype eslint-plugin-jsx-a11y eslint-plugin-standard eslint-config-standard eslint-config-standard-jsx gulp hicat instant-markdown-d jscpd jsinspect jsonlint json livedown mocha chai node-inspector pm2 prettyjson react-native-cli sloc speed-test standard traceur trash webpack vimdebug vtop yarn
+npm i -g babel-eslint bible fast fkill-cli elm elm-test elm-oracle estraverse estraverse-fb eslint eslint-plugin-promise eslint-plugin-react eslint-plugin-flowtype eslint-plugin-jsx-a11y eslint-plugin-standard eslint-config-standard eslint-config-standard-jsx gulp hicat instant-markdown-d jscpd jsinspect jsonlint json livedown mocha chai node-inspector pm2 prettyjson react-native-cli sloc speed-test standard traceur trash webpack vimdebug vtop yarn
 
 info "updating npm"
 npm update -g npm
