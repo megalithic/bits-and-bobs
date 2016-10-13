@@ -15,16 +15,13 @@ avn setup
 
 
 info "installing globals packages"
-npm i -g babel
-npm i -g babel-eslint@5.0.0
 npm i -g bible
-npm i -g bower
-npm i -g browserify
-npm i -g bunyan
+npm i -g fast
 npm i -g fkill-cli
 npm i -g elm
 npm i -g elm-test
 npm i -g elm-oracle
+npm i -g eslint
 npm i -g gulp
 npm i -g hicat
 npm i -g instant-markdown-d
@@ -41,14 +38,12 @@ npm i -g prettyjson
 npm i -g react-native-cli
 npm i -g sloc
 npm i -g speed-test
-npm i -g standard@5.3.1
-npm i -g snazzy
+npm i -g standard
 npm i -g traceur
 npm i -g trash # https://github.com/sindresorhus/trash
 npm i -g webpack
 npm i -g vimdebug
 npm i -g vtop # https://github.com/MrRio/vtop
 npm i -g yarn
-npm i -g yo
 
 success "finished node setup"

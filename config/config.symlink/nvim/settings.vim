@@ -267,12 +267,18 @@ let g:neomake_ruby_rubocop_exe = 'bundle'
 let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
 let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
 
-let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
+
+if findfile('.eslintrc.json', '.;') ==# ''
+  let g:neomake_javascript_enabled_makers = ['standard']
+  let g:neomake_jsx_enabled_makers = ['standard']
+endif
+
 let g:neomake_javascript_standard_maker = {
       \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
       \ 'errorformat': '  %f:%l:%c: %m'
       \ }
-let g:neomake_jsx_enabled_makers = ['standard']
 let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
 
 " do the lintings!
