@@ -5,7 +5,7 @@ source ./setup/lib.sh
 
 info "installing n"
 # https://github.com/mklement0/n-install
-curl -L https://git.io/n-install | bash -s -- -y 6.0 lts 4.2 4.3 4.4
+curl -L https://git.io/n-install | bash -s -- -y 6.0 latest 4.0 lts
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 info "installing avn"
@@ -15,35 +15,9 @@ avn setup
 
 
 info "installing globals packages"
-npm i -g bible
-npm i -g fast
-npm i -g fkill-cli
-npm i -g elm
-npm i -g elm-test
-npm i -g elm-oracle
-npm i -g eslint
-npm i -g gulp
-npm i -g hicat
-npm i -g instant-markdown-d
-npm i -g jscpd
-npm i -g jsinspect
-npm i -g jsonlint
-npm i -g json
-npm i -g livedown
-npm i -g mocha
-npm i -g chai
-npm i -g node-inspector
-npm i -g pm2 # http://stackoverflow.com/a/20661027/213904
-npm i -g prettyjson
-npm i -g react-native-cli
-npm i -g sloc
-npm i -g speed-test
-npm i -g standard
-npm i -g traceur
-npm i -g trash # https://github.com/sindresorhus/trash
-npm i -g webpack
-npm i -g vimdebug
-npm i -g vtop # https://github.com/MrRio/vtop
-npm i -g yarn
+npm i -g bible fast fkill-cli elm elm-test elm-oracle eslint eslint-plugin-promise eslint-plugin-react eslint-plugin-flowtype eslint-plugin-jsx-a11y eslint-plugin-standard eslint-config-standard eslint-config-standard-jsx gulp hicat instant-markdown-d jscpd jsinspect jsonlint json livedown mocha chai node-inspector pm2 prettyjson react-native-cli sloc speed-test standard traceur trash webpack vimdebug vtop yarn
+
+info "updating npm"
+npm update -g npm
 
 success "finished node setup"
