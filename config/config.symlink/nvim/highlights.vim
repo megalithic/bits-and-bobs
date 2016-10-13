@@ -24,8 +24,8 @@ function! s:after_colorscheme()
   " hi ColorColumn ctermbg=bg ctermfg=235 cterm=NONE guibg=bg guifg=#262626 gui=NONE
   " hi signColumn ctermbg=bg ctermfg=230 cterm=NONE guibg=bg guifg=#ffffd7 gui=NONE
   " hi CursorLine ctermbg=235 ctermfg=NONE cterm=NONE guibg=#262626 guifg=NONE gui=NONE
-  hi LineNr guibg=bg guifg=#665F59 gui=NONE
-  hi CursorLineNr ctermbg=bg ctermfg=223 cterm=NONE guibg=bg guifg=#af875f gui=bold
+  hi LineNr guibg=bg guifg=#937f6e gui=NONE
+  hi CursorLineNr ctermbg=bg ctermfg=223 cterm=NONE guibg=bg guifg=#db9c5e gui=bold
   hi qfLineNr ctermbg=bg ctermfg=95 cterm=NONE guibg=bg guifg=#875f5f gui=NONE
   hi TermCursor ctermfg=red
 
