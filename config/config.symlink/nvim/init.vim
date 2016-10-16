@@ -142,6 +142,8 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  Plug 'epilande/vim-es2015-snippets'
+  Plug 'epilande/vim-react-snippets'
   " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
 
   " ----------------------------------------------------------------------------

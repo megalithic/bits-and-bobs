@@ -39,9 +39,9 @@ endfunction
 
 " ----------------------------------------------------------------------------
 " ## tern
-nnoremap <leader>td :TernDef<CR>
-nnoremap <leader>tp :TernDefPreview<CR>
-nnoremap <leader>tr :TernRefs<CR>
+" nnoremap <leader>td :TernDef<CR>
+" nnoremap <leader>tp :TernDefPreview<CR>
+" nnoremap <leader>tr :TernRefs<CR>
 
 " ----------------------------------------------------------------------------
 " ## vim-over

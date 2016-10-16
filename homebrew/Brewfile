@@ -24,6 +24,7 @@ brew 'findutils'
 
 brew 'ack'
 brew 'ansifilter'
+brew 'aspell', args: ['--with-lang-en']
 brew 'bash'
 brew 'bash-completion'
 brew 'homebrew/versions/bash-completion2'

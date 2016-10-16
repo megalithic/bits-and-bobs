@@ -273,13 +273,13 @@ let g:neomake_jsx_enabled_makers = ['eslint']
 if findfile('.eslintrc.json', '.;') ==# ''
   let g:neomake_javascript_enabled_makers = ['standard']
   let g:neomake_jsx_enabled_makers = ['standard']
-endif
 
-let g:neomake_javascript_standard_maker = {
-      \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-      \ 'errorformat': '  %f:%l:%c: %m'
-      \ }
-let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
+  let g:neomake_javascript_standard_maker = {
+        \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+        \ 'errorformat': '  %f:%l:%c: %m'
+        \ }
+  let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
+endif
 
 " do the lintings!
 " au! BufWritePost * Neomake | redraw
@@ -317,8 +317,15 @@ let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split' " neoterm
 let g:neoterm_position = "vertical"
 let g:test#preserve_screen = 1
-let g:test#javascript#mocha#options = "-A --compilers js:babel/register --colors --full-trace --timeout 15000"
-let g:test#javascript#mocha#file_pattern = ".test.js"
+
+if filereadable('node_modules/babel/register.js')
+  let g:test#javascript#mocha#options = "-A --compilers js:babel/register --colors --full-trace --timeout 15000"
+elseif filereadable('node_modules/babel-register/lib/node.js')
+  let g:test#javascript#mocha#options = "-A --compilers js:babel-register --require babel-polyfill --colors --full-trace --timeout 15000"
+else
+  let g:test#javascript#mocha#options = "-A --colors --full-trace --timeout 15000"
+endif
+
 let test#elixir#exunit#options = '--trace'
 let test#ruby#rspec#options = '-f d'
 
