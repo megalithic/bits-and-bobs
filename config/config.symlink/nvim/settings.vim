@@ -318,7 +318,6 @@ let g:test#strategy = 'terminal_split' " neoterm
 let g:neoterm_position = "vertical"
 let g:test#preserve_screen = 1
 
-
 if filereadable('node_modules/babel/register.js')
   " babel 5
   let g:test#javascript#mocha#options = "--compilers js:babel/register --colors --full-trace --timeout 15000"
@@ -329,6 +328,8 @@ else
   " no babel
   let g:test#javascript#mocha#options = "--colors --full-trace --timeout 15000"
 endif
+
+let g:test#javascript#mocha#file_pattern = ".test.js"
 
 let test#elixir#exunit#options = '--trace'
 let test#ruby#rspec#options = '-f d'
