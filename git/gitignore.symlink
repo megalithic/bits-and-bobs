@@ -25,3 +25,4 @@ zeus.json
 ~/.dotfiles/config/config.symlink/nvim/.init.*
 .tern-project
 .tern-port
+Procfile

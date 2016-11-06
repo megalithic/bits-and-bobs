@@ -18,7 +18,7 @@ windows:
         - npm run mock
       - commands:
         - cd cafewell
-        - chruby ruby-2.2.3
+        # - chruby ruby-2.2.3
         - npm install
         - bundle
         - bundle exec rake db:migrate
