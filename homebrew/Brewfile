@@ -61,6 +61,7 @@ brew 'neovim', args: ['--HEAD', 'with-lua', 'with-perl', 'with-ruby']
 brew 'openssl'
 brew 'phantomjs'
 brew 'p7zip'
+brew 'pgcli'
 brew 'postgresql'
 brew 'python'
 brew 'python3'

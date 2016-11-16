@@ -1,0 +1,2 @@
+2016-11-16 08:24:38,557 (92956/MainThread) pgcli.main INFO - Default pager found in PAGER environment variable: 'less'
+2016-11-16 08:28:43,382 (4730/MainThread) pgcli.main INFO - Default pager found in PAGER environment variable: 'less'
