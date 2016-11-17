@@ -56,6 +56,7 @@ brew 'TomAnthony/brews/itermocil'
 brew 'httpie'
 brew 'homebrew/binary/kwm'
 brew 'homebrew/versions/mysql'
+brew 'mas'
 brew 'ncdu'
 brew 'neovim', args: ['--HEAD', 'with-lua', 'with-perl', 'with-ruby']
 brew 'openssl'
