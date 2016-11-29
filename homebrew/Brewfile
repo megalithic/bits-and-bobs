@@ -57,6 +57,7 @@ brew 'httpie'
 brew 'homebrew/binary/kwm'
 brew 'homebrew/versions/mysql'
 brew 'mas'
+brew 'homebrew/versions/mysql56'
 brew 'ncdu'
 brew 'neovim', args: ['--HEAD', 'with-lua', 'with-perl', 'with-ruby']
 brew 'openssl'
