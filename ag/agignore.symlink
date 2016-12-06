@@ -19,7 +19,6 @@
 .svn
 .hg
 *.sql
-*.tags*
 *.gemtags*
 *.csv
 *.tsv
@@ -37,7 +36,6 @@
 *.tif
 *.jpeg
 *.svg
-*tags*
 tags
 tmp
 log
