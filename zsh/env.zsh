@@ -51,8 +51,8 @@ export RUBY_GC_HEAP_INIT_SLOTS=40000
 export RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)"
 
 export ECLIPSE_HOME=/Applications/Eclipse
-# export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
-export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
+export SSL_CERT_FILE=''
+# export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
 
 # This setting is for the new UTF-8 terminal support
 export LC_CTYPE=en_US.UTF-8
