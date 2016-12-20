@@ -285,12 +285,12 @@ endif
 " au! BufWritePost * Neomake | redraw
 augroup AutoNeomake
   autocmd!
-  autocmd BufWritePost * call s:neomake()
+  " autocmd BufWritePost * call s:neomake()
 augroup END
 
 function! s:neomake()
   Neomake
-  call lightline#update()
+  " call lightline#update()
 endfunction
 " au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
 

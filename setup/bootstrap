@@ -220,5 +220,7 @@ brew_things
 symlink_dots
 setup_private_repo
 
+sudo xcodebuild -license accept
+
 echo ''
 echo '  All installed!'

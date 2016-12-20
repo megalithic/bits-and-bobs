@@ -53,8 +53,9 @@ export RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)"
 export ECLIPSE_HOME=/Applications/Eclipse
 export SSL_CERT_FILE=''
 
-# This must be here for `replibox`, but breaks `replibook`
-export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
+# This must be here for `replibox`, but breaks `replibook`.. maybe?
+# export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
+export CURL_CA_BUNDLE=''
 
 # This setting is for the new UTF-8 terminal support
 export LC_CTYPE=en_US.UTF-8
@@ -64,7 +65,7 @@ export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 export MYSQL=/usr/local/mysql/bin
 export PATH=$PATH:$MYSQL
-export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+# export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 # export DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
 

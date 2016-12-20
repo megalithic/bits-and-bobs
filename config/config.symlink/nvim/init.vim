@@ -92,7 +92,7 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'hkupty/iron.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'still-dreaming-1/codi.vim', { 'branch': 'repl-starting-dir' }
   Plug 'janko-m/vim-test' " tester for mocha and ruby
-  Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
+  " Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
