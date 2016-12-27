@@ -90,7 +90,7 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'kassio/neoterm'
   " Plug 'hkupty/nvimux'
   " Plug 'hkupty/iron.nvim', { 'do': function('HandleRemotePluginUpdates') }
-  Plug 'still-dreaming-1/codi.vim', { 'branch': 'repl-starting-dir' }
+  " Plug 'still-dreaming-1/codi.vim', { 'branch': 'repl-starting-dir' }
   Plug 'janko-m/vim-test' " tester for mocha and ruby
   " Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
@@ -119,7 +119,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
-  Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
+  " Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
@@ -140,7 +140,7 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'GFiles',
         \ 'GGrep'] }
 
-  Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
+  " Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
