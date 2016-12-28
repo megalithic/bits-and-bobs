@@ -39,7 +39,7 @@ augroup vimrcEx
 
   " ----------------------------------------------------------------------------
   " ## Automagically update remote homeassistant files upon editing locally
-  au BufWrite ~/.dotfiles/private/homeassistant/* :MirrorPush
+  au BufWritePost ~/.dotfiles/private/homeassistant/* silent! :MirrorPush ha
 
   " ----------------------------------------------------------------------------
   " ## Toggle colorcolumn when in insert mode for visual 80char indicator
