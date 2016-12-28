@@ -301,12 +301,14 @@ alias showdesk="defaults write com.apple.finder CreateDesktop true; killall Find
 alias remote="osascript -e 'tell application \"yubiswitch\" to KeyOn' && ssh remote.github.com -t gh-screen && osascript -e 'tell application \"yubiswitch\" to KeyOff' "
 
 # edit home-assistant (hass) config on rpi2
-alias hassconfig="nvim scp://pi@192.168.1.106//home/pi/.homeassistant/configuration.yaml"
+# alias hassconfig="nvim scp://pi@192.168.1.106//home/pi/.homeassistant/configuration.yaml"
+alias hassconfig="cd ~/.dotfiles/private/homeassistant; vim configuration.yaml"
 alias homeconfig=hassconfig
 alias haconfig=hassconfig
-alias hasslogs='ssh -t pi@192.168.1.106 "tail -f /home/pi/.homeassistant/home-assistant.log -n500 | less"'
-alias hassrestart='ssh -t pi@192.168.1.106 "sudo service hass-daemon restart"'
-alias hassstop='ssh -t pi@192.168.1.106 "sudo service hass-daemon stop"'
+alias hasslogs='ssh -t pi@192.168.1.106 "sudo journalctl -fu home-assistant@pi"'
+alias hassrestart='ssh -t pi@192.168.1.106 "sudo systemctl restart home-assistant@pi"'
+alias hassstart='ssh -t pi@192.168.1.106 "sudo systemctl start home-assistant@pi"'
+alias hassstop='ssh -t pi@192.168.1.106 "sudo systemctl stop home-assistant@pi"'
 
 
 alias elmserve='elm-reactor -p 8080'
