@@ -4,9 +4,10 @@ let maplocalleader="\\"
 
 nnoremap <c-s> :source $MYVIMRC<cr>
 
+
 " ----------------------------------------------------------------------------
-" ## Codi
-nnoremap <F2> :Codi<cr>
+" ## vim-choosewin
+nmap - <Plug>(choosewin)
 
 " ----------------------------------------------------------------------------
 " ## Autoformat
@@ -124,7 +125,7 @@ nmap <silent> <leader>g :TestVisit<CR>
 " ## Gist/Github
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
-vnoremap <leader>G :Gist -p<cr>
+vnoremap <leader>G :Gist -po<cr>
 
 " ----------------------------------------------------------------------------
 " ## Surround
@@ -136,17 +137,32 @@ vmap " S"
 
 " ----------------------------------------------------------------------------
 " ## incsearch
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map // <Plug>(incsearch-fuzzy-/)
-map ?? <Plug>(incsearch-fuzzy-?)
-map n  <Plug>(incsearch-nohl-n)zz
-map N  <Plug>(incsearch-nohl-N)zz
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
-map g/ <Plug>(incsearch-fuzzy-stay)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
+
+function! s:config_fuzzyall(...) abort
+  return extend(copy({
+  \   'converters': [
+  \     incsearch#config#fuzzy#converter(),
+  \     incsearch#config#fuzzyspell#converter()
+  \   ],
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> z/ incsearch#go(<SID>config_fuzzyall())
+noremap <silent><expr> z? incsearch#go(<SID>config_fuzzyall({'command': '?'}))
+noremap <silent><expr> zg? incsearch#go(<SID>config_fuzzyall({'is_stay': 1}))
+
+" map // <Plug>(incsearch-fuzzy-/)
+" map ?? <Plug>(incsearch-fuzzy-?)
+" map n  <Plug>(incsearch-nohl-n)zz
+" map N  <Plug>(incsearch-nohl-N)zz
+" map *  <Plug>(incsearch-nohl-*)
+" map #  <Plug>(incsearch-nohl-#)
+" map g* <Plug>(incsearch-nohl-g*)
+" map g# <Plug>(incsearch-nohl-g#)
+" map g/ <Plug>(incsearch-fuzzy-stay)
 
 " ----------------------------------------------------------------------------
 " ## Splits with vim-tmux-navigator

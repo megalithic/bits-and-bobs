@@ -52,6 +52,7 @@ export RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)"
 
 export ECLIPSE_HOME=/Applications/Eclipse
 export SSL_CERT_FILE=''
+unset SSL_CERT_FILE
 
 # This must be here for `replibox`, but breaks `replibook`.. maybe?
 # export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem

@@ -21,8 +21,10 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## Interface
-  Plug 'chriskempson/base16-vim' " consistently, my favorite colorscheme package
+  " Plug 'chriskempson/base16-vim' " consistently, my favorite colorscheme package
+  Plug 'joshdick/onedark.vim'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
+  Plug 't9md/vim-choosewin'
   Plug 'itchyny/lightline.vim'
   Plug 'felixjung/vim-base16-lightline'
 
@@ -57,7 +59,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }
-  Plug 'othree/xml.vim', { 'for': ['xml'] }
+  " Plug 'othree/xml.vim', { 'for': ['xml'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
 
   " ----------------------------------------------------------------------------
@@ -79,7 +81,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
   Plug 'jreybert/vimagit' " more git tools integrated into vim
-  Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim' " easily post to gist.github.com
+  Plug 'keith/gist.vim'
   Plug 'ElmCast/elm-vim' " all the elms
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
@@ -88,11 +90,8 @@ call plug#begin('~/.config/nvim/plugged')
   " ----------------------------------------------------------------------------
   " ## Utilities
   " Plug 'kassio/neoterm'
-  " Plug 'hkupty/nvimux'
-  " Plug 'hkupty/iron.nvim', { 'do': function('HandleRemotePluginUpdates') }
-  " Plug 'still-dreaming-1/codi.vim', { 'branch': 'repl-starting-dir' }
   Plug 'janko-m/vim-test' " tester for mocha and ruby
-  " Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
+  Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
@@ -119,12 +118,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
-  " Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
+  Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
-  Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
+  " Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'junegunn/fzf'
         \, { 'do': './install --bin' }
         \| Plug 'junegunn/fzf.vim'

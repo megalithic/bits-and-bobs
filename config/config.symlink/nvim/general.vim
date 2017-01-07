@@ -3,7 +3,8 @@
 " -----------------------------------------------------------------------------
 " ## UI
 set background=dark
-colorscheme base16-ocean
+" colorscheme base16-ocean
+colorscheme onedark
 " colorscheme OceanicNext
 
 " let g:oceanic_next_terminal_italic = 1

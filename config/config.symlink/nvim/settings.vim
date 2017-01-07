@@ -4,32 +4,8 @@
 " let g:loaded_netrw = 1
 " let g:loaded_netrwPlugin = 1
 
-" ## codi
-let g:codi#use_buffer_dir = 0
-
-" ----------------------------------------------------------------------------
-" ## nvimux
-let g:nvimux_quickterm_provider = ''
-let g:nvimux_new_term = ''
-let g:nvimux_close_term = ''
-
-let g:nvimux_custom_bindings = [
-      \['s', ':NvimuxHorizontalSplit<CR>', ['n', 'v', 'i', 't']],
-      \['v', ':NvimuxVerticalSplit<CR>', ['n', 'v', 'i', 't']],
-      \['!', ':IronPromptRepl<CR>', ['n', 'v', 'i', 't']],
-      \['$', ':call ToggleRepl()<CR>', ['n', 'v', 'i', 't']],
-      \['<C-$>', ':call AggrToggleRepl()<CR>', ['n', 'v', 'i', 't']]
-      \]
-
-let g:nvimux_prefix = '<C-a>'
-let g:nvimux_no_neoterm = 1
-let g:nvimux_open_term_by_default = 1
-
-"au VimEnter * if &columns > 200 => set vertical else set horizontal
-let g:nvimux_quickterm_direction = 'botright'
-let g:nvimux_quickterm_orientation = 'vertical'
-let g:nvimux_quickterm_scope = 't'
-let g:nvimux_quickterm_size = '80'
+" ## vim-choosewin
+let g:choosewin_overlay_enable = 1
 
 " ----------------------------------------------------------------------------
 " ## golden-ratio
@@ -39,31 +15,15 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 
 " ----------------------------------------------------------------------------
 " ## lightline
-" let g:lightline = {
-"       \ 'colorscheme': 'seoul256',
-"       \ 'active': {
-"       \   'left': [ [ 'mode', 'paste' ],
-"       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-"       \ },
-"       \ 'component': {
-"       \   'readonly': '%{&readonly?"⭤":""}',
-"       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-"       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-"       \ },
-"       \ 'component_visible_condition': {
-"       \   'readonly': '(&filetype!="help"&& &readonly)',
-"       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-"       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-"       \ }
-"       \ }
 let g:lightline = {
       \ 'colorscheme': 'base16_ocean',
       \ 'active': {
       \   'left': [
       \     [ 'mode', 'paste' ],
-      \     [ 'fugitive', 'filename' ] ],
+      \     [ 'fugitive', 'filename' ],
+      \     [ 'readonlye', 'modified' ] ],
       \   'right': [
-      \     [ 'neomake', 'lineinfo' ],
+      \     [ 'neomake_errors', 'neomake_warnings', 'column', 'lineinfo' ],
       \     [ 'percent' ],
       \     [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
@@ -75,6 +35,8 @@ let g:lightline = {
       \ },
       \ 'component_expand': {
       \   'buffercurrent': 'lightline#buffer#buffercurrent2',
+      \   'neomake_errors': 'LightLineNeomakeErrors',
+      \   'neomake_warnings': 'LightLineNeomakeWarnings',
       \ },
       \ 'component_function': {
       \   'fugitive': 'LightLineFugitive',
@@ -82,7 +44,6 @@ let g:lightline = {
       \   'modified': 'LightLineModified',
       \   'filename': 'LightLineFilename',
       \   'mode': 'LightLineMode',
-      \   'neomake': 'neomake#statusline#LoclistStatus',
       \   'bufferbefore': 'lightline#buffer#bufferbefore',
       \   'bufferafter': 'lightline#buffer#bufferafter',
       \   'bufferinfo': 'lightline#buffer#bufferinfo',
@@ -105,16 +66,21 @@ function! LightLineReadonly()
 endfunction
 
 function! LightLineFilename()
-  let fname = expand('%:t')
-  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+  return fnamemodify(expand("%"), ":~:.")
+endfunction
+
+function! LightLineNeomakeErrors()
+  if !exists(":Neomake") || ((get(neomake#statusline#QflistCounts(), "E", 0) + get(neomake#statusline#LoclistCounts(), "E", 0)) == 0)
+    return ''
+  endif
+  return 'E:'.(get(neomake#statusline#LoclistCounts(), 'E', 0) + get(neomake#statusline#QflistCounts(), 'E', 0))
+endfunction
+
+function! LightLineNeomakeWarnings()
+  if !exists(":Neomake") || ((get(neomake#statusline#QflistCounts(), "W", 0) + get(neomake#statusline#LoclistCounts(), "W", 0)) == 0)
+    return ''
+  endif
+  return 'W:'.(get(neomake#statusline#LoclistCounts(), 'W', 0) + get(neomake#statusline#QflistCounts(), 'W', 0))
 endfunction
 
 function! LightLineMode()
@@ -222,50 +188,63 @@ let g:godown_port = 1337
 " -- Settings derived from:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
 " --
-" let g:neomake_airline = 1
 let g:neomake_serialize = 1
 let g:neomake_verbose = 0
-" let g:neomake_list_height = 10
 let g:neomake_open_list = 0
 let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
-let g:neomake_error_sign = { 'text': '☓', 'texthl': 'Error' }
-let g:neomake_warning_sign = { 'text': '>', 'texthl': 'Error' }
+let g:neomake_error_sign = {
+            \ 'text': '✖',
+            \ 'texthl': 'NeomakeErrorMsg',
+            \ }
+let g:neomake_warning_sign = {
+            \ 'text': '⚠',
+            \ 'texthl': 'NeomakeWarningMsg',
+            \ }
 
-" let g:neomake_elixir_credo_maker = {
-"       \ 'exe': 'mix',
-"       \ 'args': ['credo'],
-"       \ 'append_file': 0,
-"       \ 'errorformat':
-"       \   '%E┃ [%t] %. %m.,%Z┃       %f:%l%.%#'
-"       \ }
+let g:neomake_elixir_credo_maker = {
+      \ 'exe': 'mix',
+      \ 'args': ['credo'],
+      \ 'append_file': 0,
+      \ 'errorformat':
+      \   '%E┃ [%t] %. %m.,%Z┃       %f:%l%.%#'
+      \ }
 
-" let g:neomake_elixir_diaylze_maker = {
-"       \ 'exe': 'mix',
-"       \ 'args': [
-"       \   'dialyze',
-"       \   '--no-check',
-"       \   '--unmatched-returns',
-"       \   '--error-handling',
-"       \   '--race-conditions',
-"       \   '--underspecs'
-"       \  ],
-"       \ 'errorformat':
-"       \   '%f:%l:%m'
-"       \ }
+let g:neomake_elixir_diaylze_maker = {
+      \ 'exe': 'mix',
+      \ 'args': [
+      \   'dialyze',
+      \   '--no-check',
+      \   '--unmatched-returns',
+      \   '--error-handling',
+      \   '--race-conditions',
+      \   '--underspecs'
+      \  ],
+      \ 'errorformat':
+      \   '%f:%l:%m'
+      \ }
 
-" let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'diaylze']
-" let g:neomake_elixir_mix_maker = {
-"       \ 'args': ['compile'],
-"       \ 'errorformat':
-"       \   '** %s %f:%l: %m,' .
-"       \   '%f:%l: warning: %m'
-"       \ }
+let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'diaylze']
+let g:neomake_elixir_mix_maker = {
+      \ 'args': ['compile'],
+      \ 'errorformat':
+      \   '** %s %f:%l: %m,' .
+      \   '%f:%l: warning: %m'
+      \ }
 
 let g:neomake_scss_enabled_checkers = ['scss-lint']
 
 let g:neomake_ruby_rubocop_exe = 'bundle'
 let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
 let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
+
+
+let g:neomake_javascript_enabled_checkers = ['standard', 'eslint']
+let g:neomake_javascript_eslint_marker = {
+      \   'exe': 'eslint_d',
+      \   'args': ['-f', 'compact', '--fix'],
+      \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+      \   '%W%f: line %l\, col %c\, Warning - %m'
+      \ }
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
@@ -282,16 +261,10 @@ if findfile('.eslintrc.json', '.;') ==# ''
 endif
 
 " do the lintings!
-" au! BufWritePost * Neomake | redraw
-augroup AutoNeomake
-  autocmd!
-  " autocmd BufWritePost * call s:neomake()
-augroup END
+autocmd BufEnter * nested Neomake
+autocmd BufWritePost * nested Neomake
+autocmd User NeomakeFinished nested call lightline#update()
 
-function! s:neomake()
-  Neomake
-  " call lightline#update()
-endfunction
 " au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
 
 " ----------------------------------------------------------------------------
@@ -469,16 +442,21 @@ let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
 
 " ----------------------------------------------------------------------------
 " ## webapi-vim / gist-vim
-let g:gist_put_url_to_clipboard_after_post  = 1
-let g:gist_show_privates                    = 1
-let g:gist_post_private                     = 1
-" detect filetype if vim failed autodetection
-let g:gist_detect_filetype                  = 1
-" :w! updates a Gist, not plain :w
-let g:gist_update_on_write                  = 2
-if has('macunix')
-  let g:gist_clip_command = 'pbcopy'
-endif
+" let g:gist_put_url_to_clipboard_after_post  = 1
+" let g:gist_open_url = 0
+" let g:gist_show_privates                    = 1
+" let g:gist_post_private                     = 1
+" " detect filetype if vim failed autodetection
+" let g:gist_detect_filetype                  = 1
+" " :w! updates a Gist, not plain :w
+" let g:gist_update_on_write                  = 2
+" let g:gist_list_vsplit = 1
+" let g:gist_clip_command = 'pbcopy'
+
+" ----------------------------------------------------------------------------
+" ## gist.vim
+let g:gist_open_url = 1
+let g:gist_default_private = 1
 
 " ----------------------------------------------------------------------------
 " ## ultisnips
