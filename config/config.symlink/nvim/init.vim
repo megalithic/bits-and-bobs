@@ -119,6 +119,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
+  Plug 'itchyny/vim-cursorword'
   Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }

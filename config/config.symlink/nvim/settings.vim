@@ -352,10 +352,14 @@ let g:qs_enable = 0
 set completeopt-=preview
 " set completeopt+=noinsert
 let g:deoplete#enable_at_startup = 1
-" let g:deoplete#enable_refresh_always = 0
-" let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#auto_completion_start_length = 3
+let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#max_abbr_width = 0
+let g:deoplete#max_menu_width = 0
+" let g:deoplete#file#enable_buffer_path = 1
+" let g:deoplete#auto_completion_start_length = 3
 " let g:deoplete#enable_debug = 0
 
 let g:deoplete#sources = {}
@@ -366,6 +370,7 @@ call deoplete#custom#set('buffer', 'mark', 'buffer')
 call deoplete#custom#set('ternjs', 'mark', '')
 call deoplete#custom#set('omni', 'mark', 'omni')
 call deoplete#custom#set('file', 'mark', 'file')
+call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
 function! Preview_func()
   if &pvw
     setlocal nonumber norelativenumber
