@@ -324,8 +324,6 @@ nmap dw de
 " nnoremap <silent> p p`]
 
 " ## Convenience rebindings
-" semicolon is easier to hit than colon
-" nnoremap ; : " this rebinding breaks quick-scope repeated movement
 noremap  <Leader>; :!
 noremap  <Leader>: :<Up>
 
@@ -337,6 +335,7 @@ nnoremap q <Nop>
 " allow deleting selection without updating the clipboard (yank buffer)
 vnoremap x "_x
 vnoremap X "_X
+
 " Easier to type, and I never use the default behavior.
 noremap H ^
 noremap L $
@@ -371,6 +370,7 @@ nnoremap ><lt> V`]>
 nnoremap =- V`]=
 " Reindent the whole document and keep the cursor in the same location
 nnoremap <C-=> mqHmwgg=G`wzt`q
+nnoremap <leader>= mqHmwgg=G`wzt`q
 nnoremap <leader>G mqHmwgg=G`wzt`q
 " Format entire file
 nmap <leader>fef ggVG=
