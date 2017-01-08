@@ -26,7 +26,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'megalithic/golden-ratio' " vertical split layout manager
   Plug 't9md/vim-choosewin'
   Plug 'itchyny/lightline.vim'
-  Plug 'felixjung/vim-base16-lightline'
+  Plug 'shirataki/lightline-onedark'
+  " Plug 'felixjung/vim-base16-lightline'
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al

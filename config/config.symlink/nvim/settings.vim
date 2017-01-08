@@ -16,7 +16,7 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 " ----------------------------------------------------------------------------
 " ## lightline
 let g:lightline = {
-      \ 'colorscheme': 'base16_ocean',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [
       \     [ 'mode', 'paste' ],
