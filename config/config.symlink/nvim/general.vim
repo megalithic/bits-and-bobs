@@ -5,7 +5,7 @@
 set background=dark
 " colorscheme base16-ocean
 colorscheme onedark
-" colorscheme OceanicNext
+colorscheme OceanicNext
 
 " let g:oceanic_next_terminal_italic = 1
 " let g:oceanic_next_terminal_bold = 1
@@ -42,7 +42,7 @@ set ruler " show the cursor position all the time
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
-" set cul " turn on cursorline highlighting -- needed for linenumber HL too
+set cul " turn on cursorline highlighting -- needed for linenumber HL too
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
 set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.

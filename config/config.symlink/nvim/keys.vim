@@ -15,16 +15,6 @@ nnoremap <F3> :Autoformat<CR>
 
 " ----------------------------------------------------------------------------
 " ## Tab/Deoplete Stuffs
-
-" Insert <TAB> or select next match
-" inoremap <silent> <expr> <Tab> TabComplete()
-
-" Manually trigger tag autocomplete
-" inoremap <silent> <expr> <C-]> TagComplete()
-
-" <BS>: close popup and delete backword char
-" inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
-
 inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
 inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
@@ -48,11 +38,6 @@ endfunction
 " ## vim-over
 nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
 vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
-
-" ----------------------------------------------------------------------------
-" ## CtrlP
-" let g:ctrlp_map = '<leader>m'
-" let g:ctrlp_cmd = 'CtrlP'
 
 " ----------------------------------------------------------------------------
 " ## FZF

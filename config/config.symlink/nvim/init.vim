@@ -23,6 +23,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ## Interface
   " Plug 'chriskempson/base16-vim' " consistently, my favorite colorscheme package
   Plug 'joshdick/onedark.vim'
+  Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
   Plug 't9md/vim-choosewin'
   Plug 'itchyny/lightline.vim'

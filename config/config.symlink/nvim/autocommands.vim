@@ -33,9 +33,9 @@ augroup vimrcEx
   " au WinEnter,BufEnter * set syntax=on
   " au WinEnter,BufCreate * set syntax=on
   " au WinEnter,BufWinEnter * set syntax=on
-  au WinEnter,BufEnter * set number relativenumber
+  au WinEnter,BufEnter * set number relativenumber cul
   " au WinLeave,BufLeave * set syntax=off
-  au WinLeave,BufLeave * set nonumber norelativenumber
+  au WinLeave,BufLeave * set nonumber norelativenumber nocul
 
   " ----------------------------------------------------------------------------
   " ## Automagically update remote homeassistant files upon editing locally

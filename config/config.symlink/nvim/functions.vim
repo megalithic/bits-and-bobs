@@ -5,30 +5,6 @@
 " ----------------------------------------------------------------------------
 " ## UTILS
 
-" Iron.vim
-function! IronHelper() abort
-    let s:var = "g:iron_".&ft."_repl"
-    let g:curr_iron_repl = s:var
-    let g:curr_iron_repl_ft = &ft
-    return s:var
-endfunction
-
-function! ToggleRepl() abort
-  if exists("g:curr_iron_repl")
-    call NvimuxRawToggle(g:curr_iron_repl, "IronRepl")
-  else
-    call NvimuxRawToggle(IronHelper(), "IronRepl")
-  endif
-endfunction
-
-function! AggrToggleRepl() abort
-  if exists("g:curr_iron_repl") && g:curr_iron_repl_ft == &ft
-    call NvimuxRawToggle(g:curr_iron_repl, "IronRepl")
-  else
-    call NvimuxRawToggle(IronHelper(), "IronRepl")
-  endif
-endfunction
-
 " Tab wrapper
 function! TabComplete() abort
   let l:col = col('.') - 1
@@ -119,20 +95,6 @@ function! Quick_scope_selective(movement)
 
   return a:movement . letter
 endfunction
-
-" Auto highlight the word under the cursor after a period of no cursor movement
-function! AutoHighlightToggle()
-  let @/ = ''
-  augroup auto_highlight
-    au!
-    au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-  augroup end
-  setl updatetime=1000
-  echo 'Highlight current word: ON'
-  return 1
-endfunction
-" TODO: figure out if we want to use this feature or not
-" call AutoHighlightToggle()
 
 " ---------------
 " Quick spelling fix (first item in z= list)

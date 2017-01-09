@@ -73,7 +73,7 @@ bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 
 # GENERAL SETTINGS
 # ===========================================================================
-set -sg	update-environment TERM_PROFILE
+# set -sg	update-environment TERM_PROFILE
 set -g history-limit 25000
 set -g set-titles on
 
@@ -160,17 +160,24 @@ set -g display-time 1000
 
 # Colors
 # ---------------------------------------------------------
-# NEW ACTIVE/INACTIVE PANE/WINDOW color stuff
-# http://stackoverflow.com/questions/25532773/change-background-color-of-active-or-inactive-pane-in-tmux/33553372#33553372
-# set inactive/active window styles
-set -g window-style 'fg=colour247,bg=colour236' ##1A1D23 (http://colllor.com/2b303b)
-set -g window-active-style 'fg=colour250,bg=black'
-
-# set the pane border colors
+# # set the pane border colors
 # set -g pane-border-fg colour250
 # set -g pane-border-bg colour236
 # set -g pane-active-border-fg colour250
 # set -g pane-active-border-bg colour250
+
+# NEW ACTIVE/INACTIVE PANE/WINDOW color stuff
+# http://stackoverflow.com/questions/25532773/change-background-color-of-active-or-inactive-pane-in-tmux/33553372#33553372
+# set inactive/active window styles
+# ---
+# FIXME: this is NOT working so well, specifically for loading vim within an
+# active window/pane. the background is way darker outside of vim:
+# set -g window-style 'fg=colour247,bg=colour236' ##1A1D23 (http://colllor.com/2b303b)
+# set -g window-active-style 'fg=colour250,bg=black'
+
+# highlight current/active pane
+set -g display-panes-active-colour colour33
+set -g display-panes-colour colour166
 
 set -g status-bg colour234
 set -g status-fg yellow
@@ -191,10 +198,6 @@ set -g message-fg brightred #orange
 set -g message-attr bold
 
 setw -g clock-mode-colour colour64
-
-# highlight current/active pane
-set -g display-panes-active-colour colour33
-set -g display-panes-colour colour166
 
 # statusbar format
 setw -g window-status-format ' ◦ #W '
