@@ -11,12 +11,12 @@ augroup ft_javascript
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
 
-  " js-beautify
-  au FileType javascript vnoremap <buffer>  <c-b> :call RangeJsBeautify()<cr>
-  au FileType json vnoremap <buffer> <c-b> :call RangeJsonBeautify()<cr>
-  au FileType jsx vnoremap <buffer> <c-b> :call RangeJsxBeautify()<cr>
-  au FileType html vnoremap <buffer> <c-b> :call RangeHtmlBeautify()<cr>
-  au FileType css vnoremap <buffer> <c-b> :call RangeCSSBeautify()<cr>
+  " " js-beautify
+  " au FileType javascript vnoremap <buffer>  <c-b> :call RangeJsBeautify()<cr>
+  " au FileType json vnoremap <buffer> <c-b> :call RangeJsonBeautify()<cr>
+  " au FileType jsx vnoremap <buffer> <c-b> :call RangeJsxBeautify()<cr>
+  " au FileType html vnoremap <buffer> <c-b> :call RangeHtmlBeautify()<cr>
+  " au FileType css vnoremap <buffer> <c-b> :call RangeCSSBeautify()<cr>
 
   " elm
   au BufWritePost *.elm :ElmMake

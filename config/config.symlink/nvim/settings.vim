@@ -261,11 +261,11 @@ if findfile('.eslintrc.json', '.;') ==# ''
 endif
 
 " do the lintings!
-autocmd BufEnter * nested Neomake
-autocmd BufWritePost * nested Neomake
-autocmd User NeomakeFinished nested call lightline#update()
-
+" au! BufEnter * nested Neomake
+" au! BufWritePost * nested Neomake
+" au! User NeomakeFinished nested call lightline#update()
 " au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
+
 
 " ----------------------------------------------------------------------------
 " ## JSDoc
@@ -412,14 +412,14 @@ let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 " ----------------------------------------------------------------------------
 " ## tern_for_vim
 let g:tern#command = ["tern"]
+let g:tern#command = ['node', expand('~').'/lib/tern/bin/tern']
 let g:tern#arguments = ["--persistent"]
 
 " ----------------------------------------------------------------------------
 " ## ternjs
 let g:tern_show_argument_hints = 'on_hold' "on_move; default is 0
 let g:tern_show_signature_in_pum = 1
-let g:tern_request_timeout = 1
-" " let g:tern_map_keys = 1
+let g:tern_request_timeout = 5
 
 " ----------------------------------------------------------------------------
 " ## FZF

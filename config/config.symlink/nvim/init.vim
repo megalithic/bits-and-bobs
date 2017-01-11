@@ -34,6 +34,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ## JavaScript, et al
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+  " Plug 'chemzqm/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'gavocanov/vim-js-indent', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -128,7 +129,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
   " Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'junegunn/fzf'
-        \, { 'do': './install --bin' }
+        \, { 'dir': '~/.fzf', 'do': './install --all' }
         \| Plug 'junegunn/fzf.vim'
         \, { 'on': [
         \ 'History',
