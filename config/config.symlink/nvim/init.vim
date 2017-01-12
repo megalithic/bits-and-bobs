@@ -22,13 +22,12 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## Interface
   " Plug 'chriskempson/base16-vim' " consistently, my favorite colorscheme package
-  " Plug 'joshdick/onedark.vim'
   Plug 'mhartington/oceanic-next'
-  Plug 'megalithic/golden-ratio' " vertical split layout manager
-  " Plug 't9md/vim-choosewin'
   Plug 'itchyny/lightline.vim'
   Plug 'shirataki/lightline-onedark'
-  " Plug 'felixjung/vim-base16-lightline'
+  Plug 'felixjung/vim-base16-lightline'
+  Plug 'megalithic/golden-ratio' " vertical split layout manager
+  " Plug 't9md/vim-choosewin'
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
