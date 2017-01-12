@@ -97,7 +97,6 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'kassio/neoterm'
   Plug 'janko-m/vim-test' " tester for mocha and ruby
   Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
-  " Plug 'w0rp/ale' " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path

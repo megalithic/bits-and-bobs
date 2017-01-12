@@ -1,9 +1,5 @@
 " -/ Plugin Settings /----------------------------------------------
 
-" ## vim-readdir
-" let g:loaded_netrw = 1
-" let g:loaded_netrwPlugin = 1
-
 " ## vim-choosewin
 let g:choosewin_overlay_enable = 1
 
@@ -197,12 +193,12 @@ let g:godown_port = 1337
 " -- Settings derived from / see this link, also, for custom makers:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
 " --
-let g:neomake_serialize = 1
-let g:neomake_verbose = 0
+let g:neomake_serialize = 0
+let g:neomake_verbose = 1
 let g:neomake_open_list = 0
 let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
-let g:neomake_highlight_lines = 1
-let g:neomake_highlight_columns = 1
+let g:neomake_highlight_lines = 0
+let g:neomake_highlight_columns = 0
 " texthl options: NeomakeErrorMsg, DiffDelete, Todo, NeomakeWarningMsg, Error, ErrorMsg, WarningMsg
 let g:neomake_error_sign = {
             \ 'text': '✖',
@@ -212,56 +208,87 @@ let g:neomake_warning_sign = {
             \ 'text': '⚠',
             \ 'texthl': 'WarningMsg'
             \ }
-" call neomake#signs#RedefineErrorSign()
-" call neomake#signs#RedefineWarningSign()
 
-let g:neomake_scss_enabled_checkers = ['scss-lint']
 let g:neomake_scss_enabled_makers = ['scss-lint']
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
-let g:neomake_javascript_enabled_checkers = ['standard', 'eslint']
-let g:neomake_javascript_eslint_marker = {
-      \   'exe': 'eslint_d',
-      \   'args': ['-f', 'compact', '--fix'],
-      \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-      \   '%W%f: line %l\, col %c\, Warning - %m'
-      \ }
 
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_jsx_enabled_makers = ['eslint']
+function! s:findProjectRoot(lookFor)
+  let pathMaker='%:p'
+  while(len(expand(pathMaker)) > len(expand(pathMaker.':h')))
+    let pathMaker=pathMaker.':h'
+    let fileToCheck=expand(pathMaker).'/'.a:lookFor
+    if filereadable(fileToCheck)||isdirectory(fileToCheck)
+      return expand(pathMaker)
+    endif
+  endwhile
+  return 0
+endfunction
 
-if findfile('.eslintrc.json', '.;') ==# ''
-  let g:neomake_javascript_enabled_makers = ['standard']
+function! s:getHigherStandardBin()
+  let projectRoot = <SID>findProjectRoot('package.json')
+  return expand(projectRoot).'/node_modules/.bin/higher-standard'
+endfunction
+
+function! s:getEslintrc()
+  let projectRoot = <SID>findProjectRoot('package.json')
+  return expand(projectRoot).'/.eslintrc'
+endfunction
+
+function! s:eslint()
+  let g:neomake_javascript_enabled_makers = ['eslint']
+  let g:neomake_javascript_eslint_maker = {
+        \   'exe': 'eslint_d',
+        \   'args': ['-f', 'compact', '--fix'],
+        \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \   '%W%f: line %l\, col %c\, Warning - %m'
+        \ }
   let g:neomake_jsx_enabled_makers = ['standard']
+  let g:neomake_jsx_eslint_maker =
+        \ g:neomake_javascript_eslint_maker
+endfunction
 
+function! s:standard()
+  let g:neomake_javascript_enabled_makers = ['standard']
   let g:neomake_javascript_standard_maker = {
         \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
         \ 'errorformat': '  %f:%l:%c: %m'
         \ }
-  let g:neomake_jsx_standard_maker = g:neomake_javascript_standard_maker
+  let g:neomake_jsx_enabled_makers = ['standard']
+  let g:neomake_jsx_standard_maker =
+        \ g:neomake_javascript_standard_maker
+endfunction
+
+function! s:higherstandard()
+  let g:neomake_javascript_enabled_makers = ['higherstandard']
+  let g:neomake_javascript_higherstandard_maker = {
+        \ 'exe': <SID>getHigherStandardBin(),
+        \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+        \ 'errorformat': '  %f:%l:%c: %m'
+        \ }
+  let g:neomake_jsx_enabled_makers = ['higherstandard']
+  let g:neomake_jsx_higherstandard_maker =
+        \ g:neomake_javascript_higherstandard_maker
+endfunction
+
+if findfile(<SID>getEslintrc(), '.;') ==# ''
+  " no eslintrc found, so it's either higher-standard or standard
+  if findfile(<SID>getHigherStandardBin(), '.;') ==# ''
+    " no higher-standard found, so we use standard
+    call <SID>standard()
+  else
+    " found higher-standard, so we use it
+    call <SID>higherstandard()
+  endif
+else
+  " found eslintrc, so we use eslint
+  call <SID>eslint()
 endif
 
 " do the lintings!
 au! BufEnter * nested Neomake
 au! BufWritePost * nested Neomake
-au! User NeomakeFinished nested call lightline#update()
-" au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
+au! User NeomakeFinished nested :call lightline#update()
 
-
-" ----------------------------------------------------------------------------
-" ## ale
-" let g:airline#extensions#ale#enabled = 1
-let g:ale_lint_delay = 100
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 0
-let g:ale_lint_on_text_changed = 0
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-let g:ale_echo_msg_format = '[%linter%] %s'
-let g:ale_statusline_format = ['E:%s', 'W:%s', '']
-let g:ale_linters = {
-  \   'javascript': ['eslint'],
-  \   'ruby': ['rubocop']
-  \}
 
 " ----------------------------------------------------------------------------
 " ## JSDoc
@@ -347,6 +374,7 @@ let g:qs_enable = 0
 " ## deoplete
 set completeopt-=preview
 " set completeopt+=noinsert
+let g:echodoc_enable_at_startup	= 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
@@ -357,10 +385,10 @@ let g:deoplete#file#enable_buffer_path = 1
 " let g:deoplete#max_menu_width = 0
 " let g:deoplete#enable_debug = 0
 
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
-let g:deoplete#sources.javascript = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
-let g:deoplete#sources['javascript.jsx'] = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+" let g:deoplete#sources = {}
+" let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+" let g:deoplete#sources.javascript = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+" let g:deoplete#sources['javascript.jsx'] = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
 call deoplete#custom#set('buffer', 'mark', 'buffer')
 call deoplete#custom#set('ternjs', 'mark', '')
 call deoplete#custom#set('omni', 'mark', 'omni')
@@ -371,23 +399,22 @@ function! Preview_func()
     setlocal nonumber norelativenumber
     endif
 endfunction
-
 autocmd WinEnter * call Preview_func()
 
 
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
-let g:deoplete#omni_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
-let g:deoplete#omni_patterns.elm = '\.'
-let g:deoplete#omni_patterns.html = ''
-let g:deoplete#omni_patterns.html = '<[^>]*'
-let g:deoplete#omni_patterns.xml = '<[^>]*'
-let g:deoplete#omni_patterns.md = '<[^>]*'
-let g:deoplete#omni_patterns.css = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni_patterns.go = '[^.[:digit:] *\t]\.\w*'
-let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
+" let g:deoplete#omni_patterns = {}
+" let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
+" let g:deoplete#omni_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
+" let g:deoplete#omni_patterns.elm = '\.'
+" let g:deoplete#omni_patterns.html = ''
+" let g:deoplete#omni_patterns.html = '<[^>]*'
+" let g:deoplete#omni_patterns.xml = '<[^>]*'
+" let g:deoplete#omni_patterns.md = '<[^>]*'
+" let g:deoplete#omni_patterns.css = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni_patterns.go = '[^.[:digit:] *\t]\.\w*'
+" let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
 
 " we don't want the completion menu to auto pop-up when we are in text files
 let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
@@ -409,8 +436,8 @@ let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 
 " ----------------------------------------------------------------------------
 " ## tern_for_vim
+" let g:tern#command = ['node', expand('~').'/lib/tern/bin/tern']
 let g:tern#command = ["tern"]
-let g:tern#command = ['node', expand('~').'/lib/tern/bin/tern']
 let g:tern#arguments = ["--persistent"]
 let g:tern#filetypes = [
       \ 'jsx',
