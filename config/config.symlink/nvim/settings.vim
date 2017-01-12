@@ -351,11 +351,10 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#max_abbr_width = 0
-let g:deoplete#max_menu_width = 0
-" let g:deoplete#file#enable_buffer_path = 1
-" let g:deoplete#auto_completion_start_length = 3
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#file#enable_buffer_path = 1
+" let g:deoplete#max_abbr_width = 0
+" let g:deoplete#max_menu_width = 0
 " let g:deoplete#enable_debug = 0
 
 let g:deoplete#sources = {}

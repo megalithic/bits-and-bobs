@@ -22,7 +22,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## Interface
   " Plug 'chriskempson/base16-vim' " consistently, my favorite colorscheme package
-  Plug 'joshdick/onedark.vim'
+  " Plug 'joshdick/onedark.vim'
   Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
   " Plug 't9md/vim-choosewin'
@@ -129,6 +129,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'Konfekt/FastFold'
+  Plug 'Shougo/echodoc.vim'
   Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g' }
