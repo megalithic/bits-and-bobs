@@ -105,7 +105,7 @@ function! LightLineFugitive()
   return ''
 endfunction
 
-function! LightLineFugitive()
+function! LightLineConflicted()
   return ConflictedVersion()
 endfunction
 
