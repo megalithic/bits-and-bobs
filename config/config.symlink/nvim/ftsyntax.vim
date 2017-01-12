@@ -11,16 +11,10 @@ augroup ft_javascript
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
 
-  " " js-beautify
-  " au FileType javascript vnoremap <buffer>  <c-b> :call RangeJsBeautify()<cr>
-  " au FileType json vnoremap <buffer> <c-b> :call RangeJsonBeautify()<cr>
-  " au FileType jsx vnoremap <buffer> <c-b> :call RangeJsxBeautify()<cr>
-  " au FileType html vnoremap <buffer> <c-b> :call RangeHtmlBeautify()<cr>
-  " au FileType css vnoremap <buffer> <c-b> :call RangeCSSBeautify()<cr>
-
   " elm
   au BufWritePost *.elm :ElmMake
   au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
+  au FileType javascript.jsx iabbrev class== className=
 augroup END
 
 augroup ft_scss
@@ -92,7 +86,7 @@ augroup completions
   " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
   au FileType * setl omnifunc=syntaxcomplete#Complete
   au FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
-  au FileType css,scss,sass,less setl omnifunc=csscomplete#CompleteCSS
+  au FileType css,scss,sass,less setl omnifunc=csscomplete#CompleteCSS noci
 
   au FileType coffee setl omnifunc=javascriptcomplete#CompleteJS
   au FileType javascript,javascript.jsx,jsx setl omnifunc=javascriptcomplete#CompleteJS " default

@@ -11,6 +11,8 @@ function! s:after_colorscheme()
   hi SpellLocal cterm=underline
   hi SpellRare cterm=underline
 
+  hi link ALEWarningSign Question
+
   " Make conceal look better.
   hi Conceal cterm=bold ctermbg=NONE ctermfg=67
 

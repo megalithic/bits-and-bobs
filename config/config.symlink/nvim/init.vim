@@ -71,6 +71,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
+  Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
+  Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 
   " ----------------------------------------------------------------------------
   " ## Python
@@ -84,6 +86,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
   Plug 'jreybert/vimagit' " more git tools integrated into vim
+  Plug 'christoomey/vim-conflicted'
   Plug 'keith/gist.vim'
   Plug 'ElmCast/elm-vim' " all the elms
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
@@ -95,6 +98,7 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'kassio/neoterm'
   Plug 'janko-m/vim-test' " tester for mocha and ruby
   Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
+  " Plug 'w0rp/ale' " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
@@ -124,10 +128,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'itchyny/vim-cursorword'
   Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
-  Plug 'shougo/deoplete.nvim', { 'do': function('HandleRemotePluginUpdates') }
-  Plug 'carlitux/deoplete-ternjs', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
-  Plug 'ternjs/tern_for_vim', { 'for': ['js', 'jsx', 'javascript', 'javascript.jsx'], 'do': 'npm i' }
-  " Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
+  Plug 'Konfekt/FastFold'
+  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
+  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g' }
+  Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
         \| Plug 'junegunn/fzf.vim'
@@ -142,12 +147,12 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'Helptags',
         \ 'GFiles',
         \ 'GGrep'] }
-
-  " Plug 'Konfekt/FastFold' " needed for deoplete for some arcane reasons
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
   " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
+  Plug 'airblade/vim-rooter' " change vim root to vcs root when editing a file
+  Plug 'eugen0329/vim-esearch' " project wide search and replace
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al

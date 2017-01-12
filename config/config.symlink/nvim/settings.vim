@@ -20,8 +20,8 @@ let g:lightline = {
       \ 'active': {
       \   'left': [
       \     [ 'mode', 'paste' ],
-      \     [ 'fugitive', 'filename' ],
-      \     [ 'readonlye', 'modified' ] ],
+      \     [ 'fugitive', 'conflicted', 'filename' ],
+      \     [ 'readonly', 'modified' ] ],
       \   'right': [
       \     [ 'neomake_errors', 'neomake_warnings', 'column', 'lineinfo' ],
       \     [ 'percent' ],
@@ -40,6 +40,7 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'fugitive': 'LightLineFugitive',
+      \   'conflicted': 'LightLineConflicted',
       \   'readonly': 'LightLineReadonly',
       \   'modified': 'LightLineModified',
       \   'filename': 'LightLineFilename',
@@ -104,6 +105,10 @@ function! LightLineFugitive()
   return ''
 endfunction
 
+function! LightLineFugitive()
+  return ConflictedVersion()
+endfunction
+
 function! LightLineModified()
   if &filetype == "help"
     return ""
@@ -158,6 +163,10 @@ let g:lightline_buffer_reservelen = 20
 " ## vim-javascript
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
+let g:javascript_conceal = 0
+" let g:javascript_conceal_function = "ƒ"
+" let g:javascript_conceal_this = "@"
+" let g:javascript_conceal_return = "⇚"
 
 " ----------------------------------------------------------------------------
 " ## elm
@@ -185,59 +194,30 @@ let g:godown_port = 1337
 
 " ----------------------------------------------------------------------------
 " ## neomake
-" -- Settings derived from:
+" -- Settings derived from / see this link, also, for custom makers:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
 " --
 let g:neomake_serialize = 1
 let g:neomake_verbose = 0
 let g:neomake_open_list = 0
 let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
+let g:neomake_highlight_lines = 1
+let g:neomake_highlight_columns = 1
+" texthl options: NeomakeErrorMsg, DiffDelete, Todo, NeomakeWarningMsg, Error, ErrorMsg, WarningMsg
 let g:neomake_error_sign = {
             \ 'text': '✖',
-            \ 'texthl': 'NeomakeErrorMsg',
+            \ 'texthl': 'ErrorMsg'
             \ }
 let g:neomake_warning_sign = {
             \ 'text': '⚠',
-            \ 'texthl': 'NeomakeWarningMsg',
+            \ 'texthl': 'WarningMsg'
             \ }
-
-let g:neomake_elixir_credo_maker = {
-      \ 'exe': 'mix',
-      \ 'args': ['credo'],
-      \ 'append_file': 0,
-      \ 'errorformat':
-      \   '%E┃ [%t] %. %m.,%Z┃       %f:%l%.%#'
-      \ }
-
-let g:neomake_elixir_diaylze_maker = {
-      \ 'exe': 'mix',
-      \ 'args': [
-      \   'dialyze',
-      \   '--no-check',
-      \   '--unmatched-returns',
-      \   '--error-handling',
-      \   '--race-conditions',
-      \   '--underspecs'
-      \  ],
-      \ 'errorformat':
-      \   '%f:%l:%m'
-      \ }
-
-let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'diaylze']
-let g:neomake_elixir_mix_maker = {
-      \ 'args': ['compile'],
-      \ 'errorformat':
-      \   '** %s %f:%l: %m,' .
-      \   '%f:%l: warning: %m'
-      \ }
+" call neomake#signs#RedefineErrorSign()
+" call neomake#signs#RedefineWarningSign()
 
 let g:neomake_scss_enabled_checkers = ['scss-lint']
-
-let g:neomake_ruby_rubocop_exe = 'bundle'
-let g:neomake_ruby_rubocop_args = ['exec', 'rubocop']
-let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
-
-
+let g:neomake_scss_enabled_makers = ['scss-lint']
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 let g:neomake_javascript_enabled_checkers = ['standard', 'eslint']
 let g:neomake_javascript_eslint_marker = {
       \   'exe': 'eslint_d',
@@ -261,11 +241,27 @@ if findfile('.eslintrc.json', '.;') ==# ''
 endif
 
 " do the lintings!
-" au! BufEnter * nested Neomake
-" au! BufWritePost * nested Neomake
-" au! User NeomakeFinished nested call lightline#update()
+au! BufEnter * nested Neomake
+au! BufWritePost * nested Neomake
+au! User NeomakeFinished nested call lightline#update()
 " au! BufReadPost,BufWritePost {*.js,*.rb,*.elm} Neomake | redraw
 
+
+" ----------------------------------------------------------------------------
+" ## ale
+" let g:airline#extensions#ale#enabled = 1
+let g:ale_lint_delay = 100
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_text_changed = 0
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_statusline_format = ['E:%s', 'W:%s', '']
+let g:ale_linters = {
+  \   'javascript': ['eslint'],
+  \   'ruby': ['rubocop']
+  \}
 
 " ----------------------------------------------------------------------------
 " ## JSDoc
@@ -336,7 +332,7 @@ let g:JSHintHighlightErrorLine = 1
 let javascript_enable_domhtmlcss = 1
 let loaded_matchit = 1
 let g:js_indent_log = 1
-let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angular,enzyme'
+let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angular,enzyme,ramda'
 
 " ----------------------------------------------------------------------------
 " ## vim-jsx
@@ -363,14 +359,14 @@ let g:deoplete#max_menu_width = 0
 " let g:deoplete#enable_debug = 0
 
 let g:deoplete#sources = {}
-let g:deoplete#sources._ = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'omni']
-let g:deoplete#sources.javascript = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'ternjs', 'omni']
-let g:deoplete#sources['javascript.jsx'] = ['buffer', 'vim', 'member', 'file', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+let g:deoplete#sources.javascript = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+let g:deoplete#sources['javascript.jsx'] = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
 call deoplete#custom#set('buffer', 'mark', 'buffer')
 call deoplete#custom#set('ternjs', 'mark', '')
 call deoplete#custom#set('omni', 'mark', 'omni')
 call deoplete#custom#set('file', 'mark', 'file')
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
 function! Preview_func()
   if &pvw
     setlocal nonumber norelativenumber
@@ -407,6 +403,9 @@ let g:deoplete#omni#functions['javascript.jsx'] = [
   \ 'jspc#omni'
 \]
 let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
+let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
+let g:deoplete#omni#functions.scss = 'csscomplete#CompleteCSS'
+let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
 let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 
 " ----------------------------------------------------------------------------
@@ -414,12 +413,18 @@ let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 let g:tern#command = ["tern"]
 let g:tern#command = ['node', expand('~').'/lib/tern/bin/tern']
 let g:tern#arguments = ["--persistent"]
+let g:tern#filetypes = [
+      \ 'jsx',
+      \ 'javascript',
+      \ 'javascript.jsx',
+      \ 'vue'
+      \ ]
 
 " ----------------------------------------------------------------------------
 " ## ternjs
 let g:tern_show_argument_hints = 'on_hold' "on_move; default is 0
-let g:tern_show_signature_in_pum = 1
-let g:tern_request_timeout = 5
+let g:tern_show_signature_in_pum = '0' " disables full signature type on autocomplete
+let g:tern_request_timeout = 1
 
 " ----------------------------------------------------------------------------
 " ## FZF
@@ -464,13 +469,24 @@ let g:gist_open_url = 1
 let g:gist_default_private = 1
 
 " ----------------------------------------------------------------------------
+" ## vim-esearch
+if !exists('g:esearch')
+  let g:esearch = {}
+  let g:esearch.adapter = 'ag'
+  let g:esearch.backend = 'nvim'
+  let g:esearch.out = 'win'
+  let g:esearch.batch_size = 1000
+  let g:esearch.use = ['visual', 'hlsearch', 'last']
+endif
+
+" ----------------------------------------------------------------------------
 " ## ultisnips
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
 let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
-let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips']
+" let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'replisnips']
 
 " Disable built-in <C-x><C-k> to be able to go backward
 inoremap <C-x><C-k> <NOP>
