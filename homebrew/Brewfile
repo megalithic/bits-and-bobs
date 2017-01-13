@@ -80,11 +80,12 @@ brew 'tmate'
 brew 'tmux'
 brew 'tree'
 brew 'urlview'
-brew 'weechat', args: ['with-ruby', 'with-python', 'with-perl', 'with-lua', 'with-aspell', 'with-javascript', 'with-curl', 'with-guile']
+brew 'weechat', args: ['--with-ruby', '--with-python', '--with-perl', '--with-lua', '--with-aspell', '--with-javascript', '--with-curl', '--with-guile']
 brew 'wget', args: ['enable-iri']
 brew 'zsh'
 brew 'zsh-completions'
 brew 'zsh-lovers'
+brew 'zsh-autosuggestions'
 brew 'zsh-syntax-highlighting'
 
 cask '1password'
