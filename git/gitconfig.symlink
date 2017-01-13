@@ -172,7 +172,6 @@
 
 [rebase]
 	autosquash = true
-	# for fixup hotness later
 
 [rerere]
  enabled = true
