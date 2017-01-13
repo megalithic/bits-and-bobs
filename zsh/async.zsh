@@ -3,7 +3,7 @@
 #
 # zsh-async
 #
-# version: 1.1.0
+# version: 1.3.1
 # author: Mathias Fredriksson
 # url: https://github.com/mafredri/zsh-async
 #
@@ -26,7 +26,7 @@ _async_job() {
   unset stdout stderr ret
   eval "$(
     {
-      stdout=$(eval "$@")
+      stdout=$(eval '$@')
       ret=$?
       typeset -p stdout ret
     } 2> >(stderr=$(cat); typeset -p stderr)
@@ -43,13 +43,13 @@ _async_job() {
   # have run into a bug
   ret=${ret:--1}
 
-  # Grab mutex lock
+  # Grab mutex lock, stalls until token is available
   read -ep >/dev/null
 
   # return output (<job_name> <return_code> <stdout> <duration> <stderr>)
   print -r -N -n -- "$1" "$ret" "$stdout" "$duration" "$stderr"$'\0'
 
-  # Unlock mutex
+  # Unlock mutex by inserting a token
   print -p "t"
 }
 
@@ -57,31 +57,68 @@ _async_job() {
 _async_worker() {
   local -A storage
   local unique=0
+  local notify_parent=0
+  local parent_pid=0
+  local coproc_pid=0
+
+  # Deactivate all zsh hooks inside the worker.
+  zsh_hooks=(chpwd periodic precmd preexec zshexit zshaddhistory)
+  unfunction $zsh_hooks &>/dev/null
+  # And hooks with registered functions.
+  zsh_hook_functions=( ${^zsh_hooks}_functions )
+  unset $zsh_hook_functions
+
+  child_exit() {
+    # If coproc (cat) is the only child running, we close it to avoid
+    # leaving it running indefinitely and cluttering the process tree.
+    if [[ ${#jobstates} = 1 ]] && [[ $coproc_pid = ${${(v)jobstates##*:*:}%\=*} ]]; then
+      coproc :
+    fi
+
+    # On older version of zsh (pre 5.2) we notify the parent through a
+    # SIGWINCH signal because `zpty` did not return a file descriptor (fd)
+    # prior to that.
+    if (( notify_parent )); then
+      # We use SIGWINCH for compatibility with older versions of zsh
+      # (pre 5.1.1) where other signals (INFO, ALRM, USR1, etc.) could
+      # cause a deadlock in the shell under certain circumstances.
+      kill -WINCH $parent_pid
+    fi
+  }
+
+  # Register a SIGCHLD trap to handle the completion of child processes.
+  trap child_exit CHLD
 
   # Process option parameters passed to worker
   while getopts "np:u" opt; do
     case $opt in
-      # Use SIGWINCH since many others seem to cause zsh to freeze, e.g. ALRM, INFO, etc.
-      n) trap 'kill -WINCH $ASYNC_WORKER_PARENT_PID' CHLD;;
-      p) ASYNC_WORKER_PARENT_PID=$OPTARG;;
+      n) notify_parent=1;;
+      p) parent_pid=$OPTARG;;
       u) unique=1;;
     esac
   done
 
-  # Create a mutex for writing to the terminal through coproc
-  coproc cat
-  # Insert token into coproc
-  print -p "t"
+  local -a buffer
+  # Command arguments are separated with a null character.
+  while read -r -d $'\0' line; do
+    if [[ $line != ___ZSH_ASNYC_EOC___ ]]; then
+      # Read command arguments until we receive magic end-of-command string.
+      buffer+=($line)
+      continue
+    fi
 
-  while read -r cmd; do
-    # Separate on spaces into an array
-    cmd=(${=cmd})
+    # Copy command buffer
+    cmd=("${(@)=buffer}")
+
+    # Reset command buffer
+    buffer=()
+
     local job=$cmd[1]
 
     # Check for non-job commands sent to worker
     case $job in
       _unset_trap)
-        trap - CHLD; continue;;
+        notify_parent=0; continue;;
       _killjobs)
         # Do nothing in the worker when receiving the TERM signal
         trap '' TERM
@@ -101,6 +138,16 @@ _async_worker() {
           continue 2
         fi
       done
+    fi
+
+    # Because we close the coproc after the last job has completed, we must
+    # recreate it when there are no other jobs running.
+    if (( !${#jobstates} )); then
+      # Use coproc as a mutex for synchronized output between children.
+      coproc cat
+      coproc_pid=$!
+      # Insert token into coproc
+      print -p "t"
     fi
 
     # Run task in background
@@ -130,8 +177,9 @@ async_process_results() {
   integer count=0
   local worker=$1
   local callback=$2
+  local caller=$3
   local -a items
-  local IFS=$'\0'
+  local line
 
   typeset -gA ASYNC_PROCESS_BUFFER
   # Read output from zpty and parse it if available
@@ -139,8 +187,13 @@ async_process_results() {
     # Remove unwanted \r from output
     ASYNC_PROCESS_BUFFER[$worker]+=${line//$'\r'$'\n'/$'\n'}
     # Split buffer on null characters, preserve empty elements
-    items=("${(@)=ASYNC_PROCESS_BUFFER[$worker]}")
-    # Remove last element since it's due to the return string separator structure
+    # (an anonymous function is used to avoid leaking modified IFS into the callback)
+    () {
+      local IFS=$'\0'
+      items=("${(@)=ASYNC_PROCESS_BUFFER[$worker]}")
+    }
+    # Remove last element since it's an artifact
+    # of the return string separator structure
     items=("${(@)items[1,${#items}-1]}")
 
     # Continue until we receive all information
@@ -148,7 +201,7 @@ async_process_results() {
 
     # Work through all results
     while (( ${#items} > 0 )); do
-      $callback "${(@)=items[1,5]}"
+      $callback "${(@)items[1,5]}"
       shift 5 items
       count+=1
     done
@@ -159,6 +212,9 @@ async_process_results() {
 
   # If we processed any results, return success
   (( count )) && return 0
+
+  # Avoid printing exit value from setopt printexitvalue
+  [[ $caller = trap || $caller = watcher ]] && return 0
 
   # No results were processed
   return 1
@@ -172,7 +228,7 @@ _async_zle_watcher() {
   local callback=$ASYNC_CALLBACKS[$worker]
 
   if [[ -n $callback ]]; then
-    async_process_results $worker $callback
+    async_process_results $worker $callback watcher
   fi
 }
 
@@ -186,7 +242,14 @@ async_job() {
   setopt localoptions noshwordsplit
 
   local worker=$1; shift
-  zpty -w $worker $@
+
+  local cmd p
+  for p in "$@"; do
+    cmd+="$p"$'\0'
+  done
+  cmd+=___ZSH_ASNYC_EOC___$'\0'
+
+  zpty -w $worker $cmd
 }
 
 # This function traps notification signals and calls all registered callbacks
@@ -194,7 +257,7 @@ _async_notify_trap() {
   setopt localoptions noshwordsplit
 
   for k in ${(k)ASYNC_CALLBACKS}; do
-    async_process_results $k ${ASYNC_CALLBACKS[$k]}
+    async_process_results $k ${ASYNC_CALLBACKS[$k]} trap
   done
 }
 
@@ -246,7 +309,7 @@ async_flush_jobs() {
   zpty -t $worker &>/dev/null || return 1
 
   # Send kill command to worker
-  zpty -w $worker "_killjobs"
+  async_job $worker "_killjobs"
 
   # Clear all output buffers
   while zpty -r $worker line; do true; done

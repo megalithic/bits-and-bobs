@@ -54,4 +54,5 @@ bindkey '^[[Z' reverse-menu-complete
 
 # for autosuggestions phrase accept
 bindkey '^f' vi-forward-blank-word
+bindkey '^f' expand-or-complete
 
