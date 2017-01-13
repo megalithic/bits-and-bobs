@@ -52,6 +52,6 @@ bindkey '^[[6~' history-beginning-search-forward
 # shift + tab
 bindkey '^[[Z' reverse-menu-complete
 
-# bindkey '^j' autosuggest-accept
+# for autosuggestions phrase accept
 bindkey '^f' vi-forward-blank-word
 
