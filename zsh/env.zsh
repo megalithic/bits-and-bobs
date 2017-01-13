@@ -88,4 +88,4 @@ export FZF_DEFAULT_OPTS='
 # export FZF_COMPLETION_TRIGGER=''
 export FZF_TMUX_HEIGHT='20%'
 
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters

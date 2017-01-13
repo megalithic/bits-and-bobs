@@ -87,3 +87,4 @@ source ~/.dotfiles/bin/z.sh
 # We already source these with the glob pattern around L18.
 # ===========================================================================
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
