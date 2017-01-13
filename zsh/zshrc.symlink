@@ -86,5 +86,6 @@ source ~/.dotfiles/bin/z.sh
 # NOTE: DO NOT PUT `source`s for *.zsh files local to ~/.dotfiles/zsh folder.
 # We already source these with the glob pattern around L18.
 # ===========================================================================
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# FIXME: autosuggestions blows up the shell after sourcing this file.. :(
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

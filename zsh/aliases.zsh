@@ -29,7 +29,7 @@ alias new="print -rl -- **/*(Dom[1,5])"
 #   `brew install coreutils`
 if $(gls &>/dev/null)
 then
-  alias gls="gls --color=auto --group-directories-first"
+  alias gls="tmux select-pane -P bg=default,fg=default &> /dev/null; gls --color=auto --group-directories-first"
   alias ls="gls -FA"
   alias l="gls -lAh"
   alias ll="gls -l"
@@ -43,6 +43,7 @@ alias dsnuke="find . -name '*.DS_Store' -type f -ls -delete"
 alias pkey="pbcopy < ~/.ssh/id_rsa.pub"
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 alias unixts="date +%s"
+# alias exit="exit; tmux select-pane -P bg=default"
 alias xit="exit"
 alias please='sudo $(fc -ln -1)'
 alias count='wc -l'
@@ -318,5 +319,5 @@ alias rn='react-native'
 
 alias geo='curl -s "http://www.geoiptool.com/en/?IP=${IP}" | textutil -stdin -format html -stdout -convert txt | sed -n "/Host Name/,/Postal code/p"'
 
-alias sleep='pmset displaysleepnow'
+alias sleepdisplay='pmset displaysleepnow'
 

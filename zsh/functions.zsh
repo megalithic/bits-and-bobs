@@ -1,6 +1,20 @@
 # don't forget to source our function files (ext files not currently in this one)
 source ~/.dotfiles/zsh/site-functions/**/*.zsh
 
+function exit() {
+  if [ -n "$TMUX" ]; then
+    tmux killp\; selectp -P bg=default,fg=default
+  else
+    exit
+  fi
+}
+
+function tmuxcolors () {
+  for i in {0..255}; do
+    printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+  done
+}
+
 function killport() {
   lsof -t -i tcp:$1 | xargs kill
 }
@@ -15,8 +29,7 @@ function dnd () {
   "
 }
 
-whereami()
-{
+whereami() {
   if [[ -n "$SSH_CLIENT$SSH2_CLIENT$SSH_TTY" ]] ; then
     echo ssh
   else

@@ -41,20 +41,30 @@ bind-key r refresh-client
 bind -r C-b copy-mode -u
 
 # Splitting panes
-bind '|' split-window -h -c "#{pane_current_path}"
+# bind '|' run "tmux select-pane -P bg=black; tmux split-window -h -c '#{pane_current_path}'; tmux select-pane -P bg=default"
+bind '|' select-pane -P bg=black \; split-window -h -c "#{pane_current_path}" \; select-pane -P bg=default
+# bind '|' split-window -h -c "#{pane_current_path}"
+bind '\' split-window -h -c "#{pane_current_path}"
+bind '\' select-pane -P bg=red # \; split-window -h -c "#{pane_current_path}" \; select-pane -P bg=default
 bind '_' split-window -v -c "#{pane_current_path}"
 bind '-' split-window -v -c "#{pane_current_path}"
 bind -r C-t new-window -c "#{pane_current_path}"
 bind -r C-x kill-pane
 bind -r C-q kill-pane
 bind p previous-window
-bind -r C-Space last-window
+# bind -r C-Space last-window
 
 # Resizing panes
 bind-key -n C-Up resize-pane -U 15
 bind-key -n C-Down resize-pane -D 15
 bind-key -n C-Left resize-pane -L 25
 bind-key -n C-Right resize-pane -R 25
+
+# Resizing (mouse also works).
+bind -r left resize-pane -L 5
+bind -r right resize-pane -R 5
+bind -r down resize-pane -D 5
+bind -r up resize-pane -U 8
 
 # Vi-like movements between panes
 bind h select-pane -L
@@ -64,12 +74,17 @@ bind l select-pane -R
 
 # Smart pane switching with awareness of vim splits (from https://github.com/christoomey/vim-tmux-navigator)
 is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(weechat|view|n?vim?x?)(diff)?$"'
-# is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(weechat|view|n?vim?x?)(diff)?$'"
-bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
-bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
-bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
-bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
-bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -P bg=black \; select-pane -L \; select-pane -P bg=default"
+bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -P bg=black \; select-pane -D \; select-pane -P bg=default"
+bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -P bg=black \; select-pane -U \; select-pane -P bg=default"
+bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -P bg=black \; select-pane -R \; select-pane -P bg=default"
+
+# bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+# bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+# bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+# bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+
+bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l \; select-pane -P bg=black"
 
 # GENERAL SETTINGS
 # ===========================================================================
@@ -107,6 +122,10 @@ set -g repeat-time 0
 
 # nvim trickery
 set -g escape-time 0
+
+# Don't wrap searches; it's super confusing given tmux's reverse-ordering of
+# position info in copy mode.
+set -w -g wrap-search off
 
 # VI MODE
 # ===========================================================================
@@ -160,26 +179,35 @@ set -g display-time 1000
 
 # Colors
 # ---------------------------------------------------------
-# # set the pane border colors
-# set -g pane-border-fg colour250
-# set -g pane-border-bg colour236
-# set -g pane-active-border-fg colour250
-# set -g pane-active-border-bg colour250
 
 # NEW ACTIVE/INACTIVE PANE/WINDOW color stuff
 # http://stackoverflow.com/questions/25532773/change-background-color-of-active-or-inactive-pane-in-tmux/33553372#33553372
 # set inactive/active window styles
-# ---
-# FIXME: this is NOT working so well, specifically for loading vim within an
-# active window/pane. the background is way darker outside of vim:
-# set -g window-style 'fg=colour247,bg=colour236' ##1A1D23 (http://colllor.com/2b303b)
-# set -g window-active-style 'fg=colour250,bg=black'
 
-# highlight current/active pane
+# To list tmux colours (http://superuser.com/a/285400):
+# for i in {0..255}; do
+#  printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+# done
+
+# FIXME: this is NOT working so well, specifically for loading vim within an
+# ---
+# Active window/pane. the background is way darker outside of vim:
+# set -g window-style 'fg=default,bg=colour232' ##1A1D23 (http://colllor.com/2b303b)
+# set -g window-style 'bg=black'
+# set -g window-active-style 'bg=default'
+# set -g window-active-style 'fg=default,bg=default'
+
+# colors for the pane # overlay when hitting <C-a q>
 set -g display-panes-active-colour colour33
 set -g display-panes-colour colour166
 
-set -g status-bg colour234
+# highlight current/active pane borders
+set -g pane-border-fg colour232
+# set -g pane-border-bg colour236
+set -g pane-active-border-fg colour208
+set -g pane-active-border-bg colour232
+
+set -g status-bg colour235
 set -g status-fg yellow
 set -g status-attr dim
 
@@ -207,7 +235,7 @@ setw -g window-status-current-format "#[fg=blue] ● #W #[fg=colour28]"
 # ---------------------------------------------------------
 # http://manpages.ubuntu.com/manpages/precise/en/man3/strftime.3.html
 set -g status-left-length 60
-set -g status-left "#[fg=green]#S #(~/.dotfiles/bin/ip-tmux) #{prefix_highlight}"
+set -g status-left "#[fg=green]#S ⧉ #(~/.dotfiles/bin/ip-tmux) #{prefix_highlight}"
 set -g status-right-length 120
 set -g status-right "#(~/.dotfiles/bin/tmux-spotify) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
 
