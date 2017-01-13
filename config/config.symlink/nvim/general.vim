@@ -67,14 +67,21 @@ set sessionoptions-=options " Do not save settings and mappings to sessions
 
 " -----------------------------------------------------------------------------
 " ## Folding
-set nofoldenable        "dont fold by default
+if has('folding')
+  if has('windows')
+    let &fillchars='vert: '           " less cluttered vertical window separators
+  endif
+  set foldmethod=indent               " not as cool as syntax, but faster
+  set foldlevelstart=99               " start unfolded
+endif
+" set nofoldenable        "dont fold by default
 " set foldmethod=indent   "fold based on indent
 " set foldnestmax=5      "deepest fold is 5 levels
 " set foldlevel=99
 " set foldlevelstart=0
 " set fcs=fold:-
-" let ruby_fold = 1
-" let javascript_fold = 1
+let ruby_fold = 2
+let javascript_fold = 2
 
 " -----------------------------------------------------------------------------
 " ## Indentions

@@ -9,6 +9,109 @@ let g:golden_ratio_exclude_nonmodifiable = 1
 let g:golden_ratio_wrap_ignored = 0
 let g:golden_ratio_ignore_horizontal_splits = 1
 
+
+" ----------------------------------------------------------------------------
+" ## neomake
+" -- Settings derived from / see this link, also, for custom makers:
+" -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
+" --
+let g:neomake_serialize = 0
+let g:neomake_verbose = 1
+let g:neomake_open_list = 0
+let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
+let g:neomake_highlight_lines = 0
+let g:neomake_highlight_columns = 0
+" texthl options: NeomakeErrorMsg, DiffDelete, Todo, NeomakeWarningMsg, Error, ErrorMsg, WarningMsg
+let g:neomake_error_sign = {
+            \ 'text': '✖',
+            \ 'texthl': 'ErrorMsg'
+            \ }
+let g:neomake_warning_sign = {
+            \ 'text': '⚠',
+            \ 'texthl': 'WarningMsg'
+            \ }
+
+let g:neomake_scss_enabled_makers = ['scss-lint']
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+
+function! s:findProjectRoot(lookFor)
+  let pathMaker='%:p'
+  while(len(expand(pathMaker)) > len(expand(pathMaker.':h')))
+    let pathMaker=pathMaker.':h'
+    let fileToCheck=expand(pathMaker).'/'.a:lookFor
+    if filereadable(fileToCheck)||isdirectory(fileToCheck)
+      return expand(pathMaker)
+    endif
+  endwhile
+  return 0
+endfunction
+
+function! s:getHigherStandardBin()
+  let projectRoot = <SID>findProjectRoot('package.json')
+  return expand(projectRoot).'/node_modules/.bin/higher-standard'
+endfunction
+
+function! s:getEslintrc()
+  let projectRoot = <SID>findProjectRoot('package.json')
+  return expand(projectRoot).'/.eslintrc'
+endfunction
+
+function! s:eslint()
+  let g:neomake_javascript_enabled_makers = ['eslint']
+  let g:neomake_javascript_eslint_maker = {
+        \   'exe': 'eslint_d',
+        \   'args': ['-f', 'compact', '--fix'],
+        \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \   '%W%f: line %l\, col %c\, Warning - %m'
+        \ }
+  let g:neomake_jsx_enabled_makers = ['standard']
+  let g:neomake_jsx_eslint_maker =
+        \ g:neomake_javascript_eslint_maker
+endfunction
+
+function! s:standard()
+  let g:neomake_javascript_enabled_makers = ['standard']
+  let g:neomake_javascript_standard_maker = {
+        \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+        \ 'errorformat': '  %f:%l:%c: %m'
+        \ }
+  let g:neomake_jsx_enabled_makers = ['standard']
+  let g:neomake_jsx_standard_maker =
+        \ g:neomake_javascript_standard_maker
+endfunction
+
+function! s:higherstandard()
+  let g:neomake_javascript_enabled_makers = ['higherstandard']
+  let g:neomake_javascript_higherstandard_maker = {
+        \ 'exe': <SID>getHigherStandardBin(),
+        \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+        \ 'errorformat': '  %f:%l:%c: %m'
+        \ }
+  let g:neomake_jsx_enabled_makers = ['higherstandard']
+  let g:neomake_jsx_higherstandard_maker =
+        \ g:neomake_javascript_higherstandard_maker
+endfunction
+
+if findfile(<SID>getEslintrc(), '.;') ==# ''
+  " no eslintrc found, so it's either higher-standard or standard
+  if findfile(<SID>getHigherStandardBin(), '.;') ==# ''
+    " no higher-standard found, so we use standard
+    call <SID>standard()
+  else
+    " found higher-standard, so we use it
+    call <SID>higherstandard()
+  endif
+else
+  " found eslintrc, so we use eslint
+  call <SID>eslint()
+endif
+
+" do the lintings!
+au! BufEnter * nested Neomake
+au! BufWritePost * nested Neomake
+au! User NeomakeFinished nested :call lightline#update()
+
+
 " ----------------------------------------------------------------------------
 " ## lightline
 let g:lightline = {
@@ -158,6 +261,22 @@ let g:lightline_buffer_minflen = 16
 let g:lightline_buffer_minfextlen = 3
 let g:lightline_buffer_reservelen = 20
 
+
+" ----------------------------------------------------------------------------
+" ## vim-javascript-syntax
+let g:JSHintHighlightErrorLine = 1
+let javascript_enable_domhtmlcss = 1
+let loaded_matchit = 1
+let g:js_indent_log = 1
+let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angular,enzyme,ramda'
+
+
+" ----------------------------------------------------------------------------
+" ## vim-jsx
+let g:jsx_ext_required = 0
+let g:jsx_pragma_required = 0
+
+
 " ----------------------------------------------------------------------------
 " ## vim-javascript
 let g:javascript_plugin_flow = 1
@@ -166,6 +285,7 @@ let g:javascript_conceal = 0
 " let g:javascript_conceal_function = "ƒ"
 " let g:javascript_conceal_this = "@"
 " let g:javascript_conceal_return = "⇚"
+
 
 " ----------------------------------------------------------------------------
 " ## elm
@@ -176,13 +296,21 @@ let g:elm_make_show_warnings = 1
 let g:elm_setup_keybindings = 0
 let g:elm_jump_to_error = 1
 
+
 " ----------------------------------------------------------------------------
 " ## vim-flow
 let g:flow#autoclose = 1
 
+
 " ----------------------------------------------------------------------------
 " ## vim-json
 let g:vim_json_syntax_conceal = 0
+
+
+" ----------------------------------------------------------------------------
+" ## fastfold
+let g:fastfold_savehook = 1
+
 
 " ----------------------------------------------------------------------------
 " ## godown-vim
@@ -190,107 +318,6 @@ let g:vim_json_syntax_conceal = 0
 let g:godown_autorun = 0
 " the port to run the Godown server on
 let g:godown_port = 1337
-
-" ----------------------------------------------------------------------------
-" ## neomake
-" -- Settings derived from / see this link, also, for custom makers:
-" -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
-" --
-let g:neomake_serialize = 0
-let g:neomake_verbose = 1
-let g:neomake_open_list = 0
-let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
-let g:neomake_highlight_lines = 0
-let g:neomake_highlight_columns = 0
-" texthl options: NeomakeErrorMsg, DiffDelete, Todo, NeomakeWarningMsg, Error, ErrorMsg, WarningMsg
-let g:neomake_error_sign = {
-            \ 'text': '✖',
-            \ 'texthl': 'ErrorMsg'
-            \ }
-let g:neomake_warning_sign = {
-            \ 'text': '⚠',
-            \ 'texthl': 'WarningMsg'
-            \ }
-
-let g:neomake_scss_enabled_makers = ['scss-lint']
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
-
-function! s:findProjectRoot(lookFor)
-  let pathMaker='%:p'
-  while(len(expand(pathMaker)) > len(expand(pathMaker.':h')))
-    let pathMaker=pathMaker.':h'
-    let fileToCheck=expand(pathMaker).'/'.a:lookFor
-    if filereadable(fileToCheck)||isdirectory(fileToCheck)
-      return expand(pathMaker)
-    endif
-  endwhile
-  return 0
-endfunction
-
-function! s:getHigherStandardBin()
-  let projectRoot = <SID>findProjectRoot('package.json')
-  return expand(projectRoot).'/node_modules/.bin/higher-standard'
-endfunction
-
-function! s:getEslintrc()
-  let projectRoot = <SID>findProjectRoot('package.json')
-  return expand(projectRoot).'/.eslintrc'
-endfunction
-
-function! s:eslint()
-  let g:neomake_javascript_enabled_makers = ['eslint']
-  let g:neomake_javascript_eslint_maker = {
-        \   'exe': 'eslint_d',
-        \   'args': ['-f', 'compact', '--fix'],
-        \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-        \   '%W%f: line %l\, col %c\, Warning - %m'
-        \ }
-  let g:neomake_jsx_enabled_makers = ['standard']
-  let g:neomake_jsx_eslint_maker =
-        \ g:neomake_javascript_eslint_maker
-endfunction
-
-function! s:standard()
-  let g:neomake_javascript_enabled_makers = ['standard']
-  let g:neomake_javascript_standard_maker = {
-        \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-        \ 'errorformat': '  %f:%l:%c: %m'
-        \ }
-  let g:neomake_jsx_enabled_makers = ['standard']
-  let g:neomake_jsx_standard_maker =
-        \ g:neomake_javascript_standard_maker
-endfunction
-
-function! s:higherstandard()
-  let g:neomake_javascript_enabled_makers = ['higherstandard']
-  let g:neomake_javascript_higherstandard_maker = {
-        \ 'exe': <SID>getHigherStandardBin(),
-        \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-        \ 'errorformat': '  %f:%l:%c: %m'
-        \ }
-  let g:neomake_jsx_enabled_makers = ['higherstandard']
-  let g:neomake_jsx_higherstandard_maker =
-        \ g:neomake_javascript_higherstandard_maker
-endfunction
-
-if findfile(<SID>getEslintrc(), '.;') ==# ''
-  " no eslintrc found, so it's either higher-standard or standard
-  if findfile(<SID>getHigherStandardBin(), '.;') ==# ''
-    " no higher-standard found, so we use standard
-    call <SID>standard()
-  else
-    " found higher-standard, so we use it
-    call <SID>higherstandard()
-  endif
-else
-  " found eslintrc, so we use eslint
-  call <SID>eslint()
-endif
-
-" do the lintings!
-au! BufEnter * nested Neomake
-au! BufWritePost * nested Neomake
-au! User NeomakeFinished nested :call lightline#update()
 
 
 " ----------------------------------------------------------------------------
@@ -302,10 +329,12 @@ let g:jsdoc_enable_es6 = 1
 let g:jsdoc_access_descriptions=2
 let g:jsdoc_additional_descriptions=1
 
+
 " ----------------------------------------------------------------------------
 " ## rainbow_parentheses.vim
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
 
 " ----------------------------------------------------------------------------
 " ## vim-test
@@ -333,16 +362,19 @@ let g:test#javascript#mocha#file_pattern = ".test.js"
 let test#elixir#exunit#options = '--trace'
 let test#ruby#rspec#options = '-f d'
 
+
 " ----------------------------------------------------------------------------
 " ## list-toggle
 let g:lt_location_list_toggle_map = '<F3>'
 let g:lt_quickfix_list_toggle_map = '<F4>'
+
 
 " ----------------------------------------------------------------------------
 " ## incsearch.vim
 " :h g:incsearch#auto_nohlsearch
 let g:incsearch#auto_nohlsearch = 1
 let g:incsearch#is_stay = 1
+
 
 " ----------------------------------------------------------------------------
 " ## vim-lua-ftplugin
@@ -351,23 +383,12 @@ let g:lua_complete_omni = 1
 let g:lua_complete_dynamic = 0
 let g:lua_define_completion_mappings = 0
 
+
 " ----------------------------------------------------------------------------
 " ## vim-markdown
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh', 'elm']
 let g:vim_markdown_frontmatter=1
 
-" ----------------------------------------------------------------------------
-" ## vim-javascript-syntax
-let g:JSHintHighlightErrorLine = 1
-let javascript_enable_domhtmlcss = 1
-let loaded_matchit = 1
-let g:js_indent_log = 1
-let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angular,enzyme,ramda'
-
-" ----------------------------------------------------------------------------
-" ## vim-jsx
-let g:jsx_ext_required = 0
-let g:jsx_pragma_required = 0
 
 " ----------------------------------------------------------------------------
 " ## quick-scope

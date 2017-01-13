@@ -4,6 +4,9 @@ let maplocalleader="\\"
 
 nnoremap <c-s> :source $MYVIMRC<cr>
 
+" Toggle fold at current position.
+" (Using s-tab to avoid collision between <tab> and <C-i>).
+nnoremap <s-tab> za
 
 " ----------------------------------------------------------------------------
 " ## vim-choosewin
