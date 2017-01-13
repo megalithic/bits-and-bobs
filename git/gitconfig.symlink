@@ -117,12 +117,15 @@
 	hist = for-each-ref --count=5 --sort=-committerdate --format='%(refname:short)' refs/heads/
   refresh = !ssh-add -l && STASH=$(git stash) && git fetch && git rebase origin/master && test \"$STASH\" != \"No local changes to save\" && git stash pop
 
-[merge]
-  tool = vimdiff
+[mergetool]
+  prompt = true
 
-[mergetool "vimdiff"]
+[merge]
+  tool = nvimdiff
+
+[mergetool "nvimdiff"]
   keepBackup = false
-	cmd = vim -d "$LOCAL" "$MERGED" "$REMOTE"
+	cmd = "nvim -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 	trustExitCode = true
 
 [merge "railsschema"]

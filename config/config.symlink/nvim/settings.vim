@@ -102,7 +102,10 @@ function! LightLineFugitive()
 endfunction
 
 function! LightLineConflicted()
-  return ConflictedVersion()
+  if !empty(glob("~/.config/nvim/plugged/vim-conflicted/plugin/conflicted.vim"))
+    return ConflictedVersion()
+  endif
+  return ''
 endfunction
 
 function! LightLineModified()
