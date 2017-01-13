@@ -87,5 +87,8 @@ source ~/.dotfiles/bin/z.sh
 # We already source these with the glob pattern around L18.
 # ===========================================================================
 # FIXME: autosuggestions blows up the shell after sourcing this file.. :(
-# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [[ $ZSH_EVAL_CONTEXT == 'file' ]]; then
+	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
