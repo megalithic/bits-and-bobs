@@ -16,6 +16,7 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH" # make sure gnu-sed wo
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.dotfiles/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # remove duplicates from PATH.
 typeset -U PATH
