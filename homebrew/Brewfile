@@ -74,6 +74,7 @@ brew 'rabbitmq'
 brew 'readline'
 brew 'reattach-to-user-namespace', args: ['wrap-pbcopy-and-pbpaste']
 brew 'redis'
+brew 'ripgrep'
 brew 'ruby-install'
 brew 'ssh-copy-id'
 brew 'terminal-notifier'
