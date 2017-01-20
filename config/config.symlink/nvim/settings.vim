@@ -1,7 +1,19 @@
 " -/ Plugin Settings /----------------------------------------------
 
-" ## vim-choosewin
-let g:choosewin_overlay_enable = 1
+
+" ## handy function to find project root based on given file
+function! s:findProjectRoot(lookFor)
+  let pathMaker='%:p'
+  while(len(expand(pathMaker)) > len(expand(pathMaker.':h')))
+    let pathMaker=pathMaker.':h'
+    let fileToCheck=expand(pathMaker).'/'.a:lookFor
+    if filereadable(fileToCheck)||isdirectory(fileToCheck)
+      return expand(pathMaker)
+    endif
+  endwhile
+  return 0
+endfunction
+
 
 " ----------------------------------------------------------------------------
 " ## golden-ratio
@@ -14,7 +26,6 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 " ## neomake
 " -- Settings derived from / see this link, also, for custom makers:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
-" --
 let g:neomake_serialize = 0
 let g:neomake_verbose = 1
 let g:neomake_open_list = 0
@@ -34,18 +45,6 @@ let g:neomake_warning_sign = {
 let g:neomake_scss_enabled_makers = ['scss-lint']
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
-function! s:findProjectRoot(lookFor)
-  let pathMaker='%:p'
-  while(len(expand(pathMaker)) > len(expand(pathMaker.':h')))
-    let pathMaker=pathMaker.':h'
-    let fileToCheck=expand(pathMaker).'/'.a:lookFor
-    if filereadable(fileToCheck)||isdirectory(fileToCheck)
-      return expand(pathMaker)
-    endif
-  endwhile
-  return 0
-endfunction
-
 function! s:getHigherStandardBin()
   let projectRoot = <SID>findProjectRoot('package.json')
   return expand(projectRoot).'/node_modules/.bin/higher-standard'
@@ -53,7 +52,7 @@ endfunction
 
 function! s:getEslintrc()
   let projectRoot = <SID>findProjectRoot('package.json')
-  return expand(projectRoot).'/.eslintrc'
+  return expand(projectRoot).'/.eslintrc.json'
 endfunction
 
 function! s:eslint()
@@ -299,6 +298,7 @@ let g:elm_jump_to_error = 1
 
 " ----------------------------------------------------------------------------
 " ## vim-flow
+let g:flow#enable = 0 " disable the `flow on :w' feature
 let g:flow#autoclose = 1
 
 
@@ -341,20 +341,26 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 function! SplitStrategy(cmd)
   botright new | call termopen(a:cmd) | startinsert
 endfunction
+
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split' " neoterm
 let g:neoterm_position = "vertical"
 let g:test#preserve_screen = 1
 
-if filereadable('node_modules/babel/register.js')
+if filereadable(expand(<SID>findProjectRoot('package.json')).'/node_modules/babel/register.js')
   " babel 5
-  let g:test#javascript#mocha#options = "--compilers js:babel/register --colors --full-trace --timeout 15000"
-elseif filereadable('node_modules/babel-register/lib/node.js')
+  let g:test#javascript#mocha#options = "--compilers js:babel/register --colors --full-trace --timeout 15000 -R dot"
+elseif filereadable(expand(<SID>findProjectRoot('package.json')).'/node_modules/babel-register/lib/node.js')
   " babel 6
-  let g:test#javascript#mocha#options = "--compilers js:babel-register --require babel-polyfill --colors --full-trace --timeout 15000"
+  let g:test#javascript#mocha#options = "--compilers js:babel-core/register --require babel-polyfill --colors --full-trace --timeout 15000 -R dot"
+  " let g:test#javascript#mocha#options = "--compilers js:babel-register --require babel-polyfill --colors --full-trace --timeout 15000 -R dot"
+elseif filereadable(expand(<SID>findProjectRoot('package.json')).'/node_modules/babel-core/register.js')
+  " babel 6 && voltron.asm
+  let g:test#javascript#mocha#options = "--compilers js:babel-core/register --require babel-polyfill --colors --full-trace --timeout 15000 -R dot"
+  " let g:test#javascript#mocha#options = "--compilers js:babel-register --require babel-polyfill --colors --full-trace --timeout 15000 -R dot"
 else
   " no babel
-  let g:test#javascript#mocha#options = "--colors --full-trace --timeout 15000"
+  let g:test#javascript#mocha#options = "--colors --full-trace --timeout 15000 -R dot"
 endif
 
 let g:test#javascript#mocha#file_pattern = ".test.js"

@@ -40,7 +40,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffee'] }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'moll/vim-node', { 'for': ['javascript'] }
