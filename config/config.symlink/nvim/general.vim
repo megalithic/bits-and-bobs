@@ -224,6 +224,10 @@ iab acheivement achievement
 iab acheivements achievements
 iab acheivment achievement
 iab acheivments achievements
+iab dashbaord dashboard
+iab Dashbaord Dashboard
+iab dashbarod dashboard
+iab Dashbarod Dashboard
 
 
 " TODO: understand all this better:

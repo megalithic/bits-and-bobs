@@ -216,6 +216,7 @@ alias it="git"
 #   alias git=$hub_path
 # fi
 #
+alias gs="git s"
 alias gcv="git cv"
 alias gcm="git cm"
 alias gpreq="~/.dotfiles/bin/git-pr"
