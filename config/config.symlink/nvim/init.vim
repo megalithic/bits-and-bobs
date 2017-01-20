@@ -21,7 +21,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## Interface
-  " Plug 'chriskempson/base16-vim' " consistently, my favorite colorscheme package
   Plug 'mhartington/oceanic-next'
   Plug 'itchyny/lightline.vim'
   Plug 'shirataki/lightline-onedark'
@@ -33,7 +32,6 @@ call plug#begin('~/.config/nvim/plugged')
   " ## JavaScript, et al
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-  " Plug 'chemzqm/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'gavocanov/vim-js-indent', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -41,7 +39,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
-  Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffee'] }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'moll/vim-node', { 'for': ['javascript'] }
 
@@ -81,7 +78,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## Misc, Other, et al
-  Plug 'elixir-lang/vim-elixir', { 'for': ['elixir', 'eelixir'] }
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
   Plug 'jreybert/vimagit' " more git tools integrated into vim
@@ -149,7 +145,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
-  " Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' | Plug 'honza/vim-snippets'
   Plug 'airblade/vim-rooter' " change vim root to vcs root when editing a file
   Plug 'eugen0329/vim-esearch' " project wide search and replace
 

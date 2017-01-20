@@ -58,12 +58,11 @@ endfunction
 function! s:eslint()
   let g:neomake_javascript_enabled_makers = ['eslint']
   let g:neomake_javascript_eslint_maker = {
-        \   'exe': 'eslint_d',
         \   'args': ['-f', 'compact', '--fix'],
         \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
         \   '%W%f: line %l\, col %c\, Warning - %m'
         \ }
-  let g:neomake_jsx_enabled_makers = ['standard']
+  let g:neomake_jsx_enabled_makers = ['eslint']
   let g:neomake_jsx_eslint_maker =
         \ g:neomake_javascript_eslint_maker
 endfunction
