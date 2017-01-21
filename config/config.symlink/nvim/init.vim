@@ -110,6 +110,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'docunext/closetag.vim' " will auto-close the opening tag as soon as you type </
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
+  Plug 'metakirby5/codi.vim'
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation
