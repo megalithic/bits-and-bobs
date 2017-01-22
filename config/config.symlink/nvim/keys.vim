@@ -8,9 +8,11 @@ nnoremap <c-s> :source $MYVIMRC<cr>
 " (Using s-tab to avoid collision between <tab> and <C-i>).
 nnoremap <s-tab> za
 
+
+
 " ----------------------------------------------------------------------------
-" ## vim-choosewin
-nmap - <Plug>(choosewin)
+" ## codi.vim
+nnoremap <leader>R :Codi!!<cr>
 
 " ----------------------------------------------------------------------------
 " ## Autoformat
@@ -51,6 +53,8 @@ nnoremap <silent> <leader>m <esc>:Files<cr>
 " nnoremap <silent> <leader>a <esc>:exe 'Ag ' . input('Ag/')<CR>
 nnoremap <leader>a <esc>:Ag<space>
 nnoremap <silent> <leader>A  <esc>:exe('Ag '.expand('<cword>'))<cr>
+nnoremap          <leader>gg <esc>:GGrep<space>
+nnoremap <silent> <leader>GG <esc>:exe('GGrep '.expand('<cword>'))<cr>
 
 " " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -63,6 +67,20 @@ function! s:fzf_root()
   let path = finddir(".git", expand("%:p:h").";")
   return fnamemodify(substitute(path, ".git", "", ""), ":p:h")
 endfunction
+
+function! s:git_grep_handler(line)
+  let parts = split(a:line, ':')
+  let [f, l] = parts[0 : 1]
+  exe 'e +' . l . ' `git rev-parse --show-toplevel`/'
+        \. substitute(f, ' ', '\\ ', 'g')
+endfunction
+
+command! -nargs=+ GGrep call fzf#run({
+      \ 'source':
+      \ '(cd "$(git rev-parse --show-toplevel)" && git grep --color=always -niI --untracked "<args>")',
+      \ 'sink': function('<sid>git_grep_handler'),
+      \ 'options': '--ansi --multi',
+      \ })
 
 " ----------------------------------------------------------------------------
 " ## Commenting

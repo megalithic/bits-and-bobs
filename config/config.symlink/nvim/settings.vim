@@ -23,6 +23,13 @@ let g:golden_ratio_ignore_horizontal_splits = 1
 
 
 " ----------------------------------------------------------------------------
+" ## codi.vim
+let g:codi#rightalign = 0
+let g:codi#aliases = {
+      \ 'javascript.jsx': 'javascript',
+      \ }
+
+" ----------------------------------------------------------------------------
 " ## neomake
 " -- Settings derived from / see this link, also, for custom makers:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
@@ -120,7 +127,7 @@ let g:lightline = {
       \     [ 'fugitive', 'conflicted', 'filename' ],
       \     [ 'readonly', 'modified' ] ],
       \   'right': [
-      \     [ 'neomake_errors', 'neomake_warnings', 'column', 'lineinfo' ],
+      \     [ 'column', 'lineinfo' ],
       \     [ 'percent' ],
       \     [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
@@ -131,9 +138,7 @@ let g:lightline = {
       \   'right': [ [ 'close' ], ],
       \ },
       \ 'component_expand': {
-      \   'buffercurrent': 'lightline#buffer#buffercurrent2',
-      \   'neomake_errors': 'LightLineNeomakeErrors',
-      \   'neomake_warnings': 'LightLineNeomakeWarnings',
+      \   'buffercurrent': 'lightline#buffer#buffercurrent2'
       \ },
       \ 'component_function': {
       \   'fugitive': 'LightLineFugitive',
@@ -147,7 +152,6 @@ let g:lightline = {
       \   'bufferinfo': 'lightline#buffer#bufferinfo',
       \ },
       \ 'component_type': {
-      \   'neomake': 'error',
       \ },
       \ }
 
@@ -165,20 +169,6 @@ endfunction
 
 function! LightLineFilename()
   return fnamemodify(expand("%"), ":~:.")
-endfunction
-
-function! LightLineNeomakeErrors()
-  if !exists(":Neomake") || ((get(neomake#statusline#QflistCounts(), "E", 0) + get(neomake#statusline#LoclistCounts(), "E", 0)) == 0)
-    return ''
-  endif
-  return 'E:'.(get(neomake#statusline#LoclistCounts(), 'E', 0) + get(neomake#statusline#QflistCounts(), 'E', 0))
-endfunction
-
-function! LightLineNeomakeWarnings()
-  if !exists(":Neomake") || ((get(neomake#statusline#QflistCounts(), "W", 0) + get(neomake#statusline#LoclistCounts(), "W", 0)) == 0)
-    return ''
-  endif
-  return 'W:'.(get(neomake#statusline#LoclistCounts(), 'W', 0) + get(neomake#statusline#QflistCounts(), 'W', 0))
 endfunction
 
 function! LightLineMode()
@@ -492,9 +482,12 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
+let g:fzf_files_options =
+      \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
 
 " show a preview of the file:
 " https://github.com/metakirby5/.dots/blob/master/base/.vimrc#L273
+
 
 " ----------------------------------------------------------------------------
 " ## ack.vim
@@ -505,18 +498,6 @@ let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
 " https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
 let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
 
-" ----------------------------------------------------------------------------
-" ## webapi-vim / gist-vim
-" let g:gist_put_url_to_clipboard_after_post  = 1
-" let g:gist_open_url = 0
-" let g:gist_show_privates                    = 1
-" let g:gist_post_private                     = 1
-" " detect filetype if vim failed autodetection
-" let g:gist_detect_filetype                  = 1
-" " :w! updates a Gist, not plain :w
-" let g:gist_update_on_write                  = 2
-" let g:gist_list_vsplit = 1
-" let g:gist_clip_command = 'pbcopy'
 
 " ----------------------------------------------------------------------------
 " ## gist.vim
