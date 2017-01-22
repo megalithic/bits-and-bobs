@@ -111,7 +111,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'metakirby5/codi.vim'
-  Plug 'hkupty/iron.nvim'
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation
