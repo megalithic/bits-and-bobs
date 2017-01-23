@@ -184,7 +184,7 @@ set mat=2
 set re=1
 set tm=500
 set dictionary+=/usr/share/dict/words
-set spellfile=~/.vim/spell/en.utf-8.add
+set spellfile=~/.config/nvim/spell/en.utf-8.add
 let loaded_matchparen = 0 " this turns on pair matching highlight (is slow with this on)
 
 " if more than 1 files are passed to vim as arg, open them in vertical splits

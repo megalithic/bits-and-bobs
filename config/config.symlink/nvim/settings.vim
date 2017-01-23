@@ -65,6 +65,7 @@ endfunction
 function! s:eslint()
   let g:neomake_javascript_enabled_makers = ['eslint']
   let g:neomake_javascript_eslint_maker = {
+        \   'exe': $PWD .'/node_modules/.bin/eslint',
         \   'args': ['-f', 'compact', '--fix'],
         \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
         \   '%W%f: line %l\, col %c\, Warning - %m'
@@ -114,7 +115,6 @@ endif
 " do the lintings!
 au! BufEnter * nested Neomake
 au! BufWritePost * nested Neomake
-au! User NeomakeFinished nested :call lightline#update()
 
 
 " ----------------------------------------------------------------------------
