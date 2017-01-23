@@ -52,20 +52,22 @@ let g:neomake_warning_sign = {
 let g:neomake_scss_enabled_makers = ['scss-lint']
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
+function s:packageRoot()
+  return <SID>findProjectRoot('package.json')
+endfunction
+
 function! s:getHigherStandardBin()
-  let projectRoot = <SID>findProjectRoot('package.json')
-  return expand(projectRoot).'/node_modules/.bin/higher-standard'
+  return expand(<SID>packageRoot()).'/node_modules/.bin/higher-standard'
 endfunction
 
 function! s:getEslintrc()
-  let projectRoot = <SID>findProjectRoot('package.json')
-  return expand(projectRoot).'/.eslintrc.json'
+  return expand(<SID>packageRoot()).'/.eslintrc.json'
 endfunction
 
 function! s:eslint()
   let g:neomake_javascript_enabled_makers = ['eslint']
   let g:neomake_javascript_eslint_maker = {
-        \   'exe': $PWD .'/node_modules/.bin/eslint',
+        \   'exe': expand(<SID>packageRoot).'/node_modules/.bin/eslint',
         \   'args': ['-f', 'compact', '--fix'],
         \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
         \   '%W%f: line %l\, col %c\, Warning - %m'
