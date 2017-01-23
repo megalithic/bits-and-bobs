@@ -53,6 +53,6 @@ bindkey '^[[6~' history-beginning-search-forward
 bindkey '^[[Z' reverse-menu-complete
 
 # for autosuggestions phrase accept
-bindkey '^f' vi-forward-blank-word
-# bindkey '^f' expand-or-complete
+bindkey '^j' vi-forward-blank-word
+# bindkey '^j' expand-or-complete
 

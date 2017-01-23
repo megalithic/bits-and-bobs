@@ -26,8 +26,8 @@ hs.window.setShadows(true)
 -- :: screens
 config.screens = {
   laptop = 'Built-in Retina Display',
-  primary = 724049870,
-  secondary = 724069583
+  primary = hs.screen.primaryScreen(),
+  secondary = hs.screen.primaryScreen():toWest() or hs.screen.primaryScreen()
 }
 
 -- GRID SETUP
@@ -89,25 +89,16 @@ config.layout = {
     end
   end),
 
-  ['com.nylas.nylas-mail'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))
-    else
-      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
-    end
-  end),
-
-  ['ctrlla.Polymail'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))
-    else
-      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
-    end
-  end),
-
   ['it.bloop.airmail2'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    if count == 1 then
+      grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))
+    else
+      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
+    end
+  end),
+
+  ['com.readdle.smartemail-Mac'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
       grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))
@@ -187,7 +178,7 @@ config.layout = {
     end
   end),
 
-  ['com.mozilla.Firefox'] = (function(window, forceScreenCount)
+  ['org.mozilla.firefoxdeveloperedition'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
       grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
@@ -203,11 +194,6 @@ config.layout = {
     else
       grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
     end
-  end),
-
-  ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),
 }
 
