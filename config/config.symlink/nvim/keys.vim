@@ -12,7 +12,9 @@ nnoremap <s-tab> za
 
 " ----------------------------------------------------------------------------
 " ## codi.vim
-nnoremap <leader>R :Codi!!<cr>
+nnoremap <leader>Rj :Codi!! javascript<cr>
+nnoremap <leader>Rr :Codi!! ruby<cr>
+nnoremap <leader>Rr :Codi!! python<cr>
 
 " ----------------------------------------------------------------------------
 " ## Autoformat
