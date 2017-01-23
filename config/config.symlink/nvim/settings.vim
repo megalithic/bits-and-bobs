@@ -67,8 +67,8 @@ endfunction
 function! s:eslint()
   let g:neomake_javascript_enabled_makers = ['eslint']
   let g:neomake_javascript_eslint_maker = {
-        \   'exe': expand(<SID>packageRoot).'/node_modules/.bin/eslint',
-        \   'args': ['-f', 'compact', '--fix'],
+        \   'exe': expand(<SID>packageRoot()).'/node_modules/.bin/eslint',
+        \   'args': ['-f', 'compact'],
         \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
         \   '%W%f: line %l\, col %c\, Warning - %m'
         \ }
