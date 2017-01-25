@@ -12,7 +12,6 @@ export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 RUBIES=(~/.rubies/*)
-# chruby ruby-2.2.3
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 

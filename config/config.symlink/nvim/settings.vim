@@ -492,12 +492,12 @@ let g:fzf_files_options =
 
 " ----------------------------------------------------------------------------
 " ## ack.vim
-set grepprg=ag\ --nogroup\ --line-numbers\ --column\ --noheading
-let &grepprg = 'command ag --nogroup --nocolor --line-numbers --column'
-let g:ackprg="ag --column --nogroup --line-numbers --vimgrep"
-let g:agprg="ag --column --nogroup --line-numbers --vimgrep"
+set grepprg=rg\ --nogroup\ --line-numbers\ --column\ --noheading
+let &grepprg = 'command rg --nogroup --nocolor --line-numbers --column'
+let g:ackprg="rg --column --nogroup --line-numbers --vimgrep"
+let g:agprg="rg --column --nogroup --line-numbers --vimgrep"
 " https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
-let g:agprg = 'ag --nogroup --nocolor --column --smart-case'
+let g:agprg = 'rg --nogroup --nocolor --column --smart-case'
 
 
 " ----------------------------------------------------------------------------
