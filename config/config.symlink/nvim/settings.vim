@@ -334,7 +334,7 @@ function! SplitStrategy(cmd)
 endfunction
 
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-let g:test#strategy = 'neovim'
+let g:test#strategy = 'terminal_split'
 let g:neoterm_position = "vertical"
 let g:test#preserve_screen = 1
 let test#ruby#bundle_exec = 1
