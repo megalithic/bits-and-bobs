@@ -115,7 +115,7 @@ else
 endif
 
 " do the lintings!
-au! BufEnter * nested Neomake
+" au! BufEnter * nested Neomake
 au! BufWritePost * nested Neomake
 
 
@@ -334,29 +334,28 @@ function! SplitStrategy(cmd)
 endfunction
 
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-let g:test#strategy = 'terminal_split' " neoterm
+let g:test#strategy = 'neovim'
 let g:neoterm_position = "vertical"
 let g:test#preserve_screen = 1
+let test#ruby#bundle_exec = 1
 
-if filereadable(expand(<SID>findProjectRoot('package.json')).'/node_modules/babel/register.js')
+" if filereadable(expand(<SID>packageRoot()))
+"   let test#project_root = expand(<SID>packageRoot())
+" endif
+
+if filereadable(expand(<SID>packageRoot()).'/node_modules/babel/register.js')
   " babel 5
   let g:test#javascript#mocha#options = "--compilers js:babel/register --colors --full-trace --timeout 15000 -R dot"
-elseif filereadable(expand(<SID>findProjectRoot('package.json')).'/node_modules/babel-register/lib/node.js')
+elseif filereadable(expand(<SID>packageRoot()).'/node_modules/babel-register/lib/node.js')
   " babel 6
-  let g:test#javascript#mocha#options = "--compilers js:babel-core/register --require babel-polyfill --colors --full-trace --timeout 15000 -R dot"
-  " let g:test#javascript#mocha#options = "--compilers js:babel-register --require babel-polyfill --colors --full-trace --timeout 15000 -R dot"
-elseif filereadable(expand(<SID>findProjectRoot('package.json')).'/node_modules/babel-core/register.js')
-  " babel 6 && voltron.asm
-  let g:test#javascript#mocha#options = "--compilers js:babel-core/register --require babel-polyfill --colors --full-trace --timeout 15000 -R dot"
-  " let g:test#javascript#mocha#options = "--compilers js:babel-register --require babel-polyfill --colors --full-trace --timeout 15000 -R dot"
+  let g:test#javascript#mocha#options = "--compilers js:babel-register --colors --timeout 15000 --es_staging --opts ".expand(<SID>packageRoot())."/test/mocha.opts"
 else
   " no babel
   let g:test#javascript#mocha#options = "--colors --full-trace --timeout 15000 -R dot"
 endif
-
+let test#javascript#mocha#executable = "NODE_ENV=test ".expand(<SID>packageRoot())."/node_modules/.bin/mocha"
 let g:test#javascript#mocha#file_pattern = ".test.js"
 
-let test#elixir#exunit#options = '--trace'
 let test#ruby#rspec#options = '-f d'
 
 

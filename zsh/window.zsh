@@ -8,7 +8,7 @@ function title() {
   a=$(print -Pn "%40>...>$a" | tr -d "\n")
 
   case $TERM in
-  screen)
+  screen*|tmux*)
     print -Pn "\ek$a:$3\e\\" # screen title (in ^A")
     ;;
   xterm*|rxvt)

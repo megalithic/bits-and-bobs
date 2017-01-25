@@ -11,10 +11,6 @@
 # To profile stuff for zsh startup, uncomment:
 # zmodload zsh/zprof
 
-# Was loading this via iterm2:
-# (tmux ls | grep -vq attached && tmux at) || tmux
-
-# vi mode
 bindkey -e
 
 # shortcut to this dotfiles path is $ZSH
@@ -68,7 +64,6 @@ zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 RUBIES=(~/.rubies/*)
-# chruby ruby-2.2.3
 
 # setup n
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
@@ -86,9 +81,7 @@ source ~/.dotfiles/bin/z.sh
 # NOTE: DO NOT PUT `source`s for *.zsh files local to ~/.dotfiles/zsh folder.
 # We already source these with the glob pattern around L18.
 # ===========================================================================
-# FIXME: autosuggestions blows up the shell after sourcing this file.. :(
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 if [[ $ZSH_EVAL_CONTEXT == 'file' ]]; then
-	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi

@@ -119,6 +119,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'tmux-plugins/vim-tmux-focus-events'
+  " Plug 'benmills/vimux'
+  " Plug 'skywind3000/asyncrun.vim'
+  Plug 'christoomey/vim-tmux-runner'
+  Plug 'tpope/vim-dispatch'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
   Plug 'itchyny/vim-cursorword'
@@ -147,7 +151,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
-  Plug 'airblade/vim-rooter' " change vim root to vcs root when editing a file
+  " Plug 'airblade/vim-rooter' " change vim root to vcs root when editing a file
   Plug 'eugen0329/vim-esearch' " project wide search and replace
 
   " ----------------------------------------------------------------------------
