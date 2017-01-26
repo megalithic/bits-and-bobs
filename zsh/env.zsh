@@ -54,8 +54,6 @@ export ECLIPSE_HOME=/Applications/Eclipse
 export SSL_CERT_FILE=''
 unset SSL_CERT_FILE
 
-# This must be here for `replibox`, but breaks `replibook`.. maybe?
-# export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
 export CURL_CA_BUNDLE=''
 
 # This setting is for the new UTF-8 terminal support
@@ -66,14 +64,7 @@ export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 export MYSQL=/usr/local/mysql/bin
 export PATH=$PATH:$MYSQL
-# export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
-# export DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
-
-# setup docker
-# export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-# export DOCKER_TLS_VERIFY=1
-# export DOCKER_HOST=tcp://192.168.59.103:2376 # modify to correct IP/port $(boot2docker ip)
 
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
@@ -82,9 +73,10 @@ export FZF_DEFAULT_OPTS='
   --ansi
   --extended
   --bind ctrl-f:page-down,ctrl-b:page-up
-  --color fg:252,bg:-1,hl:67,fg+:252,bg+:235,hl+:81
-  --color info:144,prompt:161,spinner:135,pointer:135,marker:118
 '
+# --color fg:252,bg:-1,hl:67,fg+:252,bg+:235,hl+:81
+# --color info:144,prompt:161,spinner:135,pointer:135,marker:118
+
 # export FZF_COMPLETION_TRIGGER=''
 export FZF_TMUX_HEIGHT='20%'
 
