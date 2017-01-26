@@ -33,8 +33,11 @@ setup_zsh () {
 
   if [[ ${PIPESTATUS[0]} != 0 ]]; then
     running "changing your login shell to zsh"
-    echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-    chsh -s $(which zsh);ok
+    # echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+    # chsh -s $(which zsh);ok
+    zsh_path=$(which zsh)
+    grep -Fxq "$zsh_path" /etc/shells || sudo bash -c "echo $zsh_path >> /etc/shells"
+    chsh -s "$zsh_path" $USER
     zsh
   else
     bot "looks like you are already using zsh. woot!"
