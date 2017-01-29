@@ -91,7 +91,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ----------------------------------------------------------------------------
   " ## Utilities
   " Plug 'kassio/neoterm'
-  Plug 'janko-m/vim-test' " tester for mocha and ruby
+  Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for mocha and ruby
   Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting

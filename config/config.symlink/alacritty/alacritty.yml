@@ -7,7 +7,7 @@ dpi:
   y: 96.0
 
 # Display tabs using this many cells (changes require restart)
-tabspaces: 4
+tabspaces: 8
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
@@ -200,5 +200,10 @@ mouse_bindings:
 
 # Shell
 #
-# You can set this to a path to your favorite shell, e.g. /bin/fish
-shell: /usr/local/bin/zsh -l
+# You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
+# Entries in shell.args are passed unmodified as arguments to the shell.
+#
+#shell:
+#  program: /bin/bash
+#  args:
+#    - --login

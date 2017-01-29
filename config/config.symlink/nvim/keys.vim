@@ -9,12 +9,12 @@ nnoremap <c-s> :source $MYVIMRC<cr>
 nnoremap <s-tab> za
 
 
-
 " ----------------------------------------------------------------------------
 " ## codi.vim
 nnoremap <leader>Rj :Codi!! javascript<cr>
 nnoremap <leader>Rr :Codi!! ruby<cr>
-nnoremap <leader>Rr :Codi!! python<cr>
+nnoremap <leader>Rp :Codi!! python<cr>
+nnoremap <leader>Rl :Codi!! lua<cr>
 
 " ----------------------------------------------------------------------------
 " ## Autoformat

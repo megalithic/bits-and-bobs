@@ -339,10 +339,6 @@ let g:neoterm_position = "vertical"
 let g:test#preserve_screen = 1
 let test#ruby#bundle_exec = 1
 
-" if filereadable(expand(<SID>packageRoot()))
-"   let test#project_root = expand(<SID>packageRoot())
-" endif
-
 if filereadable(expand(<SID>packageRoot()).'/node_modules/babel/register.js')
   " babel 5
   let g:test#javascript#mocha#options = "--compilers js:babel/register --colors --full-trace --timeout 15000 -R dot"
@@ -353,6 +349,7 @@ else
   " no babel
   let g:test#javascript#mocha#options = "--colors --full-trace --timeout 15000 -R dot"
 endif
+" to debug nock stuff in tests, add `DEBUG=nock.* ` before the `expand`, below
 let test#javascript#mocha#executable = "NODE_ENV=test ".expand(<SID>packageRoot())."/node_modules/.bin/mocha"
 let g:test#javascript#mocha#file_pattern = ".test.js"
 
@@ -484,7 +481,8 @@ let g:fzf_action = {
       \ 'enter': 'vsplit'
       \ }
 let g:fzf_files_options =
-      \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
+      \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+      " \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
 
 " show a preview of the file:
 " https://github.com/metakirby5/.dots/blob/master/base/.vimrc#L273
