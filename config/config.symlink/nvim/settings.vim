@@ -29,6 +29,12 @@ let g:codi#aliases = {
       \ 'javascript.jsx': 'javascript',
       \ }
 
+
+" ----------------------------------------------------------------------------
+" ## auto-pairs
+let g:AutoPairsShortcutToggle = ''
+
+
 " ----------------------------------------------------------------------------
 " ## neomake
 " -- Settings derived from / see this link, also, for custom makers:
