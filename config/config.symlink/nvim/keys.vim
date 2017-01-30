@@ -431,3 +431,6 @@ inoremap <c-e> <esc>A
 inoremap <c-a> <esc>I
 
 nnoremap <F8> RunCurrentFile()
+
+" pretty much essential: by default in terminal mode, you have to press ctrl-\-n to get into normal mode
+tnoremap <Esc> <C-\><C-n>

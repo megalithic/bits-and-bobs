@@ -126,7 +126,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [
       \     [ 'mode', 'paste' ],
-      \     [ 'fugitive', 'conflicted', 'filename' ],
+      \     [ 'fugitive', 'gitmerge', 'conflicted', 'filename' ],
       \     [ 'readonly', 'modified' ] ],
       \   'right': [
       \     [ 'column', 'lineinfo' ],
@@ -145,6 +145,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'fugitive': 'LightLineFugitive',
       \   'conflicted': 'LightLineConflicted',
+      \   'gitmerge': 'LightlineGitmerge',
       \   'readonly': 'LightLineReadonly',
       \   'modified': 'LightLineModified',
       \   'filename': 'LightLineFilename',
@@ -199,6 +200,21 @@ function! LightLineConflicted()
     return ConflictedVersion()
   endif
   return ''
+endfunction
+
+function! LightlineGitmerge()
+  let fullname = expand('%')
+  let gitversion = ''
+  if fullname =~? 'fugitive://.*/\.git//0/.*'
+      let gitversion = 'git index'
+  elseif fullname =~? 'fugitive://.*/\.git//2/.*'
+      let gitversion = 'git target'
+  elseif fullname =~? 'fugitive://.*/\.git//3/.*'
+      let gitversion = 'git merge'
+  elseif &diff == 1
+      let gitversion = 'working copy'
+  endif
+  return gitversion
 endfunction
 
 function! LightLineModified()
@@ -330,14 +346,11 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 " ----------------------------------------------------------------------------
 " ## vim-test
 function! SplitStrategy(cmd)
-  botright new | call termopen(a:cmd) | startinsert
+  belowright new | call termopen(a:cmd) | startinsert
 endfunction
 
-let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-let g:test#strategy = 'terminal_split'
-let g:neoterm_position = "vertical"
-let g:test#preserve_screen = 1
-let test#ruby#bundle_exec = 1
+" let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
+let g:test#strategy = 'neovim_error_only'
 
 if filereadable(expand(<SID>packageRoot()).'/node_modules/babel/register.js')
   " babel 5
@@ -354,6 +367,7 @@ let test#javascript#mocha#executable = "NODE_ENV=test ".expand(<SID>packageRoot(
 let g:test#javascript#mocha#file_pattern = ".test.js"
 
 let test#ruby#rspec#options = '-f d'
+let test#ruby#bundle_exec = 1
 
 
 " ----------------------------------------------------------------------------
