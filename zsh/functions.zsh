@@ -168,10 +168,11 @@ function zsh_recompile {
   source ~/.zshrc
 }
 
-function chpwd() {
-  emulate -L zsh
-  ls -a
-}
+# function chpwd() {
+#   emulate -L zsh
+#   ls -a
+# }
+
 # make autocd do cd and ls:
 # ref: https://bbs.archlinux.org/viewtopic.php?id=97980
 # preexec() { LS_USED=$(echo $1|cut -d' ' -f1) }

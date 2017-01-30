@@ -345,11 +345,13 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 " ----------------------------------------------------------------------------
 " ## vim-test
+
 function! SplitStrategy(cmd)
   belowright new | call termopen(a:cmd) | startinsert
 endfunction
 
 " let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
+" let g:test#strategy = 'testrunner'
 let g:test#strategy = 'neovim_error_only'
 
 if filereadable(expand(<SID>packageRoot()).'/node_modules/babel/register.js')
