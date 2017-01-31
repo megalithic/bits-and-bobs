@@ -126,9 +126,10 @@ augroup ft_scss
 
   " https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/css3-syntax.vim
   au FileType css,css.scss,sass,scss setl iskeyword+=-
+  " au FileType scss set iskeyword+=-
   au FileType css,css.scss,sass,scss setl formatoptions+=croql
-  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss set ft=sass
-  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss.css set ft=sass
+  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss set ft=scss.css
+  " au BufEnter,BufNewFile,BufRead,BufReadPost *.scss.css set ft=sass
 augroup END
 
 augroup ft_markdown

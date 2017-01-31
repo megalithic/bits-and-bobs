@@ -134,16 +134,6 @@ bind Escape copy-mode
 setw -g mode-keys vi
 set -g @shell_mode 'vi'
 
-# Setup 'v' to being selection as in vim
-bind-key -t vi-copy v begin-selection
-bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
-# bind-key -t vi-copy y copy-pipe "pbcopy"
-
-# Update default binding of 'Enter' to also use copy-pipe
-unbind -t vi-copy Enter
-bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
-# bind-key -t vi-copy Enter copy-pipe "pbcopy"
-
 # Various keybindings to try:
 # https://github.com/hamvocke/dotfiles/blob/master/tmux/.tmux.conf#L48
 # fix pbcopy/pbpaste
