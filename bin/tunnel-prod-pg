@@ -1,5 +1,0 @@
-#!/bin/bash
-
-LOCAL_PORT=${1:-15432}
-ssh -i ~/.ssh/welltok -CNL ${LOCAL_PORT}:shared-production-pg-95.cdgfohcltgb9.us-east-1.rds.amazonaws.com:5432 seth.messer@bastion.srv.apollo.cafewell.com
-
