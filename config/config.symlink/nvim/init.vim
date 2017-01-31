@@ -90,10 +90,10 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## Utilities
-  Plug 'kassio/neoterm'
-  Plug 'tpope/vim-dispatch'
+  " Plug 'kassio/neoterm'
+  " Plug 'tpope/vim-dispatch'
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for mocha and ruby
-  Plug 'kevinsjoberg/vim-test-neovim-error-only'
+  " Plug 'kevinsjoberg/vim-test-neovim-error-only'
   Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting

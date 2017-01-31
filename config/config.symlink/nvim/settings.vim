@@ -353,12 +353,11 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 " ## vim-test
 
 function! SplitStrategy(cmd)
-  belowright new | call termopen(a:cmd) | startinsert
+  botright new | call termopen(a:cmd) | startinsert
 endfunction
 
-" let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-" let g:test#strategy = 'testrunner'
-let g:test#strategy = 'neovim_error_only'
+let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
+let g:test#strategy = 'terminal_split'
 
 if filereadable(expand(<SID>packageRoot()).'/node_modules/babel/register.js')
   " babel 5
@@ -503,8 +502,8 @@ let g:fzf_action = {
       \ 'enter': 'vsplit'
       \ }
 let g:fzf_files_options =
-      \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
-      " \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
+      \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
+      " \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 
 " show a preview of the file:
 " https://github.com/metakirby5/.dots/blob/master/base/.vimrc#L273
