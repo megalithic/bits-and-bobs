@@ -39,7 +39,7 @@ let g:AutoPairsShortcutToggle = ''
 " ## neomake
 " -- Settings derived from / see this link, also, for custom makers:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
-let g:neomake_serialize = 0
+let g:neomake_serialize = 1
 let g:neomake_verbose = 1
 let g:neomake_open_list = 0
 let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
