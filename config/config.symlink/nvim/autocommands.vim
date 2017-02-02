@@ -80,9 +80,9 @@ augroup vimrcEx
   " ## Terminal
   if has('nvim')
     " Automatically go into insert mode when entering terminal window
-    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    au BufEnter * if &buftype == 'term' | :startinsert | endif
-    au BufWinEnter,WinEnter,BufEnter term://* startinsert
+    " au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    " au BufEnter * if &buftype == 'term' | :startinsert | endif
+    " au BufWinEnter,WinEnter,BufEnter term://* startinsert
   endif
 
   " ----------------------------------------------------------------------------
@@ -173,7 +173,7 @@ augroup END
 
 augroup ft_misc
   au!
-  au FileType javascript,javascript.jsx,lisp,clojure,scheme,sass,scss RainbowParentheses
+  au FileType javascript,javascript.jsx,lisp,clojure,scheme,sass,scss,scss.css RainbowParentheses
 
   au BufNewFile,BufRead *.conf set ft=conf
 

@@ -36,17 +36,6 @@ function! s:smart_cr()
 endfunction
 
 " ----------------------------------------------------------------------------
-" ## tern
-" nnoremap <leader>td :TernDef<CR>
-" nnoremap <leader>tp :TernDefPreview<CR>
-" nnoremap <leader>tr :TernRefs<CR>
-
-" ----------------------------------------------------------------------------
-" ## vim-over
-nnoremap <silent> <bslash> <esc>:OverCommandLine<cr>%s/
-vnoremap <silent> <bslash> <esc>gv:OverCommandLine<cr>s/
-
-" ----------------------------------------------------------------------------
 " ## FZF
 " nnoremap <silent> <leader>m :FZF -m<CR>
 " nnoremap <silent> <leader>a :Ag<CR>
@@ -184,16 +173,6 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 nnoremap <C-t> :tabe<cr>:e<space><c-d>
-
-" tnoremap <silent> <C-h> <C-\><C-n><C-w><C-h>
-" tnoremap <silent> <C-j> <C-\><C-n><C-w><C-j>
-" tnoremap <silent> <C-k> <C-\><C-n><C-w><C-k>
-" tnoremap <silent> <C-l> <C-\><C-n><C-w><C-l>
-
-" inoremap <silent> <C-h> <ESC><C-w><C-h>
-" inoremap <silent> <C-j> <ESC><C-w><C-j>
-" inoremap <silent> <C-k> <ESC><C-w><C-k>
-" inoremap <silent> <C-l> <ESC><C-w><C-l>
 
 tnoremap <C-w>h <C-\><C-n><C-w><C-h>
 tnoremap <C-w>j <C-\><C-n><C-w><C-j>
@@ -431,6 +410,3 @@ inoremap <c-e> <esc>A
 inoremap <c-a> <esc>I
 
 nnoremap <F8> RunCurrentFile()
-
-" pretty much essential: by default in terminal mode, you have to press ctrl-\-n to get into normal mode
-tnoremap <Esc> <C-\><C-n>

@@ -12,12 +12,11 @@ tap 'homebrew/versions'
 tap 'caskroom/versions'
 tap 'homebrew/brewdler'
 tap 'kopischke/ctags'
-tap 'Goles/battery'
 tap 'neovim/neovim'
 tap 'homebrew/bundle'
 tap 'homebrew/dev-tools'
 tap 'homebrew/services'
-tap 'd12frosted/emacs-plus'
+tap 'choppsv1/term24'
 
 brew 'coreutils'
 brew 'moreutils'
@@ -39,8 +38,9 @@ brew 'docker'
 brew 'docker-compose'
 brew 'docker-machine'
 brew 'elasticsearch'
-brew 'emacs-plus'
-# linkapps 'emacs-plus'
+brew 'choppsv1/term24/emacs-mac'
+# brew 'emacs', args: ['--devel', '--with-imagemagick', '--with-gnutls', '--with-librsvg']
+# brew services start emacs
 brew 'extract_url'
 brew 'ffind'
 brew 'figlet'
@@ -84,13 +84,13 @@ brew 'terminal-notifier'
 brew 'the_silver_searcher'
 brew 'tig'
 brew 'tmate'
-brew 'tmux', args: ['--HEAD']
+brew 'tmux', args: ['--with-utf8proc']
 brew 'tree'
 brew 'urlview'
 brew 'weechat', args: ['--with-ruby', '--with-python', '--with-perl', '--with-lua', '--with-aspell', '--with-javascript', '--with-curl', '--with-guile', '--HEAD']
 brew 'wget', args: ['enable-iri']
-brew 'vim'
-brew 'zsh'
+brew 'vim', args: ['--with-lua', '--with-luajit', '--with-python3']
+brew 'zsh', args: ['--with-unicode9', '--without-etcdir']
 brew 'zsh-completions'
 brew 'zsh-lovers'
 brew 'zsh-autosuggestions'

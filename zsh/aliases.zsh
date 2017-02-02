@@ -94,14 +94,20 @@ alias b="brew"
 # -----------------------------------------------------------------------------
 alias py="python"
 
-# emacs/spacemacs
+# ALACRITTY
 # -----------------------------------------------------------------------------
-alias e='emacsclient --no-wait'
+alias updatealacritty='cd ~/code/rust/alacritty; git co master; git fetch; git merge origin/master; rustup override set nightly; cargo build --release; sudo cp target/release/alacritty /usr/local/bin; cd -'
+
+# EMACS/SPACEMACS
+# -----------------------------------------------------------------------------
+alias updateemacs='cd ~/.emacs.d; git co develop; git fetch; git merge origin/develop; cd -'
+# alias e='emacsclient --no-wait'
+alias e='emacsclient'
 alias em=e
 
 # (NEO)VIM
 # -----------------------------------------------------------------------------
-alias updatenvim="brew update; brew reinstall --HEAD neovim; pip3 install --upgrade neovim; pip install --upgrade neovim; pip3 install --upgrade pip; gem install neovim; nvim +PlugUpgrade +qall; nvim +PlugUpdate +qall; nvim +UpdateRemotePlugins +qall;"
+alias updatenvim="brew update; brew reinstall --HEAD neovim; pip3 install --upgrade neovim; pip install --upgrade neovim; pip3 install --upgrade pip; gem install neovim; nvim +PlugUpgrade +qall; nvim +PlugUpdate +qall; nvim +UpdateRemotePlugins +qall; cd -"
 alias nvimupdate=updatenvim
 alias nv="nvim"
 alias vim="nvim"

@@ -1,5 +1,6 @@
 export SUDO_EDITOR='nvim'
 export EDITOR='nvim'
+export ALTERNATE_EDITOR='emacs'
 export VISUAL='nvim'
 export ZDOTDIR=$HOME
 export HOMEBREW_NO_ANALYTICS=1
