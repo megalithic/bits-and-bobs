@@ -46,7 +46,6 @@ call plug#begin('~/.config/nvim/plugged')
   " ## SCSS, CSS, et al
   Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
-  Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass'] } " scss/sass-specific syntax
   Plug 'stephenway/postcss.vim', { 'for': ['css', 'scss', 'sass'] } " postcss syntax
   Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
 
@@ -57,7 +56,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'jtratner/vim-flavored-markdown', { 'for': ['markdown'] }
   Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
-  Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }
+  Plug 'tpope/vim-haml', { 'for': ['haml'] }
   " Plug 'othree/xml.vim', { 'for': ['xml'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
 

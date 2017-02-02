@@ -164,6 +164,8 @@ let g:lightline = {
       \ },
       \ }
 
+    " \ 'separator': { 'left': '█▓░', 'right': '░▓█' },
+
 function! LightLineInfo()
   return expand('⭡ %3l:%-2v')
 endfunction
