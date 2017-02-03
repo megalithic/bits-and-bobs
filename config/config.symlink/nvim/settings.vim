@@ -352,14 +352,22 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 
 " ----------------------------------------------------------------------------
-" ## vim-test
+" ## neoterm
+let g:neoterm_position='vertical'
+let g:neoterm_run_tests_bg = 1
+let g:neoterm_focus_when_tests_fail = 1
+let g:neoterm_raise_when_tests_fail = 1
+let g:neoterm_close_when_tests_succeed = 1
 
+
+" ----------------------------------------------------------------------------
+" ## vim-test
 function! SplitStrategy(cmd)
-  botright new | call termopen(a:cmd) | startinsert
+  belowright new | call termopen(a:cmd) | startinsert
 endfunction
 
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-let g:test#strategy = 'terminal_split'
+let g:test#strategy = 'neoterm'
 
 if filereadable(expand(<SID>packageRoot()).'/node_modules/babel/register.js')
   " babel 5
