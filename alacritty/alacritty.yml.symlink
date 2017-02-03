@@ -16,19 +16,19 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Menlo
+    family: FiraCode-Retina
     # Style can be specified to pick a specific face.
     # style: Regular
 
   # The bold font face
   bold:
-    family: Menlo
+    family: FiraCode-Retina
     # Style can be specified to pick a specific face.
     # style: Bold
 
   # The italic font face
   italic:
-    family: Menlo
+    family: FiraCode-Retina
     # Style can be specified to pick a specific face.
     # style: Italic
 
@@ -214,3 +214,5 @@ mouse_bindings:
 #  program: /bin/bash
 #  args:
 #    - --login
+
+# vim: set ft=yaml:

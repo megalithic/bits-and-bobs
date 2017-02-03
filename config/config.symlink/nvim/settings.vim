@@ -128,9 +128,12 @@ au! BufWritePost * nested Neomake
 " ## vim-airline
 let g:airline#extensions#neomake#enabled = 1
 let g:airline_theme = 'oceanicnext'
-let g:airline#extensions#tabline#left_alt_sep = '░'
-let g:airline_left_sep = '█▓░'
-let g:airline_right_sep = '░▓█'
+" let g:airline#extensions#tabline#left_alt_sep = '░'
+" let g:airline_left_sep = '█▓░'
+" let g:airline_right_sep = '░▓█'
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 
 " ----------------------------------------------------------------------------
 " ## lightline
@@ -374,7 +377,7 @@ function! SplitStrategy(cmd)
 endfunction
 
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-let g:test#strategy = 'neoterm'
+let g:test#strategy = 'terminal_split'
 
 if filereadable(expand(<SID>packageRoot()).'/node_modules/babel/register.js')
   " babel 5

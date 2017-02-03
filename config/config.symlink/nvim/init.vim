@@ -28,7 +28,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
-  " Plug 't9md/vim-choosewin'
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
@@ -91,7 +90,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## Utilities
-  Plug 'kassio/neoterm'
+  " Plug 'kassio/neoterm'
   " Plug 'tpope/vim-dispatch'
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for mocha and ruby
   " Plug 'kevinsjoberg/vim-test-neovim-error-only'

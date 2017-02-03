@@ -9,6 +9,8 @@ colorscheme OceanicNext
 let g:oceanic_next_terminal_italic = 1
 let g:oceanic_next_terminal_bold = 1
 
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ 12
+
 " change vim cursor depending on the mode
 if has('nvim')
   set termguicolors
