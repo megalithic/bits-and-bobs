@@ -97,6 +97,7 @@ alias py="python"
 # ALACRITTY
 # -----------------------------------------------------------------------------
 alias updatealacritty='cd ~/code/rust/alacritty; git co master; git fetch; git merge origin/master; rustup override set nightly; cargo build --release; sudo cp target/release/alacritty /usr/local/bin; cd -'
+alias ala='alacritty;'
 
 # EMACS/SPACEMACS
 # -----------------------------------------------------------------------------
