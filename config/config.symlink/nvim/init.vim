@@ -22,9 +22,11 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## Interface
   Plug 'mhartington/oceanic-next'
-  Plug 'itchyny/lightline.vim'
-  Plug 'shirataki/lightline-onedark'
-  Plug 'felixjung/vim-base16-lightline'
+  " Plug 'itchyny/lightline.vim'
+  " Plug 'shirataki/lightline-onedark'
+  " Plug 'felixjung/vim-base16-lightline'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
   " Plug 't9md/vim-choosewin'
 
@@ -92,7 +94,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kassio/neoterm'
   " Plug 'tpope/vim-dispatch'
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for mocha and ruby
-  Plug 'neomake/neomake', { 'on': ['Neomake'] } " async linting
+  " Plug 'kevinsjoberg/vim-test-neovim-error-only'
+  Plug 'neomake/neomake' " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path

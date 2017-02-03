@@ -124,6 +124,13 @@ endif
 " au! BufEnter * nested Neomake
 au! BufWritePost * nested Neomake
 
+" ----------------------------------------------------------------------------
+" ## vim-airline
+let g:airline#extensions#neomake#enabled = 1
+let g:airline_theme = 'oceanicnext'
+let g:airline#extensions#tabline#left_alt_sep = '░'
+let g:airline_left_sep = '█▓░'
+let g:airline_right_sep = '░▓█'
 
 " ----------------------------------------------------------------------------
 " ## lightline
