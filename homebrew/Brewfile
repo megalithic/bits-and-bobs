@@ -39,8 +39,7 @@ brew 'docker-compose'
 brew 'docker-machine'
 brew 'elasticsearch'
 brew 'choppsv1/term24/emacs-mac'
-# brew 'emacs', args: ['--devel', '--with-imagemagick', '--with-gnutls', '--with-librsvg']
-# brew services start emacs
+brew 'emacs', args: ['--with-imagemagick', '--with-gnutls', '--with-librsvg', '--with-ctags', '--with-mailutils', '--with-dbus']
 brew 'extract_url'
 brew 'ffind'
 brew 'figlet'
