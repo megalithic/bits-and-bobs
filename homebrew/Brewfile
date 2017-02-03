@@ -38,7 +38,7 @@ brew 'docker'
 brew 'docker-compose'
 brew 'docker-machine'
 brew 'elasticsearch'
-brew 'choppsv1/term24/emacs-mac'
+brew 'choppsv1/term24/emacs-mac', args: ['--with-dbus', '--with-modules', '--with-xml2', '--with-ctags', '--with-spacemacs-icon']
 brew 'emacs', args: ['--with-imagemagick', '--with-gnutls', '--with-librsvg', '--with-ctags', '--with-mailutils', '--with-dbus']
 brew 'extract_url'
 brew 'ffind'
@@ -132,5 +132,6 @@ cask 'usb-overdrive'
 cask 'virtualbox'
 cask 'yubiswitch'
 
+linkapps
 cleanup
 
