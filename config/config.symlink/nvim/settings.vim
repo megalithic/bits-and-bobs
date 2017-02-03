@@ -353,7 +353,7 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 " ----------------------------------------------------------------------------
 " ## neoterm
-let g:neoterm_position='vertical'
+let g:neoterm_position='horizontal'
 let g:neoterm_run_tests_bg = 1
 let g:neoterm_focus_when_tests_fail = 1
 let g:neoterm_raise_when_tests_fail = 1
