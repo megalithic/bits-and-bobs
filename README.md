@@ -22,7 +22,7 @@ out there.
 
 If you want to kick the tires, then simply:
 
-- `git clone https://github.com/megalithic/dotfiles.git ~/.dotfiles`
+- `git clone https://github.com/megalithic/bits-and-bobs.git ~/.dotfiles`
 - `cd ~/.dotfiles`
 - `setup/bootstrap`
 
