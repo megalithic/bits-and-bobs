@@ -108,6 +108,7 @@ set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
 set completeopt=menu,menuone
 set completeopt-=preview
+set completeopt+=noinsert
 " set complete-=i "don't complete in included files
 
 " -----------------------------------------------------------------------------
@@ -166,8 +167,9 @@ set lazyredraw "may be the cause of lots of issues
 set noesckeys
 set notimeout
 set ttimeout
-set ttimeoutlen=10
-set timeoutlen=10
+set ttimeoutlen=5
+set timeoutlen=5
+" set timeout timeoutlen=500 ttimeoutlen=100
 
 " -----------------------------------------------------------------------------
 " ## Misc
@@ -177,7 +179,7 @@ set report=0 " Show all changes.
 set hidden
 set shiftround
 set formatoptions=qorn1 " automatic formating.
-set shortmess=atI " don't show the intro message when starting vim.
+set shortmess=catI " don't show the intro message when starting vim.
 set matchpairs+=<:>
 set virtualedit+=block
 set magic

@@ -64,6 +64,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   " FIXME: causes sggfaults and other crazy things:
   " Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
+  " Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
   Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
@@ -129,6 +130,7 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'blueyed/vim-diminactive'
   Plug 'Konfekt/FastFold'
   Plug 'Shougo/echodoc.vim'
+  " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
   Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g' }

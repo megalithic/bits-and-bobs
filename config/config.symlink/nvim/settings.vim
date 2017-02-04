@@ -135,6 +135,10 @@ let g:airline_theme = 'oceanicnext'
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+let g:airline#extensions#cm_call_signature#enabled = 1
+if exists('g:airline_extensions')
+  let g:airline_extensions = add(g:airline_extensions, 'cm_call_signature')
+endif
 
 
 " ----------------------------------------------------------------------------
@@ -282,8 +286,6 @@ let g:qs_enable = 0
 
 " ----------------------------------------------------------------------------
 " ## deoplete
-set completeopt-=preview
-set completeopt+=noinsert
 let g:echodoc_enable_at_startup	= 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -395,7 +397,7 @@ endif
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
 let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'replisnips']
+let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips', 'replisnips']
 " let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 
 " Disable built-in <C-x><C-k> to be able to go backward

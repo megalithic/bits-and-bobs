@@ -98,6 +98,8 @@ augroup ft_javascript
   au!
   au BufEnter,BufNewFile,BufRead,BufReadPost *.js set ft=javascript.jsx
 
+  au FileType javascript.jsx highlight xmlAttrib cterm=italic
+
   " make `gf` search for .js files
   au FileType javascript,javascript.jsx setl suffixesadd=.js
   au FileType javascript,javascript.jsx setl suffixesadd=.jsx

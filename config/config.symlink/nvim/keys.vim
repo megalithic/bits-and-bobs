@@ -8,7 +8,6 @@ nnoremap <c-s> :source $MYVIMRC<cr>
 " (Using s-tab to avoid collision between <tab> and <C-i>).
 nnoremap <s-tab> za
 
-
 " ----------------------------------------------------------------------------
 " ## codi.vim
 nnoremap <leader>Rj :Codi!! javascript<cr>
@@ -18,29 +17,34 @@ nnoremap <leader>Rl :Codi!! lua<cr>
 
 " ----------------------------------------------------------------------------
 " ## Autoformat
-nnoremap <F3> :Autoformat<CR>
+nnoremap <F3> :Neoformat<CR>
 
 " ----------------------------------------------------------------------------
 " ## Tab/Deoplete Stuffs
-inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
-inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
-inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
 
-let g:ulti_expand_or_jump_res = 0
-function! s:smart_cr()
-  silent! call UltiSnips#ExpandSnippet()
-  echo "trying to expand a snippet"
-  return g:ulti_expand_res ? "" :
-        \ (pumvisible() ? "\<c-j>" : "\<cr>")
-endfunction
+" nvim-completion-manager
+inoremap <expr> <silent> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <silent> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+" inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
+" inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
+
+" inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
+" let g:ulti_expand_or_jump_res = 0
+" function! s:smart_cr()
+"   silent! call UltiSnips#ExpandSnippet()
+"   echo "trying to expand a snippet"
+"   return g:ulti_expand_res ? "" :
+"         \ (pumvisible() ? "\<c-j>" : "\<cr>")
+" endfunction
 
 " ----------------------------------------------------------------------------
 " ## FZF
 " nnoremap <silent> <leader>m :FZF -m<CR>
 " nnoremap <silent> <leader>a :Ag<CR>
 " nnoremap <silent> <leader>m <esc>:exe 'FZF ' . <SID>fzf_root()<CR>
-nnoremap <silent> <leader>m <esc>:Files<cr>
+nnoremap <silent> <leader>m <esc>:FZF<cr>
 " nnoremap <silent> <leader>a <esc>:exe 'Ag ' . input('Ag/')<CR>
 nnoremap <leader>a <esc>:Ag<space>
 nnoremap <silent> <leader>A  <esc>:exe('Ag '.expand('<cword>'))<cr>
