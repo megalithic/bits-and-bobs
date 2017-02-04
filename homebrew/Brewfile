@@ -64,7 +64,7 @@ brew 'mas'
 brew 'homebrew/versions/mysql56'
 brew 'ncdu'
 brew 'homebrew/dupes/ncurses'
-brew 'neovim', args: ['--HEAD', 'with-lua', 'with-perl', 'with-ruby']
+brew 'neovim', args: ['with-lua', 'with-perl', 'with-ruby']
 brew 'openssl'
 brew 'phantomjs'
 brew 'p7zip'
@@ -90,7 +90,7 @@ brew 'tree'
 brew 'urlview'
 brew 'weechat', args: ['--with-ruby', '--with-python', '--with-perl', '--with-lua', '--with-aspell', '--with-javascript', '--with-curl', '--with-guile', '--HEAD']
 brew 'wget', args: ['enable-iri']
-brew 'vim', args: ['--with-lua', '--with-luajit', '--with-python3']
+brew 'vim', args: ['--with-lua', '--with-luajit', '--with-python3', '--with-tcl', '--with-override-system-vi']
 brew 'zsh', args: ['--with-unicode9', '--without-etcdir']
 brew 'zsh-completions'
 brew 'zsh-lovers'

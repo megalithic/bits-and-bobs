@@ -108,7 +108,7 @@ alias em=e
 
 # (NEO)VIM
 # -----------------------------------------------------------------------------
-alias updatenvim="brew update; brew reinstall --HEAD neovim; pip3 install --upgrade neovim; pip install --upgrade neovim; pip3 install --upgrade pip; gem install neovim; nvim +PlugUpgrade +qall; nvim +PlugUpdate +qall; nvim +UpdateRemotePlugins +qall; cd -"
+alias updatenvim="brew update; pip3 install --upgrade neovim; pip install --upgrade neovim; pip3 install --upgrade pip; gem install neovim; nvim +PlugUpgrade +qall; nvim +PlugUpdate +qall; nvim +UpdateRemotePlugins +qall; cd -; brew outdated"
 alias nvimupdate=updatenvim
 alias nv="nvim"
 alias vim="nvim"
