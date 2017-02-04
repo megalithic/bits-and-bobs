@@ -23,23 +23,23 @@ nnoremap <F3> :Neoformat<CR>
 " ## Tabbing for completions:
 
 " deoplete ---
-" inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-" inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
-" inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
+inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
+inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
 
-" inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
-" let g:ulti_expand_or_jump_res = 0
-" function! s:smart_cr()
-"   silent! call UltiSnips#ExpandSnippet()
-"   echo "trying to expand a snippet"
-"   return g:ulti_expand_res ? "" :
-"         \ (pumvisible() ? "\<c-j>" : "\<cr>")
-" endfunction
+inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
+let g:ulti_expand_or_jump_res = 0
+function! s:smart_cr()
+  silent! call UltiSnips#ExpandSnippet()
+  echo "trying to expand a snippet"
+  return g:ulti_expand_res ? "" :
+        \ (pumvisible() ? "\<c-j>" : "\<cr>")
+endfunction
 
 " completor.vim ---
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " nvim-completion-manager ---
 " inoremap <expr> <silent> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
