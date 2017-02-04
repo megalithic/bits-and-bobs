@@ -27,15 +27,11 @@ augroup vimrcEx
 
   " ----------------------------------------------------------------------------
   " ## Toggle certain accoutrements when entering and leaving a buffer & window
-  " NOTE: the syntax highlighting fails when using FZF
+  " NOTE: the syntax highlighting fails when using FZF and BufEnter
   " FIXME: we really want to still be able to flip between syntax highlighting
   " on and off.
-  " au WinEnter,BufEnter * set syntax=on
-  " au WinEnter,BufCreate * set syntax=on
-  " au WinEnter,BufWinEnter * set syntax=on
-  au WinEnter,BufEnter * set number relativenumber cul syntax=on
-  " au WinLeave,BufLeave * set syntax=off
-  au WinLeave,BufLeave * set nonumber norelativenumber nocul syntax=off
+  au WinEnter,BufEnter * set number relativenumber "cul syntax=on
+  au WinLeave,BufLeave * set nonumber norelativenumber "nocul syntax=off
 
   " ----------------------------------------------------------------------------
   " ## Automagically update remote homeassistant files upon editing locally
