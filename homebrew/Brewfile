@@ -57,11 +57,13 @@ brew 'htop-osx'
 brew 'hub'
 brew 'imagemagick'
 brew 'httpie'
+brew 'https://raw.githubusercontent.com/mawww/kakoune/master/contrib/kakoune.rb', args: ['--HEAD']
 brew 'homebrew/versions/mysql'
 brew 'libgcrypt'
 brew 'mas'
 brew 'homebrew/versions/mysql56'
 brew 'ncdu'
+brew 'homebrew/dupes/ncurses'
 brew 'neovim', args: ['--HEAD', 'with-lua', 'with-perl', 'with-ruby']
 brew 'openssl'
 brew 'phantomjs'

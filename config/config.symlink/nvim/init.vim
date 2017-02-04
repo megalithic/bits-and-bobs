@@ -131,7 +131,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'Konfekt/FastFold'
   Plug 'Shougo/echodoc.vim'
   " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
-  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'roxma/vim-syntax-compl-pop'
+  " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g' }
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }

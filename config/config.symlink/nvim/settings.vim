@@ -296,10 +296,14 @@ let g:deoplete#file#enable_buffer_path = 1
 
 let g:deoplete#sources = {}
 let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
-call deoplete#custom#set('buffer', 'mark', 'buffer')
-call deoplete#custom#set('ternjs', 'mark', '')
-call deoplete#custom#set('omni', 'mark', 'omni')
-call deoplete#custom#set('file', 'mark', 'file')
+if has('deoplete')
+  echo "foooo"
+endif
+
+" call deoplete#custom#set('buffer', 'mark', 'buffer')
+" call deoplete#custom#set('ternjs', 'mark', '')
+" call deoplete#custom#set('omni', 'mark', 'omni')
+" call deoplete#custom#set('file', 'mark', 'file')
 
 " we don't want the completion menu to auto pop-up when we are in text files
 let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
