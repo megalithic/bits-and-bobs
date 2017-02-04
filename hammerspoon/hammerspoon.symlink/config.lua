@@ -17,7 +17,7 @@ local screenCount = #hs.screen.allScreens()
 hs.grid.GRIDWIDTH = 8
 hs.grid.GRIDHEIGHT = 8
 hs.grid.MARGINX = 10
-hs.grid.MARGINY = 2
+hs.grid.MARGINY = 0
 
 -- :: settings
 hs.window.animationDuration = 0.5 -- 0 to disable animations
