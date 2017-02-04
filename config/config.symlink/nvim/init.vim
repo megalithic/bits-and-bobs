@@ -39,6 +39,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'moll/vim-node', { 'for': ['javascript'] }
+  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g' }
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
@@ -66,14 +67,12 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
   " Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
-  Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
   Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 
   " ----------------------------------------------------------------------------
   " ## Python
   Plug 'hynek/vim-python-pep8-indent', { 'for': ['python'] }
   Plug 'davidhalter/jedi-vim', { 'for': ['python'] }
-  Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
 
   " ----------------------------------------------------------------------------
   " ## Misc, Other, et al
@@ -129,12 +128,14 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'inside/vim-search-pulse'
   " Plug 'blueyed/vim-diminactive'
   Plug 'Konfekt/FastFold'
-  Plug 'Shougo/echodoc.vim'
-  Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
+  " Plug 'maralla/completor.vim', {'do': 'cd pythonx/completers/javascript && npm install'}
+  " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
   " Plug 'roxma/vim-syntax-compl-pop'
-  " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
-  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g' }
+  Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
+  Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
+  Plug 'Shougo/echodoc.vim'
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }

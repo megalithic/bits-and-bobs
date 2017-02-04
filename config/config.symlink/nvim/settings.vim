@@ -285,6 +285,12 @@ let g:qs_enable = 0
 
 
 " ----------------------------------------------------------------------------
+" ## completor.vim
+let g:completor_css_omni_trigger = '([\w-]+|@[\w-]*|[\w-]+:\s*[\w-]*)$'
+let g:completor_html_omni_trigger = '.*$'
+
+
+" ----------------------------------------------------------------------------
 " ## deoplete
 let g:echodoc_enable_at_startup	= 1
 let g:deoplete#enable_at_startup = 1
@@ -296,14 +302,13 @@ let g:deoplete#file#enable_buffer_path = 1
 
 let g:deoplete#sources = {}
 let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
-if has('deoplete')
-  echo "foooo"
-endif
 
-" call deoplete#custom#set('buffer', 'mark', 'buffer')
-" call deoplete#custom#set('ternjs', 'mark', '')
-" call deoplete#custom#set('omni', 'mark', 'omni')
-" call deoplete#custom#set('file', 'mark', 'file')
+if exists('g:deoplete#custom#set')
+  call deoplete#custom#set('buffer', 'mark', 'buffer')
+  call deoplete#custom#set('ternjs', 'mark', '')
+  call deoplete#custom#set('omni', 'mark', 'omni')
+  call deoplete#custom#set('file', 'mark', 'file')
+endif
 
 " we don't want the completion menu to auto pop-up when we are in text files
 let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
@@ -368,6 +373,16 @@ let g:ackprg="rg --column --nogroup --line-numbers --vimgrep"
 let g:agprg="rg --column --nogroup --line-numbers --vimgrep"
 " https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
 let g:agprg = 'rg --nogroup --nocolor --column --smart-case'
+
+
+" ----------------------------------------------------------------------------
+" ## ripgrep/fzf
+let g:rg_command = '
+\ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+\ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf,sass,scss,haml,erb,ejs}"
+\ -g "!*.{min.js,swp,o,zip}"
+\ -g "!{.git,node_modules,vendor}/*" '
+command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 
 " ----------------------------------------------------------------------------

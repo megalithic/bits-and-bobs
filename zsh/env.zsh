@@ -68,12 +68,17 @@ export PATH=$PATH:$MYSQL
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
 
 # Setting ag as the default source for fzf
-export FZF_DEFAULT_COMMAND='ag -l -g ""'
+# export FZF_DEFAULT_COMMAND='ag -l -g ""'
+
+# Setting ripgrep(rg) as the default source for fzf
+# fzf/ripgrep stuffs: https://www.reddit.com/r/linux/comments/5rrpyy/turbo_charge_bash_with_fzf_ripgrep
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+# bind -x '"\C-p": vim $(fzf);'
 export FZF_DEFAULT_OPTS='
   --select-1
   --ansi
   --extended
-  --bind ctrl-f:page-down,ctrl-b:page-up
+  --bind ctrl-f:page-down,ctrl-b:page-up,J:down,K:up
 '
 # --color fg:252,bg:-1,hl:67,fg+:252,bg+:235,hl+:81
 # --color info:144,prompt:161,spinner:135,pointer:135,marker:118

@@ -2,13 +2,18 @@
   "ecmaVersion": 6,
   "libs": [
     "browser",
+    "chai",
     "ecma5",
     "ecma6",
+    "jest",
     "jquery",
-    "underscore",
     "lodash",
+    "mocha",
     "ramda",
-    "chai"
+    "react",
+    "redux",
+    "underscore",
+    "yarn"
   ],
   "plugins": {
     "node": {},
@@ -24,3 +29,5 @@
     "webpack": {}
   }
 }
+
+// vim: set ft=json:
