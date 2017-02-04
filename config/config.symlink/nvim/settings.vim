@@ -521,10 +521,6 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
-" UNCOMMENT FOR FZF FILE PREVIEW:
-" let g:fzf_files_options =
-"       \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
-      " \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 
 " show a preview of the file:
 " https://github.com/metakirby5/.dots/blob/master/base/.vimrc#L273
