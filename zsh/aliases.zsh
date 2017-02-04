@@ -111,9 +111,10 @@ alias em=e
 alias updatenvim="brew update; pip3 install --upgrade neovim; pip install --upgrade neovim; pip3 install --upgrade pip; gem install neovim; nvim +PlugUpgrade +qall; nvim +PlugUpdate +qall; nvim +UpdateRemotePlugins +qall; cd -; brew outdated"
 alias nvimupdate=updatenvim
 alias nv="nvim"
-alias vim="nvim"
-alias vi="nvim"
 alias im="nvim"
+alias vim="nvim"
+alias vi="/usr/local/bin/vim"
+alias v=vi
 
 # alias nvt="nv +tabe +term +NvimuxVerticalSplit +term +tabnext"
 # alias nvts="nv +tabe +term +NvimuxVerticalSplit +term +NvimuxHorizontalSplit +term +tabnext"

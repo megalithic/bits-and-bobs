@@ -284,54 +284,53 @@ let g:vim_markdown_frontmatter=1
 let g:qs_enable = 0
 
 
-" ----------------------------------------------------------------------------
-" ## completor.vim
-let g:completor_css_omni_trigger = '([\w-]+|@[\w-]*|[\w-]+:\s*[\w-]*)$'
-let g:completor_html_omni_trigger = '.*$'
+if has('nvim')
+  " ----------------------------------------------------------------------------
+  " ## deoplete
+  let g:echodoc_enable_at_startup	= 1
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_ignore_case = 1
+  let g:deoplete#enable_smart_case = 1
+  let g:deoplete#enable_camel_case = 1
+  let g:deoplete#enable_refresh_always = 0
+  let g:deoplete#file#enable_buffer_path = 1
 
+  " let g:deoplete#sources = {}
+  " let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
 
-" ----------------------------------------------------------------------------
-" ## deoplete
-let g:echodoc_enable_at_startup	= 1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#file#enable_buffer_path = 1
-
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
-
-if exists('g:deoplete#custom#set')
   call deoplete#custom#set('buffer', 'mark', 'buffer')
   call deoplete#custom#set('ternjs', 'mark', '')
   call deoplete#custom#set('omni', 'mark', 'omni')
   call deoplete#custom#set('file', 'mark', 'file')
+
+  " we don't want the completion menu to auto pop-up when we are in text files
+  let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
+
+  let g:deoplete#omni#functions = {}
+  let g:deoplete#omni#functions.javascript = [
+    \ 'tern#Complete',
+    \ 'jspc#omni'
+  \]
+  let g:deoplete#omni#functions['javascript.jsx'] = [
+    \ 'tern#Complete',
+    \ 'jspc#omni'
+  \]
+  let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
+  let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
+  let g:deoplete#omni#functions.scss = 'csscomplete#CompleteCSS'
+  let g:deoplete#omni#functions.sass = 'csscomplete#CompleteCSS'
+  let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
+  let g:monster#completion#rcodetools#backend = 'async_rct_complete'
+else
+  " ----------------------------------------------------------------------------
+  " ## completor.vim
+  let g:completor_css_omni_trigger = '([\w-]+|@[\w-]*|[\w-]+:\s*[\w-]*)$'
+  let g:completor_html_omni_trigger = '.*$'
 endif
-
-" we don't want the completion menu to auto pop-up when we are in text files
-let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
-
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-let g:deoplete#omni#functions['javascript.jsx'] = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
-let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
-let g:deoplete#omni#functions.scss = 'csscomplete#CompleteCSS'
-let g:deoplete#omni#functions.sass = 'csscomplete#CompleteCSS'
-let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
-let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 
 
 " ----------------------------------------------------------------------------
-" ## tern_for_vim
+" ## ternjs
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 let g:tern#filetypes = [
@@ -340,10 +339,6 @@ let g:tern#filetypes = [
       \ 'javascript.jsx',
       \ 'vue'
       \ ]
-
-
-" ----------------------------------------------------------------------------
-" ## ternjs
 let g:tern_show_argument_hints = 'on_hold' "on_move; default is 0
 let g:tern_show_signature_in_pum = '0' " disables full signature type on autocomplete
 let g:tern_request_timeout = 1

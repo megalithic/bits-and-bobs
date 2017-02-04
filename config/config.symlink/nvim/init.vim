@@ -21,6 +21,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## Interface
+  Plug 'chriskempson/base16-vim'
   Plug 'mhartington/oceanic-next'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -39,7 +40,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'moll/vim-node', { 'for': ['javascript'] }
-  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g' }
+  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i && npm i -g tern' }
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
@@ -64,8 +65,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   " FIXME: causes sggfaults and other crazy things:
-  " Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
-  " Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
+  Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 
@@ -117,8 +117,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'tmux-plugins/vim-tmux-focus-events'
-  " Plug 'benmills/vimux'
-  " Plug 'skywind3000/asyncrun.vim'
   Plug 'christoomey/vim-tmux-runner'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
@@ -128,15 +126,20 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'inside/vim-search-pulse'
   " Plug 'blueyed/vim-diminactive'
   Plug 'Konfekt/FastFold'
-  " Plug 'maralla/completor.vim', {'do': 'cd pythonx/completers/javascript && npm install'}
+
+  if has('nvim')
+    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
+    Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
+    Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
+    Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
+  else
+    Plug 'maralla/completor.vim', {'do': 'cd pythonx/completers/javascript && npm i && cd -'}
+  endif
+
   " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
   " Plug 'roxma/vim-syntax-compl-pop'
-  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
-  Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
-  Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
   Plug 'Shougo/echodoc.vim'
-  Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
         \| Plug 'junegunn/fzf.vim'

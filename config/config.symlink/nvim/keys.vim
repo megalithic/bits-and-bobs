@@ -22,24 +22,26 @@ nnoremap <F3> :Neoformat<CR>
 " ----------------------------------------------------------------------------
 " ## Tabbing for completions:
 
-" deoplete ---
-inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
-inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
+if has('nvim')
+  " deoplete ---
+  inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+  inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
+  inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
 
-inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
-let g:ulti_expand_or_jump_res = 0
-function! s:smart_cr()
-  silent! call UltiSnips#ExpandSnippet()
-  echo "trying to expand a snippet"
-  return g:ulti_expand_res ? "" :
-        \ (pumvisible() ? "\<c-j>" : "\<cr>")
-endfunction
-
-" completor.vim ---
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+  inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
+  let g:ulti_expand_or_jump_res = 0
+  function! s:smart_cr()
+    silent! call UltiSnips#ExpandSnippet()
+    echo "trying to expand a snippet"
+    return g:ulti_expand_res ? "" :
+          \ (pumvisible() ? "\<c-j>" : "\<cr>")
+  endfunction
+else
+  " completor.vim ---
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+endif
 
 " nvim-completion-manager ---
 " inoremap <expr> <silent> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -192,10 +194,12 @@ nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 nnoremap <C-o> :vnew<cr>:e<space><c-d>
 nnoremap <C-t> :tabe<cr>:e<space><c-d>
 
-tnoremap <C-w>h <C-\><C-n><C-w><C-h>
-tnoremap <C-w>j <C-\><C-n><C-w><C-j>
-tnoremap <C-w>k <C-\><C-n><C-w><C-k>
-tnoremap <C-w>l <C-\><C-n><C-w><C-l>
+if(has('nvim'))
+  tnoremap <C-w>h <C-\><C-n><C-w><C-h>
+  tnoremap <C-w>j <C-\><C-n><C-w><C-j>
+  tnoremap <C-w>k <C-\><C-n><C-w><C-k>
+  tnoremap <C-w>l <C-\><C-n><C-w><C-l>
+endif
 
 inoremap <C-w>h <ESC><C-w><C-h>
 inoremap <C-w>j <ESC><C-w><C-j>

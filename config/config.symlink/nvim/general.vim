@@ -3,19 +3,27 @@
 " -----------------------------------------------------------------------------
 " ## UI
 set background=dark
-" colorscheme base16-ocean
-colorscheme OceanicNext
 
-let g:oceanic_next_terminal_italic = 1
-let g:oceanic_next_terminal_bold = 1
-
-" change vim cursor depending on the mode
 if has('nvim')
+  colorscheme OceanicNext
+  let g:oceanic_next_terminal_italic = 1
+  let g:oceanic_next_terminal_bold = 1
+
   set termguicolors
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
   let g:python_host_prog = '/usr/local/bin/python2'
   let g:python3_host_prog = '/usr/local/bin/python3'
+else
+  colorscheme base16-ocean
+
+  if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  endif
 endif
 
 set re=1 " Updated vim regex engine
@@ -106,9 +114,10 @@ set hlsearch
 set omnifunc=syntaxcomplete#Complete " Set omni-completion method.
 set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
-set completeopt=menu,menuone,longest,noinsert
+" set completeopt=menu,menuone,longest,noinsert
+set completeopt=menu,menuone
 set completeopt-=preview
-" set completeopt+=noinsert
+set completeopt+=noinsert
 " set complete-=i "don't complete in included files
 
 " -----------------------------------------------------------------------------
