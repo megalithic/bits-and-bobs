@@ -22,9 +22,6 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## Interface
   Plug 'mhartington/oceanic-next'
-  " Plug 'itchyny/lightline.vim'
-  " Plug 'shirataki/lightline-onedark'
-  " Plug 'felixjung/vim-base16-lightline'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
@@ -58,13 +55,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
-  " Plug 'othree/xml.vim', { 'for': ['xml'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
 
   " ----------------------------------------------------------------------------
   " ## Ruby, Rails, et al
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
+  " FIXME: causes sggfaults and other crazy things:
   " Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
@@ -90,10 +87,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## Utilities
-  " Plug 'kassio/neoterm'
-  " Plug 'tpope/vim-dispatch'
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for mocha and ruby
-  " Plug 'kevinsjoberg/vim-test-neovim-error-only'
   Plug 'neomake/neomake' " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
@@ -153,7 +147,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
-  " Plug 'airblade/vim-rooter' " change vim root to vcs root when editing a file
   Plug 'eugen0329/vim-esearch' " project wide search and replace
 
   " ----------------------------------------------------------------------------

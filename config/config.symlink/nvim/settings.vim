@@ -431,7 +431,7 @@ let g:qs_enable = 0
 " ----------------------------------------------------------------------------
 " ## deoplete
 set completeopt-=preview
-" set completeopt+=noinsert
+set completeopt+=noinsert
 let g:echodoc_enable_at_startup	= 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -521,8 +521,9 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
-let g:fzf_files_options =
-      \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
+" UNCOMMENT FOR FZF FILE PREVIEW:
+" let g:fzf_files_options =
+"       \ '--preview "(pygmentize {} || less {}) 2>/dev/null"'
       " \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 
 " show a preview of the file:
