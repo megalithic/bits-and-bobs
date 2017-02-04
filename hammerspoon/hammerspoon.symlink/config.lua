@@ -16,12 +16,12 @@ local screenCount = #hs.screen.allScreens()
 -- :: grid creation
 hs.grid.GRIDWIDTH = 8
 hs.grid.GRIDHEIGHT = 8
-hs.grid.MARGINX = 10
+hs.grid.MARGINX = screenCount == 1 and 10 or 0
 hs.grid.MARGINY = 0
 
 -- :: settings
-hs.window.animationDuration = 0.5 -- 0 to disable animations
-hs.window.setShadows(true)
+hs.window.animationDuration = 0.0 -- 0 to disable animations
+hs.window.setShadows(false)
 
 -- :: screens
 config.screens = {
@@ -137,11 +137,7 @@ config.layout = {
 
   ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
-    else
-      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
-    end
+    grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),
 
   ['co.zeit.hyperterm'] = (function(window, forceScreenCount)
