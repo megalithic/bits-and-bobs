@@ -121,7 +121,7 @@ set -g assume-paste-time 0
 set -g repeat-time 0
 
 # nvim trickery
-set -g escape-time 0
+set -g escape-time 2
 
 # Don't wrap searches; it's super confusing given tmux's reverse-ordering of
 # position info in copy mode.
@@ -265,3 +265,5 @@ if "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
 
 run-shell '~/.tmux/plugins/tpm/tpm'
+
+# vim: set ft=tmux:

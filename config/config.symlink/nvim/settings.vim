@@ -124,6 +124,7 @@ endif
 " au! BufEnter * nested Neomake
 au! BufWritePost * nested Neomake
 
+
 " ----------------------------------------------------------------------------
 " ## vim-airline
 let g:airline#extensions#neomake#enabled = 1
@@ -134,156 +135,6 @@ let g:airline_theme = 'oceanicnext'
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-
-" ----------------------------------------------------------------------------
-" ## lightline
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ 'active': {
-      \   'left': [
-      \     [ 'mode', 'paste' ],
-      \     [ 'fugitive', 'gitmerge', 'conflicted', 'filename' ],
-      \     [ 'readonly', 'modified' ] ],
-      \   'right': [
-      \     [ 'column', 'lineinfo' ],
-      \     [ 'percent' ],
-      \     [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'tabline': {
-      \   'left': [
-      \     [ 'bufferinfo' ],
-      \     [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
-      \   'right': [ [ 'close' ], ],
-      \ },
-      \ 'component_expand': {
-      \   'buffercurrent': 'lightline#buffer#buffercurrent2'
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightLineFugitive',
-      \   'conflicted': 'LightLineConflicted',
-      \   'gitmerge': 'LightlineGitmerge',
-      \   'readonly': 'LightLineReadonly',
-      \   'modified': 'LightLineModified',
-      \   'filename': 'LightLineFilename',
-      \   'mode': 'LightLineMode',
-      \   'bufferbefore': 'lightline#buffer#bufferbefore',
-      \   'bufferafter': 'lightline#buffer#bufferafter',
-      \   'bufferinfo': 'lightline#buffer#bufferinfo',
-      \ },
-      \ 'component_type': {
-      \ },
-      \ }
-
-    " \ 'separator': { 'left': '█▓░', 'right': '░▓█' },
-
-function! LightLineInfo()
-  return expand('⭡ %3l:%-2v')
-endfunction
-
-function! LightLineModified()
-  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightLineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-function! LightLineFilename()
-  return fnamemodify(expand("%"), ":~:.")
-endfunction
-
-function! LightLineMode()
-  let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-function! LightLineFugitive()
-  if exists("*fugitive#head")
-    let branch = fugitive#head()
-    return branch !=# '' ? ' '.branch : ''
-  endif
-  return ''
-endfunction
-
-function! LightLineConflicted()
-  if !empty(glob("~/.config/nvim/plugged/vim-conflicted/plugin/conflicted.vim"))
-    return ConflictedVersion()
-  endif
-  return ''
-endfunction
-
-function! LightlineGitmerge()
-  let fullname = expand('%')
-  let gitversion = ''
-  if fullname =~? 'fugitive://.*/\.git//0/.*'
-      let gitversion = 'git index'
-  elseif fullname =~? 'fugitive://.*/\.git//2/.*'
-      let gitversion = 'git target'
-  elseif fullname =~? 'fugitive://.*/\.git//3/.*'
-      let gitversion = 'git merge'
-  elseif &diff == 1
-      let gitversion = 'working copy'
-  endif
-  return gitversion
-endfunction
-
-function! LightLineModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! LightLineReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
-
-" disable overwriting the statusline forcibly by other plugins
-let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
-let g:vimshell_force_overwrite_statusline = 0
-
-let g:lightline_buffer_readonly_icon = ''
-let g:lightline_buffer_modified_icon = '✭'
-let g:lightline_buffer_git_icon = ' '
-let g:lightline_buffer_separator_icon = ''
-
-let g:lightline_buffer_show_bufnr = 1
-let g:lightline_buffer_rotate = 0
-let g:lightline_buffer_fname_mod = ':t'
-let g:lightline_buffer_excludes = ['vimfiler']
-
-let g:lightline_buffer_maxflen = 30
-let g:lightline_buffer_maxfextlen = 3
-let g:lightline_buffer_minflen = 16
-let g:lightline_buffer_minfextlen = 3
-let g:lightline_buffer_reservelen = 20
 
 
 " ----------------------------------------------------------------------------
@@ -428,6 +279,7 @@ let g:vim_markdown_frontmatter=1
 " ## quick-scope
 let g:qs_enable = 0
 
+
 " ----------------------------------------------------------------------------
 " ## deoplete
 set completeopt-=preview
@@ -439,40 +291,13 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 let g:deoplete#enable_refresh_always = 0
 let g:deoplete#file#enable_buffer_path = 1
-" let g:deoplete#max_abbr_width = 0
-" let g:deoplete#max_menu_width = 0
-" let g:deoplete#enable_debug = 0
 
-" let g:deoplete#sources = {}
-" let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
-" let g:deoplete#sources.javascript = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
-" let g:deoplete#sources['javascript.jsx'] = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
 call deoplete#custom#set('buffer', 'mark', 'buffer')
 call deoplete#custom#set('ternjs', 'mark', '')
 call deoplete#custom#set('omni', 'mark', 'omni')
 call deoplete#custom#set('file', 'mark', 'file')
-" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-function! Preview_func()
-  if &pvw
-    setlocal nonumber norelativenumber
-    endif
-endfunction
-autocmd WinEnter * call Preview_func()
-
-
-" let g:deoplete#omni_patterns = {}
-" let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%(\h\w*\)\?'
-" let g:deoplete#omni_patterns['javascript.jsx'] = '[^. \t]\.\%(\h\w*\)\?'
-" let g:deoplete#omni_patterns.elm = '\.'
-" let g:deoplete#omni_patterns.html = ''
-" let g:deoplete#omni_patterns.html = '<[^>]*'
-" let g:deoplete#omni_patterns.xml = '<[^>]*'
-" let g:deoplete#omni_patterns.md = '<[^>]*'
-" let g:deoplete#omni_patterns.css = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-" let g:deoplete#omni_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-" let g:deoplete#omni_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-" let g:deoplete#omni_patterns.go = '[^.[:digit:] *\t]\.\w*'
-" let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
 
 " we don't want the completion menu to auto pop-up when we are in text files
 let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
@@ -492,9 +317,9 @@ let g:deoplete#omni#functions.scss = 'csscomplete#CompleteCSS'
 let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
 let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 
+
 " ----------------------------------------------------------------------------
 " ## tern_for_vim
-" let g:tern#command = ['node', expand('~').'/lib/tern/bin/tern']
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 let g:tern#filetypes = [
@@ -504,11 +329,13 @@ let g:tern#filetypes = [
       \ 'vue'
       \ ]
 
+
 " ----------------------------------------------------------------------------
 " ## ternjs
 let g:tern_show_argument_hints = 'on_hold' "on_move; default is 0
 let g:tern_show_signature_in_pum = '0' " disables full signature type on autocomplete
 let g:tern_request_timeout = 1
+
 
 " ----------------------------------------------------------------------------
 " ## FZF
@@ -541,11 +368,20 @@ let g:agprg = 'rg --nogroup --nocolor --column --smart-case'
 let g:gist_open_url = 1
 let g:gist_default_private = 1
 
+
+" ----------------------------------------------------------------------------
+" ## vim-search-pulse
+" FIXME: pulse isn't working
+" let g:vim_search_pulse_disable_auto_mappings = 1
+" let g:vim_search_pulse_color_list = ['red', 'white']
+let g:vim_search_pulse_duration = 150
+
+
 " ----------------------------------------------------------------------------
 " ## vim-esearch
 if !exists('g:esearch')
   let g:esearch = {}
-  let g:esearch.adapter = 'ag'
+  let g:esearch.adapter = 'rg'
   let g:esearch.backend = 'nvim'
   let g:esearch.out = 'win'
   let g:esearch.batch_size = 1000
@@ -558,8 +394,8 @@ endif
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
 let g:UltiSnipsUsePythonVersion = 3
-" let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'replisnips']
+" let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 
 " Disable built-in <C-x><C-k> to be able to go backward
 inoremap <C-x><C-k> <NOP>

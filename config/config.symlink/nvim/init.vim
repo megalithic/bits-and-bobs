@@ -124,6 +124,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'itchyny/vim-cursorword'
   Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
+  Plug 'inside/vim-search-pulse'
+  Plug 'blueyed/vim-diminactive'
   Plug 'Konfekt/FastFold'
   Plug 'Shougo/echodoc.vim'
   Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -179,3 +181,5 @@ source $HOME/.config/nvim/functions.vim
 source $HOME/.config/nvim/autocommands.vim
 source $HOME/.config/nvim/keys.vim
 source $HOME/.config/nvim/highlights.vim
+
+" a wealth of solid neovim info: https://github.com/justinmk/config/blob/master/.config/nvim/init.vim

@@ -35,7 +35,7 @@ set wrapscan
 command! Hardwrap set fo=want tw=80 nowrap
 command! Nohardwrap set fo=croq wrap linebreak nolist
 
-set synmaxcol=500 " turn off syntax highlight beyond 500 chars
+set synmaxcol=400 " turn off syntax highlight beyond 500 chars
 set showcmd " show incomplete commands
 set ruler " show the cursor position all the time
 set scrolloff=5

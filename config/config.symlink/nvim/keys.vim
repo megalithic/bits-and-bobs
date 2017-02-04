@@ -134,32 +134,39 @@ vmap " S"
 
 " ----------------------------------------------------------------------------
 " ## incsearch
-" map /  <Plug>(incsearch-forward)
-" map ?  <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
 
-function! s:config_fuzzyall(...) abort
-  return extend(copy({
-  \   'converters': [
-  \     incsearch#config#fuzzy#converter(),
-  \     incsearch#config#fuzzyspell#converter()
-  \   ],
-  \ }), get(a:, 1, {}))
-endfunction
+" function! s:config_fuzzyall(...) abort
+"   return extend(copy({
+"   \   'converters': [
+"   \     incsearch#config#fuzzy#converter(),
+"   \     incsearch#config#fuzzyspell#converter()
+"   \   ],
+"   \ }), get(a:, 1, {}))
+" endfunction
 
-noremap <silent><expr> z/ incsearch#go(<SID>config_fuzzyall())
-noremap <silent><expr> z? incsearch#go(<SID>config_fuzzyall({'command': '?'}))
-noremap <silent><expr> zg? incsearch#go(<SID>config_fuzzyall({'is_stay': 1}))
+" noremap <silent><expr> z/ incsearch#go(<SID>config_fuzzyall()<Plug>Pulse)
+" noremap <silent><expr> z? incsearch#go(<SID>config_fuzzyall({'command': '?'})<Plug>Pulse)
+" noremap <silent><expr> zg? incsearch#go(<SID>config_fuzzyall({'is_stay': 1})<Plug>Pulse)
 
-" map // <Plug>(incsearch-fuzzy-/)
-" map ?? <Plug>(incsearch-fuzzy-?)
-" map n  <Plug>(incsearch-nohl-n)zz
-" map N  <Plug>(incsearch-nohl-N)zz
-" map *  <Plug>(incsearch-nohl-*)
-" map #  <Plug>(incsearch-nohl-#)
-" map g* <Plug>(incsearch-nohl-g*)
-" map g# <Plug>(incsearch-nohl-g#)
-" map g/ <Plug>(incsearch-fuzzy-stay)
+" ----------------------------------------------------------------------------
+" ## incsearch and vim search pulse
+" https://github.com/inside/vim-search-pulse#integration-with-the-incsearchvim-plugin
+"
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" Next or previous match is followed by a Pulse
+map n <Plug>(incsearch-nohl-n)<Plug>Pulse
+map N <Plug>(incsearch-nohl-N)<Plug>Pulse
+map * <Plug>(incsearch-nohl-*)<Plug>Pulse
+map # <Plug>(incsearch-nohl-#)<Plug>Pulse
+map g* <Plug>(incsearch-nohl-g*)<Plug>Pulse
+map g# <Plug>(incsearch-nohl-g#)<Plug>Pulse
+
+" Pulses the first match after hitting the enter keyan
+autocmd! User IncSearchExecute
+autocmd User IncSearchExecute :call search_pulse#Pulse()
 
 " ----------------------------------------------------------------------------
 " ## Splits with vim-tmux-navigator
