@@ -21,23 +21,23 @@ nnoremap <F3> :Neoformat<CR>
 
 " ----------------------------------------------------------------------------
 " ## Tab/Deoplete Stuffs
+inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
+inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
+
+inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
+let g:ulti_expand_or_jump_res = 0
+function! s:smart_cr()
+  silent! call UltiSnips#ExpandSnippet()
+  echo "trying to expand a snippet"
+  return g:ulti_expand_res ? "" :
+        \ (pumvisible() ? "\<c-j>" : "\<cr>")
+endfunction
 
 " nvim-completion-manager
-inoremap <expr> <silent> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr> <silent> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" inoremap <expr> <silent> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr> <silent> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
-" inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-" inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
-" inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
-
-" inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
-" let g:ulti_expand_or_jump_res = 0
-" function! s:smart_cr()
-"   silent! call UltiSnips#ExpandSnippet()
-"   echo "trying to expand a snippet"
-"   return g:ulti_expand_res ? "" :
-"         \ (pumvisible() ? "\<c-j>" : "\<cr>")
-" endfunction
 
 " ----------------------------------------------------------------------------
 " ## FZF
