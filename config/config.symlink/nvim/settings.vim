@@ -314,6 +314,7 @@ let g:deoplete#omni#functions['javascript.jsx'] = [
 let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
 let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
 let g:deoplete#omni#functions.scss = 'csscomplete#CompleteCSS'
+let g:deoplete#omni#functions.sass = 'csscomplete#CompleteCSS'
 let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
 let g:monster#completion#rcodetools#backend = 'async_rct_complete'
 

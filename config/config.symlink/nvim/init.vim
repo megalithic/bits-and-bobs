@@ -125,7 +125,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'inside/vim-search-pulse'
-  Plug 'blueyed/vim-diminactive'
+  " Plug 'blueyed/vim-diminactive'
   Plug 'Konfekt/FastFold'
   Plug 'Shougo/echodoc.vim'
   Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }

@@ -182,7 +182,7 @@ augroup completions
   " https://github.com/davidosomething/dotfiles/blob/7fcd48209c8f116ccc4fb96beffdc315837fe876/vim/plugin/completion.vim
   au FileType * setl omnifunc=syntaxcomplete#Complete
   au FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
-  au FileType css,scss,sass,less setl omnifunc=csscomplete#CompleteCSS noci
+  au FileType css,scss,sass,less,scss.css,sass.css setl omnifunc=csscomplete#CompleteCSS noci
 
   au FileType coffee setl omnifunc=javascriptcomplete#CompleteJS
   au FileType javascript,javascript.jsx,jsx setl omnifunc=javascriptcomplete#CompleteJS " default
