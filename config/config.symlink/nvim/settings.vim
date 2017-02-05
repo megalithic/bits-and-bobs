@@ -287,21 +287,32 @@ let g:qs_enable = 0
 if has('nvim')
   " ----------------------------------------------------------------------------
   " ## deoplete
-  let g:echodoc_enable_at_startup	= 1
   let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_ignore_case = 1
   let g:deoplete#enable_smart_case = 1
-  let g:deoplete#enable_camel_case = 1
-  let g:deoplete#enable_refresh_always = 0
+  " let g:deoplete#enable_ignore_case = 1
+  " let g:deoplete#enable_camel_case = 1
+  let g:deoplete#enable_refresh_always = 1
   let g:deoplete#file#enable_buffer_path = 1
+  let g:deoplete#auto_complete_start_length = 1
+  " DEBUGGING:
+  " let g:deoplete#enable_debug = 1
+  " let g:deoplete#enable_profile = 1
 
-  " let g:deoplete#sources = {}
-  " let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+  let g:deoplete#sources = {}
+  let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
 
   call deoplete#custom#set('buffer', 'mark', 'buffer')
   call deoplete#custom#set('ternjs', 'mark', '')
   call deoplete#custom#set('omni', 'mark', 'omni')
   call deoplete#custom#set('file', 'mark', 'file')
+  function! Preview_func()
+    if &pvw
+      setlocal nonumber norelativenumber
+    endif
+  endfunction
+  autocmd WinEnter * call Preview_func()
+  call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
+  " call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
 
   " we don't want the completion menu to auto pop-up when we are in text files
   let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
@@ -321,6 +332,10 @@ if has('nvim')
   let g:deoplete#omni#functions.sass = 'csscomplete#CompleteCSS'
   let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
   let g:monster#completion#rcodetools#backend = 'async_rct_complete'
+
+  let g:echodoc_enable_at_startup	= 1
+
+  " NOTE: additional settings found in autocommands.vim and keys.vim
 else
   " ----------------------------------------------------------------------------
   " ## completor.vim

@@ -76,14 +76,16 @@ augroup vimrcEx
   " ## Terminal
   if has('nvim')
     " Automatically go into insert mode when entering terminal window
-    " au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    " au BufEnter * if &buftype == 'term' | :startinsert | endif
-    " au BufWinEnter,WinEnter,BufEnter term://* startinsert
+    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    au BufEnter * if &buftype == 'term' | :startinsert | endif
+    au BufWinEnter,WinEnter,BufEnter term://* startinsert
   endif
 
   " ----------------------------------------------------------------------------
   " ## Deoplete
-  au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
+  " NOTE: some of these have been moved to settings.vim#deoplete and
+  " keys.vim#deoplete
+  " au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
 
   " au VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
   " au VimEnter * call deoplete#custom#set('_', 'converters',
@@ -156,7 +158,7 @@ augroup ft_ssh
   au BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
 augroup END
 
-augroup ft_ssh
+augroup ft_python
   au!
   au FileType python
          \   let python_highlight_all = 1
@@ -194,5 +196,5 @@ augroup completions
 
   au FileType python setl omnifunc=pythoncomplete#Complete
   au FileType xml setl omnifunc=xmlcomplete#CompleteTags
-  " au FileType ruby setl omnifunc=rubycomplete#Complete
+  au FileType ruby setl omnifunc=rubycomplete#Complete
 augroup END

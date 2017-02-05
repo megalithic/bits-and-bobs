@@ -40,7 +40,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'moll/vim-node', { 'for': ['javascript'] }
-  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i && npm i -g tern' }
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
@@ -133,13 +132,16 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
     Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
     Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
+    Plug 'Shougo/echodoc.vim'
   else
     Plug 'maralla/completor.vim', {'do': 'cd pythonx/completers/javascript && npm i && cd -'}
   endif
 
+  Plug 'Shougo/context_filetype.vim'
+  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i && npm i -g' }
+
   " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
   " Plug 'roxma/vim-syntax-compl-pop'
-  Plug 'Shougo/echodoc.vim'
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
         \| Plug 'junegunn/fzf.vim'

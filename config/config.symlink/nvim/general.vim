@@ -49,6 +49,9 @@ set ruler " show the cursor position all the time
 set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
+set scroll=3
+set lazyredraw "may be the cause of lots of issues
+set ttyfast
 " NOTE: also handled in autocommands.vim
 " set cul " turn on cursorline highlighting -- needed for linenumber HL too
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
@@ -117,7 +120,8 @@ set complete=.,w,b,u,U,t,i,d
 " set completeopt=menu,menuone,longest,noinsert
 set completeopt=menu,menuone
 set completeopt-=preview
-set completeopt+=noinsert
+set completeopt+=noselect " @mhartington
+" set completeopt+=noinsert " me.. :(
 " set complete-=i "don't complete in included files
 
 " -----------------------------------------------------------------------------
@@ -169,15 +173,14 @@ endif
 set autowrite
 set fileformats=unix,mac,dos
 set fileformat=unix
-set lazyredraw "may be the cause of lots of issues
 
 " -----------------------------------------------------------------------------
 " ## Mode changes speedups
 set noesckeys
 set notimeout
 set ttimeout
-set ttimeoutlen=5
-set timeoutlen=5
+set ttimeoutlen=2
+set timeoutlen=2
 " set timeout timeoutlen=500 ttimeoutlen=100
 
 " -----------------------------------------------------------------------------
