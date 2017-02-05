@@ -17,7 +17,7 @@ local screenCount = #hs.screen.allScreens()
 hs.grid.GRIDWIDTH = 8
 hs.grid.GRIDHEIGHT = 8
 hs.grid.MARGINX = screenCount == 1 and 10 or 0
-hs.grid.MARGINY = 0
+hs.grid.MARGINY = 2
 
 -- :: settings
 hs.window.animationDuration = 0.0 -- 0 to disable animations
@@ -41,7 +41,7 @@ config.grid = {
   rightTwoThirds =  '3,0 5x8',
   leftOneThird =    '0,0 3x8',
   leftTwoThirds =   '0,0 5x8',
-  fullScreen =      '0,0 32x18',
+  fullScreen =      '0,0 8x8',
   centeredLarge =   '1,1 6x6',
   centeredMedium =  '2,2 4x4',
   centeredSmall =   '3,3 2x2',
