@@ -26,10 +26,23 @@ if has('nvim')
   " deoplete ---
   au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
   au CompleteDone * pclose
-  " deoplete + ultisnippets
+
+  " deoplete + ultisnips
+  " ---
   inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
   inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
   inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
+
+  " deoplete + neosnippets
+  " ---
+  " imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
+  " imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+  " imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+
+  " nvim-completion-manager ---
+  " ---
+  " inoremap <expr> <silent> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+  " inoremap <expr> <silent> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
   inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
   let g:ulti_expand_or_jump_res = 0
@@ -39,21 +52,12 @@ if has('nvim')
     return g:ulti_expand_res ? "" :
           \ (pumvisible() ? "\<c-j>" : "\<cr>")
   endfunction
-
-  " deoplete + neosnippets
-  " imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
-  " imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-  " imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
 else
   " completor.vim ---
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 endif
-
-" nvim-completion-manager ---
-" inoremap <expr> <silent> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-" inoremap <expr> <silent> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 
 " ----------------------------------------------------------------------------

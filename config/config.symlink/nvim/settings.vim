@@ -289,14 +289,14 @@ if has('nvim')
   " ## deoplete
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#enable_smart_case = 1
-  " let g:deoplete#enable_ignore_case = 1
-  " let g:deoplete#enable_camel_case = 1
   let g:deoplete#enable_refresh_always = 1
   let g:deoplete#file#enable_buffer_path = 1
   let g:deoplete#auto_complete_start_length = 1
+
   " DEBUGGING:
   " let g:deoplete#enable_debug = 1
   " let g:deoplete#enable_profile = 1
+  " call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
 
   let g:deoplete#sources = {}
   let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
@@ -305,27 +305,20 @@ if has('nvim')
   call deoplete#custom#set('ternjs', 'mark', '')
   call deoplete#custom#set('omni', 'mark', 'omni')
   call deoplete#custom#set('file', 'mark', 'file')
-  function! Preview_func()
-    if &pvw
-      setlocal nonumber norelativenumber
-    endif
-  endfunction
-  autocmd WinEnter * call Preview_func()
   call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
-  " call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
 
   " we don't want the completion menu to auto pop-up when we are in text files
   let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
 
   let g:deoplete#omni#functions = {}
   let g:deoplete#omni#functions.javascript = [
-    \ 'tern#Complete',
-    \ 'jspc#omni'
+    \ 'tern#Complete'
   \]
+  " \ 'jspc#omni'
   let g:deoplete#omni#functions['javascript.jsx'] = [
     \ 'tern#Complete',
-    \ 'jspc#omni'
   \]
+  " \ 'jspc#omni'
   let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
   let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
   let g:deoplete#omni#functions.scss = 'csscomplete#CompleteCSS'
@@ -354,7 +347,7 @@ let g:tern#filetypes = [
       \ 'javascript.jsx',
       \ 'vue'
       \ ]
-let g:tern_show_argument_hints = 'on_hold' "on_move; default is 0
+let g:tern_show_argument_hints = 'on_hold' "on_move
 let g:tern_show_signature_in_pum = '0' " disables full signature type on autocomplete
 let g:tern_request_timeout = 1
 

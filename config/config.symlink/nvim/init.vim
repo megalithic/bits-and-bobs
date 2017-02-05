@@ -36,7 +36,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  " Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'moll/vim-node', { 'for': ['javascript'] }
@@ -137,11 +137,12 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'maralla/completor.vim', {'do': 'cd pythonx/completers/javascript && npm i && cd -'}
   endif
 
+  " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
+  " Plug 'roxma/vim-syntax-compl-pop'
+
   Plug 'Shougo/context_filetype.vim'
   Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i && npm i -g' }
 
-  " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
-  " Plug 'roxma/vim-syntax-compl-pop'
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
         \| Plug 'junegunn/fzf.vim'
