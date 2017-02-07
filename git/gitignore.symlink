@@ -25,3 +25,5 @@ zeus.json
 .tern-project
 .tern-port
 Procfile
+node_modules
+.nyc_output

@@ -137,7 +137,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'maralla/completor.vim', {'do': 'cd pythonx/completers/javascript && npm i && cd -'}
   endif
 
-  Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
+  " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
 
   Plug 'Shougo/context_filetype.vim'
   Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i && npm i -g' }
@@ -159,6 +159,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
+  Plug 'isRuslan/vim-es6'
   Plug 'eugen0329/vim-esearch' " project wide search and replace
 
   " ----------------------------------------------------------------------------
