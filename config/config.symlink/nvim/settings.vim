@@ -291,7 +291,7 @@ if has('nvim')
   let g:deoplete#enable_smart_case = 1
   let g:deoplete#enable_refresh_always = 1
   let g:deoplete#file#enable_buffer_path = 1
-  let g:deoplete#auto_complete_start_length = 1
+  let g:deoplete#auto_complete_start_length = 2
 
   " DEBUGGING:
   " let g:deoplete#enable_debug = 1
