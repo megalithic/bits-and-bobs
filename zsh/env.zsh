@@ -72,7 +72,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
 
 # Setting ripgrep(rg) as the default source for fzf
 # fzf/ripgrep stuffs: https://www.reddit.com/r/linux/comments/5rrpyy/turbo_charge_bash_with_fzf_ripgrep
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 # bind -x '"\C-p": vim $(fzf);'
 export FZF_DEFAULT_OPTS='
   --select-1

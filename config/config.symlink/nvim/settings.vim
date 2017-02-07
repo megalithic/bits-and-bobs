@@ -287,11 +287,11 @@ let g:qs_enable = 0
 if has('nvim')
   " ----------------------------------------------------------------------------
   " ## deoplete
-  let g:deoplete#enable_at_startup = 0
+  let g:deoplete#enable_at_startup = 1
   let g:deoplete#enable_smart_case = 1
   let g:deoplete#enable_refresh_always = 1
   let g:deoplete#file#enable_buffer_path = 1
-  let g:deoplete#auto_complete_start_length = 1
+  let g:deoplete#auto_complete_start_length = 2
 
   " DEBUGGING:
   " let g:deoplete#enable_debug = 1

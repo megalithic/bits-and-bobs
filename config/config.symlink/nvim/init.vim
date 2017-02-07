@@ -126,21 +126,18 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'blueyed/vim-diminactive'
   Plug 'Konfekt/FastFold'
 
-  if has('nvim')
-    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
-    Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
-    Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
-    Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
-    Plug 'Shougo/echodoc.vim'
-  else
-    Plug 'maralla/completor.vim', {'do': 'cd pythonx/completers/javascript && npm i && cd -'}
-  endif
+  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
+  Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
+  Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
+  Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
+  Plug 'Shougo/echodoc.vim'
 
-  Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
+  " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
+  " Plug 'maralla/completor.vim', {'branch': 'support-neovim', 'do': 'make js'}
 
   Plug 'Shougo/context_filetype.vim'
-  Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i && npm i -g' }
+  " Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i && npm i -g' }
 
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
