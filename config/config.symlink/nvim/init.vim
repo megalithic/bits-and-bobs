@@ -30,12 +30,12 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'gavocanov/vim-js-indent', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+  " Plug 'gavocanov/vim-js-indent', { 'for': ['javascript', 'javascript.jsx'] }
+  " Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
+  " Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  " Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
@@ -58,12 +58,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
+  Plug 'othree/xml.vim', { 'for': ['xml'] }
 
   " ----------------------------------------------------------------------------
   " ## Ruby, Rails, et al
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
-  " FIXME: causes sggfaults and other crazy things:
   Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
@@ -80,7 +80,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'jreybert/vimagit' " more git tools integrated into vim
   Plug 'christoomey/vim-conflicted'
   Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
-  Plug 'ElmCast/elm-vim' " all the elms
+  Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
   Plug 'honza/dockerfile.vim', { 'for': ['dockerfile', 'docker'] }
