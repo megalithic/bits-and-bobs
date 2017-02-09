@@ -98,17 +98,18 @@ augroup END
 " -/ Filetypes/Syntax /-------------------------------------------------------
 augroup ft_javascript
   au!
-  au BufEnter,BufNewFile,BufRead,BufReadPost *.js set ft=javascript.jsx
+  " au BufEnter,BufNewFile,BufRead,BufReadPost *.js set ft=javascript.jsx
 
   au FileType javascript.jsx highlight xmlAttrib cterm=italic
 
   " make `gf` search for .js files
-  au FileType javascript,javascript.jsx setl suffixesadd=.js
-  au FileType javascript,javascript.jsx setl suffixesadd=.jsx
-  au FileType javascript,javascript.jsx setl path+=js,scripts
+  " au FileType javascript,javascript.jsx setl suffixesadd=.js
+  " au FileType javascript,javascript.jsx setl suffixesadd=.jsx
+  " au FileType javascript,javascript.jsx setl path+=js,scripts
 
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
+  " au BufRead,BufNewFile *.test.js set ft=javascript
 
   " elm
   au BufWritePost *.elm :ElmMake
