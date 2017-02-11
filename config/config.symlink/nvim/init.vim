@@ -80,6 +80,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
   Plug 'jreybert/vimagit' " more git tools integrated into vim
+  Plug 'chrisbra/vim-diff-enhanced'
   Plug 'christoomey/vim-conflicted'
   Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
   Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms

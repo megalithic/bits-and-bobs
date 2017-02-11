@@ -103,8 +103,8 @@ alias ala='alacritty;'
 # -----------------------------------------------------------------------------
 alias updateemacs='cd ~/.emacs.d; git co develop; git fetch; git merge origin/develop; cd -'
 # alias e='emacsclient --no-wait'
-alias e='emacsclient'
-alias em=e
+alias ec='emacsclient'
+# alias em=e
 
 # (NEO)VIM
 # -----------------------------------------------------------------------------

@@ -55,7 +55,8 @@ config.layout = {
 
   _after_ = (function()
     utils.activate('com.google.Chrome')
-    utils.activate('com.googlecode.iterm2') -- iTerm2 is front-most
+    utils.activate('com.googlecode.iterm2')
+    utils.activate('org.gnu.Emacs') -- emacs gui is front-most
   end),
 
   ['com.webex.meetingmanager'] = (function(window, forceScreenCount)
@@ -135,7 +136,12 @@ config.layout = {
     end
   end),
 
-  ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
+  -- ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
+  --   local count = forceScreenCount or screenCount
+  --   grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
+  -- end),
+
+  ['org.gnu.Emacs'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),

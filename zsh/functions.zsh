@@ -1,6 +1,10 @@
 # don't forget to source our function files (ext files not currently in this one)
 source ~/.dotfiles/zsh/site-functions/**/*.zsh
 
+function em() {
+  open -a /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &
+}
+
 function exit() {
   if [ -n "$TMUX" ]; then
     tmux killp\; selectp -P bg=default,fg=default
