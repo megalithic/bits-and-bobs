@@ -119,12 +119,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
   Plug 'itchyny/vim-cursorword'
-  " Plug 'romainl/vim-cool'
-  Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
+  " Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'inside/vim-search-pulse'
-  Plug 'eugen0329/vim-esearch' " project wide search and replace
   Plug 'Konfekt/FastFold'
+  " disabled vim-esearch for now.. useful, but lots of cognitive load
+  " Plug 'eugen0329/vim-esearch' " project wide search and replace
 
   Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }

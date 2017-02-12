@@ -452,6 +452,7 @@ let g:vim_search_pulse_duration = 150
 
 " ----------------------------------------------------------------------------
 " ## vim-esearch
+" disabled vim-esearch for now.. useful, but lots of cognitive load
 if !exists('g:esearch')
   let g:esearch = {}
   let g:esearch.adapter = 'rg'
@@ -479,13 +480,8 @@ endif
 
 " ----------------------------------------------------------------------------
 " ## neosnippet
-" Enable
-let g:neosnippet#disable_runtime_snippets = {
-  \   '_' : 1,
-  \ }
-
 " Set snippet directory
-let g:neosnippet#snippets_directory='~/.config/nvim/replisnips/'
+let g:neosnippet#snippets_directory='~/.config/nvim/replisnips/, ~/.config/nvim/plugged/vim-snippets/snippets'
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
