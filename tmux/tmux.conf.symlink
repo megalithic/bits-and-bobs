@@ -44,11 +44,11 @@ bind -r C-b copy-mode -u
 # bind '|' run "tmux select-pane -P bg=black; tmux split-window -h -c '#{pane_current_path}'; tmux select-pane -P bg=default"
 bind '|' select-pane -P bg=black \; split-window -h -c "#{pane_current_path}" \; select-pane -P bg=default
 # bind '|' split-window -h -c "#{pane_current_path}"
-bind '\' split-window -h -c "#{pane_current_path}"
-bind '\' select-pane -P bg=red # \; split-window -h -c "#{pane_current_path}" \; select-pane -P bg=default
-bind '_' split-window -v -c "#{pane_current_path}"
-bind '-' split-window -v -c "#{pane_current_path}"
+bind '\' select-pane -P bg=black \; split-window -h -c "#{pane_current_path}" \; select-pane -P bg=default
+bind '_' select-pane -P bg=black \; split-window -v -c "#{pane_current_path}" \; select-pane -P bg=default
+bind '-' select-pane -P bg=black \; split-window -v -c "#{pane_current_path}" \; select-pane -P bg=default
 bind -r C-t new-window -c "#{pane_current_path}"
+
 bind -r C-x kill-pane
 bind -r C-q kill-pane
 bind p previous-window
@@ -65,12 +65,6 @@ bind -r left resize-pane -L 5
 bind -r right resize-pane -R 5
 bind -r down resize-pane -D 5
 bind -r up resize-pane -U 8
-
-# Vi-like movements between panes
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
 
 # Smart pane switching with awareness of vim splits (from https://github.com/christoomey/vim-tmux-navigator)
 is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(weechat|emacs|view|n?vim?x?)(diff)?$"'

@@ -13,6 +13,9 @@ function! s:after_colorscheme()
 
   hi link ALEWarningSign Question
 
+  " Fix splits
+  hi VertSplit ctermbg=NONE guibg=NONE
+
   " Make conceal look better.
   hi Conceal cterm=bold ctermbg=NONE ctermfg=67
 

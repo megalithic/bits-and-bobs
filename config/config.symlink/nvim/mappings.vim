@@ -24,39 +24,43 @@ nnoremap <F3> :Neoformat<CR>
 
 if has('nvim')
   " deoplete ---
-  au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
-  au CompleteDone * pclose
+  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
   " deoplete + ultisnips
   " ---
-  inoremap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-  inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
-  inoremap <expr> <bs>    deoplete#smart_close_popup() . "\<bs>"
+  " inoremap <expr> <silent> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+  " " inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
+  " inoremap <expr> <silent> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+  " inoremap <expr> <silent> <bs>    deoplete#smart_close_popup() . "\<bs>"
+  " inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
+  " let g:ulti_expand_or_jump_res = 0
+  " function! s:smart_cr()
+  "   silent! call UltiSnips#ExpandSnippet()
+  "   echo "trying to expand a snippet"
+  "   return g:ulti_expand_res ? "" :
+  "         \ (pumvisible() ? "\<c-j>" : "\<cr>")
+  " endfunction
 
   " deoplete + neosnippets
   " ---
-  " imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
-  " imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-  " imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+  " Ref: https://github.com/mhartington/dotfiles/blob/master/config/nvim/init.vim#L512
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+
+  inoremap <expr> <silent> <tab> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>")
+  inoremap <expr> <silent> <s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
+  " inoremap <expr> <silent> <cr> pumvisible() ? deoplete#smart_close_popup() : "\<cr>"
 
   " nvim-completion-manager ---
   " ---
   " inoremap <expr> <silent> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
   " inoremap <expr> <silent> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
-  inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
-  let g:ulti_expand_or_jump_res = 0
-  function! s:smart_cr()
-    silent! call UltiSnips#ExpandSnippet()
-    echo "trying to expand a snippet"
-    return g:ulti_expand_res ? "" :
-          \ (pumvisible() ? "\<c-j>" : "\<cr>")
-  endfunction
-else
-  " completor.vim ---
-  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+  " " completor.vim ---
+  " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  " inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 endif
 
 

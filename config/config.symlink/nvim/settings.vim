@@ -128,7 +128,7 @@ au! BufWritePost * nested Neomake
 " ----------------------------------------------------------------------------
 " ## vim-airline
 let g:airline#extensions#neomake#enabled = 1
-let g:airline_theme = 'oceanicnext'
+let g:airline_theme = 'base16_ocean'
 " let g:airline#extensions#tabline#left_alt_sep = '░'
 " let g:airline_left_sep = '█▓░'
 " let g:airline_right_sep = '░▓█'
@@ -142,12 +142,25 @@ endif
 
 
 " ----------------------------------------------------------------------------
+" ## vim-better-javascript-completion
+let g:vimjs#casesensistive = 1
+" Enabled by default. flip the value to make completion matches case insensitive
+
+let g:vimjs#smartcomplete = 0
+" Disabled by default. Enabling this will let vim complete matches at any location
+" e.g. typing 'ocument' will suggest 'document' if enabled.
+
+let g:vimjs#chromeapis = 0
+" Disabled by default. Toggling this will enable completion for a number of Chrome's JavaScript extension APIs
+
+
+" ----------------------------------------------------------------------------
 " ## vim-javascript-syntax
 let g:JSHintHighlightErrorLine = 1
 let javascript_enable_domhtmlcss = 1
 let loaded_matchit = 1
 let g:js_indent_log = 1
-let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angular,enzyme,ramda'
+let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3'
 
 
 " ----------------------------------------------------------------------------
@@ -157,7 +170,7 @@ let g:jsx_pragma_required = 0
 
 
 " ----------------------------------------------------------------------------
-" ## vim-javascript-syntax
+" ## vim-pretty-jsx
 let g:vim_jsx_pretty_colorful_config = 1
 let g:vim_jsx_pretty_enable_jsx_highlight = 1
 
@@ -170,6 +183,23 @@ let g:javascript_conceal = 0
 " let g:javascript_conceal_function = "ƒ"
 " let g:javascript_conceal_this = "@"
 " let g:javascript_conceal_return = "⇚"
+
+" https://github.com/davidosomething/dotfiles/blob/master/vim/ftplugin/javascript.vim#L8
+let b:match_words = '\<function\>:\<return\>,'
+  \ . '\<do\>:\<while\>,'
+  \ . '\<switch\>:\<case\>:\<default\>,'
+  \ . '\<if\>:\<else\>,'
+  \ . '\<try\>:\<catch\>:\<finally\>'
+
+
+" ----------------------------------------------------------------------------
+" ## scss
+let s:match_done = '<CR>:nohlsearch<CR>'
+let s:matches = '\(#\|\.\|@\|\h\|&:\).\+\s*{'
+execute 'nmap <silent><buffer> [[ ?' . escape(s:matches, '|?') . s:match_done
+execute 'omap <silent><buffer> [[ ?' . escape(s:matches, '|?') . s:match_done
+execute 'nmap <silent><buffer> ]] /' . escape(s:matches, '|') . s:match_done
+execute 'omap <silent><buffer> ]] /' . escape(s:matches, '|') . s:match_done
 
 
 " ----------------------------------------------------------------------------
@@ -294,8 +324,10 @@ if has('nvim')
   " ----------------------------------------------------------------------------
   " ## deoplete
   let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_ignore_case = 1
+  let g:deoplete#enable_camel_case = 1
   let g:deoplete#enable_smart_case = 1
-  let g:deoplete#enable_refresh_always = 1
+  let g:deoplete#enable_refresh_always = 0
   let g:deoplete#file#enable_buffer_path = 1
   let g:deoplete#auto_complete_start_length = 2
 
@@ -305,7 +337,7 @@ if has('nvim')
   " call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
 
   let g:deoplete#sources = {}
-  let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'ultisnips', 'ternjs', 'omni']
+  let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'neosnippet', 'ultisnips', 'ternjs', 'omni']
 
   call deoplete#custom#set('buffer', 'mark', 'buffer')
   call deoplete#custom#set('ternjs', 'mark', '')
@@ -370,24 +402,34 @@ let g:fzf_action = {
       \ 'enter': 'vsplit'
       \ }
 
+" Search term using rg
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+" command! -bang -nargs=* Search call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
 " show a preview of the file:
 " https://github.com/metakirby5/.dots/blob/master/base/.vimrc#L273
 
 
 " ----------------------------------------------------------------------------
 " ## ack.vim
-set grepprg=rg\ --nogroup\ --line-numbers\ --column\ --noheading
+set grepprg=rg\ --nogroup\ --line-numbers\ --column\ --noheading\ --color=always
 let &grepprg = 'command rg --nogroup --nocolor --line-numbers --column'
-let g:ackprg="rg --column --nogroup --line-numbers --vimgrep"
-let g:agprg="rg --column --nogroup --line-numbers --vimgrep"
-" https://github.com/akalyaev/dotfiles/blob/master/vimrc#L207
-let g:agprg = 'rg --nogroup --nocolor --column --smart-case'
-
+let g:ackprg="rg --column --nogroup --line-numbers --vimgrep --color=always"
+let g:agprg="rg --column --nogroup --line-numbers --vimgrep --color=always"
 
 " ----------------------------------------------------------------------------
 " ## ripgrep/fzf
 let g:rg_command = '
-\ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+\ rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --color "always"
 \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf,sass,scss,haml,erb,ejs}"
 \ -g "!*.{min.js,swp,o,zip}"
 \ -g "!{.git,node_modules,vendor}/*" '
@@ -424,24 +466,27 @@ endif
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
-let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips', 'replisnips']
+" let g:UltiSnipsUsePythonVersion = 3
+" let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips', 'replisnips']
 " let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 
 " Disable built-in <C-x><C-k> to be able to go backward
-inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger='<C-j>'
-let g:UltiSnipsListSnippets='<C-s>'
-let g:UltiSnipsJumpForwardTrigger='<C-j>'
-let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+" inoremap <C-x><C-k> <NOP>
+" let g:UltiSnipsExpandTrigger='<C-j>'
+" let g:UltiSnipsListSnippets='<C-s>'
+" let g:UltiSnipsJumpForwardTrigger='<C-j>'
+" let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
 " ----------------------------------------------------------------------------
 " ## neosnippet
+" Enable
+let g:neosnippet#disable_runtime_snippets = {
+  \   '_' : 1,
+  \ }
+
+" Set snippet directory
+let g:neosnippet#snippets_directory='~/.config/nvim/replisnips/'
+
 " Enable snipMate compatibility feature.
-" let g:neosnippet#enable_snipmate_compatibility = 1
-" let g:neosnippet#expand_word_boundary = 1
-" imap <C-k> <Plug>(neosnippet_expand_or_jump)
-" smap <C-k> <Plug>(neosnippet_expand_or_jump)
-" xmap <C-k> <Plug>(neosnippet_expand_target)
-" Tell Neosnippet about the other snippets
-" let g:neosnippet#snippets_directory='~/.config/repos/github.com/Shougo/neosnippet-snippets/neosnippets, ~/Github/ionic-snippets, ~/.config/repos/github.com/matthewsimo/angular-vim-snippets/snippets'
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#expand_word_boundary = 1

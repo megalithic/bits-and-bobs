@@ -30,14 +30,11 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'gavocanov/vim-js-indent', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'neoclide/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx'] }
   " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug '1995eaton/vim-better-javascript-completion', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
@@ -110,12 +107,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'metakirby5/codi.vim'
-  Plug 'hkupty/iron.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'sbdchd/neoformat'
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation
-  Plug 'ap/vim-readdir' " simple directory browser
+  " Plug 'ap/vim-readdir' " simple directory browser
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -123,10 +119,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'unblevable/quick-scope' " highlights f/t type of motions
   Plug 'EinfachToll/DidYouMean'
   Plug 'itchyny/vim-cursorword'
+  " Plug 'romainl/vim-cool'
   Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'inside/vim-search-pulse'
-  " Plug 'blueyed/vim-diminactive'
+  Plug 'eugen0329/vim-esearch' " project wide search and replace
   Plug 'Konfekt/FastFold'
 
   Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -135,12 +132,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
   Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   Plug 'Shougo/echodoc.vim'
-
-  " Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
-  " Plug 'maralla/completor.vim', {'branch': 'support-neovim', 'do': 'make js'}
-
-  Plug 'Shougo/context_filetype.vim'
-  " Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i && npm i -g' }
 
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
@@ -156,11 +147,13 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'Helptags',
         \ 'GFiles',
         \ 'GGrep'] }
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  " Plug 'SirVer/ultisnips'
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
+  Plug 'honza/vim-snippets'
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
   Plug 'isRuslan/vim-es6'
-  Plug 'eugen0329/vim-esearch' " project wide search and replace
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
@@ -190,7 +183,7 @@ source $HOME/.config/nvim/general.vim
 source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/functions.vim
 source $HOME/.config/nvim/autocommands.vim
-source $HOME/.config/nvim/keys.vim
+source $HOME/.config/nvim/mappings.vim
 source $HOME/.config/nvim/highlights.vim
 
 " a wealth of solid neovim info: https://github.com/justinmk/config/blob/master/.config/nvim/init.vim
