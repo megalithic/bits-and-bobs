@@ -48,9 +48,10 @@ if has('nvim')
   smap <C-k> <Plug>(neosnippet_expand_or_jump)
   xmap <C-k> <Plug>(neosnippet_expand_target)
 
-  inoremap <expr> <silent> <tab> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>")
-  inoremap <expr> <silent> <s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
-  " inoremap <expr> <silent> <cr> pumvisible() ? deoplete#smart_close_popup() : "\<cr>"
+  " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
+  imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+  inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 
   " nvim-completion-manager ---
   " ---

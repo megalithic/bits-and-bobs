@@ -33,6 +33,7 @@ let g:codi#aliases = {
 " ----------------------------------------------------------------------------
 " ## auto-pairs
 let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
 
 
 " ----------------------------------------------------------------------------
@@ -324,8 +325,8 @@ if has('nvim')
   " ----------------------------------------------------------------------------
   " ## deoplete
   let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_ignore_case = 1
-  let g:deoplete#enable_camel_case = 1
+  let g:deoplete#enable_ignore_case = 0
+  " let g:deoplete#enable_camel_case = 1
   let g:deoplete#enable_smart_case = 1
   let g:deoplete#enable_refresh_always = 0
   let g:deoplete#file#enable_buffer_path = 1
