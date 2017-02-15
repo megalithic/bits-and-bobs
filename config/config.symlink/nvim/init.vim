@@ -148,12 +148,12 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'GFiles',
         \ 'GGrep'] }
   " Plug 'SirVer/ultisnips'
-  Plug 'Shougo/neosnippet.vim'
-  Plug 'Shougo/neosnippet-snippets'
-  Plug 'honza/vim-snippets'
-  Plug 'epilande/vim-es2015-snippets'
-  Plug 'epilande/vim-react-snippets'
-  Plug 'isRuslan/vim-es6'
+  " Plug 'Shougo/neosnippet.vim'
+  " Plug 'Shougo/neosnippet-snippets'
+  " Plug 'honza/vim-snippets'
+  " Plug 'epilande/vim-es2015-snippets'
+  " Plug 'epilande/vim-react-snippets'
+  " Plug 'isRuslan/vim-es6'
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
