@@ -73,6 +73,10 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 # consider these handy fzf functions: https://github.com/junegunn/dotfiles/blob/master/bashrc#L267
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^G' fzf-completion
+bindkey '^I' $fzf_default_completion
+
 # z.sh init
 source ~/.dotfiles/bin/z.sh
 
