@@ -44,6 +44,7 @@ function! s:after_colorscheme()
 
   " Highlight VCS conflict markers
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
 endfunction
 
 
