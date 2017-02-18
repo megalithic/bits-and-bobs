@@ -30,7 +30,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'isRuslan/vim-es6'
 
