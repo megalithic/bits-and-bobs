@@ -98,15 +98,8 @@ augroup END
 " -/ Filetypes/Syntax /-------------------------------------------------------
 augroup ft_javascript
   au!
-  " au BufEnter,BufNewFile,BufRead,BufReadPost *.js set ft=javascript.jsx
 
   au FileType javascript.jsx highlight xmlAttrib cterm=italic
-
-  " make `gf` search for .js files
-  " au FileType javascript,javascript.jsx setl suffixesadd=.js
-  " au FileType javascript,javascript.jsx setl suffixesadd=.jsx
-  " au FileType javascript,javascript.jsx setl path+=js,scripts
-
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
   " au BufRead,BufNewFile *.test.js set ft=javascript
@@ -193,7 +186,6 @@ augroup completions
   au FileType javascript,javascript.jsx,jsx setl omnifunc=javascriptcomplete#CompleteJS " default
   au FileType javascript,javascript.jsx,jsx setl completefunc=jspc#omni " jspc
   au FileType javascript,javascript.jsx,jsx setl omnifunc=tern#Complete " tern
-  " au FileType javascript,javascript.jsx,jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " supertab / tern
 
   au FileType python setl omnifunc=pythoncomplete#Complete
   au FileType xml setl omnifunc=xmlcomplete#CompleteTags

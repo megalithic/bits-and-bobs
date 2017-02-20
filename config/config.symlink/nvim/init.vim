@@ -21,8 +21,10 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ---------------------------------------------------------------------------
   " ## Interface
-  Plug 'chriskempson/base16-vim'
   Plug 'mhartington/oceanic-next'
+  " Plug 'chriskempson/base16-vim'
+  " Plug 'romainl/flattened'
+  " Plug 'morhetz/gruvbox'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
@@ -30,10 +32,11 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'isRuslan/vim-es6'
+  " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+  " Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  " Plug 'isRuslan/vim-es6'
 
+  " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'neoclide/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx'] }
   " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 
@@ -48,7 +51,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ## SCSS, CSS, et al
   Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
-  Plug 'stephenway/postcss.vim', { 'for': ['css', 'scss', 'sass'] } " postcss syntax
+  " Plug 'stephenway/postcss.vim', { 'for': ['css', 'scss', 'sass'] } " postcss syntax
   Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
   Plug 'rstacruz/vim-hyperstyle', { 'for': ['css', 'scss', 'sass'] }
 
@@ -57,10 +60,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
   Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'jtratner/vim-flavored-markdown', { 'for': ['markdown'] }
-  Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
+  " Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
-  Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
+  " Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
 
   " ----------------------------------------------------------------------------
@@ -120,9 +123,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'christoomey/vim-tmux-runner'
-  Plug 'unblevable/quick-scope' " highlights f/t type of motions
+  Plug 'unblevable/quick-scope' " highlights f/t type of motions, for quick horizontal movements
   Plug 'EinfachToll/DidYouMean'
-  Plug 'itchyny/vim-cursorword'
+  Plug 'itchyny/vim-cursorword' " underlines all occurences the current word
   " Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'inside/vim-search-pulse'
@@ -152,9 +155,9 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'GFiles',
         \ 'GGrep'] }
   " Plug 'SirVer/ultisnips'
-  " Plug 'Shougo/neosnippet.vim'
-  " Plug 'Shougo/neosnippet-snippets'
-  " Plug 'honza/vim-snippets'
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
+  Plug 'honza/vim-snippets'
   " Plug 'epilande/vim-es2015-snippets'
   " Plug 'epilande/vim-react-snippets'
   " Plug 'isRuslan/vim-es6'

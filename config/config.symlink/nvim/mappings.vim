@@ -20,62 +20,39 @@ nnoremap <leader>Rl :Codi!! lua<cr>
 nnoremap <F3> :Neoformat<CR>
 
 " ----------------------------------------------------------------------------
+" ## Autoformat
+nnoremap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+
+" ----------------------------------------------------------------------------
 " ## Tabbing for completions:
 
 if has('nvim')
   " deoplete ---
   autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-  " deoplete + ultisnips
-  " ---
-  inoremap <expr> <silent> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-  " inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : neocomplete#undo_completion()
-  inoremap <expr> <silent> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-  inoremap <expr> <silent> <bs>    deoplete#smart_close_popup() . "\<bs>"
-  " inoremap <silent> <cr>  <c-r>=<SID>smart_cr()<cr>
-  " let g:ulti_expand_or_jump_res = 0
-  " function! s:smart_cr()
-  "   silent! call UltiSnips#ExpandSnippet()
-  "   echo "trying to expand a snippet"
-  "   return g:ulti_expand_res ? "" :
-  "         \ (pumvisible() ? "\<c-j>" : "\<cr>")
-  " endfunction
-
   " deoplete + neosnippets
   " ---
   " Ref: https://github.com/mhartington/dotfiles/blob/master/config/nvim/init.vim#L512
-  " imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  " smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  " xmap <C-k> <Plug>(neosnippet_expand_target)
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+
+  imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+  inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 
   " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
   " imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
   " imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
   " inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
-
-  " nvim-completion-manager ---
-  " ---
-  " inoremap <expr> <silent> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-  " inoremap <expr> <silent> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-  " " completor.vim ---
-  " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  " inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 endif
 
 
 " ----------------------------------------------------------------------------
 " ## FZF
-" nnoremap <silent> <leader>m :FZF -m<CR>
-" nnoremap <silent> <leader>a :Ag<CR>
-" nnoremap <silent> <leader>m <esc>:exe 'FZF ' . <SID>fzf_root()<CR>
 nnoremap <silent> <leader>m <esc>:FZF<cr>
-" nnoremap <silent> <leader>a <esc>:exe 'Ag ' . input('Ag/')<CR>
 nnoremap <leader>a <esc>:Ag<space>
 nnoremap <silent> <leader>A  <esc>:exe('Ag '.expand('<cword>'))<cr>
-" nnoremap          <leader>gg <esc>:GGrep<space>
-" nnoremap <silent> <leader>GG <esc>:exe('GGrep '.expand('<cword>'))<cr>
 
 " " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -363,8 +340,9 @@ vnoremap x "_x
 vnoremap X "_X
 
 " Easier to type, and I never use the default behavior.
-noremap H ^
-noremap L $
+" disabling these 2 remaps, they break me on remote servers:
+" noremap H ^
+" noremap L $
 vnoremap L g_
 
 " make the tab key match bracket pairs

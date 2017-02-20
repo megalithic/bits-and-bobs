@@ -2,18 +2,28 @@
 
 " -----------------------------------------------------------------------------
 " ## UI
-set background=dark
+syntax enable
 
 if has('nvim')
-  colorscheme OceanicNext
-  let g:oceanic_next_terminal_italic = 1
-  let g:oceanic_next_terminal_bold = 1
-
   set termguicolors
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
+  set background=dark
+
+  colorscheme OceanicNext
+  " colorscheme flattened_dark
+  " colorscheme base16-ocean
+
+  " let g:gruvbox_italic=1
+  " colorscheme gruvbox
+
+  let g:oceanic_next_terminal_italic = 1
+  let g:oceanic_next_terminal_bold = 1
+
   let g:python_host_prog = '/usr/local/bin/python2'
   let g:python3_host_prog = '/usr/local/bin/python3'
+  let g:python_host_skip_check = 1
+  let g:python3_host_skip_check = 1
 else
   colorscheme base16-ocean
 
