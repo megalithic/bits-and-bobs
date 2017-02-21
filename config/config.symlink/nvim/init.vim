@@ -63,7 +63,7 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
-  " Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
+  Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
 
   " ----------------------------------------------------------------------------
@@ -133,12 +133,15 @@ call plug#begin('~/.config/nvim/plugged')
   " disabled vim-esearch for now.. useful, but lots of cognitive load
   " Plug 'eugen0329/vim-esearch' " project wide search and replace
 
-  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
-  Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
-  Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
-  Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
-  Plug 'Shougo/echodoc.vim'
+  " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
+  " Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
+  " Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
+  " Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
+  " Plug 'Shougo/echodoc.vim'
+
+  Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
+  " Plug 'roxma/python-support.nvim', {'do': ':PythonSupportInitPython3'}
 
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
@@ -154,9 +157,9 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'Helptags',
         \ 'GFiles',
         \ 'GGrep'] }
-  " Plug 'SirVer/ultisnips'
-  Plug 'Shougo/neosnippet.vim'
-  Plug 'Shougo/neosnippet-snippets'
+  " Plug 'Shougo/neosnippet.vim'
+  " Plug 'Shougo/neosnippet-snippets'
+  Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
   " Plug 'epilande/vim-es2015-snippets'
   " Plug 'epilande/vim-react-snippets'

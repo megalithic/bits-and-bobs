@@ -325,7 +325,7 @@ let g:qs_enable = 0
 if has('nvim')
   " ----------------------------------------------------------------------------
   " ## deoplete
-  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_at_startup = 0
   let g:deoplete#enable_ignore_case = 0
   " let g:deoplete#enable_camel_case = 1
   let g:deoplete#enable_smart_case = 1
@@ -341,11 +341,12 @@ if has('nvim')
   let g:deoplete#sources = {}
   let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'nsnip', 'neosnippet', 'ultisnips', 'ternjs', 'omni']
 
-  call deoplete#custom#set('buffer', 'mark', 'buffer')
-  call deoplete#custom#set('ternjs', 'mark', '')
-  call deoplete#custom#set('omni', 'mark', 'omni')
-  call deoplete#custom#set('file', 'mark', 'file')
-  call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
+  " TODO: find a way to check if deoplete exists before calling these:
+  " call deoplete#custom#set('buffer', 'mark', 'buffer')
+  " call deoplete#custom#set('ternjs', 'mark', '')
+  " call deoplete#custom#set('omni', 'mark', 'omni')
+  " call deoplete#custom#set('file', 'mark', 'file')
+  " call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
 
   " we don't want the completion menu to auto pop-up when we are in text files
   let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
@@ -375,6 +376,18 @@ else
   let g:completor_css_omni_trigger = '([\w-]+|@[\w-]*|[\w-]+:\s*[\w-]*)$'
   let g:completor_html_omni_trigger = '.*$'
 endif
+
+
+" ----------------------------------------------------------------------------
+" ## nvim-completion-manager
+" " for python completions
+" let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
+" " language specific completions on markdown file
+" let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
+
+" " utils, optional
+" let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
+" let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
 
 
 " ----------------------------------------------------------------------------
@@ -466,12 +479,13 @@ endif
 
 " ----------------------------------------------------------------------------
 " ## ultisnips
+let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips', 'replisnips']
+let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
+
 " better key bindings for UltiSnipsExpandTrigger
 " Use tab to expand snippet and move to next target. Shift tab goes back.
 " <C-tab> lists available snippets for the file
-" let g:UltiSnipsUsePythonVersion = 3
-" let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips', 'replisnips']
-" let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 
 " Disable built-in <C-x><C-k> to be able to go backward
 " inoremap <C-x><C-k> <NOP>

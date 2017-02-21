@@ -28,23 +28,29 @@ nnoremap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 
 if has('nvim')
   " deoplete ---
-  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+  " autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
+  " ---
   " deoplete + neosnippets
   " ---
   " Ref: https://github.com/mhartington/dotfiles/blob/master/config/nvim/init.vim#L512
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k> <Plug>(neosnippet_expand_target)
-
-  imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-  inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+  " imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  " smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  " xmap <C-k> <Plug>(neosnippet_expand_target)
 
   " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
   " imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
   " imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
   " inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+
+  " ---
+  " nvim-completion-manager
+  " ---
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+  let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+  inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 endif
 
 
@@ -340,9 +346,8 @@ vnoremap x "_x
 vnoremap X "_X
 
 " Easier to type, and I never use the default behavior.
-" disabling these 2 remaps, they break me on remote servers:
-" noremap H ^
-" noremap L $
+noremap H ^
+noremap L $
 vnoremap L g_
 
 " make the tab key match bracket pairs
