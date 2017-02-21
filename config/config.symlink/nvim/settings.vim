@@ -339,7 +339,7 @@ if has('nvim')
   " call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
 
   let g:deoplete#sources = {}
-  let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'neosnippet', 'ultisnips', 'ternjs', 'omni']
+  let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'nsnip', 'neosnippet', 'ultisnips', 'ternjs', 'omni']
 
   call deoplete#custom#set('buffer', 'mark', 'buffer')
   call deoplete#custom#set('ternjs', 'mark', '')
