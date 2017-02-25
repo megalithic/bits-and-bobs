@@ -53,7 +53,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
   " Plug 'stephenway/postcss.vim', { 'for': ['css', 'scss', 'sass'] } " postcss syntax
   Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
-  Plug 'rstacruz/vim-hyperstyle', { 'for': ['css', 'scss', 'sass'] }
+  " Plug 'rstacruz/vim-hyperstyle', { 'for': ['css', 'scss', 'sass'] } " throwing errors
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al

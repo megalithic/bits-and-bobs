@@ -68,15 +68,14 @@ endfunction
 function s:alternatePair(stop)
   let pos = getpos('.')[1:2]
   while search('\m[][(){}]','bW',a:stop)
-    if !s:skip_func()
-      let idx = stridx('])}',s:looking_at())
-      if idx + 1
-        if s:GetPair(['\[','(','{'][idx], '])}'[idx],'bW','s:skip_func()',2000,a:stop) <= 0
-          break
-        endif
-      else
-        return
+    if s:skip_func() | continue | endif
+    let idx = stridx('])}',s:looking_at())
+    if idx + 1
+      if s:GetPair(['\[','(','{'][idx], '])}'[idx],'bW','s:skip_func()',2000,a:stop) <= 0
+        break
       endif
+    else
+      return
     endif
   endwhile
   call call('cursor',pos)
@@ -125,22 +124,21 @@ function s:expr_col()
   let [l:pos,bal] = [getpos('.')[1:2],0]
   try
     while search('\m[{}?:;]','bW')
-      if !eval(s:skip_expr)
-        if s:looking_at() == '}'
-          if s:GetPair('{','}','bW',s:skip_expr,200) <= 0
-            return
-          endif
-        elseif s:looking_at() == '{'
-          return getpos('.')[1:2] != b:js_cache[1:] && !s:IsBlock()
-        elseif s:looking_at() == ';'
+      if eval(s:skip_expr) | continue | endif
+      if s:looking_at() == '}'
+        if s:GetPair('{','}','bW',s:skip_expr,200) <= 0
           return
-        elseif s:looking_at() == ':'
-          let bal -= getline('.')[max([col('.')-2,0]):col('.')] !~ '::'
-        else
-          let bal += 1
-          if bal > 0
-            return 1
-          endif
+        endif
+      elseif s:looking_at() == '{'
+        return getpos('.')[1:2] != b:js_cache[1:] && !s:IsBlock()
+      elseif s:looking_at() == ';'
+        return
+      elseif s:looking_at() == ':'
+        let bal -= getline('.')[max([col('.')-2,0]):col('.')] !~ '::'
+      else
+        let bal += 1
+        if bal > 0
+          return 1
         endif
       endif
     endwhile
@@ -153,14 +151,14 @@ endfunction
 let s:opfirst = '^' . get(g:,'javascript_opfirst',
       \ '\%([<>=,?^%|*/&]\|\([-.:+]\)\1\@!\|!=\|in\%(stanceof\)\=\>\)')
 let s:continuation = get(g:,'javascript_continuation',
-      \ '\C\%([-+<>=,.~!?/*^%|&:]\|\<\%(typeof\|delete\|void\|in\|instanceof\)\)') . '$'
+      \ '\C\%([-+<>=,.~!?/*^%|&:]\|\<\%(typeof\|new\|delete\|void\|in\|instanceof\)\)') . '$'
 
 function s:continues(ln,con)
   return !cursor(a:ln, match(' '.a:con,s:continuation)) &&
         \ eval( (['s:syn_at(line("."),col(".")) !~? "regex"'] +
         \ repeat(['getline(".")[col(".")-2] != tr(s:looking_at(),">","=")'],3) +
-        \ repeat(['s:previous_token() != "."'],5) + ['s:expr_col()',1])[
-        \ index(split('/ > - + typeof in instanceof void delete :'),s:token())])
+        \ repeat(['s:previous_token() != "."'],6) + ['s:expr_col()',1])[
+        \ index(split('/ > - + typeof new delete void in instanceof :'),s:token())])
 endfunction
 
 " get the line of code stripped of comments and move cursor to the last
@@ -251,7 +249,7 @@ function s:IsBlock()
       return char != '{'
     elseif char =~ '\k'
       return index(split('return const let import export yield default delete var await void typeof throw case new in instanceof')
-            \ ,char) < (line('.') != l:n) || s:previous_token() == '.'
+            \ ,char) < (line('.') != l:n) || s:save_pos('s:previous_token') == '.'
     elseif char == '>'
       return getline('.')[col('.')-2] == '=' || s:syn_at(line('.'),col('.')) =~? '^jsflow'
     elseif char == ':'
