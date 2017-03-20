@@ -89,7 +89,7 @@ brew 'tmate'
 brew 'tmux', args: ['--with-utf8proc']
 brew 'tree'
 brew 'urlview'
-brew 'weechat', args: ['--with-ruby', '--with-python', '--with-perl', '--with-lua', '--with-aspell', '--with-javascript', '--with-curl', '--with-guile', '--HEAD']
+brew 'weechat', args: ['--with-ruby', '--with-python', '--with-perl', '--with-lua', '--with-aspell', '--with-javascript', '--with-curl', '--with-guile']
 brew 'wget', args: ['enable-iri']
 brew 'vim', args: ['--with-lua', '--with-luajit', '--with-python3', '--with-tcl', '--with-override-system-vi']
 brew 'zsh', args: ['--with-unicode9', '--without-etcdir']

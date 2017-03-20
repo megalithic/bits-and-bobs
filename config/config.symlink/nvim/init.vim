@@ -33,8 +33,8 @@ call plug#begin('~/.config/nvim/plugged')
   " ## JavaScript, et al
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
   " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-  " Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  " Plug 'isRuslan/vim-es6'
+  Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'isRuslan/vim-es6'
 
   " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'neoclide/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx'] }
@@ -131,7 +131,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'inside/vim-search-pulse'
   Plug 'Konfekt/FastFold'
   " disabled vim-esearch for now.. useful, but lots of cognitive load
-  " Plug 'eugen0329/vim-esearch' " project wide search and replace
+  Plug 'eugen0329/vim-esearch' " project wide search and replace
 
   " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
@@ -140,8 +140,9 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   " Plug 'Shougo/echodoc.vim'
 
-  Plug 'roxma/nvim-completion-manager', {'do': 'npm install'}
-  " Plug 'roxma/python-support.nvim', {'do': ':PythonSupportInitPython3'}
+  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'roxma/nvim-completion-manager'
+  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
