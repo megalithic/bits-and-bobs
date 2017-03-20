@@ -188,6 +188,8 @@
 
 [diff]
 	compactionHeuristic = true
+	indentHeuristic = true
+
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52

@@ -56,7 +56,7 @@ let g:neomake_warning_sign = {
             \ 'texthl': 'WarningMsg'
             \ }
 
-let g:neomake_scss_enabled_makers = ['scss-lint']
+" let g:neomake_scss_enabled_makers = ['scss-lint']
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
 function s:packageRoot()
@@ -208,10 +208,13 @@ execute 'omap <silent><buffer> ]] /' . escape(s:matches, '|') . s:match_done
 " ## elm
 let g:elm_detailed_complete = 1
 let g:elm_format_autosave = 1
+let g:elm_format_fail_silently = 0
 let g:elm_syntastic_show_warnings = 1
 let g:elm_make_show_warnings = 1
 let g:elm_setup_keybindings = 0
 let g:elm_jump_to_error = 1
+let g:elm_make_output_file = "elm.js"
+let g:elm_browser_command = ""
 
 
 " ----------------------------------------------------------------------------
@@ -282,8 +285,14 @@ else
   " no babel
   let g:test#javascript#mocha#options = "--colors --full-trace --timeout 15000 -R dot"
 endif
+
 " to debug nock stuff in tests, add `DEBUG=nock.* ` before the `expand`, below
-let test#javascript#mocha#executable = "NODE_ENV=test ".expand(<SID>packageRoot())."/node_modules/.bin/mocha"
+if filereadable(expand(<SID>packageRoot()).'/node_modules/.bin/mocha')
+  let test#javascript#mocha#executable = "NODE_ENV=test ".expand(<SID>packageRoot())."/node_modules/.bin/mocha"
+else
+  let test#javascript#mocha#executable = "NODE_ENV=test mocha"
+end
+
 let g:test#javascript#mocha#file_pattern = ".test.js"
 
 let test#ruby#rspec#options = '-f d'
@@ -313,7 +322,7 @@ let g:lua_define_completion_mappings = 0
 
 " ----------------------------------------------------------------------------
 " ## vim-markdown
-let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh', 'elm']
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
 let g:vim_markdown_frontmatter=1
 
 

@@ -69,10 +69,14 @@ RUBIES=(~/.rubies/*)
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
+
+# setup perl
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+
 # setup fzf
 # consider these handy fzf functions: https://github.com/junegunn/dotfiles/blob/master/bashrc#L267
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+# these must be set *after* loading fzf:
 export FZF_COMPLETION_TRIGGER=''
 bindkey '^G' fzf-completion
 bindkey '^I' $fzf_default_completion
