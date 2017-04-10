@@ -299,6 +299,9 @@ vnoremap ,y "+y
 nnoremap ,yy "+yy
 nnoremap ,p "+p
 
+" Don't copy the contents of an overwritten selection.
+vnoremap p "_dP
+
 " ## CamelCaseMotion overrides
 " ref: https://github.com/martin-svk/dot-files/blob/master/neovim/init.vim
 " Use CamelCaseMotion instead of default motions

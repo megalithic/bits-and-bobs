@@ -137,6 +137,7 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
   " Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
   " Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
+  " Plug 'pbogut/deoplete-elm', { 'for': ['elm'] }
   " Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
   " Plug 'Shougo/echodoc.vim'
 
