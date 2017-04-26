@@ -445,10 +445,10 @@ let g:fzf_action = {
 
 " ----------------------------------------------------------------------------
 " ## ack.vim
-set grepprg=rg\ --nogroup\ --line-numbers\ --column\ --noheading\ --color=always
-let &grepprg = 'command rg --nogroup --nocolor --line-numbers --column'
-let g:ackprg="rg --column --nogroup --line-numbers --vimgrep --color=always"
-let g:agprg="rg --column --nogroup --line-numbers --vimgrep --color=always"
+set grepprg=rg\ --column\ --noheading\ --color=always
+let &grepprg = 'command rg --column'
+let g:ackprg="rg --column --vimgrep --color=always"
+let g:agprg="rg --column --vimgrep --color=always"
 
 " ----------------------------------------------------------------------------
 " ## ripgrep/fzf

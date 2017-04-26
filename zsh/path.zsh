@@ -17,6 +17,7 @@ export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.dotfiles/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 
 # remove duplicates from PATH.
 typeset -U PATH

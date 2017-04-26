@@ -82,6 +82,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ----------------------------------------------------------------------------
   " ## Misc, Other, et al
   Plug 'tpope/vim-git'
+  Plug 'tpope/vim-rhubarb' " git :Gbrowse support
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
   Plug 'jreybert/vimagit' " more git tools integrated into vim
   Plug 'chrisbra/vim-diff-enhanced'
@@ -144,7 +145,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'roxma/nvim-completion-manager'
   Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-
+  Plug 'mileszs/ack.vim'
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
         \| Plug 'junegunn/fzf.vim'
