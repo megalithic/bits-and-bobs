@@ -237,6 +237,7 @@ set -g status-right "#(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=g
 
 # set -g @resurrect-save 'S'
 # set -g @resurrect-restore 'E'
+set -g @fingers-skip-health-check '1'
 
 # Installation
 # ---------------------------------------------------------

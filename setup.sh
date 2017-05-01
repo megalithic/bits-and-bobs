@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# bootstrap installs things.
+# install/setup all the things
 
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd)
@@ -160,30 +160,52 @@ link_file () {
 }
 
 # Primarily handles OSX specific things like homebrew bundling, and osx defaults
-brew_things () {
-  # If we're on a Mac, let's install and setup homebrew.
+run_osx_defaults () {
+  # If we're on a Mac, let's setup our osx defaults
   if [ "$(uname -s)" == "Darwin" ]
   then
-    info "installing dependencies"
+    info "setting osx defaults"
     export ZSH=$HOME/.dotfiles
 
     # Set OS X defaults
     # FIXME: confirm valid defaults for El Capitan
-    # $ZSH/osx/set-defaults.sh
+    $ZSH/osx/set-defaults.sh
+
+    success "osx defaults set"
+  fi
+}
+
+# Primarily handles OSX specific things like homebrew bundling, and osx defaults
+run_brew () {
+  # If we're on a Mac, let's install and setup homebrew.
+  if [ "$(uname -s)" == "Darwin" ]
+  then
+    info "installing homebrew dependencies/apps/libs"
+    export ZSH=$HOME/.dotfiles
 
     # Homebrew install and bundling via Brewfile
     $ZSH/homebrew/install.sh
     success "dependencies installed"
+  fi
+}
+
+run_installers () {
+  # If we're on a Mac, let's run my installers
+  if [ "$(uname -s)" == "Darwin" ]
+  then
+    info "executing installers"
+    export ZSH=$HOME/.dotfiles
 
     info "running topic installers"
+    source $DOTFILES_ROOT/setup/installers
 
-    source $DOTFILES_ROOT/setup/install
+    success "installers executed"
   fi
 }
 
 # Initiates the symlinking of dotfiles and such
 symlink_dots () {
-  info 'symlink dots'
+  info 'symlinking dots'
 
   local overwrite_all=false backup_all=false skip_all=false
 
@@ -216,14 +238,20 @@ setup_private_repo () {
   fi
 }
 
-# run everything!
+# run the things!
 setup_zsh
 setup_ssh_key
-brew_things
-symlink_dots
-setup_private_repo
 
 sudo xcodebuild -license accept
+
+# run_osx_defaults
+run_brew
+run_installers
+
+symlink_dots
+
+setup_private_repo
+
 
 echo ''
 echo '  All installed!'

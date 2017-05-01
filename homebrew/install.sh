@@ -18,7 +18,12 @@ success "updated homebrew"
 
 
 info "installing homebrew bundler"
-ln -sfv $HOME/.dotfiles/homebrew/Brewfile $HOME/.dotfiles/Brewfile
+
+set -e
+cd "$(dirname "$0")"
+
+ln -sf $PWD/Brewfile ~/Brewfile
+
 brew tap homebrew/bundle
 brew bundle
 success "installed homebrew bundler and Brewfile formulae"
