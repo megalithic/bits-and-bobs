@@ -18,8 +18,8 @@ hs.grid.GRIDWIDTH = 8
 hs.grid.GRIDHEIGHT = 8
 -- hs.grid.MARGINX = screenCount == 1 and 10 or 0
 -- hs.grid.MARGINY = 2
-hs.grid.MARGINX = 1
-hs.grid.MARGINY = 1
+hs.grid.MARGINX = 7
+hs.grid.MARGINY = 2
 
 -- :: settings
 hs.window.animationDuration = 0.0 -- 0 to disable animations
@@ -138,10 +138,10 @@ config.layout = {
     end
   end),
 
-  -- ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
-  --   local count = forceScreenCount or screenCount
-  --   grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
-  -- end),
+  ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
+  end),
 
   ['org.gnu.Emacs'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
