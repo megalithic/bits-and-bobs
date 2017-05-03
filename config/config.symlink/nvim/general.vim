@@ -186,7 +186,6 @@ set fileformat=unix
 
 " -----------------------------------------------------------------------------
 " ## Mode changes speedups
-set noesckeys
 set notimeout
 set ttimeout
 set ttimeoutlen=2
