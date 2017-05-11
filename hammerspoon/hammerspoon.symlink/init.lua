@@ -5,6 +5,14 @@
 -- :: imports/requires
 -- require 'mpd'
 -- require 'redshift'
+require('control-escape')
+-- require('delete-words')
+-- require('hyper')
+-- require('markdown')
+-- require('microphone')
+-- require('panes')
+-- require('super')
+-- require('windows')
 
 local utils = require 'utils'
 local wm = require 'wm'
@@ -60,36 +68,6 @@ hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('google-play-music-deskto
 hotkey.bind(mashShift, 'f8', function() utils.toggleApp('com.sajidanwar.Radiant-Player') end)
 hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)
 
--- :: sub-app
--- / Chrome Dev Tools
--- hotkey.bind('', 'F12', function ()
---   local win = hs.window.focusedWindow()
---   if win ~= nil and win:application():bundleID() == 'com.google.Chrome' then
---     hs.eventtap.keyStroke(cmdAlt, "i")
---   end
--- end)
--- / Tmux window selection via cmd + 1-9
--- for i = 1, 9 do
---   hotkey.bind('cmd', ''..i..'', function ()
---     local win = hs.window.focusedWindow()
---     if win ~= nil and win:application():bundleID() == 'com.googlecode.iterm2' then
---       hs.execute('tmux select-window -t '..i, true)
---     end
---   end)
--- end
-
--- :: toggle input device muting (similar to Shush.app, but not push-to-talk)
--- hotkey.bind('', 'f1', nil, nil, function ()
---   local input = hs.audiodevice.defaultInputDevice()
---   if input:muted() then
---     input:setMuted(false)
---     input:setInputVolume(50)
---   else
---     input:setMuted(true)
---     input:setInputVolume(0)
---   end
--- end)
-
 
 -- :: window manipulation
 hotkey.bind(cmdCtrl, 'h', utils.chain({
@@ -125,6 +103,7 @@ hotkey.bind(ctrlAlt, 'l', function()
   local nextScreen = win:screen():next()
   win:moveToScreen(nextScreen)
 end)
+
 
 -- :: monitor layout overrides
 hotkey.bind(cmdCtrl, '1', (function()

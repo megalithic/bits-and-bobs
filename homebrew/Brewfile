@@ -14,7 +14,6 @@ tap 'homebrew/bundle'
 tap 'homebrew/dev-tools'
 tap 'homebrew/services'
 tap 'kopischke/ctags'
-tap 'choppsv1/term24'
 tap 'neovim/neovim'
 tap 'caius/jo'
 tap 'simeji/jid'
@@ -33,8 +32,6 @@ brew 'docker'
 brew 'docker-compose'
 brew 'docker-machine'
 brew 'docker-completion'
-brew 'choppsv1/term24/emacs-mac', args: ['--with-dbus', '--with-modules', '--with-xml2', '--with-ctags', '--with-spacemacs-icon']
-brew 'emacs', args: ['--with-imagemagick', '--with-gnutls', '--with-librsvg', '--with-ctags', '--with-mailutils', '--with-dbus']
 brew 'extract_url'
 brew 'ffind'
 brew 'figlet'
@@ -113,18 +110,16 @@ cask 'bartender2'
 cask 'betterzipql'
 cask 'font-source-code-pro'
 cask 'font-fira-code'
+cask 'font-fura-code'
 cask 'cloak'
 cask 'contexts'
 cask 'dropbox'
-cask 'flux'
 cask 'google-chrome'
 cask 'graphiql'
 cask 'hazel'
 cask 'hammerspoon'
-cask 'hyper'
 cask 'istat-menus'
 cask 'iterm2-nightly'
-cask 'java'
 cask 'karabiner-elements'
 cask 'parallels-desktop'
 cask 'qlcolorcode'
@@ -144,14 +139,10 @@ cask 'the-unarchiver'
 cask 'totalfinder'
 cask 'usb-overdrive'
 cask 'virtualbox'
+cask 'yubiswitch'
 
-# mas '1Blocker', id: 1107421413
-# mas 'Deliveries', id: 924726344
-# mas 'GIPHY CAPTURE', id: 668208984
-# mas 'Reeder 3', id: 880001334
-# mas 'Shush', id: 496437906
-# mas 'Sip', id: 507257563
-# mas 'Sketch', id: 852320343
+mas 'Fantastical2', id: 975937182
+mas 'Spark', id: 1176895641
 mas 'Tweetbot', id: 557168941
 
 system "ln -s /usr/local/bin/gcc-4.9 /usr/local/bin/gcc"

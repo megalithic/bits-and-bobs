@@ -61,16 +61,6 @@ config.layout = {
     utils.activate('org.gnu.Emacs') -- emacs gui is front-most
   end),
 
-  ['com.webex.meetingmanager'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    grid.set(window, config.grid.centeredLarge, config.secondaryDisplay(count))
-  end),
-
-  ['BalsamiqMockups3.EDE15CF69E11F7F7D45B5430C7D37CC6C3545E3C.1'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
-  end),
-
   ['com.tapbots.TweetbotMac'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
@@ -89,15 +79,6 @@ config.layout = {
     local count = forceScreenCount or screenCount
     if utils.canManageWindow(window) then
       grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
-    end
-  end),
-
-  ['it.bloop.airmail2'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))
-    else
-      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
     end
   end),
 

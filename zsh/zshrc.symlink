@@ -60,18 +60,26 @@ eval `gdircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
 # ref: https://github.com/robbyrussell/oh-my-zsh/issues/1563#issuecomment-53638038
 zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 
-# setup chruby
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-RUBIES=(~/.rubies/*)
+# asdf
+if [ -s "$HOME/.asdf/asdf.sh" ]; then
+  source $HOME/.asdf/asdf.sh
+fi
+if [ -s "$HOME/.asdf/completions/asdf.bash" ]; then
+  source $HOME/.asdf/completions/asdf.bash
+fi
 
-# setup n
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+# # setup chruby
+# source /usr/local/share/chruby/chruby.sh
+# source /usr/local/share/chruby/auto.sh
+# RUBIES=(~/.rubies/*)
+
+# # setup n
+# export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+# [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
 
-# setup perl
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+# # setup perl
+# eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
 
 # setup fzf
 # consider these handy fzf functions: https://github.com/junegunn/dotfiles/blob/master/bashrc#L267

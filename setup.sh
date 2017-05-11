@@ -239,13 +239,12 @@ setup_private_repo () {
 }
 
 # run the things!
-setup_zsh
 setup_ssh_key
-
 sudo xcodebuild -license accept
 
 # run_osx_defaults
 run_brew
+setup_zsh
 run_installers
 
 symlink_dots
