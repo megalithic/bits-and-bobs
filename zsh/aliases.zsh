@@ -217,6 +217,11 @@ alias ip="ipconfig getifaddr"
 alias clr=clear
 alias syncoctoprint="scp pi@octopi.local:/home/pi/.octoprint/config.yaml $HOME/Dropbox/3d/configs/octoprint"
 
+# Intuitive map function
+# For example, to list all directories that contain a certain file:
+# find . -name .gitattributes | map dirname
+alias map="xargs -n1"
+
 # GIT
 # -----------------------------------------------------------------------------
 alias git='/usr/local/bin/git'
@@ -326,4 +331,7 @@ alias rn='react-native'
 alias geo='curl -s "http://www.geoiptool.com/en/?IP=${IP}" | textutil -stdin -format html -stdout -convert txt | sed -n "/Host Name/,/Postal code/p"'
 
 alias sleepdisplay='pmset displaysleepnow'
+
+# Lock the screen (when going AFK)
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
