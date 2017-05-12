@@ -3,7 +3,7 @@
 # install/setup all the things
 
 cd "$(dirname "$0")/.."
-DOTFILES_ROOT=$(pwd)
+DOTFILES_ROOT='~/.dotfiles'
 
 source $DOTFILES_ROOT/setup/lib.sh
 
