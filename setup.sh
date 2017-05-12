@@ -410,7 +410,7 @@ setup_private_repo () {
 # setup_ssh_key
 # sudo xcodebuild -license accept
 
-# run_osx_defaults
+run_osx_defaults
 run_brew
 setup_zsh
 run_installers

@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source ./setup/lib.sh
-
 info "installing rubies"
 
 ruby-install ruby 2.1.3

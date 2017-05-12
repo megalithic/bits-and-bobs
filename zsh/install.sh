@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source ./setup/lib.sh
-
 info "extra zsh setup"
 
 # setup mac-cli

@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source ./setup/lib.sh
-
 ###############################################################################
 bot "Configuring General System UI/UX..."
 ###############################################################################
@@ -95,7 +93,7 @@ sudo ln -s ~/.dotfiles/setup/img/wallpaper.jpg /System/Library/CoreServices/Defa
 bot "Standard System Changes"
 ################################################
 running "always boot in verbose mode (not OSX GUI mode)"
-sudo nvram boot-args="-v";ok
+# sudo nvram boot-args="-v";ok
 
 running "allow 'locate' command"
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist > /dev/null 2>&1;ok

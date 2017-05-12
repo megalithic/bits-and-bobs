@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source ./setup/lib.sh
-
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 info "checking for existing homebrew install"

@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source ./setup/lib.sh
-
 info "installing python packages"
 
 pip install --upgrade pip
