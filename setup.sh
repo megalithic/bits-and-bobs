@@ -239,8 +239,8 @@ setup_private_repo () {
 }
 
 # run the things!
-setup_ssh_key
-sudo xcodebuild -license accept
+# setup_ssh_key
+# sudo xcodebuild -license accept
 
 # run_osx_defaults
 run_brew
