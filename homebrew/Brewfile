@@ -145,6 +145,3 @@ system "ln -s /usr/local/bin/gcc-4.9 /usr/local/bin/gcc"
 # system "/usr/local/opt/fzf/install"
 # system "echo /usr/local/bin/bash >> /etc/shells"
 # system "chsh -s /usr/local/bin/bash"
-
-cleanup
-
