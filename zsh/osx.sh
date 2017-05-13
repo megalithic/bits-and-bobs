@@ -1,6 +1,6 @@
 #!/bin/sh
 
-info "extra zsh setup"
+echo "extra zsh setup"
 
 # setup mac-cli
 # ref: https://github.com/guarinogabriel/Mac-CLI
@@ -13,4 +13,4 @@ touch $HOME/.z-history
 sudo cp $HOME/.dotfiles/zsh/zprofile.symlink /etc/zprofile
 sudo cp $HOME/.dotfiles/zsh/zshenv.symlink /etc/zshenv
 
-success "finished extra zsh setup"
+echo "finished extra zsh setup"
