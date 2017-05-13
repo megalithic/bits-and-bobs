@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "does keyboard things"
+
 set -e
 
 which -s brew || (echo "Homebrew is required: http://brew.sh/" && exit 1)

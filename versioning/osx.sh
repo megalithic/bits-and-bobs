@@ -1,5 +1,7 @@
 #/bin/env bash
 
+echo "sets up asdf-vm things"
+
 set -e
 cd "$(dirname "$0")"
 
