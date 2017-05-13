@@ -26,10 +26,10 @@ then
 
   echo "installing homebrew bundler"
 
-  ln -sfv $HOME/.dotfiles/homebrew/Brewfile $HOME/Brewfile
+  ln -sfv ~/.dotfiles/homebrew/Brewfile ~/Brewfile
 
   brew tap homebrew/bundle
-  brew bundle --file=$HOME/Brewfile
+  brew bundle --file=~/Brewfile
 
   echo "finished homebrew setup"
 fi
