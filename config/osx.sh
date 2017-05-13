@@ -2,6 +2,10 @@
 
 echo "(neo)vim setup"
 
+ln -sfv ~/.dotfiles/config ~/.config
+ln -sfv ~/.config/nvim ~/.vim
+ln -sfv ~/.config/nvim/init.vim ~/.vimrc
+
 curl -fLo ~/.config/nvim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qall
 echo "finished installing vim-plug"
