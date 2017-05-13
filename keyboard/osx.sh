@@ -8,9 +8,6 @@ set -e
 # https://github.com/tekezo/Karabiner-Elements/issues/597#issuecomment-282760186
 ln -sfn $PWD/karabiner ~/.config/
 
-# Prepare custom settings for navigating between words in iTerm2
-grep -sq forward-word ~/.inputrc || cat $PWD/inputrc >> ~/.inputrc
-
 # Disable Dock icon for Hammerspoon
 defaults write org.hammerspoon.Hammerspoon MJShowDockIconKey -bool FALSE
 
