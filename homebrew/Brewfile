@@ -148,6 +148,5 @@ system "ln -s /usr/local/bin/gcc-4.9 /usr/local/bin/gcc"
 # system "echo /usr/local/bin/bash >> /etc/shells"
 # system "chsh -s /usr/local/bin/bash"
 
-linkapps
 cleanup
 
