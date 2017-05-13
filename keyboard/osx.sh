@@ -4,10 +4,6 @@ echo "does keyboard things"
 
 set -e
 
-which -s brew || (echo "Homebrew is required: http://brew.sh/" && exit 1)
-
-brew bundle check || brew bundle
-
 # Prepare custom settings for Karabiner-Elements
 # https://github.com/tekezo/Karabiner-Elements/issues/597#issuecomment-282760186
 ln -sfn $PWD/karabiner ~/.config/
