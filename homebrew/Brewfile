@@ -1,8 +1,5 @@
 #!/bin/sh
 
-update
-upgrade
-
 cask_args appdir: '/Applications'
 
 tap 'caskroom/cask'
