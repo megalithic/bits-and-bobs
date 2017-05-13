@@ -1,0 +1,14 @@
+# Run all installers and symlink dotfiles
+
+set -e
+
+Echo "Bootstrapping"
+
+Echo "Updating submodules"
+git submodule init && git submodule update
+
+script/homebrew
+script/platform
+script/generic
+script/symlinks
+script/private
