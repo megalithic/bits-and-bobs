@@ -1,0 +1,74 @@
+# ===============================================
+# Declarations
+# ===============================================
+snippet fun "function" b
+function $1($2) {
+	$3
+}
+endsnippet
+
+# ===============================================
+# Control flow
+# ===============================================
+snippet if "if block" b
+if ($1) {
+	$2
+}
+endsnippet
+
+snippet ife "if/esle block" b
+if ($1) {
+	$2
+} else {
+	$3
+}
+endsnippet
+
+snippet ifef "if/else if/else block" b
+if ($1) {
+	$2
+} else if ($3) {
+	$4
+} else {
+	$5
+}
+endsnippet
+
+snippet switch "switch case statement" b
+switch (${1:variable}) {
+	case ${2:value}: {
+		$3
+		break;
+	}
+	default: {
+		return;
+	}
+}
+endsnippet
+
+# ===============================================
+# Common functions and constructs
+# ===============================================
+snippet log "console log" w
+console.log('${1:message}');
+endsnippet
+
+snippet bt "bind this" w
+bind(this);
+endsnippet
+
+snippet strict "enable strict mode" b
+'use strict';
+endsnippet
+
+snippet req "require statement" b
+require('$1');
+endsnippet
+
+snippet ret "return"
+return $1;
+endsnippet
+
+snippet dbg "debugger" b
+debugger;
+endsnippet
