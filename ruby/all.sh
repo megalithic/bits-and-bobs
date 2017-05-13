@@ -1,3 +1,7 @@
 # #!/bin/sh
 
-cat ~/.dotfiles/ruby/default-gems | xargs gem install
+echo "installing ruby gems"
+
+cat ~/.dotfiles/ruby/default-gems.symlink | xargs gem install
+
+echo "done"

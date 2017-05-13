@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/Users/replicant/code/welltok/munero/app/lib/event-platform'
 let g:netrw_dirhist_2='/Users/replicant/code/welltok/rewards-wallet/scripts'
 let g:netrw_dirhist_3='/Users/replicant/code/welltok/rewards-wallet/scripts/test'
 let g:netrw_dirhist_4='/Users/replicant/code/welltok/voltron-components/packages/protip'
 let g:netrw_dirhist_5='/Users/replicant/code/welltok/voltron-components/packages/protip/styles'
 let g:netrw_dirhist_6='/Users/replicant/code/welltok/voltron-components/packages/autosuggest-redux-form'
+let g:netrw_dirhist_7='/Users/replicant/.dotfiles/hammerspoon'
