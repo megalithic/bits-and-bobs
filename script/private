@@ -5,8 +5,8 @@ set -e
 # setup private github repo stuff
 echo "Attempting to clone your private dotfiles repo to $HOME/.dotfiles/private ..."
 
-warn "Note: if you have 2-factor authentication enabled, you'll need to enter a personal access token when using https:// repo urls."
-user ' - What is your private github repo address? (Leave blank to skip)'
+echo "Note: if you have 2-factor authentication enabled, you'll need to enter a personal access token when using https:// repo urls."
+echo ' - What is your private github repo address? (Leave blank to skip)'
 read -e git_privaterepo
 
 if [ "$git_privaterepo" == "" ]
