@@ -61,25 +61,17 @@ eval `gdircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
 zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 
 # asdf
-if [ -s "$HOME/.asdf/asdf.sh" ]; then
-  source $HOME/.asdf/asdf.sh
-fi
-if [ -s "$HOME/.asdf/completions/asdf.bash" ]; then
-  source $HOME/.asdf/completions/asdf.bash
-fi
+# . $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/completions/asdf.bash
 
 # # setup chruby
-# source /usr/local/share/chruby/chruby.sh
-# source /usr/local/share/chruby/auto.sh
-# RUBIES=(~/.rubies/*)
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+RUBIES=(~/.rubies/*)
 
 # # setup n
-# export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-# [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
-
-
-# # setup perl
-# eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
 # setup fzf
 # consider these handy fzf functions: https://github.com/junegunn/dotfiles/blob/master/bashrc#L267
@@ -101,3 +93,7 @@ source ~/.dotfiles/bin/z.sh
 # if [[ $ZSH_EVAL_CONTEXT == 'file' ]]; then
 #   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # fi
+
+# tabtab source for yarn package
+# uninstall by removing these lines or running `tabtab uninstall yarn`
+[[ -f /Users/replicant/.config/yarn/global/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/replicant/.config/yarn/global/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh

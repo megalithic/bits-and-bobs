@@ -2,7 +2,6 @@ bundler
 coderay
 curses
 fastri
-gem-ctags
 neovim
 pry
 rcodetools

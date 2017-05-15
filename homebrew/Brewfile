@@ -20,8 +20,10 @@ brew 'ansifilter'
 brew 'autoconf'
 brew 'automake'
 brew 'aspell', args: ['--with-lang-en']
+brew 'chruby'
 brew 'cmake'
 brew 'coreutils'
+brew 'curl'
 brew 'dbus'
 brew 'diff-so-fancy'
 brew 'docker'
@@ -60,7 +62,7 @@ brew 'ncdu'
 brew 'ncurses'
 brew 'moreutils'
 brew 'neovim', args: ['with-lua', 'with-perl', 'with-ruby']
-brew 'npm'
+# brew 'npm'
 brew 'openssl'
 brew 'phantomjs'
 brew 'p7zip'
@@ -70,12 +72,17 @@ brew 'pkg-config'
 brew 'postgresql'
 brew 'python'
 brew 'python3'
+# http://stackoverflow.com/a/40910219
+brew 'qt5', args: ['with-qtwebkit']
+# brew link --force qt5
 brew 'rabbitmq'
 brew 'readline'
 brew 'reattach-to-user-namespace', args: ['wrap-pbcopy-and-pbpaste']
 brew 'redis'
 brew 'ripgrep'
 brew 'ruby'
+brew 'ruby-install'
+brew 'ruby-build'
 brew 'ssh-copy-id'
 brew 'terminal-notifier'
 brew 'the_silver_searcher'
@@ -89,7 +96,7 @@ brew 'weechat', args: ['--with-ruby', '--with-python', '--with-perl', '--with-lu
 brew 'wget', args: ['enable-iri']
 brew 'wifi-password'
 # brew 'vim', args: ['--with-lua', '--with-luajit', '--with-python3', '--with-tcl', '--with-override-system-vi']
-brew 'yarn'
+# brew 'yarn'
 brew 'zsh', args: ['--with-unicode9', '--without-etcdir']
 brew 'zsh-completions'
 brew 'zsh-lovers'
@@ -112,6 +119,7 @@ cask 'hazel'
 cask 'hammerspoon'
 cask 'istat-menus'
 cask 'iterm2-nightly'
+cask 'java'
 cask 'karabiner-elements'
 cask 'parallels-desktop'
 cask 'qlcolorcode'
@@ -136,6 +144,7 @@ cask 'virtualbox'
 mas 'Fantastical2', id: 975937182
 mas 'Spark', id: 1176895641
 mas 'Tweetbot', id: 557168941
+mas 'Xcode', id: 497799835
 
 system "ln -s /usr/local/bin/gcc-4.9 /usr/local/bin/gcc"
 # system "/usr/local/opt/fzf/install"
