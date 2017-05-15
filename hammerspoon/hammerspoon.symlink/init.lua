@@ -46,6 +46,12 @@ hotkey.bind(cmdCtrl, 'r', function()
   hs.notify.show('Hammerspoon', 'Config Reloaded', '')
 end)
 
+keyUpDown = function(modifiers, key)
+  -- Un-comment & reload config to log each keystroke that we're triggering
+  -- log.d('Sending keystroke:', hs.inspect(modifiers), key)
+  hs.eventtap.keyStroke(modifiers, key, 0)
+end
+
 -- :: media
 hotkey.bind(ctrlShift, 27, function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- < - >
 hotkey.bind(ctrlShift, '\\', function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end)   -- < \ >
@@ -56,9 +62,7 @@ hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2'
 hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('ctrl', 'return', function() utils.toggleApp('com.google.Chrome') end)
 hotkey.bind('cmd', '`', function() utils.toggleApp('com.google.Chrome') end)
-hotkey.bind('cmdShift', '`', function() utils.toggleApp('org.mozilla.firefoxdeveloperedition') end)
 hotkey.bind('cmd', 'f4', function() utils.toggleApp('com.readdle.smartemail-Mac') end)
-hotkey.bind('mashShift', 'f4', function() utils.toggleApp('it.bloop.airmail2') end)
 hotkey.bind('cmd', 'f5', function() utils.toggleApp('com.tapbots.TweetbotMac') end)
 hotkey.bind('cmd', 'f6', function() utils.toggleApp('com.tinyspeck.slackmacgap') end)
 hotkey.bind('cmd', 'f8', function() utils.toggleApp('com.spotify.client') end)
