@@ -98,6 +98,7 @@ brew 'wget', args: ['enable-iri']
 brew 'wifi-password'
 # brew 'vim', args: ['--with-lua', '--with-luajit', '--with-python3', '--with-tcl', '--with-override-system-vi']
 # brew 'yarn'
+brew 'yubico-piv-tool'
 brew 'zsh', args: ['--with-unicode9', '--without-etcdir']
 brew 'zsh-completions'
 brew 'zsh-lovers'
