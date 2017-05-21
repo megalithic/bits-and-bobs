@@ -60,6 +60,12 @@ nnoremap <silent> <leader>m <esc>:FZF<cr>
 nnoremap <leader>a <esc>:Ag<space>
 nnoremap <silent> <leader>A  <esc>:exe('Ag '.expand('<cword>'))<cr>
 
+" bind \ (backward slash) to grep shortcut
+" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+" Backslash as shortcut to ag
+nnoremap \ :Ag<SPACE>
+
 " " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)

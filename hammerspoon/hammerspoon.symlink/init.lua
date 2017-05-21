@@ -72,6 +72,8 @@ hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('google-play-music-deskto
 hotkey.bind(mashShift, 'f8', function() utils.toggleApp('com.sajidanwar.Radiant-Player') end)
 hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)
 
+hotkey.bind({'ctrl'}, 'delete', function() hs.eventtap.keyStroke({}, 'forwarddelete') end)
+-- hotkey.bind('fn', 'j', function() hs.eventtap.keyStroke({}, "down") end)
 
 -- :: window manipulation
 hotkey.bind(cmdCtrl, 'h', utils.chain({

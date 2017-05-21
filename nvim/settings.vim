@@ -425,6 +425,19 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
+let g:fzf_colors =
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
 " Search term using rg
 " --column: Show column number
@@ -445,19 +458,28 @@ let g:fzf_action = {
 
 " ----------------------------------------------------------------------------
 " ## ack.vim
-set grepprg=rg\ --column\ --noheading\ --color=always
-let &grepprg = 'command rg --column'
-let g:ackprg="rg --column --vimgrep --color=always"
-let g:agprg="rg --column --vimgrep --color=always"
+if executable("ag")
+  " Note we extract the column as well as the file and line number
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepformat=%f:%l:%c%m
 
-" ----------------------------------------------------------------------------
-" ## ripgrep/fzf
-let g:rg_command = '
-\ rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --color "always"
-\ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf,sass,scss,haml,erb,ejs}"
-\ -g "!*.{min.js,swp,o,zip}"
-\ -g "!{.git,node_modules,vendor}/*" '
-command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+  " Have the silver searcher ignore all the same things as wilgignore
+  let b:ag_command = 'ag %s -i --nocolor --nogroup'
+  let g:ag_prg = 'ag %s -i --nocolor --nogroup'
+
+  for i in split(&wildignore, ",")
+    let i = substitute(i, '\*/\(.*\)/\*', '\1', 'g')
+    let b:ag_command = b:ag_command . ' --ignore "' . substitute(i, '\*/\(.*\)/\*', '\1', 'g') . '"'
+  endfor
+
+  let b:ag_command = b:ag_command . ' --hidden -g ""'
+  let g:ctrlp_user_command = b:ag_command
+endif
+
+" set grepprg=ag\ --column\ --noheading\ --color=always
+" let &grepprg = 'command ag --column'
+" let g:ackprg="ag --column --vimgrep --color=always"
+" let g:ag_prg="ag --column --vimgrep --color=always"
 
 
 " ----------------------------------------------------------------------------

@@ -145,14 +145,15 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'roxma/nvim-completion-manager'
   Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-  Plug 'mileszs/ack.vim'
+  " Plug 'mileszs/ack.vim'
+  " Plug 'rking/ag.vim'
   Plug 'junegunn/fzf'
         \, { 'dir': '~/.fzf', 'do': './install --all' }
         \| Plug 'junegunn/fzf.vim'
         \, { 'on': [
+        \ 'Ag',
         \ 'History',
         \ 'Files',
-        \ 'Ag',
         \ 'Lines',
         \ 'History',
         \ 'Commands',
