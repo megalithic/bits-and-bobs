@@ -1,8 +1,4 @@
-# NOTES
-# ...........................................................................
-# To get 24-bit/True Color mode for neovim and other CLI stuffs, need this patched version of tmux:
-# brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/02f04ef70ddad41a81c735d709b2a3b23a3a4b91/tmux.rb
-# * may need to unlink existing installed version of tmux
+set -euo pipefail
 
 # KEY BINDINGS
 # ===========================================================================
@@ -90,6 +86,9 @@ bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l \; select-pane -
 bind-key  -T copy-mode-vi / command-prompt -i -p "search down" "send -X search-forward-incremental \"%%%\""
 bind-key  -T copy-mode-vi ? command-prompt -i -p "search up" "send -X search-backward-incremental \"%%%\""
 
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi 'y' send -X copy-selection
+
 # GENERAL SETTINGS
 # ===========================================================================
 # set -sg	update-environment TERM_PROFILE
@@ -160,7 +159,7 @@ set -g status on
 set -g status-interval 1
 set -g status-justify "centre" #don't change this spelling
 set -g status-position top
-set -g allow-rename on
+set -g allow-rename off
 
 setw -g monitor-activity on
 setw -g visual-activity off

@@ -15,10 +15,6 @@ endif
 " -/ Plugins /--------------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
 
-  function! HandleRemotePluginUpdates(arg)
-    UpdateRemotePlugins
-  endfunction
-
   " ---------------------------------------------------------------------------
   " ## Interface
   Plug 'mhartington/oceanic-next'

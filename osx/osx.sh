@@ -49,11 +49,14 @@ done
 # Set highlight color to green
 defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
 
-# Set sidebar icon size to medium
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
+# Set sidebar icon size to small
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Always show scrollbars
-# defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
 
 # Disable smooth scrolling
@@ -207,7 +210,7 @@ defaults write com.apple.universalaccess 'closeViewSmoothImages' -bool false
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Automatically illuminate built-in MacBook keyboard in low light
@@ -595,7 +598,7 @@ tell application "Terminal"
   delay 1
 
   (* Set the custom theme as the default terminal theme. *)
-  set default settings to settings set themeName
+  (*set default settings to settings set themeName*)
 
   (* Get the IDs of all the currently opened terminal windows. *)
   set allOpenedWindows to id of every window
@@ -660,14 +663,6 @@ defaults write com.apple.ActivityMonitor IconType -int 5
 
 # Show all processes in Activity Monitor
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
-
-# Sets columns for all tabs
-defaults read com.apple.ActivityMonitor "UserColumnsPerTab v5.0" -dict \
-    '0' '( Command, CPUUsage, CPUTime, Threads, PID, UID, Ports )' \
-    '1' '( Command, ResidentSize, Threads, Ports, PID, UID,  )' \
-    '2' '( Command, PowerScore, 12HRPower, AppSleep, UID, powerAssertion )' \
-    '3' '( Command, bytesWritten, bytesRead, Architecture, PID, UID, CPUUsage )' \
-    '4' '( Command, txBytes, rxBytes, PID, UID, txPackets, rxPackets, CPUUsage )'
 
 # Set sort column
 defaults write com.apple.ActivityMonitor UserColumnSortPerTab -dict \
