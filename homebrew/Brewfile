@@ -143,6 +143,7 @@ cask 'totalfinder'
 cask 'usb-overdrive'
 cask 'xquartz'
 cask 'virtualbox'
+cask 'vox'
 # cask 'yubiswitch'
 # cask 'yubico-authenticator'
 
