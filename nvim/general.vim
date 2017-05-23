@@ -6,16 +6,11 @@ syntax enable
 
 if has('nvim')
   set termguicolors
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+  set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
   set background=dark
 
   colorscheme OceanicNext
-  " colorscheme flattened_dark
-  " colorscheme base16-ocean
-
-  " let g:gruvbox_italic=1
-  " colorscheme gruvbox
 
   let g:oceanic_next_terminal_italic = 1
   let g:oceanic_next_terminal_bold = 1
