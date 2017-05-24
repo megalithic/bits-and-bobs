@@ -20,7 +20,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias dirs="ls *(/)"
 alias ff="ffind -S"
-alias f="ffind"
 alias files="find . -type f | wc -l"
 alias new="print -rl -- **/*(Dom[1,5])"
 
