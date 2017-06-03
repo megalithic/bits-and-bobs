@@ -9,13 +9,6 @@ nnoremap <c-s> :source $MYVIMRC<cr>
 nnoremap <s-tab> za
 
 " ----------------------------------------------------------------------------
-" ## codi.vim
-nnoremap <leader>Rj :Codi!! javascript<cr>
-nnoremap <leader>Rr :Codi!! ruby<cr>
-nnoremap <leader>Rp :Codi!! python<cr>
-nnoremap <leader>Rl :Codi!! lua<cr>
-
-" ----------------------------------------------------------------------------
 " ## Autoformat
 nnoremap <F3> :Neoformat<CR>
 
@@ -25,7 +18,6 @@ nnoremap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 
 " ----------------------------------------------------------------------------
 " ## Tabbing for completions:
-
 if has('nvim')
   " deoplete ---
   " autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -171,21 +163,21 @@ vmap " S"
 " ## incsearch and vim search pulse
 " https://github.com/inside/vim-search-pulse#integration-with-the-incsearchvim-plugin
 "
-map / <Plug>(incsearch-forward)
-map ? <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" map / <Plug>(incsearch-forward)
+" map ? <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
-" Next or previous match is followed by a Pulse
-map n <Plug>(incsearch-nohl-n)<Plug>Pulse
-map N <Plug>(incsearch-nohl-N)<Plug>Pulse
-map * <Plug>(incsearch-nohl-*)<Plug>Pulse
-map # <Plug>(incsearch-nohl-#)<Plug>Pulse
-map g* <Plug>(incsearch-nohl-g*)<Plug>Pulse
-map g# <Plug>(incsearch-nohl-g#)<Plug>Pulse
+" " Next or previous match is followed by a Pulse
+" map n <Plug>(incsearch-nohl-n)<Plug>Pulse
+" map N <Plug>(incsearch-nohl-N)<Plug>Pulse
+" map * <Plug>(incsearch-nohl-*)<Plug>Pulse
+" map # <Plug>(incsearch-nohl-#)<Plug>Pulse
+" map g* <Plug>(incsearch-nohl-g*)<Plug>Pulse
+" map g# <Plug>(incsearch-nohl-g#)<Plug>Pulse
 
-" Pulses the first match after hitting the enter keyan
-autocmd! User IncSearchExecute
-autocmd User IncSearchExecute :call search_pulse#Pulse()
+" " Pulses the first match after hitting the enter keyan
+" autocmd! User IncSearchExecute
+" autocmd User IncSearchExecute :call search_pulse#Pulse()
 
 " ----------------------------------------------------------------------------
 " ## Splits with vim-tmux-navigator

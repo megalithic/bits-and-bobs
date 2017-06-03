@@ -42,6 +42,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'moll/vim-node', { 'for': ['javascript'] }
+  Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
@@ -71,20 +72,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 
   " ----------------------------------------------------------------------------
-  " ## Python
-  Plug 'hynek/vim-python-pep8-indent', { 'for': ['python'] }
-  Plug 'davidhalter/jedi-vim', { 'for': ['python'] }
-
-  " ----------------------------------------------------------------------------
   " ## Misc, Other, et al
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-rhubarb' " git :Gbrowse support
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
-  Plug 'jreybert/vimagit' " more git tools integrated into vim
   Plug 'chrisbra/vim-diff-enhanced'
   Plug 'christoomey/vim-conflicted'
   Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
-  Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
   Plug 'honza/dockerfile.vim', { 'for': ['dockerfile', 'docker'] }
@@ -110,7 +104,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'docunext/closetag.vim' " will auto-close the opening tag as soon as you type </
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
-  Plug 'metakirby5/codi.vim'
   Plug 'sbdchd/neoformat'
 
   " ----------------------------------------------------------------------------
@@ -140,7 +133,9 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'roxma/nvim-completion-manager'
-  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install', 'for': ['javascript']}
+  Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
+  Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
   " Plug 'mileszs/ack.vim'
   " Plug 'rking/ag.vim'
   Plug 'junegunn/fzf'
