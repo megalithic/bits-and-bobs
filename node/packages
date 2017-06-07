@@ -5,6 +5,9 @@ bible
 browser-sync
 chai
 create-react-app
+elm
+elm-oracle
+elm-test
 fast-cli
 grunt-cli
 jest

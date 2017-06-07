@@ -103,12 +103,14 @@ augroup ft_javascript
   au FileType javascript highlight xmlAttrib cterm=italic
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
+  au FileType javascript iabbrev class== className=
   " au BufRead,BufNewFile *.test.js set ft=javascript
 
   " elm
   au BufWritePost *.elm :ElmMake
+  au FileType elm set tabstop=4 softtabstop=4 shiftwidth=4
   au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
-  au FileType javascript iabbrev class== className=
+  au FileType elm nmap <buffer> <Leader>E <Plug>(elm-error-detail)
 augroup END
 
 augroup ft_scss

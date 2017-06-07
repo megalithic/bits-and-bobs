@@ -36,6 +36,7 @@
             "selected": true,
             "simple_modifications": {
                 "caps_lock": "left_control",
+                "escape": "grave_accent_and_tilde",
                 "right_option": "f17"
             },
             "virtual_hid_keyboard": {

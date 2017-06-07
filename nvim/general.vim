@@ -15,8 +15,15 @@ if has('nvim')
   let g:oceanic_next_terminal_italic = 1
   let g:oceanic_next_terminal_bold = 1
 
-  let g:python_host_prog = '/usr/local/bin/python2'
-  let g:python3_host_prog = '/usr/local/bin/python3'
+  let os=substitute(system('uname'), '\n', '', '')
+  if os == 'Darwin' || os == 'Mac'
+    let g:python_host_prog='/usr/local/bin/python2'
+    let g:python3_host_prog='/usr/local/bin/python3'
+  elseif os == 'Linux'
+    let g:python_host_prog='/usr/bin/python2'
+    let g:python3_host_prog='/usr/bin/python3'
+  endif
+
   let g:python_host_skip_check = 1
   let g:python3_host_skip_check = 1
 else
@@ -57,9 +64,11 @@ set sidescrolloff=10
 set scroll=3
 set lazyredraw "may be the cause of lots of issues
 set ttyfast
+
 " NOTE: also handled in autocommands.vim
 " set cul " turn on cursorline highlighting -- needed for linenumber HL too
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:⚋
+
+set listchars=tab:▸\ ,eol:¬,extends:›,precedes:‹,trail:·,nbsp:⚋
 set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
 set noerrorbells
@@ -178,6 +187,9 @@ endif
 set autowrite
 set fileformats=unix,mac,dos
 set fileformat=unix
+setglobal fenc=utf-8    " Default file encoding for new files
+set enc=utf-8           " Internal encoding used by buffers, help and commands
+set tenc=utf-8          " Terminal encoding used for terminal display
 
 " -----------------------------------------------------------------------------
 " ## Mode changes speedups
@@ -203,6 +215,8 @@ set mat=2
 set re=1
 set tm=500
 set dictionary+=/usr/share/dict/words
+set nospell             " Disable spellchecking by default
+set spelllang=en_us,en_gb
 set spellfile=~/.config/nvim/spell/en.utf-8.add
 let loaded_matchparen = 0 " this turns on pair matching highlight (is slow with this on)
 

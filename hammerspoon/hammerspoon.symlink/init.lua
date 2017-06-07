@@ -73,7 +73,37 @@ hotkey.bind(mashShift, 'f8', function() utils.toggleApp('com.sajidanwar.Radiant-
 hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)
 
 -- hotkey.bind({'ctrl'}, 'delete', nil, function() hs.eventtap.keyStroke({}, 'forwarddelete') end, nil, function() hs.eventtap.keyStroke({}, 'forwarddelete') end)
--- hotkey.bind('fn', 'j', function() hs.eventtap.keyStroke({}, "down") end)
+
+-- Catch fn-h and convert it to a left arrow key.
+-- function fnKeyCatcher(event)
+--   local mappings_tbl = {
+--     ['h'] = 'left',
+--     ['j'] = 'down',
+--     ['k'] = 'up',
+--     ['l'] = 'right'
+--   }
+
+-- ////////////////////////////////////////
+-- TODO:
+-- need to map the above table into a way to fir the correct eventtap event
+-- ////////////////////////////////////////
+
+--   local func = c_tbl[choice]
+--   if(func) then
+--     func()
+--   else
+--     print " The program has been terminated."
+--     print " Thank you!";
+--   end
+
+--   if event:getFlags()['fn'] and event:getCharacters() == "h" then
+--     print("fn-h!")
+--     return true, {hs.eventtap.event.newKeyEvent({}, "left", true)}
+--   end
+--   return false
+-- end
+
+-- local keyMapper = hs.eventtap.new({hs.eventtap.event.types.keyDown}, fnKeyCatcher):start()
 
 -- :: window manipulation
 hotkey.bind(cmdCtrl, 'h', utils.chain({

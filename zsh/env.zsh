@@ -67,23 +67,45 @@ export MYSQL=/usr/local/mysql/bin
 export PATH=$PATH:$MYSQL
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
 
-# Setting ag as the default source for fzf
-# export FZF_DEFAULT_COMMAND='ag -l -g ""'
+_gen_fzf_default_opts() {
+  local color00='#002b36'
+  local color01='#073642'
+  local color02='#586e75'
+  local color03='#657b83'
+  local color04='#839496'
+  local color05='#93a1a1'
+  local color06='#eee8d5'
+  local color07='#fdf6e3'
+  local color08='#dc322f'
+  local color09='#cb4b16'
+  local color0A='#b58900'
+  local color0B='#859900'
+  local color0C='#2aa198'
+  local color0D='#268bd2'
+  local color0E='#6c71c4'
+  local color0F='#d33682'
 
-# Setting ripgrep(rg) as the default source for fzf
-# fzf/ripgrep stuffs: https://www.reddit.com/r/linux/comments/5rrpyy/turbo_charge_bash_with_fzf_ripgrep
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-# bind -x '"\C-p": vim $(fzf);'
-export FZF_DEFAULT_OPTS='
+  export FZF_DEFAULT_OPTS="
+  --no-height
+  --bind 'ctrl-j:ignore,ctrl-k:ignore'
+  --inline-info
+  --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D
+  --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C
+  --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D
+  "
+
+  export FZF_DEFAULT_OPTS="
+  --inline-info
   --select-1
   --ansi
   --extended
   --bind ctrl-f:page-down,ctrl-b:page-up,J:down,K:up
-'
-# --color fg:252,bg:-1,hl:67,fg+:252,bg+:235,hl+:81
-# --color info:144,prompt:161,spinner:135,pointer:135,marker:118
+  "
+}
 
-# export FZF_COMPLETION_TRIGGER=''
+_gen_fzf_default_opts
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_TMUX_HEIGHT='20%'
 
-# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters

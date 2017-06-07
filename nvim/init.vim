@@ -18,9 +18,6 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## Interface
   Plug 'mhartington/oceanic-next'
-  " Plug 'chriskempson/base16-vim'
-  " Plug 'romainl/flattened'
-  " Plug 'morhetz/gruvbox'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
@@ -76,7 +73,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-rhubarb' " git :Gbrowse support
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
+  Plug 'AndrewRadev/linediff.vim'
   Plug 'chrisbra/vim-diff-enhanced'
+  Plug 'idanarye/vim-merginal'
   Plug 'christoomey/vim-conflicted'
   Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
@@ -138,20 +137,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
   " Plug 'mileszs/ack.vim'
   " Plug 'rking/ag.vim'
-  Plug 'junegunn/fzf'
-        \, { 'dir': '~/.fzf', 'do': './install --all' }
-        \| Plug 'junegunn/fzf.vim'
-        \, { 'on': [
-        \ 'Ag',
-        \ 'History',
-        \ 'Files',
-        \ 'Lines',
-        \ 'History',
-        \ 'Commands',
-        \ 'Tags',
-        \ 'Helptags',
-        \ 'GFiles',
-        \ 'GGrep'] }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+
   " Plug 'Shougo/neosnippet.vim'
   " Plug 'Shougo/neosnippet-snippets'
   Plug 'SirVer/ultisnips'

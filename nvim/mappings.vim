@@ -49,14 +49,14 @@ endif
 " ----------------------------------------------------------------------------
 " ## FZF
 nnoremap <silent> <leader>m <esc>:FZF<cr>
-nnoremap <leader>a <esc>:Ag<space>
-nnoremap <silent> <leader>A  <esc>:exe('Ag '.expand('<cword>'))<cr>
+nnoremap <leader>a <esc>:Rg<space>
+nnoremap <silent> <leader>A  <esc>:exe('Rg '.expand('<cword>'))<cr>
 
 " bind \ (backward slash) to grep shortcut
-" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+" command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
 
 " Backslash as shortcut to ag
-nnoremap \ :Ag<SPACE>
+nnoremap \ :Rg<SPACE>
 
 " " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
