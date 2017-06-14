@@ -108,7 +108,7 @@ augroup ft_javascript
 
   " elm
   au BufWritePost *.elm :ElmMake
-  au FileType elm set tabstop=4 softtabstop=4 shiftwidth=4
+  " au FileType elm set tabstop=4 softtabstop=4 shiftwidth=4
   au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
   au FileType elm nmap <buffer> <Leader>E <Plug>(elm-error-detail)
 augroup END

@@ -70,18 +70,18 @@ function! s:getEslintrc()
   return expand(<SID>packageRoot()).'/.eslintrc.json'
 endfunction
 
-function! s:eslint()
-  let g:neomake_javascript_enabled_makers = ['eslint']
-  let g:neomake_javascript_eslint_maker = {
-        \   'exe': expand(<SID>packageRoot()).'/node_modules/.bin/eslint',
-        \   'args': ['-f', 'compact'],
-        \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-        \   '%W%f: line %l\, col %c\, Warning - %m'
-        \ }
-  let g:neomake_jsx_enabled_makers = ['eslint']
-  let g:neomake_jsx_eslint_maker =
-        \ g:neomake_javascript_eslint_maker
-endfunction
+" function! s:eslint()
+"   let g:neomake_javascript_enabled_makers = ['eslint']
+"   let g:neomake_javascript_eslint_maker = {
+"         \   'exe': expand(<SID>packageRoot()).'/node_modules/.bin/eslint',
+"         \   'args': ['-f', 'compact'],
+"         \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+"         \   '%W%f: line %l\, col %c\, Warning - %m'
+"         \ }
+"   let g:neomake_jsx_enabled_makers = ['eslint']
+"   let g:neomake_jsx_eslint_maker =
+"         \ g:neomake_javascript_eslint_maker
+" endfunction
 
 function! s:standard()
   let g:neomake_javascript_enabled_makers = ['standard']
@@ -94,35 +94,35 @@ function! s:standard()
         \ g:neomake_javascript_standard_maker
 endfunction
 
-function! s:higherstandard()
-  let g:neomake_javascript_enabled_makers = ['higherstandard']
-  let g:neomake_javascript_higherstandard_maker = {
-        \ 'exe': <SID>getHigherStandardBin(),
-        \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-        \ 'errorformat': '  %f:%l:%c: %m'
-        \ }
-  let g:neomake_jsx_enabled_makers = ['higherstandard']
-  let g:neomake_jsx_higherstandard_maker =
-        \ g:neomake_javascript_higherstandard_maker
-endfunction
+" function! s:higherstandard()
+"   let g:neomake_javascript_enabled_makers = ['higherstandard']
+"   let g:neomake_javascript_higherstandard_maker = {
+"         \ 'exe': <SID>getHigherStandardBin(),
+"         \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
+"         \ 'errorformat': '  %f:%l:%c: %m'
+"         \ }
+"   let g:neomake_jsx_enabled_makers = ['higherstandard']
+"   let g:neomake_jsx_higherstandard_maker =
+"         \ g:neomake_javascript_higherstandard_maker
+" endfunction
 
-if findfile(<SID>getEslintrc(), '.;') ==# ''
-  " no eslintrc found, so it's either higher-standard or standard
-  if findfile(<SID>getHigherStandardBin(), '.;') ==# ''
-    " no higher-standard found, so we use standard
-    call <SID>standard()
-  else
-    " found higher-standard, so we use it
-    call <SID>higherstandard()
-  endif
-else
-  " found eslintrc, so we use eslint
-  call <SID>eslint()
-endif
+" if findfile(<SID>getEslintrc(), '.;') ==# ''
+"   " no eslintrc found, so it's either higher-standard or standard
+"   if findfile(<SID>getHigherStandardBin(), '.;') ==# ''
+"     " no higher-standard found, so we use standard
+"     call <SID>standard()
+"   else
+"     " found higher-standard, so we use it
+"     call <SID>higherstandard()
+"   endif
+" else
+"   " found eslintrc, so we use eslint
+"   call <SID>eslint()
+" endif
 
 " do the lintings!
 " au! BufEnter * nested Neomake
-au! BufWritePost * nested Neomake
+" au! BufWritePost * nested Neomake
 
 
 " ----------------------------------------------------------------------------
@@ -487,8 +487,8 @@ if executable("ag")
   set grepformat=%f:%l:%c%m
 
   " Have the silver searcher ignore all the same things as wilgignore
-  let b:ag_command = 'ag %s -i --nocolor --nogroup'
-  let g:ag_prg = 'ag %s -i --nocolor --nogroup'
+  let b:ag_command = 'ag %s -i --nogroup'
+  let g:ag_prg = 'ag %s -i --nogroup'
 
   for i in split(&wildignore, ",")
     let i = substitute(i, '\*/\(.*\)/\*', '\1', 'g')
@@ -559,7 +559,7 @@ let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 
 " ----------------------------------------------------------------------------
 " ## neoformat
-autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.js silent Neoformat
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_javascript_prettier = {
         \ 'exe': 'prettier',
