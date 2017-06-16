@@ -99,12 +99,16 @@ augroup END
 augroup ft_javascript
   au!
 
-  au FileType javascript set formatprg=prettier\ --stdin
+  " neoformat/prettier
+  " autocmd BufWritePre,TextChanged,InsertLeave *.js Prettier
+
+  " let g:prettier#autoformat = 0
+  " autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.scss,*.less PrettierAsync
+
   au FileType javascript highlight xmlAttrib cterm=italic
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
   au FileType javascript iabbrev class== className=
-  " au BufRead,BufNewFile *.test.js set ft=javascript
 
   " elm
   au BufWritePost *.elm :ElmMake

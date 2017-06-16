@@ -85,7 +85,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ----------------------------------------------------------------------------
   " ## Utilities
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for mocha and ruby
-  Plug 'w0rp/ale'
+  " Plug 'w0rp/ale'
   " Plug 'neomake/neomake' " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
@@ -105,6 +105,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'sbdchd/neoformat'
+  " Plug 'mitermayer/vim-prettier', {
+  "       \ 'do': 'npm install',
+  "       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation

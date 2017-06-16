@@ -36,6 +36,18 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 
 
 " ----------------------------------------------------------------------------
+" ## ale
+let g:ale_javascript_eslint_executable = 'standard'
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '-'
+" Don't lint on insert/exit/text
+let g:ale_lint_on_text_changed = 'never'
+" You can disable this option too
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 0
+
+
+" ----------------------------------------------------------------------------
 " ## neomake
 " -- Settings derived from / see this link, also, for custom makers:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
@@ -559,10 +571,10 @@ let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 
 " ----------------------------------------------------------------------------
 " ## neoformat
-autocmd BufWritePre *.js silent Neoformat
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_javascript_prettier = {
-        \ 'exe': 'prettier',
-        \ 'args': ['--trailing-comma es5', '--stdin'],
-        \ 'stdin': 1,
-        \ }
+" autocmd BufWritePre *.js silent Neoformat
+" let g:neoformat_enabled_javascript = ['prettier']
+" let g:neoformat_javascript_prettier = {
+"         \ 'exe': 'prettier',
+"         \ 'args': ['--trailing-comma es5', '--stdin'],
+"         \ 'stdin': 1,
+"         \ }
