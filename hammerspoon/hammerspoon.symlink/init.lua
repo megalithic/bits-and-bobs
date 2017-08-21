@@ -18,7 +18,7 @@ local utils = require 'utils'
 local wm = require 'wm'
 local hotkey = require 'hs.hotkey'
 local settings   = require 'hs.settings'
-local ptt = require 'pushToTalk'
+-- local ptt = require 'pushToTalk'
 
 -- :: initialize all the things!
 wm.events.initEventHandling()
@@ -35,7 +35,7 @@ mash = {'cmd', 'alt', 'ctrl'}
 hyper = {'cmd', 'alt', 'ctrl', 'shift' }
 
 -- :: utility
-ptt.init({'cmd', 'alt'})
+-- ptt.init({'cmd', 'alt'})
 hotkey.bind(ctrlAlt, 'r', function() hs.toggleConsole() end)
 hotkey.bind(mashShift, 'L', function()
   hs.caffeinate.startScreensaver()

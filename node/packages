@@ -15,6 +15,7 @@ mocha
 netlify-cli
 node-inspector
 now
+preact-cli
 serverless
 webpack
 webpack-dev-server
