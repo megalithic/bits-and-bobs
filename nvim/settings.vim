@@ -569,6 +569,12 @@ let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 " let g:neosnippet#enable_snipmate_compatibility = 1
 " let g:neosnippet#expand_word_boundary = 1
 
+
+" ----------------------------------------------------------------------------
+" ## prettier
+let g:prettier#autoformat = 0
+
+
 " ----------------------------------------------------------------------------
 " ## neoformat
 " autocmd BufWritePre *.js silent Neoformat

@@ -108,9 +108,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'sbdchd/neoformat'
-  " Plug 'mitermayer/vim-prettier', {
-  "       \ 'do': 'npm install',
-  "       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
+  Plug 'prettier/vim-prettier', {
+        \ 'do': 'yarn install',
+        \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation
