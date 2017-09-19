@@ -41,6 +41,7 @@ augroup vimrcEx
   " ## Toggle colorcolumn when in insert mode for visual 80char indicator
   au InsertEnter * set colorcolumn=80
   au InsertLeave * set colorcolumn=""
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
 
   " ----------------------------------------------------------------------------
   " ## Manage GIT related scenarios
@@ -98,24 +99,22 @@ augroup END
 " -/ Filetypes/Syntax /-------------------------------------------------------
 augroup ft_javascript
   au!
-
-  " neoformat/prettier
-  " autocmd BufWritePre,TextChanged,InsertLeave *.js Prettier
-
-  " let g:prettier#autoformat = 0
-  " autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.scss,*.less PrettierAsync
+  au BufRead *.js set filetype=javascript
+  au BufRead *.es6 set filetype=javascript
+  au BufRead *.jsx set filetype=javascript
 
   au FileType javascript highlight xmlAttrib cterm=italic
-  au BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
+  au BufRead,BufNewFile .{babel,eslint,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
   au FileType javascript iabbrev class== className=
-  " au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+  " au BufWritePre *.js Neoformat
+  au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
   " elm
   au BufWritePost *.elm :ElmMake
-  " au FileType elm set tabstop=4 softtabstop=4 shiftwidth=4
   au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
   au FileType elm nmap <buffer> <Leader>E <Plug>(elm-error-detail)
+  " au FileType elm set tabstop=4 softtabstop=4 shiftwidth=4
 augroup END
 
 augroup ft_scss

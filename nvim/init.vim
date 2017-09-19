@@ -18,9 +18,8 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## Interface
   Plug 'mhartington/oceanic-next'
-  Plug 'ajmwagar/vim-dues'
-  Plug 'trevordmiller/nova-vim'
-  Plug 'arcticicestudio/nord-vim'
+  Plug 'joshdick/onedark.vim'
+  Plug 'rakr/vim-one'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
@@ -32,8 +31,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'isRuslan/vim-es6'
 
+  " Plug 'neoclide/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx'] }
   " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'neoclide/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'chemzqm/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx', 'js', 'jsx'] }
   " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -41,7 +41,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
-  Plug 'moll/vim-node', { 'for': ['javascript'] }
+  " Plug 'moll/vim-node', { 'for': ['javascript'] }
   Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
 
   " ----------------------------------------------------------------------------
@@ -49,6 +49,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
   " Plug 'stephenway/postcss.vim', { 'for': ['css', 'scss', 'sass'] } " postcss syntax
+  Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass'] }
   Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
   " Plug 'rstacruz/vim-hyperstyle', { 'for': ['css', 'scss', 'sass'] } " throwing errors
 
@@ -67,7 +68,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ## Ruby, Rails, et al
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
-  Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install rcodetools' }
+  Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install fastri rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 
@@ -83,13 +84,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
-  Plug 'honza/dockerfile.vim', { 'for': ['dockerfile', 'docker'] }
 
   " ----------------------------------------------------------------------------
   " ## Utilities
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for mocha and ruby
   " Plug 'w0rp/ale'
-  " Plug 'neomake/neomake' " async linting
+  Plug 'neomake/neomake' " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path

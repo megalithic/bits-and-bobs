@@ -1,6 +1,7 @@
 avn
 avn-n
 avn-nvm
+babel-eslint
 bible
 browser-sync
 chai
@@ -8,6 +9,10 @@ create-react-app
 elm
 elm-oracle
 elm-test
+eslint
+eslint-config-prettier
+eslint-plugin-react
+eslint-plugin-prettier
 fast-cli
 grunt-cli
 jest
@@ -16,6 +21,7 @@ netlify-cli
 node-inspector
 now
 preact-cli
+prettier
 serverless
 webpack
 webpack-dev-server

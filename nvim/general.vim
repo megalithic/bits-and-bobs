@@ -10,12 +10,14 @@ if has('nvim')
 
   set background=dark
 
-  colorscheme OceanicNext
-  " colorscheme dues
-
-  " let g:nord_italic_comments = 1
+  let g:one_allow_italics = 1
+  let g:onedark_terminal_italics = 1
   let g:oceanic_next_terminal_italic = 1
   let g:oceanic_next_terminal_bold = 1
+
+  colorscheme OceanicNext
+  " colorscheme onedark
+  " colorscheme one
 
   let os=substitute(system('uname'), '\n', '', '')
   if os == 'Darwin' || os == 'Mac'

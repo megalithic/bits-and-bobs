@@ -20,7 +20,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
-# export PATH="$HOME/.asdf:$PATH"
+export PATH="$HOME/.asdf:$PATH"
 
 # remove duplicates from PATH.
 typeset -U PATH

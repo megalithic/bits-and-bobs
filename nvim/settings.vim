@@ -1,19 +1,5 @@
 " -/ Plugin Settings /----------------------------------------------
 
-" ## handy function to find project root based on given file
-function! s:findProjectRoot(lookFor)
-  let pathMaker='%:p'
-  while(len(expand(pathMaker)) > len(expand(pathMaker.':h')))
-    let pathMaker=pathMaker.':h'
-    let fileToCheck=expand(pathMaker).'/'.a:lookFor
-    if filereadable(fileToCheck)||isdirectory(fileToCheck)
-      return expand(pathMaker)
-    endif
-  endwhile
-  return 0
-endfunction
-
-
 " ----------------------------------------------------------------------------
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
@@ -36,18 +22,6 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 
 
 " ----------------------------------------------------------------------------
-" ## ale
-let g:ale_javascript_eslint_executable = 'standard'
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '-'
-" Don't lint on insert/exit/text
-let g:ale_lint_on_text_changed = 'never'
-" You can disable this option too
-" if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 0
-
-
-" ----------------------------------------------------------------------------
 " ## neomake
 " -- Settings derived from / see this link, also, for custom makers:
 " -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
@@ -55,8 +29,8 @@ let g:neomake_serialize = 1
 let g:neomake_verbose = 1
 let g:neomake_open_list = 0
 let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
-let g:neomake_highlight_lines = 0
-let g:neomake_highlight_columns = 0
+let g:neomake_highlight_lines = 1
+let g:neomake_highlight_columns = 1
 " texthl options: NeomakeErrorMsg, DiffDelete, Todo, NeomakeWarningMsg, Error, ErrorMsg, WarningMsg
 let g:neomake_error_sign = {
             \ 'text': '✖',
@@ -69,78 +43,37 @@ let g:neomake_warning_sign = {
 
 " let g:neomake_scss_enabled_makers = ['scss-lint']
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+let g:neomake_javascript_enabled_makers = ['eslint']
+" au! BufWritePost *.js,*.rb,*.scss,*.css nested Neomake
+call neomake#configure#automake('w')
 
-function s:packageRoot()
-  return <SID>findProjectRoot('package.json')
-endfunction
 
-function! s:getHigherStandardBin()
-  return expand(<SID>packageRoot()).'/node_modules/.bin/higher-standard'
-endfunction
-
-function! s:getEslintrc()
-  return expand(<SID>packageRoot()).'/.eslintrc.json'
-endfunction
-
-" function! s:eslint()
-"   let g:neomake_javascript_enabled_makers = ['eslint']
-"   let g:neomake_javascript_eslint_maker = {
-"         \   'exe': expand(<SID>packageRoot()).'/node_modules/.bin/eslint',
-"         \   'args': ['-f', 'compact'],
-"         \   'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-"         \   '%W%f: line %l\, col %c\, Warning - %m'
-"         \ }
-"   let g:neomake_jsx_enabled_makers = ['eslint']
-"   let g:neomake_jsx_eslint_maker =
-"         \ g:neomake_javascript_eslint_maker
-" endfunction
-
-function! s:standard()
-  let g:neomake_javascript_enabled_makers = ['standard']
-  let g:neomake_javascript_standard_maker = {
-        \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-        \ 'errorformat': '  %f:%l:%c: %m'
-        \ }
-  let g:neomake_jsx_enabled_makers = ['standard']
-  let g:neomake_jsx_standard_maker =
-        \ g:neomake_javascript_standard_maker
-endfunction
-
-" function! s:higherstandard()
-"   let g:neomake_javascript_enabled_makers = ['higherstandard']
-"   let g:neomake_javascript_higherstandard_maker = {
-"         \ 'exe': <SID>getHigherStandardBin(),
-"         \ 'args': ['-f', 'compact', '--parser', 'babel-eslint', '-v'],
-"         \ 'errorformat': '  %f:%l:%c: %m'
-"         \ }
-"   let g:neomake_jsx_enabled_makers = ['higherstandard']
-"   let g:neomake_jsx_higherstandard_maker =
-"         \ g:neomake_javascript_higherstandard_maker
-" endfunction
-
-" if findfile(<SID>getEslintrc(), '.;') ==# ''
-"   " no eslintrc found, so it's either higher-standard or standard
-"   if findfile(<SID>getHigherStandardBin(), '.;') ==# ''
-"     " no higher-standard found, so we use standard
-"     call <SID>standard()
-"   else
-"     " found higher-standard, so we use it
-"     call <SID>higherstandard()
-"   endif
-" else
-"   " found eslintrc, so we use eslint
-"   call <SID>eslint()
-" endif
-
-" do the lintings!
-" au! BufEnter * nested Neomake
-" au! BufWritePost * nested Neomake
+" ----------------------------------------------------------------------------
+" ## ale
+let g:ale_sign_column_always = 0
+let g:ale_linters = {
+\   'javascript': ['eslint', 'flow', 'prettier'],
+\   'html': []
+\}
+let g:ale_fixers = {
+\   'javascript': ['eslint', 'prettier']
+\}
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '-'
+" Don't lint on insert/exit/text
+let g:ale_lint_on_text_changed = 'never'
+" You can disable this option too
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 0
+let g:ale_completion_enabled = 1
 
 
 " ----------------------------------------------------------------------------
 " ## vim-airline
 let g:airline#extensions#neomake#enabled = 1
 let g:airline_theme = 'base16_ocean'
+let g:airline_theme = 'onedark'
 " let g:airline#extensions#tabline#left_alt_sep = '░'
 " let g:airline_left_sep = '█▓░'
 " let g:airline_right_sep = '░▓█'
@@ -151,6 +84,7 @@ let g:airline#extensions#cm_call_signature#enabled = 1
 if exists('g:airline_extensions')
   let g:airline_extensions = add(g:airline_extensions, 'cm_call_signature')
 endif
+let g:airline#extensions#ale#enabled = 1
 
 
 " ----------------------------------------------------------------------------
@@ -286,23 +220,7 @@ endfunction
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split'
 
-if filereadable(expand(<SID>packageRoot()).'/node_modules/babel/register.js')
-  " babel 5
-  let g:test#javascript#mocha#options = "--compilers js:babel/register --colors --full-trace --timeout 15000 -R dot"
-elseif filereadable(expand(<SID>packageRoot()).'/node_modules/babel-register/lib/node.js')
-  " babel 6
-  let g:test#javascript#mocha#options = "--compilers js:babel-register --colors --timeout 15000 --es_staging --opts ".expand(<SID>packageRoot())."/test/mocha.opts"
-else
-  " no babel
-  let g:test#javascript#mocha#options = "--colors --full-trace --timeout 15000 -R dot"
-endif
-
-" to debug nock stuff in tests, add `DEBUG=nock.* ` before the `expand`, below
-if filereadable(expand(<SID>packageRoot()).'/node_modules/.bin/mocha')
-  let test#javascript#mocha#executable = "NODE_ENV=test ".expand(<SID>packageRoot())."/node_modules/.bin/mocha"
-else
-  let test#javascript#mocha#executable = "NODE_ENV=test mocha"
-end
+let test#javascript#jest#options = '-- -u'
 
 let g:test#javascript#mocha#file_pattern = ".test.js"
 

@@ -50,6 +50,9 @@ done
 autoload -U compinit
 compinit
 
+# NOTE: if you have issues with `complete:13: command not found: compdef`,
+# try this https://gist.github.com/rbellamy/4878fa9c5f7c2805384b
+
 unset config_files
 
 # color stuffs
@@ -61,8 +64,8 @@ eval `gdircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
 zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 
 # asdf
-# . $HOME/.asdf/asdf.sh
-# . $HOME/.asdf/completions/asdf.bash
+# source $HOME/.asdf/asdf.sh
+# source $HOME/.asdf/completions/asdf.bash
 
 # # setup chruby
 source /usr/local/share/chruby/chruby.sh
