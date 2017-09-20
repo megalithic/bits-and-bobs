@@ -14,8 +14,8 @@ source /usr/local/share/chruby/auto.sh
 RUBIES=(~/.rubies/*)
 
 # asdf
-# . $HOME/.asdf/asdf.sh
-# . $HOME/.asdf/completions/asdf.bash
+# source $HOME/.asdf/asdf.sh
+# source $HOME/.asdf/completions/asdf.bash
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 

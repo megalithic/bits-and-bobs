@@ -22,7 +22,7 @@
     "no-unused-vars": 0,
     "camelcase": 0,
     "no-underscore-dangle": 0,
-    "semi": 1,
+    "semi": 0,
     "prettier/prettier": "error"
   }
 }

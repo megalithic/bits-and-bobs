@@ -45,19 +45,21 @@ let g:neomake_warning_sign = {
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 let g:neomake_javascript_enabled_makers = ['eslint']
 " au! BufWritePost *.js,*.rb,*.scss,*.css nested Neomake
-call neomake#configure#automake('w')
+" call neomake#configure#automake('w')
 
 
 " ----------------------------------------------------------------------------
 " ## ale
 let g:ale_sign_column_always = 0
 let g:ale_linters = {
-\   'javascript': ['eslint', 'flow', 'prettier'],
-\   'html': []
+\  'javascript': ['eslint', 'flow', 'prettier'],
 \}
 let g:ale_fixers = {
-\   'javascript': ['eslint', 'prettier']
+\  'javascript': ['eslint', 'prettier'],
 \}
+" let g:ale_javascript_prettier_options = '--trailing-comma es5'
+" let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-comma es5'
+let g:ale_fix_on_save = 1
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '-'
 " Don't lint on insert/exit/text
@@ -492,6 +494,21 @@ let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 " ----------------------------------------------------------------------------
 " ## prettier
 let g:prettier#autoformat = 0
+
+" single quotes over double quotes
+let g:prettier#config#single_quote = 'true'
+
+" print spaces between brackets
+let g:prettier#config#bracket_spacing = 'false'
+
+" put > on the last line instead of new line
+let g:prettier#config#jsx_bracket_same_line = 'false'
+
+" none|es5|all
+let g:prettier#config#trailing_comma = 'es5'
+
+" flow|babylon|typescript|postcss
+let g:prettier#config#parser = 'flow'
 
 
 " ----------------------------------------------------------------------------

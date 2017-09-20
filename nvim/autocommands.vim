@@ -108,7 +108,7 @@ augroup ft_javascript
   au BufNewFile,BufRead .tern-project set ft=json
   au FileType javascript iabbrev class== className=
   " au BufWritePre *.js Neoformat
-  au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+  " au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
   " elm
   au BufWritePost *.elm :ElmMake

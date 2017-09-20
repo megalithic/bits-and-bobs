@@ -17,5 +17,6 @@
 # fi
 
 # asdf
+# FIXME: throws nonsensical errors about compdef stuffs
 # source $HOME/.asdf/asdf.sh
 # source $HOME/.asdf/completions/asdf.bash

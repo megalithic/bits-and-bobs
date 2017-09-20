@@ -20,7 +20,14 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
-export PATH="$HOME/.asdf:$PATH"
+
+# Find where asdf should be installed.
+ASDF_DIR="${ASDF_DIR:-$HOME/.asdf}"
+
+# Load asdf, if found.
+if [ -f $ASDF_DIR/asdf.sh ]; then
+    . $ASDF_DIR/asdf.sh
+fi
 
 # remove duplicates from PATH.
 typeset -U PATH
