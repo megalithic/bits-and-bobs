@@ -18,28 +18,24 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## Interface
   Plug 'mhartington/oceanic-next'
-  Plug 'joshdick/onedark.vim'
-  Plug 'rakr/vim-one'
+  Plug 'trevordmiller/nova-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
-  Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'isRuslan/vim-es6'
+  " Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+  " Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+  " Plug 'isRuslan/vim-es6'
 
-  " Plug 'neoclide/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx'] }
-  " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'chemzqm/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx', 'js', 'jsx'] }
-  " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
 
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug '1995eaton/vim-better-javascript-completion', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
+  " Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+  " Plug '1995eaton/vim-better-javascript-completion', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+  " Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+  " Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   " Plug 'moll/vim-node', { 'for': ['javascript'] }
   Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
@@ -48,8 +44,7 @@ call plug#begin('~/.config/nvim/plugged')
   " ## SCSS, CSS, et al
   Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
-  " Plug 'stephenway/postcss.vim', { 'for': ['css', 'scss', 'sass'] } " postcss syntax
-  Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass'] }
+  " Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass', 'scss.css'] }
   Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
   " Plug 'rstacruz/vim-hyperstyle', { 'for': ['css', 'scss', 'sass'] } " throwing errors
 
@@ -58,7 +53,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
   Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'jtratner/vim-flavored-markdown', { 'for': ['markdown'] }
-  " Plug 'davinche/godown-vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }

@@ -99,9 +99,9 @@ augroup END
 " -/ Filetypes/Syntax /-------------------------------------------------------
 augroup ft_javascript
   au!
-  au BufRead *.js set filetype=javascript
-  au BufRead *.es6 set filetype=javascript
-  au BufRead *.jsx set filetype=javascript
+  " au BufRead *.js set filetype=javascript
+  " au BufRead *.es6 set filetype=javascript
+  " au BufRead *.jsx set filetype=javascript
 
   au FileType javascript highlight xmlAttrib cterm=italic
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json

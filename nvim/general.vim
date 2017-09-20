@@ -5,19 +5,18 @@
 syntax enable
 
 if has('nvim')
+  colorscheme OceanicNext
+  colorscheme nova
+
   set termguicolors
   set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
   set background=dark
 
-  let g:one_allow_italics = 1
-  let g:onedark_terminal_italics = 1
-  let g:oceanic_next_terminal_italic = 1
-  let g:oceanic_next_terminal_bold = 1
-
-  colorscheme OceanicNext
-  " colorscheme onedark
-  " colorscheme one
+  " let g:one_allow_italics = 1
+  " let g:onedark_terminal_italics = 1
+  " let g:oceanic_next_terminal_italic = 1
+  " let g:oceanic_next_terminal_bold = 1
 
   let os=substitute(system('uname'), '\n', '', '')
   if os == 'Darwin' || os == 'Mac'

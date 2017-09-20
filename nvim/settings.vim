@@ -72,8 +72,9 @@ let g:ale_completion_enabled = 1
 " ----------------------------------------------------------------------------
 " ## vim-airline
 let g:airline#extensions#neomake#enabled = 1
-let g:airline_theme = 'base16_ocean'
-let g:airline_theme = 'onedark'
+" let g:airline_theme = 'base16_ocean'
+" let g:airline_theme = 'onedark'
+let g:airline_theme = 'nova'
 " let g:airline#extensions#tabline#left_alt_sep = '░'
 " let g:airline_left_sep = '█▓░'
 " let g:airline_right_sep = '░▓█'
@@ -220,7 +221,7 @@ endfunction
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split'
 
-let test#javascript#jest#options = '-- -u'
+let test#javascript#jest#options = '-u -ci --colors --verbose'
 
 let g:test#javascript#mocha#file_pattern = ".test.js"
 

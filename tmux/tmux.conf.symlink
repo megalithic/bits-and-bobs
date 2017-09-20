@@ -190,6 +190,21 @@ set -g status-right-length 120
 set -g status-right "#(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
 # set -g status-right "#(~/.dotfiles/bin/tmux-spotify) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
 
+
+# Nova Colorscheme stuffs
+# ---------------------------------------------------------------------------
+set -g default-terminal "xterm-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"
+set -g pane-border-style 'bg=black,fg=#1E272C'
+set -g pane-active-border-style 'bg=black,fg=#1E272C'
+set -g status-style 'bg=#1E272C,fg=#6A7D89'
+set-window-option -g window-status-current-bg '#1E272C'
+set-window-option -g window-status-current-fg cyan
+set -wg mode-style 'bg=cyan,fg=black'
+set -g message-style 'bg=black,fg=cyan'
+set -g clock-mode-colour cyan
+
+
 # TMUX PLUGIN MANAGER
 # ===========================================================================
 
