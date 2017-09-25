@@ -41,7 +41,7 @@ augroup vimrcEx
   " ## Toggle colorcolumn when in insert mode for visual 80char indicator
   au InsertEnter * set colorcolumn=80
   au InsertLeave * set colorcolumn=""
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
+  " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
 
   " ----------------------------------------------------------------------------
   " ## Manage GIT related scenarios
@@ -108,7 +108,7 @@ augroup ft_javascript
   au BufNewFile,BufRead .tern-project set ft=json
   au FileType javascript iabbrev class== className=
   " au BufWritePre *.js Neoformat
-  " au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+  au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
   " elm
   au BufWritePost *.elm :ElmMake

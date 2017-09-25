@@ -1,28 +1,35 @@
 {
   "extends": [
-    "eslint:recommended",
-    "prettier"
+    "eslint:recommended"
   ],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
+    "es6": true,
+    "jest": true,
+    "jquery": true,
+    "commonjs": true,
+    "mocha": true,
     "node": true
+  },
+  "globals": {
+    "mount": true,
+    "shallow": true,
+    "render": true
   },
   "settings": {
     "ecmascript": 6,
     "jsx": true
   },
   "plugins": [
-    "prettier",
     "react"
   ],
   "rules": {
     "strict": 0,
-    "quotes": 0,
+    "quotes": [ "error", "single" ],
     "no-unused-vars": 0,
     "camelcase": 0,
     "no-underscore-dangle": 0,
     "semi": 0,
-    "prettier/prettier": "error"
   }
 }

@@ -141,13 +141,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
-  " Plug 'Shougo/neosnippet.vim'
-  " Plug 'Shougo/neosnippet-snippets'
-  Plug 'SirVer/ultisnips'
-  " Plug 'honza/vim-snippets'
-  " Plug 'epilande/vim-es2015-snippets'
-  " Plug 'epilande/vim-react-snippets'
-  " Plug 'isRuslan/vim-es6'
+  " Plug 'KeyboardFire/vim-minisnip'
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al

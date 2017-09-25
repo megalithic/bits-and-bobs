@@ -22,44 +22,17 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 
 
 " ----------------------------------------------------------------------------
-" ## neomake
-" -- Settings derived from / see this link, also, for custom makers:
-" -- https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/neomake.vim
-let g:neomake_serialize = 1
-let g:neomake_verbose = 1
-let g:neomake_open_list = 0
-let g:neomake_logfile='/tmp/neomake_error.log' " display errors / write in logs
-let g:neomake_highlight_lines = 1
-let g:neomake_highlight_columns = 1
-" texthl options: NeomakeErrorMsg, DiffDelete, Todo, NeomakeWarningMsg, Error, ErrorMsg, WarningMsg
-let g:neomake_error_sign = {
-            \ 'text': '✖',
-            \ 'texthl': 'ErrorMsg'
-            \ }
-let g:neomake_warning_sign = {
-            \ 'text': '⚠',
-            \ 'texthl': 'WarningMsg'
-            \ }
-
-" let g:neomake_scss_enabled_makers = ['scss-lint']
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
-let g:neomake_javascript_enabled_makers = ['eslint']
-" au! BufWritePost *.js,*.rb,*.scss,*.css nested Neomake
-" call neomake#configure#automake('w')
-
-
-" ----------------------------------------------------------------------------
 " ## ale
-let g:ale_sign_column_always = 0
 let g:ale_linters = {
-\  'javascript': ['eslint', 'flow', 'prettier'],
+\  'javascript': ['eslint', 'flow'],
+\  'html': []
 \}
 let g:ale_fixers = {
-\  'javascript': ['eslint', 'prettier'],
+\  'javascript': ['eslint'],
 \}
 " let g:ale_javascript_prettier_options = '--trailing-comma es5'
-" let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-comma es5'
-let g:ale_fix_on_save = 1
+" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+let g:ale_fix_on_save = 0
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '-'
 " Don't lint on insert/exit/text
@@ -67,7 +40,7 @@ let g:ale_lint_on_text_changed = 'never'
 " You can disable this option too
 " if you don't want linters to run on opening a file
 let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 0
+let g:ale_lint_on_save = 1
 let g:ale_completion_enabled = 1
 
 
@@ -226,6 +199,8 @@ let g:test#strategy = 'terminal_split'
 let test#javascript#jest#options = '-u -ci --colors --verbose'
 
 let g:test#javascript#mocha#file_pattern = ".test.js"
+" let g:test#javascript#mocha#options = '--compilers js:babel-register --colors --require ignore-styles --require app/javascript/scripts/test-setup.js '
+let test#javascript#mocha#executable = 'yarn test'
 
 let test#ruby#rspec#options = '-f d'
 let test#ruby#bundle_exec = 1
@@ -465,30 +440,9 @@ if !exists('g:esearch')
 endif
 
 " ----------------------------------------------------------------------------
-" ## ultisnips
-let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips', 'replisnips']
-let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
-
-" better key bindings for UltiSnipsExpandTrigger
-" Use tab to expand snippet and move to next target. Shift tab goes back.
-" <C-tab> lists available snippets for the file
-
-" Disable built-in <C-x><C-k> to be able to go backward
-" inoremap <C-x><C-k> <NOP>
-" let g:UltiSnipsExpandTrigger='<C-j>'
-" let g:UltiSnipsListSnippets='<C-s>'
-" let g:UltiSnipsJumpForwardTrigger='<C-j>'
-" let g:UltiSnipsJumpBackwardTrigger='<C-k>'
-
-" ----------------------------------------------------------------------------
-" ## neosnippet
-" Set snippet directory
-" let g:neosnippet#snippets_directory='~/.config/nvim/replisnips/, ~/.config/nvim/plugged/vim-snippets/snippets'
-
-" Enable snipMate compatibility feature.
-" let g:neosnippet#enable_snipmate_compatibility = 1
-" let g:neosnippet#expand_word_boundary = 1
+" ## vim-minisnip
+let g:minisnip_dir = '~/.dotfiles/config/nvim/snippets'
+set dictionary=~/.dotfiles/config/nvim/snippets/index.txt
 
 
 " ----------------------------------------------------------------------------

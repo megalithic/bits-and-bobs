@@ -9,14 +9,15 @@ fi
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 # setup chruby
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-RUBIES=(~/.rubies/*)
+# source /usr/local/share/chruby/chruby.sh
+# source /usr/local/share/chruby/auto.sh
+# RUBIES=(~/.rubies/*)
 
 # asdf
 # source $HOME/.asdf/asdf.sh
 # source $HOME/.asdf/completions/asdf.bash
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+# [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
 source ~/.dotfiles/zsh/colors.zsh

@@ -12,6 +12,8 @@ function! s:after_colorscheme()
   hi SpellRare cterm=underline
 
   hi link ALEWarningSign Question
+  hi ALEErrorSign guifg=#DF8C8C
+  hi ALEWarningSign guifg=#F2C38F
 
   " Fix splits
   hi VertSplit ctermbg=NONE guibg=NONE
@@ -34,6 +36,7 @@ function! s:after_colorscheme()
   " hi LineNr guibg=bg guifg=#937f6e gui=NONE
   " hi CursorLineNr ctermbg=bg ctermfg=223 cterm=NONE guibg=bg guifg=#db9c5e gui=bold
   " hi qfLineNr ctermbg=bg ctermfg=95 cterm=NONE guibg=bg guifg=#875f5f gui=NONE
+
   hi TermCursor ctermfg=red
 
   " ref: https://github.com/aslijiasheng/jacksonvimrc/blob/0a3421a10282bafffa1c660c40cc61b1a44671a1/vimrc/jackson/plugin.vim#L846
