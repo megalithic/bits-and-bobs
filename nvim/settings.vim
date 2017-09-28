@@ -199,8 +199,8 @@ let g:test#strategy = 'terminal_split'
 let test#javascript#jest#options = '-u -ci --colors --verbose'
 
 let g:test#javascript#mocha#file_pattern = ".test.js"
-" let g:test#javascript#mocha#options = '--compilers js:babel-register --colors --require ignore-styles --require app/javascript/scripts/test-setup.js '
-let test#javascript#mocha#executable = 'yarn test'
+"  `-A` turns on async mode for tests
+let g:test#javascript#mocha#options = '-A --compilers js:babel-register --require ignore-styles --require app/javascript/scripts/test-setup.js'
 
 let test#ruby#rspec#options = '-f d'
 let test#ruby#bundle_exec = 1

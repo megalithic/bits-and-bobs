@@ -2,7 +2,7 @@
 " Language: Javascript
 " Maintainer: Chris Paul ( https://github.com/bounceme )
 " URL: https://github.com/pangloss/vim-javascript
-" Last Change: August 30, 2017
+" Last Change: September 18, 2017
 
 " Only load this indent file when no other was loaded.
 if exists('b:did_indent')
@@ -113,7 +113,6 @@ function s:SkipFunc()
     let s:check_in = 0
   elseif getline('.') =~ '\%<'.col('.').'c\/.\{-}\/\|\%>'.col('.').'c[''"]\|\\$'
     if eval(s:skip_expr)
-      let s:looksyn = a:firstline
       return 1
     endif
   elseif search('\m`\|\${\|\*\/','nW'.s:z,s:looksyn) && eval(s:skip_expr)
@@ -259,9 +258,9 @@ function s:DoWhile()
   endif
 endfunction
 
-" returns braceless levels started by 'i' and above lines * &sw. 'num' is the
-" lineNr which encloses the entire context, 'cont' if whether line 'i' + 1 is
-" a continued expression, which could have started in a braceless context
+" returns total offset from braceless contexts. 'num' is the lineNr which
+" encloses the entire context, 'cont' if whether a:firstline is a continued
+" expression, which could have started in a braceless context
 function s:IsContOne(num,cont)
   let [l:num, b_l] = [a:num + !a:num, 0]
   let pind = a:num ? indent(a:num) + s:sw() : 0
@@ -282,14 +281,9 @@ function s:IsContOne(num,cont)
   return b_l
 endfunction
 
-function s:Class()
-  return (s:Token() ==# 'class' || s:PreviousToken() =~# '^class$\|^extends$') &&
-        \ s:PreviousToken() != '.'
-endfunction
-
 function s:IsSwitch()
-  return s:PreviousToken() !~ '[.*]' &&
-        \ (!s:GetPair('{','}','cbW',s:skip_expr) || s:IsBlock() && !s:Class())
+  call call('cursor',b:js_cache[1:])
+  return search('\m\C\%#.\_s*\%(\%(\/\/.*\_$\|\/\*\_.\{-}\*\/\)\@>\_s*\)*\%(case\|default\)\>','nWc'.s:z)
 endfunction
 
 " https://github.com/sweet-js/sweet.js/wiki/design#give-lookbehind-to-the-reader
@@ -406,8 +400,11 @@ function GetJavascriptIndent()
           let is_op = s:sw()
         endif
       elseif num && sol =~# '^\%(in\%(stanceof\)\=\|\*\)$'
-        call call('cursor',b:js_cache[1:])
-        if s:PreviousToken() =~ '\k' && s:Class()
+        call cursor(l:lnum, len(pline))
+        if s:LookingAt() == '}' && s:GetPair('{','}','bW',s:skip_expr) &&
+              \ s:PreviousToken() == ')' && s:GetPair('(',')','bW',s:skip_expr) &&
+              \ (s:PreviousToken() == ']' || s:Token() =~ '\k' &&
+              \ s:{s:PreviousToken() == '*' ? 'Previous' : ''}Token() !=# 'function')
           return num_ind + s:sw()
         endif
         let is_op = s:sw()
