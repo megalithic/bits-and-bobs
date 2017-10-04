@@ -21,7 +21,13 @@ function! s:after_colorscheme()
   " Make conceal look better.
   hi Conceal cterm=bold ctermbg=NONE ctermfg=67
 
+  hi Comment cterm=italic
+  hi htmlArg cterm=italic
+  hi xmlAttrib cterm=italic
+  hi Type cterm=italic
+  hi Normal ctermbg=none
   hi Comment cterm=italic term=italic gui=italic
+
   hi Search gui=underline term=underline cterm=underline ctermfg=232 ctermbg=230 guibg=#afaf87 guifg=#333333
   hi IncSearchCursor ctermfg=232 ctermbg=214 guifg=232 guibg=214
   hi Errors ctermbg=red guibg=red ctermfg=white guifg=white term=bold gui=bold

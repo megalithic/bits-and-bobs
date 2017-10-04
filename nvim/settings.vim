@@ -190,7 +190,7 @@ let g:neoterm_close_when_tests_succeed = 1
 " ----------------------------------------------------------------------------
 " ## vim-test
 function! SplitStrategy(cmd)
-  belowright new | call termopen(a:cmd) | startinsert
+  vert new | call termopen(a:cmd) | startinsert
 endfunction
 
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
