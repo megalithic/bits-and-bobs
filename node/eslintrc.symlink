@@ -15,7 +15,8 @@
   "globals": {
     "mount": true,
     "shallow": true,
-    "render": true
+    "render": true,
+    "sinon": true
   },
   "settings": {
     "ecmascript": 6,
