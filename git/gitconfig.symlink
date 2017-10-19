@@ -174,8 +174,9 @@
 	autosquash = true
 
 [rerere]
- enabled = true
- autoupdate = true
+  enabled = true
+  enabled = 1
+  autoupdate = true
 
 [pager]
   #diff = diff-so-fancy | less --tabs=4 -RFX
