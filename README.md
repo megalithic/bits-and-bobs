@@ -1,5 +1,3 @@
-![megadots][]
-
 ## Bits and bobs
 
 I started off with a modified version of my own dotfiles, based on
@@ -8,8 +6,6 @@ more akin to what [Pengwynn][pengwynn/dotfiles] and
 [Yonk][adamyonk/dotfiles] have built/modified.
 
 Check theirs out, or many others at [octodots][dotfiles].
-
-![screencap][]
 
 ## Get your own ##
 
@@ -72,7 +68,6 @@ The file hierarchy:
   last so that they get loaded after we set up zsh autocomplete functions.
 
 ## .localrc and sensitive data
-![Keep it secret, keep it safe](https://dl.dropboxusercontent.com/u/81794/secret_safe.jpg)
 
 Use `~/.localrc` as your location for sensitive information. Optionally, you
 can let `setup/bootstrap` handle the cloning of your private repo to
@@ -120,7 +115,3 @@ questions about my specific setup here, feel free to hit me up at @[megalithic].
 [holman/dotfiles]: https://github.com/holman/dotfiles
 [pengwynn/dotfiles]: https://github.com/pengwynn/dotfiles
 [adamyonk/dotfiles]: https://github.com/adamyonk/dotfiles
-[megadots]:
-https://dl.dropboxusercontent.com/u/81794/megadotfiles.png
-[screencap]:
-https://dl.dropboxusercontent.com/u/81794/screencap.png
