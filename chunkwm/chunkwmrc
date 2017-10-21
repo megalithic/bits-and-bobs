@@ -1,0 +1,113 @@
+#!/bin/bash
+
+chunkc core::plugin_dir ~/.chunkwm_plugins
+
+chunkc core::hotload 1
+
+# Tiling {{
+chunkc set global_desktop_mode           bsp
+
+chunkc set bsp_spawn_left                0
+chunkc set bsp_optimal_ratio             1.618
+chunkc set bsp_split_mode                optimal
+chunkc set bsp_split_ratio               0.5
+# }}
+
+# Padding {{
+chunkc set global_desktop_offset_top     20
+chunkc set global_desktop_offset_bottom  20
+chunkc set global_desktop_offset_left    20
+chunkc set global_desktop_offset_right   20
+chunkc set global_desktop_offset_gap     10
+
+chunkc set desktop_padding_step_size     10.0
+chunkc set desktop_gap_step_size         5.0
+# }}
+
+# Non-global settings {{
+# 1   web
+# 2   code
+# 3   term
+# 4-7 other things
+# 8   float
+chunkc set 1_desktop_mode                monocle
+chunkc set 1_desktop_offset_top          0
+chunkc set 1_desktop_offset_bottom       0
+chunkc set 1_desktop_offset_left         0
+chunkc set 1_desktop_offset_right        0
+
+chunkc set 2_desktop_mode                bsp
+chunkc set 2_desktop_offset_top          0
+chunkc set 2_desktop_offset_bottom       0
+chunkc set 2_desktop_offset_left         0
+chunkc set 2_desktop_offset_right        0
+
+chunkc set 3_desktop_mode                bsp
+chunkc set 3_desktop_offset_top          50
+chunkc set 3_desktop_offset_bottom       50
+chunkc set 3_desktop_offset_left         50
+chunkc set 3_desktop_offset_right        50
+chunkc set 8_desktop_mode                float
+# }}
+
+# Interaction settings {{
+chunkc set window_focus_cycle            monitor
+chunkc set focus_follows_mouse           1
+chunkc set mouse_follows_focus           1
+chunkc set window_float_next             0
+chunkc set window_float_center           1
+chunkc set window_region_locked          1
+
+chunkc set mouse-drag                    1
+chunkc set mouse-drag mod                fn
+
+chunkc set window_float_topmost          1
+# }}
+
+# Border settings {{
+chunkc set focused_border_width          6
+chunkc set focused_border_radius         0
+# chunkc set focused_border_color          0xFF81A1C1
+chunkc set focused_border_color          0xFFE6E1CF
+
+chunkc set focused_border_skip_floating  1
+
+chunkc set preselect_border_width        8
+chunkc set preselect_border_radius       0
+chunkc set preselect_border_color        0x7F81A1C1
+# }}
+
+# Blur {{
+chunkc set wallpaper                     ~/Pictures/A3MuFbJ.jpg
+chunkc set wallpaper_mode                fill
+chunkc set wallpaper_blur                5.0
+chunkc set wallpaper_method              pixelate
+# chunkc set wallpaper_tmp_path            /tmp/
+# }}
+
+# Plugins {{
+chunkc core::load tiling.so
+chunkc core::load ffm.so
+chunkc core::load border.so
+chunkc core::load blur.so
+# chunkc core::load purify.so
+# chunkc core::load template.so
+# }}
+
+# Program-specific settings {{
+chunkc tiling::rule --owner kitty --state tile
+chunkc tiling::rule --owner \"System Preferences\" --state tile
+chunkc tiling::rule --owner Finder --name Copy --state float
+chunkc tiling::rule --owner macfeh --state float
+chunkc tiling::rule --owner Kap --state float
+chunkc tiling::rule --owner Emacs --state tile
+chunkc tiling::rule --owner Firefox --role AXWindow
+chunkc tiling::rule --owner FirefoxDeveloperEdition --role AXWindow
+chunkc tiling::rule --owner \"Code - Insiders\" --state tile
+chunkc tiling::rule --owner \"Visual Studio Community\" --state tile
+chunkc tiling::rule --owner Spotify --desktop 7
+
+chunkc border::rule --owner Spotify --color 0xff1db954
+chunkc border::rule --owner Firefox --border 0
+chunkc border::rule --owner Skim --border 0
+# }}
