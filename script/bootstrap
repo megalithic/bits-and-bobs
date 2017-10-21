@@ -1,11 +1,36 @@
 # Run all installers and symlink dotfiles
 
+if [[ "$(uname -s)" != "Darwin" ]]
+then
+  echo "this installer only runs on macOS; aborting."
+  exit 1
+fi
+
+if [[ "$(which git)" == "" ]]
+then
+  echo "this installer need git"
+  echo "do you want to install xcode ?"
+  read answer
+  if [[ $answer != [yY] ]]
+  then
+    exit 0
+  fi
+
+  echo "installing xcode"
+  xcode-select --install
+  exit 0
+fi
+
 set -e
 
-Echo "Bootstrapping"
+Echo "::beginning the dotfiling.."
 
-Echo "Updating submodules"
-git submodule init && git submodule update
+# Echo "updating submodules"
+# git submodule init && git submodule update
+
+cd
+git clone https://github.com/megalithic/bits-and-bobs .dotfiles
+cd .dotfiles
 
 script/homebrew
 script/platform

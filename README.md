@@ -22,9 +22,10 @@ out there.
 
 If you want to kick the tires, then simply:
 
-- `git clone https://github.com/megalithic/bits-and-bobs.git ~/.dotfiles`
-- `cd ~/.dotfiles`
-- `script/bootstrap`
+```sh
+curl -fsSL \
+  https://raw.githubusercontent.com/megalithic/bits-and-bobs/master/script/bootstrap | sh
+```
 
 The install script will symlink the appropriate files in `.dotfiles` to your
 home directory. Everything is configured and tweaked within `~/.dotfiles`,
