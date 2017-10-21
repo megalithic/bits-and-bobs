@@ -14,7 +14,7 @@ chunkc set bsp_split_ratio               0.5
 # }}
 
 # Padding {{
-chunkc set global_desktop_offset_top     20
+chunkc set global_desktop_offset_top     50
 chunkc set global_desktop_offset_bottom  20
 chunkc set global_desktop_offset_left    20
 chunkc set global_desktop_offset_right   20
