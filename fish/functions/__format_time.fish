@@ -1,0 +1,1 @@
+/Users/replicant/.config/fisherman/pure/__format_time.fish

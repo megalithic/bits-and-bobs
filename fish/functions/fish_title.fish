@@ -1,0 +1,1 @@
+/Users/replicant/.config/fisherman/pure/fish_title.fish
