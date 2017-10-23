@@ -71,10 +71,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-rhubarb' " git :Gbrowse support
   Plug 'tpope/vim-fugitive' " git tools integrated into vim
-  Plug 'AndrewRadev/linediff.vim'
-  Plug 'chrisbra/vim-diff-enhanced'
-  Plug 'idanarye/vim-merginal'
-  Plug 'christoomey/vim-conflicted'
+  " Plug 'AndrewRadev/linediff.vim'
+  " Plug 'chrisbra/vim-diff-enhanced'
+  " Plug 'idanarye/vim-merginal'
+  " Plug 'christoomey/vim-conflicted'
   Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
@@ -115,21 +115,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'christoomey/vim-tmux-runner'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions, for quick horizontal movements
   Plug 'EinfachToll/DidYouMean'
-  Plug 'itchyny/vim-cursorword' " underlines all occurences the current word
+  " Plug 'itchyny/vim-cursorword' " underlines all occurences the current word / might be slowing scrolling down
   " Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'inside/vim-search-pulse'
   Plug 'Konfekt/FastFold'
   " disabled vim-esearch for now.. useful, but lots of cognitive load
   Plug 'eugen0329/vim-esearch' " project wide search and replace
-
-  " Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm i -g tern' }
-  " Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
-  " Plug 'fishbullet/deoplete-ruby', { 'for': ['ruby'] }
-  " Plug 'pbogut/deoplete-elm', { 'for': ['elm'] }
-  " Plug 'ujihisa/neco-look', { 'for': ['html', 'text', 'markdown'] }
-  " Plug 'Shougo/echodoc.vim'
 
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'roxma/nvim-completion-manager'
