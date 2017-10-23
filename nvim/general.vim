@@ -69,9 +69,10 @@ set lazyredraw "may be the cause of lots of issues
 set ttyfast
 
 " NOTE: also handled in autocommands.vim
-" set cul " turn on cursorline highlighting -- needed for linenumber HL too
+set cul " turn on cursorline highlighting -- needed for linenumber HL too
 
 set listchars=tab:▸\ ,eol:¬,extends:›,precedes:‹,trail:·,nbsp:⚋
+set fillchars=vert:│
 set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
 set noerrorbells
@@ -98,7 +99,7 @@ set sessionoptions-=options " Do not save settings and mappings to sessions
 " ## Folding
 if has('folding')
   if has('windows')
-    let &fillchars='vert: '           " less cluttered vertical window separators
+    " let &fillchars='vert: '           " less cluttered vertical window separators
   endif
   set foldmethod=indent               " not as cool as syntax, but faster
   set foldlevelstart=99               " start unfolded
