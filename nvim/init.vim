@@ -78,6 +78,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
   Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
+  Plug 'vim-scripts/fish.vim',   { 'for': 'fish' }
 
   " ----------------------------------------------------------------------------
   " ## Utilities

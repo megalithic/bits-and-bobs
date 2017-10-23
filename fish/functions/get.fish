@@ -1,0 +1,1 @@
+/Users/replicant/.config/fisherman/get/functions/get.fish

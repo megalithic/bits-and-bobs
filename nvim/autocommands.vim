@@ -177,6 +177,7 @@ augroup ft_misc
   au FileType javascript,javascript.jsx,lisp,clojure,scheme,sass,scss,scss.css RainbowParentheses
 
   au BufNewFile,BufRead *.conf set ft=conf
+  au BufNewFile,BufRead *.fish set ft=fish
 
   au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 augroup END

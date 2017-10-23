@@ -1,3 +1,10 @@
+fisherman/await
+fisherman/fnm
+fisherman/fzf
+fisherman/get
+fisherman/get_file_age
 fisherman/getopts
+fisherman/last_job_id
+fisherman/menu
 rafaelrinaldi/pure
 fisherman/z

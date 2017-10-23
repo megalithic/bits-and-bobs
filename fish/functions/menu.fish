@@ -1,0 +1,1 @@
+/Users/replicant/.config/fisherman/menu/menu.fish
