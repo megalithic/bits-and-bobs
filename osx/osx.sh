@@ -1,3 +1,8 @@
+# ------------------
+# great reference:
+# https://github.com/herrbischoff/awesome-osx-command-line
+# ------------------
+
 COMPUTER_NAME := 'replibook'
 
 # Allow apps downloaded from "Anywhere"
@@ -53,4 +58,26 @@ defaults write com.apple.iCal n\ days\ of\ week 14
 # (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
 defaults write NSGlobalDomain KeyRepeat -int 0
+
+# Disable auto-correction
+defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# scrollbars on always!
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+# expand save/print dialogs by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# remove all default icons on the dock (for when first setting up)
+defaults delete com.apple.dock persistent-apps
+defaults delete com.apple.dock persistent-others
+killall Dock
+
+# unhide Library folder!
+chflags nohidden ~/Library/
