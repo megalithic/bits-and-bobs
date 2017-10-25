@@ -19,22 +19,15 @@ call plug#begin('~/.config/nvim/plugged')
   " ## Interface
   Plug 'mhartington/oceanic-next'
   Plug 'trevordmiller/nova-vim'
+
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
 
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
-  " Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
-  " Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
-  " Plug 'isRuslan/vim-es6'
-
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
-
-  " Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
-  " Plug '1995eaton/vim-better-javascript-completion', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
-  " Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
   " Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   " Plug 'moll/vim-node', { 'for': ['javascript'] }
@@ -46,7 +39,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
   " Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass', 'scss.css'] }
   Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
-  " Plug 'rstacruz/vim-hyperstyle', { 'for': ['css', 'scss', 'sass'] } " throwing errors
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al

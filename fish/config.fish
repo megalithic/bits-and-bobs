@@ -1,4 +1,5 @@
 set -x SHELL /usr/local/bin/fish
+set -U FZF_TMUX 1
 
 source /usr/local/share/chruby/chruby.fish
 source /usr/local/share/chruby/auto.fish

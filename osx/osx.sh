@@ -36,16 +36,19 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://$(HOME)/Down
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
-# Trackpad: enable tap to click for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad \
-  Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+# Trackpad: enable tap to click for this user and for the login screen (1 enabled, 0 disabled)
+defaults write com.apple.AppleMultitouchTrackpad Clicking -int 0
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 0
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 0
+# PRE-SIERRA:
+# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+# defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+# defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
 # Disable "Natural" scroll
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 # Enable move with 3 fingers
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad \
-  TrackpadThreeFingerDrag -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
 
 # dock size & autohidden dock
 defaults write com.apple.dock tilesize -int 128
