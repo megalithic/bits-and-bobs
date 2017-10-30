@@ -81,7 +81,7 @@ brew 'postgresql'
 brew 'python'
 brew 'python3'
 # http://stackoverflow.com/a/40910219
-brew 'qt5', args: ['with-qtwebkit']
+brew 'qt@5.5'
 # brew link --force qt5
 brew 'rabbitmq'
 brew 'readline'

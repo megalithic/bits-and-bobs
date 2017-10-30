@@ -296,14 +296,12 @@ endif
 
 " ----------------------------------------------------------------------------
 " ## nvim-completion-manager
-" " for python completions
-" let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
-" " language specific completions on markdown file
-" let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
 
-" " utils, optional
-" let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
-" let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Use location list instead of quickfix
+let g:LanguageClient_diagnosticsList = 'location'
 
 
 " ----------------------------------------------------------------------------

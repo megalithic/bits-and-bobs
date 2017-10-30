@@ -6,6 +6,9 @@
 "   Brought to you by: Seth Messer / @megalithic
 "
 " =============================================================================
+" vim:fdm=marker et fdl=2 ft=vim sts=2 sw=2 ts=2
+
+" Automatically download vim-plug, if not present
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -121,12 +124,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'roxma/nvim-cm-tern',  {'do': 'npm install', 'for': ['javascript']}
   Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
   Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
-  " Plug 'mileszs/ack.vim'
-  " Plug 'rking/ag.vim'
+
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-
-  " Plug 'KeyboardFire/vim-minisnip'
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
