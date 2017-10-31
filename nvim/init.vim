@@ -113,6 +113,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'EinfachToll/DidYouMean'
   " Plug 'itchyny/vim-cursorword' " underlines all occurences the current word / might be slowing scrolling down
   " Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
+  Plug 'haya14busa/is.vim'
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'inside/vim-search-pulse'
   Plug 'Konfekt/FastFold'
