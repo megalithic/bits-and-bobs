@@ -15,6 +15,7 @@ eslint-plugin-react
 eslint-plugin-prettier
 fast-cli
 grunt-cli
+javascript-typescript-langserver
 jest
 mocha
 netlify-cli
@@ -23,6 +24,8 @@ now
 preact-cli
 prettier
 serverless
+stylelint
+stylelint-config-standard
 webpack
 webpack-dev-server
 vscode-css-languageserver-bin
