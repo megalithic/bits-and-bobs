@@ -25,5 +25,8 @@ prettier
 serverless
 webpack
 webpack-dev-server
+vscode-css-languageserver-bin
+vscode-html-languageserver-bin
+vscode-json-languageserver-bin
 yo
 yarn-completions
