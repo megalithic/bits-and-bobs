@@ -242,5 +242,7 @@ if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
   let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
   let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
   let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
 endif

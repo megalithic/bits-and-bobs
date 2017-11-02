@@ -125,6 +125,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'roxma/nvim-cm-tern',  {'do': 'npm install', 'for': ['javascript']}
   Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
   Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
+  Plug 'Shougo/echodoc.vim'
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
