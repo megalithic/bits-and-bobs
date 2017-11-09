@@ -66,7 +66,8 @@ bind-key -T copy-mode-vi C-l select-pane -R
 set -g history-limit 25000
 set -g set-titles on
 
-set -g default-terminal "tmux-256color"
+set -g default-terminal "screen-256color"
+# set -g default-terminal "tmux-256color"
 set -g default-shell "$SHELL"
 
 # fix for NVIM_TUI_ENABLE_CURSOR_SHAPE in tmux
@@ -193,8 +194,8 @@ set -g status-right "#(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=g
 
 # Nova Colorscheme stuffs
 # ---------------------------------------------------------------------------
-set -g default-terminal "xterm-256color"
-set -ga terminal-overrides ",xterm-256color:Tc"
+# set -g default-terminal "xterm-256color"
+# set -ga terminal-overrides ",xterm-256color:Tc"
 set -g pane-border-style 'bg=black,fg=#1E272C'
 set -g pane-active-border-style 'bg=black,fg=#1E272C'
 set -g status-style 'bg=#1E272C,fg=#6A7D89'

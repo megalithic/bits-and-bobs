@@ -22,6 +22,9 @@ call plug#begin('~/.config/nvim/plugged')
   " ## Interface
   Plug 'mhartington/oceanic-next'
   Plug 'trevordmiller/nova-vim'
+  Plug 'ayu-theme/ayu-vim'
+  Plug 'nanotech/jellybeans.vim'
+  Plug 'jacoborus/tender.vim'
 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -98,6 +101,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'sbdchd/neoformat'
+  Plug 'hkupty/iron.nvim' " ctr and cp to send to repl or call previous
   Plug 'prettier/vim-prettier', {
         \ 'do': 'yarn install',
         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }

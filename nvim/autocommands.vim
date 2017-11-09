@@ -206,7 +206,7 @@ augroup END
 augroup automake
   autocmd!
   " JavaScript and Typescript lint via language servers
-  autocmd BufWritePost *.sh,*.less,*.css,*.vim,*.vimrc,*.txt,*.md make!
+  " autocmd BufWritePost *.sh,*.scss,*.less,*.css,*.vim,*.vimrc,*.txt,*.md make!
 augroup END
 
 augroup LanguageClientConfig

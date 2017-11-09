@@ -46,6 +46,7 @@ let g:ale_completion_enabled = 1
 
 " ----------------------------------------------------------------------------
 " ## vim-airline
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#neomake#enabled = 1
 " let g:airline_theme = 'base16_ocean'
 " let g:airline_theme = 'onedark'

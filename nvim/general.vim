@@ -5,18 +5,27 @@
 syntax enable
 
 if has('nvim')
-  colorscheme OceanicNext
-  colorscheme nova
+  " let ayucolor="light"  " for light version of theme
+  " let ayucolor="dark"   " for dark version of theme
+  " let ayucolor="mirage" " for mirage version of theme
+  " let g:jellybeans_overrides = {
+  "       \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+  "       \}
+  " let g:oceanic_next_terminal_italic = 1
+  " let g:oceanic_next_terminal_bold = 1
+
 
   set termguicolors
   set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
-  set background=dark
+  " colorscheme ayu
+  " colorscheme jellybeans
 
-  " let g:one_allow_italics = 1
-  " let g:onedark_terminal_italics = 1
-  " let g:oceanic_next_terminal_italic = 1
-  " let g:oceanic_next_terminal_bold = 1
+  " colorscheme OceanicNext
+  colorscheme nova
+  " colorscheme tender
+
+  set background=dark
 
   let os=substitute(system('uname'), '\n', '', '')
   if os == 'Darwin' || os == 'Mac'
@@ -30,7 +39,7 @@ if has('nvim')
   let g:python_host_skip_check = 1
   let g:python3_host_skip_check = 1
 else
-  colorscheme base16-ocean
+  colorscheme nova
 
   if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -194,7 +203,10 @@ set fileformats=unix,mac,dos
 set fileformat=unix
 setglobal fenc=utf-8    " Default file encoding for new files
 set enc=utf-8           " Internal encoding used by buffers, help and commands
+set enc=utf8           " Internal encoding used by buffers, help and commands
 set tenc=utf-8          " Terminal encoding used for terminal display
+set tenc=utf8          " Terminal encoding used for terminal display
+" set guifont=DroidSansMono_Nerd_Font:h11
 
 " -----------------------------------------------------------------------------
 " ## Mode changes speedups
