@@ -2,23 +2,22 @@
 
 echo "extra zsh setup"
 
-# echo $0 | grep zsh > /dev/null 2>&1 | true
+# install/setup zim
+# git clone --recursive https://github.com/Eriner/zim.git ${ZDOTDIR:-${HOME}}/.zim
+# setopt EXTENDED_GLOB
+# for template_file ( ${ZDOTDIR:-${HOME}}/.zim/templates/* ); do
+#   user_file="${ZDOTDIR:-${HOME}}/.${template_file:t}"
+#   if [[ ! -a ${ZDOTDIR:-${HOME}}/.zshrc ]]; then
+#     touch ${user_file}
+#     ( print -rn "$(<${template_file})$(<${user_file})" >! ${user_file} ) 2>/dev/null
+#   fi
+# done
 
-# if [[ ${PIPESTATUS[0]} != 0 ]]; then
-  echo "changing your login shell to zsh"
-  # echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-  # chsh -s $(which zsh);ok
-  zsh_path=$(which zsh)
-  grep -Fxq "$zsh_path" /etc/shells || sudo bash -c "echo $zsh_path >> /etc/shells"
-  chsh -s "$zsh_path" $USER
-  zsh
-# else
-#   echo "looks like you are already using zsh. woot!"
-# fi
-
-# setup mac-cli
-# ref: https://github.com/guarinogabriel/Mac-CLI
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/guarinogabriel/mac-cli/master/mac-cli/tools/install)"
+echo "changing your login shell to zsh"
+zsh_path=$(which zsh)
+grep -Fxq "$zsh_path" /etc/shells || sudo bash -c "echo $zsh_path >> /etc/shells"
+chsh -s "$zsh_path" $USER
+zsh
 
 touch $HOME/.z-history
 
@@ -26,7 +25,7 @@ touch $HOME/.z-history
 # https://github.com/skalnik/vim-vroom
 sudo ln -sfv $HOME/.dotfiles/zsh/zprofile.symlink /etc/zprofile
 sudo ln -sfv $HOME/.dotfiles/zsh/zshenv.symlink /etc/zshenv
-# sudo cp $HOME/.dotfiles/zsh/zprofile.symlink /etc/zprofile
-# sudo cp $HOME/.dotfiles/zsh/zshenv.symlink /etc/zshenv
+
+# source ${ZDOTDIR:-${HOME}}/.zlogin
 
 echo "finished extra zsh setup"

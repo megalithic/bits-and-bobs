@@ -66,8 +66,7 @@ bind-key -T copy-mode-vi C-l select-pane -R
 set -g history-limit 25000
 set -g set-titles on
 
-set -g default-terminal "screen-256color"
-# set -g default-terminal "tmux-256color"
+set -g default-terminal "tmux-256color"
 set -g default-shell "$SHELL"
 
 # fix for NVIM_TUI_ENABLE_CURSOR_SHAPE in tmux

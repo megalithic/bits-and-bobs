@@ -18,12 +18,7 @@ if has('nvim')
   set termguicolors
   set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
-  " colorscheme ayu
-  " colorscheme jellybeans
-
-  " colorscheme OceanicNext
   colorscheme nova
-  " colorscheme tender
 
   set background=dark
 
@@ -47,6 +42,15 @@ else
   else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  endif
+endif
+
+if has('termguicolors')
+  " Don't need this in xterm-256color, but do need it inside tmux.
+  " (See `:h xterm-true-color`.)
+  if &term =~# 'tmux-256color'
+    let &t_8f="\e[38;2;%ld;%ld;%ldm"
+    let &t_8b="\e[48;2;%ld;%ld;%ldm"
   endif
 endif
 

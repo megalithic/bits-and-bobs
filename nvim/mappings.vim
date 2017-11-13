@@ -433,3 +433,7 @@ inoremap <c-e> <esc>A
 inoremap <c-a> <esc>I
 
 nnoremap <F8> RunCurrentFile()
+
+
+" https://github.com/hkupty/dotfiles/blob/master/nvim/nvim/keybindings.vim
+nmap <leader>S :exec "let cft=&ft \| edit scratchpad \| let &ft=cft"<CR>

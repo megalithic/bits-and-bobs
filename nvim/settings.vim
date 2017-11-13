@@ -16,6 +16,84 @@ let g:codi#aliases = {
 
 
 " ----------------------------------------------------------------------------
+" ## nvimux
+" let g:nvimux_prefix = '<C-a>'
+" let g:nvimux_open_term_by_default = 'true'
+" let g:nvimux_new_window_buffer = 'single'
+" let g:nvimux_quickterm_direction = 'botright'
+" let g:nvimux_quickterm_orientation = 'vertical'
+" let g:nvimux_quickterm_scope = 't'
+" let g:nvimux_quickterm_size = '80'
+
+" if exists('$TMUX')
+"   function! TmuxOrSplitSwitch(wincmd, tmuxdir)
+"     let previous_winnr = winnr()
+"     silent! execute "wincmd " . a:wincmd
+"     if previous_winnr == winnr()
+"       call system("tmux select-pane -" . a:tmuxdir)
+"       redraw!
+"     endif
+"   endfunction
+
+"   let g:tmux_navigator_no_mappings = 1
+"   let g:tmux_navigator_save_on_switch = 1
+
+"   let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
+"   let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
+"   let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
+
+"   nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
+"   nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
+"   nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
+"   nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
+" else
+"   map <C-h> <C-w>h
+"   map <C-j> <C-w>j
+"   map <C-k> <C-w>k
+"   map <C-l> <C-w>l
+" endif
+
+" let g:nvimux_open_term_by_default = 1
+" let g:nvimux_new_window_buffer = 'single'
+" let g:nvimux_quickterm_direction = 'botright'
+" let g:nvimux_quickterm_orientation = 'vertical'
+" let g:nvimux_quickterm_scope = 't'
+" let g:nvimux_quickterm_size = '80'
+
+" function! s:escape_ft(ft)
+"   return substitute(a:ft, "\\.", "_", "")
+" endfunction
+
+" let g:iron_repl_open_cmd = "topleft vspl"
+
+" function! SetNvimuxConfigOnIronRepl(buf_id, repl_def) abort
+"   exec "let t:iron_" . s:escape_ft(a:repl_def.ft) . "_repl = " . a:buf_id
+"   call setbufvar(a:buf_id, 'nvimux_buf_orientation', g:iron_repl_open_cmd)
+" endfunction
+
+" function! SetNvimuxConfigOnShell(buf_id, repl_def) abort
+"   let orientation = g:nvimux_quickterm_direction . " " . g:nvimux_quickterm_orientation . " " . g:nvimux_quickterm_size . "split"
+"   call setbufvar(a:buf_id, 'nvimux_buf_orientation', orientation)
+" endfunction
+
+" let g:iron_new_repl_hooks = ['SetNvimuxConfigOnIronRepl']
+" let g:iron_new_sh_repl_hooks = ['SetNvimuxConfigOnShell']
+" let g:iron_debug = 1
+
+" let g:nvimux_custom_bindings = [
+"   \['s', ':NvimuxHorizontalSplit<CR>', ['n', 'v', 'i', 't']],
+"   \['v', ':NvimuxVerticalSplit<CR>', ['n', 'v', 'i', 't']],
+"   \['!', ':IronPromptRepl<CR>', ['n', 'v', 'i', 't']],
+"   \['$', ':IronRepl<CR>', ['n', 'v', 'i', 't']],
+"   \['#', ':IronPromptCommand<CR>', ['n', 'v', 'i', 't']],
+"   \['%', ':call ToggleRepl()<CR>', ['n', 'v', 'i', 't']]
+" \]
+
+" let g:nvimux_new_term = "call IronStartRepl('sh', 0, 1)"
+" let g:iron_repl_open_cmd = 'topleft vertical split'
+
+
+" ----------------------------------------------------------------------------
 " ## auto-pairs
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
@@ -331,46 +409,6 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
-
-" let g:fzf_colors =
-"       \ { 'fg':      ['fg', 'Normal'],
-"       \ 'bg':      ['bg', 'Normal'],
-"       \ 'hl':      ['fg', 'Comment'],
-"       \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"       \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"       \ 'hl+':     ['fg', 'Statement'],
-"       \ 'info':    ['fg', 'PreProc'],
-"       \ 'prompt':  ['fg', 'Conditional'],
-"       \ 'pointer': ['fg', 'Exception'],
-"       \ 'marker':  ['fg', 'Keyword'],
-"       \ 'spinner': ['fg', 'Label'],
-"       \ 'header':  ['fg', 'Comment'] }
-
-" Search term using rg
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-" command! -bang -nargs=* Search call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-
-" show a preview of the file:
-" https://github.com/metakirby5/.dots/blob/master/base/.vimrc#L273
-
-" Augmenting Ag command using fzf#vim#with_preview function
-"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
-"     * For syntax-highlighting, Ruby and any of the following tools are required:
-"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
-"       - CodeRay: http://coderay.rubychan.de/
-"       - Rouge: https://github.com/jneen/rouge
-"
-"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-"   :Ag! - Start fzf in fullscreen and display the preview window above
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -384,6 +422,63 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+
+" let g:fzf#proj#project_dir = '~/code'
+" let g:fzf#proj#max_proj_depth = 2
+" let g:fzf#proj#project#open_new_tab = 0
+
+" let s:project_dir = '~/code'
+" let s:project_cmd = "find ".s:project_dir." -maxdepth 3 -name '.git' -printf '%h\n'"
+" let s:TYPE = {'dict': type({}), 'funcref': type(function('call')), 'string': type('')}
+" let s:edited_cmd = "git status --porcelain"
+" let s:diff_master_cmd = "git diff master..HEAD --name-only"
+
+" function! s:grep_files(arg, path, bang)
+"   call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" ' . shellescape(a:arg) . ' ' . shellescape(a:path), 1, a:bang)
+" endfunction
+
+" function! s:pre_grep(tests, bang)
+"   call inputsave()
+"   let query = input("search " . (a:tests ? "all" : "code") . " → ")
+"   call inputrestore()
+"   call s:grep_files(query, a:tests ? "." : "src/", a:bang)
+" endfunction
+
+" function! s:open(args)
+"   let [_, fname] = a:args
+"   if fname =~ " "
+"     let [_, fname] = split(fname, ' ')
+"   endif
+"   exec "silent edit" fname
+" endfunction
+
+" function! s:go_to(args)
+"   let [data, fname] = a:args
+"   exec "tcd" fname
+"   exec "silent edit" fname
+" endfunction
+
+" function! s:select_projects(bang)
+"   return fzf#run(fzf#wrap('projects',{
+"    \ 'source':  s:project_cmd,
+"    \ 'dir':     s:project_dir,
+"    \ 'sink*':   function('s:go_to'),
+"    \ 'options': '+m --prompt="Projects → " --header-lines=0 --expect=ctrl-e --tiebreak=index'}, a:bang))
+" endfunction
+
+" function! s:git_files(cmd, bang)
+"   return fzf#run(fzf#wrap('edited',{
+"    \ 'source':  a:cmd,
+"    \ 'dir':     getcwd(-1, 0),
+"    \ 'sink*':   function('s:open'),
+"    \ 'options': '+m --prompt="Files → " --header-lines=0 --expect=ctrl-e --tiebreak=index'}, a:bang))
+" endfunction
+
+" command! -bar -bang Grep      call s:pre_grep(0, <bang>0)
+" command! -bar -bang GrepAll   call s:pre_grep(1, <bang>0)
+" command! -bar -bang Projects  call s:select_projects(<bang>0)
+" command! -bar -bang Gstatus   call s:git_files(s:edited_cmd, <bang>0)
+" command! -bar -bang Gdiff     call s:git_files(s:diff_master_cmd, <bang>0)
 
 
 " ----------------------------------------------------------------------------
