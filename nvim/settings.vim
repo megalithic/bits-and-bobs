@@ -275,7 +275,11 @@ endfunction
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split'
 
-let test#javascript#jest#options = '-u -ci --colors --verbose'
+if expand('%:t') =~ '_spec.js'
+  let test#javascript#jest#executable = 'yarn run cypress:run:one'
+else
+  let test#javascript#jest#executable = 'yarn test'
+endif
 
 let g:test#javascript#mocha#file_pattern = ".test.js"
 "  `-A` turns on async mode for tests

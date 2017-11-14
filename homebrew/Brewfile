@@ -102,6 +102,7 @@ brew 'tmux', args: ['--with-utf8proc']
 brew 'tree'
 brew 'unixodbc'
 brew 'urlview'
+brew 'watchman', args: ['--HEAD']
 brew 'weechat', args: ['--with-ruby', '--with-python', '--with-perl', '--with-lua', '--with-aspell', '--with-javascript', '--with-curl', '--with-guile']
 brew 'wget', args: ['enable-iri']
 brew 'wifi-password'
