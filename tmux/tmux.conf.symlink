@@ -66,11 +66,11 @@ bind-key -T copy-mode-vi C-l select-pane -R
 set -g history-limit 25000
 set -g set-titles on
 
-set -g default-terminal "tmux-256color"
 set -g default-shell "$SHELL"
 
 # fix for NVIM_TUI_ENABLE_CURSOR_SHAPE in tmux
 # https://github.com/nathanaelkane/dotfiles/commit/9607d826b9d408595de2e3fe7de0abec1e94fa87
+set -g default-terminal "tmux-256color"
 set -ga terminal-overrides ',xterm-256color:Tc'
 set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
 set -as terminal-overrides ',xterm*:sitm=\E[3m'
@@ -191,10 +191,8 @@ set -g status-right "#(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=g
 # set -g status-right "#(~/.dotfiles/bin/tmux-spotify) #(~/.dotfiles/bin/battery -t -p)#[fg=blue] %a, %b %d #[fg=green]%l:%M %p #[fg=colour255] #[bg=colour236] #{cpu_percentage}"
 
 
-# Nova Colorscheme stuffs
+# Nova colorscheme stuffs
 # ---------------------------------------------------------------------------
-# set -g default-terminal "xterm-256color"
-# set -ga terminal-overrides ",xterm-256color:Tc"
 set -g pane-border-style 'bg=black,fg=#1E272C'
 set -g pane-active-border-style 'bg=black,fg=#1E272C'
 set -g status-style 'bg=#1E272C,fg=#6A7D89'
