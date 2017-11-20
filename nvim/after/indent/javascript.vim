@@ -110,9 +110,7 @@ endfunction
 function s:SkipFunc()
   if s:top_col == 1
     throw 'out of bounds'
-  endif
-  let s:top_col = 0
-  if s:check_in
+  elseif s:check_in
     if eval(s:skip_expr)
       return 1
     endif
@@ -456,10 +454,10 @@ function GetJavascriptIndent()
 
   " main return
   if l:line =~ '^[])}]\|^|}'
-    if l:line_raw[0] == ')' && getline(num)[b:js_cache[2]-1] == '('
+    if l:line_raw[0] == ')'
       if s:ParseCino('M')
         return indent(l:lnum)
-      elseif &cino =~# 'm' && !s:ParseCino('m')
+      elseif num && &cino =~# 'm' && !s:ParseCino('m')
         return virtcol('.') - 1
       endif
     endif
