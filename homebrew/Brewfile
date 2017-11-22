@@ -142,7 +142,7 @@ cask 'java'
 cask 'karabiner-elements'
 cask 'mysimbl'
 cask 'near-lock'
-# cask 'kitty' # doesn't support ligatures yet :(
+cask 'kitty'
 cask 'screenhero'
 cask 'shiori'
 cask 'slack'
