@@ -93,6 +93,8 @@ alias b="brew"
 # -----------------------------------------------------------------------------
 alias py="python"
 
+alias kitty="/Applications/kitty.app/Contents/MacOS/kitty"
+
 # ALACRITTY
 # -----------------------------------------------------------------------------
 alias updatealacritty='cd ~/code/rust/alacritty; git co master; git fetch; git merge origin/master; rustup override set nightly; cargo build --release; sudo cp target/release/alacritty /usr/local/bin; cd -'
