@@ -70,7 +70,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # --
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
 defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -float 8.5
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
 
 
 # Disable auto-correction
