@@ -58,7 +58,7 @@ config.layout = {
   _after_ = (function()
     utils.activate('com.google.Chrome')
     utils.activate('com.googlecode.iterm2')
-    utils.activate('org.gnu.Emacs') -- emacs gui is front-most
+    -- utils.activate('org.gnu.Emacs') -- emacs gui is front-most
   end),
 
   ['com.tapbots.TweetbotMac'] = (function(window, forceScreenCount)
@@ -69,7 +69,8 @@ config.layout = {
   ['com.tinyspeck.slackmacgap'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.rightHalf, config.primaryDisplay(count))
+      -- grid.set(window, config.grid.rightHalf, config.primaryDisplay(count))
+      grid.set(window, config.grid.rightOneThird, config.secondaryDisplay(count))
     else
       grid.set(window, config.grid.rightOneThird, config.secondaryDisplay(count))
     end
@@ -94,7 +95,8 @@ config.layout = {
   ['com.spotify.client'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, '4,0 4x5', config.secondaryDisplay(count))
+      -- grid.set(window, '4,0 4x5', config.secondaryDisplay(count))
+      grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
     else
       grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
     end
@@ -113,7 +115,8 @@ config.layout = {
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, '4,5 4x4', config.secondaryDisplay(count))
+      -- grid.set(window, '4,5 4x4', config.secondaryDisplay(count))
+      grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
     else
       grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
     end
@@ -124,19 +127,19 @@ config.layout = {
     grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),
 
-  ['org.gnu.Emacs'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
-  end),
+  -- ['org.gnu.Emacs'] = (function(window, forceScreenCount)
+  --   local count = forceScreenCount or screenCount
+  --   grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
+  -- end),
 
-  ['co.zeit.hyperterm'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, '0,0 8x8', config.primaryDisplay(count))
-    else
-      grid.set(window, '0,0 8x8', config.primaryDisplay(count))
-    end
-  end),
+  -- ['co.zeit.hyperterm'] = (function(window, forceScreenCount)
+  --   local count = forceScreenCount or screenCount
+  --   if count == 1 then
+  --     grid.set(window, '0,0 8x8', config.primaryDisplay(count))
+  --   else
+  --     grid.set(window, '0,0 8x8', config.primaryDisplay(count))
+  --   end
+  -- end),
 
   ['com.agilebits.onepassword4'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
