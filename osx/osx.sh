@@ -62,7 +62,9 @@ defaults write com.apple.iCal n\ days\ of\ week 14
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -float 8.5
+
 
 # Disable auto-correction
 defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false
