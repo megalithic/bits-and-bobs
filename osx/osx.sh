@@ -62,6 +62,7 @@ defaults write com.apple.iCal n\ days\ of\ week 14
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Set a blazingly fast keyboard repeat rate
+# ref: https://ksearch.wordpress.com/2017/06/20/increase-the-key-repeat-rate-in-os-x-sierra/
 # --
 # Reset to defaults (https://coderwall.com/p/jzuuzg/osx-set-fast-keyboard-repeat-rate):
 # defaults delete NSGlobalDomain KeyRepeat
