@@ -60,7 +60,13 @@ defaults write com.apple.iCal n\ days\ of\ week 14
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
 # Set a blazingly fast keyboard repeat rate
+# --
+# Reset to defaults (https://coderwall.com/p/jzuuzg/osx-set-fast-keyboard-repeat-rate):
+# defaults delete NSGlobalDomain KeyRepeat
+# defaults delete NSGlobalDomain InitialKeyRepeat
+# --
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool true
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -float 8.5
