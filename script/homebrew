@@ -30,6 +30,7 @@ then
 
   brew tap homebrew/bundle
   brew bundle --file=~/Brewfile
+  sudo xcodebuild -license accept
 
   echo "finished homebrew setup"
 fi
