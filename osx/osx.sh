@@ -50,7 +50,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Finder
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
-defaults write com.apple.finder NewWindowTargetPath -string "file://$(HOME)/Downloads/"
+defaults write com.apple.finder NewWindowTargetPath -string "file://$HOME/Downloads/"
 
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
