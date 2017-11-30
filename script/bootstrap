@@ -18,7 +18,7 @@ then
 
   echo "installing xcode"
   xcode-select --install
-  exit 0
+  # exit 0
 fi
 
 set -e
