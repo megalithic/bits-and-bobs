@@ -11,7 +11,7 @@ sudo spctl --master-disable
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # See secrets.blacktree.com
-chsh -s /bin/zsh $(USER)
+chsh -s /usr/local/bin/zsh $(USER)
 sudo scutil --set ComputerName $(COMPUTER_NAME)
 sudo scutil --set HostName $(COMPUTER_NAME)
 sudo scutil --set LocalHostName $(COMPUTER_NAME)

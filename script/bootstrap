@@ -8,7 +8,7 @@ fi
 
 if [[ "$(which git)" == "" ]]
 then
-  echo "this installer need git"
+  echo "this installer needs git"
   echo "do you want to install xcode ?"
   read answer
   if [[ $answer != [yY] ]]
