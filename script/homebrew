@@ -19,6 +19,7 @@ then
 
   echo "updating homebrew"
 
+  sudo xcodebuild -license accept
   brew update
 
   echo "updated homebrew"
