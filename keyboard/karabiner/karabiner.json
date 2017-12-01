@@ -94,14 +94,14 @@
                         ]
                     },
                     {
-                        "description": "Change shift + delete to forward delete (rev 2)",
+                        "description": "Change ctrl+delete to forward delete",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "delete_or_backspace",
                                     "modifiers": {
                                         "mandatory": [
-                                            "shift"
+                                            "control"
                                         ],
                                         "optional": [
                                             "caps_lock",
