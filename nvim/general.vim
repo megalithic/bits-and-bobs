@@ -56,6 +56,19 @@ endif
 
 set re=1 " Updated vim regex engine
 
+" function! s:statusline_expr()
+"   let mod = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
+"   let ro  = "%{&readonly ? '[RO] ' : ''}"
+"   let ft  = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
+"   let fug = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
+"   let sep = ' %= '
+"   let pos = ' %-12(%l : %c%V%) '
+"   let pct = ' %P'
+
+"   return '[%n] %F %<'.mod.ro.ft.fug.sep.pos.'%*'.pct
+" endfunction
+" let &statusline = s:statusline_expr()
+
 filetype plugin on
 filetype indent on
 
@@ -91,7 +104,7 @@ set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
 set noerrorbells
 set novisualbell
-set relativenumber number
+set number " set relativenumber number
 set splitbelow
 set splitright
 set noshowmode

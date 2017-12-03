@@ -1,5 +1,6 @@
 set -x SHELL /usr/local/bin/fish
 set -U FZF_TMUX 1
+set -U fish_key_bindings fish_vi_key_bindings
 
 source /usr/local/share/chruby/chruby.fish
 source /usr/local/share/chruby/auto.fish

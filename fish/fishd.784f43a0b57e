@@ -33,11 +33,11 @@ SET fish_color_status:red
 SET fish_color_user:brgreen
 SET fish_color_valid_path:\x2d\x2dunderline
 SET fish_greeting:Welcome\x20to\x20fish\x2c\x20the\x20friendly\x20interactive\x20shell
-SET fish_key_bindings:fish_default_key_bindings
+SET fish_key_bindings:fish_vi_key_bindings
 SET fish_pager_color_completion:\x1d
 SET fish_pager_color_description:B3A06D\x1eyellow
 SET fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SET fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SET fish_user_paths:/Users/replicant/\x2efzf/bin
 SET fisher_active_prompt:pure
-SET fisher_dependency_count:pure\x1egetopts\x1ez\x1emenu\x1eget_file_age\x1eawait\x1elast_job_id\x1efnm\x1egetopts\x1eget\x1eawait\x1efzf
+SET fisher_dependency_count:pure\x1egetopts\x1ez\x1emenu\x1eget_file_age\x1eawait\x1elast_job_id\x1efnm\x1egetopts\x1eget\x1eawait\x1efzf\x1egrc\x1ebrew\x1enode\x1eosx\x1essh\x1etmux\x1echruby

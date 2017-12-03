@@ -5,7 +5,7 @@
 -- :: imports/requires
 -- require 'mpd'
 -- require 'redshift'
-require('control-escape')
+require('control-escape') -- is now handled by karabiner-elements
 -- require('delete-words')
 -- require('hyper')
 -- require('markdown')
@@ -40,7 +40,7 @@ hotkey.bind(ctrlAlt, 'r', function() hs.toggleConsole() end)
 hotkey.bind(mashShift, 'L', function()
   hs.caffeinate.startScreensaver()
 end)
-hotkey.bind(cmdCtrl, 'r', function()
+hotkey.bind(mashShift, 'r', function()
   wm.events.tearDownEventHandling()
   hs.reload()
   hs.notify.show('Hammerspoon', 'Config Reloaded', '')
@@ -53,9 +53,9 @@ keyUpDown = function(modifiers, key)
 end
 
 -- :: media
-hotkey.bind(ctrlShift, 27, function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- < - >
+hotkey.bind(ctrlShift, '[', function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- < - > 27
 hotkey.bind(ctrlShift, '\\', function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end)   -- < \ >
-hotkey.bind(ctrlShift, 24, function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end)         -- < = >
+hotkey.bind(ctrlShift, ']', function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end)         -- < = > 24
 
 -- :: apps
 hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)

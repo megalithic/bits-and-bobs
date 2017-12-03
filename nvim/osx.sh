@@ -2,10 +2,10 @@
 
 echo "(neo)vim setup"
 
-mkdir -p ~/.config
-ln -sfv ~/.dotfiles/nvim ~/.config/nvim
+mkdir -p $HOME/.config
+ln -sfv $HOME/.dotfiles/nvim $HOME/.config/nvim
 # ln -sfv ~/.dotfiles/nvim ~/.vim
-ln -sfv ~/.dotfiles/nvim/init.vim ~/.vimrc
+ln -sfv $HOME/.dotfiles/nvim/init.vim $HOME/.vimrc
 
 # curl -fLo ~/.config/nvim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim +PlugInstall +qall

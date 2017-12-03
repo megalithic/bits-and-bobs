@@ -1,18 +1,18 @@
-" -/ Autocommands /----------------------------------------------
+" " -/ Autocommands /----------------------------------------------
 augroup vimrcEx
   autocmd!
 
-  " ----------------------------------------------------------------------------
-  " ## Auto-source vim config files
-  " autocmd BufWritePost *.vim,*.vimrc so $MYVIMRC
+"   " ----------------------------------------------------------------------------
+"   " ## Auto-source vim config files
+"   " autocmd BufWritePost *.vim,*.vimrc so $MYVIMRC
 
   " ----------------------------------------------------------------------------
   " ## Handle window resizing
   autocmd VimResized * execute "normal! \<c-w>="
 
-  " ----------------------------------------------------------------------------
-  " ## Handle auto-closing of quickfix buffer
-  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+"   " ----------------------------------------------------------------------------
+"   " ## Handle auto-closing of quickfix buffer
+"   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 
   " No formatting on o key newlines
   autocmd BufNewFile,BufEnter * set formatoptions-=o
@@ -25,11 +25,11 @@ augroup vimrcEx
       " \   execute 'normal g`\"' |
         \ endif
 
-  " ----------------------------------------------------------------------------
-  " ## Toggle certain accoutrements when entering and leaving a buffer & window
-  " NOTE: the syntax highlighting fails when using FZF and BufEnter
-  " FIXME: we really want to still be able to flip between syntax highlighting
-  " on and off.
+"   " ----------------------------------------------------------------------------
+"   " ## Toggle certain accoutrements when entering and leaving a buffer & window
+"   " NOTE: the syntax highlighting fails when using FZF and BufEnter
+"   " FIXME: we really want to still be able to flip between syntax highlighting
+"   " on and off.
   au WinEnter,BufEnter * silent set number relativenumber syntax=on " cul
   au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " nocul
 
@@ -37,11 +37,11 @@ augroup vimrcEx
   " ## Automagically update remote homeassistant files upon editing locally
   au BufWritePost ~/.dotfiles/private/homeassistant/* silent! :MirrorPush ha
 
-  " ----------------------------------------------------------------------------
-  " ## Toggle colorcolumn when in insert mode for visual 80char indicator
-  au InsertEnter * set colorcolumn=80
-  au InsertLeave * set colorcolumn=""
-  " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
+"   " ----------------------------------------------------------------------------
+"   " ## Toggle colorcolumn when in insert mode for visual 80char indicator
+"   au InsertEnter * set colorcolumn=80
+"   au InsertLeave * set colorcolumn=""
+"   " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
 
   " ----------------------------------------------------------------------------
   " ## Manage GIT related scenarios
@@ -53,85 +53,85 @@ augroup vimrcEx
   au BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
   au Filetype gitcommit exe BufEnterCommit()
 
-  " ----------------------------------------------------------------------------
-  " ## Automagically rename tmux window to current filename
-  if exists('$TMUX') && !exists('$NORENAME')
-    au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-    au VimLeave * call system('tmux set-window automatic-rename on')
-  endif
+"   " ----------------------------------------------------------------------------
+"   " ## Automagically rename tmux window to current filename
+"   if exists('$TMUX') && !exists('$NORENAME')
+"     au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+"     au VimLeave * call system('tmux set-window automatic-rename on')
+"   endif
 
-  " ----------------------------------------------------------------------------
-  " ## Auto-highlighting of things
-  " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-  au BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
-  au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
-  au BufEnter *.rb syn match error contained "\<binding.pry\>"
-  au BufEnter *.rb syn match error contained "\<debugger\>"
-  au BufEnter *.js syn match error contained "\<debugger\>"
-  au BufEnter *.js syn match error contained "\<console.\>"
-  au BufEnter *.coffee syn match error contained "\<debugger\>"
-  " Delete trailing whitespace on write
-  au BufWrite * silent if &ft!~?'markdown'|:call DeleteTrailingWS()|endif
+"   " ----------------------------------------------------------------------------
+"   " ## Auto-highlighting of things
+"   " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+"   au BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
+"   au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
+"   au BufEnter *.rb syn match error contained "\<binding.pry\>"
+"   au BufEnter *.rb syn match error contained "\<debugger\>"
+"   au BufEnter *.js syn match error contained "\<debugger\>"
+"   au BufEnter *.js syn match error contained "\<console.\>"
+"   au BufEnter *.coffee syn match error contained "\<debugger\>"
+"   " Delete trailing whitespace on write
+"   au BufWrite * silent if &ft!~?'markdown'|:call DeleteTrailingWS()|endif
 
-  " ----------------------------------------------------------------------------
-  " ## Terminal
-  if has('nvim')
-    " Automatically go into insert mode when entering terminal window
-    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    au BufEnter * if &buftype == 'term' | :startinsert | endif
-    au BufWinEnter,WinEnter,BufEnter term://* startinsert
-  endif
+"   " ----------------------------------------------------------------------------
+"   " ## Terminal
+"   if has('nvim')
+"     " Automatically go into insert mode when entering terminal window
+"     au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+"     au BufEnter * if &buftype == 'term' | :startinsert | endif
+"     au BufWinEnter,WinEnter,BufEnter term://* startinsert
+"   endif
 
-  " ----------------------------------------------------------------------------
-  " ## Deoplete
-  " NOTE: some of these have been moved to settings.vim#deoplete and
-  " keys.vim#deoplete
-  " au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
+"   " ----------------------------------------------------------------------------
+"   " ## Deoplete
+"   " NOTE: some of these have been moved to settings.vim#deoplete and
+"   " keys.vim#deoplete
+"   " au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
 
-  " au VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
-  " au VimEnter * call deoplete#custom#set('_', 'converters',
-  "       \ ['converter_auto_paren', 'converter_remove_overlap'])
-  " au VimEnter * call deoplete#custom#set('vim', 'converters',
-  "       \ ['add_vim_versions'])
-  " au VimEnter * call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
+"   " au VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
+"   " au VimEnter * call deoplete#custom#set('_', 'converters',
+"   "       \ ['converter_auto_paren', 'converter_remove_overlap'])
+"   " au VimEnter * call deoplete#custom#set('vim', 'converters',
+"   "       \ ['add_vim_versions'])
+"   " au VimEnter * call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
 augroup END
 
-" -/ Filetypes/Syntax /-------------------------------------------------------
+" " -/ Filetypes/Syntax /-------------------------------------------------------
 augroup ft_javascript
   au!
-  " au BufRead *.js set filetype=javascript
-  " au BufRead *.es6 set filetype=javascript
-  " au BufRead *.jsx set filetype=javascript
+  au BufRead *.js set filetype=javascript
+  au BufRead *.es6 set filetype=javascript
+  au BufRead *.jsx set filetype=javascript
 
   au FileType javascript highlight xmlAttrib cterm=italic
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
   au FileType javascript iabbrev class== className=
-  " au BufWritePre *.js Neoformat
-  au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+"   " au BufWritePre *.js Neoformat
+"   au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
-  " elm
-  au BufWritePost *.elm :ElmMake
-  au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
-  au FileType elm nmap <buffer> <Leader>E <Plug>(elm-error-detail)
-  " au FileType elm set tabstop=4 softtabstop=4 shiftwidth=4
+"   " elm
+"   au BufWritePost *.elm :ElmMake
+"   au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
+"   au FileType elm nmap <buffer> <Leader>E <Plug>(elm-error-detail)
+"   " au FileType elm set tabstop=4 softtabstop=4 shiftwidth=4
 augroup END
 
-augroup ft_scss
-  au!
-  " make sure `complete` works as expected for CSS class names whithout
-  " messing with motions (eg. '.foo-bar__baz') and we make sure all
-  " delimiters (_,-,$,%,.) are treated as word separators outside insert mode
-  au InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
-  au InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
+" augroup ft_scss
+"   au!
+"   " make sure `complete` works as expected for CSS class names whithout
+"   " messing with motions (eg. '.foo-bar__baz') and we make sure all
+"   " delimiters (_,-,$,%,.) are treated as word separators outside insert mode
+"   au InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
+"   au InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
 
-  " https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/css3-syntax.vim
-  au FileType css,css.scss,sass,scss setl iskeyword+=-
-  " au FileType scss set iskeyword+=-
-  au FileType css,css.scss,sass,scss setl formatoptions+=croql
-  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss set ft=scss.css
-  " au BufEnter,BufNewFile,BufRead,BufReadPost *.scss.css set ft=sass
-augroup END
+"   " https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/css3-syntax.vim
+"   au FileType css,css.scss,sass,scss setl iskeyword+=-
+"   " au FileType scss set iskeyword+=-
+"   au FileType css,css.scss,sass,scss setl formatoptions+=croql
+"   au BufEnter,BufNewFile,BufRead,BufReadPost *.scss set ft=scss.css
+"   " au BufEnter,BufNewFile,BufRead,BufReadPost *.scss.css set ft=sass
+" augroup END
 
 augroup ft_markdown
   au!
@@ -143,15 +143,15 @@ augroup ft_markdown
   au FileType markdown set tw=80
 augroup END
 
-augroup ft_ruby
-  au!
-  au FileType ruby setl iskeyword+=_
-augroup END
+" augroup ft_ruby
+"   au!
+"   au FileType ruby setl iskeyword+=_
+" augroup END
 
-augroup ft_haml
-  au!
-  au BufNewFile,BufRead,BufReadPost *.html set ft=haml
-augroup END
+" augroup ft_haml
+"   au!
+"   au BufNewFile,BufRead,BufReadPost *.html set ft=haml
+" augroup END
 
 augroup ft_ssh
   au!
@@ -159,18 +159,18 @@ augroup ft_ssh
   au BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
 augroup END
 
-augroup ft_python
-  au!
-  au FileType python
-         \   let python_highlight_all = 1
-         \ | set cc=80
-         \ | highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-         \ | match OverLength /\%81v.\+/
-         \ | map <leader>ii i import ipdb;ipdb.set_trace()<ESC>
-         \ | set autoindent
-         \ | set smartindent
-         \ | set textwidth=79
-augroup END
+" augroup ft_python
+"   au!
+"   au FileType python
+"          \   let python_highlight_all = 1
+"          \ | set cc=80
+"          \ | highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"          \ | match OverLength /\%81v.\+/
+"          \ | map <leader>ii i import ipdb;ipdb.set_trace()<ESC>
+"          \ | set autoindent
+"          \ | set smartindent
+"          \ | set textwidth=79
+" augroup END
 
 augroup ft_misc
   au!
@@ -201,13 +201,13 @@ augroup completions
 augroup END
 
 
-" https://github.com/fortes/dotfiles/blob/master/symlinks/config/nvim/init.vim
-" Don't need to automake in supported languages
-augroup automake
-  autocmd!
-  " JavaScript and Typescript lint via language servers
-  " autocmd BufWritePost *.sh,*.scss,*.less,*.css,*.vim,*.vimrc,*.txt,*.md make!
-augroup END
+" " https://github.com/fortes/dotfiles/blob/master/symlinks/config/nvim/init.vim
+" " Don't need to automake in supported languages
+" augroup automake
+"   autocmd!
+"   " JavaScript and Typescript lint via language servers
+"   " autocmd BufWritePost *.sh,*.scss,*.less,*.css,*.vim,*.vimrc,*.txt,*.md make!
+" augroup END
 
 augroup LanguageClientConfig
   autocmd!

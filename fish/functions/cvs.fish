@@ -1,0 +1,1 @@
+/Users/replicant/.config/fisherman/grc/functions/cvs.fish
