@@ -39,9 +39,9 @@ function! s:after_colorscheme()
   " hi CursorLine ctermbg=235 ctermfg=NONE cterm=NONE guibg=#262626 guifg=NONE gui=NONE
 
   " FIXME: breaks in nova-vim colorscheme
-  " hi LineNr guibg=bg guifg=#937f6e gui=NONE
-  " hi CursorLineNr ctermbg=bg ctermfg=223 cterm=NONE guibg=bg guifg=#db9c5e gui=bold
-  " hi qfLineNr ctermbg=bg ctermfg=95 cterm=NONE guibg=bg guifg=#875f5f gui=NONE
+  hi LineNr guibg=#3C4C55 guifg=#937f6e gui=NONE
+  hi CursorLineNr ctermbg=black ctermfg=223 cterm=NONE guibg=black guifg=#db9c5e gui=bold
+  hi qfLineNr ctermbg=black ctermfg=95 cterm=NONE guibg=black guifg=#875f5f gui=NONE
 
   hi TermCursor ctermfg=red
 

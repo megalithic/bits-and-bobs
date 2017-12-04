@@ -551,7 +551,7 @@ let g:prettier#autoformat = 0
 let g:prettier#config#single_quote = 'true'
 
 " print spaces between brackets
-let g:prettier#config#bracket_spacing = 'false'
+let g:prettier#config#bracket_spacing = 'true'
 
 " put > on the last line instead of new line
 let g:prettier#config#jsx_bracket_same_line = 'false'

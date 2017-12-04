@@ -96,7 +96,7 @@ set lazyredraw "may be the cause of lots of issues
 set ttyfast
 
 " NOTE: also handled in autocommands.vim
-set cul " turn on cursorline highlighting -- needed for linenumber HL too
+" set cul " turn on cursorline highlighting -- needed for linenumber HL too
 
 set listchars=tab:▸\ ,eol:¬,extends:›,precedes:‹,trail:·,nbsp:⚋
 set fillchars=vert:│
@@ -104,7 +104,7 @@ set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
 set noerrorbells
 set novisualbell
-set number " set relativenumber number
+" set relativenumber number " fully handled in nvim/autocommands.vim
 set splitbelow
 set splitright
 set noshowmode

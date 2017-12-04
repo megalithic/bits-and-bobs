@@ -107,8 +107,7 @@ augroup ft_javascript
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
   au FileType javascript iabbrev class== className=
-"   " au BufWritePre *.js Neoformat
-"   au BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+  au BufWritePre client/**/*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
 "   " elm
 "   au BufWritePost *.elm :ElmMake
@@ -159,18 +158,18 @@ augroup ft_ssh
   au BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
 augroup END
 
-" augroup ft_python
-"   au!
-"   au FileType python
-"          \   let python_highlight_all = 1
-"          \ | set cc=80
-"          \ | highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-"          \ | match OverLength /\%81v.\+/
-"          \ | map <leader>ii i import ipdb;ipdb.set_trace()<ESC>
-"          \ | set autoindent
-"          \ | set smartindent
-"          \ | set textwidth=79
-" augroup END
+augroup ft_python
+  au!
+  au FileType python
+         \   let python_highlight_all = 1
+         \ | set cc=80
+         \ | highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+         \ | match OverLength /\%81v.\+/
+         \ | map <leader>ii i import ipdb;ipdb.set_trace()<ESC>
+         \ | set autoindent
+         \ | set smartindent
+         \ | set textwidth=79
+augroup END
 
 augroup ft_misc
   au!
@@ -201,13 +200,13 @@ augroup completions
 augroup END
 
 
-" " https://github.com/fortes/dotfiles/blob/master/symlinks/config/nvim/init.vim
-" " Don't need to automake in supported languages
-" augroup automake
-"   autocmd!
-"   " JavaScript and Typescript lint via language servers
-"   " autocmd BufWritePost *.sh,*.scss,*.less,*.css,*.vim,*.vimrc,*.txt,*.md make!
-" augroup END
+" https://github.com/fortes/dotfiles/blob/master/symlinks/config/nvim/init.vim
+" Don't need to automake in supported languages
+augroup automake
+  autocmd!
+  " JavaScript and Typescript lint via language servers
+  " autocmd BufWritePost *.sh,*.scss,*.less,*.css,*.vim,*.vimrc,*.txt,*.md make!
+augroup END
 
 augroup LanguageClientConfig
   autocmd!

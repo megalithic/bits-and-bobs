@@ -6,7 +6,7 @@
 "   Brought to you by: Seth Messer / @megalithic
 "
 " =============================================================================
-" vim:fdm=marker et fdl=2 ft=vim sts=2 sw=2 ts=2
+" vim: set fdm=marker fdl=2 ft=vim sts=2 sw=2 ts=2:
 
 " Automatically download vim-plug, if not present
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -97,11 +97,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'docunext/closetag.vim' " will auto-close the opening tag as soon as you type </
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
-  " Plug 'sbdchd/neoformat'
+  Plug 'sbdchd/neoformat'
   " Plug 'hkupty/iron.nvim' " ctr and cp to send to repl or call previous
-  " Plug 'prettier/vim-prettier', {
-  "       \ 'do': 'yarn install',
-  "       \ 'for': ['javascript', 'javascript.jsx', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+  Plug 'prettier/vim-prettier', {
+        \ 'do': 'yarn install',
+        \ 'for': ['javascript', 'javascript.jsx', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation

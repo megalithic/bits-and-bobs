@@ -57,6 +57,9 @@ unset SSL_CERT_FILE
 
 export CURL_CA_BUNDLE=''
 
+# GNUpg setup: https://github.com/drduh/YubiKey-Guide#create-temporary-working-directory-for-gpg
+export GNUPGHOME=$(mktemp -d) #; echo $GNUPGHOME
+
 # This setting is for the new UTF-8 terminal support
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
