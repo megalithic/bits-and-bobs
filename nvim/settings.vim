@@ -106,23 +106,15 @@ let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_fixer_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 
 let g:ale_linters = {}
-let g:ale_linters['javascript'] = ['prettier', 'eslint']
-let g:ale_linters['javascript.jsx'] = ['prettier', 'eslint']
-let g:ale_linters['jsx'] = ['prettier', 'eslint']
+let g:ale_linters['javascript'] = ['prettier_eslint', 'prettier', 'eslint']
+let g:ale_linters['jsx'] = ['prettier_eslint', 'prettier', 'eslint']
 let g:ale_linters['css'] = ['prettier']
 
 let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier', 'eslint']
-let g:ale_fixers['javascript.jsx'] = ['prettier', 'eslint']
-let g:ale_fixers['jsx'] = ['prettier', 'eslint']
+let g:ale_fixers['javascript'] = ['prettier_eslint', 'prettier']
+let g:ale_fixers['jsx'] = ['prettier_eslint', 'prettier']
 let g:ale_fixers['css'] = ['prettier']
-" let g:ale_fixers = {
-" \  'javascript': ['prettier', 'eslint'],
-" \  'javascript.jsx': ['prettier', 'eslint'],
-" \  'css': ['prettier'],
-" \  'sass': ['prettier'],
-" \  'scss': ['prettier'],
-" \}
+let g:ale_fixers['json'] = ['prettier']
 
 " Disable for vendor, node_modules
 let g:ale_pattern_options = {
@@ -132,58 +124,29 @@ let g:ale_pattern_options = {
       \  '.*/node_modules/*.js': {
       \    'ale_enabled': 0
       \  },
-      \  '.*/public/components/*.js': {
+      \  '.*/public/*.js': {
       \    'ale_enabled': 0
       \  }
       \}
 
-" autocmd FileType scss let g:ale_fix_on_save = 1
-" autocmd FileType css let g:ale_fix_on_save = 1
-" autocmd BufRead *.js let g:ale_javascript_prettier_options = '--single-quote --trailing-comma --arrow-parens "always" --bracket-spacing'
-" autocmd BufRead *.js let g:ale_javascript_prettier_eslint_options = '--single-quote --trailing-comma --arrow-parens "always" --bracket-spacing'
-" autocmd BufRead *.js let g:ale_fix_on_save = 1
-" let g:ale_fix_on_save = 1
-" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma --arrow-parens "always" --bracket-spacing'
-" let g:ale_javascript_prettier_eslint_options = '--single-quote --trailing-comma --arrow-parens "always" --bracket-spacing'
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
+let g:ale_jsx_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '~'
 
-" Don't lint on insert/exit/text
-let g:ale_lint_on_text_changed = 'never'
-
-" You can disable this option too
-" if you don't want linters to run on opening a file
+" let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
+let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
-let g:ale_completion_enabled = 1
-
-
-" ----------------------------------------------------------------------------
-" ## neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
-
-" if eslintrc file present use eslint, else use standard
-if findfile('.eslintrc', '.;') !=# ''
-  let g:neomake_javascript_enabled_makers = ['eslint']
-  " load local eslint in the project root to avoid global plugin installations
-  let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-  let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-else
-  let g:neomake_javascript_enabled_makers = ['standard']
-endif
+" let g:ale_completion_enabled = 1
 
 
 " ----------------------------------------------------------------------------
 " ## vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#neomake#enabled = 1
-" let g:airline_theme = 'base16_ocean'
-" let g:airline_theme = 'onedark'
 let g:airline_theme = 'nova'
-" let g:airline#extensions#tabline#left_alt_sep = '░'
-" let g:airline_left_sep = '█▓░'
-" let g:airline_right_sep = '░▓█'
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
@@ -371,62 +334,6 @@ let g:vim_markdown_frontmatter=1
 " ----------------------------------------------------------------------------
 " ## quick-scope
 let g:qs_enable = 0
-
-
-if has('nvim')
-  " ----------------------------------------------------------------------------
-  " ## deoplete
-  let g:deoplete#enable_at_startup = 0
-  let g:deoplete#enable_ignore_case = 0
-  " let g:deoplete#enable_camel_case = 1
-  let g:deoplete#enable_smart_case = 1
-  let g:deoplete#enable_refresh_always = 0
-  let g:deoplete#file#enable_buffer_path = 1
-  let g:deoplete#auto_complete_start_length = 2
-
-  " DEBUGGING:
-  " let g:deoplete#enable_debug = 1
-  " let g:deoplete#enable_profile = 1
-  " call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
-
-  let g:deoplete#sources = {}
-  let g:deoplete#sources._ = ['file', 'buffer', 'vim', 'member', 'dictionary', 'nsnip', 'neosnippet', 'ultisnips', 'ternjs', 'omni']
-
-  " TODO: find a way to check if deoplete exists before calling these:
-  " call deoplete#custom#set('buffer', 'mark', 'buffer')
-  " call deoplete#custom#set('ternjs', 'mark', '')
-  " call deoplete#custom#set('omni', 'mark', 'omni')
-  " call deoplete#custom#set('file', 'mark', 'file')
-  " call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
-
-  " we don't want the completion menu to auto pop-up when we are in text files
-  let g:deoplete#lock_buffer_name_pattern = '\v(\.md|\.txt|\.git\/COMMIT_EDITMSG)'
-
-  let g:deoplete#omni#functions = {}
-  let g:deoplete#omni#functions.javascript = [
-    \ 'tern#Complete'
-  \]
-  " \ 'jspc#omni'
-  let g:deoplete#omni#functions['javascript.jsx'] = [
-    \ 'tern#Complete',
-  \]
-  " \ 'jspc#omni'
-  let g:deoplete#omni#functions.lua = 'xolox#lua#omnifunc'
-  let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
-  let g:deoplete#omni#functions.scss = 'csscomplete#CompleteCSS'
-  let g:deoplete#omni#functions.sass = 'csscomplete#CompleteCSS'
-  let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
-  let g:monster#completion#rcodetools#backend = 'async_rct_complete'
-
-  let g:echodoc_enable_at_startup	= 1
-
-  " NOTE: additional settings found in autocommands.vim and keys.vim
-else
-  " ----------------------------------------------------------------------------
-  " ## completor.vim
-  let g:completor_css_omni_trigger = '([\w-]+|@[\w-]*|[\w-]+:\s*[\w-]*)$'
-  let g:completor_html_omni_trigger = '.*$'
-endif
 
 
 " ----------------------------------------------------------------------------

@@ -6,6 +6,7 @@
 "   Brought to you by: Seth Messer / @megalithic
 "
 " =============================================================================
+
 " vim: set fdm=marker fdl=2 ft=vim sts=2 sw=2 ts=2:
 
 " Automatically download vim-plug, if not present
@@ -99,26 +100,20 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'sbdchd/neoformat'
-  " Plug 'prettier/vim-prettier', {
-  "       \ 'do': 'yarn install',
-  "       \ 'for': ['javascript', 'javascript.jsx', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation
-  " Plug 'ap/vim-readdir' " simple directory browser
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions, for quick horizontal movements
   Plug 'EinfachToll/DidYouMean'
-  " Plug 'itchyny/vim-cursorword' " underlines all occurences the current word / might be slowing scrolling down
-  " Plug 'haya14busa/incsearch.vim' | Plug 'haya14busa/incsearch-fuzzy.vim' " improved incremental searching
   Plug 'haya14busa/is.vim'
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   " Plug 'inside/vim-search-pulse'
   Plug 'Konfekt/FastFold'
   " disabled vim-esearch for now.. useful, but lots of cognitive load
-  Plug 'eugen0329/vim-esearch' " project wide search and replace
+  " Plug 'eugen0329/vim-esearch' " project wide search and replace
 
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'roxma/nvim-completion-manager'

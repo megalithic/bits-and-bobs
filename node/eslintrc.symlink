@@ -1,8 +1,10 @@
 {
-  "extends": [
-    "eslint:recommended"
-  ],
+  "extends": ["airbnb-base", "prettier/react"],
+  "plugins": ["prettier", "react"],
   "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
   "env": {
     "browser": true,
     "es6": true,
@@ -22,15 +24,22 @@
     "ecmascript": 6,
     "jsx": true
   },
-  "plugins": [
-    "react"
-  ],
   "rules": {
     "strict": 0,
-    "quotes": [ "error", "single" ],
+    "quotes": ["error", "single"],
+    "arrow-parens": ["error", "as-needed"],
     "no-unused-vars": 0,
     "camelcase": 0,
     "no-underscore-dangle": 0,
     "semi": 0,
+    "object-curly-newline": [{ "multiline": true, "consistent": true }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": true,
+        "singleQuote": true
+      }
+    ]
   }
 }

@@ -40,7 +40,7 @@ function! s:after_colorscheme()
 
   " FIXME: breaks in nova-vim colorscheme
   hi LineNr guibg=#3C4C55 guifg=#937f6e gui=NONE
-  hi CursorLineNr ctermbg=black ctermfg=223 cterm=NONE guibg=black guifg=#db9c5e gui=bold
+  hi CursorLineNr ctermbg=black ctermfg=223 cterm=NONE guibg=#333333 guifg=#db9c5e gui=bold
   hi qfLineNr ctermbg=black ctermfg=95 cterm=NONE guibg=black guifg=#875f5f gui=NONE
 
   hi TermCursor ctermfg=red
