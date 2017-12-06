@@ -34,16 +34,13 @@ function! s:after_colorscheme()
   " hi ColorColumn ctermbg=bg ctermfg=235 cterm=NONE guibg=bg guifg=#262626 gui=NONE
   " hi signColumn ctermbg=bg ctermfg=230 cterm=NONE guibg=bg guifg=#ffffd7 gui=NONE
   " hi LineNr ctermbg=bg ctermfg=137 cterm=NONE guibg=bg guifg=#af875f gui=NONE
-  " hi ColorColumn ctermbg=bg ctermfg=235 cterm=NONE guibg=bg guifg=#262626 gui=NONE
+  hi ColorColumn ctermbg=black ctermfg=235 cterm=NONE guibg=#444444 guifg=#262626 gui=NONE
   " hi signColumn ctermbg=bg ctermfg=230 cterm=NONE guibg=bg guifg=#ffffd7 gui=NONE
   " hi CursorLine ctermbg=235 ctermfg=NONE cterm=NONE guibg=#262626 guifg=NONE gui=NONE
 
-  " FIXME: breaks in nova-vim colorscheme
   hi LineNr guibg=#3C4C55 guifg=#937f6e gui=NONE
   hi CursorLineNr ctermbg=black ctermfg=223 cterm=NONE guibg=#333333 guifg=#db9c5e gui=bold
   hi qfLineNr ctermbg=black ctermfg=95 cterm=NONE guibg=black guifg=#875f5f gui=NONE
-
-  hi TermCursor ctermfg=red
 
   " ref: https://github.com/aslijiasheng/jacksonvimrc/blob/0a3421a10282bafffa1c660c40cc61b1a44671a1/vimrc/jackson/plugin.vim#L846
   hi Pmenu    gui=NONE    guifg=#c5c8c6 guibg=#373b41
