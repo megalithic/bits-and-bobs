@@ -81,7 +81,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
   Plug 'w0rp/ale'
-  " Plug 'neomake/neomake' " async linting
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
