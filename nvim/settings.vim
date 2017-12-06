@@ -101,25 +101,77 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 
 " ----------------------------------------------------------------------------
 " ## ale
-let g:ale_linters = {
-\  'javascript': ['eslint', 'flow'],
-\  'html': []
-\}
-let g:ale_fixers = {
-\  'javascript': ['eslint'],
-\}
-" let g:ale_javascript_prettier_options = '--trailing-comma es5'
-" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
-let g:ale_fix_on_save = 0
+let g:ale_enabled = 1
+let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
+let g:ale_fixer_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
+
+let g:ale_linters = {}
+let g:ale_linters['javascript'] = ['prettier', 'eslint']
+let g:ale_linters['javascript.jsx'] = ['prettier', 'eslint']
+let g:ale_linters['jsx'] = ['prettier', 'eslint']
+let g:ale_linters['css'] = ['prettier']
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+let g:ale_fixers['javascript.jsx'] = ['prettier', 'eslint']
+let g:ale_fixers['jsx'] = ['prettier', 'eslint']
+let g:ale_fixers['css'] = ['prettier']
+" let g:ale_fixers = {
+" \  'javascript': ['prettier', 'eslint'],
+" \  'javascript.jsx': ['prettier', 'eslint'],
+" \  'css': ['prettier'],
+" \  'sass': ['prettier'],
+" \  'scss': ['prettier'],
+" \}
+
+" Disable for vendor, node_modules
+let g:ale_pattern_options = {
+      \  '.*/vendor/*.go': {
+      \    'ale_enabled': 0
+      \  },
+      \  '.*/node_modules/*.js': {
+      \    'ale_enabled': 0
+      \  },
+      \  '.*/public/components/*.js': {
+      \    'ale_enabled': 0
+      \  }
+      \}
+
+" autocmd FileType scss let g:ale_fix_on_save = 1
+" autocmd FileType css let g:ale_fix_on_save = 1
+" autocmd BufRead *.js let g:ale_javascript_prettier_options = '--single-quote --trailing-comma --arrow-parens "always" --bracket-spacing'
+" autocmd BufRead *.js let g:ale_javascript_prettier_eslint_options = '--single-quote --trailing-comma --arrow-parens "always" --bracket-spacing'
+" autocmd BufRead *.js let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 1
+" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma --arrow-parens "always" --bracket-spacing'
+" let g:ale_javascript_prettier_eslint_options = '--single-quote --trailing-comma --arrow-parens "always" --bracket-spacing'
+
 let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '-'
+let g:ale_sign_warning = '~'
+
 " Don't lint on insert/exit/text
 let g:ale_lint_on_text_changed = 'never'
+
 " You can disable this option too
 " if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 let g:ale_completion_enabled = 1
+
+
+" ----------------------------------------------------------------------------
+" ## neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+
+" if eslintrc file present use eslint, else use standard
+if findfile('.eslintrc', '.;') !=# ''
+  let g:neomake_javascript_enabled_makers = ['eslint']
+  " load local eslint in the project root to avoid global plugin installations
+  let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+  let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+else
+  let g:neomake_javascript_enabled_makers = ['standard']
+endif
 
 
 " ----------------------------------------------------------------------------
@@ -545,6 +597,7 @@ set dictionary=~/.dotfiles/config/nvim/snippets/index.txt
 
 " ----------------------------------------------------------------------------
 " ## prettier
+let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
 
 " single quotes over double quotes
@@ -557,7 +610,10 @@ let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#jsx_bracket_same_line = 'false'
 
 " none|es5|all
-let g:prettier#config#trailing_comma = 'es5'
+let g:prettier#config#trailing_comma = 'all'
+
+" avoid/always
+let g:prettier#config#arrow_parens = 'always'
 
 " flow|babylon|typescript|postcss
 let g:prettier#config#parser = 'flow'

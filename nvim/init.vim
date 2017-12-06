@@ -29,7 +29,8 @@ call plug#begin('~/.config/nvim/plugged')
   " ## JavaScript, et al
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
   " Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
-  Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+  Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
+  " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   " Plug 'moll/vim-node', { 'for': ['javascript'] }
@@ -98,10 +99,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-endwise'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'sbdchd/neoformat'
-  " Plug 'hkupty/iron.nvim' " ctr and cp to send to repl or call previous
-  Plug 'prettier/vim-prettier', {
-        \ 'do': 'yarn install',
-        \ 'for': ['javascript', 'javascript.jsx', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+  " Plug 'prettier/vim-prettier', {
+  "       \ 'do': 'yarn install',
+  "       \ 'for': ['javascript', 'javascript.jsx', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 
   " ----------------------------------------------------------------------------
   " ## Code Navigation

@@ -37,11 +37,11 @@ augroup vimrcEx
   " ## Automagically update remote homeassistant files upon editing locally
   au BufWritePost ~/.dotfiles/private/homeassistant/* silent! :MirrorPush ha
 
-"   " ----------------------------------------------------------------------------
-"   " ## Toggle colorcolumn when in insert mode for visual 80char indicator
-"   au InsertEnter * set colorcolumn=80
-"   au InsertLeave * set colorcolumn=""
-"   " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
+  " ----------------------------------------------------------------------------
+  " ## Toggle colorcolumn when in insert mode for visual 80char indicator
+  au InsertEnter * set colorcolumn=80
+  au InsertLeave * set colorcolumn=""
+  " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
 
   " ----------------------------------------------------------------------------
   " ## Manage GIT related scenarios
@@ -60,18 +60,18 @@ augroup vimrcEx
 "     au VimLeave * call system('tmux set-window automatic-rename on')
 "   endif
 
-"   " ----------------------------------------------------------------------------
-"   " ## Auto-highlighting of things
-"   " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-"   au BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
-"   au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
-"   au BufEnter *.rb syn match error contained "\<binding.pry\>"
-"   au BufEnter *.rb syn match error contained "\<debugger\>"
-"   au BufEnter *.js syn match error contained "\<debugger\>"
-"   au BufEnter *.js syn match error contained "\<console.\>"
-"   au BufEnter *.coffee syn match error contained "\<debugger\>"
-"   " Delete trailing whitespace on write
-"   au BufWrite * silent if &ft!~?'markdown'|:call DeleteTrailingWS()|endif
+  " ----------------------------------------------------------------------------
+  " ## Auto-highlighting of things
+  " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+  au BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
+  au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
+  " au BufEnter *.rb syn match error contained "\<binding.pry\>"
+  " au BufEnter *.rb syn match error contained "\<debugger\>"
+  " au BufEnter *.js syn match error contained "\<debugger\>"
+  " au BufEnter *.js syn match error contained "\<console.\>"
+  " au BufEnter *.coffee syn match error contained "\<debugger\>"
+  " Delete trailing whitespace on write
+  au BufWrite * silent if &ft!~?'markdown'|:call DeleteTrailingWS()|endif
 
 "   " ----------------------------------------------------------------------------
 "   " ## Terminal
@@ -99,7 +99,7 @@ augroup END
 " " -/ Filetypes/Syntax /-------------------------------------------------------
 augroup ft_javascript
   au!
-  au BufRead *.js set filetype=javascript
+  " au BufRead *.js set filetype=javascript
   au BufRead *.es6 set filetype=javascript
   au BufRead *.jsx set filetype=javascript
 
@@ -107,30 +107,32 @@ augroup ft_javascript
   au BufRead,BufNewFile .{babel,eslint,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
   au FileType javascript iabbrev class== className=
-  au BufWritePre client/**/*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
-"   " elm
-"   au BufWritePost *.elm :ElmMake
-"   au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
-"   au FileType elm nmap <buffer> <Leader>E <Plug>(elm-error-detail)
-"   " au FileType elm set tabstop=4 softtabstop=4 shiftwidth=4
+  " autocmd BufWritePost,BufEnter * Neomake
+  " au BufWritePre client/**/*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+
+  " elm
+  au BufWritePost *.elm :ElmMake
+  au FileType elm nmap <buffer> <Leader>D <Plug>(elm-show-docs)
+  au FileType elm nmap <buffer> <Leader>E <Plug>(elm-error-detail)
+  " au FileType elm set tabstop=4 softtabstop=4 shiftwidth=4
 augroup END
 
-" augroup ft_scss
-"   au!
-"   " make sure `complete` works as expected for CSS class names whithout
-"   " messing with motions (eg. '.foo-bar__baz') and we make sure all
-"   " delimiters (_,-,$,%,.) are treated as word separators outside insert mode
-"   au InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
-"   au InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
+augroup ft_scss
+  au!
+  " make sure `complete` works as expected for CSS class names whithout
+  " messing with motions (eg. '.foo-bar__baz') and we make sure all
+  " delimiters (_,-,$,%,.) are treated as word separators outside insert mode
+  au InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
+  au InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
 
-"   " https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/css3-syntax.vim
-"   au FileType css,css.scss,sass,scss setl iskeyword+=-
-"   " au FileType scss set iskeyword+=-
-"   au FileType css,css.scss,sass,scss setl formatoptions+=croql
-"   au BufEnter,BufNewFile,BufRead,BufReadPost *.scss set ft=scss.css
-"   " au BufEnter,BufNewFile,BufRead,BufReadPost *.scss.css set ft=sass
-" augroup END
+  " https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/css3-syntax.vim
+  au FileType css,css.scss,sass,scss setl iskeyword+=-
+  " au FileType scss set iskeyword+=-
+  au FileType css,css.scss,sass,scss setl formatoptions+=croql
+  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss set ft=scss.css
+  " au BufEnter,BufNewFile,BufRead,BufReadPost *.scss.css set ft=sass
+augroup END
 
 augroup ft_markdown
   au!
@@ -142,15 +144,15 @@ augroup ft_markdown
   au FileType markdown set tw=80
 augroup END
 
-" augroup ft_ruby
-"   au!
-"   au FileType ruby setl iskeyword+=_
-" augroup END
+augroup ft_ruby
+  au!
+  au FileType ruby setl iskeyword+=_
+augroup END
 
-" augroup ft_haml
-"   au!
-"   au BufNewFile,BufRead,BufReadPost *.html set ft=haml
-" augroup END
+augroup ft_haml
+  au!
+  au BufNewFile,BufRead,BufReadPost *.html set ft=haml
+augroup END
 
 augroup ft_ssh
   au!
