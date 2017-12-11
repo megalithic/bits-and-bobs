@@ -109,6 +109,7 @@ let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['prettier_eslint', 'prettier', 'eslint']
 let g:ale_linters['jsx'] = ['prettier_eslint', 'prettier', 'eslint']
 let g:ale_linters['css'] = ['prettier']
+let g:ale_linters['json'] = ['prettier']
 
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier_eslint', 'prettier']

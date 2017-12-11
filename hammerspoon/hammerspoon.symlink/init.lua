@@ -5,7 +5,7 @@
 -- :: imports/requires
 -- require 'mpd'
 -- require 'redshift'
-require('control-escape') -- is now handled by karabiner-elements
+-- require('control-escape') -- is now handled by karabiner-elements
 -- require('delete-words')
 -- require('hyper')
 -- require('markdown')
@@ -13,6 +13,7 @@ require('control-escape') -- is now handled by karabiner-elements
 -- require('panes')
 -- require('super')
 -- require('windows')
+require('karabiner')
 
 local utils = require 'utils'
 local wm = require 'wm'
@@ -56,6 +57,9 @@ end
 hotkey.bind(ctrlShift, '[', function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- < - > 27
 hotkey.bind(ctrlShift, '\\', function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end)   -- < \ >
 hotkey.bind(ctrlShift, ']', function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end)         -- < = > 24
+
+hotkey.bind(ctrlShift, 27, function() utils.handleMediaKeyEvents('SOUND_DOWN', 'Volume Down') end) -- < - > 27
+hotkey.bind(ctrlShift, 24, function() utils.handleMediaKeyEvents('SOUND_UP', 'Volume Up') end)         -- < = > 24
 
 -- :: apps
 hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)

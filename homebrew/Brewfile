@@ -49,6 +49,7 @@ brew 'gnupg'
 brew 'grc'
 brew 'gcc49'
 brew 'heroku-toolbelt'
+brew 'hivemind' # foreman replacement
 brew 'htop-osx'
 brew 'hub'
 brew 'imagemagick@6'

@@ -121,6 +121,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set sessionoptions-=options " Do not save settings and mappings to sessions
+set autowriteall " saves buffers as you create or switch
 
 " -----------------------------------------------------------------------------
 " ## Folding
@@ -295,6 +296,7 @@ iab dashbaord dashboard
 iab Dashbaord Dashboard
 iab dashbarod dashboard
 iab Dashbarod Dashboard
+iab canavs canvas
 
 
 " TODO: understand all this better:

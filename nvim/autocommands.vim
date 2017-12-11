@@ -1,21 +1,24 @@
 " " -/ Autocommands /----------------------------------------------
 augroup vimrcEx
-  autocmd!
+  au!
 
-"   " ----------------------------------------------------------------------------
-"   " ## Auto-source vim config files
-"   " autocmd BufWritePost *.vim,*.vimrc so $MYVIMRC
+  " auto save on focuslost
+  au FocusLost * :wa
+
+  " ----------------------------------------------------------------------------
+  " ## Auto-source vim config files
+  " autocmd BufWritePost *.vim,*.vimrc so $MYVIMRC
 
   " ----------------------------------------------------------------------------
   " ## Handle window resizing
-  autocmd VimResized * execute "normal! \<c-w>="
+  au VimResized * execute "normal! \<c-w>="
 
-"   " ----------------------------------------------------------------------------
-"   " ## Handle auto-closing of quickfix buffer
-"   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+  " ----------------------------------------------------------------------------
+  " ## Handle auto-closing of quickfix buffer
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 
   " No formatting on o key newlines
-  autocmd BufNewFile,BufEnter * set formatoptions-=o
+  au BufNewFile,BufEnter * set formatoptions-=o
 
   " ----------------------------------------------------------------------------
   " ## Always put me back a the last known cursor position
