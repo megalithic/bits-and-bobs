@@ -1,1 +1,0 @@
-/Users/replicant/.config/fisherman/tmux/functions/tmux.fish

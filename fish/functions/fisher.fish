@@ -2270,7 +2270,7 @@ Install some plugins\.
 .
 .nf
 
-'"$fisher_cmd_name"' z fzf edc/bass omf/tab
+'"$fisher_cmd_name"' z edc/bass omf/tab
 .
 .fi
 .
@@ -2353,8 +2353,6 @@ Show everything you\'ve installed\.
 @ plugin     # a local directory
 * mono       # the current prompt
   bass
-  fzf
-  thefuck
   z
 .
 .fi
@@ -2394,7 +2392,7 @@ Update some plugins\.
 .
 .nf
 
-'"$fisher_cmd_name"' up bass z fzf
+'"$fisher_cmd_name"' up bass z
 .
 .fi
 .

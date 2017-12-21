@@ -1,1 +1,0 @@
-/Users/replicant/.config/fisherman/fzf/functions/__fzfcmd.fish

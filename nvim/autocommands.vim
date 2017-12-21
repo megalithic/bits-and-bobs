@@ -107,7 +107,7 @@ augroup ft_javascript
   au BufRead *.jsx set filetype=javascript
 
   au FileType javascript highlight xmlAttrib cterm=italic
-  au BufRead,BufNewFile .{babel,eslint,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
+  au BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
   au FileType javascript iabbrev class== className=
 
@@ -133,7 +133,7 @@ augroup ft_scss
   au FileType css,css.scss,sass,scss setl iskeyword+=-
   " au FileType scss set iskeyword+=-
   au FileType css,css.scss,sass,scss setl formatoptions+=croql
-  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss set ft=scss.css
+  au BufEnter,BufNewFile,BufRead,BufReadPost *.scss,*.css set ft=scss.css
   " au BufEnter,BufNewFile,BufRead,BufReadPost *.scss.css set ft=sass
 augroup END
 

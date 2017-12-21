@@ -104,16 +104,17 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 let g:ale_enabled = 1
 let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_fixer_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
+let g:ale_javascript_prettier_use_local_config = 1
 
 let g:ale_linters = {}
-let g:ale_linters['javascript'] = ['prettier_eslint', 'prettier', 'eslint']
-let g:ale_linters['jsx'] = ['prettier_eslint', 'prettier', 'eslint']
+let g:ale_linters['javascript'] = ['prettier', 'eslint']
+let g:ale_linters['jsx'] = ['prettier', 'eslint']
 let g:ale_linters['css'] = ['prettier']
 let g:ale_linters['json'] = ['prettier']
 
 let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier_eslint', 'prettier']
-let g:ale_fixers['jsx'] = ['prettier_eslint', 'prettier']
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['json'] = ['prettier']
 
@@ -130,8 +131,8 @@ let g:ale_pattern_options = {
       \  }
       \}
 
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
-let g:ale_jsx_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
+" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
+" let g:ale_jsx_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '~'

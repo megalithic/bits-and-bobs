@@ -434,6 +434,9 @@ inoremap <c-a> <esc>I
 
 nnoremap <F8> RunCurrentFile()
 
+" jump between each ALE marker (error/warning/etc)
+nmap <silent> <leader>ej :ALENext<cr>
+nmap <silent> <leader>ek :ALEPrevious<cr>
 
 " https://github.com/hkupty/dotfiles/blob/master/nvim/nvim/keybindings.vim
 nmap <leader>S :exec "let cft=&ft \| edit scratchpad \| let &ft=cft"<CR>
