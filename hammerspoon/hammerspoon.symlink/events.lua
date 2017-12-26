@@ -9,6 +9,7 @@ local config = require 'config'
 local utils = require 'utils'
 local wf = hs.window.filter
 local eventsWatcher = hs.uielement.watcher
+local karabiner = require('karabiner')
 
 -- :: globals
 local watchers = {}
@@ -293,6 +294,8 @@ function events.initEventHandling ()
     -- Watch for wifi/ssid changes
     wifiWatcher = hs.wifi.watcher.new(handleWifiEvent)
     wifiWatcher:start()
+
+    karabiner.init()
   end
 
   -- Only init these watchers for my desktop

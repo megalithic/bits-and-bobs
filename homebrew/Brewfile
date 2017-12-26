@@ -133,6 +133,7 @@ cask 'controlplane'
 cask 'cumulus'
 cask 'dashlane'
 cask 'dropbox'
+# install elgato thunderbolt 3 support app: https://www.elgato.com/dock/support
 cask 'elm-platform'
 cask 'encryptMe'
 cask 'firefox'

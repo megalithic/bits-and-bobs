@@ -12,12 +12,12 @@ local selectProfile = nil
 local watcher = nil
 
 handleEvent = (function(event)
-  if event.vendorID == 2131 and event.productID == 273 then
+  if event.vendorID == 1241 and event.productID == 321 then
     if event.eventType == 'added' then
-      log.i('Realforce added')
+      log.i('Pok3r added')
       selectProfile('pok3r')
     else
-      log.i('Realforce removed')
+      log.i('Pok3r removed')
       selectProfile('internal')
     end
   end

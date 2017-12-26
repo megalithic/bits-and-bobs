@@ -2,6 +2,9 @@
 --/ initialize /--
 -------------------------------------------------------------------------------
 
+-- References:
+-- https://github.com/knu/hs-knu
+
 -- :: imports/requires
 -- require 'mpd'
 -- require 'redshift'
@@ -13,8 +16,6 @@
 -- require('panes')
 -- require('super')
 -- require('windows')
-require('karabiner')
-
 local utils = require 'utils'
 local wm = require 'wm'
 local hotkey = require 'hs.hotkey'
