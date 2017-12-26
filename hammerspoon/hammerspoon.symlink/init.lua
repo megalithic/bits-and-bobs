@@ -4,6 +4,9 @@
 
 -- References:
 -- https://github.com/knu/hs-knu
+-- https://github.com/wassimk/dotfiles
+-- https://github.com/tekezo/Karabiner-Elements/issues/137
+
 
 -- :: imports/requires
 -- require 'mpd'
