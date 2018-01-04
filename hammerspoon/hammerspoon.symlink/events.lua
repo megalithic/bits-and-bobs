@@ -9,7 +9,7 @@ local config = require 'config'
 local utils = require 'utils'
 local wf = hs.window.filter
 local eventsWatcher = hs.uielement.watcher
-local karabiner = require('karabiner')
+local usbConfig_laptop = require('usb-config-laptop')
 
 -- :: globals
 local watchers = {}
@@ -289,25 +289,26 @@ function events.initEventHandling ()
     end
   end
 
-  -- Only init these watchers for my laptop
+  -- Only init these watchers for my laptop (replibook, SMesserBook, etc)
   if (config.hostname ~= 'replibox') then
     -- Watch for wifi/ssid changes
     wifiWatcher = hs.wifi.watcher.new(handleWifiEvent)
     wifiWatcher:start()
 
-    karabiner.init()
+    -- usb watcher for laptop, specifically
+    usbConfig_laptop.init()
   end
 
   -- Only init these watchers for my desktop
   if (config.hostname == 'replibox') then
-    -- Watch for usb device changes.
+    -- usb watcher for desktop, specifically
     usbWatcher = hs.usb.watcher.new(handleUsbEvent)
     usbWatcher:start()
-
-    -- Watch for screen energy mode changes
-    caffeinateWatcher = hs.caffeinate.watcher.new(handleCaffeinateEvent)
-    caffeinateWatcher:start()
   end
+
+  -- Watch for screen energy mode changes
+  caffeinateWatcher = hs.caffeinate.watcher.new(handleCaffeinateEvent)
+  caffeinateWatcher:start()
 
   config.applyLayout()
 end

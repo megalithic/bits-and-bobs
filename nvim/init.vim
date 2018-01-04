@@ -255,7 +255,7 @@ set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
 set noerrorbells
 set novisualbell
-" set relativenumber number " fully handled in nvim/autocommands.vim
+set number relativenumber
 set splitbelow
 set splitright
 set noshowmode
