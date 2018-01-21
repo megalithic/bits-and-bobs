@@ -16,12 +16,12 @@ handleEvent = (function(event)
   -- things based on being "docked".
   if event.vendorID == 1241 and event.productID == 321 then
     if event.eventType == 'added' then
-      log.i('Pok3r added')
+      log.i('Pok3r added; presumably docked.')
       selectProfile('pok3r')
       toggleWifi('off')
       selectAudioOutput('Audioengine D1')
     else
-      log.i('Pok3r removed')
+      log.i('Pok3r removed; presumably undocked.')
       selectProfile('internal')
       toggleWifi('on')
       selectAudioOutput('Built-in Output')
@@ -44,7 +44,7 @@ end)
 
 toggleWifi = (function(state)
   hs.execute(
-    'networksetup -setairportpower airport' ..
+    'networksetup -setairportpower airport ' ..
     state
   )
 end)

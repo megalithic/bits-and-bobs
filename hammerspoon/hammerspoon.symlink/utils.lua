@@ -88,7 +88,8 @@ utils.handleMediaKeyEvents = function (event, alertText)
   hs.eventtap.event.newSystemKeyEvent(event, true):post()
   if alertText then
     hs.alert.closeAll()
-    hs.alert.show(alertText, 1)
+    -- hs.alert.show(alertText, 0.5)
+    hs.timer.doAfter(0.5, function () hs.alert.show(hs.spotify.getCurrentArtist() .. " - " .. hs.spotify.getCurrentTrack(), 1) end)
   end
 end
 

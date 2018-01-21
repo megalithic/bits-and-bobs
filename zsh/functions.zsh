@@ -297,9 +297,10 @@ alias cdm=mcd
 
 cdf() { cd *$1*/ } # stolen from @topfunky
 
-port\?() { lsof -iTCP:$1 }
+# port\?() { lsof -n -i4TCP:$1 }
+portchk() { lsof -n -i4TCP:$1 }
 
-\?() { check $1 }
+# \?() { check $1 }
 
 freplace() {find  . -type f | grep "$0" | xargs sed -i "" 's,$1\$,$2,'}
 

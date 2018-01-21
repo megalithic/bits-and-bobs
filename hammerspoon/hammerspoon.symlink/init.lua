@@ -58,7 +58,7 @@ keyUpDown = function(modifiers, key)
 end
 
 -- :: media
-hotkey.bind(ctrlShift, '[', function() utils.handleMediaKeyEvents('PREVIOUS', '⇤ previous') end) -- < - > 27
+hotkey.bind(ctrlShift, '[', function() utils.handleMediaKeyEvents('PREVIOUS', "⇤ previous") end) -- < - > 27
 hotkey.bind(ctrlShift, '\\', function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end)   -- < \ >
 hotkey.bind(ctrlShift, ']', function() utils.handleMediaKeyEvents('NEXT', 'next ⇥') end)         -- < = > 24
 
