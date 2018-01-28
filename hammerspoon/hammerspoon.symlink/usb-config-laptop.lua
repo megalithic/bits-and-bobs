@@ -19,12 +19,12 @@ handleEvent = (function(event)
       log.i('Pok3r added; presumably docked.')
       selectProfile('pok3r')
       toggleWifi('off')
-      selectAudioOutput('Audioengine D1')
+      selectAudioOutput('"Audioengine D1"')
     else
       log.i('Pok3r removed; presumably undocked.')
       selectProfile('internal')
       toggleWifi('on')
-      selectAudioOutput('Built-in Output')
+      selectAudioOutput('"Built-in Output"')
     end
   end
 end)

@@ -1098,7 +1098,7 @@ augroup vimrcEx
   au!
 
   " auto save on focuslost
-  au FocusLost * :wa
+  " au FocusLost * :wa
 
   " ----------------------------------------------------------------------------
   " ## Auto-source vim config files
