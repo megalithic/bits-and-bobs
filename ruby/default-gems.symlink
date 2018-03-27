@@ -2,10 +2,12 @@ bundler
 coderay
 curses
 fastri
+foreman
 neovim
 pry
 rcodetools
 rubocop
+sidekiq
 teamocil
 terminal-notifier
 weechat
