@@ -146,7 +146,6 @@ cask 'licecap'
 # cask 'mysimbl'
 cask 'near-lock'
 cask 'postgres'
-system "createuser -s -r postgres"
 cask 'shiori'
 cask 'slack'
 cask 'spotify'
@@ -165,7 +164,3 @@ mas 'Spark', id: 1176895641
 mas 'Tweetbot', id: 557168941
 mas 'Xcode', id: 497799835
 
-system "ln -s /usr/local/bin/gcc-4.9 /usr/local/bin/gcc"
-# system "/usr/local/opt/fzf/install"
-# system "echo /usr/local/bin/bash >> /etc/shells"
-# system "chsh -s /usr/local/bin/bash"
