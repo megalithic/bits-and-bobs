@@ -3,6 +3,7 @@
 echo "does node things"
 
 curl -L https://git.io/n-install | bash -s -- -y lts
+source .
 n lts
 
 cat ~/.dotfiles/node/packages | xargs npm i -g
