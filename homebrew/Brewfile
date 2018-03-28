@@ -66,7 +66,7 @@ brew 'moreutils'
 brew 'mysql'
 brew 'mycli'
 # brew 'mysql@5.6'
-brew 'n'
+# brew 'n'
 brew 'ncdu'
 brew 'ncurses'
 brew 'neovim', args: ['with-lua', 'with-perl', 'with-ruby']
