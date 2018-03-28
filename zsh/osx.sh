@@ -28,4 +28,14 @@ sudo ln -sfv $HOME/.dotfiles/zsh/zshenv.symlink /etc/zshenv
 
 # source ${ZDOTDIR:-${HOME}}/.zlogin
 
+# ASDF setup
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.4.3
+echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.zshrc
+echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.zshrc
+
+source ~/.zshrc
+
+asdf local ruby 2.3.1
+asdf local nodejs 8.0.0
+
 echo "finished extra zsh setup"
