@@ -32,7 +32,7 @@ then
   brew bundle --file=~/Brewfile
   sudo xcodebuild -license accept
   
-  ln -s /usr/local/bin/gcc-4.9 /usr/local/bin/gcc
+  ln -sfv /usr/local/bin/gcc-4.9 /usr/local/bin/gcc
   createuser -s -r postgres
 
 # system "/usr/local/opt/fzf/install"
