@@ -36,8 +36,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'elzr/vim-json', { 'for': ['json'] }
   " Plug 'moll/vim-node', { 'for': ['javascript'] }
   Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
-  " Plug 'HerringtonDarkholme/yats.vim'
-  " Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript'] }
+  Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'] }
 
 
   " ----------------------------------------------------------------------------
@@ -175,14 +176,11 @@ if has('nvim')
 
   let os=substitute(system('uname'), '\n', '', '')
   if os == 'Darwin' || os == 'Mac'
-    let g:python_host_prog='/usr/local/bin/python2'
     let g:python3_host_prog='/usr/local/bin/python3'
   elseif os == 'Linux'
-    let g:python_host_prog='/usr/bin/python2'
     let g:python3_host_prog='/usr/bin/python3'
   endif
 
-  let g:python_host_skip_check = 1
   let g:python3_host_skip_check = 1
 else
   colorscheme nova
@@ -1200,6 +1198,8 @@ augroup ft_javascript
   " au BufRead *.js set filetype=javascript
   au BufRead *.es6 set filetype=javascript
   au BufRead *.jsx set filetype=javascript
+  " au BufRead *.tsx set filetype=typescript
+  " au BufRead *.ts set filetype=typescript
 
   au FileType javascript highlight xmlAttrib cterm=italic
   au BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json

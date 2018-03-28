@@ -6,7 +6,7 @@ set -e
 
 # Prepare custom settings for Karabiner-Elements
 # https://github.com/tekezo/Karabiner-Elements/issues/597#issuecomment-282760186
-ln -sfvn ~/.dotfiles/keyboard/karabiner ~/.config/
+ln -sfvn ~/.dotfiles/keyboard/karabiner ~/.config
 
 # Disable Dock icon for Hammerspoon
 defaults write org.hammerspoon.Hammerspoon MJShowDockIconKey -bool FALSE
@@ -15,8 +15,8 @@ defaults write org.hammerspoon.Hammerspoon MJShowDockIconKey -bool FALSE
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+# defaults write NSGlobalDomain KeyRepeat -int 1
+# defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Open Apps
 open /Applications/Hammerspoon.app

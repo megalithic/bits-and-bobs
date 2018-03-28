@@ -33,7 +33,7 @@ git clone https://github.com/megalithic/bits-and-bobs .dotfiles
 cd .dotfiles
 
 script/homebrew
-script/generic
-script/platform
+# script/generic
+# script/platform
 script/symlinks
 script/private

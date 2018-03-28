@@ -13,14 +13,14 @@ eslint-plugin-prettier
 javascript-typescript-langserver
 jest
 mocha
+neovim
 netlify-cli
 preact-cli
 prettier
 serverless
 stylelint
 stylelint-config-standard
-webpack
-webpack-dev-server
+typescript
 vscode-css-languageserver-bin
 vscode-html-languageserver-bin
 vscode-json-languageserver-bin

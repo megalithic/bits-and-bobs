@@ -97,8 +97,9 @@ source ~/.dotfiles/bin/z.sh
 #   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # fi
 
-# tabtab source for yarn package
-# uninstall by removing these lines or running `tabtab uninstall yarn`
-[[ -f /Users/replicant/.config/yarn/global/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/replicant/.config/yarn/global/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/replicant/n/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/replicant/n/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/replicant/n/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/replicant/n/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
