@@ -28,21 +28,22 @@ sudo ln -sfv $HOME/.dotfiles/zsh/zshenv.symlink /etc/zshenv
 
 # source ${ZDOTDIR:-${HOME}}/.zlogin
 
-# ASDF setup
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.4.3
-echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.zshrc
-echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.zshrc
-
-source ~/.zshrc
-
-asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-
-asdf local ruby 2.3.1
-asdf local nodejs 8.0.0
-
-RUBIES=(~/.rubies/*)
-cat ~/.dotfiles/ruby/default-gems.symlink | xargs gem install
+echo "setting up node things"
+curl -L https://git.io/n-install | bash -s -- -y lts
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+n lts
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+avn setup
 cat ~/.dotfiles/node/packages | xargs npm i -g
+echo "done"
+
+echo "setting up ruby things"
+ruby-install ruby 2.3.1
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+RUBIES=(~/.rubies/*)
+chruby ruby-2.3.1
+cat ~/.dotfiles/ruby/default-gems.symlink | xargs gem install
+echo "done"
 
 echo "finished extra zsh setup"

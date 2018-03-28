@@ -100,3 +100,5 @@ source ~/.dotfiles/bin/z.sh
 # tabtab source for yarn package
 # uninstall by removing these lines or running `tabtab uninstall yarn`
 [[ -f /Users/replicant/.config/yarn/global/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/replicant/.config/yarn/global/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

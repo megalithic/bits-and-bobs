@@ -1,16 +1,15 @@
-# #!/bin/sh
+#!/bin/sh
 
-#echo "setting up ruby things"
+# echo "setting up ruby things"
 
-#ruby-install ruby 2.3.1
+# ruby-install ruby 2.3.1
 
 # source /usr/local/share/chruby/chruby.sh
 # source /usr/local/share/chruby/auto.sh
-#RUBIES=(~/.rubies/*)
+# RUBIES=(~/.rubies/*)
 
 # chruby ruby-2.3.1
 
-#RUBIES=(~/.rubies/*)
-#cat ~/.dotfiles/ruby/default-gems.symlink | xargs gem install
+# cat ~/.dotfiles/ruby/default-gems.symlink | xargs gem install
 
-#echo "done"
+# echo "done"
