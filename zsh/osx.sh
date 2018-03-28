@@ -41,4 +41,7 @@ asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf local ruby 2.3.1
 asdf local nodejs 8.0.0
 
+RUBIES=(~/.rubies/*)
+cat ~/.dotfiles/ruby/default-gems.symlink | xargs gem install
+
 echo "finished extra zsh setup"
