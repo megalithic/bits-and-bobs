@@ -43,5 +43,6 @@ asdf local nodejs 8.0.0
 
 RUBIES=(~/.rubies/*)
 cat ~/.dotfiles/ruby/default-gems.symlink | xargs gem install
+cat ~/.dotfiles/node/packages | xargs npm i -g
 
 echo "finished extra zsh setup"
