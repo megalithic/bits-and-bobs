@@ -33,7 +33,7 @@ then
   sudo xcodebuild -license accept
   
   ln -sfv /usr/local/bin/gcc-4.9 /usr/local/bin/gcc
-  createuser -s -r postgres
+  # createuser -s -r postgres
 
 # system "/usr/local/opt/fzf/install"
 # system "echo /usr/local/bin/bash >> /etc/shells"
