@@ -70,9 +70,9 @@ config.layout = {
     local count = forceScreenCount or screenCount
     if count == 1 then
       -- grid.set(window, config.grid.rightHalf, config.primaryDisplay(count))
-      grid.set(window, config.grid.rightOneThird, config.secondaryDisplay(count))
+      grid.set(window, config.grid.rightOneThird, config.primaryDisplay(count))
     else
-      grid.set(window, config.grid.rightOneThird, config.secondaryDisplay(count))
+      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
     end
   end),
 
@@ -122,24 +122,19 @@ config.layout = {
     end
   end),
 
+  ['us.zoom.xos'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    if count == 1 then
+      grid.set(window, centeredMedium, config.primaryDisplay(count))
+    else
+      grid.set(window, fullScreen, config.secondaryDisplay(count))
+    end
+  end),
+
   ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),
-
-  -- ['org.gnu.Emacs'] = (function(window, forceScreenCount)
-  --   local count = forceScreenCount or screenCount
-  --   grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
-  -- end),
-
-  -- ['co.zeit.hyperterm'] = (function(window, forceScreenCount)
-  --   local count = forceScreenCount or screenCount
-  --   if count == 1 then
-  --     grid.set(window, '0,0 8x8', config.primaryDisplay(count))
-  --   else
-  --     grid.set(window, '0,0 8x8', config.primaryDisplay(count))
-  --   end
-  -- end),
 
   ['com.agilebits.onepassword4'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
@@ -166,8 +161,8 @@ config.layout = {
     if count == 1 then
       grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
     else
-      if window:title() == 'Postman' then
-        grid.set(window, config.grid.centeredLarge, config.secondaryDisplay(count))
+      if window:title() == 'Postman' or window:title() == 'Task Manager - Google Chrome' then
+        grid.set(window, config.grid.centeredMedium, config.secondaryDisplay(count))
       else
         grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
       end
@@ -199,27 +194,22 @@ config.layout = {
 -- NOTE: if you have more than 2 displays, please
 -- alter the following display functions as necessary
 function config.primaryDisplay(count)
-  if (config.hostname == 'replibox') then
-    -- utils.log.df('[layout] screen event; using primary screen %s', hs.screen.find(config.screens.primary))
+  if count > 1 then
     return hs.screen.find(config.screens.primary)
+  else
+    return hs.screen.find(config.screens.laptop)
   end
 
-  -- utils.log.df('[layout] screen event; using laptop screen %s', hs.screen.find(config.screens.laptop))
   return hs.screen.find(config.screens.laptop)
 end
 
 function config.secondaryDisplay(count)
-  if (config.hostname == 'replibox') then
-    if count == 1 then
-      -- utils.log.df('[layout] screen event; using primary screen %s', hs.screen.find(config.screens.primary))
-      return hs.screen.find(config.screens.primary)
-    end
-
-    -- utils.log.df('[layout] screen event; using secondary screen %s', hs.screen.find(config.screens.secondary))
-    return hs.screen.find(config.screens.secondary)
+  if count > 1 then
+    return hs.screen.find(config.screens.laptop)
+  else
+    return hs.screen.find(config.screens.primary)
   end
 
-  -- utils.log.df('[layout] screen event; using laptop screen %s', hs.screen.find(config.screens.laptop))
   return hs.screen.find(config.screens.laptop)
 end
 
