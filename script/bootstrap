@@ -32,8 +32,39 @@ cd
 git clone https://github.com/megalithic/bits-and-bobs .dotfiles
 cd .dotfiles
 
+# app/system installers
 script/homebrew
+
+# TODO: get these working again, but take care of order of things
 # script/generic
 # script/platform
+
+# setup all zsh things
+sh zsh/install.sh
+
+# node packages and versions
+sh node/install.sh
+
+# ruby packages and versions
+sh ruby/install.sh
+
+# python packages and versions
+sh python/install.sh
+
+# tmux plugins
+sh tmux/install.sh
+
+# terminfo configuration
+sh terminfo/install.sh
+
+# macOS defaults changes and tweaks
+sh osx/install.sh
+
+# symlink all the things to all their places
 script/symlinks
+
+# keyboard/karabiner specific configurations
+sh keyboard/install.sh
+
+# setup private repo things for secretz
 script/private
