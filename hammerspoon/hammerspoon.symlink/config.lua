@@ -112,9 +112,14 @@ config.layout = {
     end
   end),
 
+  -- this one gets wonky because of the fact that it spawns a popup then a window.
   ['us.zoom.xos'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
+    if count == 1 then
+      grid.set(window, config.grid.centerMedium, config.primaryDisplay(count))
+    else
+      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
+    end
   end),
 
   ['com.googlecode.iterm2'] = (function(window, forceScreenCount)
