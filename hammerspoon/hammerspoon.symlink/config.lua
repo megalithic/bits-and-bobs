@@ -102,16 +102,6 @@ config.layout = {
     end
   end),
 
-  ['google-play-music-desktop-player'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
-  end),
-
-  ['com.github.radiant-player'] = (function(window, forceScreenCount)
-    local count = forceScreenCount or screenCount
-    grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
-  end),
-
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
@@ -124,11 +114,7 @@ config.layout = {
 
   ['us.zoom.xos'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count > 1 then
-      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
-    else
-      grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
-    end
+    grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
   end),
 
   ['com.googlecode.iterm2'] = (function(window, forceScreenCount)

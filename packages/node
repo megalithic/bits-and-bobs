@@ -10,6 +10,7 @@ eslint
 eslint-config-prettier
 eslint-plugin-react
 eslint-plugin-prettier
+exp
 javascript-typescript-langserver
 jest
 mocha

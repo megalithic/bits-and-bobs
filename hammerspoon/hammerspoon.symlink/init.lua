@@ -66,14 +66,17 @@ hotkey.bind(ctrlShift, 27, function() utils.handleMediaKeyEvents('SOUND_DOWN', '
 hotkey.bind(ctrlShift, 24, function() utils.handleMediaKeyEvents('SOUND_UP', '') end)         -- < = > 24
 
 -- :: apps
+hotkey.bind('ctrl', '`', function() utils.toggleApp('Finder') end)
 hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind('ctrl', 'return', function() utils.toggleApp('com.google.Chrome') end)
+hotkey.bind('ctrl', 'return', function() utils.toggleApp('com.google.Chrome') end)
 hotkey.bind('cmd', '`', function() utils.toggleApp('com.google.Chrome') end)
 hotkey.bind('cmd', 'f4', function() utils.toggleApp('com.readdle.smartemail-Mac') end)
+hotkey.bind(mashShift, 'm', function() utils.toggleApp('com.readdle.smartemail-Mac') end)
 hotkey.bind('cmd', 'f5', function() utils.toggleApp('com.tapbots.TweetbotMac') end)
 hotkey.bind('cmd', 'f6', function() utils.toggleApp('com.tinyspeck.slackmacgap') end)
-hotkey.bind('cmd', 'f8', function() utils.toggleApp('com.spotify.client') end)
+hotkey.bind(mashShift, 's', function() utils.toggleApp('com.tinyspeck.slackmacgap') end)
 hotkey.bind(cmdShift, '8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdCtrl, '8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)
