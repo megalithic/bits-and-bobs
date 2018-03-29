@@ -124,10 +124,10 @@ config.layout = {
 
   ['us.zoom.xos'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, centeredMedium, config.primaryDisplay(count))
+    if count > 1 then
+      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
     else
-      grid.set(window, fullScreen, config.secondaryDisplay(count))
+      grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
     end
   end),
 

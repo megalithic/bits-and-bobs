@@ -62,8 +62,8 @@ hotkey.bind(ctrlShift, '[', function() utils.handleMediaKeyEvents('PREVIOUS', "â
 hotkey.bind(ctrlShift, '\\', function() utils.handleMediaKeyEvents('PLAY', 'play/pause') end)   -- < \ >
 hotkey.bind(ctrlShift, ']', function() utils.handleMediaKeyEvents('NEXT', 'next â‡¥') end)         -- < = > 24
 
-hotkey.bind(ctrlShift, 27, function() utils.handleMediaKeyEvents('SOUND_DOWN', 'Volume Down') end) -- < - > 27
-hotkey.bind(ctrlShift, 24, function() utils.handleMediaKeyEvents('SOUND_UP', 'Volume Up') end)         -- < = > 24
+hotkey.bind(ctrlShift, 27, function() utils.handleMediaKeyEvents('SOUND_DOWN', '') end) -- < - > 27
+hotkey.bind(ctrlShift, 24, function() utils.handleMediaKeyEvents('SOUND_UP', '') end)         -- < = > 24
 
 -- :: apps
 hotkey.bind(cmdCtrl, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
@@ -76,42 +76,7 @@ hotkey.bind('cmd', 'f6', function() utils.toggleApp('com.tinyspeck.slackmacgap')
 hotkey.bind('cmd', 'f8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdShift, '8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdCtrl, '8', function() utils.toggleApp('com.spotify.client') end)
-hotkey.bind(cmdShift, 'f8', function() utils.toggleApp('google-play-music-desktop-player') end)
-hotkey.bind(mashShift, 'f8', function() utils.toggleApp('com.sajidanwar.Radiant-Player') end)
 hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)
-
--- hotkey.bind({'ctrl'}, 'delete', nil, function() hs.eventtap.keyStroke({}, 'forwarddelete') end, nil, function() hs.eventtap.keyStroke({}, 'forwarddelete') end)
-
--- Catch fn-h and convert it to a left arrow key.
--- function fnKeyCatcher(event)
---   local mappings_tbl = {
---     ['h'] = 'left',
---     ['j'] = 'down',
---     ['k'] = 'up',
---     ['l'] = 'right'
---   }
-
--- ////////////////////////////////////////
--- TODO:
--- need to map the above table into a way to fir the correct eventtap event
--- ////////////////////////////////////////
-
---   local func = c_tbl[choice]
---   if(func) then
---     func()
---   else
---     print " The program has been terminated."
---     print " Thank you!";
---   end
-
---   if event:getFlags()['fn'] and event:getCharacters() == "h" then
---     print("fn-h!")
---     return true, {hs.eventtap.event.newKeyEvent({}, "left", true)}
---   end
---   return false
--- end
-
--- local keyMapper = hs.eventtap.new({hs.eventtap.event.types.keyDown}, fnKeyCatcher):start()
 
 -- :: window manipulation
 hotkey.bind(cmdCtrl, 'h', utils.chain({
