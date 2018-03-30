@@ -82,6 +82,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
   Plug 'w0rp/ale'
+  " Plug 'neomake/neomake'
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
@@ -125,6 +126,10 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+
+  Plug 'epilande/vim-es2015-snippets'
+  Plug 'epilande/vim-react-snippets'
+  Plug 'SirVer/ultisnips'
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
@@ -550,7 +555,30 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 
 
 " ----------------------------------------------------------------------------
-" ## ale
+" ## linting (neomake/ale)
+let g:standard_prettier_settings = {
+      \ 'exe': 'prettier',
+      \ 'args': ['--stdin', '--stdin-filepath', '%:p', '--single-quote'],
+      \ 'stdin': 1,
+      \ }
+" Full config: when writing or reading a buffer, and on changes in insert and
+" normal mode (after 1s; no delay when writing).
+" call neomake#configure#automake('nrwi', 500)
+
+let g:neomake_error_sign = {'text': '✖'}
+let g:neomake_warning_sign = {'text': '~'}
+let g:airline#extensions#neomake#error_symbol='✖ '
+let g:airline#extensions#neomake#warning_symbol='~  '
+let g:neoformat_javascript_prettier = g:standard_prettier_settings
+let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_typescript_prettier = g:standard_prettier_settings
+let g:neoformat_enabled_typescript = ['prettier']
+let g:neoformat_enabled_html = ['htmlbeautify']
+let g:neoformat_scss_prettier = g:standard_prettier_settings
+let g:neoformat_enabled_scss = ['prettier']
+let g:neoformat_markdown_prettier = g:standard_prettier_settings
+let g:neoformat_enabled_markdown = ['prettier']
+
 let g:ale_enabled = 1
 let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_fixer_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
@@ -581,8 +609,9 @@ let g:ale_pattern_options = {
       \  }
       \}
 
-" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
-" let g:ale_jsx_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
+let g:ale_typescript_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
+let g:ale_jsx_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '~'
@@ -591,7 +620,6 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
-" let g:ale_completion_enabled = 1
 
 
 " ----------------------------------------------------------------------------
@@ -629,6 +657,44 @@ let javascript_enable_domhtmlcss = 1
 let loaded_matchit = 1
 let g:js_indent_log = 1
 let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3'
+
+" ----------------------------------------------------------------------------
+" ## nvim-typescript
+let g:nvim_typescript#max_completion_detail=100
+let g:nvim_typescript#completion_mark=''
+" let g:nvim_typescript#default_mappings=1
+" let g:nvim_typescript#type_info_on_hold=1
+let g:nvim_typescript#javascript_support=1
+let g:nvim_typescript#vue_support=1
+let g:nvim_typescript#kind_symbols = {
+    \ 'keyword': 'keyword',
+    \ 'class': '',
+    \ 'interface': '',
+    \ 'script': 'script',
+    \ 'module': '',
+    \ 'local class': 'local class',
+    \ 'type': '',
+    \ 'enum': '',
+    \ 'enum member': '',
+    \ 'alias': '',
+    \ 'type parameter': 'type param',
+    \ 'primitive type': 'primitive type',
+    \ 'var': '',
+    \ 'local var': '',
+    \ 'property': '',
+    \ 'let': '',
+    \ 'const': '',
+    \ 'label': 'label',
+    \ 'parameter': 'param',
+    \ 'index': 'index',
+    \ 'function': '',
+    \ 'local function': 'local function',
+    \ 'method': '',
+    \ 'getter': '',
+    \ 'setter': '',
+    \ 'call': 'call',
+    \ 'constructor': '',
+    \}
 
 
 " ----------------------------------------------------------------------------
@@ -949,33 +1015,31 @@ if !exists('g:esearch')
 endif
 
 " ----------------------------------------------------------------------------
-" ## vim-minisnip
-let g:minisnip_dir = '~/.dotfiles/config/nvim/snippets'
-set dictionary=~/.dotfiles/config/nvim/snippets/index.txt
+" ## ultisnips
 
 
 " ----------------------------------------------------------------------------
 " ## prettier
-let g:prettier#quickfix_enabled = 0
-let g:prettier#autoformat = 0
+" let g:prettier#quickfix_enabled = 0
+" let g:prettier#autoformat = 0
 
-" single quotes over double quotes
-let g:prettier#config#single_quote = 'true'
+" " single quotes over double quotes
+" let g:prettier#config#single_quote = 'true'
 
-" print spaces between brackets
-let g:prettier#config#bracket_spacing = 'true'
+" " print spaces between brackets
+" let g:prettier#config#bracket_spacing = 'true'
 
-" put > on the last line instead of new line
-let g:prettier#config#jsx_bracket_same_line = 'false'
+" " put > on the last line instead of new line
+" let g:prettier#config#jsx_bracket_same_line = 'false'
 
-" none|es5|all
-let g:prettier#config#trailing_comma = 'all'
+" " none|es5|all
+" let g:prettier#config#trailing_comma = 'all'
 
-" avoid/always
-let g:prettier#config#arrow_parens = 'always'
+" " avoid/always
+" let g:prettier#config#arrow_parens = 'always'
 
-" flow|babylon|typescript|postcss
-let g:prettier#config#parser = 'flow'
+" " flow|babylon|typescript|postcss
+" let g:prettier#config#parser = 'flow'
 
 
 " -/ Custom Functions /--------------------------------------------
