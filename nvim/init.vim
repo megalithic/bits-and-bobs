@@ -29,19 +29,16 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
-  " Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
-  " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
-  " Plug 'moll/vim-node', { 'for': ['javascript'] }
   Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
   Plug 'HerringtonDarkholme/yats.vim'
   Plug 'leafgarland/typescript-vim'
-  Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'], 'do': 'npm i -g typescript' }
+  Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'], 'do': 'npm i -g typescript @types' }
   Plug 'Quramy/vim-js-pretty-template'
   Plug 'reasonml-editor/vim-reason-plus', { 'do': 'npm i -g reason'  }
-  Plug 'mhartington/vim-typings', { 'do': 'npm i -g typings'  }
+  " Plug 'mhartington/vim-typings', { 'do': 'npm i -g typings'  }
 
 
   " ----------------------------------------------------------------------------
@@ -61,13 +58,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
-  Plug 'mattn/emmet-vim'
+  " Plug 'mattn/emmet-vim'
 
   " ----------------------------------------------------------------------------
   " ## Ruby, Rails, et al
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
-  " Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install fastri rcodetools' }
+  Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install fastri rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 
@@ -489,14 +486,8 @@ let g:standard_prettier_settings = {
       \ 'args': ['--stdin', '--stdin-filepath', '%:p', '--single-quote'],
       \ 'stdin': 1,
       \ }
-" Full config: when writing or reading a buffer, and on changes in insert and
-" normal mode (after 1s; no delay when writing).
-" call neomake#configure#automake('nrwi', 500)
-
 let g:neomake_error_sign = {'text': '✖'}
 let g:neomake_warning_sign = {'text': '~'}
-let g:airline#extensions#neomake#error_symbol='✖ '
-let g:airline#extensions#neomake#warning_symbol='~  '
 let g:neoformat_javascript_prettier = g:standard_prettier_settings
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_typescript_prettier = g:standard_prettier_settings
@@ -560,6 +551,8 @@ let g:ale_lint_on_save = 1
 " ## vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#neomake#enabled = 1
+let g:airline#extensions#neomake#error_symbol='✖ '
+let g:airline#extensions#neomake#warning_symbol='~  '
 let g:airline_theme = 'nova'
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline_left_sep = ''
@@ -575,11 +568,9 @@ let g:airline#extensions#ale#enabled = 1
 " ## vim-better-javascript-completion
 let g:vimjs#casesensistive = 1
 " Enabled by default. flip the value to make completion matches case insensitive
-
 let g:vimjs#smartcomplete = 0
 " Disabled by default. Enabling this will let vim complete matches at any location
 " e.g. typing 'ocument' will suggest 'document' if enabled.
-
 let g:vimjs#chromeapis = 0
 " Disabled by default. Toggling this will enable completion for a number of Chrome's JavaScript extension APIs
 
@@ -590,7 +581,7 @@ let g:JSHintHighlightErrorLine = 1
 let javascript_enable_domhtmlcss = 1
 let loaded_matchit = 1
 let g:js_indent_log = 1
-let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3'
+let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3,typescript,reactnative,react-native'
 
 " ----------------------------------------------------------------------------
 " ## nvim-typescript
@@ -599,7 +590,6 @@ let g:nvim_typescript#completion_mark=''
 " let g:nvim_typescript#default_mappings=1
 " let g:nvim_typescript#type_info_on_hold=1
 let g:nvim_typescript#javascript_support=1
-let g:nvim_typescript#vue_support=1
 let g:nvim_typescript#kind_symbols = {
     \ 'keyword': 'keyword',
     \ 'class': '',
@@ -729,17 +719,6 @@ endfunction
 
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split'
-
-" if expand('%:t') =~ '_spec.js'
-"   let test#javascript#jest#executable = 'yarn run cypress:run:one'
-" else
-"   let test#javascript#jest#executable = 'yarn test'
-" endif
-
-" let g:test#javascript#mocha#file_pattern = ".test.js"
-" "  `-A` turns on async mode for tests
-" let g:test#javascript#mocha#options = '-A --compilers js:babel-register --require ignore-styles --require app/javascript/scripts/test-setup.js'
-
 let test#ruby#rspec#options = '-f d'
 let test#ruby#bundle_exec = 1
 
@@ -792,7 +771,6 @@ let g:tern#filetypes = [
       \ 'jsx',
       \ 'javascript',
       \ 'javascript.jsx',
-      \ 'typescript',
       \ 'vue'
       \ ]
 let g:tern_show_argument_hints = 'on_hold' "on_move
@@ -811,6 +789,7 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
+
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -824,63 +803,6 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-
-" let g:fzf#proj#project_dir = '~/code'
-" let g:fzf#proj#max_proj_depth = 2
-" let g:fzf#proj#project#open_new_tab = 0
-
-" let s:project_dir = '~/code'
-" let s:project_cmd = "find ".s:project_dir." -maxdepth 3 -name '.git' -printf '%h\n'"
-" let s:TYPE = {'dict': type({}), 'funcref': type(function('call')), 'string': type('')}
-" let s:edited_cmd = "git status --porcelain"
-" let s:diff_master_cmd = "git diff master..HEAD --name-only"
-
-" function! s:grep_files(arg, path, bang)
-"   call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" ' . shellescape(a:arg) . ' ' . shellescape(a:path), 1, a:bang)
-" endfunction
-
-" function! s:pre_grep(tests, bang)
-"   call inputsave()
-"   let query = input("search " . (a:tests ? "all" : "code") . " → ")
-"   call inputrestore()
-"   call s:grep_files(query, a:tests ? "." : "src/", a:bang)
-" endfunction
-
-" function! s:open(args)
-"   let [_, fname] = a:args
-"   if fname =~ " "
-"     let [_, fname] = split(fname, ' ')
-"   endif
-"   exec "silent edit" fname
-" endfunction
-
-" function! s:go_to(args)
-"   let [data, fname] = a:args
-"   exec "tcd" fname
-"   exec "silent edit" fname
-" endfunction
-
-" function! s:select_projects(bang)
-"   return fzf#run(fzf#wrap('projects',{
-"    \ 'source':  s:project_cmd,
-"    \ 'dir':     s:project_dir,
-"    \ 'sink*':   function('s:go_to'),
-"    \ 'options': '+m --prompt="Projects → " --header-lines=0 --expect=ctrl-e --tiebreak=index'}, a:bang))
-" endfunction
-
-" function! s:git_files(cmd, bang)
-"   return fzf#run(fzf#wrap('edited',{
-"    \ 'source':  a:cmd,
-"    \ 'dir':     getcwd(-1, 0),
-"    \ 'sink*':   function('s:open'),
-"    \ 'options': '+m --prompt="Files → " --header-lines=0 --expect=ctrl-e --tiebreak=index'}, a:bang))
-" endfunction
-
-" command! -bar -bang Grep      call s:pre_grep(0, <bang>0)
-" command! -bar -bang GrepAll   call s:pre_grep(1, <bang>0)
-" command! -bar -bang Projects  call s:select_projects(<bang>0)
-" command! -bar -bang Gstatus   call s:git_files(s:edited_cmd, <bang>0)
-" command! -bar -bang Gdiff     call s:git_files(s:diff_master_cmd, <bang>0)
 
 
 " ----------------------------------------------------------------------------
@@ -902,11 +824,6 @@ if executable("ag")
   let b:ag_command = b:ag_command . ' --hidden -g ""'
   let g:ctrlp_user_command = b:ag_command
 endif
-
-" set grepprg=ag\ --column\ --noheading\ --color=always
-" let &grepprg = 'command ag --column'
-" let g:ackprg="ag --column --vimgrep --color=always"
-" let g:ag_prg="ag --column --vimgrep --color=always"
 
 
 " ----------------------------------------------------------------------------
@@ -935,25 +852,20 @@ if !exists('g:esearch')
   let g:esearch.use = ['visual', 'hlsearch', 'last']
 endif
 
+
 " ----------------------------------------------------------------------------
 " ## ultisnips
 " Use tab to expand snippet and move to next target. Shift tab goes back.
-let g:UltiSnipsExpandTrigger='<tab>'
+" let g:UltiSnipsExpandTrigger='<tab>'
 " <C-k> fuzzy-finds available snippets for the file with FZF
 " let g:UltiSnipsListSnippets="<C-k>"
 inoremap <C-k> <C-o>:Snippets<cr>
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
 
-" -/ Custom Functions /--------------------------------------------
-" _________________________________________________________________
-
 
 " ----------------------------------------------------------------------------
-" ## COMMANDS
-" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-
-" ----------------------------------------------------------------------------
+"
 " ## UTILS
 
 " Rename current file or even move it to another location
@@ -986,6 +898,7 @@ function! BufEnterCommit()
 
   let b:deoplete_disable_auto_complete=1
   let b:deoplete_ignore_sources = ['buffer']
+  " TODO: disable auto completion for nvim-completion-manager
   set spell
   set spelllang=en
 endfunction
@@ -1067,7 +980,7 @@ augroup vimrcEx
 
   " ----------------------------------------------------------------------------
   " ## Auto-source vim config files
-  " autocmd BufWritePost *.vim,*.vimrc so $MYVIMRC
+  autocmd BufWritePost *.vim,*.vimrc so $MYVIMRC
 
   " ----------------------------------------------------------------------------
   " ## Handle window resizing
@@ -1093,8 +1006,8 @@ augroup vimrcEx
 "   " NOTE: the syntax highlighting fails when using FZF and BufEnter
 "   " FIXME: we really want to still be able to flip between syntax highlighting
 "   " on and off.
-  " au WinEnter,BufEnter * silent set number relativenumber syntax=on " cul
-  " au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " nocul
+  au WinEnter,BufEnter * silent set number relativenumber syntax=on " cul
+  au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " nocul
 
   " ----------------------------------------------------------------------------
   " ## Automagically update remote homeassistant files upon editing locally
@@ -1118,63 +1031,28 @@ augroup vimrcEx
 
 "   " ----------------------------------------------------------------------------
 "   " ## Automagically rename tmux window to current filename
-"   if exists('$TMUX') && !exists('$NORENAME')
-"     au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-"     au VimLeave * call system('tmux set-window automatic-rename on')
-"   endif
+  if exists('$TMUX') && !exists('$NORENAME')
+    au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+    au VimLeave * call system('tmux set-window automatic-rename on')
+  endif
 
   " ----------------------------------------------------------------------------
   " ## Auto-highlighting of things
   " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
   au BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
   au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
-  " au BufEnter *.rb syn match error contained "\<binding.pry\>"
-  " au BufEnter *.rb syn match error contained "\<debugger\>"
-  " au BufEnter *.js syn match error contained "\<debugger\>"
-  " au BufEnter *.js syn match error contained "\<console.\>"
-  " au BufEnter *.coffee syn match error contained "\<debugger\>"
   " Delete trailing whitespace on write
   au BufWrite * silent if &ft!~?'markdown'|:call DeleteTrailingWS()|endif
-
-"   " ----------------------------------------------------------------------------
-"   " ## Terminal
-"   if has('nvim')
-"     " Automatically go into insert mode when entering terminal window
-"     au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-"     au BufEnter * if &buftype == 'term' | :startinsert | endif
-"     au BufWinEnter,WinEnter,BufEnter term://* startinsert
-"   endif
-
-"   " ----------------------------------------------------------------------------
-"   " ## Deoplete
-"   " NOTE: some of these have been moved to settings.vim#deoplete and
-"   " keys.vim#deoplete
-"   " au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
-
-"   " au VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
-"   " au VimEnter * call deoplete#custom#set('_', 'converters',
-"   "       \ ['converter_auto_paren', 'converter_remove_overlap'])
-"   " au VimEnter * call deoplete#custom#set('vim', 'converters',
-"   "       \ ['add_vim_versions'])
-"   " au VimEnter * call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
 augroup END
 
 " " -/ Filetypes/Syntax /-------------------------------------------------------
 augroup ft_javascript
   au!
-  " au BufRead *.js set filetype=javascript
-  au BufRead *.es6 set filetype=javascript
   au BufRead *.jsx set filetype=javascript
-  " au BufRead *.tsx set filetype=typescript
-  " au BufRead *.ts set filetype=typescript
-
-  au FileType javascript highlight xmlAttrib cterm=italic
   au BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
-  au BufNewFile,BufRead .tern-project set ft=json
+  au BufRead,BufNewFile .tern-project set ft=json
+  au FileType javascript highlight xmlAttrib cterm=italic
   au FileType javascript iabbrev class== className=
-
-  " autocmd BufWritePost,BufEnter * Neomake
-  " au BufWritePre client/**/*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
   " elm
   au BufWritePost *.elm :ElmMake
@@ -1228,14 +1106,14 @@ augroup END
 augroup ft_python
   au!
   au FileType python
-         \   let python_highlight_all = 1
-         \ | set cc=80
-         \ | highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-         \ | match OverLength /\%81v.\+/
-         \ | map <leader>ii i import ipdb;ipdb.set_trace()<ESC>
-         \ | set autoindent
-         \ | set smartindent
-         \ | set textwidth=79
+    \   let python_highlight_all = 1
+    \ | set cc=80
+    \ | highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+    \ | match OverLength /\%81v.\+/
+    \ | map <leader>ii i import ipdb;ipdb.set_trace()<ESC>
+    \ | set autoindent
+    \ | set smartindent
+    \ | set textwidth=79
 augroup END
 
 augroup ft_misc
@@ -1260,7 +1138,6 @@ augroup completions
   au FileType javascript,javascript.jsx,jsx setl omnifunc=javascriptcomplete#CompleteJS " default
   au FileType javascript,javascript.jsx,jsx setl completefunc=jspc#omni " jspc
   au FileType javascript,javascript.jsx,jsx setl omnifunc=tern#Complete " tern
-  au FileType typescript setl completeopt-=menu
 
   au FileType python setl omnifunc=pythoncomplete#Complete
   au FileType xml setl omnifunc=xmlcomplete#CompleteTags
@@ -1291,19 +1168,14 @@ augroup LanguageClientConfig
   autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
   " <leader>ls to fuzzy find the symbols in the current document
   autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
-
   " Use as omnifunc by default
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html setlocal omnifunc=LanguageClient#complete
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason setlocal omnifunc=LanguageClient#complete
 augroup END
 
 let g:LanguageClient_serverCommands = {}
 
 if executable('pyls')
   let g:LanguageClient_serverCommands.python = ['pyls']
-endif
-
-if executable('typescript-language-server')
-  let g:LanguageClient_serverCommands.typescript = ['typescript-language-server', '--stdio']
 endif
 
 if executable('javascript-typescript-stdio')
@@ -1337,10 +1209,6 @@ nnoremap <s-tab> za
 " ----------------------------------------------------------------------------
 " ## Autoformat
 nnoremap <F3> :Neoformat<CR>
-
-" ----------------------------------------------------------------------------
-" ## Autoformat
-nnoremap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
 " ----------------------------------------------------------------------------
 " ## Tabbing for completions:
@@ -1444,8 +1312,6 @@ nnoremap <leader>gb :Gblame<cr>
 nmap <silent> <leader>t :TestFile<CR>
 nmap <silent> <leader>T :TestNearest<CR>
 " nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
 
 " ref: https://github.com/Dkendal/dot-files/blob/master/nvim/.config/nvim/init.vim
 " nmap <silent> <leader>1 :TestNearest<CR>
@@ -1468,42 +1334,6 @@ vmap ( S)
 vmap { S}
 vmap ' S'
 vmap " S"
-
-" ----------------------------------------------------------------------------
-" ## incsearch
-
-" function! s:config_fuzzyall(...) abort
-"   return extend(copy({
-"   \   'converters': [
-"   \     incsearch#config#fuzzy#converter(),
-"   \     incsearch#config#fuzzyspell#converter()
-"   \   ],
-"   \ }), get(a:, 1, {}))
-" endfunction
-
-" noremap <silent><expr> z/ incsearch#go(<SID>config_fuzzyall()<Plug>Pulse)
-" noremap <silent><expr> z? incsearch#go(<SID>config_fuzzyall({'command': '?'})<Plug>Pulse)
-" noremap <silent><expr> zg? incsearch#go(<SID>config_fuzzyall({'is_stay': 1})<Plug>Pulse)
-
-" ----------------------------------------------------------------------------
-" ## incsearch and vim search pulse
-" https://github.com/inside/vim-search-pulse#integration-with-the-incsearchvim-plugin
-"
-" map / <Plug>(incsearch-forward)
-" map ? <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
-
-" " Next or previous match is followed by a Pulse
-" map n <Plug>(incsearch-nohl-n)<Plug>Pulse
-" map N <Plug>(incsearch-nohl-N)<Plug>Pulse
-" map * <Plug>(incsearch-nohl-*)<Plug>Pulse
-" map # <Plug>(incsearch-nohl-#)<Plug>Pulse
-" map g* <Plug>(incsearch-nohl-g*)<Plug>Pulse
-" map g# <Plug>(incsearch-nohl-g#)<Plug>Pulse
-
-" " Pulses the first match after hitting the enter keyan
-" autocmd! User IncSearchExecute
-" autocmd User IncSearchExecute :call search_pulse#Pulse()
 
 " ----------------------------------------------------------------------------
 " ## Splits with vim-tmux-navigator
