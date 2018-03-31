@@ -30,22 +30,20 @@ call plug#begin('~/.config/nvim/plugged')
   " ## JavaScript, et al
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
+  Plug 'Quramy/vim-js-pretty-template'
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
   Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
   Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
   Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'], 'do': 'npm i -g typescript' }
-  Plug 'Quramy/vim-js-pretty-template'
-  Plug 'reasonml-editor/vim-reason-plus', { 'do': 'npm i -g reason'  }
+  Plug 'reasonml-editor/vim-reason-plus', { 'for': ['reason'], 'do': 'npm i -g reason' }
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
   Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
-  " Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass', 'scss.css'] }
   Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
-  " Plug 'styled-components/vim-styled-components'
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al
@@ -56,7 +54,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
-  " Plug 'mattn/emmet-vim'
+  Plug 'mattn/emmet-vim'
 
   " ----------------------------------------------------------------------------
   " ## Ruby, Rails, et al
@@ -82,7 +80,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
   Plug 'w0rp/ale'
-  " Plug 'neomake/neomake'
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
@@ -99,7 +96,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] } " a set of mappings for several langs: html, xml, erb, php, more
   Plug 'docunext/closetag.vim' " will auto-close the opening tag as soon as you type </
   Plug 'tpope/vim-endwise'
-  " Plug 'chaoren/vim-wordmotion'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'sbdchd/neoformat'
 
@@ -112,22 +108,16 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'EinfachToll/DidYouMean'
   Plug 'haya14busa/is.vim'
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
-  " Plug 'inside/vim-search-pulse'
   Plug 'Konfekt/FastFold'
-  " disabled vim-esearch for now.. useful, but lots of cognitive load
-  " Plug 'eugen0329/vim-esearch' " project wide search and replace
-
   Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
   Plug 'roxma/nvim-completion-manager', { 'do': ':UpdateRemotePlugins' }
-  Plug 'roxma/nvim-cm-tern',  {'for': ['javascript'], 'do': 'npm install'}
+  Plug 'roxma/nvim-cm-tern',  {'for': ['javascript', 'typescript'], 'do': 'npm install'}
   Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
   Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
   Plug 'roxma/ncm-flow',  {'for': ['javascript']}
   Plug 'Shougo/echodoc.vim'
-
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
   Plug 'SirVer/ultisnips'

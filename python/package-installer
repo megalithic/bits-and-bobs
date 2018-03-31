@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cat ~/.dotfiles/packages/python | xargs pip3 install -U --user
