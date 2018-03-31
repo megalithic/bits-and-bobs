@@ -1,1 +1,0 @@
-/Users/replicant/.config/fisherman/brew/init.fish

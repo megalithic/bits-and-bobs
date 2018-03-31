@@ -1,1 +1,0 @@
-/Users/replicant/.config/fisherman/fnm/conf.d/fnm.fish

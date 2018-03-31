@@ -1,1 +1,0 @@
-/Users/replicant/.config/fisherman/ssh/ssh.fish

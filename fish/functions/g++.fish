@@ -1,1 +1,0 @@
-/Users/replicant/.config/fisherman/grc/functions/g++.fish
