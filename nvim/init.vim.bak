@@ -32,12 +32,14 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
-  Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
-  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
-  Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
-  Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'], 'do': 'npm i -g typescript' }
+  Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
+  Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'], 'do': 'npm i -g typescript @types' }
   Plug 'Quramy/vim-js-pretty-template'
   Plug 'reasonml-editor/vim-reason-plus', { 'do': 'npm i -g reason'  }
+  " Plug 'mhartington/vim-typings', { 'do': 'npm i -g typings'  }
+
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
@@ -119,7 +121,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
   Plug 'roxma/nvim-completion-manager', { 'do': ':UpdateRemotePlugins' }
-  Plug 'roxma/nvim-cm-tern',  {'for': ['javascript'], 'do': 'npm install'}
+  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install', 'for': ['javascript']}
   Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
   Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
   Plug 'roxma/ncm-flow',  {'for': ['javascript']}
@@ -149,6 +151,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'wellle/targets.vim' " Improved targets line cin) next parens
   " ^--- https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
+
 call plug#end()
 
 " Enable built-in matchit plugin
@@ -162,10 +165,21 @@ runtime macros/matchit.vim
 syntax enable
 
 if has('nvim')
+  " let ayucolor="light"  " for light version of theme
+  " let ayucolor="dark"   " for dark version of theme
+  " let ayucolor="mirage" " for mirage version of theme
+  " let g:jellybeans_overrides = {
+  "       \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+  "       \}
+  " let g:oceanic_next_terminal_italic = 1
+  " let g:oceanic_next_terminal_bold = 1
+
+
   set termguicolors
   set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
   colorscheme nova
+
   set background=dark
 
   let os=substitute(system('uname'), '\n', '', '')
@@ -175,7 +189,7 @@ if has('nvim')
     let g:python3_host_prog='/usr/bin/python3'
   endif
 
-  let g:python3_host_skip_check = 0
+  let g:python3_host_skip_check = 1
 else
   colorscheme nova
 
