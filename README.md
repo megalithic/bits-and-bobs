@@ -20,7 +20,7 @@ If you want to kick the tires, then simply:
 
 ```sh
 curl -fsSL \
-  https://raw.githubusercontent.com/megalithic/bits-and-bobs/master/script/bootstrap | sh
+  https://raw.githubusercontent.com/megalithic/bits-and-bobs/master/scripts/bootstrap | sh
 ```
 
 The install script will symlink the appropriate files in `.dotfiles` to your

@@ -29,21 +29,25 @@ call plug#begin('~/.config/nvim/plugged')
   " ---------------------------------------------------------------------------
   " ## JavaScript, et al
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+  " Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
-  Plug 'Quramy/vim-js-pretty-template'
+  " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
   Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
   Plug 'elzr/vim-json', { 'for': ['json'] }
-  Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
-  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
-  Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
-  Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'], 'do': 'npm i -g typescript' }
-  Plug 'reasonml-editor/vim-reason-plus', { 'for': ['reason'], 'do': 'npm i -g reason' }
+  " Plug 'moll/vim-node', { 'for': ['javascript'] }
+  Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
+  Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'] }
+
 
   " ----------------------------------------------------------------------------
   " ## SCSS, CSS, et al
   Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
+  " Plug 'cakebaker/scss-syntax.vim', { 'for': ['css', 'scss', 'sass', 'scss.css'] }
   Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
+  " Plug 'styled-components/vim-styled-components'
 
   " ----------------------------------------------------------------------------
   " ## HAML, HTML, XML, Markdown, YAML, et al
@@ -54,13 +58,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
-  Plug 'mattn/emmet-vim'
 
   " ----------------------------------------------------------------------------
   " ## Ruby, Rails, et al
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
-  Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install fastri rcodetools' }
+  " Plug 'shougo/vimproc.vim', { 'do': 'make' } | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install fastri rcodetools' }
   Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
   Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 
@@ -76,10 +79,10 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## Utilities
-  Plug 'rhysd/vim-grammarous'
   Plug 'tpope/vim-eunuch'
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
   Plug 'w0rp/ale'
+  " Plug 'neomake/neomake'
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
@@ -96,6 +99,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb'] } " a set of mappings for several langs: html, xml, erb, php, more
   Plug 'docunext/closetag.vim' " will auto-close the opening tag as soon as you type </
   Plug 'tpope/vim-endwise'
+  " Plug 'chaoren/vim-wordmotion'
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'sbdchd/neoformat'
 
@@ -108,16 +112,21 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'EinfachToll/DidYouMean'
   Plug 'haya14busa/is.vim'
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
+  " Plug 'inside/vim-search-pulse'
   Plug 'Konfekt/FastFold'
-  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-  Plug 'roxma/nvim-completion-manager', { 'do': ':UpdateRemotePlugins' }
-  Plug 'roxma/nvim-cm-tern',  {'for': ['javascript', 'typescript'], 'do': 'npm install'}
+  " disabled vim-esearch for now.. useful, but lots of cognitive load
+  " Plug 'eugen0329/vim-esearch' " project wide search and replace
+
+  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'roxma/nvim-completion-manager'
+  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install', 'for': ['javascript']}
   Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
   Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
-  Plug 'roxma/ncm-flow',  {'for': ['javascript']}
   Plug 'Shougo/echodoc.vim'
+
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
   Plug 'SirVer/ultisnips'
@@ -139,6 +148,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'wellle/targets.vim' " Improved targets line cin) next parens
   " ^--- https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
+
 call plug#end()
 
 " Enable built-in matchit plugin
@@ -152,10 +162,21 @@ runtime macros/matchit.vim
 syntax enable
 
 if has('nvim')
+  " let ayucolor="light"  " for light version of theme
+  " let ayucolor="dark"   " for dark version of theme
+  " let ayucolor="mirage" " for mirage version of theme
+  " let g:jellybeans_overrides = {
+  "       \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+  "       \}
+  " let g:oceanic_next_terminal_italic = 1
+  " let g:oceanic_next_terminal_bold = 1
+
+
   set termguicolors
   set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
   colorscheme nova
+
   set background=dark
 
   let os=substitute(system('uname'), '\n', '', '')
@@ -165,7 +186,7 @@ if has('nvim')
     let g:python3_host_prog='/usr/bin/python3'
   endif
 
-  let g:python3_host_skip_check = 0
+  let g:python3_host_skip_check = 1
 else
   colorscheme nova
 
@@ -457,23 +478,6 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 
 " ----------------------------------------------------------------------------
 " ## linting (neomake/ale)
-let g:standard_prettier_settings = {
-      \ 'exe': 'prettier',
-      \ 'args': ['--stdin', '--stdin-filepath', '%:p', '--single-quote'],
-      \ 'stdin': 1,
-      \ }
-let g:neomake_error_sign = {'text': '✖'}
-let g:neomake_warning_sign = {'text': '~'}
-let g:neoformat_javascript_prettier = g:standard_prettier_settings
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_typescript_prettier = g:standard_prettier_settings
-let g:neoformat_enabled_typescript = ['prettier']
-let g:neoformat_enabled_html = ['htmlbeautify']
-let g:neoformat_scss_prettier = g:standard_prettier_settings
-let g:neoformat_enabled_scss = ['prettier']
-let g:neoformat_markdown_prettier = g:standard_prettier_settings
-let g:neoformat_enabled_markdown = ['prettier']
-
 let g:ale_enabled = 1
 let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_fixer_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
@@ -499,12 +503,6 @@ let g:ale_pattern_options = {
       \  '.*/node_modules/*.js': {
       \    'ale_enabled': 0
       \  },
-      \  '.*/node_modules/*.ts': {
-      \    'ale_enabled': 0
-      \  },
-      \  '.*/node_modules/*.tsx': {
-      \    'ale_enabled': 0
-      \  },
       \  '.*/public/*.js': {
       \    'ale_enabled': 0
       \  }
@@ -527,8 +525,6 @@ let g:ale_lint_on_save = 1
 " ## vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#neomake#enabled = 1
-let g:airline#extensions#neomake#error_symbol='✖ '
-let g:airline#extensions#neomake#warning_symbol='~  '
 let g:airline_theme = 'nova'
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline_left_sep = ''
@@ -557,44 +553,46 @@ let g:JSHintHighlightErrorLine = 1
 let javascript_enable_domhtmlcss = 1
 let loaded_matchit = 1
 let g:js_indent_log = 1
-let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3,typescript,reactnative,react-native'
+let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3'
+
 
 " ----------------------------------------------------------------------------
 " ## nvim-typescript
-let g:nvim_typescript#max_completion_detail=100
-let g:nvim_typescript#completion_mark=''
-" let g:nvim_typescript#default_mappings=1
-" let g:nvim_typescript#type_info_on_hold=1
-let g:nvim_typescript#javascript_support=1
-let g:nvim_typescript#kind_symbols = {
-    \ 'keyword': 'keyword',
-    \ 'class': '',
-    \ 'interface': '',
-    \ 'script': 'script',
-    \ 'module': '',
-    \ 'local class': 'local class',
-    \ 'type': '',
-    \ 'enum': '',
-    \ 'enum member': '',
-    \ 'alias': '',
-    \ 'type parameter': 'type param',
-    \ 'primitive type': 'primitive type',
-    \ 'var': '',
-    \ 'local var': '',
-    \ 'property': '',
-    \ 'let': '',
-    \ 'const': '',
-    \ 'label': 'label',
-    \ 'parameter': 'param',
-    \ 'index': 'index',
-    \ 'function': '',
-    \ 'local function': 'local function',
-    \ 'method': '',
-    \ 'getter': '',
-    \ 'setter': '',
-    \ 'call': 'call',
-    \ 'constructor': '',
-    \}
+" let g:nvim_typescript#max_completion_detail=100
+" let g:nvim_typescript#completion_mark=''
+" " let g:nvim_typescript#default_mappings=1
+" " let g:nvim_typescript#type_info_on_hold=1
+" let g:nvim_typescript#javascript_support=1
+" let g:nvim_typescript#vue_support=1
+" let g:nvim_typescript#kind_symbols = {
+"     \ 'keyword': 'keyword',
+"     \ 'class': '',
+"     \ 'interface': '',
+"     \ 'script': 'script',
+"     \ 'module': '',
+"     \ 'local class': 'local class',
+"     \ 'type': '',
+"     \ 'enum': '',
+"     \ 'enum member': '',
+"     \ 'alias': '',
+"     \ 'type parameter': 'type param',
+"     \ 'primitive type': 'primitive type',
+"     \ 'var': '',
+"     \ 'local var': '',
+"     \ 'property': '',
+"     \ 'let': '',
+"     \ 'const': '',
+"     \ 'label': 'label',
+"     \ 'parameter': 'param',
+"     \ 'index': 'index',
+"     \ 'function': '',
+"     \ 'local function': 'local function',
+"     \ 'method': '',
+"     \ 'getter': '',
+"     \ 'setter': '',
+"     \ 'call': 'call',
+"     \ 'constructor': '',
+"     \}
 
 
 " ----------------------------------------------------------------------------
@@ -615,7 +613,6 @@ let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_conceal = 0
-
 " https://github.com/davidosomething/dotfiles/blob/master/vim/ftplugin/javascript.vim#L8
 let b:match_words = '\<function\>:\<return\>,'
   \ . '\<do\>:\<while\>,'
@@ -664,14 +661,6 @@ let g:fastfold_savehook = 1
 
 
 " ----------------------------------------------------------------------------
-" ## godown-vim
-" should the preview be shown automatically when a markdown buffer is opened
-let g:godown_autorun = 0
-" the port to run the Godown server on
-let g:godown_port = 1337
-
-
-" ----------------------------------------------------------------------------
 " ## JSDoc
 " https://github.com/heavenshell/vim-jsdoc#configuration
 let g:jsdoc_allow_input_prompt=1
@@ -688,11 +677,19 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 
 " ----------------------------------------------------------------------------
+" ## neoterm
+let g:neoterm_position='horizontal'
+let g:neoterm_run_tests_bg = 1
+let g:neoterm_focus_when_tests_fail = 1
+let g:neoterm_raise_when_tests_fail = 1
+let g:neoterm_close_when_tests_succeed = 1
+
+
+" ----------------------------------------------------------------------------
 " ## vim-test
 function! SplitStrategy(cmd)
   vert new | call termopen(a:cmd) | startinsert
 endfunction
-
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split'
 let test#ruby#rspec#options = '-f d'
@@ -707,7 +704,6 @@ let g:lt_quickfix_list_toggle_map = '<F4>'
 
 " ----------------------------------------------------------------------------
 " ## incsearch.vim
-" :h g:incsearch#auto_nohlsearch
 let g:incsearch#auto_nohlsearch = 1
 let g:incsearch#is_stay = 1
 
@@ -722,7 +718,7 @@ let g:lua_define_completion_mappings = 0
 
 " ----------------------------------------------------------------------------
 " ## vim-markdown
-let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ts=typescript', 'tsx=typescript', 'ruby', 'sass', 'xml', 'html', 'bash=sh', 'sh', 'scss', 'zsh']
 let g:vim_markdown_frontmatter=1
 
 
@@ -765,7 +761,6 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
-
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -828,20 +823,11 @@ if !exists('g:esearch')
   let g:esearch.use = ['visual', 'hlsearch', 'last']
 endif
 
-
 " ----------------------------------------------------------------------------
 " ## ultisnips
-" Use tab to expand snippet and move to next target. Shift tab goes back.
-" let g:UltiSnipsExpandTrigger='<tab>'
-" <C-k> fuzzy-finds available snippets for the file with FZF
-" let g:UltiSnipsListSnippets="<C-k>"
-inoremap <C-k> <C-o>:Snippets<cr>
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
 
 
 " ----------------------------------------------------------------------------
-"
 " ## UTILS
 
 " Rename current file or even move it to another location
@@ -874,7 +860,6 @@ function! BufEnterCommit()
 
   let b:deoplete_disable_auto_complete=1
   let b:deoplete_ignore_sources = ['buffer']
-  " TODO: disable auto completion for nvim-completion-manager
   set spell
   set spelllang=en
 endfunction
@@ -956,7 +941,7 @@ augroup vimrcEx
 
   " ----------------------------------------------------------------------------
   " ## Auto-source vim config files
-  autocmd BufWritePost *.vim,*.vimrc so $MYVIMRC
+  " autocmd BufWritePost *.vim,*.vimrc so $MYVIMRC
 
   " ----------------------------------------------------------------------------
   " ## Handle window resizing
@@ -977,11 +962,11 @@ augroup vimrcEx
       " \   execute 'normal g`\"' |
         \ endif
 
-"   " ----------------------------------------------------------------------------
-"   " ## Toggle certain accoutrements when entering and leaving a buffer & window
-"   " NOTE: the syntax highlighting fails when using FZF and BufEnter
-"   " FIXME: we really want to still be able to flip between syntax highlighting
-"   " on and off.
+  " ----------------------------------------------------------------------------
+  " ## Toggle certain accoutrements when entering and leaving a buffer & window
+  " NOTE: the syntax highlighting fails when using FZF and BufEnter
+  " FIXME: we really want to still be able to flip between syntax highlighting
+  " on and off.
   au WinEnter,BufEnter * silent set number relativenumber syntax=on " cul
   au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " nocul
 
@@ -1005,8 +990,8 @@ augroup vimrcEx
   au BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
   au Filetype gitcommit exe BufEnterCommit()
 
-"   " ----------------------------------------------------------------------------
-"   " ## Automagically rename tmux window to current filename
+  " ----------------------------------------------------------------------------
+  " ## Automagically rename tmux window to current filename
   if exists('$TMUX') && !exists('$NORENAME')
     au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
     au VimLeave * call system('tmux set-window automatic-rename on')
@@ -1019,16 +1004,33 @@ augroup vimrcEx
   au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
   " Delete trailing whitespace on write
   au BufWrite * silent if &ft!~?'markdown'|:call DeleteTrailingWS()|endif
+
+
+"   " ----------------------------------------------------------------------------
+"   " ## Deoplete
+"   " NOTE: some of these have been moved to settings.vim#deoplete and
+"   " keys.vim#deoplete
+"   " au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
+
+"   " au VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
+"   " au VimEnter * call deoplete#custom#set('_', 'converters',
+"   "       \ ['converter_auto_paren', 'converter_remove_overlap'])
+"   " au VimEnter * call deoplete#custom#set('vim', 'converters',
+"   "       \ ['add_vim_versions'])
+"   " au VimEnter * call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
 augroup END
 
 " " -/ Filetypes/Syntax /-------------------------------------------------------
 augroup ft_javascript
   au!
   au BufRead *.jsx set filetype=javascript
-  au BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
-  au BufRead,BufNewFile .tern-project set ft=json
   au FileType javascript highlight xmlAttrib cterm=italic
+  au BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
+  au BufNewFile,BufRead .tern-project set ft=json
   au FileType javascript iabbrev class== className=
+
+  " autocmd BufWritePost,BufEnter * Neomake
+  " au BufWritePre client/**/*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
   " elm
   au BufWritePost *.elm :ElmMake
@@ -1082,14 +1084,14 @@ augroup END
 augroup ft_python
   au!
   au FileType python
-    \   let python_highlight_all = 1
-    \ | set cc=80
-    \ | highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-    \ | match OverLength /\%81v.\+/
-    \ | map <leader>ii i import ipdb;ipdb.set_trace()<ESC>
-    \ | set autoindent
-    \ | set smartindent
-    \ | set textwidth=79
+         \   let python_highlight_all = 1
+         \ | set cc=80
+         \ | highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+         \ | match OverLength /\%81v.\+/
+         \ | map <leader>ii i import ipdb;ipdb.set_trace()<ESC>
+         \ | set autoindent
+         \ | set smartindent
+         \ | set textwidth=79
 augroup END
 
 augroup ft_misc
@@ -1133,19 +1135,20 @@ augroup LanguageClientConfig
   autocmd!
 
   " <leader>ld to go to definition
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
   " <leader>lf to autoformat document
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
   " <leader>lh for type info under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
   " <leader>lr to rename variable under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
   " <leader>lc to switch omnifunc to LanguageClient
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
   " <leader>ls to fuzzy find the symbols in the current document
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+
   " Use as omnifunc by default
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason setlocal omnifunc=LanguageClient#complete
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html setlocal omnifunc=LanguageClient#complete
 augroup END
 
 let g:LanguageClient_serverCommands = {}
@@ -1166,11 +1169,6 @@ if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
 endif
 
-if executable('ocaml-language-server')
-  let g:LanguageClient_serverCommands.reason = ['ocaml-language-server', '--stdio']
-  let g:LanguageClient_serverCommands.ocaml = ['ocaml-language-server', '--stdio']
-endif
-
 
 " -/ Keybindings /------------------------------------------------
 let mapleader=","
@@ -1185,6 +1183,10 @@ nnoremap <s-tab> za
 " ----------------------------------------------------------------------------
 " ## Autoformat
 nnoremap <F3> :Neoformat<CR>
+
+" ----------------------------------------------------------------------------
+" ## Autoformat
+nnoremap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
 " ----------------------------------------------------------------------------
 " ## Tabbing for completions:
@@ -1221,9 +1223,6 @@ endif
 nnoremap <silent> <leader>m <esc>:FZF<cr>
 nnoremap <leader>a <esc>:Rg<space>
 nnoremap <silent> <leader>A  <esc>:exe('Rg '.expand('<cword>'))<cr>
-
-" bind \ (backward slash) to grep shortcut
-" command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
 
 " Backslash as shortcut to ag
 nnoremap \ :Rg<SPACE>
@@ -1288,14 +1287,9 @@ nnoremap <leader>gb :Gblame<cr>
 nmap <silent> <leader>t :TestFile<CR>
 nmap <silent> <leader>T :TestNearest<CR>
 " nmap <silent> <leader>a :TestSuite<CR>
-
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 " ref: https://github.com/Dkendal/dot-files/blob/master/nvim/.config/nvim/init.vim
-" nmap <silent> <leader>1 :TestNearest<CR>
-" nmap <silent> <leader>! :TestFile<CR>
-" nmap <silent> <leader>@ :TestSuite<CR>
-" nmap <silent> <leader>2 :TestLast<CR>
-" nmap <silent> <leader>3 :TestSuite --next-failure<CR>
-" nmap <silent> <leader># :TestVisit<CR>
 
 " ----------------------------------------------------------------------------
 " ## Gist/Github
@@ -1432,38 +1426,9 @@ nnoremap ,p "+p
 " Don't copy the contents of an overwritten selection.
 vnoremap p "_dP
 
-" ## CamelCaseMotion overrides
-" ref: https://github.com/martin-svk/dot-files/blob/master/neovim/init.vim
-" Use CamelCaseMotion instead of default motions
-" map <silent> w <Plug>CamelCaseMotion_w
-" map <silent> b <Plug>CamelCaseMotion_b
-" map <silent> e <Plug>CamelCaseMotion_e
-" map <silent> ge <Plug>CamelCaseMotion_ge
-" sunmap w
-" sunmap b
-" sunmap e
-" sunmap ge
-
 " Fix the cw at the end of line bug default vim has special treatment (:help cw)
 nmap cw ce
 nmap dw de
-
-" ## Copy/Paste
-" noremap <leader>y "*y
-" noremap <leader>yy "*Y
-" "don't move the cursor after pasting
-" "(by jumping to back start of previously changed text)
-" noremap p p`[
-" noremap P P`[
-" nnoremap Y y$
-" vmap <silent><leader>y "xy
-" map <silent><leader>p "xp
-" vmap <silent> <expr> p <sid>Repl()
-
-" " Go to end of text you've just pasted
-" vnoremap <silent> y y`]
-" vnoremap <silent> p p`]
-" nnoremap <silent> p p`]
 
 " ## Convenience rebindings
 noremap  <Leader>; :!
@@ -1629,7 +1594,6 @@ function! s:after_colorscheme()
   " Highlight VCS conflict markers
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 endfunction
-
 
 augroup after_colorscheme
   au!

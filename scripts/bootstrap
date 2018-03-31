@@ -33,11 +33,11 @@ git clone https://github.com/megalithic/bits-and-bobs .dotfiles
 cd .dotfiles
 
 # app/system installers
-script/homebrew
+scripts/homebrew
 
 # TODO: get these working again, but take care of order of things
-# script/generic
-# script/platform
+# scripts/generic
+# scripts/platform
 
 # setup all zsh things
 sh zsh/install.sh
@@ -61,10 +61,10 @@ sh terminfo/install.sh
 sh osx/install.sh
 
 # symlink all the things to all their places
-script/symlinks
+scripts/symlinks
 
 # keyboard/karabiner specific configurations
 sh keyboard/install.sh
 
 # setup private repo things for secretz
-script/private
+scripts/private
