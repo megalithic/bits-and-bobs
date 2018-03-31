@@ -9,8 +9,10 @@ ln -sfv $HOME/.dotfiles/nvim/init.vim $HOME/.vimrc
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    
-nvim +PlugInstall +qall
+
+nvim +PlugInstall! +qall!
+
+pip3 install --upgrade neovim
 
 echo "finished installing vim-plug"
 
