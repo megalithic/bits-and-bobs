@@ -11,7 +11,6 @@ eslint-config-prettier
 eslint-plugin-react
 eslint-plugin-prettier
 exp
-javascript-typescript-langserver
 jest
 mocha
 neovim
@@ -21,8 +20,11 @@ prettier
 serverless
 stylelint
 stylelint-config-standard
-typescript
+javascript-typescript-langserver
+typescript-language-server
 vscode-css-languageserver-bin
 vscode-html-languageserver-bin
 vscode-json-languageserver-bin
+ocaml-language-server
+yaml-language-server
 yarn

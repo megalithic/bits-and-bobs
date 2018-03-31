@@ -6,5 +6,5 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 RUBIES=(~/.rubies/*)
 chruby ruby-2.3.1
-cat ~/.dotfiles/ruby/default-gems.symlink | xargs gem install
+./package-installer
 echo "done"

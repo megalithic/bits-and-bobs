@@ -38,7 +38,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ElmCast/elm-vim', { 'for': ['elm'] } " all the elms
   Plug 'HerringtonDarkholme/yats.vim'
   Plug 'leafgarland/typescript-vim'
-  Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'] }
+  Plug 'mhartington/nvim-typescript', { 'for': ['javascript', 'typescript', 'tsx', 'ts'], 'do': 'npm i -g typescript' }
+  Plug 'Quramy/vim-js-pretty-template'
+  Plug 'reasonml-editor/vim-reason-plus', { 'do': 'npm i -g reason'  }
+  Plug 'mhartington/vim-typings', { 'do': 'npm i -g typings'  }
 
 
   " ----------------------------------------------------------------------------
@@ -58,6 +61,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'othree/xml.vim', { 'for': ['xml'] }
+  Plug 'mattn/emmet-vim'
 
   " ----------------------------------------------------------------------------
   " ## Ruby, Rails, et al
@@ -79,6 +83,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " ----------------------------------------------------------------------------
   " ## Utilities
+  Plug 'rhysd/vim-grammarous'
   Plug 'tpope/vim-eunuch'
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
   Plug 'w0rp/ale'
@@ -117,11 +122,12 @@ call plug#begin('~/.config/nvim/plugged')
   " disabled vim-esearch for now.. useful, but lots of cognitive load
   " Plug 'eugen0329/vim-esearch' " project wide search and replace
 
-  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'roxma/nvim-completion-manager'
+  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+  Plug 'roxma/nvim-completion-manager', { 'do': ':UpdateRemotePlugins' }
   Plug 'roxma/nvim-cm-tern',  {'do': 'npm install', 'for': ['javascript']}
   Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
   Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
+  Plug 'roxma/ncm-flow',  {'for': ['javascript']}
   Plug 'Shougo/echodoc.vim'
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -471,84 +477,6 @@ let g:codi#aliases = {
 
 
 " ----------------------------------------------------------------------------
-" ## nvimux
-" let g:nvimux_prefix = '<C-a>'
-" let g:nvimux_open_term_by_default = 'true'
-" let g:nvimux_new_window_buffer = 'single'
-" let g:nvimux_quickterm_direction = 'botright'
-" let g:nvimux_quickterm_orientation = 'vertical'
-" let g:nvimux_quickterm_scope = 't'
-" let g:nvimux_quickterm_size = '80'
-
-" if exists('$TMUX')
-"   function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-"     let previous_winnr = winnr()
-"     silent! execute "wincmd " . a:wincmd
-"     if previous_winnr == winnr()
-"       call system("tmux select-pane -" . a:tmuxdir)
-"       redraw!
-"     endif
-"   endfunction
-
-"   let g:tmux_navigator_no_mappings = 1
-"   let g:tmux_navigator_save_on_switch = 1
-
-"   let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-"   let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-"   let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-
-"   nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-"   nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-"   nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-"   nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-" else
-"   map <C-h> <C-w>h
-"   map <C-j> <C-w>j
-"   map <C-k> <C-w>k
-"   map <C-l> <C-w>l
-" endif
-
-" let g:nvimux_open_term_by_default = 1
-" let g:nvimux_new_window_buffer = 'single'
-" let g:nvimux_quickterm_direction = 'botright'
-" let g:nvimux_quickterm_orientation = 'vertical'
-" let g:nvimux_quickterm_scope = 't'
-" let g:nvimux_quickterm_size = '80'
-
-" function! s:escape_ft(ft)
-"   return substitute(a:ft, "\\.", "_", "")
-" endfunction
-
-" let g:iron_repl_open_cmd = "topleft vspl"
-
-" function! SetNvimuxConfigOnIronRepl(buf_id, repl_def) abort
-"   exec "let t:iron_" . s:escape_ft(a:repl_def.ft) . "_repl = " . a:buf_id
-"   call setbufvar(a:buf_id, 'nvimux_buf_orientation', g:iron_repl_open_cmd)
-" endfunction
-
-" function! SetNvimuxConfigOnShell(buf_id, repl_def) abort
-"   let orientation = g:nvimux_quickterm_direction . " " . g:nvimux_quickterm_orientation . " " . g:nvimux_quickterm_size . "split"
-"   call setbufvar(a:buf_id, 'nvimux_buf_orientation', orientation)
-" endfunction
-
-" let g:iron_new_repl_hooks = ['SetNvimuxConfigOnIronRepl']
-" let g:iron_new_sh_repl_hooks = ['SetNvimuxConfigOnShell']
-" let g:iron_debug = 1
-
-" let g:nvimux_custom_bindings = [
-"   \['s', ':NvimuxHorizontalSplit<CR>', ['n', 'v', 'i', 't']],
-"   \['v', ':NvimuxVerticalSplit<CR>', ['n', 'v', 'i', 't']],
-"   \['!', ':IronPromptRepl<CR>', ['n', 'v', 'i', 't']],
-"   \['$', ':IronRepl<CR>', ['n', 'v', 'i', 't']],
-"   \['#', ':IronPromptCommand<CR>', ['n', 'v', 'i', 't']],
-"   \['%', ':call ToggleRepl()<CR>', ['n', 'v', 'i', 't']]
-" \]
-
-" let g:nvimux_new_term = "call IronStartRepl('sh', 0, 1)"
-" let g:iron_repl_open_cmd = 'topleft vertical split'
-
-
-" ----------------------------------------------------------------------------
 " ## auto-pairs
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
@@ -602,6 +530,12 @@ let g:ale_pattern_options = {
       \    'ale_enabled': 0
       \  },
       \  '.*/node_modules/*.js': {
+      \    'ale_enabled': 0
+      \  },
+      \  '.*/node_modules/*.ts': {
+      \    'ale_enabled': 0
+      \  },
+      \  '.*/node_modules/*.tsx': {
       \    'ale_enabled': 0
       \  },
       \  '.*/public/*.js': {
@@ -715,9 +649,6 @@ let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_conceal = 0
-" let g:javascript_conceal_function = "ƒ"
-" let g:javascript_conceal_this = "@"
-" let g:javascript_conceal_return = "⇚"
 
 " https://github.com/davidosomething/dotfiles/blob/master/vim/ftplugin/javascript.vim#L8
 let b:match_words = '\<function\>:\<return\>,'
@@ -791,15 +722,6 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 
 " ----------------------------------------------------------------------------
-" ## neoterm
-let g:neoterm_position='horizontal'
-let g:neoterm_run_tests_bg = 1
-let g:neoterm_focus_when_tests_fail = 1
-let g:neoterm_raise_when_tests_fail = 1
-let g:neoterm_close_when_tests_succeed = 1
-
-
-" ----------------------------------------------------------------------------
 " ## vim-test
 function! SplitStrategy(cmd)
   vert new | call termopen(a:cmd) | startinsert
@@ -808,15 +730,15 @@ endfunction
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split'
 
-if expand('%:t') =~ '_spec.js'
-  let test#javascript#jest#executable = 'yarn run cypress:run:one'
-else
-  let test#javascript#jest#executable = 'yarn test'
-endif
+" if expand('%:t') =~ '_spec.js'
+"   let test#javascript#jest#executable = 'yarn run cypress:run:one'
+" else
+"   let test#javascript#jest#executable = 'yarn test'
+" endif
 
-let g:test#javascript#mocha#file_pattern = ".test.js"
-"  `-A` turns on async mode for tests
-let g:test#javascript#mocha#options = '-A --compilers js:babel-register --require ignore-styles --require app/javascript/scripts/test-setup.js'
+" let g:test#javascript#mocha#file_pattern = ".test.js"
+" "  `-A` turns on async mode for tests
+" let g:test#javascript#mocha#options = '-A --compilers js:babel-register --require ignore-styles --require app/javascript/scripts/test-setup.js'
 
 let test#ruby#rspec#options = '-f d'
 let test#ruby#bundle_exec = 1
@@ -856,10 +778,8 @@ let g:qs_enable = 0
 
 " ----------------------------------------------------------------------------
 " ## nvim-completion-manager
-
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
-
 " Use location list instead of quickfix
 let g:LanguageClient_diagnosticsList = 'location'
 
@@ -872,6 +792,7 @@ let g:tern#filetypes = [
       \ 'jsx',
       \ 'javascript',
       \ 'javascript.jsx',
+      \ 'typescript',
       \ 'vue'
       \ ]
 let g:tern_show_argument_hints = 'on_hold' "on_move
@@ -1016,31 +937,13 @@ endif
 
 " ----------------------------------------------------------------------------
 " ## ultisnips
-
-
-" ----------------------------------------------------------------------------
-" ## prettier
-" let g:prettier#quickfix_enabled = 0
-" let g:prettier#autoformat = 0
-
-" " single quotes over double quotes
-" let g:prettier#config#single_quote = 'true'
-
-" " print spaces between brackets
-" let g:prettier#config#bracket_spacing = 'true'
-
-" " put > on the last line instead of new line
-" let g:prettier#config#jsx_bracket_same_line = 'false'
-
-" " none|es5|all
-" let g:prettier#config#trailing_comma = 'all'
-
-" " avoid/always
-" let g:prettier#config#arrow_parens = 'always'
-
-" " flow|babylon|typescript|postcss
-" let g:prettier#config#parser = 'flow'
-
+" Use tab to expand snippet and move to next target. Shift tab goes back.
+let g:UltiSnipsExpandTrigger='<tab>'
+" <C-k> fuzzy-finds available snippets for the file with FZF
+" let g:UltiSnipsListSnippets="<C-k>"
+inoremap <C-k> <C-o>:Snippets<cr>
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
 
 " -/ Custom Functions /--------------------------------------------
 " _________________________________________________________________
@@ -1357,6 +1260,7 @@ augroup completions
   au FileType javascript,javascript.jsx,jsx setl omnifunc=javascriptcomplete#CompleteJS " default
   au FileType javascript,javascript.jsx,jsx setl completefunc=jspc#omni " jspc
   au FileType javascript,javascript.jsx,jsx setl omnifunc=tern#Complete " tern
+  au FileType typescript setl completeopt-=menu
 
   au FileType python setl omnifunc=pythoncomplete#Complete
   au FileType xml setl omnifunc=xmlcomplete#CompleteTags
@@ -1376,17 +1280,17 @@ augroup LanguageClientConfig
   autocmd!
 
   " <leader>ld to go to definition
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
   " <leader>lf to autoformat document
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
   " <leader>lh for type info under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
   " <leader>lr to rename variable under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
   " <leader>lc to switch omnifunc to LanguageClient
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
   " <leader>ls to fuzzy find the symbols in the current document
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html,reason nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
 
   " Use as omnifunc by default
   autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html setlocal omnifunc=LanguageClient#complete
@@ -1396,6 +1300,10 @@ let g:LanguageClient_serverCommands = {}
 
 if executable('pyls')
   let g:LanguageClient_serverCommands.python = ['pyls']
+endif
+
+if executable('typescript-language-server')
+  let g:LanguageClient_serverCommands.typescript = ['typescript-language-server', '--stdio']
 endif
 
 if executable('javascript-typescript-stdio')
@@ -1408,6 +1316,11 @@ if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
   let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
   let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
+endif
+
+if executable('ocaml-language-server')
+  let g:LanguageClient_serverCommands.reason = ['ocaml-language-server', '--stdio']
+  let g:LanguageClient_serverCommands.ocaml = ['ocaml-language-server', '--stdio']
 endif
 
 

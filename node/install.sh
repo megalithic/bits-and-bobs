@@ -6,5 +6,5 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 n lts
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 avn setup
-cat ~/.dotfiles/node/packages | xargs npm i -g
+./package-installer
 echo "done"
