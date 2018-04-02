@@ -105,7 +105,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'haya14busa/is.vim'
   Plug 'osyo-manga/vim-over', { 'on': 'OverCommandLine' } " :substitute preview
   Plug 'Konfekt/FastFold'
-  " Plug 'mattn/emmet-vim'
+  Plug 'mattn/emmet-vim'
 
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   " Plug 'autozimu/LanguageClient-neovim', {
@@ -113,16 +113,16 @@ call plug#begin('~/.config/nvim/plugged')
   "   \ 'do': 'bash install.sh',
   "   \ }
 
-  " Plug 'roxma/nvim-completion-manager', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'roxma/nvim-cm-tern',  {'do': 'npm install', 'for': ['javascript']}
-  " Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
-  " Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
+  Plug 'roxma/nvim-completion-manager', { 'do': ':UpdateRemotePlugins' }
+  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install; npm install -g tern', 'for': ['javascript']}
+  Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
+  Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
 
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/echodoc.vim'
-  Plug 'pbogut/deoplete-elm'
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' }
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'Shougo/echodoc.vim'
+  " Plug 'pbogut/deoplete-elm'
+  " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript', 'for': ['typescript'] }
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -258,7 +258,7 @@ set diffopt=filler " Add vertical spaces to keep right and left aligned.
 set diffopt+=iwhite " Ignore whitespace changes.
 set noerrorbells
 set novisualbell
-set number relativenumber
+set number " relativenumber
 set splitbelow
 set splitright
 set noshowmode
@@ -484,12 +484,14 @@ let g:ale_fixer_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_javascript_prettier_use_local_config = 1
 
 let g:ale_linters = {}
+let g:ale_linters['typescript'] = ['tslint', 'typecheck', 'tsserver']
 let g:ale_linters['javascript'] = ['prettier', 'eslint']
 let g:ale_linters['jsx'] = ['prettier', 'eslint']
 let g:ale_linters['css'] = ['prettier']
 let g:ale_linters['json'] = ['prettier']
 
 let g:ale_fixers = {}
+let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
@@ -508,9 +510,9 @@ let g:ale_pattern_options = {
       \  }
       \}
 
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
-let g:ale_typescript_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
-let g:ale_jsx_prettier_options = '--single-quote --trailing-comma es5 --arrow-parens always --bracket-spacing'
+" let g:ale_javascript_prettier_options = '--single-quote --no-semi --trailing-comma es5' " --arrow-parens always --bracket-spacing'
+" let g:ale_typescript_prettier_options = '--single-quote --no-semi --trailing-comma es5' " --arrow-parens always --bracket-spacing'
+" let g:ale_jsx_prettier_options =        '--single-quote --no-semi --trailing-comma es5' " --arrow-parens always --bracket-spacing'
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '~'
@@ -729,12 +731,12 @@ let g:qs_enable = 0
 
 " ----------------------------------------------------------------------------
 " ## deoplete
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 
 
 " ----------------------------------------------------------------------------
 " ## nvim-completion-manager
-let g:cm_smart_enable=0
+let g:cm_smart_enable=1
 
 
 " ----------------------------------------------------------------------------
@@ -978,8 +980,8 @@ augroup vimrcEx
   " NOTE: the syntax highlighting fails when using FZF and BufEnter
   " FIXME: we really want to still be able to flip between syntax highlighting
   " on and off.
-  au WinEnter,BufEnter * silent set number relativenumber syntax=on " cul
-  au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " nocul
+  " au WinEnter,BufEnter * silent set number relativenumber syntax=on " cul
+  " au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " nocul
 
   " ----------------------------------------------------------------------------
   " ## Automagically update remote homeassistant files upon editing locally
