@@ -27,7 +27,7 @@ hs.window.setShadows(false)
 
 -- :: screens
 config.screens = {
-  laptop = 'Built-in Retina Display',
+  laptop = 'Color LCD', -- 'Built-in Retina Display',
   primary = hs.screen.primaryScreen(),
   secondary = hs.screen.primaryScreen():toWest() or hs.screen.primaryScreen()
 }
@@ -72,7 +72,7 @@ config.layout = {
       -- grid.set(window, config.grid.rightHalf, config.primaryDisplay(count))
       grid.set(window, config.grid.rightOneThird, config.primaryDisplay(count))
     else
-      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
+      grid.set(window, config.grid.rightHalf, config.secondaryDisplay(count))
     end
   end),
 
@@ -88,7 +88,7 @@ config.layout = {
     if count == 1 then
       grid.set(window, config.grid.leftHalf, config.primaryDisplay(count))
     else
-      grid.set(window, config.grid.leftTwoThirds, config.secondaryDisplay(count))
+      grid.set(window, config.grid.leftHalf, config.secondaryDisplay(count))
     end
   end),
 
@@ -149,33 +149,21 @@ config.layout = {
 
   ['com.google.Chrome'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
-    else
-      if window:title() == 'Postman' or window:title() == 'Task Manager - Google Chrome' then
-        grid.set(window, config.grid.centeredMedium, config.secondaryDisplay(count))
-      else
-        grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
-      end
+    grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
+
+    if window:title() == 'Postman' or window:title() == 'Task Manager - Google Chrome' then
+      grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
     end
   end),
 
   ['org.mozilla.firefoxdeveloperedition'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
-    else
-      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
-    end
+    grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),
 
   ['com.electron.brave'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
-    else
-      grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
-    end
+    grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),
 }
 
@@ -195,6 +183,8 @@ function config.primaryDisplay(count)
 end
 
 function config.secondaryDisplay(count)
+  utils.log.df('[layout] event; count: %s', count)
+
   if count > 1 then
     return hs.screen.find(config.screens.laptop)
   else
