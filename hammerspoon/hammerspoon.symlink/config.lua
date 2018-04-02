@@ -94,22 +94,12 @@ config.layout = {
 
   ['com.spotify.client'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      -- grid.set(window, '4,0 4x5', config.secondaryDisplay(count))
-      grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
-    else
-      grid.set(window, '5,0 5x5', config.secondaryDisplay(count))
-    end
+    grid.set(window, '5,0 5x5', config.primaryDisplay(count))
   end),
 
   ['com.apple.iChat'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      -- grid.set(window, '4,5 4x4', config.secondaryDisplay(count))
-      grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
-    else
-      grid.set(window, '5,5 3x3', config.secondaryDisplay(count))
-    end
+    grid.set(window, '5,5 3x3', config.primaryDisplay(count))
   end),
 
   -- this one gets wonky because of the fact that it spawns a popup then a window.
