@@ -17,7 +17,6 @@ neovim
 netlify-cli
 preact-cli
 prettier
-serverless
 stylelint
 stylelint-config-standard
 javascript-typescript-langserver

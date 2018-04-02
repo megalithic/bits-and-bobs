@@ -96,10 +96,3 @@ source ~/.dotfiles/bin/z.sh
 # if [[ $ZSH_EVAL_CONTEXT == 'file' ]]; then
 #   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # fi
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/replicant/n/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/replicant/n/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/replicant/n/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/replicant/n/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
