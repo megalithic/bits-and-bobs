@@ -481,7 +481,14 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 let g:ale_enabled = 1
 let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_fixer_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
+
 let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_javascript_prettier_eslint_use_local_config = 1
+let g:ale_javascript_tslint_use_local_config = 1
+
+let g:ale_javascript_prettier_use_global = 1
+let g:ale_javascript_prettier_eslint_use_global = 1
+let g:ale_javascript_tslint_use_global = 1
 
 let g:ale_linters = {}
 let g:ale_linters['typescript'] = ['tslint', 'typecheck', 'tsserver']
@@ -510,9 +517,9 @@ let g:ale_pattern_options = {
       \  }
       \}
 
-" let g:ale_javascript_prettier_options = '--single-quote --no-semi --trailing-comma es5' " --arrow-parens always --bracket-spacing'
-" let g:ale_typescript_prettier_options = '--single-quote --no-semi --trailing-comma es5' " --arrow-parens always --bracket-spacing'
-" let g:ale_jsx_prettier_options =        '--single-quote --no-semi --trailing-comma es5' " --arrow-parens always --bracket-spacing'
+let g:ale_javascript_prettier_options = '--single-quote --no-semi --trailing-comma all' " --arrow-parens always --bracket-spacing'
+let g:ale_typescript_prettier_options = '--single-quote --no-semi --trailing-comma all' " --arrow-parens always --bracket-spacing'
+let g:ale_jsx_prettier_options =        '--single-quote --no-semi --trailing-comma all' " --arrow-parens always --bracket-spacing'
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '~'
@@ -727,6 +734,16 @@ let g:vim_markdown_frontmatter=1
 " ----------------------------------------------------------------------------
 " ## quick-scope
 let g:qs_enable = 0
+
+
+" ----------------------------------------------------------------------------
+" ## emmet
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
 
 
 " ----------------------------------------------------------------------------

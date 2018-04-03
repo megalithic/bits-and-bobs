@@ -16,15 +16,19 @@ handleEvent = (function(event)
   -- things based on being "docked".
   if event.vendorID == 1241 and event.productID == 321 then
     if event.eventType == 'added' then
-      log.i('Pok3r added; presumably docked.')
-      selectProfile('pok3r')
-      toggleWifi('off')
-      selectAudioOutput('"Audioengine D1"')
+      log.i('Pok3r keyboard plugged in; laptop presumably docked.')
+      hs.timer.doAfter(1, function ()
+        selectProfile('pok3r')
+        toggleWifi('off')
+        selectAudioOutput('"Audioengine D1"')
+      end)
     else
-      log.i('Pok3r removed; presumably undocked.')
-      selectProfile('internal')
-      toggleWifi('on')
-      selectAudioOutput('"Built-in Output"')
+      log.i('Pok3r keyboard unplugged; laptop presumably undocked.')
+      hs.timer.doAfter(1, function ()
+        selectProfile('internal')
+        toggleWifi('on')
+        selectAudioOutput('"Built-in Output"')
+      end)
     end
   end
 end)

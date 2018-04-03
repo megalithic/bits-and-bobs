@@ -112,6 +112,11 @@ config.layout = {
     grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),
 
+  ['Finder'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
+  end),
+
   ['com.agilebits.onepassword4'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.centeredMedium, config.primaryDisplay(count))
