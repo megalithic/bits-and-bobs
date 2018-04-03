@@ -77,6 +77,7 @@ hotkey.bind(mashShift, 'm', function() utils.toggleApp('com.readdle.smartemail-M
 hotkey.bind('cmd', 'f5', function() utils.toggleApp('com.tapbots.TweetbotMac') end)
 hotkey.bind('cmd', 'f6', function() utils.toggleApp('com.tinyspeck.slackmacgap') end)
 hotkey.bind(mashShift, 's', function() utils.toggleApp('com.tinyspeck.slackmacgap') end)
+hotkey.bind(mashShift, 'z', function() utils.toggleApp('us.zoom.xos') end)
 hotkey.bind(cmdShift, '8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdCtrl, '8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)

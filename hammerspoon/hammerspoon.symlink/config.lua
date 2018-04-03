@@ -68,12 +68,7 @@ config.layout = {
 
   ['com.tinyspeck.slackmacgap'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
-    if count == 1 then
-      -- grid.set(window, config.grid.rightHalf, config.primaryDisplay(count))
-      grid.set(window, config.grid.rightOneThird, config.primaryDisplay(count))
-    else
-      grid.set(window, config.grid.rightHalf, config.secondaryDisplay(count))
-    end
+    grid.set(window, config.grid.rightHalf, config.secondaryDisplay(count))
   end),
 
   ['com.flexibits.fantastical2.mac'] = (function(window, forceScreenCount)
@@ -106,7 +101,7 @@ config.layout = {
   ['us.zoom.xos'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     if count == 1 then
-      grid.set(window, config.grid.centerMedium, config.primaryDisplay(count))
+      grid.set(window, config.grid.centeredLarge, config.primaryDisplay(count))
     else
       grid.set(window, config.grid.fullScreen, config.secondaryDisplay(count))
     end
