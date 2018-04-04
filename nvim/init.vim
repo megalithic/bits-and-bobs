@@ -127,23 +127,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
   endif
 
-  " Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'autozimu/LanguageClient-neovim', {
-  "   \ 'branch': 'next',
-  "   \ 'do': 'bash install.sh',
-  "   \ }
-
-  " Plug 'roxma/nvim-completion-manager', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'roxma/nvim-cm-tern',  {'do': 'npm install; npm install -g tern', 'for': ['javascript']}
-  " Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
-  " Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
-
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'Shougo/echodoc.vim'
-  " Plug 'pbogut/deoplete-elm'
-  " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  " Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript', 'for': ['typescript'] }
-
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
@@ -530,11 +513,11 @@ call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
       \  }))
 
 " typescript
-call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
-      \ 'name': 'tscompletejob',
-      \ 'whitelist': ['typescript'],
-      \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
-      \ }))
+" call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
+"       \ 'name': 'tscompletejob',
+"       \ 'whitelist': ['typescript'],
+"       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+"       \ }))
 
 if executable('typescript-language-server')
   au User lsp_setup call lsp#register_server({
@@ -867,24 +850,6 @@ let g:user_emmet_settings = {
 
 
 " ----------------------------------------------------------------------------
-" ## deoplete
-let g:deoplete#enable_at_startup = 0
-
-
-" ----------------------------------------------------------------------------
-" ## ncm/nvcm/nvim-completion-manager
-let g:cm_smart_enable=0
-
-
-" ----------------------------------------------------------------------------
-" ## languageclient
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 0
-" Use location list instead of quickfix
-let g:LanguageClient_diagnosticsList = 'location'
-
-
-" ----------------------------------------------------------------------------
 " ## ternjs
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
@@ -1008,8 +973,6 @@ function! BufEnterCommit()
     start
   end
 
-  let b:deoplete_disable_auto_complete=1
-  let b:deoplete_ignore_sources = ['buffer']
   set spell
   set spelllang=en
 endfunction
@@ -1154,20 +1117,6 @@ augroup vimrcEx
   au InsertEnter * silent! match ExtraWhitespace /\s\+\%#\@<!$/
   " Delete trailing whitespace on write
   au BufWrite * silent if &ft!~?'markdown'|:call DeleteTrailingWS()|endif
-
-
-"   " ----------------------------------------------------------------------------
-"   " ## Deoplete
-"   " NOTE: some of these have been moved to settings.vim#deoplete and
-"   " keys.vim#deoplete
-"   " au InsertLeave,CompleteDone,CursorMovedI * if pumvisible() == 0 | pclose | endif
-
-"   " au VimEnter * call deoplete#enable_logging('DEBUG', expand('~/.config/nvim/deoplete.log'))
-"   " au VimEnter * call deoplete#custom#set('_', 'converters',
-"   "       \ ['converter_auto_paren', 'converter_remove_overlap'])
-"   " au VimEnter * call deoplete#custom#set('vim', 'converters',
-"   "       \ ['add_vim_versions'])
-"   " au VimEnter * call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
 augroup END
 
 " " -/ Filetypes/Syntax /-------------------------------------------------------
@@ -1273,53 +1222,6 @@ augroup completions
 augroup END
 
 
-" https://github.com/fortes/dotfiles/blob/master/symlinks/config/nvim/init.vim
-" Don't need to automake in supported languages
-augroup automake
-  autocmd!
-  " JavaScript and Typescript lint via language servers
-  " autocmd BufWritePost *.sh,*.scss,*.less,*.css,*.vim,*.vimrc,*.txt,*.md make!
-augroup END
-
-augroup LanguageClientConfig
-  autocmd!
-
-  " <leader>ld to go to definition
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
-  " <leader>lf to autoformat document
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
-  " <leader>lh for type info under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
-  " <leader>lr to rename variable under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
-  " <leader>lc to switch omnifunc to LanguageClient
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
-  " <leader>ls to fuzzy find the symbols in the current document
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
-
-  " Use as omnifunc by default
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html setlocal omnifunc=LanguageClient#complete
-augroup END
-
-let g:LanguageClient_serverCommands = {}
-
-if executable('pyls')
-  let g:LanguageClient_serverCommands.python = ['pyls']
-endif
-
-if executable('javascript-typescript-stdio')
-  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
-endif
-
-
 " -/ Keybindings /------------------------------------------------
 let mapleader=","
 let maplocalleader="\\"
@@ -1341,31 +1243,12 @@ nnoremap <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 " ----------------------------------------------------------------------------
 " ## Tabbing for completions:
 if has('nvim')
-  " deoplete ---
-  " autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-  " ---
-  " deoplete + neosnippets
-  " ---
-  " Ref: https://github.com/mhartington/dotfiles/blob/master/config/nvim/init.vim#L512
-  " imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  " smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  " xmap <C-k> <Plug>(neosnippet_expand_target)
-
-  " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
-  " imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  " imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-  " inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
-
-  " ---
-  " nvim-completion-manager
-  " ---
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
-  let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-  inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
+  " let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+  " inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 endif
 
 

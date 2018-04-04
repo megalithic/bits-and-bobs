@@ -11,7 +11,7 @@ alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias stack='nocorrect stack'
 alias sudo='nocorrect sudo'
-alias avn='nocorrect avn'
+# alias avn='nocorrect avn'
 
 # Files & directories
 # -----------------------------------------------------------------------------

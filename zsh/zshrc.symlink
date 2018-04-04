@@ -67,12 +67,12 @@ zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 # source $HOME/.asdf/asdf.sh
 # source $HOME/.asdf/completions/asdf.bash
 
-# # setup chruby
+# setup chruby
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 RUBIES=(~/.rubies/*)
 
-# # setup n
+# setup n
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 
