@@ -51,6 +51,9 @@ sh ruby/install.sh
 # python packages and versions
 sh python/install.sh
 
+# nvim plugins
+sh nvim/install.sh
+
 # tmux plugins
 sh tmux/install.sh
 

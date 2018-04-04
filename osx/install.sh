@@ -16,6 +16,13 @@ osascript -e 'tell application "System Preferences" to quit'
 # get password up front
 sudo -v
 
+if [ ! -d "$HOME/code" ]; then
+  mkdir -p $HOME/code
+fi
+
+if [ ! -d "$HOME/tmp" ]; then
+  mkdir -p $HOME/tmp
+fi
 
 # Keep-alive: update existing `sudo` time stamp until `osx/osx.sh` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
@@ -43,7 +50,10 @@ sudo defaults write \
   NetBIOSName -string $COMPUTER_NAME
 
 # Save screenshots to the desktop
-mkdir ~/Desktop/screenshots
+if [ ! -d "$HOME/Desktop/screenshots" ]; then
+  mkdir ~/Desktop/screenshots
+fi
+
 defaults write com.apple.screencapture location -string "${HOME}/Desktop/screenshots"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
@@ -85,7 +95,7 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
 
 # dock size & autohidden dock
-defaults write com.apple.dock tilesize -int 128
+defaults write com.apple.dock tilesize -int 48
 defaults write com.apple.dock autohide -bool true
 
 # 14 days on ical

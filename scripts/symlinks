@@ -6,8 +6,6 @@ DOTFILES_ROOT="`pwd`"
 
 set -e
 
-echo 'Symlinking dotfiles'
-
 info () {
   printf "  [ \033[00;34m..\033[0m ] $1"
 }
@@ -26,29 +24,22 @@ fail () {
   exit
 }
 
-link_files () {
-  ln -s $1 $2
-  success "linked $1 to $2"
-}
+symlink_files () {
+	info 'symlinking dotfiles'
+  echo ''
 
-install_dotfiles () {
-  info 'installing dotfiles'
+	for found in **/*.symlink; do
+		source="$HOME/.dotfiles/$found"
+    dest="$HOME/.`basename \"${found%.*}\"`"
 
-  overwrite_all=false
-  backup_all=false
-  skip_all=false
-
-  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink`
-  do
-    dest="$HOME/.`basename \"${source%.*}\"`"
-
-    if [ -f $dest ] || [ -d $dest ]
-    then
+    if [ -f $dest ] || [ -d $dest ]; then
       rm -rf $dest
       success "removed $dest"
-      link_files $source $dest
     fi
-  done
+
+		ln -sf $source $dest
+		success "symlinked $source to $dest"
+	done
 }
 
-install_dotfiles
+symlink_files

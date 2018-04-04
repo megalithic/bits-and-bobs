@@ -2,9 +2,11 @@
 
 echo "(neo)vim setup"
 
-mkdir -p $HOME/.config
-ln -sfv $HOME/.dotfiles/nvim $HOME/.config/nvim
-# ln -sfv ~/.dotfiles/nvim ~/.vim
+if [ ! -d "$HOME/.config" ]; then
+  mkdir -p $HOME/.config
+fi
+
+ln -sfv $HOME/.dotfiles/nvim $HOME/.config
 ln -sfv $HOME/.dotfiles/nvim/init.vim $HOME/.vimrc
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -12,11 +14,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 nvim +PlugInstall! +qall!
 
-pip3 install --upgrade neovim
+pip3 install -U --upgrade neovim
 
-echo "finished installing vim-plug"
-
-# mkdir -p ~/.config/nvim/after/indent
-# wget https://github.com/pangloss/vim-javascript/blob/master/indent/javascript.vim -O ~/.config/nvim/after/indent/javascript.vim
-
-echo "finished neovim setup"
+echo "finished (neo)vim setup"
