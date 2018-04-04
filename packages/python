@@ -8,3 +8,4 @@ pygments
 setuptools
 glances
 psutil
+python-language-server

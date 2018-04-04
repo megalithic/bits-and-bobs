@@ -146,7 +146,7 @@ config.layout = {
     end
   end),
 
-  ['org.mozilla.firefoxdeveloperedition'] = (function(window, forceScreenCount)
+  ['Firefox'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),

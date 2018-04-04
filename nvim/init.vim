@@ -107,29 +107,45 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'Konfekt/FastFold'
   Plug 'mattn/emmet-vim'
 
-  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+  " # completions
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/asyncomplete-buffer.vim'
+  Plug 'prabirshrestha/asyncomplete-file.vim'
+  Plug 'yami-beta/asyncomplete-omni.vim'
+  Plug 'runoshun/tscompletejob'
+  Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
+
+  " # snippets + completions
+  if has('python3')
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'epilande/vim-es2015-snippets'
+    Plug 'epilande/vim-react-snippets'
+    Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+  endif
+
+  " Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   " Plug 'autozimu/LanguageClient-neovim', {
   "   \ 'branch': 'next',
   "   \ 'do': 'bash install.sh',
   "   \ }
 
-  Plug 'roxma/nvim-completion-manager', { 'do': ':UpdateRemotePlugins' }
-  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install; npm install -g tern', 'for': ['javascript']}
-  Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
-  Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
+  " Plug 'roxma/nvim-completion-manager', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'roxma/nvim-cm-tern',  {'do': 'npm install; npm install -g tern', 'for': ['javascript']}
+  " Plug 'roxma/ncm-elm-oracle', { 'for': ['elm'] }
+  " Plug 'roxma/ncm-rct-complete', { 'for': ['ruby', 'erb'] }
 
   " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " Plug 'Shougo/echodoc.vim'
   " Plug 'pbogut/deoplete-elm'
   " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript', 'for': ['typescript'] }
+  " Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript', 'for': ['typescript'] }
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-
-  " Plug 'epilande/vim-es2015-snippets'
-  " Plug 'epilande/vim-react-snippets'
-  " Plug 'SirVer/ultisnips'
 
   " ----------------------------------------------------------------------------
   " ## Text Objects, et al
@@ -477,32 +493,136 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 
 
 " ----------------------------------------------------------------------------
+" ## asyncomplete.vim/asynccomplete
+
+" ultisnips
+if has('python3')
+  let g:UltiSnipsExpandTrigger="<c-e>"
+  call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'whitelist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+endif
+
+" buffers
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'whitelist': ['*'],
+      \ 'blacklist': ['go'],
+      \ 'completor': function('asyncomplete#sources#buffer#completor'),
+      \ }))
+
+" files
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'whitelist': ['*'],
+      \ 'priority': 10,
+      \ 'completor': function('asyncomplete#sources#file#completor')
+      \ }))
+
+" omnis/omnicompletes
+call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+      \ 'name': 'omni',
+      \ 'whitelist': ['*'],
+      \ 'blacklist': ['c', 'cpp', 'html'],
+      \ 'completor': function('asyncomplete#sources#omni#completor')
+      \  }))
+
+" typescript
+call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
+      \ 'name': 'tscompletejob',
+      \ 'whitelist': ['typescript'],
+      \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+      \ }))
+
+if executable('typescript-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+        \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
+        \ })
+endif
+
+" if executable('typescript-language-server')
+"   au User lsp_setup call lsp#register_server({
+"         \ 'name': 'typescript-language-server',
+"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
+"         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+"         \ 'whitelist': ['typescript'],
+"         \ })
+" endif
+
+" scss, css and friends
+if executable('css-languageserver')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'css-languageserver',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+        \ 'whitelist': ['css', 'less', 'sass'],
+        \ })
+endif
+
+" reason, ocaml and friends
+if executable('ocaml-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'ocaml-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
+        \ 'whitelist': ['reason', 'ocaml'],
+        \ })
+endif
+
+" python
+if executable('pyls')
+  " pip install python-language-server
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+let g:lsp_signs_error = {'text': '✖'}
+let g:lsp_signs_warning = {'text': '~'} " icons require GUI
+" let g:lsp_signs_warning = {'text': '~', 'icon': '/path/to/some/icon'} " icons require GUI
+" let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+" for asyncomplete.vim log
+let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+
+
+" ----------------------------------------------------------------------------
 " ## linting (neomake/ale)
-let g:ale_enabled = 1
+let g:ale_enabled = 0
 let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_fixer_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_javascript_prettier_eslint_use_local_config = 1
-let g:ale_javascript_tslint_use_local_config = 1
-
-let g:ale_javascript_prettier_use_global = 1
-let g:ale_javascript_prettier_eslint_use_global = 1
-let g:ale_javascript_tslint_use_global = 1
-
 let g:ale_linters = {}
-let g:ale_linters['typescript'] = ['tslint', 'typecheck', 'tsserver']
-let g:ale_linters['javascript'] = ['prettier', 'eslint']
-let g:ale_linters['jsx'] = ['prettier', 'eslint']
-let g:ale_linters['css'] = ['prettier']
-let g:ale_linters['json'] = ['prettier']
+let g:ale_linters['typescript'] = ['prettier', 'eslint', 'prettier_eslint']
+let g:ale_linters['javascript'] = ['prettier', 'eslint', 'prettier_eslint']
+let g:ale_linters['jsx'] = ['prettier', 'eslint', 'prettier_eslint']
+let g:ale_linters['css'] = ['prettier', 'eslint', 'prettier_eslint']
+let g:ale_linters['json'] = ['prettier', 'eslint', 'prettier_eslint']
 
 let g:ale_fixers = {}
-let g:ale_fixers['typescript'] = ['prettier']
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['jsx'] = ['prettier']
-let g:ale_fixers['css'] = ['prettier']
-let g:ale_fixers['json'] = ['prettier']
+let g:ale_fixers['typescript'] = ['prettier_eslint']
+let g:ale_fixers['javascript'] = ['prettier_eslint']
+let g:ale_fixers['jsx'] = ['prettier_eslint']
+let g:ale_fixers['css'] = ['prettier_eslint']
+let g:ale_fixers['json'] = ['prettier_eslint']
+
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_javascript_prettier_eslint_use_local_config = 1
+" let g:ale_javascript_tslint_use_local_config = 1
+
+" let g:ale_javascript_prettier_use_global = 1
+let g:ale_javascript_prettier_eslint_executable = 'prettier-eslint'
+let g:ale_typescript_prettier_eslint_executable = 'prettier-eslint'
+" let g:ale_javascript_prettier_eslint_use_global = 1
+" let g:ale_javascript_tslint_use_global = 1
 
 " Disable for vendor, node_modules
 let g:ale_pattern_options = {
@@ -517,16 +637,16 @@ let g:ale_pattern_options = {
       \  }
       \}
 
-let g:ale_javascript_prettier_options = '--single-quote --no-semi --trailing-comma all' " --arrow-parens always --bracket-spacing'
-let g:ale_typescript_prettier_options = '--single-quote --no-semi --trailing-comma all' " --arrow-parens always --bracket-spacing'
-let g:ale_jsx_prettier_options =        '--single-quote --no-semi --trailing-comma all' " --arrow-parens always --bracket-spacing'
+" let g:ale_javascript_prettier_options = '--single-quote --no-semi --trailing-comma all' " --arrow-parens always --bracket-spacing'
+" let g:ale_typescript_prettier_options = '--single-quote --no-semi --trailing-comma all' " --arrow-parens always --bracket-spacing'
+" let g:ale_jsx_prettier_options =        '--single-quote --no-semi --trailing-comma all' " --arrow-parens always --bracket-spacing'
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '~'
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_lint_on_save = 1
 
 
@@ -752,14 +872,14 @@ let g:deoplete#enable_at_startup = 0
 
 
 " ----------------------------------------------------------------------------
-" ## nvim-completion-manager
-let g:cm_smart_enable=1
+" ## ncm/nvcm/nvim-completion-manager
+let g:cm_smart_enable=0
 
 
 " ----------------------------------------------------------------------------
 " ## languageclient
 " Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+let g:LanguageClient_autoStart = 0
 " Use location list instead of quickfix
 let g:LanguageClient_diagnosticsList = 'location'
 
@@ -1242,6 +1362,7 @@ if has('nvim')
   " ---
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
   let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
   inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>

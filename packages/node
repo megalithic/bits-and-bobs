@@ -20,6 +20,7 @@ prettier
 stylelint
 stylelint-config-standard
 javascript-typescript-langserver
+typescript-language-server
 vscode-css-languageserver-bin
 vscode-html-languageserver-bin
 vscode-json-languageserver-bin
