@@ -29,3 +29,5 @@ config/config.symlink/configstore
 /Brewfile
 **/elm-stuff
 **/elm-package.json
+asyncomplete.log
+vim-lsp.log

@@ -477,109 +477,104 @@ let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/makin
 
 " ----------------------------------------------------------------------------
 " ## asyncomplete.vim/asynccomplete
+" let g:asyncomplete_auto_popup = 1
+" let g:asyncomplete_remove_duplicates = 1
+" let g:asyncomplete_smart_completion = 1
+" let g:asyncomplete_min_chars = 3
+" let g:lsp_signs_enabled = 1         " enable signs
+" let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+" let g:lsp_signs_error = {'text': '✖'}
+" let g:lsp_signs_warning = {'text': '~'} " icons require GUI
+" let g:lsp_signs_hint = {'text': '?'} " icons require GUI
+" " let g:lsp_signs_warning = {'text': '~', 'icon': '/path/to/some/icon'} " icons require GUI
+" " let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/.config/nvim/vim-lsp.log')
+" let g:asyncomplete_log_file = expand('~/.config/nvim/asyncomplete.log')
+" set completeopt+=preview
 
-" ultisnips
-if has('python3')
-  let g:UltiSnipsExpandTrigger="<c-e>"
-  call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-        \ 'name': 'ultisnips',
-        \ 'whitelist': ['*'],
-        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-        \ }))
-endif
+" " ultisnips
+" if has('python3')
+"   let g:UltiSnipsExpandTrigger="<c-e>"
+"   au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+"         \ 'name': 'ultisnips',
+"         \ 'whitelist': ['*'],
+"         \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+"         \ }))
+" endif
 
-" buffers
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-      \ 'name': 'buffer',
-      \ 'whitelist': ['*'],
-      \ 'blacklist': ['go'],
-      \ 'completor': function('asyncomplete#sources#buffer#completor'),
-      \ }))
-
-" files
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-      \ 'name': 'file',
-      \ 'whitelist': ['*'],
-      \ 'priority': 10,
-      \ 'completor': function('asyncomplete#sources#file#completor')
-      \ }))
-
-" omnis/omnicompletes
-call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-      \ 'name': 'omni',
-      \ 'whitelist': ['*'],
-      \ 'blacklist': ['c', 'cpp', 'html'],
-      \ 'completor': function('asyncomplete#sources#omni#completor')
-      \  }))
-
-" typescript
-" call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
-"       \ 'name': 'tscompletejob',
-"       \ 'whitelist': ['typescript'],
-"       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+" " buffers
+" au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+"       \ 'name': 'buffer',
+"       \ 'whitelist': ['*'],
+"       \ 'blacklist': ['go'],
+"       \ 'completor': function('asyncomplete#sources#buffer#completor'),
 "       \ }))
 
-if executable('typescript-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-        \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
-        \ })
-endif
+" " files
+" au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+"       \ 'name': 'file',
+"       \ 'whitelist': ['*'],
+"       \ 'priority': 10,
+"       \ 'completor': function('asyncomplete#sources#file#completor')
+"       \ }))
+
+" " omnis/omnicompletes
+" au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+"       \ 'name': 'omni',
+"       \ 'whitelist': ['*'],
+"       \ 'blacklist': ['c', 'cpp', 'html'],
+"       \ 'completor': function('asyncomplete#sources#omni#completor')
+"       \  }))
+
+" " typescript
+" " au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
+" "       \ 'name': 'tscompletejob',
+" "       \ 'whitelist': ['typescript'],
+" "       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+" "       \ }))
 
 " if executable('typescript-language-server')
 "   au User lsp_setup call lsp#register_server({
 "         \ 'name': 'typescript-language-server',
-"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
-"         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-"         \ 'whitelist': ['typescript'],
+"         \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+"         \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+"         \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
 "         \ })
 " endif
 
-" scss, css and friends
-if executable('css-languageserver')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'css-languageserver',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
-        \ 'whitelist': ['css', 'less', 'sass'],
-        \ })
-endif
+" " scss, css and friends
+" if executable('css-languageserver')
+"   au User lsp_setup call lsp#register_server({
+"         \ 'name': 'css-languageserver',
+"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+"         \ 'whitelist': ['css', 'less', 'sass', 'scss'],
+"         \ })
+" endif
 
-" reason, ocaml and friends
-if executable('ocaml-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'ocaml-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
-        \ 'whitelist': ['reason', 'ocaml'],
-        \ })
-endif
+" " reason, ocaml and friends
+" if executable('ocaml-language-server')
+"   au User lsp_setup call lsp#register_server({
+"         \ 'name': 'ocaml-language-server',
+"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
+"         \ 'whitelist': ['reason', 'ocaml'],
+"         \ })
+" endif
 
-" python
-if executable('pyls')
-  " pip install python-language-server
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
-
-let g:lsp_signs_enabled = 1         " enable signs
-let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-let g:lsp_signs_error = {'text': '✖'}
-let g:lsp_signs_warning = {'text': '~'} " icons require GUI
-" let g:lsp_signs_warning = {'text': '~', 'icon': '/path/to/some/icon'} " icons require GUI
-" let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
-" for asyncomplete.vim log
-let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+" " python
+" if executable('pyls')
+"   " pip install python-language-server
+"   au User lsp_setup call lsp#register_server({
+"         \ 'name': 'pyls',
+"         \ 'cmd': {server_info->['pyls']},
+"         \ 'whitelist': ['python'],
+"         \ })
+" endif
 
 
 " ----------------------------------------------------------------------------
 " ## linting (neomake/ale)
-let g:ale_enabled = 0
+let g:ale_enabled = 1
 let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_fixer_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 
@@ -597,13 +592,12 @@ let g:ale_fixers['jsx'] = ['prettier_eslint']
 let g:ale_fixers['css'] = ['prettier_eslint']
 let g:ale_fixers['json'] = ['prettier_eslint']
 
+let g:ale_javascript_eslint_use_local_config = 1
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_prettier_eslint_use_local_config = 1
-" let g:ale_javascript_tslint_use_local_config = 1
 
 " let g:ale_javascript_prettier_use_global = 1
-let g:ale_javascript_prettier_eslint_executable = 'prettier-eslint'
-let g:ale_typescript_prettier_eslint_executable = 'prettier-eslint'
+" let g:ale_javascript_prettier_eslint_executable = 'prettier-eslint'
 " let g:ale_javascript_prettier_eslint_use_global = 1
 " let g:ale_javascript_tslint_use_global = 1
 
@@ -1246,6 +1240,7 @@ if has('nvim')
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
   " let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
   " inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>

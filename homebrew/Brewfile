@@ -61,11 +61,9 @@ brew 'moreutils'
 brew 'mysql'
 brew 'mycli'
 # brew 'mysql@5.6'
-# brew 'n'
 brew 'ncdu'
 brew 'ncurses'
 brew 'neovim', args: ['with-lua', 'with-perl', 'with-ruby']
-# brew 'npm'
 brew 'openssl'
 brew 'p7zip'
 brew 'perl'
@@ -75,16 +73,12 @@ brew 'postgresql@9.5'
 brew 'postgis'
 brew 'python'
 brew 'python3'
-# http://stackoverflow.com/a/40910219
-# brew 'qt@5.5'
-# brew link --force qt5
 brew 'rabbitmq'
 brew 'readline'
 brew 'reattach-to-user-namespace', args: ['wrap-pbcopy-and-pbpaste']
 brew 'ren'
 brew 'redis'
 brew 'ripgrep'
-# brew 'ruby'
 brew 'ruby-install'
 brew 'ruby-build'
 brew 'ssh-copy-id'
@@ -101,8 +95,6 @@ brew 'watchman', args: ['--HEAD']
 brew 'weechat', args: ['--with-ruby', '--with-python', '--with-perl', '--with-lua', '--with-aspell', '--with-javascript', '--with-curl', '--with-guile']
 brew 'wget', args: ['enable-iri']
 brew 'wifi-password'
-# brew 'vim', args: ['--with-lua', '--with-luajit', '--with-python3', '--with-tcl', '--with-override-system-vi']
-# brew 'yarn'
 brew 'yubico-piv-tool'
 brew 'libyubikey'
 brew 'pam_yubico'
