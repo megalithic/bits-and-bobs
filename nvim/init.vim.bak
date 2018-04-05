@@ -1568,7 +1568,7 @@ nmap <silent> <leader>ek :ALEPrevious<cr>
 nmap <leader>S :exec "let cft=&ft \| edit scratchpad \| let &ft=cft"<CR>
 
 
-" -/ Highlighting /------------------------------------------------
+" -/ Highlights/Highlighting /------------------------------------------------
 function! s:after_colorscheme()
   " Make spelling problems easier to read.
   hi clear SpellBad

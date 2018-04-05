@@ -77,7 +77,7 @@ set showcmd                                                                     
 set noshowmode                                                                  "Hide showmode because of the powerline plugin
 set gdefault                                                                    "Set global flag for search and replace
 set gcr=a:blinkon500-blinkwait500-blinkoff500                                   "Set cursor blinking rate
-set cursorline                                                                  "Highlight current line
+"set cursorline                                                                  "Highlight current line
 set smartcase                                                                   "Smart case search if there is uppercase
 set ignorecase                                                                  "case insensitive search
 set mouse=a                                                                     "Enable mouse usage
@@ -917,6 +917,9 @@ hi xmlAttrib cterm=italic
 hi Type cterm=italic
 hi Normal ctermbg=none
 hi Comment cterm=italic term=italic gui=italic
+hi LineNr guibg=#3C4C55 guifg=#937f6e gui=NONE
+hi CursorLineNr ctermbg=black ctermfg=223 cterm=NONE guibg=#333333 guifg=#db9c5e gui=bold
+hi qfLineNr ctermbg=black ctermfg=95 cterm=NONE guibg=black guifg=#875f5f gui=NONE
 " }}}
 
 " vim:foldenable:foldmethod=marker
