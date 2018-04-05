@@ -31,3 +31,5 @@ config/config.symlink/configstore
 **/elm-package.json
 asyncomplete.log
 vim-lsp.log
+.cache
+repos

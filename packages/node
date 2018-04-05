@@ -1,7 +1,6 @@
 avn
 avn-n
 babel-eslint
-bible
 browser-sync
 chai
 create-react-app
@@ -16,9 +15,8 @@ exp
 jest
 mocha
 neovim
-netlify-cli
-preact-cli
 prettier
+prettier-eslint
 stylelint
 stylelint-config-standard
 javascript-typescript-langserver
