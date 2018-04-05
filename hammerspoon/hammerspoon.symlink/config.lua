@@ -96,7 +96,7 @@ config.layout = {
     local count = forceScreenCount or screenCount
     grid.set(window, '5,5 3x3', config.primaryDisplay(count))
   end),
-  ['YakYak'] = (function(window, forceScreenCount)
+  ['com.github.yakyak'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, '5,5 3x3', config.primaryDisplay(count))
   end),
