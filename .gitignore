@@ -19,6 +19,8 @@ nvim/.init.vim-rplugin*
 nvim/deoplete.log
 nvim/autoload/plug.vim
 nvim/.netrwhist
+nvim/bundle
+nvim/backups
 config/config.symlink/configstore
 ~/.config/nvim/autoload
 ~/.config/nvim/plugged
@@ -33,3 +35,4 @@ asyncomplete.log
 vim-lsp.log
 .cache
 repos
+tags

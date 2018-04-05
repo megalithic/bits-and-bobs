@@ -98,6 +98,7 @@ brew 'wifi-password'
 brew 'yubico-piv-tool'
 brew 'libyubikey'
 brew 'pam_yubico'
+brew 'universal-ctags', args: ['--HEAD']
 brew 'yubikey-personalization'
 brew 'zsh', args: ['--with-unicode9', '--without-etcdir']
 brew 'zsh-completions'
@@ -146,6 +147,7 @@ cask 'usb-overdrive'
 # cask 'yubiswitch'
 cask 'visual-studio-code'
 # cask 'yubico-authenticator'
+cask 'yakyak'
 
 mas 'Fantastical2', id: 975937182
 mas 'Spark', id: 1176895641

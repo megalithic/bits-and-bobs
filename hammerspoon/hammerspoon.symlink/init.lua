@@ -81,6 +81,7 @@ hotkey.bind(mashShift, 'z', function() utils.toggleApp('us.zoom.xos') end)
 hotkey.bind(cmdShift, '8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdCtrl, '8', function() utils.toggleApp('com.spotify.client') end)
 hotkey.bind(cmdShift, 'M', function() utils.toggleApp('com.apple.iChat') end)
+hotkey.bind(ctrlShift, 'M', function() utils.toggleApp('YakYak') end)
 
 -- :: window manipulation
 hotkey.bind(cmdCtrl, 'h', utils.chain({

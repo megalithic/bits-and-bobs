@@ -96,6 +96,10 @@ config.layout = {
     local count = forceScreenCount or screenCount
     grid.set(window, '5,5 3x3', config.primaryDisplay(count))
   end),
+  ['YakYak'] = (function(window, forceScreenCount)
+    local count = forceScreenCount or screenCount
+    grid.set(window, '5,5 3x3', config.primaryDisplay(count))
+  end),
 
   -- this one gets wonky because of the fact that it spawns a popup then a window.
   ['us.zoom.xos'] = (function(window, forceScreenCount)
