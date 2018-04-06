@@ -1,11 +1,11 @@
 " ================ Plugins ==================== {{{
 call plug#begin( '~/.config/nvim/bundle')
 
-Plug 'w0rp/ale', { 'do': 'npm install -g prettier' }
+Plug 'w0rp/ale' ", { 'do': 'npm install -g prettier' }
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
-Plug 'manasthakur/vim-commentor'
+"Plug 'manasthakur/vim-commentor'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -13,7 +13,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx'] }
+
+" ## Syntax
 Plug 'sheerun/vim-polyglot'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'leafgarland/typescript-vim'
+
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet'
 Plug 'dyng/ctrlsf.vim'
@@ -26,6 +31,7 @@ Plug 'sbdchd/neoformat'
 Plug 'morhetz/gruvbox'
 
 Plug 'trevordmiller/nova-vim'
+Plug 'tpope/vim-commentary' " (un)comment code
 Plug 'megalithic/golden-ratio' " vertical split layout manager
 Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
 Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
@@ -192,7 +198,7 @@ set nofoldenable
 set foldmethod=syntax
 
 " }}}
-" ================ Auto commands ====================== {{{
+" ================ Autocommands ====================== {{{
 
 augroup vimrc
   autocmd!
@@ -208,6 +214,8 @@ autocmd vimrc FileType javascript setlocal formatprg=prettier\ --stdin
 autocmd vimrc FocusGained,BufEnter * checktime                                  "Refresh file when vim gets focus
 autocmd vimrc FileType javascript nnoremap <buffer><silent><C-]> :JsGotoDefinition<CR>
 autocmd vimrc FileType javascript nnoremap <buffer><silent><Leader>] <C-W>v:JsGotoDefinition<CR>
+autocmd BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
+autocmd BufNewFile,BufRead .tern-project set ft=json
 
 
 " ----------------------------------------------------------------------------
@@ -412,12 +420,12 @@ endfunction
 
 
 " }}}
-" ================ Custom mappings ======================== {{{
+" ================ Custom Mappings ======================== {{{
 
 " Comment map
-nmap <Leader>c gcc
+"nmap <Leader>c gcc
 " Line comment command
-xmap <Leader>c gc
+"xmap <Leader>c gc
 
 
 " Down is really the next line
@@ -513,6 +521,10 @@ nnoremap <Leader>db :silent w <BAR> :silent %bd <BAR> e#<CR>
 
 " folding toggle
 nnoremap <space> za
+
+" ## vim-commentary
+nmap <leader>c :Commentary<cr>
+vmap <leader>c :Commentary<cr>
 
 " ## FZF
 nnoremap <silent> <leader>m <esc>:FZF<cr>
@@ -745,15 +757,16 @@ inoremap <c-a> <esc>I
 
 
 " }}}
-" ================ Plugins setups ======================== {{{
+" ================ Plugins Settings ======================== {{{
 
-" ----------------------------------------------------------------------------
+" ## polyglot
+let g:polyglot_disabled = ['typescript']
+
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
 let g:golden_ratio_wrap_ignored = 0
 let g:golden_ratio_ignore_horizontal_splits = 1
 
-" ----------------------------------------------------------------------------
 " ## auto-pairs
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
@@ -768,7 +781,7 @@ let g:NERDTreeUpdateOnCursorHold = 0                                            
 
 " ## emmet
 let g:user_emmet_leader_key = '<c-e>'                                           "Change trigger emmet key
-let g:user_emmet_leader_key='<Tab>'
+" let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
       \  'javascript.jsx' : {
       \      'extends' : 'jsx',
@@ -788,11 +801,26 @@ let g:delimitMate_expand_cr = 2                                                 
 
 let g:neoformat_try_formatprg = 1                                               "Use formatprg when available
 
-let g:ale_linters = {'javascript': ['eslint']}                                  "Lint js with eslint
-let g:ale_fixers = {'javascript': ['prettier', 'eslint']}                       "Fix eslint errors
-let g:ale_javascript_prettier_options = '--print-width 100'                     "Set max width to 100 chars for prettier
+let g:ale_enabled = 1
+let g:ale_linters = {
+      \   'javascript': ['prettier', 'eslint'],
+      \   'typescript': ['prettier', 'eslint']
+      \ }                                                                       "Lint js with eslint
+let g:ale_fixers = {
+      \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
+      \   'typescript': ['prettier', 'eslint', 'prettier_eslint']
+      \ }                                                                       "Fix eslint errors
+" let g:ale_javascript_prettier_options = '--print-width 100'                     "Set max width to 100 chars for prettier
 let g:ale_sign_error = '✖'                                                      "Lint error sign
 let g:ale_sign_warning = '⚠'                                                    "Lint warning sign
+let g:ale_javascript_eslint_use_local_config = 1
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_javascript_prettier_eslint_use_local_config = 1
+
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_enter = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
 
 " ## vim-jsx
 let g:jsx_ext_required = 0
@@ -911,7 +939,7 @@ endif
 let g:gist_open_url = 1
 let g:gist_default_private = 1
 " }}}
-" ================ Highlights and colors ======================== {{{
+" ================ Highlights and Colors ======================== {{{
 hi htmlArg cterm=italic
 hi xmlAttrib cterm=italic
 hi Type cterm=italic
