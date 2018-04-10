@@ -17,6 +17,7 @@ mocha
 neovim
 prettier
 prettier-eslint
+prettier-eslint-cli
 stylelint
 stylelint-config-standard
 javascript-typescript-langserver

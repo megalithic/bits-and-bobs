@@ -116,7 +116,7 @@ config.layout = {
     grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),
 
-  ['io.alacritty'] = (function(window, forceScreenCount)
+  ['Alacritty'] = (function(window, forceScreenCount)
     local count = forceScreenCount or screenCount
     grid.set(window, config.grid.fullScreen, config.primaryDisplay(count))
   end),

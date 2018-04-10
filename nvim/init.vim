@@ -1,34 +1,64 @@
+" vim: set foldenable fdm=marker fdl=2 ft=vim sts=2 sw=2 ts=2:
 " ================ Plugins ==================== {{{
 call plug#begin( '~/.config/nvim/bundle')
 
-Plug 'w0rp/ale' ", { 'do': 'npm install -g prettier' }
+Plug 'tweekmonster/startuptime.vim', { 'on': [ 'StartupTime' ] } " Show slow plugins
+" `:Bufferize messages` to get messages (or any :command) in a new buffer
+" let g:bufferize_command = 'tabnew'
+" Plug 'AndrewRadev/bufferize.vim', { 'on': [ 'Bufferize' ] }
+Plug 'w0rp/ale' " , { 'do': 'npm install -g prettier prettier-eslint-cli' }
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
-"Plug 'manasthakur/vim-commentor'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx'] }
+Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx', 'javascript', 'typescript'] }
+Plug 'Valloric/MatchTagAlways', { 'for': ['haml', 'html', 'xml', 'erb', 'javascript', 'javascript.jsx', 'typescript'] } " highlights the opening/closing tags for the block you're in
+Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim' " auto-closes many delimiters and can repeat with a `.`
 
 " ## Syntax
-Plug 'sheerun/vim-polyglot'
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
+Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
+Plug 'elzr/vim-json', { 'for': ['json'] }
+Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'leafgarland/typescript-vim'
-
+Plug 'reasonml-editor/vim-reason-plus', { 'for': ['reason'] }
+Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
+Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
+Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
+Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
+Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
+Plug 'jtratner/vim-flavored-markdown', { 'for': ['markdown'] }
+Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
+Plug 'tpope/vim-haml', { 'for': ['haml'] }
+Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
+Plug 'othree/xml.vim', { 'for': ['xml'] }
+Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
+Plug 'shougo/vimproc.vim', { 'do': 'make' } " | Plug 'osyo-manga/vim-monster', { 'for': ['ruby'], 'do': 'gem install fastri rcodetools' }
+Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
+Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
+Plug 'vim-scripts/fish.vim',   { 'for': 'fish' }
+Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
+Plug 'sickill/vim-pasta' " context-aware pasting
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet'
-Plug 'dyng/ctrlsf.vim'
-Plug 'vimwiki/vimwiki'
+Plug 'Shougo/neosnippet-snippets'
+" Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'kristijanhusak/vim-js-file-import'
 Plug 'sbdchd/neoformat'
-Plug 'morhetz/gruvbox'
 
 Plug 'trevordmiller/nova-vim'
 Plug 'tpope/vim-commentary' " (un)comment code
@@ -36,6 +66,10 @@ Plug 'megalithic/golden-ratio' " vertical split layout manager
 Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
 Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
 Plug 'junegunn/rainbow_parentheses.vim' " nicely colors nested pairs of [], (), {}
+Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb', 'haml', 'javascript.jsx', 'typescript', 'javascript'] } " a set of mappings for several langs: html, xml, erb, php, more
+Plug 'docunext/closetag.vim' " will auto-close the opening tag as soon as you type </
+Plug 'tpope/vim-endwise'
+Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
 Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
 Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -43,10 +77,43 @@ Plug 'unblevable/quick-scope' " highlights f/t type of motions, for quick horizo
 Plug 'EinfachToll/DidYouMean'
 Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
 Plug 'tpope/vim-eunuch'
-
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-es2015-snippets'
 Plug 'epilande/vim-react-snippets'
+Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-apple-darwin', 'do': ':UpdateRemotePlugins'}
+
+" ## Text Objects, et al
+Plug 'kana/vim-operator-user'
+" -- provide ai and ii for indent blocks
+" -- provide al and il for current line
+" -- provide a_ and i_ for underscores
+" -- provide a- and i-
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire' " Entire buffer text object (vae)
+Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (vir)
+Plug 'kana/vim-textobj-function' " Function text object (vaf)
+Plug 'glts/vim-textobj-comment' " Comment text object (vac)
+Plug 'michaeljsmith/vim-indent-object'
+" - d/D   for underscore section (e.g. `did` on foo_b|ar_baz -> foo__baz)
+Plug 'machakann/vim-textobj-delimited', { 'on': [
+      \   '<Plug>(textobj-delimited'
+      \ ] }
+" - i     for indent level
+Plug 'kana/vim-textobj-indent', { 'on': [ '<Plug>(textobj-indent' ] }
+" - l     for current line
+Plug 'kana/vim-textobj-line', { 'on': [ '<Plug>(textobj-line' ] }
+" - P     for last paste
+Plug 'gilligan/textobj-lastpaste', { 'on': [ '<Plug>(textobj-lastpaste' ] }
+" - u     for url
+Plug 'mattn/vim-textobj-url', { 'on': [ '<Plug>(textobj-url' ] }
+" - b     for any block type (parens, braces, quotes, ltgt)
+Plug 'rhysd/vim-textobj-anyblock'
+" - x     for xml attr like `data-content="everything"`
+Plug 'whatyouhide/vim-textobj-xmlattr', { 'on': [
+      \   '<Plug>(textobj-xmlattr',
+      \ ] }
+Plug 'wellle/targets.vim' " Improved targets line cin) next parens
+" ^--- https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
 
 call plug#end()
 "}}}
@@ -91,11 +158,14 @@ set showmatch                                                                   
 set nostartofline                                                               "Jump to first non-blank character
 set timeoutlen=1000 ttimeoutlen=0                                               "Reduce Command timeout for faster escape and O
 set fileencoding=utf-8                                                          "Set utf-8 encoding on write
-set wrap                                                                        "Enable word wrap
-set linebreak                                                                   "Wrap lines at convenient points
-set listchars=tab:\ \ ,trail:·                                                  "Set trails for tabs and spaces
-set list                                                                        "Enable listchars
+set linebreak
+set textwidth=79 " will auto wrap content when set
+set nowrap " `on` is 'wrap'
+set wrapscan
+set listchars=tab:▸\ ,eol:¬,extends:›,precedes:‹,trail:·,nbsp:⚋
+set nolist " list to enable                                                                        "Enable listchars
 set lazyredraw                                                                  "Do not redraw on registers and macros
+set ttyfast
 set background=dark                                                             "Set background to dark
 set hidden                                                                      "Hide buffers in background
 set conceallevel=2 concealcursor=i                                              "neosnippets conceal marker
@@ -134,10 +204,11 @@ if empty($SSH_CONNECTION) && has('clipboard')
   endif
 endif
 
+" if more than 1 files are passed to vim as arg, open them in vertical splits
+if argc() > 1
+  silent vertical all
+endif
 
-" -------- per-folder vim settings
-set exrc
-set secure " disable unsafe commands in local .vimrc files
 
 
 " -------- abbreviations/spellings
@@ -202,49 +273,123 @@ set foldmethod=syntax
 
 augroup vimrc
   autocmd!
+  " au QuickFixCmdPost [^l]* cwindow                                     "Open quickfix window after grepping
+  au BufWritePre * call StripTrailingWhitespaces()                     "Auto-remove trailing spaces
+  "au InsertEnter * set nocul                                           "Remove cursorline highlight
+  "au InsertLeave * set cul                                             "Add cursorline highlight in normal mode
+  au FocusGained,BufEnter * checktime                                  "Refresh file when vim gets focus
+
+  " ## Handle window resizing
+  au VimResized * execute "normal! \<c-w>="
+
+  " No formatting on o key newlines
+  au BufNewFile,BufEnter * set formatoptions-=o
+
+  " ----------------------------------------------------------------------------
+  " ## JavaScript
+  au FileType javascript nnoremap <buffer><silent><C-]> :JsGotoDefinition<CR>
+  au FileType javascript nnoremap <buffer><silent><Leader>] <C-W>v:JsGotoDefinition<CR>
+  au BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
+  au BufNewFile,BufRead .tern-project set ft=json
+  au FileType javascript,javascript.jsx,lisp,clojure,scheme,sass,scss,scss.css RainbowParentheses
+
+  " ----------------------------------------------------------------------------
+  " ## CSS/SCSS
+  " make sure `complete` works as expected for CSS class names whithout
+  " messing with motions (eg. '.foo-bar__baz') and we make sure all
+  " delimiters (_,-,$,%,.) are treated as word separators outside insert mode
+  au InsertEnter,BufLeave * setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
+  au InsertLeave,BufEnter * setl iskeyword=@,48-57,192-255
+  " https://github.com/rstacruz/vimfiles/blob/master/plugin/plugins/css3-syntax.vim
+  au FileType css,css.scss,sass,scss setl iskeyword+=-
+  " au FileType scss set iskeyword+=-
+  au FileType css,css.scss,sass,scss setl formatoptions+=croql
+
+  " ----------------------------------------------------------------------------
+  " ## Markdown
+  au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw ft=ghmarkdown
+  au FileType markdown,text,html setlocal spell complete+=kspell
+  au FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
+  au FileType markdown set tw=80
+
+  " ----------------------------------------------------------------------------
+  " ## Ruby
+  au FileType ruby setl iskeyword+=_
+
+  " ----------------------------------------------------------------------------
+  " ## SSH
+  au BufNewFile,BufRead */ssh/config  setf sshconfig
+  au BufNewFile,BufRead ssh_config,*/.dotfiles/private/ssh/config  setf sshconfig
+
+  " ----------------------------------------------------------------------------
+  " ## Completions
+  au FileType * setl omnifunc=syntaxcomplete#Complete
+  au FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
+  au FileType css,scss,sass,less,scss.css,sass.css setl omnifunc=csscomplete#CompleteCSS noci
+
+  au FileType coffee setl omnifunc=javascriptcomplete#CompleteJS
+  au FileType javascript,javascript.jsx,jsx setl omnifunc=javascriptcomplete#CompleteJS " default
+  au FileType javascript,javascript.jsx,jsx setl completefunc=jspc#omni " jspc
+  au FileType javascript,javascript.jsx,jsx setl omnifunc=tern#Complete " tern
+
+  au FileType python setl omnifunc=pythoncomplete#Complete
+  au FileType xml setl omnifunc=xmlcomplete#CompleteTags
+  au FileType ruby setl omnifunc=rubycomplete#Complete
+
+  " ----------------------------------------------------------------------------
+  " ## Fixing/Linting
+
+  " ----------------------------------------------------------------------------
+  " ## Toggle certain accoutrements when entering and leaving a buffer & window
+  au WinEnter,BufEnter * silent set number relativenumber syntax=on " cul
+  au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " nocul
+
+  " ----------------------------------------------------------------------------
+  " ## Automagically update remote homeassistant files upon editing locally
+  au BufWritePost ~/.dotfiles/private/homeassistant/* silent! :MirrorPush ha
+
+  " ----------------------------------------------------------------------------
+  " ## Toggle colorcolumn when in insert mode for visual 80char indicator
+  au BufEnter,FocusGained,InsertLeave * silent set relativenumber
+  au BufLeave,FocusLost,InsertEnter   * silent set norelativenumber
+  au InsertEnter * silent set colorcolumn=80
+  au InsertLeave * silent set colorcolumn=""
+  " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
+
+  " ----------------------------------------------------------------------------
+  " ## Manage GIT related scenarios
+  au Filetype gitcommit setl spell textwidth=72
+  au BufNewFile,BufRead .git/index setlocal nolist
+  au BufReadPost fugitive://* set bufhidden=delete
+  au BufReadCmd *.git/index exe BufReadIndex()
+  au BufEnter *.git/index silent normal gg0j
+  au BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
+  au Filetype gitcommit exe BufEnterCommit()
+
+  autocmd! TermOpen * setlocal nonumber norelativenumber
+  autocmd! TermOpen * if &buftype == 'terminal'
+        \| set nonumber norelativenumber
+        \| endif
 augroup END
 
-autocmd vimrc QuickFixCmdPost [^l]* cwindow                                     "Open quickfix window after grepping
-autocmd vimrc BufWritePre * call StripTrailingWhitespaces()                     "Auto-remove trailing spaces
-"autocmd vimrc InsertEnter * set nocul                                           "Remove cursorline highlight
-"autocmd vimrc InsertLeave * set cul                                             "Add cursorline highlight in normal mode
-autocmd vimrc FileType php setlocal sw=4 sts=4 ts=4                             "Set indentation to 4 for php
-autocmd vimrc FileType javascript setlocal formatprg=prettier\ --stdin
-      \\ --single-quote\ --print-width\ 100                                     "Setup prettier options for neoformat
-autocmd vimrc FocusGained,BufEnter * checktime                                  "Refresh file when vim gets focus
-autocmd vimrc FileType javascript nnoremap <buffer><silent><C-]> :JsGotoDefinition<CR>
-autocmd vimrc FileType javascript nnoremap <buffer><silent><Leader>] <C-W>v:JsGotoDefinition<CR>
-autocmd BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
-autocmd BufNewFile,BufRead .tern-project set ft=json
+" Automatically close vim if only the quickfix window is open
+" http://stackoverflow.com/a/7477056/3720597
+augroup QuickFixClose
+    autocmd!
+    autocmd WinEnter * if winnr('$') == 1 &&
+                \getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"
+                \| q
+                \| endif
+augroup END
 
+augroup MakeQuickFixPrettier
+    autocmd!
+    autocmd BufRead * if &buftype == 'quickfix'
+                \| setlocal colorcolumn=
+                \| setlocal nolist
+                \| endif
+augroup END
 
-" ----------------------------------------------------------------------------
-" ## Toggle certain accoutrements when entering and leaving a buffer & window
-" NOTE: the syntax highlighting fails when using FZF and BufEnter
-" FIXME: we really want to still be able to flip between syntax highlighting
-" on and off.
-" au WinEnter,BufEnter * silent set number relativenumber syntax=on " cul
-" au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " nocul
-
-" ----------------------------------------------------------------------------
-" ## Automagically update remote homeassistant files upon editing locally
-au BufWritePost ~/.dotfiles/private/homeassistant/* silent! :MirrorPush ha
-
-" ----------------------------------------------------------------------------
-" ## Toggle colorcolumn when in insert mode for visual 80char indicator
-au InsertEnter * set colorcolumn=80
-au InsertLeave * set colorcolumn=""
-" au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
-
-" ----------------------------------------------------------------------------
-" ## Manage GIT related scenarios
-au Filetype gitcommit setl spell textwidth=72
-au BufNewFile,BufRead .git/index setlocal nolist
-au BufReadPost fugitive://* set bufhidden=delete
-au BufReadCmd *.git/index exe BufReadIndex()
-au BufEnter *.git/index silent normal gg0j
-au BufEnter *.git/COMMIT_EDITMSG exe BufEnterCommit()
-au Filetype gitcommit exe BufEnterCommit()
 
 " }}}
 " ================ Completion ======================= {{{
@@ -311,6 +456,20 @@ cnoreabbrev nowrap set nowrap
 " }}}
 " ================ Functions ======================== {{{
 
+" function! PlugIf(condition, ...) abort
+"   let l:enabled = a:condition ? {} : { 'on': [], 'for': [] }
+"   return a:0 ? extend(l:enabled, a:000[0]) : l:enabled
+" endfunction
+
+" " Shortcut
+" function! WithCompl(...) abort
+"   return call('PlugIf', [ g:megalithic_use_completion ] + a:000)
+" endfunction
+
+function! RemoveTypescriptIncompatibilityBanner(...) abort
+  " echo "should remove banner now"
+endfunction
+
 function! StripTrailingWhitespaces()
   if &modifiable
     let l:l = line(".")
@@ -341,10 +500,6 @@ function! AleStatusline(type)
   endif
 
   return ''
-endfunction
-
-function! FormatSelection() range
-  exe ":'<,'>Neoformat! ".&ft." | norm!gv="
 endfunction
 
 function! GitFileStatus()
@@ -477,7 +632,8 @@ nnoremap <silent><Leader>q :call CloseBuffer()<CR>
 " Find current file in NERDTree
 nnoremap <Leader>hf :NERDTreeFind<CR>
 " Open NERDTree
-nnoremap <Leader>n :NERDTreeToggle<CR>
+" nnoremap <Leader>n :NERDTreeToggle<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
 
 " Toggle between last 2 buffers
 nnoremap <leader><tab> <c-^>
@@ -487,10 +643,10 @@ nnoremap <Leader>f :call Search()<CR>
 nnoremap <Leader>F :call Search(1)<CR>
 
 " Toggle buffer list
-nnoremap <C-p> :Files<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>t :BTags<CR>
-nnoremap <Leader>m :History<CR>
+" nnoremap <C-p> :Files<CR>
+" nnoremap <Leader>b :Buffers<CR>
+" nnoremap <Leader>t :BTags<CR>
+" nnoremap <Leader>m :History<CR>
 
 " Indenting in visual mode
 xnoremap <s-tab> <gv
@@ -509,10 +665,6 @@ map Q <Nop>
 
 " Jump to definition in vertical split
 nnoremap <Leader>] <C-W>v<C-]>
-
-" Reformat and fix linting errors
-nnoremap <Leader>r :ALEFix<CR>
-vnoremap <Leader>r :call FormatSelection()<CR>
 
 " Close all other buffers except current one
 nnoremap <Leader>db :silent w <BAR> :silent %bd <BAR> e#<CR>
@@ -757,10 +909,10 @@ inoremap <c-a> <esc>I
 
 
 " }}}
-" ================ Plugins Settings ======================== {{{
+" ================ Plugin Config ======================== {{{
 
 " ## polyglot
-let g:polyglot_disabled = ['typescript']
+" let g:polyglot_disabled = ['typescript']
 
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
@@ -799,24 +951,52 @@ let g:deoplete#enable_camel_case = 1                                            
 
 let g:delimitMate_expand_cr = 2                                                 "Auto indent on enter
 
-let g:neoformat_try_formatprg = 1                                               "Use formatprg when available
+" let g:neoformat_javascript_eslint = {
+"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
+"       \ 'replace': 1
+"       \ }
+" let g:neoformat_typescript_eslint = {
+"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
+"       \ 'replace': 1
+"       \ }
+" let g:neoformat_javascript_prettiereslint = {
+"       \ 'exe': './node_modules/.bin/prettier-eslint',
+"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
+"       \ 'replace': 1
+"       \ }
+" let g:neoformat_typescript_prettiereslint = {
+"       \ 'exe': './node_modules/.bin/prettier-eslint',
+"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
+"       \ 'replace': 1
+"       \ }
+" let g:neoformat_try_formatprg = 1                                               "Use formatprg when available
+" let g:neoformat_enabled_javascript = ['prettiereslint', 'eslint']
+" let g:neoformat_enabled_typescript = ['prettiereslint', 'eslint']
+" let g:neoformat_enabled_scss = ['prettier']
+" let g:neoformat_enabled_css = ['prettier']
+" let g:neoformat_enabled_json = ['prettier']
+
 
 let g:ale_enabled = 1
 let g:ale_linters = {
-      \   'javascript': ['prettier', 'eslint'],
-      \   'typescript': ['prettier', 'eslint']
+      \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
+      \   'typescript': ['prettier', 'eslint', 'prettier_eslint'],
+      \   'css': ['prettier'],
+      \   'scss': ['prettier'],
+      \   'json': ['prettier']
       \ }                                                                       "Lint js with eslint
 let g:ale_fixers = {
-      \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
-      \   'typescript': ['prettier', 'eslint', 'prettier_eslint']
+      \   'javascript': ['prettier_eslint'],
+      \   'typescript': ['prettier_eslint'],
+      \   'css': ['prettier'],
+      \   'scss': ['prettier'],
+      \   'json': ['prettier']
       \ }                                                                       "Fix eslint errors
-" let g:ale_javascript_prettier_options = '--print-width 100'                     "Set max width to 100 chars for prettier
 let g:ale_sign_error = '✖'                                                      "Lint error sign
-let g:ale_sign_warning = '⚠'                                                    "Lint warning sign
+let g:ale_sign_warning = '~~'                                                    "Lint warning sign
 let g:ale_javascript_eslint_use_local_config = 1
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_prettier_eslint_use_local_config = 1
-
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_on_enter = 1
 let g:ale_fix_on_save = 1
@@ -828,24 +1008,23 @@ let g:jsx_pragma_required = 0
 
 let g:javascript_plugin_jsdoc = 1                                               "Enable syntax highlighting for js doc blocks
 
-let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]                            "Use dropbox folder for easier syncing of wiki
-
 " ## vim-json
 let g:vim_json_syntax_conceal = 0
 
-" ## vim-airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#neomake#enabled = 1
-let g:airline_theme = 'nova'
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline#extensions#cm_call_signature#enabled = 1
-if exists('g:airline_extensions')
-  let g:airline_extensions = add(g:airline_extensions, 'cm_call_signature')
-endif
-let g:airline#extensions#ale#enabled = 1
+" quickfix is used by :Rg
+let g:LanguageClient_diagnosticsList = 'location'
 
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Minimal LSP configuration for JavaScript
+let g:LanguageClient_serverCommands = {}
+
+if executable('javascript-typescript-stdio')
+  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+  " Use LanguageServer for omnifunc completion
+  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
+endif
 
 " ## vim-better-javascript-completion
 let g:vimjs#casesensistive = 1
@@ -900,6 +1079,7 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'enter': 'vsplit'
       \ }
+
 command! -bang -nargs=* Ag
       \ call fzf#vim#ag(<q-args>,
       \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -912,6 +1092,18 @@ command! -bang -nargs=* Rg
       \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --ignore-case --no-heading --no-messages --hidden --color=always '
+      \   . <q-args>, 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%', '?'),
+      \   <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(<q-args>,
+      \   fzf#vim#with_preview('right:50%', '?'),
       \   <bang>0)
 
 
@@ -938,6 +1130,51 @@ endif
 " ## gist.vim
 let g:gist_open_url = 1
 let g:gist_default_private = 1
+
+
+" ## LanguageClient/languageclient
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+" Use location list instead of quickfix
+let g:LanguageClient_diagnosticsList = 'location'
+
+augroup LanguageClientConfig
+  autocmd!
+
+  " <leader>ld to go to definition
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
+  " <leader>lf to autoformat document
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+  " <leader>lh for type info under cursor
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
+  " <leader>lr to rename variable under cursor
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
+  " <leader>lc to switch omnifunc to LanguageClient
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
+  " <leader>ls to fuzzy find the symbols in the current document
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+
+  " Use as omnifunc by default
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html setlocal omnifunc=LanguageClient#complete
+augroup END
+
+let g:LanguageClient_serverCommands = {}
+
+if executable('pyls')
+  let g:LanguageClient_serverCommands.python = ['pyls']
+endif
+
+if executable('javascript-typescript-stdio')
+  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
+endif
 " }}}
 " ================ Highlights and Colors ======================== {{{
 hi htmlArg cterm=italic
@@ -948,6 +1185,7 @@ hi Comment cterm=italic term=italic gui=italic
 hi LineNr guibg=#3C4C55 guifg=#937f6e gui=NONE
 hi CursorLineNr ctermbg=black ctermfg=223 cterm=NONE guibg=#333333 guifg=#db9c5e gui=bold
 hi qfLineNr ctermbg=black ctermfg=95 cterm=NONE guibg=black guifg=#875f5f gui=NONE
+hi Search gui=underline term=underline cterm=underline ctermfg=232 ctermbg=230 guibg=#afaf87 guifg=#333333
 " }}}
 
 " vim:foldenable:foldmethod=marker

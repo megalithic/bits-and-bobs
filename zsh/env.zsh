@@ -31,6 +31,7 @@ export KEYTIMEOUT=1
 export JAVA_OPTS="$JAVA_OPTS -Xms2048M -Xmx4096M -XX:MaxPermSize=512M -Djboss.vfs.forceCopy=false"
 # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home"
 export ANDROID_HOME=/usr/local/opt/android-sdk
+export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 
 # Enable color in grep
 export GREP_OPTIONS='--color=auto'
