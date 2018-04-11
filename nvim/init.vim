@@ -1,4 +1,3 @@
-" vim: set foldenable fdm=marker fdl=2 ft=vim sts=2 sw=2 ts=2:
 " ================ Plugins ==================== {{{
 call plug#begin( '~/.config/nvim/bundle')
 
@@ -28,8 +27,8 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
 Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
 Plug 'elzr/vim-json', { 'for': ['json'] }
 Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'leafgarland/typescript-vim'
+" Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': ['reason'] }
 Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
 Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
@@ -50,9 +49,31 @@ Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
 Plug 'vim-scripts/fish.vim',   { 'for': 'fish' }
 Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 Plug 'sickill/vim-pasta' " context-aware pasting
+
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
+
+" # completions
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'yami-beta/asyncomplete-omni.vim'
+Plug 'runoshun/tscompletejob'
+Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
+
+" # snippets + completions
+if has('python3')
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'epilande/vim-es2015-snippets'
+  Plug 'epilande/vim-react-snippets'
+  Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+endif
+
 " Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -1134,7 +1155,7 @@ let g:gist_default_private = 1
 
 " ## LanguageClient/languageclient
 " Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+let g:LanguageClient_autoStart = 0
 " Use location list instead of quickfix
 let g:LanguageClient_diagnosticsList = 'location'
 
@@ -1175,6 +1196,102 @@ if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
   let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
 endif
+
+" ## asyncomplete.vim/asynccomplete/vim-lsp
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_min_chars = 2
+let g:lsp_signs_enabled = 0         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+let g:lsp_signs_error = {'text': '✖'}
+let g:lsp_signs_warning = {'text': '~'} " icons require GUI
+let g:lsp_signs_hint = {'text': '?'} " icons require GUI
+" let g:lsp_signs_warning = {'text': '~', 'icon': '/path/to/some/icon'} " icons require GUI
+" let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
+let g:lsp_log_verbose = 0
+let g:lsp_log_file = expand('~/.config/nvim/vim-lsp.log')
+let g:asyncomplete_log_file = expand('~/.config/nvim/asyncomplete.log')
+" set completeopt+=preview
+
+" ultisnips
+if has('python3')
+  let g:UltiSnipsExpandTrigger="<c-e>"
+  au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'whitelist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+endif
+
+" buffers
+au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'whitelist': ['*'],
+      \ 'blacklist': ['go'],
+      \ 'completor': function('asyncomplete#sources#buffer#completor'),
+      \ }))
+
+" files
+au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'whitelist': ['*'],
+      \ 'priority': 10,
+      \ 'completor': function('asyncomplete#sources#file#completor')
+      \ }))
+
+" omnis/omnicompletes
+au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+      \ 'name': 'omni',
+      \ 'whitelist': ['*'],
+      \ 'blacklist': ['c', 'cpp', 'html'],
+      \ 'completor': function('asyncomplete#sources#omni#completor')
+      \  }))
+
+" typescript
+" au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
+"       \ 'name': 'tscompletejob',
+"       \ 'whitelist': ['typescript'],
+"       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+"       \ }))
+
+if executable('typescript-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+        \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
+        \ })
+endif
+
+" scss, css and friends
+if executable('css-languageserver')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'css-languageserver',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+        \ 'whitelist': ['css', 'less', 'sass', 'scss'],
+        \ })
+endif
+
+" reason, ocaml and friends
+if executable('ocaml-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'ocaml-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
+        \ 'whitelist': ['reason', 'ocaml'],
+        \ })
+endif
+
+" python
+if executable('pyls')
+  " pip install python-language-server
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+
 " }}}
 " ================ Highlights and Colors ======================== {{{
 hi htmlArg cterm=italic
@@ -1188,4 +1305,4 @@ hi qfLineNr ctermbg=black ctermfg=95 cterm=NONE guibg=black guifg=#875f5f gui=NO
 hi Search gui=underline term=underline cterm=underline ctermfg=232 ctermbg=230 guibg=#afaf87 guifg=#333333
 " }}}
 
-" vim:foldenable:foldmethod=marker
+" vim:foldenable:foldmethod=marker:ft=vim

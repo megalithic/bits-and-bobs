@@ -7,8 +7,6 @@
 "
 " =============================================================================
 
-" vim: set foldenable fdm=marker fdl=2 ft=vim sts=2 sw=2 ts=2:
-
 " Automatically download vim-plug, if not present
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -1685,4 +1683,4 @@ augroup END
 
 " a wealth of solid neovim info: https://github.com/justinmk/config/blob/master/.config/nvim/init.vim
 
-" vim:foldenable:foldmethod=marker
+" vim:foldenable:foldmethod=marker:ft=vim
