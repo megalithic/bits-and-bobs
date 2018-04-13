@@ -49,6 +49,14 @@ Plug 'vim-scripts/fish.vim',   { 'for': 'fish' }
 Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 Plug 'sickill/vim-pasta' " context-aware pasting
 
+" # completions
+Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+Plug 'roxma/ncm-rct-complete'
+Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-apple-darwin', 'do': ':UpdateRemotePlugins'}
+" Plug 'mhartington/nvim-typescript', { 'for': ['typescript'], 'do': ':UpdateRemotePlugins' }
+Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
+
 " # tags + completions
 if executable('ctags')
   Plug 'ludovicchabant/vim-gutentags'
@@ -63,7 +71,7 @@ if has('python3')
   Plug 'epilande/vim-react-snippets'
 endif
 
-" Plug 'Valloric/ListToggle'
+Plug 'Valloric/ListToggle'
 " Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -86,10 +94,6 @@ Plug 'unblevable/quick-scope' " highlights f/t type of motions, for quick horizo
 Plug 'EinfachToll/DidYouMean'
 Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
 Plug 'tpope/vim-eunuch'
-Plug 'roxma/nvim-completion-manager'
-Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-apple-darwin', 'do': ':UpdateRemotePlugins'}
-" Plug 'mhartington/nvim-typescript', { 'for': ['typescript'], 'do': ':UpdateRemotePlugins' }
-Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
 
 " ## Text Objects, et al
 Plug 'kana/vim-operator-user'
@@ -592,9 +596,9 @@ endfunction
 " ================ Plugin Config ======================== {{{
 
 " ## listtoggle
-" let g:lt_location_list_toggle_map = '<leader>l'
-" let g:lt_quickfix_list_toggle_map = '<c-q>'
-" let g:lt_height = 3
+let g:lt_location_list_toggle_map = '<F3>'
+let g:lt_quickfix_list_toggle_map = '<F4>'
+let g:lt_height = 3
 
 " ## polyglot
 " let g:polyglot_disabled = ['typescript']
@@ -798,8 +802,6 @@ let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
 let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
-" optional
-inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 
 
 " ## lsp/languageclient/nvim-completion-manager/ncm
@@ -959,12 +961,17 @@ endif
 nnoremap j gj
 nnoremap k gk
 
-" Expand snippets on tab if snippets exists, otherwise do autocompletion
+" " Expand snippets on tab if snippets exists, otherwise do autocompletion
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+" inoremap <expr> <cr> (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<cr>")
+" inoremap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<c-u>":"\<cr>")
+
+" optional
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-inoremap <expr> <cr> (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<cr>")
-inoremap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<c-u>":"\<cr>")
+inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 
 " Yank to the end of the line
 nnoremap Y y$
@@ -1070,7 +1077,7 @@ nnoremap <leader>gb :Gblame<cr>
 " ## Testing vim-test
 nmap <silent> <leader>t :TestFile<CR>
 nmap <silent> <leader>T :TestNearest<CR>
-" nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>l :TestLast<CR>
 " nmap <silent> <leader>a :TestSuite<CR>
 " nmap <silent> <leader>g :TestVisit<CR>
 " ref: https://github.com/Dkendal/dot-files/blob/master/nvim/.config/nvim/init.vim
