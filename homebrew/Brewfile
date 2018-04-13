@@ -151,7 +151,7 @@ cask 'usb-overdrive'
 # cask 'yubiswitch'
 cask 'visual-studio-code'
 # cask 'yubico-authenticator'
-cask 'yakyak'
+# cask 'yakyak'
 
 mas 'Fantastical2', id: 975937182
 mas 'Spark', id: 1176895641

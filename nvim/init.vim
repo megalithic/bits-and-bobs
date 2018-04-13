@@ -24,10 +24,9 @@ Plug 'cohama/lexima.vim' " auto-closes many delimiters and can repeat with a `.`
 " ## Syntax
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
-Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx', 'jsx'], 'do': 'npm install -g flow-bin' }
 Plug 'elzr/vim-json', { 'for': ['json'] }
 Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
-" Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
+Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': ['reason'] }
 Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
@@ -50,20 +49,11 @@ Plug 'vim-scripts/fish.vim',   { 'for': 'fish' }
 Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 Plug 'sickill/vim-pasta' " context-aware pasting
 
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-
-" # completions
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
-Plug 'prabirshrestha/asyncomplete-file.vim'
-Plug 'yami-beta/asyncomplete-omni.vim'
-Plug 'runoshun/tscompletejob'
-Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
+" # tags + completions
+if executable('ctags')
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'kristijanhusak/vim-js-file-import'
+endif
 
 " # snippets + completions
 if has('python3')
@@ -71,14 +61,12 @@ if has('python3')
   Plug 'honza/vim-snippets'
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
-  Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 endif
 
+" Plug 'Valloric/ListToggle'
 " Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'kristijanhusak/vim-js-file-import'
 Plug 'sbdchd/neoformat'
 
 Plug 'trevordmiller/nova-vim'
@@ -98,10 +86,10 @@ Plug 'unblevable/quick-scope' " highlights f/t type of motions, for quick horizo
 Plug 'EinfachToll/DidYouMean'
 Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
 Plug 'tpope/vim-eunuch'
-Plug 'honza/vim-snippets'
-Plug 'epilande/vim-es2015-snippets'
-Plug 'epilande/vim-react-snippets'
+Plug 'roxma/nvim-completion-manager'
 Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-apple-darwin', 'do': ':UpdateRemotePlugins'}
+" Plug 'mhartington/nvim-typescript', { 'for': ['typescript'], 'do': ':UpdateRemotePlugins' }
+Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
 
 " ## Text Objects, et al
 Plug 'kana/vim-operator-user'
@@ -274,9 +262,9 @@ set nowb
 " ================ Persistent Undo ================== {{{
 
 " Keep undo history across sessions, by storing in file.
-silent !mkdir ~/.config/nvim/backups > /dev/null 2>&1
-set undodir=~/.config/nvim/backups
-set undofile
+" silent !mkdir ~/.config/nvim/backups > /dev/null 2>&1
+" set undodir=~/.config/nvim/backups
+" set undofile
 
 " }}}
 " ================ Indentation ====================== {{{
@@ -430,6 +418,8 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 
+set shortmess+=c
+
 " }}}
 " ================ Scrolling ======================== {{{
 
@@ -571,6 +561,9 @@ function! BufEnterCommit()
     start
   end
 
+  " disable for gitcommit messages
+  let g:cm_smart_enable = 0
+
   set spell
   set spelllang=en
 endfunction
@@ -596,32 +589,382 @@ endfunction
 
 
 " }}}
+" ================ Plugin Config ======================== {{{
+
+" ## listtoggle
+" let g:lt_location_list_toggle_map = '<leader>l'
+" let g:lt_quickfix_list_toggle_map = '<c-q>'
+" let g:lt_height = 3
+
+" ## polyglot
+" let g:polyglot_disabled = ['typescript']
+
+" ## golden-ratio
+let g:golden_ratio_exclude_nonmodifiable = 1
+let g:golden_ratio_wrap_ignored = 0
+let g:golden_ratio_ignore_horizontal_splits = 1
+
+" ## auto-pairs
+let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
+
+let g:ctrlsf_auto_close = 0                                                     "Do not close search when file is opened
+let g:ctrlsf_mapping = {'vsplit': 's'}                                          "Mapping for opening search result in vertical split
+
+let g:NERDTreeChDirMode = 2                                                     "Always change the root directory
+let g:NERDTreeMinimalUI = 1                                                     "Disable help text and bookmark title
+let g:NERDTreeShowHidden = 1                                                    "Show hidden files in NERDTree
+let g:NERDTreeUpdateOnCursorHold = 0                                            "Disable nerdtree git plugin updating on cursor hold
+
+" ## emmet
+let g:user_emmet_leader_key = '<c-e>'                                           "Change trigger emmet key
+" let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+      \  'javascript.jsx' : {
+      \      'extends' : 'jsx',
+      \  },
+      \}
+
+let g:delimitMate_expand_cr = 2                                                 "Auto indent on enter
+
+" let g:neoformat_javascript_eslint = {
+"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
+"       \ 'replace': 1
+"       \ }
+" let g:neoformat_typescript_eslint = {
+"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
+"       \ 'replace': 1
+"       \ }
+" let g:neoformat_javascript_prettiereslint = {
+"       \ 'exe': './node_modules/.bin/prettier-eslint',
+"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
+"       \ 'replace': 1
+"       \ }
+" let g:neoformat_typescript_prettiereslint = {
+"       \ 'exe': './node_modules/.bin/prettier-eslint',
+"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
+"       \ 'replace': 1
+"       \ }
+" let g:neoformat_try_formatprg = 1                                               "Use formatprg when available
+" let g:neoformat_enabled_javascript = ['prettiereslint', 'eslint']
+" let g:neoformat_enabled_typescript = ['prettiereslint', 'eslint']
+" let g:neoformat_enabled_scss = ['prettier']
+" let g:neoformat_enabled_css = ['prettier']
+" let g:neoformat_enabled_json = ['prettier']
+
+
+let g:ale_enabled = 1
+let g:ale_linters = {
+      \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
+      \   'typescript': ['prettier', 'eslint', 'prettier_eslint'],
+      \   'css': ['prettier'],
+      \   'scss': ['prettier'],
+      \   'json': ['prettier']
+      \ }                                                                       "Lint js with eslint
+let g:ale_fixers = {
+      \   'javascript': ['prettier_eslint'],
+      \   'typescript': ['prettier_eslint'],
+      \   'css': ['prettier'],
+      \   'scss': ['prettier'],
+      \   'json': ['prettier']
+      \ }                                                                       "Fix eslint errors
+let g:ale_sign_error = '✖'                                                      "Lint error sign
+let g:ale_sign_warning = '~~'                                                    "Lint warning sign
+let g:ale_javascript_eslint_use_local_config = 1
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_javascript_prettier_eslint_use_local_config = 1
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_enter = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
+
+" ## vim-jsx
+let g:jsx_ext_required = 0
+let g:jsx_pragma_required = 0
+
+let g:javascript_plugin_jsdoc = 1                                               "Enable syntax highlighting for js doc blocks
+
+" ## vim-json
+let g:vim_json_syntax_conceal = 0
+
+" ## vim-better-javascript-completion
+let g:vimjs#casesensistive = 1
+" Enabled by default. flip the value to make completion matches case insensitive
+let g:vimjs#smartcomplete = 0
+" Disabled by default. Enabling this will let vim complete matches at any location
+" e.g. typing 'ocument' will suggest 'document' if enabled.
+let g:vimjs#chromeapis = 0
+" Disabled by default. Toggling this will enable completion for a number of Chrome's JavaScript extension APIs
+
+
+" ## vim-javascript-syntax
+let g:JSHintHighlightErrorLine = 1
+let javascript_enable_domhtmlcss = 1
+let loaded_matchit = 1
+let g:js_indent_log = 1
+let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3'
+
+" ## JSDoc
+" https://github.com/heavenshell/vim-jsdoc#configuration
+let g:jsdoc_allow_input_prompt=1
+let g:jsdoc_input_description=1
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_access_descriptions=2
+let g:jsdoc_additional_descriptions=1
+
+
+" ## rainbow_parentheses.vim
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
+
+" ## vim-test
+function! SplitStrategy(cmd)
+  vert new | call termopen(a:cmd) | startinsert
+endfunction
+let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
+let g:test#strategy = 'terminal_split'
+let test#ruby#rspec#options = '-f d'
+let test#ruby#bundle_exec = 1
+
+" ## quick-scope
+let g:qs_enable = 0
+
+" ## FZF
+let g:fzf_buffers_jump = 1
+let g:fzf_filemru_bufwrite = 1
+let g:fzf_layout = { 'down': '~25%' }
+let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit',
+      \ 'enter': 'vsplit'
+      \ }
+
+command! -bang -nargs=* Ag
+      \ call fzf#vim#ag(<q-args>,
+      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \                 <bang>0)
+
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --ignore-case --no-heading --no-messages --hidden --color=always '
+      \   . <q-args>, 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%', '?'),
+      \   <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(<q-args>,
+      \   fzf#vim#with_preview('right:50%', '?'),
+      \   <bang>0)
+
+
+" ## ack.vim
+if executable("ag")
+  " Note we extract the column as well as the file and line number
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepformat=%f:%l:%c%m
+
+  " Have the silver searcher ignore all the same things as wilgignore
+  let b:ag_command = 'ag %s -i --nogroup'
+  let g:ag_prg = 'ag %s -i --nogroup'
+
+  for i in split(&wildignore, ",")
+    let i = substitute(i, '\*/\(.*\)/\*', '\1', 'g')
+    let b:ag_command = b:ag_command . ' --ignore "' . substitute(i, '\*/\(.*\)/\*', '\1', 'g') . '"'
+  endfor
+
+  let b:ag_command = b:ag_command . ' --hidden -g ""'
+  let g:ctrlp_user_command = b:ag_command
+endif
+
+
+" ## gist.vim
+let g:gist_open_url = 1
+let g:gist_default_private = 1
+
+
+" ## ultisnips
+let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+" optional
+inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
+
+
+" ## lsp/languageclient/nvim-completion-manager/ncm
+let g:cm_smart_enable = 1
+let g:LanguageClient_diagnosticsList = 'location' " quickfix is used by :Rg
+let g:LanguageClient_autoStart = 1 " Automatically start language servers.
+
+augroup LanguageClientConfig
+  autocmd!
+  " " <leader>ld to go to definition
+  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
+  " " <leader>lf to autoformat document
+  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+  " " <leader>lh for type info under cursor
+  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
+  " " <leader>lr to rename variable under cursor
+  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
+  " " <leader>lc to switch omnifunc to LanguageClient
+  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
+  " " <leader>ls to fuzzy find the symbols in the current document
+  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+
+  " Use as omnifunc by default
+  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html setlocal omnifunc=LanguageClient#complete
+augroup END
+
+let g:LanguageClient_serverCommands = {}
+
+if executable('pyls')
+  let g:LanguageClient_serverCommands.python = ['pyls']
+endif
+
+if executable('javascript-typescript-stdio')
+  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
+endif
+
+
+" ## asyncomplete.vim/asynccomplete/vim-lsp
+" let g:asyncomplete_auto_popup = 1
+" let g:asyncomplete_remove_duplicates = 1
+" let g:asyncomplete_smart_completion = 1
+" let g:asyncomplete_min_chars = 2
+" let g:lsp_signs_enabled = 0         " enable signs
+" let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+" let g:lsp_signs_error = {'text': '✖'}
+" let g:lsp_signs_warning = {'text': '~'} " icons require GUI
+" let g:lsp_signs_hint = {'text': '?'} " icons require GUI
+" " let g:lsp_signs_warning = {'text': '~', 'icon': '/path/to/some/icon'} " icons require GUI
+" " let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
+" let g:lsp_log_verbose = 0
+" let g:lsp_log_file = expand('~/.config/nvim/vim-lsp.log')
+" let g:asyncomplete_log_file = expand('~/.config/nvim/asyncomplete.log')
+" " set completeopt+=preview
+
+" " ultisnips
+" if has('python3')
+"   let g:UltiSnipsExpandTrigger="<c-e>"
+"   au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+"         \ 'name': 'ultisnips',
+"         \ 'whitelist': ['*'],
+"         \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+"         \ }))
+" endif
+
+" " buffers
+" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+"       \ 'name': 'buffer',
+"       \ 'whitelist': ['*'],
+"       \ 'blacklist': ['go'],
+"       \ 'completor': function('asyncomplete#sources#buffer#completor'),
+"       \ }))
+
+" " files
+" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+"       \ 'name': 'file',
+"       \ 'whitelist': ['*'],
+"       \ 'blacklist': ['typescript', 'javascript', 'javascript.js'],
+"       \ 'priority': 10,
+"       \ 'completor': function('asyncomplete#sources#file#completor')
+"       \ }))
+
+" if executable('ctags')
+"   au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+"       \ 'name': 'tags',
+"       \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx'],
+"       \ 'completor': function('asyncomplete#sources#tags#completor'),
+"       \ 'config': {
+"       \    'max_file_size': 150000000,
+"       \  },
+"       \ }))
+" endif
+
+" " omnis/omnicompletes
+" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+"       \ 'name': 'omni',
+"       \ 'whitelist': ['*'],
+"       \ 'blacklist': ['c', 'cpp', 'html'],
+"       \ 'completor': function('asyncomplete#sources#omni#completor')
+"       \  }))
+
+" " typescript
+" " au User asynccomplete_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
+" "       \ 'name': 'tscompletejob',
+" "       \ 'whitelist': ['typescript'],
+" "       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+" "       \ }))
+
+" if executable('typescript-language-server')
+"   au User lsp_setup call lsp#register_server({
+"         \ 'name': 'typescript-language-server',
+"         \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+"         \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+"         \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
+"         \ })
+" endif
+
+" " scss, css and friends
+" if executable('css-languageserver')
+"   au User lsp_setup call lsp#register_server({
+"         \ 'name': 'css-languageserver',
+"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+"         \ 'whitelist': ['css', 'less', 'sass', 'scss'],
+"         \ })
+" endif
+
+" " reason, ocaml and friends
+" if executable('ocaml-language-server')
+"   au User lsp_setup call lsp#register_server({
+"         \ 'name': 'ocaml-language-server',
+"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
+"         \ 'whitelist': ['reason', 'ocaml'],
+"         \ })
+" endif
+
+" " python
+" if executable('pyls')
+"   " pip install python-language-server
+"   au User lsp_setup call lsp#register_server({
+"         \ 'name': 'pyls',
+"         \ 'cmd': {server_info->['pyls']},
+"         \ 'whitelist': ['python'],
+"         \ })
+" endif
+
+" }}}
 " ================ Custom Mappings ======================== {{{
-
-" Comment map
-"nmap <Leader>c gcc
-" Line comment command
-"xmap <Leader>c gc
-
 
 " Down is really the next line
 nnoremap j gj
 nnoremap k gk
 
 " Expand snippets on tab if snippets exists, otherwise do autocompletion
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \ : pumvisible() ? "\<C-n>" : "\<TAB>"
-" If popup window is visible do autocompletion from back
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Fix for jumping over placeholders for neosnippet
-smap <expr><TAB> neosnippet#jumpable() ?
-      \ "\<Plug>(neosnippet_jump)"
-      \: "\<TAB>"
-
-" Map for Escape key
-inoremap jj <Esc>
-tnoremap <Leader>jj <C-\><C-n>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+inoremap <expr> <cr> (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<cr>")
+inoremap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<c-u>":"\<cr>")
 
 " Yank to the end of the line
 nnoremap Y y$
@@ -642,9 +985,6 @@ vnoremap p p`]
 " Move selected lines up and down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-" Clear search highlight
-nnoremap <Leader><space> :noh<CR>
 
 " Handle syntastic error window
 nnoremap <Leader>e :lopen<CR>
@@ -693,7 +1033,7 @@ nnoremap <Leader>db :silent w <BAR> :silent %bd <BAR> e#<CR>
 " ------------------------------------------------------------------
 
 " folding toggle
-nnoremap <space> za
+nnoremap <leader-space> za
 
 " ## vim-commentary
 nmap <leader>c :Commentary<cr>
@@ -730,9 +1070,9 @@ nnoremap <leader>gb :Gblame<cr>
 " ## Testing vim-test
 nmap <silent> <leader>t :TestFile<CR>
 nmap <silent> <leader>T :TestNearest<CR>
+" nmap <silent> <leader>l :TestLast<CR>
 " nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+" nmap <silent> <leader>g :TestVisit<CR>
 " ref: https://github.com/Dkendal/dot-files/blob/master/nvim/.config/nvim/init.vim
 
 " ## Gist/Github
@@ -928,369 +1268,6 @@ inoremap <c-e> <esc>A
 " Ctrl-a: Go to begin of line
 inoremap <c-a> <esc>I
 
-
-" }}}
-" ================ Plugin Config ======================== {{{
-
-" ## polyglot
-" let g:polyglot_disabled = ['typescript']
-
-" ## golden-ratio
-let g:golden_ratio_exclude_nonmodifiable = 1
-let g:golden_ratio_wrap_ignored = 0
-let g:golden_ratio_ignore_horizontal_splits = 1
-
-" ## auto-pairs
-let g:AutoPairsShortcutToggle = ''
-let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
-
-let g:ctrlsf_auto_close = 0                                                     "Do not close search when file is opened
-let g:ctrlsf_mapping = {'vsplit': 's'}                                          "Mapping for opening search result in vertical split
-
-let g:NERDTreeChDirMode = 2                                                     "Always change the root directory
-let g:NERDTreeMinimalUI = 1                                                     "Disable help text and bookmark title
-let g:NERDTreeShowHidden = 1                                                    "Show hidden files in NERDTree
-let g:NERDTreeUpdateOnCursorHold = 0                                            "Disable nerdtree git plugin updating on cursor hold
-
-" ## emmet
-let g:user_emmet_leader_key = '<c-e>'                                           "Change trigger emmet key
-" let g:user_emmet_leader_key='<Tab>'
-let g:user_emmet_settings = {
-      \  'javascript.jsx' : {
-      \      'extends' : 'jsx',
-      \  },
-      \}
-
-let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
-let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               "Snippets directory
-
-let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
-let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
-let g:deoplete#tag#cache_limit_size = 20000000                                  "Allow tags file up to ~20 MB
-let g:deoplete#max_list = 30                                                    "Show maximum of 30 entries in autocomplete popup
-let g:deoplete#enable_camel_case = 1                                            "Enable camel case completion
-
-let g:delimitMate_expand_cr = 2                                                 "Auto indent on enter
-
-" let g:neoformat_javascript_eslint = {
-"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
-"       \ 'replace': 1
-"       \ }
-" let g:neoformat_typescript_eslint = {
-"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
-"       \ 'replace': 1
-"       \ }
-" let g:neoformat_javascript_prettiereslint = {
-"       \ 'exe': './node_modules/.bin/prettier-eslint',
-"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
-"       \ 'replace': 1
-"       \ }
-" let g:neoformat_typescript_prettiereslint = {
-"       \ 'exe': './node_modules/.bin/prettier-eslint',
-"       \ 'args': ['--write', '--eslint-config-path ./.eslintrc'],
-"       \ 'replace': 1
-"       \ }
-" let g:neoformat_try_formatprg = 1                                               "Use formatprg when available
-" let g:neoformat_enabled_javascript = ['prettiereslint', 'eslint']
-" let g:neoformat_enabled_typescript = ['prettiereslint', 'eslint']
-" let g:neoformat_enabled_scss = ['prettier']
-" let g:neoformat_enabled_css = ['prettier']
-" let g:neoformat_enabled_json = ['prettier']
-
-
-let g:ale_enabled = 1
-let g:ale_linters = {
-      \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
-      \   'typescript': ['prettier', 'eslint', 'prettier_eslint'],
-      \   'css': ['prettier'],
-      \   'scss': ['prettier'],
-      \   'json': ['prettier']
-      \ }                                                                       "Lint js with eslint
-let g:ale_fixers = {
-      \   'javascript': ['prettier_eslint'],
-      \   'typescript': ['prettier_eslint'],
-      \   'css': ['prettier'],
-      \   'scss': ['prettier'],
-      \   'json': ['prettier']
-      \ }                                                                       "Fix eslint errors
-let g:ale_sign_error = '✖'                                                      "Lint error sign
-let g:ale_sign_warning = '~~'                                                    "Lint warning sign
-let g:ale_javascript_eslint_use_local_config = 1
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_javascript_prettier_eslint_use_local_config = 1
-let g:ale_lint_on_text_changed = 'always'
-let g:ale_lint_on_enter = 1
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_save = 1
-
-" ## vim-jsx
-let g:jsx_ext_required = 0
-let g:jsx_pragma_required = 0
-
-let g:javascript_plugin_jsdoc = 1                                               "Enable syntax highlighting for js doc blocks
-
-" ## vim-json
-let g:vim_json_syntax_conceal = 0
-
-" quickfix is used by :Rg
-let g:LanguageClient_diagnosticsList = 'location'
-
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-" Minimal LSP configuration for JavaScript
-let g:LanguageClient_serverCommands = {}
-
-if executable('javascript-typescript-stdio')
-  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-  " Use LanguageServer for omnifunc completion
-  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
-endif
-
-" ## vim-better-javascript-completion
-let g:vimjs#casesensistive = 1
-" Enabled by default. flip the value to make completion matches case insensitive
-let g:vimjs#smartcomplete = 0
-" Disabled by default. Enabling this will let vim complete matches at any location
-" e.g. typing 'ocument' will suggest 'document' if enabled.
-let g:vimjs#chromeapis = 0
-" Disabled by default. Toggling this will enable completion for a number of Chrome's JavaScript extension APIs
-
-
-" ## vim-javascript-syntax
-let g:JSHintHighlightErrorLine = 1
-let javascript_enable_domhtmlcss = 1
-let loaded_matchit = 1
-let g:js_indent_log = 1
-let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3'
-
-" ## JSDoc
-" https://github.com/heavenshell/vim-jsdoc#configuration
-let g:jsdoc_allow_input_prompt=1
-let g:jsdoc_input_description=1
-let g:jsdoc_enable_es6 = 1
-let g:jsdoc_access_descriptions=2
-let g:jsdoc_additional_descriptions=1
-
-
-" ## rainbow_parentheses.vim
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-
-
-" ## vim-test
-function! SplitStrategy(cmd)
-  vert new | call termopen(a:cmd) | startinsert
-endfunction
-let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-let g:test#strategy = 'terminal_split'
-let test#ruby#rspec#options = '-f d'
-let test#ruby#bundle_exec = 1
-
-" ## quick-scope
-let g:qs_enable = 0
-
-" ## FZF
-let g:fzf_buffers_jump = 1
-let g:fzf_filemru_bufwrite = 1
-let g:fzf_layout = { 'down': '~25%' }
-let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit',
-      \ 'enter': 'vsplit'
-      \ }
-
-command! -bang -nargs=* Ag
-      \ call fzf#vim#ag(<q-args>,
-      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \                 <bang>0)
-
-" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --ignore-case --no-heading --no-messages --hidden --color=always '
-      \   . <q-args>, 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%', '?'),
-      \   <bang>0)
-
-command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>,
-      \   fzf#vim#with_preview('right:50%', '?'),
-      \   <bang>0)
-
-
-" ## ack.vim
-if executable("ag")
-  " Note we extract the column as well as the file and line number
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
-  set grepformat=%f:%l:%c%m
-
-  " Have the silver searcher ignore all the same things as wilgignore
-  let b:ag_command = 'ag %s -i --nogroup'
-  let g:ag_prg = 'ag %s -i --nogroup'
-
-  for i in split(&wildignore, ",")
-    let i = substitute(i, '\*/\(.*\)/\*', '\1', 'g')
-    let b:ag_command = b:ag_command . ' --ignore "' . substitute(i, '\*/\(.*\)/\*', '\1', 'g') . '"'
-  endfor
-
-  let b:ag_command = b:ag_command . ' --hidden -g ""'
-  let g:ctrlp_user_command = b:ag_command
-endif
-
-
-" ## gist.vim
-let g:gist_open_url = 1
-let g:gist_default_private = 1
-
-
-" ## LanguageClient/languageclient
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 0
-" Use location list instead of quickfix
-let g:LanguageClient_diagnosticsList = 'location'
-
-augroup LanguageClientConfig
-  autocmd!
-
-  " <leader>ld to go to definition
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
-  " <leader>lf to autoformat document
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
-  " <leader>lh for type info under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
-  " <leader>lr to rename variable under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
-  " <leader>lc to switch omnifunc to LanguageClient
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
-  " <leader>ls to fuzzy find the symbols in the current document
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
-
-  " Use as omnifunc by default
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html setlocal omnifunc=LanguageClient#complete
-augroup END
-
-let g:LanguageClient_serverCommands = {}
-
-if executable('pyls')
-  let g:LanguageClient_serverCommands.python = ['pyls']
-endif
-
-if executable('javascript-typescript-stdio')
-  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
-endif
-
-" ## asyncomplete.vim/asynccomplete/vim-lsp
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_remove_duplicates = 1
-let g:asyncomplete_smart_completion = 1
-let g:asyncomplete_min_chars = 2
-let g:lsp_signs_enabled = 0         " enable signs
-let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-let g:lsp_signs_error = {'text': '✖'}
-let g:lsp_signs_warning = {'text': '~'} " icons require GUI
-let g:lsp_signs_hint = {'text': '?'} " icons require GUI
-" let g:lsp_signs_warning = {'text': '~', 'icon': '/path/to/some/icon'} " icons require GUI
-" let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
-let g:lsp_log_verbose = 0
-let g:lsp_log_file = expand('~/.config/nvim/vim-lsp.log')
-let g:asyncomplete_log_file = expand('~/.config/nvim/asyncomplete.log')
-" set completeopt+=preview
-
-" ultisnips
-if has('python3')
-  let g:UltiSnipsExpandTrigger="<c-e>"
-  au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-        \ 'name': 'ultisnips',
-        \ 'whitelist': ['*'],
-        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-        \ }))
-endif
-
-" buffers
-au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-      \ 'name': 'buffer',
-      \ 'whitelist': ['*'],
-      \ 'blacklist': ['go'],
-      \ 'completor': function('asyncomplete#sources#buffer#completor'),
-      \ }))
-
-" files
-au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-      \ 'name': 'file',
-      \ 'whitelist': ['*'],
-      \ 'priority': 10,
-      \ 'completor': function('asyncomplete#sources#file#completor')
-      \ }))
-
-" omnis/omnicompletes
-au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-      \ 'name': 'omni',
-      \ 'whitelist': ['*'],
-      \ 'blacklist': ['c', 'cpp', 'html'],
-      \ 'completor': function('asyncomplete#sources#omni#completor')
-      \  }))
-
-" typescript
-" au User lsp_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
-"       \ 'name': 'tscompletejob',
-"       \ 'whitelist': ['typescript'],
-"       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
-"       \ }))
-
-if executable('typescript-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-        \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
-        \ })
-endif
-
-" scss, css and friends
-if executable('css-languageserver')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'css-languageserver',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
-        \ 'whitelist': ['css', 'less', 'sass', 'scss'],
-        \ })
-endif
-
-" reason, ocaml and friends
-if executable('ocaml-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'ocaml-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
-        \ 'whitelist': ['reason', 'ocaml'],
-        \ })
-endif
-
-" python
-if executable('pyls')
-  " pip install python-language-server
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
 
 " }}}
 " ================ Highlights and Colors ======================== {{{
