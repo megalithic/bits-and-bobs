@@ -29,6 +29,15 @@ bind -r C-x kill-pane
 bind -r C-q kill-pane
 bind p previous-window
 
+bind -r C-] previous-window
+bind -r C-[ previous-window
+
+# bind -r C-[ prev
+# bind -r C-] next
+
+# bind -r C-[ swap-window -t -1
+# bind -r C-] swap-window -t +1
+
 # Resizing panes
 bind-key -n C-Up resize-pane -U 15
 bind-key -n C-Down resize-pane -D 15

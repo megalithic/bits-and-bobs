@@ -141,6 +141,7 @@ alias ezp="nvim ~/.dotfiles/zsh/path.zsh"
 alias ezkb="nvim ~/.dotfiles/zsh/keybindings.zsh"
 alias ev="nvim ~/.dotfiles/nvim/init.vim"
 alias evs="nvim ~/.dotfiles/nvim/settings.vim"
+alias ea="nvim ~/.dotfiles/alacritty/alacritty.yml.symlink"
 alias et="nvim ~/.dotfiles/tmux/tmux.conf.symlink"
 
 # FOLDERS

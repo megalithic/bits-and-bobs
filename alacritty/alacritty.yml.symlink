@@ -252,10 +252,10 @@ live_config_reload: true
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
 #
-# shell:
-#   program: /bin/bash
-#   args:
-#     - --login
+shell:
+  program: /usr/local/bin/zsh
+  args:
+    - --login
 
 # Key bindings
 #
@@ -296,7 +296,7 @@ key_bindings:
   - { key: V,        mods: Command, action: Paste                        }
   - { key: C,        mods: Command, action: Copy                         }
   - { key: Q,        mods: Command, action: Quit                         }
-  - { key: W,        mods: Command, action: Quit                         }
+  # - { key: W,        mods: Command, action: Quit                         }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
@@ -395,3 +395,8 @@ key_bindings:
   - { key: F10,      mods: Command, chars: "\x1b[21;3~"                  }
   - { key: F11,      mods: Command, chars: "\x1b[23;3~"                  }
   - { key: F12,      mods: Command, chars: "\x1b[24;3~"                  }
+
+  # tmux things ----------------------------------------------------------
+  - { key: T,        mods: Command, chars: "\x01\x63"                    }
+  # - { key: [,        mods: Command|Shift, chars: "\x01\x7b"                    }
+  # - { key: ],        mods: Command|Shift, chars: "\x01\x7d"                    }
