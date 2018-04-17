@@ -96,3 +96,5 @@ source ~/.dotfiles/bin/z.sh
 # if [[ $ZSH_EVAL_CONTEXT == 'file' ]]; then
 #   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

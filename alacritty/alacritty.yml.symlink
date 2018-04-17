@@ -398,5 +398,5 @@ key_bindings:
 
   # tmux things ----------------------------------------------------------
   - { key: T,        mods: Command, chars: "\x01\x63"                    }
-  # - { key: [,        mods: Command|Shift, chars: "\x01\x7b"                    }
-  # - { key: ],        mods: Command|Shift, chars: "\x01\x7d"                    }
+  - { key: LBracket,        mods: Command|Shift, chars: "\x01\x70"                    }
+  - { key: RBracket,        mods: Command|Shift, chars: "\x01\x6e"                    }
