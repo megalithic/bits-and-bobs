@@ -1,6 +1,6 @@
 export SUDO_EDITOR='nvim'
 export EDITOR='nvim'
-export ALTERNATE_EDITOR='emacs'
+export ALTERNATE_EDITOR='oni'
 export VISUAL='nvim'
 export ZDOTDIR=$HOME
 export HOMEBREW_NO_ANALYTICS=1
@@ -14,7 +14,6 @@ export TERMINFO=$HOME/.terminfo
 # export PYTHONPATH="$BREW_PATH/bin/python3.5"
 export BROWSER=chrome
 export _Z_DATA="$HOME/.z-history"
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # by default: export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'

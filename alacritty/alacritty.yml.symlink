@@ -42,20 +42,17 @@ font:
   # The normal (roman) font face to use.
   normal:
     family: Fira Code Retina
-    # Style can be specified to pick a specific face.
-    # style: Retina
+    style: Retina
 
   # The bold font face
   bold:
     family: Fira Code Retina
-    # Style can be specified to pick a specific face.
-    # style: Bold
+    style: Bold
 
   # The italic font face
   italic:
     family: Fira Code Retina
-    # Style can be specified to pick a specific face.
-    # style: Italic
+    style: Italic
 
   # Point size of the font
   size: 16.0
@@ -400,3 +397,5 @@ key_bindings:
   - { key: T,        mods: Command, chars: "\x01\x63"                    }
   - { key: LBracket,        mods: Command|Shift, chars: "\x01\x70"                    }
   - { key: RBracket,        mods: Command|Shift, chars: "\x01\x6e"                    }
+
+# vim:foldenable:foldmethod=marker:ft=yaml

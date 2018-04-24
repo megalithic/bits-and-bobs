@@ -22,7 +22,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'cohama/lexima.vim' " auto-closes many delimiters and can repeat with a `.`
 
 " ## Syntax
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+" Plug 'sheerun/vim-polyglot'
+" Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'typescript'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
 Plug 'elzr/vim-json', { 'for': ['json'] }
 Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
@@ -53,7 +55,8 @@ Plug 'sickill/vim-pasta' " context-aware pasting
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'roxma/ncm-rct-complete'
-Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-apple-darwin', 'do': ':UpdateRemotePlugins'}
+" Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-apple-darwin', 'do': ':UpdateRemotePlugins'}
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 " Plug 'mhartington/nvim-typescript', { 'for': ['typescript'], 'do': ':UpdateRemotePlugins' }
 Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
 
@@ -71,7 +74,7 @@ if has('python3')
   Plug 'epilande/vim-react-snippets'
 endif
 
-Plug 'Valloric/ListToggle'
+" Plug 'Valloric/ListToggle'
 " Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -154,6 +157,8 @@ if has('termguicolors')
     let &t_8b="\e[48;2;%ld;%ld;%ldm"
   endif
 endif
+
+" let g:ruby_host_prog = '$RUBY_ROOT/bin/ruby'
 
 set title                                                                       "change the terminal's title
 set number                                                                      "Line numbers are good
@@ -279,7 +284,7 @@ set tabstop=2
 set expandtab
 set smartindent
 set nofoldenable
-set foldmethod=syntax
+" set foldmethod=syntax
 
 " }}}
 " ================ Autocommands ====================== {{{
@@ -302,9 +307,9 @@ augroup vimrc
   " ## JavaScript
   au FileType javascript nnoremap <buffer><silent><C-]> :JsGotoDefinition<CR>
   au FileType javascript nnoremap <buffer><silent><Leader>] <C-W>v:JsGotoDefinition<CR>
+  " au FileType typescript,javascript,javascript.jsx,sass,scss,scss.css RainbowParentheses
   au BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
-  au FileType javascript,javascript.jsx,lisp,clojure,scheme,sass,scss,scss.css RainbowParentheses
 
   " ----------------------------------------------------------------------------
   " ## CSS/SCSS
@@ -596,12 +601,12 @@ endfunction
 " ================ Plugin Config ======================== {{{
 
 " ## listtoggle
-let g:lt_location_list_toggle_map = '<F3>'
-let g:lt_quickfix_list_toggle_map = '<F4>'
-let g:lt_height = 3
+" let g:lt_location_list_toggle_map = '<F3>'
+" let g:lt_quickfix_list_toggle_map = '<F4>'
+" let g:lt_height = 3
 
 " ## polyglot
-" let g:polyglot_disabled = ['typescript']
+let g:polyglot_disabled = ['typescript']
 
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
@@ -677,7 +682,7 @@ let g:ale_sign_warning = '~~'                                                   
 let g:ale_javascript_eslint_use_local_config = 1
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_prettier_eslint_use_local_config = 1
-let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
@@ -838,13 +843,17 @@ if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
   let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
   let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
+endif
+
+if executable('css-languageserver')
   let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
   let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
   let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
   let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
 endif
+
+let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
+let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
 
 
 " ## asyncomplete.vim/asynccomplete/vim-lsp
@@ -1040,7 +1049,7 @@ nnoremap <Leader>db :silent w <BAR> :silent %bd <BAR> e#<CR>
 " ------------------------------------------------------------------
 
 " folding toggle
-nnoremap <leader-space> za
+nnoremap <leader><space> za
 
 " ## vim-commentary
 nmap <leader>c :Commentary<cr>
