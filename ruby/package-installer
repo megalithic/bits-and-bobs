@@ -1,3 +1,8 @@
-#!/bin/sh
+#!/usr/local/bin/zsh
 
-cat ~/.dotfiles/ruby/packages | xargs gem install
+typeset -U ruby_version
+ruby_version="$(cat ~/.dotfiles/ruby/ruby-version.symlink)"
+rbenv shell $ruby_version
+unset ruby_version
+
+cat ~/.dotfiles/packages/ruby | xargs gem install

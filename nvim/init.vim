@@ -54,7 +54,7 @@ Plug 'sickill/vim-pasta' " context-aware pasting
 " # completions
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-Plug 'roxma/ncm-rct-complete'
+" Plug 'roxma/ncm-rct-complete'
 " Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-apple-darwin', 'do': ':UpdateRemotePlugins'}
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 " Plug 'mhartington/nvim-typescript', { 'for': ['typescript'], 'do': ':UpdateRemotePlugins' }
