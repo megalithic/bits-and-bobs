@@ -8,9 +8,9 @@ if [ -x /usr/libexec/path_helper ]; then
 fi
 
 # setup chruby
-# source /usr/local/share/chruby/auto.sh
-# source /usr/local/share/chruby/chruby.sh
-# RUBIES=(~/.rubies/*)
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+RUBIES=(~/.rubies/*)
 
 # RBEnv
 eval "$(rbenv init --no-rehash -)"

@@ -17,10 +17,13 @@ export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.dotfiles/bin:$PATH"
+export PATH="$HOME/.rubies:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/lib/python2.7/site-packages:$PATH"
+export PATH="$HOME/Library/Python/3.6/lib/python/site-packages:$PATH"
 
 # Find where asdf should be installed.
 # ASDF_DIR="${ASDF_DIR:-$HOME/.asdf}"
