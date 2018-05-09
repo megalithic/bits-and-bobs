@@ -178,6 +178,7 @@ endif
 set title                                                                       "change the terminal's title
 set number                                                                      "Line numbers are good
 set relativenumber                                                              "Show numbers relative to current line
+set signcolumn=yes
 set history=500                                                                 "Store lots of :cmdline history
 set showcmd                                                                     "Show incomplete cmds down the bottom
 set noshowmode                                                                  "Hide showmode because of the powerline plugin
@@ -281,14 +282,15 @@ iab canavs canvas
 set noswapfile
 set nobackup
 set nowb
+set backupcopy=yes "HMR things - https://parceljs.org/hmr.html#safe-write
 
 " }}}
 " ================ Persistent Undo ================== {{{
 
 " Keep undo history across sessions, by storing in file.
-" silent !mkdir ~/.config/nvim/backups > /dev/null 2>&1
-" set undodir=~/.config/nvim/backups
-" set undofile
+silent !mkdir ~/.config/nvim/undo > /dev/null 2>&1
+set undodir=~/.config/nvim/undo
+set undofile
 
 " }}}
 " ================ Indentation ====================== {{{
