@@ -25,20 +25,20 @@ Plug 'tpope/vim-fugitive'
 " Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx', 'javascript', 'typescript'] }
-Plug 'Valloric/MatchTagAlways', { 'for': ['haml', 'html', 'xml', 'erb', 'javascript', 'javascript.jsx', 'typescript'] } " highlights the opening/closing tags for the block you're in
+Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx', 'javascript', 'typescript', 'typescriptreact'] }
+Plug 'Valloric/MatchTagAlways', { 'for': ['haml', 'html', 'xml', 'erb', 'javascript', 'javascript.jsx', 'typescript', 'typescriptreact'] } " highlights the opening/closing tags for the block you're in
 Plug 'jiangmiao/auto-pairs'
 Plug 'cohama/lexima.vim' " auto-closes many delimiters and can repeat with a `.`
 
 " ## Syntax
 " Plug 'sheerun/vim-polyglot'
 " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
-Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'typescript'] }
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'typescript', 'typescriptreact'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
 Plug 'elzr/vim-json', { 'for': ['json'] }
 Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
-Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
+Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript', 'typescriptreact'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
 Plug 'reasonml-editor/vim-reason-plus', { 'for': ['reason'] }
 Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
 Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
@@ -66,7 +66,7 @@ Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 " Plug 'roxma/ncm-rct-complete'
 " Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-apple-darwin', 'do': ':UpdateRemotePlugins'}
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-" Plug 'mhartington/nvim-typescript', { 'for': ['typescript'], 'do': ':UpdateRemotePlugins' }
+" Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'typescriptreact'], 'do': ':UpdateRemotePlugins' }
 Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
 
 " # tags + completions
@@ -97,7 +97,7 @@ Plug 'megalithic/golden-ratio' " vertical split layout manager
 Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
 Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
 Plug 'junegunn/rainbow_parentheses.vim' " nicely colors nested pairs of [], (), {}
-Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb', 'haml', 'javascript.jsx', 'typescript', 'javascript'] } " a set of mappings for several langs: html, xml, erb, php, more
+Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb', 'haml', 'javascript.jsx', 'typescript', 'typescriptreact', 'javascript'] } " a set of mappings for several langs: html, xml, erb, php, more
 Plug 'docunext/closetag.vim' " will auto-close the opening tag as soon as you type </
 Plug 'tpope/vim-endwise'
 Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
@@ -322,7 +322,7 @@ augroup vimrc
   " ## JavaScript
   au FileType javascript nnoremap <buffer><silent><C-]> :JsGotoDefinition<CR>
   au FileType javascript nnoremap <buffer><silent><Leader>] <C-W>v:JsGotoDefinition<CR>
-  " au FileType typescript,javascript,javascript.jsx,sass,scss,scss.css RainbowParentheses
+  au FileType typescript, typescriptreact,javascript,javascript.jsx,sass,scss,scss.css RainbowParentheses
   au BufRead,BufNewFile .{babel,eslint,prettier,stylelint,jshint,jscs}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
 
@@ -491,20 +491,6 @@ cnoreabbrev nowrap set nowrap
 " }}}
 " ================ Functions ======================== {{{
 
-" function! PlugIf(condition, ...) abort
-"   let l:enabled = a:condition ? {} : { 'on': [], 'for': [] }
-"   return a:0 ? extend(l:enabled, a:000[0]) : l:enabled
-" endfunction
-
-" " Shortcut
-" function! WithCompl(...) abort
-"   return call('PlugIf', [ g:megalithic_use_completion ] + a:000)
-" endfunction
-
-function! RemoveTypescriptIncompatibilityBanner(...) abort
-  " echo "should remove banner now"
-endfunction
-
 function! StripTrailingWhitespaces()
   if &modifiable
     let l:l = line(".")
@@ -621,7 +607,7 @@ endfunction
 " let g:lt_height = 3
 
 " ## polyglot
-let g:polyglot_disabled = ['typescript']
+" let g:polyglot_disabled = ['typescript']
 
 " ## golden-ratio
 let g:golden_ratio_exclude_nonmodifiable = 1
@@ -681,6 +667,7 @@ let g:ale_enabled = 1
 let g:ale_linters = {
       \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
       \   'typescript': ['prettier', 'eslint', 'prettier_eslint'],
+      \   'typescriptreact': ['prettier', 'eslint', 'prettier_eslint'],
       \   'css': ['prettier'],
       \   'scss': ['prettier'],
       \   'json': ['prettier']
@@ -688,6 +675,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
       \   'javascript': ['prettier_eslint'],
       \   'typescript': ['prettier_eslint'],
+      \   'typescriptreact': ['prettier_eslint'],
       \   'css': ['prettier'],
       \   'scss': ['prettier'],
       \   'json': ['prettier']
@@ -831,21 +819,21 @@ let g:LanguageClient_autoStart = 1 " Automatically start language servers.
 
 augroup LanguageClientConfig
   autocmd!
-  " " <leader>ld to go to definition
-  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
-  " " <leader>lf to autoformat document
-  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
-  " " <leader>lh for type info under cursor
-  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
-  " " <leader>lr to rename variable under cursor
-  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
-  " " <leader>lc to switch omnifunc to LanguageClient
-  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
-  " " <leader>ls to fuzzy find the symbols in the current document
-  " autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+  " <leader>ld to go to definition
+  autocmd FileType javascript,javascript.jsx,python,typescript, typescriptreact,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
+  " <leader>lf to autoformat document
+  autocmd FileType javascript,javascript.jsx,python,typescript, typescriptreact,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+  " <leader>lh for type info under cursor
+  autocmd FileType javascript,javascript.jsx,python,typescript, typescriptreact,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
+  " <leader>lr to rename variable under cursor
+  autocmd FileType javascript,javascript.jsx,python,typescript, typescriptreact,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
+  " <leader>lc to switch omnifunc to LanguageClient
+  autocmd FileType javascript,javascript.jsx,python,typescript, typescriptreact,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
+  " <leader>ls to fuzzy find the symbols in the current document
+  autocmd FileType javascript,javascript.jsx,python,typescript, typescriptreact,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
 
   " Use as omnifunc by default
-  autocmd FileType javascript,javascript.jsx,python,typescript,json,css,less,html setlocal omnifunc=LanguageClient#complete
+  autocmd FileType javascript,javascript.jsx,python,typescript, typescriptreact,json,css,less,html setlocal omnifunc=LanguageClient#complete
 augroup END
 
 let g:LanguageClient_serverCommands = {}
@@ -858,6 +846,7 @@ if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
   let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
   let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
 endif
 
 if executable('css-languageserver')
@@ -910,7 +899,7 @@ let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
 " au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
 "       \ 'name': 'file',
 "       \ 'whitelist': ['*'],
-"       \ 'blacklist': ['typescript', 'javascript', 'javascript.js'],
+"       \ 'blacklist': ['typescript', 'typescriptreact', 'javascript', 'javascript.js'],
 "       \ 'priority': 10,
 "       \ 'completor': function('asyncomplete#sources#file#completor')
 "       \ }))
@@ -918,7 +907,7 @@ let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
 " if executable('ctags')
 "   au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
 "       \ 'name': 'tags',
-"       \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx'],
+"       \ 'whitelist': ['typescript', 'typescriptreact', 'javascript', 'javascript.jsx'],
 "       \ 'completor': function('asyncomplete#sources#tags#completor'),
 "       \ 'config': {
 "       \    'max_file_size': 150000000,
@@ -937,7 +926,7 @@ let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
 " " typescript
 " " au User asynccomplete_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
 " "       \ 'name': 'tscompletejob',
-" "       \ 'whitelist': ['typescript'],
+" "       \ 'whitelist': ['typescript', 'typescriptreact'],
 " "       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
 " "       \ }))
 
@@ -946,7 +935,7 @@ let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
 "         \ 'name': 'typescript-language-server',
 "         \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
 "         \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-"         \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
+"         \ 'whitelist': ['typescript', 'typescriptreact', 'javascript', 'javascript.jsx']
 "         \ })
 " endif
 
