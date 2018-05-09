@@ -15,6 +15,7 @@ export TERMINFO=$HOME/.terminfo
 export BROWSER=chrome
 export _Z_DATA="$HOME/.z-history"
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export TERM_ITALICS="TRUE"
 
 # by default: export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 # we take out the slash, period, angle brackets, dash here.

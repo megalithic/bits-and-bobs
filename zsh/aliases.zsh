@@ -62,7 +62,7 @@ alias mmv='noglob zmv -W'
 # -----------------------------------------------------------------------------
 # alias tm="(tmux ls | grep -vq attached && tmux at) || tmux"
 alias tm=tmux -2 #"tmux attach || tmux new"
-alias mux=tm
+alias mux="tmux -2 attach-session || tmux -2"
 alias takeover="tmux detach -a"
 alias teama="tmux attach-session -t default"
 alias team="cd ~ && teamocil --here default"
@@ -71,13 +71,10 @@ alias def=team
 alias toka="tmux attach-session -t welltok"
 alias tok="cd ~; teamocil --here welltok"
 
-# welltok stuffs
-# -----------------------------------------------------------------------------
-alias nsa="sudo sentinelctl"
-
-## - ag/ack/grep/fzf --------------------------------------
+## - ag/ack/grep/fzf/rg/ripgrep --------------------------------------
 # https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
 # alias ag="ag --nobreak --nonumbers --noheading . | fzf"
+alias g="rg"
 
 # DOCKER
 # -----------------------------------------------------------------------------
@@ -93,8 +90,6 @@ alias b="brew"
 # -----------------------------------------------------------------------------
 alias py="python"
 
-alias kitty="/Applications/kitty.app/Contents/MacOS/kitty"
-
 # ALACRITTY
 # -----------------------------------------------------------------------------
 alias updatealacritty='cd ~/code/rust/alacritty; git co master; git fetch; git merge origin/master; rustup override set nightly; cargo build --release; sudo cp target/release/alacritty /usr/local/bin; cd -'
@@ -103,9 +98,7 @@ alias ala='alacritty;'
 # EMACS/SPACEMACS
 # -----------------------------------------------------------------------------
 alias updateemacs='cd ~/.emacs.d; git co develop; git fetch; git merge origin/develop; cd -'
-# alias e='emacsclient --no-wait'
 alias ec='emacsclient'
-# alias em=e
 
 # (NEO)VIM
 # -----------------------------------------------------------------------------

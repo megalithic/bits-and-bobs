@@ -1,3 +1,12 @@
+" =============================================================================
+"
+"   ┌┬┐┌─┐┌─┐┌─┐┬  ┬┌┬┐┬ ┬┬┌─┐
+"   │││├┤ │ ┬├─┤│  │ │ ├─┤││   :: DOTFILES > vimrc
+"   ┴ ┴└─┘└─┘┴ ┴┴─┘┴ ┴ ┴ ┴┴└─┘
+"   Brought to you by: Seth Messer / @megalithic
+"
+" =============================================================================
+
 " ================ Plugins ==================== {{{
 call plug#begin( '~/.config/nvim/bundle')
 
@@ -81,6 +90,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'sbdchd/neoformat'
 
 Plug 'trevordmiller/nova-vim'
+Plug 'dikiaap/minimalist'
+Plug 'ajmwagar/vim-deus'
 Plug 'tpope/vim-commentary' " (un)comment code
 Plug 'megalithic/golden-ratio' " vertical split layout manager
 Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
@@ -145,6 +156,7 @@ let g:mapleader = ","                                                           
 "hi link jsFuncCall GruvboxBlue
 
 silent! colorscheme nova
+" let g:deus_termcolors=256
 
 set termguicolors
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
@@ -155,6 +167,9 @@ if has('termguicolors')
   if &term =~# 'tmux-256color'
     let &t_8f="\e[38;2;%ld;%ld;%ldm"
     let &t_8b="\e[48;2;%ld;%ld;%ldm"
+    " deus
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   endif
 endif
 
