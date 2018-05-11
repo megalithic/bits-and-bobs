@@ -15,15 +15,15 @@ call plug#begin( '~/.config/nvim/bundle')
 " ## UI/Interface
   Plug 'trevordmiller/nova-vim'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
-"
+
 " ## Syntax
-  " Plug 'sheerun/vim-polyglot'
+  Plug 'sheerun/vim-polyglot'
 
 " # JS
-  " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
-  Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'typescript', 'typescriptreact'] }
-  Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js', 'typescriptreact'] }
-  Plug 'elzr/vim-json', { 'for': ['json'] }
+  " Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'typescript', 'typescriptreact'] }
+  Plug 'chemzqm/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js', 'typescriptreact'] }
+  " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js', 'typescriptreact'] }
+  " Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'jparise/vim-graphql', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js', 'typescriptreact'] }
 
 " # TS
@@ -31,8 +31,8 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
 
 " # Fn
-  Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
-  Plug 'reasonml-editor/vim-reason-plus', { 'for': ['reason'] }
+  " Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
+  " Plug 'reasonml-editor/vim-reason-plus', { 'for': ['reason'] }
 
 " # CSS
   Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
@@ -40,30 +40,30 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
 
 " # HTML
-  Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
-  Plug 'othree/xml.vim', { 'for': ['xml'] }
+  " Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
+  " Plug 'othree/xml.vim', { 'for': ['xml'] }
 
 " # Cfg
-  Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
+  " Plug 'martin-svk/vim-yaml', { 'for': ['yaml'] }
 
 " # MD
-  Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
+  " Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'jtratner/vim-flavored-markdown', { 'for': ['markdown'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
 
 " # RoR
-  Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
-  Plug 'tpope/vim-haml', { 'for': ['haml'] }
+  " Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
+  " Plug 'tpope/vim-haml', { 'for': ['haml'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
-  Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
-  Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
+  " Plug 'tpope/vim-bundler', { 'for': ['ruby', 'eruby', 'haml', 'slim'] }
+  " Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 
  " #Misc
   Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
-  Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
-  Plug 'vim-scripts/fish.vim',   { 'for': 'fish' }
+  " Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
+  " Plug 'vim-scripts/fish.vim',   { 'for': 'fish' }
 
-" ## Project Navigation
+" ## Project/Code Navigation
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'scrooloose/nerdtree'
@@ -73,13 +73,15 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'unblevable/quick-scope' " highlights f/t type of motions, for quick horizontal movements
+  " Plug 'justinmk/vim-sneak.git' " https://github.com/justinmk/vim-sneak
 
 " ## Completions
   Plug 'roxma/nvim-completion-manager'
   Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
   Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
-  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-  " Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'typescriptreact'], 'do': ':UpdateRemotePlugins' }
+  Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'typescriptreact'], 'do': ':UpdateRemotePlugins' }
+  " Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+  Plug 'natebosch/vim-lsc' " https://github.com/natebosch/vim-lsc/blob/master/doc/lsc.txt
   " Plug 'roxma/ncm-rct-complete'
 
 " ## Tags
@@ -96,14 +98,18 @@ call plug#begin( '~/.config/nvim/bundle')
     Plug 'epilande/vim-react-snippets'
   endif
 
-" ## Random/Misc
-  Plug 'junegunn/goyo.vim'
+" ## Random/Misc/Docs
+  Plug 'junegunn/goyo.vim', { 'for': ['tex','text','txt','markdown','ghmarkdown','md'] }
+  Plug 'drmikehenry/vim-extline'
+  Plug 'wendyyuchensun/import-cost-vim'
+  Plug 'Galooshi/vim-import-js' "https://github.com/Galooshi/vim-import-js#default-mappings
 
   Plug 'tpope/vim-commentary' " (un)comment code
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
 
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
   Plug 'EinfachToll/DidYouMean'
+  Plug 'wsdjeg/vim-fetch' " open files at line number
   Plug 'nelstrom/vim-visual-star-search'
   Plug 'shougo/vimproc.vim', { 'do': 'make' }
   Plug 'xolox/vim-misc'
@@ -128,8 +134,8 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'tpope/vim-eunuch'
 
   Plug 'w0rp/ale'
+  " Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx', 'typescript', 'typescriptreact'] }
   " Plug 'airblade/vim-gitgutter'
-  Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 
 " ## Movements/Text Objects, et al
   Plug 'kana/vim-operator-user'
@@ -137,7 +143,7 @@ call plug#begin( '~/.config/nvim/bundle')
   " -- provide al and il for current line
   " -- provide a_ and i_ for underscores
   " -- provide a- and i-
-  Plug 'kana/vim-textobj-user'
+  Plug 'kana/vim-textobj-user' "https://github.com/kana/vim-textobj-user/wiki
   Plug 'kana/vim-textobj-entire' " Entire buffer text object (vae)
   Plug 'kana/vim-textobj-function' " Function text object (vaf)
   Plug 'kana/vim-textobj-indent', { 'on': [ '<Plug>(textobj-indent' ] } " - i     for indent level
@@ -148,7 +154,7 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'machakann/vim-textobj-delimited', { 'on': [ '<Plug>(textobj-delimited' ] } " - P     for last paste
   Plug 'gilligan/textobj-lastpaste', { 'on': [ '<Plug>(textobj-lastpaste' ] } " - u     for url
   Plug 'mattn/vim-textobj-url', { 'on': [ '<Plug>(textobj-url' ] } " - b     for any block type (parens, braces, quotes, ltgt)
-  Plug 'rhysd/vim-textobj-anyblock' " - x     for xml attr like `data-content="everything"`
+  Plug 'rhysd/vim-textobj-anyblock'
   Plug 'whatyouhide/vim-textobj-xmlattr', { 'on': [ '<Plug>(textobj-xmlattr' ] }
   Plug 'wellle/targets.vim' " Improved targets line cin) next parens
   " ^--- https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
@@ -156,19 +162,11 @@ call plug#begin( '~/.config/nvim/bundle')
 call plug#end()
 
 "}}}
-" ================ General Config ==================== {{{
+" ================ General Config/Setup ==================== {{{
 
 let g:mapleader = ","                                                           "Change leader to a comma
 
-"let g:gruvbox_italic = 1                                                        "Use italic for comments
-"let g:gruvbox_invert_selection = 0                                              "Do not invert highlighing on selection
-"let g:gruvbox_sign_column = 'none'                                              "Do not use background for sign column
-
-"silent! colorscheme gruvbox
-"hi link jsFuncCall GruvboxBlue
-
 silent! colorscheme nova
-" let g:deus_termcolors=256
 
 set termguicolors
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
@@ -193,6 +191,7 @@ set relativenumber                                                              
 set signcolumn=yes
 set history=500                                                                 "Store lots of :cmdline history
 set showcmd                                                                     "Show incomplete cmds down the bottom
+set cmdheight=2
 set noshowmode                                                                  "Hide showmode because of the powerline plugin
 set gdefault                                                                    "Set global flag for search and replace
 set gcr=a:blinkon500-blinkwait500-blinkoff500                                   "Set cursor blinking rate
@@ -357,7 +356,6 @@ augroup vimrc
   " ## Markdown
   au BufNewFile,BufRead,BufReadPost *.{md,mdwn,mkd,mkdn,mark*} set nolazyredraw ft=ghmarkdown
   au FileType markdown,text,html setlocal spell complete+=kspell
-  au FileType markdown,text,html hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
   au FileType markdown set tw=80
 
   " ----------------------------------------------------------------------------
@@ -418,6 +416,29 @@ augroup vimrc
   autocmd! TermOpen * if &buftype == 'terminal'
         \| set nonumber norelativenumber
         \| endif
+
+  " Start NERDTree automatically when vim starts up on opening a directory
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+  " Close vim if the only window left open is a NERDTree
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
+
+" # vim-lsc things
+augroup completesplitbelow
+ autocmd User LSCAutocomplete setlocal splitbelow
+ autocmd CompleteDone * setlocal nosplitbelow
+ autocmd CompleteDone * silent! pclose
+augroup END
+
+" Automatically close preview window after completing an item, only if the
+" preview window wasn't open before completing.
+augroup PREVIEW_AUTOCLOSE
+  autocmd!
+  autocmd User LSCAutocomplete let g:was_preview_open = <SID>IsPreviewOpen()
+  autocmd CompleteDone * call <SID>ClosePreview()
 augroup END
 
 " Automatically close vim if only the quickfix window is open
@@ -506,6 +527,55 @@ cnoreabbrev nowrap set nowrap
 " }}}
 " ================ Functions ======================== {{{
 
+" Keybinding for visiting the GitHub page of the plugin defined on the current line
+autocmd FileType vim nnoremap <silent> <leader>op :call OpenPluginHomepage()<CR>
+function! OpenPluginHomepage()
+  " Get line under cursor
+  let line = getline(".")
+
+  " Matches for instance Plug 'tpope/surround' -> tpope/surround
+  " Greedy match in order to not capture trailing comments
+  let plugin_name = '\w\+ \([''"]\)\(.\{-}\)\1'
+  let repository = matchlist(line, plugin_name)[2]
+
+  " Open the corresponding GitHub homepage with $BROWSER
+  " You need to set the BROWSER environment variable in order for this to work
+  " For MacOS, you can set the following for opening it in your default
+  " browser: 'export BROWSER=open'
+  silent exec "!$BROWSER https://github.com/".repository
+endfunction
+
+function! s:IsPreviewOpen() abort
+  for win in range(1, winnr('$'))
+    if getwinvar(win, '&previewwindow')
+      return v:true
+    endif
+  endfor
+  return v:false
+endfunction
+
+function! s:ClosePreview() abort
+  if !exists('g:was_preview_open') || !g:was_preview_open
+    silent! pclose
+  endif
+endfunction
+
+" Scratch buffer
+function! ScratchOpen()
+  let scr_bufnr = bufnr('__scratch__')
+  if scr_bufnr == -1
+    vnew
+    setlocal filetype=markdown
+    setlocal bufhidden=hide
+    setlocal nobuflisted
+    setlocal buftype=nofile
+    setlocal noswapfile
+    file __scratch__
+  else
+    execute 'buffer ' . scr_bufnr
+  endif
+endfunction
+
 function! StripTrailingWhitespaces()
   if &modifiable
     let l:l = line(".")
@@ -573,7 +643,7 @@ endfunction
 " Used by Fugitive
 function! BufReadIndex()
   " Use j/k in status
-  setlocal nohlsearch
+  setl nohlsearch
   nnoremap <buffer> <silent> j :call search('^#\t.*','W')<Bar>.<CR>
   nnoremap <buffer> <silent> k :call search('^#\t.*','Wbe')<Bar>.<CR>
 endfunction
@@ -588,9 +658,12 @@ function! BufEnterCommit()
 
   " disable for gitcommit messages
   let g:cm_smart_enable = 0
+  let g:lsc_enable_autocomplete = v:false
 
-  set spell
-  set spelllang=en
+  setl spell
+  setl spelllang=en
+  setl nolist
+  setl nonumber
 endfunction
 
 " QuickScope, used in conjunction with keybinding overrides
@@ -611,236 +684,354 @@ function! Quick_scope_selective(movement)
   return a:movement . letter
 endfunction
 
+" vim-vertical-move replacement
+" credit: cherryberryterry: https://www.reddit.com/r/vim/comments/4j4duz/a/d33s213
+function! s:vjump(dir) abort
+  let c = '%'.virtcol('.').'v'
+  let flags = a:dir ? 'bnW' : 'nW'
+  let bot = search('\v'.c.'.*\n^(.*'.c.'.)@!.*$', flags)
+  let top = search('\v^(.*'.c.'.)@!.*$\n.*\zs'.c, flags)
+
+  " norm! m`
+  return a:dir ? (line('.') - (bot > top ? bot : top)).'k'
+    \        : ((bot < top ? bot : top) - line('.')).'j'
+endfunction
 
 
 " }}}
-" ================ Plugin Config ======================== {{{
+" ================ Plugin Config/Settings ======================== {{{
 
 " ## polyglot
-" let g:polyglot_disabled = ['typescript']
+  let g:polyglot_disabled = ['typescript', 'graphql', 'jsx']
+
+" ## vim-qf
+  " nmap qp <Plug>qf_qf_previous
+  " nmap qn <Plug>qf_qf_next
+  " nmap qc <Plug>qf_qf_stay_toggle
 
 " ## golden-ratio
-let g:golden_ratio_exclude_nonmodifiable = 1
-let g:golden_ratio_wrap_ignored = 0
-let g:golden_ratio_ignore_horizontal_splits = 1
+  let g:golden_ratio_exclude_nonmodifiable = 1
+  let g:golden_ratio_wrap_ignored = 0
+  let g:golden_ratio_ignore_horizontal_splits = 1
 
 " ## auto-pairs
-let g:AutoPairsShortcutToggle = ''
-let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
+  let g:AutoPairsShortcutToggle = ''
+  let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
 
-let g:ctrlsf_auto_close = 0                                                     "Do not close search when file is opened
-let g:ctrlsf_mapping = {'vsplit': 's'}                                          "Mapping for opening search result in vertical split
+" ## NERDtree
+  let g:NERDTreeChDirMode = 2                                                     "Always change the root directory
+  let g:NERDTreeMinimalUI = 1                                                     "Disable help text and bookmark title
+  let g:NERDTreeShowHidden = 1                                                    "Show hidden files in NERDTree
+  let g:NERDTreeUpdateOnCursorHold = 0                                            "Disable nerdtree git plugin updating on cursor hold
 
-let g:NERDTreeChDirMode = 2                                                     "Always change the root directory
-let g:NERDTreeMinimalUI = 1                                                     "Disable help text and bookmark title
-let g:NERDTreeShowHidden = 1                                                    "Show hidden files in NERDTree
-let g:NERDTreeUpdateOnCursorHold = 0                                            "Disable nerdtree git plugin updating on cursor hold
+" ## vim-sneak
+  let g:sneak#label = 1
+  let g:sneak#use_ic_scs = 1
+  let g:sneak#absolute_dir = 1
+
+" ## quickscope
+  let g:qs_enable = 0
 
 " ## emmet
-let g:user_emmet_leader_key = '<c-e>'                                           "Change trigger emmet key
-" let g:user_emmet_leader_key='<Tab>'
-let g:user_emmet_settings = {
-      \  'javascript.jsx' : {
-      \      'extends' : 'jsx',
-      \  },
-      \}
+  " let g:user_emmet_leader_key = '<c-e>'                                           "Change trigger emmet key
+  " let g:user_emmet_leader_key='<Tab>'
+  " let g:user_emmet_settings = {
+  "       \  'javascript.jsx' : {
+  "       \      'extends' : 'jsx',
+  "       \  },
+  "       \}
 
-let g:delimitMate_expand_cr = 2                                                 "Auto indent on enter
+" # delimitMate
+  let g:delimitMate_expand_cr = 2                                                 "Auto indent on enter
 
-let g:ale_enabled = 1
-let g:ale_linters = {
-      \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
-      \   'typescript': ['prettier', 'eslint', 'prettier_eslint'],
-      \   'typescriptreact': ['prettier', 'eslint', 'prettier_eslint'],
-      \   'css': ['prettier'],
-      \   'scss': ['prettier'],
-      \   'json': ['prettier']
-      \ }                                                                       "Lint js with eslint
-let g:ale_fixers = {
-      \   'javascript': ['prettier_eslint'],
-      \   'typescript': ['prettier_eslint'],
-      \   'typescriptreact': ['prettier_eslint'],
-      \   'css': ['prettier'],
-      \   'scss': ['prettier'],
-      \   'json': ['prettier']
-      \ }                                                                       "Fix eslint errors
-let g:ale_sign_error = '✖'                                                      "Lint error sign
-let g:ale_sign_warning = '~~'                                                    "Lint warning sign
-let g:ale_javascript_eslint_use_local_config = 1
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_javascript_prettier_eslint_use_local_config = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 1
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_save = 1
+" ## ALE
+  let g:ale_enabled = 1
+  let g:ale_lint_delay = 200
+  let g:ale_linters = {
+        \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
+        \   'typescript': ['prettier', 'eslint', 'prettier_eslint'],
+        \   'typescriptreact': ['prettier', 'eslint', 'prettier_eslint'],
+        \   'css': ['prettier'],
+        \   'scss': ['prettier'],
+        \   'json': ['prettier']
+        \ }                                                                       "Lint js with eslint
+  let g:ale_fixers = {
+        \   'javascript': ['prettier_eslint'],
+        \   'typescript': ['prettier_eslint'],
+        \   'typescriptreact': ['prettier_eslint'],
+        \   'css': ['prettier'],
+        \   'scss': ['prettier'],
+        \   'json': ['prettier']
+        \ }                                                                       "Fix eslint errors
+  let g:ale_sign_error = '✖'                                                      "Lint error sign
+  let g:ale_sign_warning = '⚠'                                                    "Lint warning sign
+  let g:ale_javascript_eslint_use_local_config = 1
+  let g:ale_javascript_prettier_use_local_config = 1
+  let g:ale_javascript_prettier_eslint_use_local_config = 1
+  let g:ale_lint_on_text_changed = 'always'
+  let g:ale_lint_on_enter = 1
+  let g:ale_fix_on_save = 1
+  let g:ale_lint_on_save = 1
 
 " ## vim-jsx
-let g:jsx_ext_required = 0
-let g:jsx_pragma_required = 0
+  let g:jsx_ext_required = 0
+  let g:jsx_pragma_required = 0
+  let g:javascript_plugin_jsdoc = 1                                               "Enable syntax highlighting for js doc blocks
 
-let g:javascript_plugin_jsdoc = 1                                               "Enable syntax highlighting for js doc blocks
+" ## vim-markdown
+  let g:vim_markdown_frontmatter = 1
+  let g:vim_markdown_toc_autofit = 1
+  let g:markdown_fenced_languages = [
+                          \ 'javascript',
+                          \ 'typescript',
+                          \ 'python',
+                          \ 'java',
+                          \ 'html',
+                          \ 'bash=sh']
 
 " ## vim-json
-let g:vim_json_syntax_conceal = 0
+  let g:vim_json_syntax_conceal = 0
 
 " ## vim-better-javascript-completion
-let g:vimjs#casesensistive = 1
-" Enabled by default. flip the value to make completion matches case insensitive
-let g:vimjs#smartcomplete = 0
-" Disabled by default. Enabling this will let vim complete matches at any location
-" e.g. typing 'ocument' will suggest 'document' if enabled.
-let g:vimjs#chromeapis = 0
-" Disabled by default. Toggling this will enable completion for a number of Chrome's JavaScript extension APIs
-
+  let g:vimjs#casesensistive = 1
+  " Enabled by default. flip the value to make completion matches case insensitive
+  let g:vimjs#smartcomplete = 0
+  " Disabled by default. Enabling this will let vim complete matches at any location
+  " e.g. typing 'ocument' will suggest 'document' if enabled.
+  let g:vimjs#chromeapis = 0
+  " Disabled by default. Toggling this will enable completion for a number of Chrome's JavaScript extension APIs
 
 " ## vim-javascript-syntax
-let g:JSHintHighlightErrorLine = 1
-let javascript_enable_domhtmlcss = 1
-let loaded_matchit = 1
-let g:js_indent_log = 1
-let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3'
+  let g:JSHintHighlightErrorLine = 1
+  let javascript_enable_domhtmlcss = 1
+  let loaded_matchit = 1
+  let g:js_indent_log = 1
+  let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3'
 
 " ## JSDoc
 " https://github.com/heavenshell/vim-jsdoc#configuration
-let g:jsdoc_allow_input_prompt=1
-let g:jsdoc_input_description=1
-let g:jsdoc_enable_es6 = 1
-let g:jsdoc_access_descriptions=2
-let g:jsdoc_additional_descriptions=1
-
+  let g:jsdoc_allow_input_prompt=1
+  let g:jsdoc_input_description=1
+  let g:jsdoc_enable_es6 = 1
+  let g:jsdoc_access_descriptions=2
+  let g:jsdoc_additional_descriptions=1
 
 " ## rainbow_parentheses.vim
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+  let g:rainbow#max_level = 16
+  let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
+" ## vim-surround
+  let g:surround_indent = 0
+  " let g:surround_no_insert_mappings = 1
 
 " ## vim-test
-function! SplitStrategy(cmd)
-  vert new | call termopen(a:cmd) | startinsert
-endfunction
-let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-let g:test#strategy = 'terminal_split'
-let test#ruby#rspec#options = '-f d'
-let test#ruby#bundle_exec = 1
-
-" ## quick-scope
-let g:qs_enable = 0
+  function! SplitStrategy(cmd)
+    vert new | call termopen(a:cmd) | startinsert
+  endfunction
+  let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
+  let g:test#strategy = 'terminal_split'
+  let test#ruby#rspec#options = '-f d'
+  let test#ruby#bundle_exec = 1
 
 " ## FZF
-let g:fzf_buffers_jump = 1
-let g:fzf_filemru_bufwrite = 1
-let g:fzf_layout = { 'down': '~25%' }
-let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit',
-      \ 'enter': 'vsplit'
-      \ }
+  let g:fzf_buffers_jump = 1
+  let g:fzf_filemru_bufwrite = 1
+  let g:fzf_layout = { 'down': '~25%' }
+  let g:fzf_action = {
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-x': 'split',
+        \ 'ctrl-v': 'vsplit',
+        \ 'enter': 'vsplit'
+        \ }
 
-command! -bang -nargs=* Ag
-      \ call fzf#vim#ag(<q-args>,
-      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \                 <bang>0)
+  if executable("rg")
+    command! -bang -nargs=* Rg
+          \ call fzf#vim#grep(
+          \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+          \   <bang>0 ? fzf#vim#with_preview('up:60%')
+          \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+          \   <bang>0)
+    command! -bang -nargs=* Rg
+          \ call fzf#vim#grep(
+          \   'rg --column --line-number --ignore-case --no-heading --no-messages --hidden --color=always '
+          \   . <q-args>, 1,
+          \   <bang>0 ? fzf#vim#with_preview('up:60%')
+          \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+          \   <bang>0)
+    " command! -bang -nargs=? -complete=dir Files
+    "       \ call fzf#vim#files(<q-args>,
+    "       \   fzf#vim#with_preview('right:50%:hidden', '?'),
+    "       \   <bang>0)
+  endif
 
-" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --ignore-case --no-heading --no-messages --hidden --color=always '
-      \   . <q-args>, 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-
-command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>,
-      \   fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-
-
-" ## ack.vim
-if executable("ag")
-  " Note we extract the column as well as the file and line number
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
-  set grepformat=%f:%l:%c%m
-
-  " Have the silver searcher ignore all the same things as wilgignore
-  let b:ag_command = 'ag %s -i --nogroup'
-  let g:ag_prg = 'ag %s -i --nogroup'
-
-  for i in split(&wildignore, ",")
-    let i = substitute(i, '\*/\(.*\)/\*', '\1', 'g')
-    let b:ag_command = b:ag_command . ' --ignore "' . substitute(i, '\*/\(.*\)/\*', '\1', 'g') . '"'
-  endfor
-
-  let b:ag_command = b:ag_command . ' --hidden -g ""'
-  let g:ctrlp_user_command = b:ag_command
-endif
-
+" ## ag
+  if executable("ag")
+    " Note we extract the column as well as the file and line number
+    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepformat=%f:%l:%c%m
+    " Have the silver searcher ignore all the same things as wilgignore
+    let b:ag_command = 'ag %s -i --nogroup'
+    let g:ag_prg = 'ag %s -i --nogroup'
+    for i in split(&wildignore, ",")
+      let i = substitute(i, '\*/\(.*\)/\*', '\1', 'g')
+      let b:ag_command = b:ag_command . ' --ignore "' . substitute(i, '\*/\(.*\)/\*', '\1', 'g') . '"'
+    endfor
+    let b:ag_command = b:ag_command . ' --hidden -g ""'
+    let g:ctrlp_user_command = b:ag_command
+  endif
 
 " ## gist.vim
-let g:gist_open_url = 1
-let g:gist_default_private = 1
-
+  let g:gist_open_url = 1
+  let g:gist_default_private = 1
 
 " ## ultisnips
-let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
-
+  let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+  let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+  let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+  let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " ## lsp/languageclient/nvim-completion-manager/ncm
-let g:cm_smart_enable = 1
-let g:LanguageClient_diagnosticsList = 'location' " quickfix is used by :Rg
-let g:LanguageClient_autoStart = 1 " Automatically start language servers.
+  let g:cm_smart_enable = 1
+  let g:LanguageClient_diagnosticsList = 'location' " quickfix is used by :Rg
+  let g:LanguageClient_autoStart = 1 " Automatically start language servers.
 
-augroup LanguageClientConfig
-  autocmd!
-  " <leader>ld to go to definition
-  autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
-  " <leader>lf to autoformat document
-  autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
-  " <leader>lh for type info under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
-  " <leader>lr to rename variable under cursor
-  autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
-  " <leader>lc to switch omnifunc to LanguageClient
-  autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
-  " <leader>ls to fuzzy find the symbols in the current document
-  autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
-  " Use as omnifunc by default
-  autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html setlocal omnifunc=LanguageClient#complete
-augroup END
+  augroup LanguageClientConfig
+    autocmd!
+    " <leader>ld to go to definition
+    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
+    " <leader>lf to autoformat document
+    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+    " <leader>lh for type info under cursor
+    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
+    " <leader>lr to rename variable under cursor
+    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
+    " <leader>lc to switch omnifunc to LanguageClient
+    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
+    " <leader>ls to fuzzy find the symbols in the current document
+    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+    " Use as omnifunc by default
+    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html setlocal omnifunc=LanguageClient#complete
+  augroup END
 
-let g:LanguageClient_serverCommands = {}
+  let g:LanguageClient_serverCommands = {}
+  if executable('pyls')
+    let g:LanguageClient_serverCommands.python = ['pyls']
+  endif
+  if executable('javascript-typescript-stdio')
+    let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
+  endif
+  if executable('css-languageserver')
+    let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
+    let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
+    let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
+    let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
+  endif
+  if executable('html-languageserver')
+    let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
+  endif
+  if executable('json-languageserver')
+    let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
+  endif
 
-if executable('pyls')
-  let g:LanguageClient_serverCommands.python = ['pyls']
-endif
 
-if executable('javascript-typescript-stdio')
-  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
-endif
+" ## vim-lsc
+  let g:lsc_enable_autocomplete = v:true
+  let g:lsc_auto_map = v:true
+  let g:lsc_preview_split_direction = 'below'
+  let g:lsc_enable_apply_edit = v:true
+  let g:lsc_enable_incremental_sync = v:true
 
-if executable('css-languageserver')
-  let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.scss = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.sass = ['css-languageserver', '--stdio']
-endif
+  let g:lsc_server_commands = {}
+  if executable('pyls')
+    let g:lsc_server_commands.python = 'pyls'
+  endif
+  if executable('go-langserver')
+    let g:lsc_server_commands.go = 'go-langserver'
+  endif
+  if executable('lua-lsp')
+    let g:lsc_server_commands.lua = 'lua-lsp'
+  endif
+  if executable('dart_language_server')
+    let g:lsc_server_commands.dart = 'dart_language_server'
+  endif
+  if executable('javascript-typescript-stdio')
+    let g:lsc_server_commands.javascript = 'javascript-typescript-stdio'
+    let g:lsc_server_commands['javascript.jsx'] = 'javascript-typescript-stdio'
+    let g:lsc_server_commands.typescript = 'javascript-typescript-stdio'
+    let g:lsc_server_commands.typescriptreact = 'javascript-typescript-stdio'
+  endif
+  if executable('css-languageserver')
+    let g:lsc_server_commands.css = 'css-languageserver --stdio'
+    let g:lsc_server_commands.less = 'css-languageserver --stdio'
+    let g:lsc_server_commands.scss = 'css-languageserver --stdio'
+    let g:lsc_server_commands.sass = 'css-languageserver --stdio'
+  endif
+  if executable('html-languageserver')
+    let g:lsc_server_commands.html = 'html-languageserver --stdio'
+  endif
+  if executable('json-languageserver')
+    let g:lsc_server_commands.json = 'json-languageserver --stdio'
+  endif
+  if executable('language_server-ruby')
+    let g:lsc_server_commands.ruby = 'language_server-ruby'
+  endif
 
-let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
-let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
+
+" ## tagbar
+  let tagbar_type_css = {
+      \ 'ctagsbin' : 'ctags',
+      \ 'ctagsargs' : '--file-scope=yes -o - ',
+      \ 'kinds' : [
+          \ 'c:classes:1:0',
+          \ 'i:ids:1:0',
+          \ 't:tags:1:0',
+          \ 's:selectors:1:0',
+      \ ],
+  \ }
+
+  let tagbar_type_scss = {
+      \ 'ctagsbin' : 'ctags',
+      \ 'ctagsargs' : '--file-scope=yes -o - ',
+      \ 'kinds' : [
+          \ 'v:variables:1:0',
+          \ 'm:mixins:1:0',
+          \ 'c:classes:1:0',
+          \ 'i:ids:1:0',
+          \ 't:tags:1:0',
+      \ ],
+  \ }
+  let tagbar_type_c = {
+      \ 'ctagsbin' : 'ctags',
+      \ 'ctagsargs' : '--file-scope=yes -o - ',
+      \ 'kinds' : [
+          \ 'd:macros:1:0',
+          \ 'p:prototypes:1:0',
+          \ 'g:enums',
+          \ 'e:enumerators:0:0',
+          \ 't:typedefs:0:0',
+          \ 's:structs',
+          \ 'u:unions',
+          \ 'm:members:0:0',
+          \ 'v:variables:0:0',
+          \ 'f:functions',
+      \ ],
+  \ }
+  let tagbar_type_typescript = {
+      \ 'ctagstype' : 'typescript',
+      \ 'kinds'     : [
+          \ 'n:modules',
+          \ 't:types',
+          \ 'i:interfaces',
+          \ 'e:enum',
+          \ 'c:classes',
+          \ 'a:abstract classes',
+          \ 'm:members',
+          \ 'f:functions',
+          \ 'p:properties',
+      \ ] }
 
 " }}}
 " ================ Custom Mappings ======================== {{{
@@ -891,6 +1082,9 @@ nnoremap <Leader>hf :NERDTreeFind<CR>
 " nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <F2> :NERDTreeToggle<CR>
 
+" tagbar
+nnoremap <F3> :TagbarToggle<CR>
+
 " Toggle between last 2 buffers
 nnoremap <leader><tab> <c-^>
 
@@ -927,6 +1121,16 @@ nnoremap <Leader>db :silent w <BAR> :silent %bd <BAR> e#<CR>
 
 " ------------------------------------------------------------------
 
+nnoremap <C-s> :call ScratchOpen()<cr>
+
+" vim-vertical-move replacement
+nnoremap <expr> <C-j> <SID>vjump(0)
+nnoremap <expr> <C-k> <SID>vjump(1)
+xnoremap <expr> <C-j> <SID>vjump(0)
+xnoremap <expr> <C-k> <SID>vjump(1)
+onoremap <expr> <C-j> <SID>vjump(0)
+onoremap <expr> <C-k> <SID>vjump(1)
+
 " folding toggle
 nnoremap <leader><space> za
 
@@ -946,6 +1150,13 @@ noremap <F5> :PlugUpdate<cr>
 map <F5> :PlugUpdate<cr>
 noremap <S-F5> :PlugClean!<cr>
 map <S-F5> :PlugClean!<cr>
+
+" ## vim-sneak
+" map f <Plug>Sneak_f
+" map F <Plug>Sneak_F
+" map t <Plug>Sneak_t
+" map T <Plug>Sneak_T
+" map <M-;> <Plug>Sneak_,
 
 " ## QuickScope
 nnoremap <expr> <silent> f Quick_scope_selective('f')
@@ -1159,22 +1370,61 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 " Insert mode movements
 " Ctrl-e: Go to end of line
-inoremap <c-e> <esc>A
+" inoremap <c-e> <esc>A
 " Ctrl-a: Go to begin of line
-inoremap <c-a> <esc>I
+" inoremap <c-a> <esc>I
 
 
 " }}}
 " ================ Highlights and Colors ======================== {{{
-hi htmlArg cterm=italic
-hi xmlAttrib cterm=italic
-hi Type cterm=italic
-hi Normal ctermbg=none
-hi Comment cterm=italic term=italic gui=italic
-hi LineNr guibg=#3C4C55 guifg=#937f6e gui=NONE
-hi CursorLineNr ctermbg=black ctermfg=223 cterm=NONE guibg=#333333 guifg=#db9c5e gui=bold
-hi qfLineNr ctermbg=black ctermfg=95 cterm=NONE guibg=black guifg=#875f5f gui=NONE
-hi Search gui=underline term=underline cterm=underline ctermfg=232 ctermbg=230 guibg=#afaf87 guifg=#333333
+  hi htmlArg cterm=italic
+  hi xmlAttrib cterm=italic
+  hi Type cterm=italic
+  hi Normal ctermbg=none
+  hi Comment cterm=italic term=italic gui=italic
+  hi LineNr guibg=#3C4C55 guifg=#937f6e gui=NONE
+  hi CursorLineNr ctermbg=black ctermfg=223 cterm=NONE guibg=#333333 guifg=#db9c5e gui=bold
+  hi qfLineNr ctermbg=black ctermfg=95 cterm=NONE guibg=black guifg=#875f5f gui=NONE
+  hi Search gui=underline term=underline cterm=underline ctermfg=232 ctermbg=230 guibg=#afaf87 guifg=#333333
+  hi QuickFixLine term=bold,underline cterm=bold,underline gui=bold,underline
+
+  " Some custom spell-checking colors
+  "highlight SpellBad   term=underline cterm=underline ctermbg=NONE ctermfg=205
+  highlight clear SpellBad
+
+  highlight SpellBad   term=underline cterm=underline gui=underline ctermfg=darkred guibg=#ff2929 guifg=#ffffff
+  highlight SpellCap   term=underline cterm=underline gui=underline ctermbg=NONE ctermfg=33
+  highlight SpellRare  term=underline cterm=underline gui=underline ctermbg=NONE ctermfg=217
+  highlight SpellLocal term=underline cterm=underline gui=underline ctermbg=NONE ctermfg=72
+
+  " Markdown could be more fruit salady
+  highlight link markdownH1 PreProc
+  highlight link markdownH2 PreProc
+  highlight link markdownLink Character
+  highlight link markdownBold String
+  highlight link markdownItalic Statement
+  highlight link markdownCode Delimiter
+  highlight link markdownCodeBlock Delimiter
+  highlight link markdownListMarker Todo
+
+  " Configure how vim-lsc highlights errors.
+  " hi lscDiagnosticError term=none ctermbg=none cterm=undercurl ctermfg=Red gui=undercurl guisp=Red
+  " hi lscDiagnosticWarning term=none ctermbg=none cterm=undercurl ctermfg=Magenta gui=undercurl guisp=Magenta
+  " hi lscDiagnosticHint term=none ctermbg=none cterm=undercurl ctermfg=Cyan gui=undercurl guisp=Cyan
+  " hi lscDiagnosticInfo term=none ctermbg=none cterm=undercurl ctermfg=Grey gui=undercurl guisp=Grey
+
+  hi DiffChange guibg=#444444 ctermbg=238
+  hi DiffText guibg=#777777 ctermbg=244
+  hi DiffAdd guibg=#4f8867 ctermbg=29
+  hi DiffDelete guibg=#870000 ctermbg=88
+
+  highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#cc6666 guibg=NONE
+  highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#f0c674 guibg=NONE
+
+  highlight GitGutterAdd guibg=NONE
+  highlight GitGutterChange guibg=NONE
+  highlight GitGutterDelete guibg=NONE
+  highlight GitGutterChangeDelete guibg=NONE
 " }}}
 
 " vim:foldenable:foldmethod=marker:ft=vim
