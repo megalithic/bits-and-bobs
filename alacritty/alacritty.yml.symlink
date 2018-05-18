@@ -41,17 +41,17 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Fira Code Retina
+    family: FuraCode Nerd Font
     style: Retina
 
   # The bold font face
   bold:
-    family: Fira Code Retina
+    family: FuraCode Nerd Font
     style: Bold
 
   # The italic font face
   italic:
-    family: Fira Code Retina
+    family: FuraCode Nerd Font
     style: Italic
 
   # Point size of the font
