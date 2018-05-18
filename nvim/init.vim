@@ -39,7 +39,8 @@ call plug#begin( '~/.config/nvim/bundle')
 " # CSS
   Plug 'othree/csscomplete.vim', { 'for': ['css', 'scss', 'sass'] } " css completion
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'sass'] } " css3-specific syntax
-  Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
+  " Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass'] }
+  Plug 'chrisbra/Colorizer', { 'for': ['css', 'scss', 'sass'] }
 
 " # HTML
   " Plug 'othree/html5.vim', { 'for': ['html', 'haml'] }
@@ -52,7 +53,7 @@ call plug#begin( '~/.config/nvim/bundle')
   " Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'jtratner/vim-flavored-markdown', { 'for': ['markdown'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
-  Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release' }
+  " Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release' }
 
 " # RoR
   " Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
@@ -952,6 +953,10 @@ endfunction
   let g:jsdoc_access_descriptions=2
   let g:jsdoc_additional_descriptions=1
 
+" ## colorizer
+  let g:colorizer_auto_filetype='css,scss'
+  let g:colorizer_colornames = 0
+
 " ## rainbow_parentheses.vim
   let g:rainbow#max_level = 16
   let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
@@ -1311,6 +1316,7 @@ endfunction
   call deoplete#custom#source('ultisnips', 'mark', '')
   " call deoplete#custom#source('neosnippet', 'mark', '')
   call deoplete#custom#source('typescript', 'rank', 630)
+  call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
   let g:deoplete#omni_patterns = {}
   let g:deoplete#omni_patterns.html = ''
   let g:deoplete#omni_patterns.css = ''
