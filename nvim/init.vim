@@ -537,10 +537,12 @@ hi User3 guifg=#2C323C guibg=#E5C07B gui=bold
 set statusline=\ %{toupper(mode())}                                             "Mode
 set statusline+=\ \│\ %{fugitive#head()}                                        "Git branch
 set statusline+=%{GitFileStatus()}                                              "Git file status
-set statusline+=\ \│\ %4F                                                       "File path
+set statusline+=\ \│\ %<%{pathshorten(getcwd())}\                               "File path
+" set statusline+=\ \│\ %4F                                                     "File path
 set statusline+=\ %1*%m%*                                                       "Modified indicator
 set statusline+=\ %w                                                            "Preview indicator
-set statusline+=\ %r                                                            "Read only indicator
+set statusline+=%{&readonly?'\ ':''}                                           "Read only indicator
+" set statusline+=\ %r                                                          "Read only indicator
 set statusline+=\ %q                                                            "Quickfix list indicator
 set statusline+=\ %=                                                            "Start right side layout
 set statusline+=\ %{&enc}                                                       "Encoding
