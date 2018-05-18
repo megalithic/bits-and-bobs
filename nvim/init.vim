@@ -78,18 +78,18 @@ call plug#begin( '~/.config/nvim/bundle')
   " Plug 'justinmk/vim-sneak.git' " https://github.com/justinmk/vim-sneak
 
 " ## Completions
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  Plug 'prabirshrestha/asyncomplete-buffer.vim'
-  Plug 'prabirshrestha/asyncomplete-file.vim'
-  Plug 'prabirshrestha/asyncomplete-tags.vim'
-  Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-  Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
-  Plug 'yami-beta/asyncomplete-omni.vim'
+  " Plug 'prabirshrestha/asyncomplete.vim'
+  " Plug 'prabirshrestha/async.vim'
+  " Plug 'prabirshrestha/vim-lsp'
+  " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  " Plug 'prabirshrestha/asyncomplete-buffer.vim'
+  " Plug 'prabirshrestha/asyncomplete-file.vim'
+  " Plug 'prabirshrestha/asyncomplete-tags.vim'
+  " Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+  " Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
+  " Plug 'yami-beta/asyncomplete-omni.vim'
 
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " Plug 'roxma/nvim-completion-manager'
   " Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
   " Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
@@ -681,9 +681,9 @@ function! BufEnterCommit()
 
   " disable for gitcommit messages
   " let g:cm_smart_enable = 0
-  " let b:deoplete_disable_auto_complete=1
-  " let g:deoplete_disable_auto_complete=1
-  " call deoplete#custom#buffer_option('auto_complete', v:false)
+  let b:deoplete_disable_auto_complete=1
+  let g:deoplete_disable_auto_complete=1
+  call deoplete#custom#buffer_option('auto_complete', v:false)
   " let g:lsc_enable_autocomplete = v:false
 
   setl spell
@@ -1128,34 +1128,46 @@ endfunction
   endif
 
 " ## deoplete
-  " set completeopt-=preview
-  " let g:deoplete#enable_at_startup = 1
-  " let g:deoplete#enable_smart_case = 1
-  " let g:deoplete#auto_complete_start_length = 2
-  " if !exists('g:deoplete#omni#input_patterns')
-  "   let g:deoplete#omni#input_patterns = {}
-  " endif
-  " let g:deoplete#ignore_sources = {}
-  " let g:deoplete#ignore_sources._ = ['around']
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 0
+  let g:echodoc_enable_at_startup=1
+  set splitbelow
+  set completeopt+=noselect,menuone
+  set completeopt-=preview
+  autocmd CompleteDone * pclose
 
-  " " no autocompletion when writing strings and comments
-  " call deoplete#custom#source('_',
-  "       \ 'disabled_syntaxes', ['Comment', 'String'])
+  function! Multiple_cursors_before()
+    let b:deoplete_disable_auto_complete=2
+  endfunction
+  function! Multiple_cursors_after()
+    let b:deoplete_disable_auto_complete=0
+  endfunction
+  let g:deoplete#file#enable_buffer_path=1
+  call deoplete#custom#source('buffer', 'mark', 'B')
+  " call deoplete#custom#source('tern', 'mark', '')
+  call deoplete#custom#source('omni', 'mark', '⌾')
+  call deoplete#custom#source('file', 'mark', '')
+  " call deoplete#custom#source('jedi', 'mark', '')
+  call deoplete#custom#source('neosnippet', 'mark', 'NS')
+  call deoplete#custom#source('ultisnips', 'mark', 'US')
+  call deoplete#custom#source('typescript', 'rank', 630)
+  let g:deoplete#omni_patterns = {}
+  let g:deoplete#omni_patterns.html = ''
+  let g:deoplete#omni_patterns.css = ''
+  function! Preview_func()
+    if &pvw
+      setlocal nonumber norelativenumber
+     endif
+  endfunction
+  autocmd WinEnter * call Preview_func()
+  let g:deoplete#ignore_sources = {}
+  let g:deoplete#ignore_sources._ = ['around']
 
-  " " set sources
-  " " let g:deoplete#sources = {}
-  " " let g:deoplete#sources.javascript = ['LanguageClient']
-  " " let g:deoplete#sources['javscript.jsx'] = ['LanguageClient']
-  " " let g:deoplete#sources.typescript = ['LanguageClient']
-  " " let g:deoplete#sources.typescriptreact = ['LanguageClient']
-  " " let g:deoplete#sources.html = ['LanguageClient']
-  " " let g:deoplete#sources.css = ['LanguageClient']
-  " " let g:deoplete#sources.scss = ['LanguageClient']
-  " " let g:deoplete#sources.python = ['LanguageClient']
-  " " let g:deoplete#sources.python3 = ['LanguageClient']
-  " " let g:deoplete#sources.vim = ['vim']
-
-  " call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy']) " https://github.com/SirVer/ultisnips/issues/517#issuecomment-268518251
+  " let g:deoplete#enable_debug = 1
+  " let g:deoplete#enable_profile = 1
+  " let g:deoplete#enable_logging = {'level': 'DEBUG','logfile': 'deoplete.log'}
+  " call deoplete#enable_logging('DEBUG', 'deoplete.log')
+  " call deoplete#custom#source('typescript', 'debug_enabled', 1)
 
 " ## tagbar
   let g:tagbar_sort = 0
