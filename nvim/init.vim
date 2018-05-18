@@ -543,8 +543,11 @@ set statusline=\ %{toupper(mode())}                                             
 set statusline+=\ \│\ %{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}    "Git branch
 " set statusline+=\ \│\ %{fugitive#head()}                                      "Git branch
 set statusline+=%{GitFileStatus()}                                              "Git file status
-set statusline+=\ \│\ %<%{pathshorten(getcwd())}\                               "File path
+" set statusline+=\ \│\ %<%{pathshorten(getcwd())}\                               "File path
 " set statusline+=\ \│\ %4F                                                     "File path
+set statusline+=\ \│\ %{FilepathStatusline()}
+set statusline+=\%{FilenameStatusline()}                                                     "File path
+
 set statusline+=\ %1*%m%*                                                       "Modified indicator
 set statusline+=\ %w                                                            "Preview indicator
 set statusline+=%{&readonly?'\ ':''}                                           "Read only indicator
@@ -630,6 +633,26 @@ function! Search(...)
   endif
 endfunction
 
+function! FilepathStatusline() abort
+  if !empty(expand('%:t'))
+    let fn = winwidth(0) <# 55
+          \ ? '../'
+          \ : winwidth(0) ># 85
+          \ ? expand('%:~:.:h') . '/'
+          \ : pathshorten(expand('%:~:.:h')) . '/'
+  else
+    let fn = ''
+  endif
+  return fn
+endfun
+
+function! FilenameStatusline() abort
+  let fn = !empty(expand('%:t'))
+        \ ? expand('%:p:t')
+        \ : '[No Name]'
+  return fn . (&readonly ? ' ' : '')
+endfun
+
 function! AleStatusline(type)
   let count = ale#statusline#Count(bufnr(''))
   if a:type == 'error' && count['error']
@@ -702,7 +725,7 @@ function! BufEnterCommit()
   setl spell
   setl spelllang=en
   setl nolist
-  setl nonumber
+  " setl nonumber
 endfunction
 
 " QuickScope, used in conjunction with keybinding overrides
