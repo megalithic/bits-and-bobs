@@ -94,7 +94,7 @@ call plug#begin( '~/.config/nvim/bundle')
   " Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
   " Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
   " Plug 'roxma/ncm-rct-complete'
-  " Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'typescriptreact'], 'do': ':UpdateRemotePlugins' }
+  Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'typescriptreact'], 'do': ':UpdateRemotePlugins' }
 
 " ## Language Servers
   " Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
@@ -772,7 +772,7 @@ endfunction
 
 " ## ALE
   let g:ale_enabled = 1
-  let g:ale_lint_delay = 200
+  let g:ale_lint_delay = 100
   let g:ale_sign_column_always = 1
   let g:ale_linters = {
         \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
@@ -939,10 +939,10 @@ endfunction
 
 
 " ## ultisnips
-  " let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-  " let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-  " let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-  " let g:UltiSnipsRemoveSelectModeMappings = 0
+  let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+  let g:UltiSnipsJumpForwardTrigger	= "<tab>"
+  let g:UltiSnipsJumpBackwardTrigger	= "<s-tab>"
+  let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " ## neosnippet
   let g:neosnippet#enable_completed_snippet = 1
@@ -1091,11 +1091,11 @@ endfunction
         \ 'blacklist': ['c', 'cpp', 'html'],
         \ 'completor': function('asyncomplete#sources#omni#completor')
         \  }))
-  " au User asynccomplete_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
-  "       \ 'name': 'tscompletejob',
-  "       \ 'whitelist': ['typescript', 'typescriptreact'],
-  "       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
-  "       \ }))
+  au User asynccomplete_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
+        \ 'name': 'tscompletejob',
+        \ 'whitelist': ['typescript', 'typescriptreact'],
+        \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+        \ }))
   if executable('typescript-language-server')
     au User lsp_setup call lsp#register_server({
           \ 'name': 'typescript-language-server',
@@ -1220,16 +1220,16 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 " inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 
 " - deoplete + neosnippet + autopairs
-imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+" imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-e>     <Plug>(neosnippet_expand_or_jump)
-smap <C-e>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-e>     <Plug>(neosnippet_expand_target)
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+" imap <C-e>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-e>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-e>     <Plug>(neosnippet_expand_target)
+" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 " imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"

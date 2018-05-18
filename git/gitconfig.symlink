@@ -103,9 +103,9 @@
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   last = !git log --max-count=1 | awk '{print $2}' | awk 'NR==1{print $1}'
 
-  promote = !$ZSH/bin/git-promote
-  wtf     = !$ZSH/bin/git-wtf
-  rank-contributers = !$ZSH/bin/git-rank-contributers
+  promote = !$DOTFILES/bin/git-promote
+  wtf     = !$DOTFILES/bin/git-wtf
+  rank-contributers = !$DOTFILES/bin/git-rank-contributers
   count   = !git shortlog -sn
   this = !git init && git add . && git commit -m \"Initial commit\"
   who = shortlog -s -n --no-merges

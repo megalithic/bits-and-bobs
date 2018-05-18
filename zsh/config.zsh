@@ -8,9 +8,9 @@
 # https://github.com/pjg/dotfiles/blob/master/.zshrc#L24
 umask 022
 
-fpath=($ZSH/zsh/completions/src $ZSH/zsh/functions $fpath)
+fpath=($ZSH/completions/src $ZSH/functions $fpath)
 
-autoload -U $ZSH/zsh/functions/*(:t)
+autoload -U $ZSH/functions/*(:t)
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
