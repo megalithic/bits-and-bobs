@@ -220,6 +220,12 @@ set -g message-style 'bg=black,fg=cyan'
 set -g pane-border-style 'bg=black,fg=#1E272C'
 set -g pane-active-border-style 'bg=black,fg=#1E272C'
 
+# set color of active pane
+set -g pane-border-fg colour235
+set -g pane-border-bg black
+set -g pane-active-border-fg green
+set -g pane-active-border-bg black
+
 
 # TMUX PLUGIN MANAGER
 # ===========================================================================

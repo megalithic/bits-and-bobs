@@ -32,12 +32,13 @@ vf() {
 }
 
 # fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-*} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf-tmux +m) &&
-  cd "$dir"
-}
+# ::: commenting this for now because i've got an `fd` binary from homebrew now
+# fd() {
+#   local dir
+#   dir=$(find ${1:-*} -path '*/\.*' -prune \
+#                   -o -type d -print 2> /dev/null | fzf-tmux +m) &&
+#   cd "$dir"
+# }
 
 # fda - including hidden directories
 fda() {
