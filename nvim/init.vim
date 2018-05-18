@@ -14,7 +14,7 @@ call plug#begin( '~/.config/nvim/bundle')
 
 " ## UI/Interface
   Plug 'trevordmiller/nova-vim'
-  Plug 'mhartington/oceanic-next'
+  " Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
 
 " ## Syntax
@@ -121,7 +121,7 @@ call plug#begin( '~/.config/nvim/bundle')
   endif
 
 " ## Random/Misc/Docs
-  Plug 'junegunn/goyo.vim', { 'for': ['tex','text','txt','markdown','ghmarkdown','md'] }
+  " Plug 'junegunn/goyo.vim', { 'for': ['tex','text','txt','markdown','ghmarkdown','md'] }
   Plug 'drmikehenry/vim-extline'
   Plug 'wendyyuchensun/import-cost-vim'
   Plug 'Galooshi/vim-import-js' "https://github.com/Galooshi/vim-import-js#default-mappings
@@ -156,6 +156,7 @@ call plug#begin( '~/.config/nvim/bundle')
 
   Plug 'w0rp/ale'
   " Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx', 'typescript', 'typescriptreact'] }
+  Plug 'mhinz/vim-signify'
   " Plug 'airblade/vim-gitgutter'
 
 " ## Movements/Text Objects, et al
