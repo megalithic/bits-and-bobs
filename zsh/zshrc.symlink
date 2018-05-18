@@ -8,7 +8,7 @@
 # .zlogin: [[ -o login ]]
 #
 
-# bindkey -e
+bindkey -e
 
 # shortcut to this dotfiles path is $ZSH
 export DOTFILES=$HOME/.dotfiles

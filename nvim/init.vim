@@ -542,15 +542,18 @@ set sidescroll=5
 hi User1 guifg=#FF0000 guibg=#504945 gui=bold
 hi User2 guifg=#FFFFFF guibg=#FF1111 gui=bold
 hi User3 guifg=#2C323C guibg=#E5C07B gui=bold
+" Override statusline as you like
+hi fzf1 ctermfg=161 ctermbg=251
+hi fzf2 ctermfg=23 ctermbg=251
+hi fzf3 ctermfg=237 ctermbg=251
 set statusline=\ %{toupper(mode())}                                             "Mode
 set statusline+=\ \│\ %{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}    "Git branch
 " set statusline+=\ \│\ %{fugitive#head()}                                      "Git branch
 set statusline+=%{GitFileStatus()}                                              "Git file status
-" set statusline+=\ \│\ %<%{pathshorten(getcwd())}\                               "File path
+" set statusline+=\ \│\ %<%{pathshorten(getcwd())}\                             "File path
 " set statusline+=\ \│\ %4F                                                     "File path
-set statusline+=\ \│\ %{FilepathStatusline()}
-set statusline+=\%{FilenameStatusline()}                                                     "File path
-
+set statusline+=\ \│\ %{FilepathStatusline()}                                   "File path
+set statusline+=\%{FilenameStatusline()}                                        "File name
 set statusline+=\ %1*%m%*                                                       "Modified indicator
 set statusline+=\ %w                                                            "Preview indicator
 set statusline+=%{&readonly?'\ ':''}                                           "Read only indicator
@@ -558,12 +561,13 @@ set statusline+=%{&readonly?'\ ':''}                                         
 set statusline+=\ %q                                                            "Quickfix list indicator
 set statusline+=\ %=                                                            "Start right side layout
 set statusline+=\ %{&enc}                                                       "Encoding
-set statusline+=\ \│\ %{WebDevIconsGetFileTypeSymbol()}                         "Filetype
+set statusline+=\ \│\ %{WebDevIconsGetFileTypeSymbol()}                         "DevIcon/Filetype
 " set statusline+=\ \│\ %{WebDevIconsGetFileTypeSymbol()}\ %{&filetype}         "Filetype
 " set statusline+=\ \│\ %y                                                      "Filetype
 set statusline+=\ \│\ %p%%                                                      "Percentage
 set statusline+=\ \│\ %c                                                        "Column number
 set statusline+=\ \│\ %l/%L                                                     "Current line number/Total line numbers
+" set statusline+=\ \│\ %#fzf1#\ >\ %#fzf2#fz%#fzf3#f                              "FZF
 set statusline+=\ %{gutentags#statusline('\│\ ')}                               "Tags status
 set statusline+=\ %2*%{AleStatusline('error')}%*                                "Errors count
 set statusline+=%3*%{AleStatusline('warning')}%*                                "Warning count
@@ -978,12 +982,25 @@ endfunction
 
   if executable("rg")
     set grepprg=rg\ --vimgrep                                                       "Use ripgrep for grepping
-    command! -bang -nargs=* Rg
+    function! s:CompleteRg(arg_lead, line, pos)
+      let l:args = join(split(a:line)[1:])
+      return systemlist('get_completions rg ' . l:args)
+    endfunction
+
+    " Add support for ripgrep
+    " https://github.com/dsifford/.dotfiles/blob/master/vim/.vimrc#L130
+    command! -bang -complete=customlist,s:CompleteRg -nargs=* Rg
           \ call fzf#vim#grep(
           \   'rg --column --line-number --no-heading --color=always --glob "!.git/*" '.shellescape(<q-args>), 1,
           \   <bang>0 ? fzf#vim#with_preview('up:60%')
-          \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+          \           : fzf#vim#with_preview('right:50%', '?'),
           \   <bang>0)
+    " command! -bang -nargs=* Rg
+    "       \ call fzf#vim#grep(
+    "       \   'rg --column --line-number --no-heading --color=always --glob "!.git/*" '.shellescape(<q-args>), 1,
+    "       \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    "       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    "       \   <bang>0)
     " command! -bang -nargs=* Rg
     "       \ call fzf#vim#grep(
     "       \   'rg --column --line-number --ignore-case --no-heading --no-messages --hidden --color=always '
@@ -994,19 +1011,19 @@ endfunction
     command! -bang -nargs=? -complete=dir Files
           \ call fzf#vim#files(<q-args>,
           \   <bang>0 ? fzf#vim#with_preview('up:60%')
-          \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+          \           : fzf#vim#with_preview('right:50%', '?'),
           \   <bang>0)
-    command! -bang -nargs=* Find
-          \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"',
-          \   1,
-          \   <bang>0)
+    " command! -bang -nargs=* Find
+    "       \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"',
+    "       \   1,
+    "       \   <bang>0)
 
-    command! -bang -nargs=* F
-          \ call fzf#vim#grep(
-          \   'rg --column --line-number --no-heading --glob "!.git/*" --color=always '.shellescape(<q-args>), 1,
-          \   <bang>0 ? fzf#vim#with_preview('up:60%')
-          \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-          \   <bang>0)
+    " command! -bang -nargs=* F
+    "       \ call fzf#vim#grep(
+    "       \   'rg --column --line-number --no-heading --glob "!.git/*" --color=always '.shellescape(<q-args>), 1,
+    "       \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    "       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    "       \   <bang>0)
   endif
 
 " ## ag
