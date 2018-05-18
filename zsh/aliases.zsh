@@ -102,7 +102,7 @@ alias ec='emacsclient'
 
 # (NEO)VIM
 # -----------------------------------------------------------------------------
-alias updatenvim="brew update; pip3 install --upgrade neovim; npm update -g neovim; nvim +PlugUpgrade +qall; nvim +PlugUpdate +qall; nvim +UpdateRemotePlugins +qall; wget https://raw.githubusercontent.com/pangloss/vim-javascript/master/indent/javascript.vim -O ~/.config/nvim/after/indent/javascript.vim; brew outdated"
+alias updatenvim="brew update; pip3 install --upgrade neovim; npm install -g neovim; nvim +PlugUpgrade +qall; nvim +PlugUpdate +qall; nvim +UpdateRemotePlugins +qall; wget https://raw.githubusercontent.com/pangloss/vim-javascript/master/indent/javascript.vim -O ~/.config/nvim/after/indent/javascript.vim; brew outdated"
 alias nvimupdate=updatenvim
 alias nv="nvim"
 alias im="nvim"

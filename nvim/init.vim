@@ -14,9 +14,9 @@ call plug#begin( '~/.config/nvim/bundle')
 
 " ## UI/Interface
   Plug 'trevordmiller/nova-vim'
-  Plug 'NLKNguyen/papercolor-theme'
   Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
+  Plug 'ryanoasis/vim-devicons'
 
 " ## Syntax
   Plug 'sheerun/vim-polyglot'
@@ -30,7 +30,8 @@ call plug#begin( '~/.config/nvim/bundle')
 
 " # TS
   Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript', 'typescriptreact'] }
-  Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
+  " Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
+  Plug 'ianks/vim-tsx', { 'for': ['typescript', 'typescriptreact'] }
 
 " # Fn
   " Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
@@ -52,6 +53,7 @@ call plug#begin( '~/.config/nvim/bundle')
   " Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'jtratner/vim-flavored-markdown', { 'for': ['markdown'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
+  Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release' }
 
 " # RoR
   " Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
@@ -108,8 +110,8 @@ call plug#begin( '~/.config/nvim/bundle')
 
 " ## Snippets
   if has('python3')
-    Plug 'Shougo/neosnippet.vim'
-    Plug 'Shougo/neosnippet-snippets'
+    " Plug 'Shougo/neosnippet.vim'
+    " Plug 'Shougo/neosnippet-snippets'
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'epilande/vim-es2015-snippets'
@@ -201,6 +203,7 @@ silent! colorscheme nova
 
 set termguicolors
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+set guifont=FuraCode\ Nerd\ Font\ Retina:h16
 
 if has('termguicolors')
   " Don't need this in xterm-256color, but do need it inside tmux.
@@ -482,21 +485,21 @@ augroup MakeQuickFixPrettier
                 \| endif
 augroup END
 
-augroup language_mappings
-  autocmd!
+" augroup language_mappings
+"   autocmd!
 
-  " TypeScript
-  autocmd FileType typescript,typescriptreact nnoremap <leader>h :LspHover<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f2> :LspRename<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f8> :LspDocumentDiagnostics<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f10> :LspDocumentSymbol<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f11> :LspReferences<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f12> :LspDefinition<cr>
-  autocmd FileType typescript,typescriptreact command! ProjectSearch -nargs=1 vimgrep /<args>/gj ./**/*.ts<cr>
+"   " TypeScript
+"   autocmd FileType typescript,typescriptreact nnoremap <leader>h :LspHover<cr>
+"   autocmd FileType typescript,typescriptreact nnoremap <f2> :LspRename<cr>
+"   autocmd FileType typescript,typescriptreact nnoremap <f8> :LspDocumentDiagnostics<cr>
+"   autocmd FileType typescript,typescriptreact nnoremap <f10> :LspDocumentSymbol<cr>
+"   autocmd FileType typescript,typescriptreact nnoremap <f11> :LspReferences<cr>
+"   autocmd FileType typescript,typescriptreact nnoremap <f12> :LspDefinition<cr>
+"   autocmd FileType typescript,typescriptreact command! ProjectSearch -nargs=1 vimgrep /<args>/gj ./**/*.ts<cr>
 
-  " Vim
-  autocmd FileType vim command! ProjectSearch -nargs=1 vimgrep /<args>/gj ./**/*.vim<cr>
-augroup END
+"   " Vim
+"   autocmd FileType vim command! ProjectSearch -nargs=1 vimgrep /<args>/gj ./**/*.vim<cr>
+" augroup END
 
 " }}}
 " ================ Completion ======================= {{{
@@ -730,6 +733,26 @@ endfunction
 " ## polyglot
   let g:polyglot_disabled = ['typescript', 'graphql', 'jsx']
 
+" ## vim-devicons
+  " let g:NERDTreeGitStatusNodeColorization = 1
+  " " 
+  " " let g:webdevicons_enable_denite = 0
+  " " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
+  " let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+  " let g:WebDevIconsOS = 'Darwin'
+  " let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+  " let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ''
+  " let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+  " let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
+  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tsx'] = ''
+  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
+  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
+  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['json'] = ''
+  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
+  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sql'] = ''
+
 " ## vim-qf
   " nmap qp <Plug>qf_qf_previous
   " nmap qn <Plug>qf_qf_next
@@ -839,13 +862,45 @@ endfunction
   let g:used_javascript_libs = 'underscore,chai,react,flux,mocha,redux,lodash,angularjs,angularui,enzyme,ramda,d3'
 
 " ## nvim-typescript
-  " let g:nvim_typescript#signature_complete=1
-  let g:nvim_typescript#max_completion_detail=100
-  " let g:nvim_typescript#completion_mark=''
-  " let g:nvim_typescript#default_mappings=1
-  " let g:nvim_typescript#type_info_on_hold=1
+  " let g:nvim_typescript#max_completion_detail=100
+  let g:nvim_typescript#completion_mark=''
+  " " let g:nvim_typescript#default_mappings=1
+  " " let g:nvim_typescript#type_info_on_hold=1
   let g:nvim_typescript#javascript_support=1
-  let g:nvim_typescript#vue_support=1
+  " let g:nvim_typescript#vue_support=1
+
+  " " map <silent> <leader>@ :Denite -buffer-name=TSDocumentSymbol TSDocumentSymbol <cr>
+  " " map <silent> <leader># :Denite -buffer-name=TSWorkspaceSymbol TSWorkspaceSymbol <cr>
+
+  let g:nvim_typescript#kind_symbols = {
+      \ 'keyword': 'keyword',
+      \ 'class': '',
+      \ 'interface': '',
+      \ 'script': 'script',
+      \ 'module': '',
+      \ 'local class': 'local class',
+      \ 'type': '',
+      \ 'enum': '',
+      \ 'enum member': '',
+      \ 'alias': '',
+      \ 'type parameter': 'type param',
+      \ 'primitive type': 'primitive type',
+      \ 'var': '',
+      \ 'local var': '',
+      \ 'property': '',
+      \ 'let': '',
+      \ 'const': '',
+      \ 'label': 'label',
+      \ 'parameter': 'param',
+      \ 'index': 'index',
+      \ 'function': '',
+      \ 'local function': 'local function',
+      \ 'method': '',
+      \ 'getter': '',
+      \ 'setter': '',
+      \ 'call': 'call',
+      \ 'constructor': '',
+      \}
 
 " ## JSDoc
 " https://github.com/heavenshell/vim-jsdoc#configuration
@@ -945,10 +1000,10 @@ endfunction
   let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " ## neosnippet
-  let g:neosnippet#enable_completed_snippet = 1
-  let g:neosnippet#enable_snipmate_compatibility = 1
-  " let g:neosnippet#snippets_directory='~/GitHub/ionic-snippets'
-  let g:neosnippet#expand_word_boundary = 1
+  " let g:neosnippet#enable_completed_snippet = 1
+  " let g:neosnippet#enable_snipmate_compatibility = 1
+  " " let g:neosnippet#snippets_directory='~/GitHub/ionic-snippets'
+  " let g:neosnippet#expand_word_boundary = 1
 
 " ## LanguageClient
   " let g:cm_smart_enable = 1
@@ -1143,13 +1198,13 @@ endfunction
     let b:deoplete_disable_auto_complete=0
   endfunction
   let g:deoplete#file#enable_buffer_path=1
-  call deoplete#custom#source('buffer', 'mark', 'B')
+  call deoplete#custom#source('buffer', 'mark', 'ℬ')
   " call deoplete#custom#source('tern', 'mark', '')
   call deoplete#custom#source('omni', 'mark', '⌾')
   call deoplete#custom#source('file', 'mark', '')
   " call deoplete#custom#source('jedi', 'mark', '')
-  call deoplete#custom#source('neosnippet', 'mark', 'NS')
-  call deoplete#custom#source('ultisnips', 'mark', 'US')
+  call deoplete#custom#source('ultisnips', 'mark', '')
+  " call deoplete#custom#source('neosnippet', 'mark', '')
   call deoplete#custom#source('typescript', 'rank', 630)
   let g:deoplete#omni_patterns = {}
   let g:deoplete#omni_patterns.html = ''
