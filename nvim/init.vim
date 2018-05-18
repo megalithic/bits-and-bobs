@@ -96,6 +96,7 @@ call plug#begin( '~/.config/nvim/bundle')
   " Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
   " Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
   " Plug 'roxma/ncm-rct-complete'
+  Plug 'Shougo/echodoc.vim'
   Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'typescriptreact'], 'do': ':UpdateRemotePlugins' }
 
 " ## Language Servers
@@ -374,8 +375,6 @@ augroup vimrc
 
   " ----------------------------------------------------------------------------
   " ## JavaScript
-  au FileType javascript nnoremap <buffer><silent><C-]> :JsGotoDefinition<CR>
-  au FileType javascript nnoremap <buffer><silent><Leader>] <C-W>v:JsGotoDefinition<CR>
   " au FileType typescript,typescriptreact,javascript,javascript.jsx,sass,scss,scss.css RainbowParentheses " consistently fails *shrug*
   au BufNewFile,BufRead .{babel,eslint,prettier,stylelint,jshint,jscs,postcss}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
@@ -535,6 +534,10 @@ set sidescroll=5
 " https://github.com/VagabondAzulien/dotfiles/blob/master/vim/vimrc#L88
 " or:
 " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/
+" or:
+" https://kadekillary.work/post/statusline/
+" or:
+" https://github.com/KabbAmine/myVimFiles/blob/master/config/statusline.vim
 
 hi User1 guifg=#FF0000 guibg=#504945 gui=bold
 hi User2 guifg=#FFFFFF guibg=#FF1111 gui=bold
@@ -897,14 +900,16 @@ endfunction
 " ## nvim-typescript
   " let g:nvim_typescript#max_completion_detail=100
   let g:nvim_typescript#completion_mark=''
-  " " let g:nvim_typescript#default_mappings=1
+  let g:nvim_typescript#default_mappings=0
   " " let g:nvim_typescript#type_info_on_hold=1
   let g:nvim_typescript#javascript_support=1
   " let g:nvim_typescript#vue_support=1
-
-  " " map <silent> <leader>@ :Denite -buffer-name=TSDocumentSymbol TSDocumentSymbol <cr>
-  " " map <silent> <leader># :Denite -buffer-name=TSWorkspaceSymbol TSWorkspaceSymbol <cr>
-
+  autocmd FileType typescript,typescriptreact nnoremap <leader>h :TSDefPreview<cr>
+  autocmd FileType typescript,typescriptreact nnoremap <f2> :TSRename<cr>
+  autocmd FileType typescript,typescriptreact nnoremap <f8> :TSDef<cr>
+  autocmd FileType typescript,typescriptreact nnoremap <f10> :TSType<cr>
+  autocmd FileType typescript,typescriptreact nnoremap <f11> :TSRefs<cr>
+  autocmd FileType typescript,typescriptreact nnoremap <f12> :TSTypeDef<cr>
   let g:nvim_typescript#kind_symbols = {
       \ 'keyword': 'keyword',
       \ 'class': '',
@@ -1039,25 +1044,35 @@ endfunction
   " let g:neosnippet#expand_word_boundary = 1
 
 " ## LanguageClient
-  let g:LanguageClient_diagnosticsList = 'location' " quickfix is used by :Rg
+  " let g:LanguageClient_diagnosticsList = 'location' " quickfix is used by :Rg
   let g:LanguageClient_autoStart = 1 " Automatically start language servers.
   let g:LanguageClient_loadSettings = 1
+  let g:LanguageClient_loggingLevel = 'INFO'
+  " Don't populate lists since it overrides Neomake lists
+  try
+    let g:LanguageClient_diagnosticsList = v:null
+  catch
+    let g:LanguageClient_diagnosticsList = ''
+  endtry
   augroup LanguageClientConfig
     autocmd!
     " <leader>ld to go to definition
-    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>ld :call LanguageClient_textDocument_definition()<cr>
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>ld :call LanguageClient_textDocument_definition()<cr>
     " <leader>lf to autoformat document
-    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
     " <leader>lh for type info under cursor
-    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lh :call LanguageClient_textDocument_hover()<cr>
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lh :call LanguageClient_textDocument_hover()<cr>
     " <leader>lr to rename variable under cursor
-    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lr :call LanguageClient_textDocument_rename()<cr>
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<cr>
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<cr>
     " <leader>lc to switch omnifunc to LanguageClient
-    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
     " <leader>ls to fuzzy find the symbols in the current document
-    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html nnoremap <buffer> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>@ :call LanguageClient_textDocument_documentSymbol()<cr>
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader># :call LanguageClient_workspace_symbol()<cr>
     " Use as omnifunc by default
-    autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html setlocal omnifunc=LanguageClient#complete
+    autocmd FileType javascript,javascript.jsx,python,json,css,less,html setlocal omnifunc=LanguageClient#complete
   augroup END
   let g:LanguageClient_serverCommands = {}
   if executable('pyls')
@@ -1081,6 +1096,47 @@ endfunction
   if executable('json-languageserver')
     let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
   endif
+  " Signs and highlighting for errors, etc. TODO: move this elsewhere and fix
+  " up. ref: https://github.com/euclio/vimrc/blob/master/plugins.vim
+  let s:error_sign = '⨉'
+  let s:error_sign_hl = 'DiagnosticErrorSign'
+  let s:error_hl = 'DiagnosticError'
+  let s:warning_sign = '♦'
+  let s:warning_sign_hl = 'DiagnosticWarningSign'
+  let s:warning_hl = 'DiagnosticWarning'
+  let s:message_sign = '→'
+  let s:message_sign_hl = 'DiagnosticMessageSign'
+  let s:message_hl = 'DiagnosticMessage'
+  let s:info_sign = '…'
+  let s:info_sign_hl = s:message_sign_hl
+  let s:info_hl = s:message_hl
+  let g:LanguageClient_diagnosticsDisplay = {
+        \  1: {
+        \    'name': 'Error',
+        \    'texthl': s:error_hl,
+        \    'signText': s:error_sign,
+        \    'signTexthl': s:error_sign_hl,
+        \  },
+        \  2: {
+        \    'name': 'Warning',
+        \    'texthl': s:warning_hl,
+        \    'signText': s:warning_sign,
+        \    'signTexthl': s:warning_sign_hl,
+        \  },
+        \  3: {
+        \    'name': 'Information',
+        \    'texthl': s:info_hl,
+        \    'signText': s:info_sign,
+        \    'signTexthl': s:info_sign_hl,
+        \  },
+        \  4: {
+        \    'name': 'Hint',
+        \    'texthl': s:message_hl,
+        \    'signText': s:message_sign,
+        \    'signTexthl': s:message_sign_hl,
+        \  },
+        \ }
+  let g:LanguageClient_diagnosticsDisplay = ''
 
 
 " ## vim-lsc

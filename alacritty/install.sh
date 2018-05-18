@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# font setup things and other font related stuff: https://github.com/jwilm/alacritty/issues/489
+
 echo "--- begin alacritty setup"
 
 if [ ! -d "$HOME/tmp" ]; then
