@@ -846,8 +846,8 @@ endfunction
         \   'scss': ['prettier'],
         \   'json': ['prettier']
         \ }                                                                       "Fix eslint errors
-  let g:ale_sign_error = '⨉'                                                      "Lint error sign ⤫ ✖⨉
-  let g:ale_sign_warning = '⚠'                                                    "Lint warning sign ⬥⚠
+  let g:ale_sign_error = '✖'                                                      "Lint error sign ⤫ ✖⨉
+  let g:ale_sign_warning = '⬥'                                                    "Lint warning sign ⬥⚠
   let g:ale_javascript_eslint_use_local_config = 1
   let g:ale_javascript_prettier_use_local_config = 1
   let g:ale_javascript_prettier_eslint_use_local_config = 1
