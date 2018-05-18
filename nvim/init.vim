@@ -73,7 +73,6 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'majutsushi/tagbar'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
   Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -105,10 +104,11 @@ call plug#begin( '~/.config/nvim/bundle')
   " Plug 'natebosch/vim-lsc' " https://github.com/natebosch/vim-lsc/blob/master/doc/lsc.txt
 
 " ## Tags
-  if executable('ctags')
-    Plug 'ludovicchabant/vim-gutentags'
-    " Plug 'kristijanhusak/vim-js-file-import'
-  endif
+  " if executable('ctags')
+  "   Plug 'ludovicchabant/vim-gutentags'
+  "   Plug 'majutsushi/tagbar'
+  "   " Plug 'kristijanhusak/vim-js-file-import'
+  " endif
 
 " ## Snippets
   if has('python3')
@@ -570,7 +570,7 @@ set statusline+=\ \│\ %p%%                                                    
 set statusline+=\ \│\ %c                                                        "Column number
 set statusline+=\ \│\ %l/%L                                                     "Current line number/Total line numbers
 " set statusline+=\ \│\ %#fzf1#\ >\ %#fzf2#fz%#fzf3#f                              "FZF
-set statusline+=\ %{gutentags#statusline('\│\ ')}                               "Tags status
+" set statusline+=\ %{gutentags#statusline('\│\ ')}                               "Tags status
 set statusline+=\ %2*%{AleStatusline('error')}%*                                "Errors count
 set statusline+=%3*%{AleStatusline('warning')}%*                                "Warning count
 
@@ -910,10 +910,12 @@ endfunction
   " " let g:nvim_typescript#type_info_on_hold=1
   let g:nvim_typescript#javascript_support=1
   " let g:nvim_typescript#vue_support=1
-  autocmd FileType typescript,typescriptreact nnoremap <leader>h :TSDefPreview<cr>
   autocmd FileType typescript,typescriptreact nnoremap <f2> :TSRename<cr>
+  autocmd FileType typescript,typescriptreact nnoremap <f3> :TSDefPreview<cr>
   autocmd FileType typescript,typescriptreact nnoremap <f8> :TSDef<cr>
+  autocmd FileType typescript,typescriptreact nnoremap <f9> :TSDoc<cr>
   autocmd FileType typescript,typescriptreact nnoremap <f10> :TSType<cr>
+  autocmd FileType typescript,typescriptreact nnoremap <leader>K :TSType<cr>
   autocmd FileType typescript,typescriptreact nnoremap <f11> :TSRefs<cr>
   autocmd FileType typescript,typescriptreact nnoremap <f12> :TSTypeDef<cr>
   let g:nvim_typescript#kind_symbols = {
@@ -1060,11 +1062,13 @@ endfunction
   let g:UltiSnipsJumpBackwardTrigger	= "<s-tab>"
   let g:UltiSnipsRemoveSelectModeMappings = 0
 
+
 " ## neosnippet
   " let g:neosnippet#enable_completed_snippet = 1
   " let g:neosnippet#enable_snipmate_compatibility = 1
   " " let g:neosnippet#snippets_directory='~/GitHub/ionic-snippets'
   " let g:neosnippet#expand_word_boundary = 1
+
 
 " ## LanguageClient
   " let g:LanguageClient_diagnosticsList = 'location' " quickfix is used by :Rg
@@ -1079,22 +1083,22 @@ endfunction
   endtry
   augroup LanguageClientConfig
     autocmd!
-    " <leader>ld to go to definition
-    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>ld :call LanguageClient_textDocument_definition()<cr>
-    " <leader>lf to autoformat document
-    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
-    " <leader>lh for type info under cursor
-    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lh :call LanguageClient_textDocument_hover()<cr>
-    " <leader>lr to rename variable under cursor
-    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<cr>
-    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<cr>
-    " <leader>lc to switch omnifunc to LanguageClient
-    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
-    " <leader>ls to fuzzy find the symbols in the current document
-    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
-    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>@ :call LanguageClient_textDocument_documentSymbol()<cr>
-    autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader># :call LanguageClient_workspace_symbol()<cr>
-    " Use as omnifunc by default
+    " " <leader>ld to go to definition
+    " autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>ld :call LanguageClient_textDocument_definition()<cr>
+    " " <leader>lf to autoformat document
+    " autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+    " " <leader>lh for type info under cursor
+    " autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lh :call LanguageClient_textDocument_hover()<cr>
+    " " <leader>lr to rename variable under cursor
+    " autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<cr>
+    " autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<cr>
+    " " <leader>lc to switch omnifunc to LanguageClient
+    " autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>lc :setlocal omnifunc=LanguageClient#complete<cr>
+    " " <leader>ls to fuzzy find the symbols in the current document
+    " autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+    " autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader>@ :call LanguageClient_textDocument_documentSymbol()<cr>
+    " autocmd FileType javascript,javascript.jsx,python,json,css,less,html nnoremap <silent> <leader># :call LanguageClient_workspace_symbol()<cr>
+    " " Use as omnifunc by default
     autocmd FileType javascript,javascript.jsx,python,json,css,less,html setlocal omnifunc=LanguageClient#complete
   augroup END
   let g:LanguageClient_serverCommands = {}
@@ -1104,8 +1108,8 @@ endfunction
   if executable('javascript-typescript-stdio')
     let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
     let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
-    " let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-    " let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
   endif
   if executable('css-languageserver')
     let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
@@ -1205,93 +1209,93 @@ endfunction
   " autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html setlocal omnifunc=lsc#complete
 
 " ## asyncomplete.vim/asynccomplete/vim-lsp
-  let g:asyncomplete_auto_popup = 1
-  let g:asyncomplete_remove_duplicates = 0
-  let g:asyncomplete_smart_completion = 1
-  let g:asyncomplete_min_chars = 2
-  let g:lsp_signs_enabled = 1         " enable signs
-  let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-  let g:lsp_signs_error = {'text': '⤫'}
-  let g:lsp_signs_warning = {'text': '~'}
-  let g:lsp_signs_hint = {'text': '?'}
-  " let g:lsp_signs_warning = {'text': '~', 'icon': '/path/to/some/icon'} " icons require GUI
-  " let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
-  " let g:lsp_log_verbose = 0
-  " let g:lsp_log_file = expand('~/.config/nvim/vim-lsp.log')
-  let g:asyncomplete_log_file = expand('~/.config/nvim/asyncomplete.log')
-  set completeopt+=preview
-  if has('python3')
-    let g:UltiSnipsExpandTrigger="<c-e>"
-    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-          \ 'name': 'ultisnips',
-          \ 'whitelist': ['*'],
-          \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-          \ }))
-  endif
-  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-        \ 'name': 'buffer',
-        \ 'whitelist': ['*'],
-        \ 'blacklist': ['go'],
-        \ 'completor': function('asyncomplete#sources#buffer#completor'),
-        \ }))
-  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-        \ 'name': 'file',
-        \ 'whitelist': ['*'],
-        \ 'blacklist': ['typescript', 'javascript', 'javascript.js'],
-        \ 'priority': 10,
-        \ 'completor': function('asyncomplete#sources#file#completor')
-        \ }))
-  if executable('ctags')
-    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
-        \ 'name': 'tags',
-        \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx'],
-        \ 'completor': function('asyncomplete#sources#tags#completor'),
-        \ 'config': {
-        \    'max_file_size': 150000000,
-        \  },
-        \ }))
-  endif
-  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-        \ 'name': 'omni',
-        \ 'whitelist': ['*'],
-        \ 'blacklist': ['c', 'cpp', 'html'],
-        \ 'completor': function('asyncomplete#sources#omni#completor')
-        \  }))
-  au User asynccomplete_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
-        \ 'name': 'tscompletejob',
-        \ 'whitelist': ['typescript', 'typescriptreact'],
-        \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
-        \ }))
-  if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-          \ 'name': 'typescript-language-server',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
-          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-          \ 'whitelist': ['typescript', 'typescriptreact'],
-          \ })
-  endif
-  if executable('css-languageserver')
-    au User lsp_setup call lsp#register_server({
-          \ 'name': 'css-languageserver',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
-          \ 'whitelist': ['css', 'less', 'sass', 'scss'],
-          \ })
-  endif
-  if executable('ocaml-language-server')
-    au User lsp_setup call lsp#register_server({
-          \ 'name': 'ocaml-language-server',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
-          \ 'whitelist': ['reason', 'ocaml'],
-          \ })
-  endif
-  if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-          \ 'name': 'pyls',
-          \ 'cmd': {server_info->['pyls']},
-          \ 'whitelist': ['python'],
-          \ })
-  endif
+  " let g:asyncomplete_auto_popup = 1
+  " let g:asyncomplete_remove_duplicates = 0
+  " let g:asyncomplete_smart_completion = 1
+  " let g:asyncomplete_min_chars = 2
+  " let g:lsp_signs_enabled = 1         " enable signs
+  " let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+  " let g:lsp_signs_error = {'text': '⤫'}
+  " let g:lsp_signs_warning = {'text': '~'}
+  " let g:lsp_signs_hint = {'text': '?'}
+  " " let g:lsp_signs_warning = {'text': '~', 'icon': '/path/to/some/icon'} " icons require GUI
+  " " let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
+  " " let g:lsp_log_verbose = 0
+  " " let g:lsp_log_file = expand('~/.config/nvim/vim-lsp.log')
+  " let g:asyncomplete_log_file = expand('~/.config/nvim/asyncomplete.log')
+  " set completeopt+=preview
+  " if has('python3')
+  "   let g:UltiSnipsExpandTrigger="<c-e>"
+  "   au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+  "         \ 'name': 'ultisnips',
+  "         \ 'whitelist': ['*'],
+  "         \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+  "         \ }))
+  " endif
+  " au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+  "       \ 'name': 'buffer',
+  "       \ 'whitelist': ['*'],
+  "       \ 'blacklist': ['go'],
+  "       \ 'completor': function('asyncomplete#sources#buffer#completor'),
+  "       \ }))
+  " au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+  "       \ 'name': 'file',
+  "       \ 'whitelist': ['*'],
+  "       \ 'blacklist': ['typescript', 'javascript', 'javascript.js'],
+  "       \ 'priority': 10,
+  "       \ 'completor': function('asyncomplete#sources#file#completor')
+  "       \ }))
+  " if executable('ctags')
+  "   au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+  "       \ 'name': 'tags',
+  "       \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx'],
+  "       \ 'completor': function('asyncomplete#sources#tags#completor'),
+  "       \ 'config': {
+  "       \    'max_file_size': 150000000,
+  "       \  },
+  "       \ }))
+  " endif
+  " au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+  "       \ 'name': 'omni',
+  "       \ 'whitelist': ['*'],
+  "       \ 'blacklist': ['c', 'cpp', 'html'],
+  "       \ 'completor': function('asyncomplete#sources#omni#completor')
+  "       \  }))
+  " au User asynccomplete_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
+  "       \ 'name': 'tscompletejob',
+  "       \ 'whitelist': ['typescript', 'typescriptreact'],
+  "       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+  "       \ }))
+  " if executable('typescript-language-server')
+  "   au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'typescript-language-server',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
+  "         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+  "         \ 'whitelist': ['typescript', 'typescriptreact'],
+  "         \ })
+  " endif
+  " if executable('css-languageserver')
+  "   au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'css-languageserver',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+  "         \ 'whitelist': ['css', 'less', 'sass', 'scss'],
+  "         \ })
+  " endif
+  " if executable('ocaml-language-server')
+  "   au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'ocaml-language-server',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
+  "         \ 'whitelist': ['reason', 'ocaml'],
+  "         \ })
+  " endif
+  " if executable('pyls')
+  "   " pip install python-language-server
+  "   au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'pyls',
+  "         \ 'cmd': {server_info->['pyls']},
+  "         \ 'whitelist': ['python'],
+  "         \ })
+  " endif
 
 " ## deoplete
   let g:deoplete#enable_at_startup = 1
