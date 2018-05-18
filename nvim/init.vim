@@ -156,7 +156,7 @@ call plug#begin( '~/.config/nvim/bundle')
 
   Plug 'w0rp/ale'
   " Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx', 'typescript', 'typescriptreact'] }
-  Plug 'mhinz/vim-signify'
+  " Plug 'mhinz/vim-signify'
   " Plug 'airblade/vim-gitgutter'
 
 " ## Movements/Text Objects, et al
@@ -731,9 +731,9 @@ function! BufEnterCommit()
   call deoplete#custom#buffer_option('auto_complete', v:false)
   " let g:lsc_enable_autocomplete = v:false
 
-  setl spell
-  setl spelllang=en
-  setl nolist
+  " setl spell
+  " setl spelllang=en
+  " setl nolist
   " setl nonumber
 endfunction
 
