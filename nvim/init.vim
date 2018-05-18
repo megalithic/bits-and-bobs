@@ -533,12 +533,15 @@ set sidescroll=5
 
 " TODO: change statusline based on focus:
 " https://github.com/VagabondAzulien/dotfiles/blob/master/vim/vimrc#L88
+" or:
+" https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/
 
 hi User1 guifg=#FF0000 guibg=#504945 gui=bold
 hi User2 guifg=#FFFFFF guibg=#FF1111 gui=bold
 hi User3 guifg=#2C323C guibg=#E5C07B gui=bold
 set statusline=\ %{toupper(mode())}                                             "Mode
-set statusline+=\ \│\ %{fugitive#head()}                                        "Git branch
+set statusline+=\ \│\ %{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}    "Git branch
+" set statusline+=\ \│\ %{fugitive#head()}                                      "Git branch
 set statusline+=%{GitFileStatus()}                                              "Git file status
 set statusline+=\ \│\ %<%{pathshorten(getcwd())}\                               "File path
 " set statusline+=\ \│\ %4F                                                     "File path
@@ -820,8 +823,8 @@ endfunction
         \   'scss': ['prettier'],
         \   'json': ['prettier']
         \ }                                                                       "Fix eslint errors
-  let g:ale_sign_error = '✖'                                                      "Lint error sign ⤫ ✖
-  let g:ale_sign_warning = '⚠'                                                    "Lint warning sign
+  let g:ale_sign_error = '⨉'                                                      "Lint error sign ⤫ ✖⨉
+  let g:ale_sign_warning = '⚠'                                                    "Lint warning sign ⬥⚠
   let g:ale_javascript_eslint_use_local_config = 1
   let g:ale_javascript_prettier_use_local_config = 1
   let g:ale_javascript_prettier_eslint_use_local_config = 1
