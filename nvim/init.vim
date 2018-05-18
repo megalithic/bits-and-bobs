@@ -16,7 +16,6 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'trevordmiller/nova-vim'
   Plug 'mhartington/oceanic-next'
   Plug 'megalithic/golden-ratio' " vertical split layout manager
-  Plug 'ryanoasis/vim-devicons'
 
 " ## Syntax
   Plug 'sheerun/vim-polyglot'
@@ -72,6 +71,7 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'junegunn/fzf.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'ryanoasis/vim-devicons'
   Plug 'majutsushi/tagbar'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
@@ -99,7 +99,7 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'typescriptreact'], 'do': ':UpdateRemotePlugins' }
 
 " ## Language Servers
-  " Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
   " Plug 'natebosch/vim-lsc' " https://github.com/natebosch/vim-lsc/blob/master/doc/lsc.txt
 
 " ## Tags
@@ -531,6 +531,9 @@ set sidescroll=5
 " }}}
 " ================ Statusline ======================== {{{
 
+" TODO: change statusline based on focus:
+" https://github.com/VagabondAzulien/dotfiles/blob/master/vim/vimrc#L88
+
 hi User1 guifg=#FF0000 guibg=#504945 gui=bold
 hi User2 guifg=#FFFFFF guibg=#FF1111 gui=bold
 hi User3 guifg=#2C323C guibg=#E5C07B gui=bold
@@ -546,7 +549,9 @@ set statusline+=%{&readonly?'\ ':''}                                         
 set statusline+=\ %q                                                            "Quickfix list indicator
 set statusline+=\ %=                                                            "Start right side layout
 set statusline+=\ %{&enc}                                                       "Encoding
-set statusline+=\ \│\ %y                                                        "Filetype
+set statusline+=\ \│\ %{WebDevIconsGetFileTypeSymbol()}                         "Filetype
+" set statusline+=\ \│\ %{WebDevIconsGetFileTypeSymbol()}\ %{&filetype}         "Filetype
+" set statusline+=\ \│\ %y                                                      "Filetype
 set statusline+=\ \│\ %p%%                                                      "Percentage
 set statusline+=\ \│\ %c                                                        "Column number
 set statusline+=\ \│\ %l/%L                                                     "Current line number/Total line numbers
@@ -736,24 +741,24 @@ endfunction
   let g:polyglot_disabled = ['typescript', 'graphql', 'jsx']
 
 " ## vim-devicons
-  " let g:NERDTreeGitStatusNodeColorization = 1
-  " " 
-  " " let g:webdevicons_enable_denite = 0
-  " " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
-  " let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
-  " let g:WebDevIconsOS = 'Darwin'
-  " let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-  " let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ''
-  " let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-  " let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
-  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
-  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
-  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tsx'] = ''
-  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
-  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
-  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['json'] = ''
-  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
-  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sql'] = ''
+  let g:NERDTreeGitStatusNodeColorization = 1
+  " 
+  " let g:webdevicons_enable_denite = 0
+  " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
+  let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+  let g:WebDevIconsOS = 'Darwin'
+  let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+  let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ''
+  let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+  let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tsx'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['json'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sql'] = ''
 
 " ## vim-qf
   " nmap qp <Plug>qf_qf_previous
@@ -1008,7 +1013,6 @@ endfunction
   " let g:neosnippet#expand_word_boundary = 1
 
 " ## LanguageClient
-  " let g:cm_smart_enable = 1
   let g:LanguageClient_diagnosticsList = 'location' " quickfix is used by :Rg
   let g:LanguageClient_autoStart = 1 " Automatically start language servers.
   let g:LanguageClient_loadSettings = 1
@@ -1036,8 +1040,8 @@ endfunction
   if executable('javascript-typescript-stdio')
     let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
     let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
-    let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-    let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
+    " let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+    " let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
   endif
   if executable('css-languageserver')
     let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
@@ -1200,8 +1204,8 @@ endfunction
     let b:deoplete_disable_auto_complete=0
   endfunction
   let g:deoplete#file#enable_buffer_path=1
-  call deoplete#custom#source('buffer', 'mark', 'ℬ')
-  " call deoplete#custom#source('tern', 'mark', '')
+  call deoplete#custom#source('buffer', 'mark', 'B')
+  call deoplete#custom#source('tern', 'mark', '')
   call deoplete#custom#source('omni', 'mark', '⌾')
   call deoplete#custom#source('file', 'mark', '')
   " call deoplete#custom#source('jedi', 'mark', '')
