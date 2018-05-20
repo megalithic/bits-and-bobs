@@ -21,16 +21,16 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'sheerun/vim-polyglot'
 
 " # JS
-  " Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'typescript', 'typescriptreact'] }
-  " Plug 'chemzqm/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js', 'typescriptreact'] }
-  " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js', 'typescriptreact'] }
+  " Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'jsx'] }
+  " Plug 'chemzqm/vim-jsx-improve', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
+  " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
   " Plug 'elzr/vim-json', { 'for': ['json'] }
-  Plug 'jparise/vim-graphql', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js', 'typescriptreact'] }
+  Plug 'jparise/vim-graphql', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'js'] }
 
 " # TS
-  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript', 'typescriptreact'] }
-  " Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
-  Plug 'ianks/vim-tsx', { 'for': ['typescript', 'typescriptreact'] }
+  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript', 'typescriptreact', 'typescript.tsx'] }
+  " Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact', 'typescript.tsx'] }
+  Plug 'ianks/vim-tsx', { 'for': ['typescript', 'typescriptreact', 'typescript.tsx'] }
 
 " # Fn
   " Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
@@ -92,12 +92,13 @@ call plug#begin( '~/.config/nvim/bundle')
   " Plug 'yami-beta/asyncomplete-omni.vim'
 
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/neoinclude.vim'
   " Plug 'roxma/nvim-completion-manager'
   " Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
   " Plug 'calebeby/ncm-css', { 'for': ['scss', 'css', 'sass', 'less'] }
   " Plug 'roxma/ncm-rct-complete'
   Plug 'Shougo/echodoc.vim'
-  Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'typescriptreact'], 'do': ':UpdateRemotePlugins' }
+  Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'typescriptreact', 'typescript.tsx'], 'do': ':UpdateRemotePlugins' }
 
 " ## Language Servers
   Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
@@ -115,9 +116,9 @@ call plug#begin( '~/.config/nvim/bundle')
     " Plug 'Shougo/neosnippet.vim'
     " Plug 'Shougo/neosnippet-snippets'
     Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-    Plug 'epilande/vim-es2015-snippets'
-    Plug 'epilande/vim-react-snippets'
+    " Plug 'honza/vim-snippets'
+    " Plug 'epilande/vim-es2015-snippets'
+    " Plug 'epilande/vim-react-snippets'
   endif
 
 " ## Random/Misc/Docs
@@ -140,11 +141,11 @@ call plug#begin( '~/.config/nvim/bundle')
 
   Plug 'junegunn/rainbow_parentheses.vim' " nicely colors nested pairs of [], (), {}
   Plug 'docunext/closetag.vim' " will auto-close the opening tag as soon as you type </
-  Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb', 'haml', 'javascript.jsx', 'typescript', 'typescriptreact', 'javascript'] } " a set of mappings for several langs: html, xml, erb, php, more
+  Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'erb', 'haml', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript'] } " a set of mappings for several langs: html, xml, erb, php, more
   Plug 'tpope/vim-endwise'
   Plug 'Raimondi/delimitMate'
-  Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx', 'javascript', 'typescript', 'typescriptreact'] }
-  Plug 'Valloric/MatchTagAlways', { 'for': ['haml', 'html', 'xml', 'erb', 'javascript', 'javascript.jsx', 'typescript', 'typescriptreact'] } " highlights the opening/closing tags for the block you're in
+  Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx', 'javascript', 'typescript', 'typescriptreact', 'typescript.tsx'] }
+  Plug 'Valloric/MatchTagAlways', { 'for': ['haml', 'html', 'xml', 'erb', 'javascript', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx'] } " highlights the opening/closing tags for the block you're in
   Plug 'jiangmiao/auto-pairs'
   Plug 'cohama/lexima.vim' " auto-closes many delimiters and can repeat with a `.`
 
@@ -155,7 +156,7 @@ call plug#begin( '~/.config/nvim/bundle')
   Plug 'tpope/vim-eunuch'
 
   Plug 'w0rp/ale'
-  " Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx', 'typescript', 'typescriptreact'] }
+  " Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx'] }
   " Plug 'mhinz/vim-signify'
   " Plug 'airblade/vim-gitgutter'
 
@@ -380,7 +381,7 @@ augroup vimrc
   " au FileType typescript,typescriptreact,javascript,javascript.jsx,sass,scss,scss.css RainbowParentheses " consistently fails *shrug*
   au BufNewFile,BufRead .{babel,eslint,prettier,stylelint,jshint,jscs,postcss}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
-  au BufNewFile,BufRead *.tsx set ft=typescript
+  au BufNewFile,BufRead *.tsx set ft=typescriptreact "forces typescript.tsx -> typescriptreact
 
   " ----------------------------------------------------------------------------
   " ## CSS/SCSS
@@ -490,13 +491,13 @@ augroup END
 "   autocmd!
 
 "   " TypeScript
-"   autocmd FileType typescript,typescriptreact nnoremap <leader>h :LspHover<cr>
-"   autocmd FileType typescript,typescriptreact nnoremap <f2> :LspRename<cr>
-"   autocmd FileType typescript,typescriptreact nnoremap <f8> :LspDocumentDiagnostics<cr>
-"   autocmd FileType typescript,typescriptreact nnoremap <f10> :LspDocumentSymbol<cr>
-"   autocmd FileType typescript,typescriptreact nnoremap <f11> :LspReferences<cr>
-"   autocmd FileType typescript,typescriptreact nnoremap <f12> :LspDefinition<cr>
-"   autocmd FileType typescript,typescriptreact command! ProjectSearch -nargs=1 vimgrep /<args>/gj ./**/*.ts<cr>
+"   autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <leader>h :LspHover<cr>
+"   autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f2> :LspRename<cr>
+"   autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f8> :LspDocumentDiagnostics<cr>
+"   autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f10> :LspDocumentSymbol<cr>
+"   autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f11> :LspReferences<cr>
+"   autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f12> :LspDefinition<cr>
+"   autocmd FileType typescript,typescriptreact,typescript.tsx command! ProjectSearch -nargs=1 vimgrep /<args>/gj ./**/*.ts<cr>
 
 "   " Vim
 "   autocmd FileType vim command! ProjectSearch -nargs=1 vimgrep /<args>/gj ./**/*.vim<cr>
@@ -540,6 +541,8 @@ set sidescroll=5
 " https://kadekillary.work/post/statusline/
 " or:
 " https://github.com/KabbAmine/myVimFiles/blob/master/config/statusline.vim
+" definitely:
+" https://gabri.me/blog/diy-vim-statusline/
 
 hi User1 guifg=#FF0000 guibg=#504945 gui=bold
 hi User2 guifg=#FFFFFF guibg=#FF1111 gui=bold
@@ -731,6 +734,16 @@ function! BufEnterCommit()
   call deoplete#custom#buffer_option('auto_complete', v:false)
   " let g:lsc_enable_autocomplete = v:false
 
+  " Allow automatic formatting of bulleted lists and blockquotes
+  " https://github.com/lencioni/dotfiles/blob/master/.vim/after/ftplugin/gitcommit.vim
+  setlocal comments+=fb:*
+  setlocal comments+=fb:-
+  setlocal comments+=fb:+
+  setlocal comments+=b:>
+
+  setlocal formatoptions+=c " Auto-wrap comments using textwidth
+  setlocal formatoptions+=q " Allow formatting of comments with `gq`
+
   " setl spell
   " setl spelllang=en
   " setl nolist
@@ -841,16 +854,21 @@ endfunction
   let g:ale_sign_column_always = 1
   let g:ale_linters = {
         \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
+        \   'javascript.jsx': ['prettier', 'eslint', 'prettier_eslint'],
         \   'typescript': ['prettier', 'eslint', 'prettier_eslint'],
         \   'typescriptreact': ['prettier', 'eslint', 'prettier_eslint'],
+        \   'typescript.tsx': ['prettier', 'eslint', 'prettier_eslint'],
         \   'css': ['prettier'],
         \   'scss': ['prettier'],
-        \   'json': ['prettier']
+        \   'json': ['prettier'],
+        \   'ruby': []
         \ }                                                                       "Lint js with eslint
   let g:ale_fixers = {
         \   'javascript': ['prettier_eslint'],
+        \   'javascript.jsx': ['prettier_eslint'],
         \   'typescript': ['prettier_eslint'],
         \   'typescriptreact': ['prettier_eslint'],
+        \   'typescript.tsx': ['prettier_eslint'],
         \   'css': ['prettier'],
         \   'scss': ['prettier'],
         \   'json': ['prettier']
@@ -910,14 +928,14 @@ endfunction
   " " let g:nvim_typescript#type_info_on_hold=1
   let g:nvim_typescript#javascript_support=1
   " let g:nvim_typescript#vue_support=1
-  autocmd FileType typescript,typescriptreact nnoremap <f2> :TSRename<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f3> :TSDefPreview<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f8> :TSDef<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f9> :TSDoc<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f10> :TSType<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <leader>K :TSType<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f11> :TSRefs<cr>
-  autocmd FileType typescript,typescriptreact nnoremap <f12> :TSTypeDef<cr>
+  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f2> :TSRename<cr>
+  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f3> :TSDefPreview<cr>
+  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f8> :TSDef<cr>
+  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f9> :TSDoc<cr>
+  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f10> :TSType<cr>
+  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <leader>K :TSType<cr>
+  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f11> :TSRefs<cr>
+  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f12> :TSTypeDef<cr>
   let g:nvim_typescript#kind_symbols = {
       \ 'keyword': 'keyword',
       \ 'class': '',
@@ -1057,10 +1075,12 @@ endfunction
 
 
 " ## ultisnips
-  let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+  let g:UltiSnipsExpandTrigger		= "<c-e>"
+  " let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
   let g:UltiSnipsJumpForwardTrigger	= "<tab>"
   let g:UltiSnipsJumpBackwardTrigger	= "<s-tab>"
   let g:UltiSnipsRemoveSelectModeMappings = 0
+  let g:UltiSnipsSnippetDirectories=['UltiSnips']
 
 
 " ## neosnippet
@@ -1110,6 +1130,7 @@ endfunction
     let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
     let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
     let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands['typescript.tsx'] = ['javascript-typescript-stdio']
   endif
   if executable('css-languageserver')
     let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
@@ -1190,6 +1211,7 @@ endfunction
   "   let g:lsc_server_commands['javascript.jsx'] = 'javascript-typescript-stdio'
   "   let g:lsc_server_commands.typescript = 'javascript-typescript-stdio'
   "   let g:lsc_server_commands.typescriptreact = 'javascript-typescript-stdio'
+  "   let g:lsc_server_commands['typescript.tsx'] = 'javascript-typescript-stdio'
   " endif
   " if executable('css-languageserver')
   "   let g:lsc_server_commands.css = 'css-languageserver --stdio'
@@ -1206,7 +1228,7 @@ endfunction
   " if executable('language_server-ruby')
   "   let g:lsc_server_commands.ruby = 'language_server-ruby'
   " endif
-  " autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,json,css,less,html setlocal omnifunc=lsc#complete
+  " autocmd FileType javascript,javascript.jsx,python,typescript,typescriptreact,typescript.tsx,json,css,less,html setlocal omnifunc=lsc#complete
 
 " ## asyncomplete.vim/asynccomplete/vim-lsp
   " let g:asyncomplete_auto_popup = 1
@@ -1263,7 +1285,7 @@ endfunction
   "       \  }))
   " au User asynccomplete_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
   "       \ 'name': 'tscompletejob',
-  "       \ 'whitelist': ['typescript', 'typescriptreact'],
+  "       \ 'whitelist': ['typescript', 'typescriptreact', 'typescript.tsx'],
   "       \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
   "       \ }))
   " if executable('typescript-language-server')
@@ -1271,7 +1293,7 @@ endfunction
   "         \ 'name': 'typescript-language-server',
   "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
   "         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-  "         \ 'whitelist': ['typescript', 'typescriptreact'],
+  "         \ 'whitelist': ['typescript', 'typescriptreact', 'typescript.tsx'],
   "         \ })
   " endif
   " if executable('css-languageserver')
@@ -1321,6 +1343,7 @@ endfunction
   call deoplete#custom#source('ultisnips', 'mark', '')
   " call deoplete#custom#source('neosnippet', 'mark', '')
   call deoplete#custom#source('typescript', 'rank', 630)
+  call deoplete#custom#source('ultisnips', 'rank', 999)
   call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
   let g:deoplete#omni_patterns = {}
   let g:deoplete#omni_patterns.html = ''
