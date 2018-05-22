@@ -11,6 +11,7 @@ export NVIMRUNTIME='/usr/local/share/nvim/runtime'
 export TERMINFO=$HOME/.terminfo
 # export TERMINFO=/usr/share/terminfo
 # export NVIM_PYTHON_LOG_FILE='~/tmp/nvim_python.log'
+# export NVIM_PYTHON_LOG_LEVEL=DEBUG
 # export PYTHONPATH="$BREW_PATH/bin/python3.5"
 export BROWSER="open"
 export _Z_DATA="$HOME/.z-history"

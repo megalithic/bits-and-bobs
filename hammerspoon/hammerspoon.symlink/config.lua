@@ -56,9 +56,6 @@ config.layout = {
   end),
 
   _after_ = (function()
-    utils.activate('com.google.Chrome')
-    utils.activate('com.googlecode.iterm2')
-    utils.activate('io.alacritty')
   end),
 
   ['com.tapbots.TweetbotMac'] = (function(window, forceScreenCount)

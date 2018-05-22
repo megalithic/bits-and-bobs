@@ -8,7 +8,7 @@
 " =============================================================================
 
 " ================ Plugins ==================== {{{
-call plug#begin( '~/.config/nvim/bundle')
+call plug#begin( '~/.config/nvim/plugged')
 
 " Plug 'tweekmonster/startuptime.vim', { 'on': [ 'StartupTime' ] } " Show slow plugins
 
@@ -63,7 +63,7 @@ call plug#begin( '~/.config/nvim/bundle')
   " Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " rspec commands and highlight
 
  " #Misc
-  Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
+  " Plug 'xolox/vim-lua-ftplugin', { 'for': ['lua'] } " all the luas
   " Plug 'tmux-plugins/vim-tmux', { 'for': ['tmux'] }
   " Plug 'vim-scripts/fish.vim',   { 'for': 'fish' }
 
@@ -123,18 +123,17 @@ call plug#begin( '~/.config/nvim/bundle')
 
 " ## Random/Misc/Docs
   " Plug 'junegunn/goyo.vim', { 'for': ['tex','text','txt','markdown','ghmarkdown','md'] }
-  Plug 'drmikehenry/vim-extline'
-  Plug 'wendyyuchensun/import-cost-vim'
-  Plug 'Galooshi/vim-import-js' "https://github.com/Galooshi/vim-import-js#default-mappings
+  Plug 'drmikehenry/vim-extline' " https://github.com/drmikehenry/vim-extline/blob/master/doc/extline.txt / Ctrl+L Ctrl+L to auto `=` under the visual selection
+  " Plug 'Galooshi/vim-import-js' "https://github.com/Galooshi/vim-import-js#default-mappings
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
 
   Plug 'jordwalke/VimAutoMakeDirectory' " auto-makes the dir for you if it doesn't exist in the path
   Plug 'EinfachToll/DidYouMean'
   Plug 'wsdjeg/vim-fetch' " open files at line number
-  Plug 'nelstrom/vim-visual-star-search'
+  " Plug 'nelstrom/vim-visual-star-search'
   Plug 'tpope/vim-commentary' " (un)comment code
-  Plug 'shougo/vimproc.vim', { 'do': 'make' }
-  Plug 'xolox/vim-misc'
+  " Plug 'shougo/vimproc.vim', { 'do': 'make' } " for rct/rails things?
+  " Plug 'xolox/vim-misc' " for lua things
   Plug 'sickill/vim-pasta' " context-aware pasting
   Plug 'zenbro/mirror.vim' " allows mirror'ed editing of files locally, to a specified ssh location via ~/.mirrors
   Plug 'keith/gist.vim', { 'do': 'chmod -HR 0600 ~/.netrc' }
@@ -374,11 +373,11 @@ augroup vimrc
         \ endif
 
   " Auto-close preview window when completion is done.
-  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+  autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
   " ----------------------------------------------------------------------------
   " ## JavaScript
-  " au FileType typescript,typescriptreact,javascript,javascript.jsx,sass,scss,scss.css RainbowParentheses " consistently fails *shrug*
+  au FileType typescript,typescriptreact,typescript.tsx,javascript,javascript.jsx,sass,scss,scss.css RainbowParentheses " consistently fails *shrug*
   au BufNewFile,BufRead .{babel,eslint,prettier,stylelint,jshint,jscs,postcss}*rc,\.tern-*,*.json set ft=json
   au BufNewFile,BufRead .tern-project set ft=json
   au BufNewFile,BufRead *.tsx set ft=typescriptreact "forces typescript.tsx -> typescriptreact
@@ -430,8 +429,8 @@ augroup vimrc
 
   " ----------------------------------------------------------------------------
   " ## Toggle certain accoutrements when entering and leaving a buffer & window
-  au WinEnter,BufEnter * silent set number relativenumber syntax=on " cul
-  au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " nocul
+  au WinEnter,BufEnter * silent set number relativenumber syntax=on " call :RainbowParentheses  cul
+  au WinLeave,BufLeave * silent set nonumber norelativenumber syntax=off " call :RainbowParentheses! nocul
 
   " ----------------------------------------------------------------------------
   " ## Automagically update remote homeassistant files upon editing locally
@@ -728,10 +727,12 @@ function! BufEnterCommit()
   end
 
   " disable for gitcommit messages
+  call deoplete#disable()
+
   " let g:cm_smart_enable = 0
-  let b:deoplete_disable_auto_complete=1
-  let g:deoplete_disable_auto_complete=1
-  call deoplete#custom#buffer_option('auto_complete', v:false)
+  " let b:deoplete_disable_auto_complete=1
+  " let g:deoplete_disable_auto_complete=1
+  " call deoplete#custom#buffer_option('auto_complete', v:false)
   " let g:lsc_enable_autocomplete = v:false
 
   " Allow automatic formatting of bulleted lists and blockquotes
@@ -934,8 +935,8 @@ endfunction
   autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f9> :TSDoc<cr>
   autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f10> :TSType<cr>
   autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <leader>K :TSType<cr>
-  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f11> :TSRefs<cr>
-  autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f12> :TSTypeDef<cr>
+  " autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f11> :TSRefs<cr>
+  " autocmd FileType typescript,typescriptreact,typescript.tsx nnoremap <f12> :TSTypeDef<cr>
   let g:nvim_typescript#kind_symbols = {
       \ 'keyword': 'keyword',
       \ 'class': '',
@@ -1091,16 +1092,17 @@ endfunction
 
 
 " ## LanguageClient
-  " let g:LanguageClient_diagnosticsList = 'location' " quickfix is used by :Rg
+  let g:LanguageClient_diagnosticsList = v:null
   let g:LanguageClient_autoStart = 1 " Automatically start language servers.
-  let g:LanguageClient_loadSettings = 1
+  let g:LanguageClient_loadSettings = 0
   let g:LanguageClient_loggingLevel = 'INFO'
   " Don't populate lists since it overrides Neomake lists
-  try
-    let g:LanguageClient_diagnosticsList = v:null
-  catch
-    let g:LanguageClient_diagnosticsList = ''
-  endtry
+  " try
+  "   let g:LanguageClient_diagnosticsList = v:null
+  " catch
+  "   let g:LanguageClient_diagnosticsList = ''
+  " endtry
+  " PREFER nvim-typescript for most things, as it's faster
   augroup LanguageClientConfig
     autocmd!
     " " <leader>ld to go to definition
@@ -1128,9 +1130,9 @@ endfunction
   if executable('javascript-typescript-stdio')
     let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
     let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
-    let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-    let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
-    let g:LanguageClient_serverCommands['typescript.tsx'] = ['javascript-typescript-stdio']
+    " let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+    " let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
+    " let g:LanguageClient_serverCommands['typescript.tsx'] = ['javascript-typescript-stdio']
   endif
   if executable('css-languageserver')
     let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
@@ -1158,33 +1160,33 @@ endfunction
   let s:info_sign = '…'
   let s:info_sign_hl = s:message_sign_hl
   let s:info_hl = s:message_hl
-  let g:LanguageClient_diagnosticsDisplay = {
-        \  1: {
-        \    'name': 'Error',
-        \    'texthl': s:error_hl,
-        \    'signText': s:error_sign,
-        \    'signTexthl': s:error_sign_hl,
-        \  },
-        \  2: {
-        \    'name': 'Warning',
-        \    'texthl': s:warning_hl,
-        \    'signText': s:warning_sign,
-        \    'signTexthl': s:warning_sign_hl,
-        \  },
-        \  3: {
-        \    'name': 'Information',
-        \    'texthl': s:info_hl,
-        \    'signText': s:info_sign,
-        \    'signTexthl': s:info_sign_hl,
-        \  },
-        \  4: {
-        \    'name': 'Hint',
-        \    'texthl': s:message_hl,
-        \    'signText': s:message_sign,
-        \    'signTexthl': s:message_sign_hl,
-        \  },
-        \ }
-  let g:LanguageClient_diagnosticsDisplay = ''
+  " let g:LanguageClient_diagnosticsDisplay = v:null
+  " let g:LanguageClient_diagnosticsDisplay = {
+  "       \  1: {
+  "       \    'name': 'Error',
+  "       \    'texthl': s:error_hl,
+  "       \    'signText': s:error_sign,
+  "       \    'signTexthl': s:error_sign_hl,
+  "       \  },
+  "       \  2: {
+  "       \    'name': 'Warning',
+  "       \    'texthl': s:warning_hl,
+  "       \    'signText': s:warning_sign,
+  "       \    'signTexthl': s:warning_sign_hl,
+  "       \  },
+  "       \  3: {
+  "       \    'name': 'Information',
+  "       \    'texthl': s:info_hl,
+  "       \    'signText': s:info_sign,
+  "       \    'signTexthl': s:info_sign_hl,
+  "       \  },
+  "       \  4: {
+  "       \    'name': 'Hint',
+  "       \    'texthl': s:message_hl,
+  "       \    'signText': s:message_sign,
+  "       \    'signTexthl': s:message_sign_hl,
+  "       \  },
+  "       \ }
 
 
 " ## vim-lsc
@@ -1320,13 +1322,13 @@ endfunction
   " endif
 
 " ## deoplete
+  " call deoplete#enable() " which of these startups are needed?
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#auto_complete_delay = 0
   let g:echodoc_enable_at_startup=1
   set splitbelow
   set completeopt+=noselect,menuone
   set completeopt-=preview
-  autocmd CompleteDone * pclose
 
   function! Multiple_cursors_before()
     let b:deoplete_disable_auto_complete=2
@@ -1341,10 +1343,13 @@ endfunction
   call deoplete#custom#source('file', 'mark', '')
   " call deoplete#custom#source('jedi', 'mark', '')
   call deoplete#custom#source('ultisnips', 'mark', '')
+  call deoplete#custom#source('typescript', 'mark', '')
   " call deoplete#custom#source('neosnippet', 'mark', '')
+  call deoplete#custom#source('LanguageClient', 'mark', 'LC')
   call deoplete#custom#source('typescript', 'rank', 630)
   call deoplete#custom#source('ultisnips', 'rank', 999)
   call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+  " let g:deoplete#sources = {}
   let g:deoplete#omni_patterns = {}
   let g:deoplete#omni_patterns.html = ''
   let g:deoplete#omni_patterns.css = ''
@@ -1362,6 +1367,7 @@ endfunction
   " let g:deoplete#enable_logging = {'level': 'DEBUG','logfile': 'deoplete.log'}
   " call deoplete#enable_logging('DEBUG', 'deoplete.log')
   " call deoplete#custom#source('typescript', 'debug_enabled', 1)
+  " call deoplete#custom#source('typescriptreact', 'debug_enabled', 1)
 
 " ## tagbar
   let g:tagbar_sort = 0
