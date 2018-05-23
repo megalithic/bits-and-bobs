@@ -53,6 +53,7 @@ call plug#begin( '~/.config/nvim/plugged')
   " Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md', 'mdown'] }
   Plug 'jtratner/vim-flavored-markdown', { 'for': ['markdown'] }
   Plug 'tyru/markdown-codehl-onthefly.vim', { 'for': ['markdown', 'md', 'mdown'] }
+  Plug 'rhysd/vim-gfm-syntax'
   " Plug 'euclio/vim-markdown-composer', { 'do': 'cargo build --release' }
 
 " # RoR
@@ -70,8 +71,8 @@ call plug#begin( '~/.config/nvim/plugged')
 " ## Project/Code Navigation
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'scrooloose/nerdtree'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
+  " Plug 'scrooloose/nerdtree'
+  " Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'ryanoasis/vim-devicons'
   Plug 'christoomey/vim-tmux-navigator' " needed for tmux/hotkey integration with vim
   Plug 'christoomey/vim-tmux-runner' " needed for tmux/hotkey integration with vim
@@ -122,7 +123,7 @@ call plug#begin( '~/.config/nvim/plugged')
   endif
 
 " ## Random/Misc/Docs
-  " Plug 'junegunn/goyo.vim', { 'for': ['tex','text','txt','markdown','ghmarkdown','md'] }
+  Plug 'junegunn/goyo.vim', { 'for': ['tex','text','txt','markdown','ghmarkdown','md'] }
   Plug 'drmikehenry/vim-extline' " https://github.com/drmikehenry/vim-extline/blob/master/doc/extline.txt / Ctrl+L Ctrl+L to auto `=` under the visual selection
   " Plug 'Galooshi/vim-import-js' "https://github.com/Galooshi/vim-import-js#default-mappings
   Plug 'janko-m/vim-test', {'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] } " tester for js and ruby
@@ -147,7 +148,7 @@ call plug#begin( '~/.config/nvim/plugged')
   Plug 'Valloric/MatchTagAlways', { 'for': ['haml', 'html', 'xml', 'erb', 'javascript', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx'] } " highlights the opening/closing tags for the block you're in
   Plug 'jiangmiao/auto-pairs'
   Plug 'cohama/lexima.vim' " auto-closes many delimiters and can repeat with a `.`
-
+  Plug 'benjifisher/matchit.zip'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
@@ -165,20 +166,20 @@ call plug#begin( '~/.config/nvim/plugged')
   " -- provide al and il for current line
   " -- provide a_ and i_ for underscores
   " -- provide a- and i-
-  Plug 'kana/vim-textobj-user' "https://github.com/kana/vim-textobj-user/wiki
-  Plug 'kana/vim-textobj-entire' " Entire buffer text object (vae)
-  Plug 'kana/vim-textobj-function' " Function text object (vaf)
-  Plug 'kana/vim-textobj-indent', { 'on': [ '<Plug>(textobj-indent' ] } " - i     for indent level
-  Plug 'kana/vim-textobj-line', { 'on': [ '<Plug>(textobj-line' ] } " - l     for current line
-  Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (vir)
-  Plug 'glts/vim-textobj-comment' " Comment text object (vac)
-  Plug 'michaeljsmith/vim-indent-object' " - d/D   for underscore section (e.g. `did` on foo_b|ar_baz -> foo__baz)
-  Plug 'machakann/vim-textobj-delimited', { 'on': [ '<Plug>(textobj-delimited' ] } " - P     for last paste
-  Plug 'gilligan/textobj-lastpaste', { 'on': [ '<Plug>(textobj-lastpaste' ] } " - u     for url
-  Plug 'mattn/vim-textobj-url', { 'on': [ '<Plug>(textobj-url' ] } " - b     for any block type (parens, braces, quotes, ltgt)
+  Plug 'kana/vim-textobj-user'                                                      " https://github.com/kana/vim-textobj-user/wiki
+  Plug 'kana/vim-textobj-entire'                                                    " Entire buffer text object (vae)
+  Plug 'kana/vim-textobj-function'                                                  " Function text object (vaf)
+  Plug 'kana/vim-textobj-indent', { 'on': [ '<Plug>(textobj-indent' ] }             " for indent level (vai)
+  Plug 'kana/vim-textobj-line', { 'on': [ '<Plug>(textobj-line' ] }                 " for current line (val)
+  Plug 'nelstrom/vim-textobj-rubyblock'                                             " Ruby block text object (vir)
+  Plug 'glts/vim-textobj-comment'                                                   " Comment text object (vac)
+  Plug 'michaeljsmith/vim-indent-object'
+  Plug 'machakann/vim-textobj-delimited', { 'on': [ '<Plug>(textobj-delimited' ] }  " - d/D   for underscore section (e.g. `did` on foo_b|ar_baz -> foo__baz)
+  Plug 'gilligan/textobj-lastpaste', { 'on': [ '<Plug>(textobj-lastpaste' ] }       " - P     for last paste
+  Plug 'mattn/vim-textobj-url', { 'on': [ '<Plug>(textobj-url' ] }                  " - u     for url
   Plug 'rhysd/vim-textobj-anyblock'
-  Plug 'whatyouhide/vim-textobj-xmlattr', { 'on': [ '<Plug>(textobj-xmlattr' ] }
-  Plug 'wellle/targets.vim' " Improved targets line cin) next parens
+  Plug 'whatyouhide/vim-textobj-xmlattr', { 'on': [ '<Plug>(textobj-xmlattr' ] }    " - x     for xml
+  Plug 'wellle/targets.vim'                                                         " Improved targets line cin) next parens
   " ^--- https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
 
 call plug#end()
@@ -459,13 +460,13 @@ augroup vimrc
         \| set nonumber norelativenumber
         \| endif
 
-  " Start NERDTree automatically when vim starts up on opening a directory
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+  " " Start NERDTree automatically when vim starts up on opening a directory
+  " autocmd StdinReadPre * let s:std_in=1
+  " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
-  " Close vim if the only window left open is a NERDTree
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  " " Close vim if the only window left open is a NERDTree
+  " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
 " Automatically close vim if only the quickfix window is open
@@ -697,15 +698,15 @@ function! CloseBuffer() abort
     bd
     return 1
   endif
-  let l:nerdtreeOpen = g:NERDTree.IsOpen()
+  " let l:nerdtreeOpen = g:NERDTree.IsOpen()
   let l:windowCount = winnr('$')
   let l:command = 'bd'
   let l:totalBuffers = len(getbufinfo({ 'buflisted': 1 }))
-  let l:isNerdtreeLast = l:nerdtreeOpen && l:windowCount ==? 2
-  let l:noSplits = !l:nerdtreeOpen && l:windowCount ==? 1
-  if l:totalBuffers > 1 && (l:isNerdtreeLast || l:noSplits)
-    let l:command = 'bp|bd#'
-  endif
+  " let l:isNerdtreeLast = l:nerdtreeOpen && l:windowCount ==? 2
+  " let l:noSplits = !l:nerdtreeOpen && l:windowCount ==? 1
+  " if l:totalBuffers > 1 && (l:isNerdtreeLast || l:noSplits)
+  "   let l:command = 'bp|bd#'
+  " endif
   silent exe l:command
 endfunction
 
@@ -790,7 +791,7 @@ endfunction
   let g:polyglot_disabled = ['typescript', 'graphql', 'jsx']
 
 " ## vim-devicons
-  let g:NERDTreeGitStatusNodeColorization = 1
+  " let g:NERDTreeGitStatusNodeColorization = 1
   " 
   " let g:webdevicons_enable_denite = 0
   " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
@@ -809,6 +810,12 @@ endfunction
   let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
   let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sql'] = ''
 
+" ## goyo
+  let g:goyo_width = 80
+  let g:goyo_height = '100%'
+  let g:goyo_margin_top = 3
+  let g:goyo_margin_bottom = 3
+
 " ## vim-qf
   " nmap qp <Plug>qf_qf_previous
   " nmap qn <Plug>qf_qf_next
@@ -823,11 +830,11 @@ endfunction
   let g:AutoPairsShortcutToggle = ''
   let g:AutoPairsMapCR = 0 " https://www.reddit.com/r/neovim/comments/4st4i6/making_ultisnips_and_deoplete_work_together_nicely/d6m73rh/
 
-" ## NERDtree
-  let g:NERDTreeChDirMode = 2                                                     "Always change the root directory
-  let g:NERDTreeMinimalUI = 1                                                     "Disable help text and bookmark title
-  let g:NERDTreeShowHidden = 1                                                    "Show hidden files in NERDTree
-  let g:NERDTreeUpdateOnCursorHold = 0                                            "Disable nerdtree git plugin updating on cursor hold
+" " ## NERDtree
+"   let g:NERDTreeChDirMode = 2                                                     "Always change the root directory
+"   let g:NERDTreeMinimalUI = 1                                                     "Disable help text and bookmark title
+"   let g:NERDTreeShowHidden = 1                                                    "Show hidden files in NERDTree
+"   let g:NERDTreeUpdateOnCursorHold = 0                                            "Disable nerdtree git plugin updating on cursor hold
 
 " ## vim-sneak
   let g:sneak#label = 1
@@ -898,8 +905,8 @@ endfunction
   let g:markdown_fenced_languages = [
                           \ 'javascript',
                           \ 'typescript',
+                          \ 'json',
                           \ 'python',
-                          \ 'java',
                           \ 'html',
                           \ 'bash=sh']
 
@@ -1475,11 +1482,11 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <Leader>e :lopen<CR>
 nnoremap <silent><Leader>q :call CloseBuffer()<CR>
 
-" Find current file in NERDTree
-nnoremap <Leader>hf :NERDTreeFind<CR>
-" Open NERDTree
-" nnoremap <Leader>n :NERDTreeToggle<CR>
-nnoremap <f3> :NERDTreeToggle<CR>
+" " Find current file in NERDTree
+" nnoremap <Leader>hf :NERDTreeFind<CR>
+" " Open NERDTree
+" " nnoremap <Leader>n :NERDTreeToggle<CR>
+" nnoremap <f3> :NERDTreeToggle<CR>
 
 " tagbar
 nnoremap <f4> :TagbarToggle<CR>
@@ -1691,9 +1698,9 @@ vnoremap x "_x
 vnoremap X "_X
 
 " Easier to type, however, i hurt my muscle memory when on remote vim (disabled) for now
-" noremap H ^
-" noremap L $
-" vnoremap L g_
+noremap H ^
+noremap L $
+vnoremap L g_
 
 " make the tab key match bracket pairs
 silent! unmap [%
