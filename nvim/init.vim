@@ -727,12 +727,12 @@ function! BufEnterCommit()
   end
 
   " disable for gitcommit messages
-  call deoplete#disable()
+  " call deoplete#disable()
 
   " let g:cm_smart_enable = 0
-  " let b:deoplete_disable_auto_complete=1
-  " let g:deoplete_disable_auto_complete=1
-  " call deoplete#custom#buffer_option('auto_complete', v:false)
+  let b:deoplete_disable_auto_complete=1
+  let g:deoplete_disable_auto_complete=1
+  call deoplete#custom#buffer_option('auto_complete', v:false)
   " let g:lsc_enable_autocomplete = v:false
 
   " Allow automatic formatting of bulleted lists and blockquotes
