@@ -1,43 +1,28 @@
-#!/usr/bin/env bash
+#!/bin/zsh
 
 if [ "$(uname -s)" == "Darwin" ]
 then
-  set -e
-
-  cd "$(dirname "$0")"
-
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
   echo "checking for existing homebrew install"
 
-  if test ! $(which brew)
-  then
-    echo "existing install not found, installing homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    echo "installed homebrew"
+  # Install Homebrew and Brews
+  if ! type "brew" > /dev/null; then
+    echo "Installing Homebrew..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 
-  echo "updating homebrew"
-
+  echo "Brewing applications..."
   brew update
+  brew bundle --file=$DOTDIR/homebrew/Brewfile
+  if [[ -a $DOTDIR/homebrew/Brewfile.local ]]
+  then
+    brew bundle --file=$DOTS/homebrew/Brewfile.local
+  fi
 
-  echo "updated homebrew"
-
-
-  echo "installing homebrew bundler"
-
-  ln -sfv ~/.dotfiles/homebrew/Brewfile ~/Brewfile
-
-  brew tap homebrew/bundle
-  brew bundle --file=~/Brewfile
   sudo xcodebuild -license accept
-  
-  ln -sfv /usr/local/bin/gcc-4.9 /usr/local/bin/gcc
-  # createuser -s -r postgres
 
-# system "/usr/local/opt/fzf/install"
-# system "echo /usr/local/bin/bash >> /etc/shells"
-# system "chsh -s /usr/local/bin/bash"
+  ln -sfv /usr/local/bin/gcc-4.9 /usr/local/bin/gcc
 
   echo "finished homebrew setup"
 fi

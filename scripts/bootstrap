@@ -1,3 +1,17 @@
+#!/bin/zsh
+
+echo '
+
+   ┌┬┐┌─┐┌─┐┌─┐┬  ┬┌┬┐┬ ┬┬┌─┐
+   │││├┤ │ ┬├─┤│  │ │ ├─┤││   :: DOTFILES
+   ┴ ┴└─┘└─┘┴ ┴┴─┘┴ ┴ ┴ ┴┴└─┘
+   Brought to you by: Seth Messer / @megalithic
+
+Setting up dotfiles. If the ~/.dotfiles folder does not exist, it will be cloned
+down from https://github.com/megalithic/dotfiles. The ZShell configuration uses the
+Prezto framework, which will be installed or updated at this time.
+'
+
 # Run all installers and symlink dotfiles
 
 if [[ "$(uname -s)" != "Darwin" ]]
@@ -21,16 +35,39 @@ then
   # exit 0
 fi
 
-set -e
+# set -e
 
-Echo "::beginning the dotfiling.."
+echo "::beginning the dotfiling.."
 
-# Echo "updating submodules"
-# git submodule init && git submodule update
+# Setup
+if [[ -z $HOMEDIR ]]
+then
+  export HOMEDIR=$HOME
+fi
 
-cd
-git clone https://github.com/megalithic/bits-and-bobs .dotfiles
-cd .dotfiles
+if [[ -z $DOTS ]]
+then
+  export DOTDIR="$HOMEDIR/.dotfiles"
+  # export DOTS="$DOTDIR/config"
+fi
+
+if [[ ! -d $DOTDIR ]]
+then
+  echo "Cloning dotfiles..."
+  mkdir -p $DOTDIR
+  git clone --recursive git://github.com/megalithic/dotfiles.git "$DOTDIR"
+else
+  if [[ -z $SKIP_DOTFILES_UPDATE ]]
+  then
+    cd $DOTDIR
+    git add -u .
+    git stash
+    git pull --recurse-submodules --rebase origin master
+    git push origin master
+    git stash pop
+    cd $HOMEDIR
+  fi
+fi
 
 # app/system installers
 scripts/homebrew
