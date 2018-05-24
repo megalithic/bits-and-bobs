@@ -73,6 +73,7 @@ hotkey.bind('ctrl', 'space', function() utils.toggleApp('com.googlecode.iterm2')
 
 hotkey.bind(mashShift, 'space', function() utils.toggleApp('com.googlecode.iterm2') end)
 hotkey.bind(mashShift, 'space', function() utils.toggleApp('io.alacritty') end)
+hotkey.bind(mashShift, 'space', function() utils.toggleApp('net.kovidgoyal.kitty') end)
 
 hotkey.bind('ctrl', 'return', function() utils.toggleApp('com.google.Chrome') end)
 hotkey.bind('cmd', '`', function() utils.toggleApp('com.google.Chrome') end)
