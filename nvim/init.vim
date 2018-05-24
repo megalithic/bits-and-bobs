@@ -1356,6 +1356,7 @@ endfunction
   call deoplete#custom#source('LanguageClient', 'mark', 'LC')
   call deoplete#custom#source('typescript', 'rank', 630)
   call deoplete#custom#source('ultisnips', 'rank', 999)
+  call deoplete#custom#source('LanguageClient', 'rank', 629)
   call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
   " let g:deoplete#sources = {}
   let g:deoplete#omni_patterns = {}

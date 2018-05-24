@@ -28,4 +28,4 @@ Procfile
 node_modules
 .nyc_output
 public/components/eezy-editor
-structure.sql
+**/db/structure.sql

@@ -29,7 +29,7 @@ hs.window.setShadows(false)
 config.screens = {
   laptop = 'Color LCD', -- 'Built-in Retina Display',
   primary = hs.screen.primaryScreen(),
-  secondary = hs.screen.primaryScreen():toWest() or hs.screen.primaryScreen()
+  secondary = hs.screen.primaryScreen():toEast() or hs.screen.primaryScreen()
 }
 
 -- GRID SETUP
