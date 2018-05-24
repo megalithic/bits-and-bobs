@@ -860,6 +860,7 @@ endfunction
   let g:ale_enabled = 1
   let g:ale_lint_delay = 100
   let g:ale_sign_column_always = 1
+  let g:ale_echo_msg_format = '[%linter%] %s'
   let g:ale_linters = {
         \   'javascript': ['prettier', 'eslint', 'prettier_eslint'],
         \   'javascript.jsx': ['prettier', 'eslint', 'prettier_eslint'],
@@ -1137,9 +1138,9 @@ endfunction
   if executable('javascript-typescript-stdio')
     let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
     let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
-    " let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-    " let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
-    " let g:LanguageClient_serverCommands['typescript.tsx'] = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands.typescriptreact = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands['typescript.tsx'] = ['javascript-typescript-stdio']
   endif
   if executable('css-languageserver')
     let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
@@ -1421,38 +1422,10 @@ endfunction
 " }}}
 " ================ Custom Mappings ======================== {{{
 
-" " Expand snippets on tab if snippets exists, otherwise do autocompletion
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-" inoremap <expr> <cr> (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<cr>")
-" inoremap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<c-u>":"\<cr>")
-
-" - asynccomplete
+" - deoplete + ultisnips
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-
-" - nvim-complete
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
-
-" - deoplete + neosnippet + autopairs
-" imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-" inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-" imap <C-e>     <Plug>(neosnippet_expand_or_jump)
-" smap <C-e>     <Plug>(neosnippet_expand_or_jump)
-" xmap <C-e>     <Plug>(neosnippet_expand_target)
-" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-" inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-" imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " Down is really the next line
 nnoremap j gj
