@@ -106,7 +106,7 @@ set -g allow-rename off
 set -g pane-border-style 'bg=#3C4C55,fg=#1E272C'
 set -g pane-active-border-style 'bg=#3C4C55,fg=red'
 set -g window-style 'fg=black,bg=#3C4C55'
-set -g window-active-style 'fg=colour250,bg=#3C4C55'
+set -g window-active-style 'fg=white,bg=#3C4C55'
 
 # Bar Layout
 # ---------------------------------------------------------
