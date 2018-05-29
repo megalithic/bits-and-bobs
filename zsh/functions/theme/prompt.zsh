@@ -179,7 +179,9 @@ prompt_pure_preprompt_render() {
   # background jobs running
   preprompt+="%F{gray}$(prompt_pure_background_jobs_indicator)%f"
   # git info
-  preprompt+="%F{$git_color}%f$(git_super_status)%f"
+  # if [[ -n $prompt_pure_vcs_info[branch] ]]; then
+    preprompt+="%F{$git_color}%f$(git_super_status)%f"
+  # fi
   # git pull/push arrows
   preprompt+="%F{cyan}${prompt_pure_git_arrows}%f"
   # username and machine if applicable

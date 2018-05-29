@@ -343,7 +343,7 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
-set smartindent
+set autoindent
 set nofoldenable
 " set foldmethod=syntax
 
@@ -932,7 +932,7 @@ endfunction
   " let g:js_file_import_no_mappings = 1
 
 " ## vim-markdown
-  let g:vim_markdown_frontmatter = 1
+  " let g:vim_markdown_frontmatter = 1
   let g:vim_markdown_toc_autofit = 1
   let g:markdown_fenced_languages = [
                           \ 'javascript',
