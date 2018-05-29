@@ -159,6 +159,15 @@ prompt_format_pwd() {
   fi
 }
 
+is_git_repo() {
+    # Check if we're in a git repo
+    command git rev-parse --is-inside-work-tree &>/dev/null || return
+    # # Check if it's dirty
+    # command git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ] && echo "true" && return
+    # # We're in a git repo but we're clean
+    # echo "false"
+}
+
 prompt_pure_preprompt_render() {
   # store the current prompt_subst setting so that it can be restored later
   local prompt_subst_status=$options[prompt_subst]
@@ -179,7 +188,7 @@ prompt_pure_preprompt_render() {
   # background jobs running
   preprompt+="%F{gray}$(prompt_pure_background_jobs_indicator)%f"
   # git info
-  # if [[ -n $prompt_pure_vcs_info[branch] ]]; then
+  # if [[ -n $(is_git_repo) ]]; then
     preprompt+="%F{$git_color}%f$(git_super_status)%f"
   # fi
   # git pull/push arrows
