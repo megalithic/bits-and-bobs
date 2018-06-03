@@ -1,4 +1,7 @@
-## Bits and bobs
+## [DEPRECATED] Bits and bobs
+
+**NOTE:** my dotfiles are now managed under
+[megalithic/dotfiles](https://github.com/megalithic/dotfiles)
 
 I started off with a modified version of my own dotfiles, based on
 [Holman's][holman/dotfiles], but have slowly been updating it to be
